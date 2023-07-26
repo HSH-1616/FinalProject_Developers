@@ -1,0 +1,386 @@
+body {
+  background-image: url(../../images/main/body.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+header{
+	height: 0;
+}
+
+/* 메인 배너 */
+#banner {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+#bannerRight {
+  overflow: hidden;
+  position: absolute;
+  top: 70%;
+  left: 0;
+  z-index: 2;
+  height: 30vh;
+  width: 100%;
+  background: #000;
+  opacity: 0.6;
+}
+
+#bannerImage {
+  width: 100%;
+  height: 100vh;
+}
+.carousel img {
+  height: 100vh;
+}
+#bannerText {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  top: 74%;
+  z-index: 3;
+  align-content: center;
+}
+
+#bannerText h1 {
+  font-family: "HANAMDAUM" !important;
+  font-size: 4rem;
+  color: #eeeded;
+  margin-top: 25px;
+  margin-bottom: 50px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+#bannerText h1 span {
+  font-family: "HANAMDAUM" !important;
+  position: relative;
+  /* left: 25px; */
+}
+#bannerText div:last-child {
+  display: flex;
+  align-items: center;
+}
+#bannerText h2 {
+  font-family: "LINESeedKR-Bd" !important;
+  font-size: 4.5rem;
+  color: #eeeded;
+  /* color: #b31312; */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+#bannerText h2 span {
+  font-family: "LINESeedKR-Bd" !important;
+  font-size: 6rem;
+}
+/* /메인 배너/ */
+
+/* 여행갤러리 */
+#community {
+  display: flex;
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+  background-image: url(../image/3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#communityTitle {
+  width: 30%;
+  margin-left: 100px;
+}
+#community h4 {
+  color: #b31312;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+  font-weight: bold;
+}
+#community h4::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #b31312;
+  left: calc(116px);
+  margin-top: 5px;
+}
+#community h1 {
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  margin-top: 50px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+#community h1:last-child {
+  margin-top: 20px;
+}
+#communityImage {
+  margin-left: 150px;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+}
+#communityImage img {
+  width: 100%;
+  height: 100%;
+}
+.card {
+  width: 40%;
+  height: 400px;
+  background: white;
+  padding: 0.4em;
+  border-radius: 6px;
+  margin: 20px;
+}
+
+.card-image {
+  background-color: rgb(236, 236, 236);
+  width: 100%;
+  height: 80%;
+  border-radius: 6px 6px 0 0;
+}
+
+.card-image:hover {
+  transform: scale(0.98);
+}
+
+.category {
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: rgb(63, 121, 230);
+  padding: 10px 7px 0;
+}
+
+.category:hover {
+  cursor: pointer;
+}
+
+.heading {
+  font-weight: 600;
+  color: rgb(88, 87, 87);
+  padding: 7px;
+}
+
+.heading:hover {
+  cursor: pointer;
+}
+
+.author {
+  color: gray;
+  font-weight: 400;
+  font-size: 11px;
+  padding-top: 20px;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.name:hover {
+  cursor: pointer;
+}
+
+#memoryImg {
+  display: flex;
+  position: absolute;
+  top: 470px;
+  left: 80px;
+}
+#memoryImg div img {
+  width: 190px;
+  height: 240px;
+  border: 6px solid white;
+}
+#memoryImg :first-child img {
+  position: relative;
+  top: 40px;
+  left: 15px;
+  transform: rotate(-15deg);
+  width: 170px;
+  height: 220px;
+  border: 6px solid white;
+}
+
+#memoryImg :last-child img {
+  position: relative;
+  top: 40px;
+  right: 20px;
+  transform: rotate(17deg);
+  width: 210px;
+  height: 260px;
+  border: 6px solid white;
+}
+
+#memoryImg div {
+  position: static;
+  z-index: 2;
+}
+/* /여행갤러리/ */
+
+/* 서비스 */
+#bannerTitle {
+  text-align: center;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+  color: #b31312;
+}
+
+#bannerTitle h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+#bannerTitle h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 150px;
+  height: 3px;
+  background: #b31312;
+  left: calc(50% - 75px);
+  margin-top: 15px;
+}
+
+#travelBanner {
+  display: flex;
+  height: 600px;
+  background-image: url(../../images/main/travel.jpg);
+  background-size: 100% 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#travelBanner h2 {
+  font-weight: bolder;
+  color: #eeeeee;
+  font-size: 5rem;
+  position: relative;
+  top: 50px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+#hotelBanner {
+  display: flex;
+  height: 600px;
+  background-image: url(../../images/main/hotel.jpg);
+  background-size: 100% 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#hotelBanner h2 {
+  font-weight: bolder;
+  color: #cee6f3;
+  font-size: 5rem;
+  position: relative;
+  top: 50px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+#rootBanner {
+  display: flex;
+  height: 600px;
+  background-image: url(../../images/main/root.png);
+  background-size: 100% 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#rootBanner h2 {
+  font-weight: bolder;
+  color: wheat;
+  font-size: 5rem;
+  position: relative;
+  top: 50px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+.travelBtn {
+  position: relative;
+  width: 300px;
+  height: 100px;
+
+  border-radius: 15px;
+  background-color: transparent;
+
+  font-size: 1.7rem;
+  font-weight: bold;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+#travelBanner button {
+  border: 5px solid #eeeeee;
+  color: #eeeeee;
+}
+
+#hotelBanner button {
+  border: 5px solid #cee6f3;
+  color: #cee6f3;
+}
+
+#rootBanner button {
+  border: 5px solid wheat;
+  color: wheat;
+}
+
+.blurImage {
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
+/* /서비스/ */
+
+/* 여행 추억  */
+#travelMemory {
+  background-size: 100% 100%;
+  height: 600px;
+}
+#memoryText {
+  position: relative;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#memoryText > div span {
+  font-size: 2.5rem;
+  font-family: "LINESeedKR-Bd" !important;
+  color: #eeeded;
+  position: relative;
+  /* top: 60px;
+  left: 180px; */
+  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+  font-weight: bold;
+}
+
+#memoryText h1 {
+  color: #eeeded;
+  font-weight: bolder;
+  font-family: "LINESeedKR-Bd" !important;
+  font-size: 5rem;
+  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+    0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+/* /여행 추억/  */
