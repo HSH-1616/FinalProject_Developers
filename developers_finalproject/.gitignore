@@ -6,8 +6,7 @@ target/
 
 ### STS ###
 .apt_generated
-.classpath
-.factorypath
+
 .project
 .settings
 .springBeans
@@ -33,7 +32,7 @@ build/
 *.xml
 src/main/webapp/WEB-INF/classes/
 src/main/resources/
-.dbeaver
+.dbeaver/
 src/main/webapp/images/
 src/main/webapp/upload/
 .DS_Store
