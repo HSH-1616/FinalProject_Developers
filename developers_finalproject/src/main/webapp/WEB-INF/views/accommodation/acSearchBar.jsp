@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
+  <script src="${path }/js/accommodation/acSearchBar.js"></script>  
+<section>
 <div id="blurSection"></div>
       <div id="searchMiniContainer">
         <div id="searchMini">
@@ -32,14 +34,20 @@
             </div>
           </label>
           <label class="searchLabel">
-            <div id="searchDay">
+             <div id="searchDay">
               <div class="checkDay">
                 <span>체크인</span>
-                <span id="checkInDay">날짜 추가</span>
+                <div>
+                  <span id="checkInDay">날짜 추가</span>
+                  <ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
+                </div>
               </div>
               <div class="checkDay">
                 <span>체크아웃</span>
-                <span id="checkOutDay">날짜 추가</span>
+                <div>
+                  <span id="checkOutDay">날짜 추가</span>
+                  <ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
+                </div>
               </div>
             </div>
           </label>
@@ -248,7 +256,7 @@
                 <div class="day">SAT</div>
                 <div class="day">SUN</div>
               </div>
-              <div class="calDates now"></div>
+              <div class="hotelDates now"></div>
             </div>
             <div class="calContainer">
               <div class="calDays">
@@ -260,7 +268,7 @@
                 <div class="day">SAT</div>
                 <div class="day">SUN</div>
               </div>
-              <div class="calDates next"></div>
+              <div class="hotelDates next"></div>
             </div>
           </div>
         </div>
@@ -296,4 +304,4 @@
         </div>
       </div>
       <div id="blurSearchBar"></div>
-<%--  <script src="${path }/js/accommodation/acSearchBar.js"/>  --%>
+

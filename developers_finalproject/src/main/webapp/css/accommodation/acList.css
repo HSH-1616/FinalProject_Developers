@@ -39,6 +39,11 @@
 .carousel-inner {
   /* width: 280px; */
 }
+
+.carousel-control-next, .carousel-control-prev{
+	/*opacity: unset;*/
+}
+
 .itemContent {
   position: relative;
   top: 15px;
@@ -116,7 +121,8 @@
 }
 
 .con-like .outline {
-  fill: white;
+  fill: none;
+  stroke: unset;
 }
 
 .con-like .normal {

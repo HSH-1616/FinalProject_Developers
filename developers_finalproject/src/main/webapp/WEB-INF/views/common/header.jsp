@@ -42,7 +42,9 @@
 		</div>
 
 		<nav class="navbar navbar-expand-sm navbar-dark fixed-top drop">
-			<img id="headerLogo" src="${path }/images/common/logo.png" alt="" />
+		<a href="${path}/">
+			<img id="headerLogo" src="${path }/images/common/logo.png" alt="" />			
+		</a>	
 			<div class="container-fluid">
 				<ion-icon name="menu" class="btn btn-primary" type="button"
 					data-bs-toggle="offcanvas" data-bs-target="#demo"></ion-icon>

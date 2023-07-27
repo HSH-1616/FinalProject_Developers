@@ -40,6 +40,11 @@ header .main-menu .item .item__name {
 #searchMini span {
   font-size: 0.9rem;
 }
+
+#searchMini span:hover {
+  cursor: pointer;
+}
+
 .line {
   border-left: 2.5px solid #dbdada;
   height: 20px;
@@ -135,8 +140,27 @@ header .main-menu .item .item__name {
   height: 75px;
 }
 
+.checkDay {
+  width: 80px;
+}
+
 .checkDay span {
   display: block;
+}
+
+.checkDay > div {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.checkDay > div > ion-icon {
+  display: none;
+  position: absolute;
+  color: #b31312;
+  left: 83px;
+  bottom: 3px;
+  font-size: 1.3rem;
 }
 
 #searchPeople {
@@ -298,7 +322,7 @@ header .main-menu .item .item__name {
   font-size: 0.8rem;
   font-weight: bold;
 }
-.calDates {
+.hotelDates {
   display: flex;
   flex-flow: wrap;
   height: 400px;

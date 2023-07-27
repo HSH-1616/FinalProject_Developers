@@ -6,13 +6,14 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/accommodation/acSearchBar.jsp" />
 <link rel="stylesheet" href="${path }/css/accommodation/acList.css" />
+
 <div id="hotelListContainer">
 	<div id="hotelList">
 		<c:choose>
 			<c:when test="${not empty ac}">
 				<c:forEach var="al" items="${ac}" varStatus="status">
 					<div class="hotelCard">
-						<div class="hotelItem" href="">
+						<a class="hotelItem" href="${path}/ac/acDetail?no=${al.acId}">
 							<div class="heartContainer">
 								<div class="con-like">
 									<input title="like" type="checkbox" class="like" />
@@ -48,7 +49,7 @@
 							<div id="carouselExampleIndicators${status.index}"
 								class="carousel slide">
 								<div class="carousel-indicators">
-									<c:forEach var="i" begin="0" end="${fn:length(al.acFiles)}"
+									<c:forEach var="i" begin="0" end="${fn:length(al.acFiles)-1}"
 										step="1">
 										<button type="button"
 											data-bs-target="#carouselExampleIndicators${status.index}"
@@ -58,15 +59,18 @@
 								</div>
 								<div class="carousel-inner">
 									<c:forEach var="af" items="${al.acFiles}">
-										<div class="carousel-item active">
-											<img src="${path}/images/upload/accommodation/${af.afName}"
-												class="d-block w-100" alt="..." />
-										</div>
-										<!-- <div class="carousel-item">
-											<img
-												src="https://a0.muscache.com/im/pictures/ff86ea07-d2f2-4f2d-a07a-ac7f7427f9b5.jpg?im_w=720"
-												class="d-block w-100" alt="..." />
-										</div> -->
+										<c:if test="${fn:contains(af.afMain, 'Y')}">
+											<div class="carousel-item active">
+												<img src="${path}/images/upload/accommodation/${af.afName}"
+													class="d-block w-100" alt="..." />
+											</div>
+										</c:if>
+										<c:if test="${fn:contains(af.afMain, 'N')}">
+											<div class="carousel-item">
+												<img src="${path}/images/upload/accommodation/${af.afName}"
+													class="d-block w-100" alt="..." />
+											</div>
+										</c:if>
 									</c:forEach>
 								</div>
 								<button class="carousel-control-prev" type="button"
@@ -84,27 +88,33 @@
 							</div>
 							<div class="itemContent">
 								<div class="contentTitle">${fn:substring(al.acTitle, 0, 16)}...</div>
-								<div class="contentAddress">${al.acAddress}</div>
+								<div class="contentAddress">${fn:substringBefore(al.acAddress, "시")}시</div>
 								<div class="priceStar">
-
-
 									<div class="contentPrice">
 										₩
 										<fmt:formatNumber value="${al.acPrice }" pattern="#,###" />
 										/박
 									</div>
 									<div class="starContainer">
-										<span class="star"> ★★★★★ <span
-											<c:set var="star" value="20" />
-											style="width: ${al.reviewGrade * star}">★★★★★</span>
-										</span>
+										<c:if test="${al.reviewGrade!='0.0'}">
+											<span class="star"> ★★★★★ <span
+												<c:set var="star" value="20" />
+												style="width: ${al.reviewGrade * star}">★★★★★</span>
+											</span>
+										</c:if>
+										<c:if test="${al.reviewGrade=='0.0'}">
+										<span>리뷰 없음</span>
+										</c:if>
 									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 				</c:forEach>
 			</c:when>
+			<c:otherwise>
+				<h2>숙박지 없음</h2>
+			</c:otherwise>
 		</c:choose>
 	</div>
 </div>
