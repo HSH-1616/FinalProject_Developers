@@ -89,6 +89,8 @@ header .main-menu .item .item__name {
   padding: 10px 20px 12px 20px;
   font-size: 1.2rem;
   color: white;
+  border: none;
+  background-color: transparent;
 }
 
 header .main-menu .item:hover .item__name {

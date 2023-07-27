@@ -45,6 +45,6 @@
         </div>
       </div>
     </footer>
-    <script src="${path }js/default.js"></script>
+    <script src="${path }/js/default.js"></script>
   </body>
 </html>

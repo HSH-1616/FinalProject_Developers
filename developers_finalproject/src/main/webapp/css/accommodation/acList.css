@@ -1,0 +1,185 @@
+/* 숙박지 리스트 */
+
+#hotelListContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#hotelList {
+  display: flex;
+  /* justify-content: center; */
+  width: 95%;
+  height: 100%;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+
+.hotelCard {
+  width: 260px;
+  height: 100%;
+  border-radius: 5%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  text-decoration: none;
+}
+
+.hotelItem {
+  text-decoration: none;
+  color: black;
+}
+
+.hotelItem img {
+  width: 260px;
+  height: 260px;
+  border-radius: 5%;
+}
+
+.carousel-inner {
+  /* width: 280px; */
+}
+.itemContent {
+  position: relative;
+  top: 15px;
+}
+
+.itemContent div {
+  display: flex;
+  align-items: center;
+}
+
+.contentTitle {
+  display: block;
+  width: 100%;
+}
+
+.contentTitle,
+.contentPrice {
+  font-weight: bold;
+}
+
+.contentAddress {
+  margin-top: 5px;
+  color: #999;
+}
+.starContainer {
+  position: relative;
+  left: 15px;
+}
+.star {
+  position: relative;
+  font-size: 1.5rem;
+  color: #ddd;
+  bottom: 2px;
+}
+
+.star span {
+  width: 0;
+  position: absolute;
+  left: 0;
+  color: #b31312;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heartContainer {
+  /* width: 100%; */
+  display: flex;
+  justify-content: end;
+}
+.con-like {
+  --red: #b31312;
+  fill: black;
+  position: absolute;
+  z-index: 2;
+  width: 45px;
+  height: 45px;
+  margin-top: 5px;
+}
+
+.con-like .like {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.con-like .checkmark {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.con-like .outline {
+  fill: white;
+}
+
+.con-like .normal {
+  fill: black;
+  position: absolute;
+  opacity: 0.5;
+}
+
+.con-like .filled {
+  fill: var(--red);
+  position: absolute;
+}
+
+.con-like .filled {
+  animation: kfr-filled 0.5s;
+  display: none;
+}
+
+.con-like .celebrate {
+  position: absolute;
+  animation: kfr-celebrate 0.5s;
+  animation-fill-mode: forwards;
+  display: none;
+}
+
+.con-like .poly {
+  /* stroke: var(--red); */
+  fill: var(--red);
+}
+
+.con-like .like:checked ~ .checkmark .filled {
+  display: block;
+}
+
+.con-like .like:checked ~ .checkmark .celebrate {
+  display: block;
+}
+
+@keyframes kfr-filled {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes kfr-celebrate {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+    display: none;
+  }
+}
+/* /숙박지 리스트/ */

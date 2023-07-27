@@ -58,16 +58,17 @@
 			<div id="mainHeader">
 				<ul class="main-menu">
 					<li class="item">
-						<div class="item__name">TRAVEL&FOOD</div>
+						<button class="item__name">TRAVEL&FOOD</button>
 					</li>
 					<li class="item">
-						<div class="item__name">ACCOMMODATION</div>
+						<button class="item__name"
+							onclick="location.href='${path }/ac/acList'">ACCOMMODATION</button>
 					</li>
 					<li class="item">
-						<div class="item__name">NOTICE</div>
+						<button class="item__name">NOTICE</button>
 					</li>
 					<li class="item">
-						<div class="item__name">COMMUNITY</div>
+						<button class="item__name">COMMUNITY</button>
 					</li>
 				</ul>
 			</div>
