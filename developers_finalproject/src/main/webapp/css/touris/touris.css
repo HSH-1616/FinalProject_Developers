@@ -10,9 +10,12 @@
 } 
 /*  */
 
-
-
-
+.drp-buttons button{
+	position: relative;
+    top: 2px;
+    border: none;
+    color: #000;
+}
 
 section {
   width: 100%;
@@ -479,7 +482,7 @@ section {
     color: #aaa !important;
     background-color: #fafafa !important;
     border: none !important;
-    height: 285px
+    height: 275px;
 }
 .list-text svg{
   position: absolute;

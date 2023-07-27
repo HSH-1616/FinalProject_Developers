@@ -116,6 +116,7 @@ header .main-menu .item .item__contents {
   position: fixed;
   left: 0;
   display: none;
+  top: 79px;
 }
 
 header .main-menu .item:hover .item__contents {

@@ -7,7 +7,7 @@
 <title>관광경로만들기 해당페이지</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/touris/tourisheader.jsp"/>   
+<jsp:include page="/WEB-INF/views/touris/tourisheader.jsp"/> 
 	<section>
       <div class="" id="sidebar-left">
         <div id="sidebtn"><button></button></div>
@@ -32,12 +32,6 @@
           </div>
           </div>
           <div id="select-area">
-            <!-- <div id="select-travelname">
-              <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
-                <li class="tab testTabs"><a href="#">관광지</a></li>
-                <li class="tab testTabs"><a href="#test2">맛집</a></li>
-                </ul>
-            </div> -->
             <div class="select-travelname">
             <div class="mydict">
               <div>

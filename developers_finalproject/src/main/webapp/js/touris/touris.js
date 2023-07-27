@@ -257,6 +257,7 @@ $(function() {
 });
 $(document).ready(function(){
   $('input[name="datefilter"]').trigger('click');
+ console.log($('input[name="datefilter"]').trigger('click'));
 });
  
   // 탭 js
