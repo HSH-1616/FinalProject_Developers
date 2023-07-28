@@ -256,6 +256,7 @@
                 <div class="day">SAT</div>
                 <div class="day">SUN</div>
               </div>
+               <input type="hidden" id="fnum" value="" />
               <div class="hotelDates now"></div>
             </div>
             <div class="calContainer">
@@ -268,6 +269,7 @@
                 <div class="day">SAT</div>
                 <div class="day">SUN</div>
               </div>
+               <input type="hidden" id="lnum" value="" />
               <div class="hotelDates next"></div>
             </div>
           </div>

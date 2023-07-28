@@ -146,14 +146,15 @@ function calender() {
   renderCalender(thisMonth);
   //renderNextCalender(nextMonth);
 
-  function renderCalender(thisMonth) {
+  function renderCalender(thisMonth, fnum, lnum) {
     //새로 들어오는 변수를 위한 데이터 정의
     currentYear = thisMonth.getFullYear();
     currentMonth = thisMonth.getMonth();
     currentDate = thisMonth.getDate();
 
     nextMonth = thisMonth.getMonth() + 1;
-
+    console.log(fnum);
+    console.log(lnum);
     // 이전 달의 마지막 날 날짜와 요일
     var startDay = new Date(currentYear, currentMonth, 0);
     var prevDate = startDay.getDate();
@@ -216,23 +217,46 @@ function calender() {
 
         $(".hotelDates.now").html(nowdate);
       } else {
-        nowdate =
-          nowdate +
-          "<div class='day'>" +
-          i +
-          "<input type='hidden' class='daysVal' value='" +
-          val +
-          (i < 10 ? "0" + i : i) +
-          "'/>" +
-          "</div>";
-        $(".hotelDates.now").html(nowdate);
+        if (fnum == val + (i < 10 ? "0" + i : i)) {
+          nowdate =
+            nowdate +
+            "<div class='day first'>" +
+            i +
+            "<input type='hidden' class='daysVal' value='" +
+            val +
+            (i < 10 ? "0" + i : i) +
+            "'/>" +
+            "</div>";
+          $(".hotelDates.now").html(nowdate);
+        } else if (lnum == val + (i < 10 ? "0" + i : i)) {
+          nowdate =
+            nowdate +
+            "<div class='day last'>" +
+            i +
+            "<input type='hidden' class='daysVal' value='" +
+            val +
+            (i < 10 ? "0" + i : i) +
+            "'/>" +
+            "</div>";
+          $(".hotelDates.now").html(nowdate);
+        } else {
+          nowdate =
+            nowdate +
+            "<div class='day'>" +
+            i +
+            "<input type='hidden' class='daysVal' value='" +
+            val +
+            (i < 10 ? "0" + i : i) +
+            "'/>" +
+            "</div>";
+          $(".hotelDates.now").html(nowdate);
+        }
       }
     }
     // 다음달
     for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
       nowdate = nowdate + "<div class='notday'></div>";
       $(".hotelDates.now").html(nowdate);
-      console.log(i);
     }
 
     //오른쪽 달력
@@ -241,34 +265,213 @@ function calender() {
       $(".hotelDates.next").html(nextdate);
     }
     for (var i = 1; i <= nextNextDate; i++) {
-      nextdate =
-        nextdate +
-        "<div class='day'>" +
-        i +
-        "<input type='hidden' class='daysVal' value='" +
-        nextval +
-        (i < 10 ? "0" + i : i) +
-        "'/>" +
-        "</div>";
-      $(".hotelDates.next").html(nextdate);
+      if (fnum == nextval + (i < 10 ? "0" + i : i)) {
+        nextdate =
+          nextdate +
+          "<div class='day first'>" +
+          i +
+          "<input type='hidden' class='daysVal' value='" +
+          nextval +
+          (i < 10 ? "0" + i : i) +
+          "'/>" +
+          "</div>";
+        $(".hotelDates.next").html(nextdate);
+      } else if (lnum == nextval + (i < 10 ? "0" + i : i)) {
+        nextdate =
+          nextdate +
+          "<div class='day last'>" +
+          i +
+          "<input type='hidden' class='daysVal' value='" +
+          nextval +
+          (i < 10 ? "0" + i : i) +
+          "'/>" +
+          "</div>";
+        $(".hotelDates.next").html(nextdate);
+      } else {
+        nextdate =
+          nextdate +
+          "<div class='day'>" +
+          i +
+          "<input type='hidden' class='daysVal' value='" +
+          nextval +
+          (i < 10 ? "0" + i : i) +
+          "'/>" +
+          "</div>";
+        $(".hotelDates.next").html(nextdate);
+      }
     }
     for (var i = 1; i <= (7 - nextNextDay == 7 ? 0 : 7 - nextNextDay); i++) {
       nextdate = nextdate + "<div class='notday'></div>";
       $(".hotelDates.next").html(nextdate);
     }
+    var listDate = [];
+    function getDateRange(fnum, lnum, listDate) {
+      var dateMove = new Date(fnum);
+      var strDate = fnum;
+
+      if (fnum == lnum) {
+        var strDate = dateMove.toISOString().slice(0, 10);
+
+        listDate.push(strDate);
+      } else {
+        while (strDate < lnum) {
+          var strDate = dateMove.toISOString().slice(0, 10);
+
+          listDate.push(strDate);
+
+          dateMove.setDate(dateMove.getDate() + 1);
+        }
+      }
+
+      return listDate;
+    }
+    if ($(".first,.last").length) {
+      getDateRange(fnum, lnum, listDate);
+      $(listDate).each(function (index, item) {
+        $(".day").each(function (index2, item2) {
+          if ($(this).children().val() == item) {
+            $(this)
+              .not(".first,.last")
+              .css({ "background-color": "#eeeeee", "border-radius": "0" });
+          }
+        });
+      });
+    }
   }
 
+  //달력 기간 구하기
+  $(document).on("click", ".day", function () {
+    var num = $(this).children().val().replace("-", "").replace("-", "");
+    if (!$(".day.first").length) {
+      // if ($("#fnum").val() == "") {
+      $(this).addClass("first");
+      $(this).css({ "background-color": "#b31312", "border-radius": "100%" });
+      $("#inDayBtn").show();
+      // }
+      // else if ($("#fnum").val() != "") {
+      //   console.log(2);
+      //   $(this).addClass("last");
+      // }
+    }
+
+    var fnum =
+      $(".day.first").length == 0
+        ? ""
+        : $(".day.first").children().val().replace("-", "").replace("-", "");
+    var lnum =
+      $(".day.last").length == 0
+        ? ""
+        : $(".day.last").children().val().replace("-", "").replace("-", "");
+
+    if ($(".day.first").length && fnum < num) {
+      $(".day").not(".first").css("background-color", "white");
+      $(".day").removeClass("last");
+      $(this).addClass("last");
+      $(this).css({ "background-color": "#b31312", "border-radius": "100%" });
+      $("#outDayBtn").show();
+    } else if ($(".day.first").length && fnum > num) {
+      $(".day").not(".last").css("background-color", "white");
+      $(".day").removeClass("first");
+      $(this).addClass("first");
+      $(this).css({ "background-color": "#b31312", "border-radius": "100%" });
+    }
+
+    var fnum =
+      $(".day.first").length == 0
+        ? ""
+        : $(".day.first").children().val().replace("-", "").replace("-", "");
+    var lnum =
+      $(".day.last").length == 0
+        ? ""
+        : $(".day.last").children().val().replace("-", "").replace("-", "");
+    var inday =
+      $(".day.first").length == 0
+        ? "날짜 추가"
+        : fnum.substr(4, 2) + "월 " + fnum.substr(6, 2) + "일";
+    var outday =
+      $(".day.last").length == 0
+        ? "날짜 추가"
+        : lnum.substr(4, 2) + "월 " + lnum.substr(6, 2) + "일";
+    $("#checkInDay").text(inday);
+    $("#checkOutDay").text(outday);
+
+    var listDate = [];
+    var fnum =
+      $(".day.first").length == 0 ? "" : $(".day.first").children().val();
+    var lnum =
+      $(".day.last").length == 0 ? "" : $(".day.last").children().val();
+
+    function getDateRange(fnum, lnum, listDate) {
+      var dateMove = new Date(fnum);
+      var strDate = fnum;
+
+      if (fnum == lnum) {
+        var strDate = dateMove.toISOString().slice(0, 10);
+
+        listDate.push(strDate);
+      } else {
+        while (strDate < lnum) {
+          var strDate = dateMove.toISOString().slice(0, 10);
+
+          listDate.push(strDate);
+
+          dateMove.setDate(dateMove.getDate() + 1);
+        }
+      }
+
+      return listDate;
+    }
+    if ($(".first,.last").length) {
+      getDateRange(fnum, lnum, listDate);
+      $(listDate).each(function (index, item) {
+        $(".day").each(function (index2, item2) {
+          if ($(this).children().val() == item) {
+            $(this)
+              .not(".first,.last")
+              .css({ "background-color": "#eeeeee", "border-radius": "0" });
+          }
+        });
+      });
+    }
+
+    $(".checkDay > div > ion-icon").click(function () {
+      if ($(this).attr("id") == "inDayBtn") {
+        $(".day").removeClass("first").removeClass("last");
+        $("#inDayBtn,#outDayBtn").hide();
+        $("#checkInDay,#checkOutDay").text("날짜 추가");
+        $(".day").css("background-color", "white");
+      } else {
+        $(".day").removeClass("last");
+        $("#outDayBtn").hide();
+        $("#checkOutDay").text("날짜 추가");
+        $(".day").not(".first").css("background-color", "white");
+      }
+    });
+    $(".day.first").length == 0
+      ? ""
+      : $("#fnum").val($(".day.first").children().val());
+    $(".day.last").length == 0
+      ? ""
+      : $("#lnum").val($(".day.last").children().val());
+  });
+
+  console.log(fnum);
   // 이전달로 이동
   $(".calBtn.prev").on("click", function () {
+    var fnum = $("#fnum").val();
+    var lnum = $("#lnum").val();
     thisMonth = new Date(currentYear, currentMonth - 1, currentDate);
-    renderCalender(thisMonth);
+
+    renderCalender(thisMonth, fnum, lnum);
     prevBtn();
   });
 
   // 다음달로 이동
   $(".calBtn.next").on("click", function () {
+    var fnum = $("#fnum").val();
+    var lnum = $("#lnum").val();
     thisMonth = new Date(currentYear, currentMonth + 1, currentDate);
-    renderCalender(thisMonth);
+    renderCalender(thisMonth, fnum, lnum);
     prevBtn();
   });
 
@@ -285,7 +488,7 @@ function calender() {
   }
 }
 
-//달력 기간 구하기
+// /달력함수/
 $(document).on("click", ".day", function () {
   if (!$(".day.first").length) {
     $(this).addClass("first");
