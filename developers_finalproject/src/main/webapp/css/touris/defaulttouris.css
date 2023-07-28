@@ -1,0 +1,207 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "LINESeedKR-Bd";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "HANAMDAUM";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+header {
+  height: 10%;
+  width: 100%;
+  position: fixed;
+  /* left: 0; */
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+/* 헤더 */
+#headerLogo {
+  position: absolute;
+  width: 150px;
+  /* height: 90px; */
+  /* bottom: -30px; */
+  left: 150px;
+  bottom: 3px;
+}
+.btn {
+  background-color: transparent;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  position: relative;
+  top: 20px;
+}
+
+.btn:hover {
+  background-color: transparent;
+}
+.btn:click {
+  background-color: transparent;
+}
+
+/* 헤더 네비게이션바 */
+#fluidcicon {
+  position: static;
+  border: none;
+}
+
+.navbar {
+  display: block;
+  padding: 25px 0;
+  height: 100px;
+  transition: all 0.5s;
+}
+
+.navbar.drop {
+  background-color: #b31312;
+  padding: 12px 0;
+  position: fixed;
+  height: 10%;
+  transition: all 0.5s;
+}
+.container-fluid{
+  width: 100%;
+}
+.navbar > .container-fluid {
+  justify-content: space-between;
+}
+#mainHeader {
+  position: fixed;
+  /* bottom: 32px; */
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  left: 30%;
+  top: 4%;
+}
+/* 헤더 메뉴바 */
+.main-menu {
+  display: flex;
+}
+
+header .main-menu .item .item__name {
+  padding: 10px 20px 12px 20px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+header .main-menu .item:hover .item__name {
+  background-color: #eeeeee;
+
+  color: #b31312;
+  border-radius: 6px 6px 0 0;
+}
+
+header .main-menu .item .item__contents {
+  width: 100%;
+
+  position: fixed;
+  left: 0;
+  display: none;
+  top: 79px;
+}
+
+header .main-menu .item:hover .item__contents {
+  display: block;
+}
+
+header .main-menu .item .item__contents .contents__menu {
+  background-color: #eeeeee;
+  height: 200px;
+}
+
+header .main-menu .item .item__contents .contents__menu > ul {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+header .main-menu .item .item__contents .contents__menu > ul > li {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+header .main-menu .item .item__contents .contents__menu > ul > li h4 {
+  padding: 3px 0 12px 0;
+  font-size: 1.5rem;
+  color: #b31312;
+}
+
+header .main-menu .item .item__contents .contents__menu > ul > li ul li {
+  padding: 5px 0;
+  font-size: 1rem;
+  color: #999;
+  cursor: pointer;
+}
+
+header .main-menu .item .item__contents .contents__menu > ul > li ul li:hover {
+  color: #b31312;
+}
+
+.offcanvas-header {
+  justify-content: right;
+}
+
+#blurSection {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: 0.5;
+}
+
+/* 헤더 사이드바 */
+#userProfile {
+  text-align: center;
+  background-color: #eeeeee;
+}
+#userProfile img {
+  width: 130px;
+  height: 130px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin-top: 35px;
+}
+#userProfile p {
+  font-size: 1.5rem;
+  margin-top: 15px;
+}
+
+#userProfile button {
+  position: relative;
+  bottom: 10px;
+  border: none;
+}
+#userProfile b {
+  position: relative;
+  bottom: 10px;
+}
+
+#userProfile b:nth-child(4) {
+  margin: 10px;
+}
