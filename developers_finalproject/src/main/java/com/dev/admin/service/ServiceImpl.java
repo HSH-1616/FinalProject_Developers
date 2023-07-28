@@ -1,4 +1,4 @@
-package com.dev.admin.model.service;
+package com.dev.admin.service;
 
 import java.util.Map;
 

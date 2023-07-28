@@ -80,6 +80,10 @@ window.addEventListener("keyup", e => {
 })
 
 /*카카오 로그인 서비스  */
+const naverlogin=()=>{
+	location.assign("${path}/login/naverLogin");
+}
+
 const kakaologin=()=>{
   Kakao.init("c0e169307572ef60ba8671f2af4eaff4");
   console.log(Kakao.isInitialized()); 
