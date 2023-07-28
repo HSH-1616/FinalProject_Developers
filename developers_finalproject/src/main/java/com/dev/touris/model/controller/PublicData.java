@@ -24,12 +24,14 @@ public class PublicData {
 //		String decodeservicekey = servicekey.removingPercentEncoding;
 		
 		String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedSyncList1?"+
-		"serviceKey=0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w=="+
-		"pageNo=1"+
-		"numOfRows=100"+
-		"&MobileOS=ETC"+
-		"&MobileApp=AppTest"+
-		"&type=json";
+		URLEncoder.encode("serviceKey","UTF-8")+"="
+		+URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8")
+		+"&"+URLEncoder.encode("pageNo","UTF-8")+"="+URLEncoder.encode("1","UTF-8")
+		+"&"+URLEncoder.encode("numOfRows","UTF-8")+"="+URLEncoder.encode("100","UTF-8")
+		+"&"+URLEncoder.encode("MobileOS","UTF-8")+"="+URLEncoder.encode("ETC","UTF-8")
+		+"&"+URLEncoder.encode("contentTypeId", "UTF-8")+"="+URLEncoder.encode("12", "UTF-8")
+		+"&"+URLEncoder.encode("MobileApp","UTF-8")+"="+URLEncoder.encode("AppTest","UTF-8")
+		+"&"+URLEncoder.encode("_type","UTF-8")+"="+URLEncoder.encode("XML","UTF-8");
 		URL url = new URL(urlStr);
 		
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
