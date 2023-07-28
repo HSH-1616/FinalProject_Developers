@@ -1,29 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-	<link rel="stylesheet" type="text/css" href="css/coStyle.css">
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-    
-<header>
-    <script src="./common/default.html"></script>
+<link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
 
-	
-</header>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/> 
+<section>
 
 
-<div class="container p-3">
+<div class="notice-container p-3">
 
 <div class="title text-align"><h3 class="text-center">공지사항</h3></div>
         
@@ -92,6 +80,9 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="text-end">
+			<button class="w-btn w-btn-red">작성하기</button>
+		</div>
 	</div>
 		<div class="write-area text-end">
 				<a href="#"
@@ -119,6 +110,5 @@
 		  </nav>
 	</div>
 </div>
-</body>
-
-</html>
+</section>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
