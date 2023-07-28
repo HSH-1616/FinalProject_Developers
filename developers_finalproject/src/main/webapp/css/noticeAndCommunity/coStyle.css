@@ -3,6 +3,11 @@
     
 }
 
+.carousel-item{
+      width: 100%;
+      max-height: 400px;
+}
+
 .w-btn-red{
 	margin-top: 3%;
 	margin-right: 70px;
@@ -17,6 +22,38 @@
 .del-img{
 	margin: 0px;
 }
+.notice-container{
+	text-align: center;
+	min-height: 500px;
+}
+
+.search-notice{
+	margin-right: 15%;
+}
+
+.list-area{
+	display: block;
+	margin-left: 10%;
+	width: 1300px;
+}
+
+.card-box-write{
+	
+	text-align: center;
+	min-height: 1500px;
+}
+
+.card-box{
+	min-height: 1500px;
+}
+
+.card-box-form{
+	display: block;
+	margin-right: 48%;
+	padding-top: 0%;
+}
+
+
  div.card-box{
     display: block;
     position: relative;
