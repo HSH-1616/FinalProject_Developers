@@ -67,10 +67,10 @@
 						<div class="item__name">ACCOMMODATION</div>
 					</li>
 					<li class="item">
-						<div class="item__name">NOTICE</div>
+						<div class="item__name" onclick="location.href='${path }/notice/noticeList.do'">NOTICE</div>
 					</li>
 					<li class="item">
-						<div class="item__name">COMMUNITY</div>
+						<div class="item__name" onclick="location.href='${path }/community/communityList.do'">COMMUNITY</div>
 					</li>
 				</ul>
 			</div>
