@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link
@@ -12,12 +12,16 @@
       href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
       type="text/css"
     />
-   
-    <section class="container text-center">
-        <form>
-       <h2>게시글 작성</h2>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>   
+    <section>
+    <div class="card-box-write">
+    <div style="margin-top:2%;">
+     	<h2>게시글 작성</h2>
+     	</div>
+        <form action="" class="card-box-form">
+      
         <div class="card-box">
-            <div class="card" style="width: 40rem;">
+            <div class="card" style="width:1300px;">
                 <div class="registImgCon form-control">
                     <div class="registImg">
                       <div class="dropzone" id="dropDiv"></div>
@@ -76,32 +80,33 @@
                       </div>
                     </div>
                   </div>
-                
+               
                 <div class="card-body">
                     
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">제목</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1">
+                        <input type="text" class="form-control border border-danger" id="exampleFormControlInput1">
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                        <textarea class="form-control border border-danger" id="exampleFormControlTextarea1" rows="7"></textarea>
                       </div>
                     
                       <div class="comu-buttons">
-                        <button class="btn w-btn-blue-outline">등록</button>
-                        <button class="btn w-btn-gray-outline">취소</button>
+                        <button class="w-btn w-btn-blue-outline">등록</button>&nbsp;&nbsp;&nbsp;
+                        <button class="w-btn w-btn-gray-outline">취소</button>
                       </div>
                     
-                </div>
+             </div>
 
 
 
         </div>
         </div>
         </form>
+        </div>
     </section>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
 
         Dropzone.autoDiscover = false;

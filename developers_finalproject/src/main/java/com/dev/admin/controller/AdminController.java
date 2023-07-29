@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dev.admin.model.dto.Admin;
-import com.dev.admin.model.service.AdminService;
+import com.dev.admin.service.AdminService;
 
 
 @Controller
