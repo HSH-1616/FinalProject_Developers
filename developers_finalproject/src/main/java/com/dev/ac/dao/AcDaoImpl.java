@@ -18,7 +18,7 @@ public class AcDaoImpl implements AcDao {
 
 	@Override
 	public List<Accommodation> acSearchAll(SqlSessionTemplate session, Map param) {
-		return session.selectList("accommodation.searchListAll");
+		return session.selectList("accommodation.searchListAll",param);
 	}
 
 }

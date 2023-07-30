@@ -1,0 +1,555 @@
+#hotelListContainer {
+	justify-content: start;
+	height: 100%;
+}
+
+#hotelList {
+	width: 60%;
+	height: auto;
+	margin-top: 80px;
+
+}
+
+.hotelCard {
+	width: 330px;
+}
+
+.hotelItem img {
+	height: 330px;
+}
+
+#mapContainer {
+	position: sticky;
+	background-color: #afafaf;
+	top: 116px;
+	width: 40%;
+	height: calc(100vh - 116px);
+	left: 60%;
+}
+
+#acSearchMapWrapper {}
+
+#acSearchMap {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.mapMarker {
+	width: 100px;
+	height: 30px;
+	border-radius: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+}
+
+.mapMarker>div {
+	font-family: "LINESeedKR-Bd" !important;
+	height: 20px;
+}
+
+.mapDetail {
+
+	width: 400px;
+	height: 400px;
+	border-radius: 15px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	background-color: white;
+	position: absolute;
+	margin-left: 200px;
+	left: 0;
+	margin-left: -180px;
+	bottom: 80px;
+}
+
+#mapDetailImg {
+	width: 400px;
+}
+
+.mapDetail img {
+	width: 100%;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	height: 260px;
+}
+
+.mapDetailItem {
+	margin-left: 15px;
+	margin-top: 15px;
+	font-size: 1.2rem;
+}
+
+.mapDetailTitle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.mapDetailTitle>span {
+	height: 30px;
+	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.mapDetailTitle>div {
+	position: relative;
+	top: 1px;
+	left: -15px;
+
+}
+
+.mapDetailAddress span {
+	font-size: 1rem;
+	color: #999;
+}
+
+.mapDetailCount span {
+	margin-right: 5px;
+	font-size: 1rem;
+}
+
+.mapDetailPrice span {
+	font-size: 1rem;
+}
+
+.notReview {
+	color: #b31312;
+	font-size: 1rem;
+	position: relative;
+	bottom: 2px;
+}
+
+.mapDetail ion-icon {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	color: black;
+	opacity: 0.5;
+	z-index: 2;
+	top: 10px;
+	left: 90%;
+}
+
+.radius_border {
+	border: 1px solid #eeeeee;
+	border-radius: 5px;
+}
+
+.custom_typecontrol {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	overflow: hidden;
+	width: 130px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+	display: flex;
+}
+
+.custom_typecontrol span {
+	display: block;
+	width: 65px;
+	height: 30px;
+	float: left;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.custom_typecontrol .nbtn {
+	background: #fff;
+	background: linear-gradient(#fff, #e6e6e6);
+}
+
+.custom_typecontrol .btn:hover {
+	background: #f5f5f5;
+	background: linear-gradient(#f5f5f5, #e3e3e3);
+}
+
+.custom_typecontrol .btn:active {
+	background: #e6e6e6;
+	background: linear-gradient(#e6e6e6, #fff);
+}
+
+.custom_typecontrol .selected_btn {
+	color: #fff;
+	background: #425470;
+	background: linear-gradient(#425470, #5b6d8a);
+}
+
+.custom_typecontrol .selected_btn:hover {
+	color: #fff;
+}
+
+.custom_zoomcontrol {
+	position: absolute;
+	top: 50px;
+	right: 10px;
+	width: 36px;
+	height: 80px;
+	overflow: hidden;
+	z-index: 1;
+	background-color: #eeeeee;
+}
+
+.custom_zoomcontrol span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 36px;
+	height: 40px;
+	cursor: pointer;
+}
+
+.custom_zoomcontrol span img {
+	width: 15px;
+	height: 15px;
+	padding: 0;
+	border: none;
+}
+
+.custom_zoomcontrol span:first-child {
+	border-bottom: 1px solid #bfbfbf;
+}
+
+#roadviewControl {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 42px;
+	height: 42px;
+	z-index: 1;
+	cursor: pointer;
+	background: url(https://t1.daumcdn.net/localimg/localimages/07/2018/pc/common/img_search.png) 0 -450px no-repeat;
+}
+
+#roadviewControl.active {
+	background-position: 0 -350px;
+}
+
+#close {
+	position: absolute;
+	padding: 4px;
+	top: 5px;
+	left: 5px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	border: 1px solid #c8c8c8;
+	box-shadow: 0px 1px #888;
+}
+
+#close .img {
+	display: block;
+	background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/rv_close.png) no-repeat;
+	width: 14px;
+	height: 14px;
+}
+
+#mapContainer {
+	overflow: hidden;
+}
+
+#acSearchMapWrapper {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+#rvWrapper {
+	display: none;
+	width: 100%;
+	height: 50%;
+	top: 50%;
+	right: 0;
+	position: absolute;
+	z-index: 0;
+}
+
+#mapContainer.view_roadview #acSearchMapWrapper {
+	height: 50%;
+}
+
+#mapContainer.view_roadview #rvWrapper {
+	display: block;
+}
+
+#roadviewControl {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 42px;
+	height: 42px;
+	z-index: 1;
+	cursor: pointer;
+	background: url(https://t1.daumcdn.net/localimg/localimages/07/2018/pc/common/img_search.png) 0 -450px no-repeat;
+}
+
+#roadviewControl.active {
+	background-position: 0 -350px;
+}
+
+#close {
+	position: absolute;
+	padding: 4px;
+	top: 5px;
+	left: 5px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	border: 1px solid #c8c8c8;
+	box-shadow: 0px 1px #888;
+}
+
+#close .img {
+	display: block;
+	background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/rv_close.png) no-repeat;
+	width: 14px;
+	height: 14px;
+}
+
+.infoWindow{
+	border-radius: 10px;
+}
+
+
+#filterMini {
+	position: fixed;
+	background-color: white;
+	width: 60%;
+	height: 70px;
+	top: 116px;
+	z-index: 800;
+}
+
+#filterMini button {
+	width: 100px;
+	height: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	font-size: 1.1rem;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+	background-color: white;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+#filterMini ion-icon,
+#filterMini span {
+	color: #b31312;
+}
+
+#filterDetail {
+	display: none;
+}
+
+#filterDetail.on {
+	display: flex;
+	position: fixed;
+	z-index: 1610;
+	top: 1px;
+}
+
+#filter {
+	width: 600px;
+	height: 100vh;
+	background-color: white;
+}
+
+#filter>button {
+	width: 200px;
+}
+
+.middle {
+	position: relative;
+	width: 50%;
+	max-width: 500px;
+}
+
+.slider {
+	position: relative;
+	z-index: 1;
+	height: 10px;
+	margin: 0 15px;
+}
+
+.slider>.track {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	background-color: #c6aee7;
+}
+
+.slider>.range {
+	position: absolute;
+	z-index: 2;
+	left: 25%;
+	right: 25%;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	background-color: #6200ee;
+}
+
+.slider>.thumb {
+	position: absolute;
+	z-index: 3;
+	width: 30px;
+	height: 30px;
+	background-color: #6200ee;
+	border-radius: 50%;
+}
+
+.slider>.thumb.left {
+	left: 25%;
+	transform: translate(-15px, -10px);
+}
+
+.slider>.thumb.right {
+	right: 25%;
+	transform: translate(15px, -10px);
+}
+
+input[type="range"] {
+	position: absolute;
+	/* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+	pointer-events: none;
+	-webkit-appearance: none;
+	z-index: 2;
+	height: 10px;
+	width: 100%;
+	opacity: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	/* 겹쳐진 두 thumb를 모두 활성화 */
+	pointer-events: all;
+	width: 30px;
+	height: 30px;
+	border-radius: 0;
+	border: 0 none;
+	background-color: red;
+	cursor: pointer;
+	/* appearance를 해야 위의 스타일들을 볼 수 있음 */
+	-webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	/* 겹쳐진 두 thumb를 모두 활성화 */
+	pointer-events: all;
+	width: 30px;
+	height: 30px;
+	border-radius: 0;
+	border: 0 none;
+	background-color: red;
+	cursor: pointer;
+	/* appearance를 해야 위의 스타일들을 볼 수 있음 */
+	-webkit-appearance: none;
+}
+
+.hotelType {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 60px;
+}
+
+.ht {
+	width: 30%;
+	height: 150px;
+	border: 1px solid #c8c8c8;
+	border-radius: 30px;
+	background-color: white;
+	text-align: center;
+}
+
+.ht p {
+	margin-top: 10px;
+	color: #afafaf;
+}
+
+.ht img {
+	width: 100px;
+	height: 80px;
+}
+
+.ht.on {
+	border: 2px solid #b31312;
+}
+
+.ht.on p {
+	color: #b31312;
+}
+
+.ht:hover {
+	border: 2px solid #b31312;
+}
+
+.ht:hover>p {
+	color: #b31312;
+}
+
+.hotelCountCon {
+	display: flex;
+	margin-left: 25px;
+	margin-top: 10px;
+}
+
+.hotelCount.countFirst {
+	margin-top: 50px;
+}
+
+.hotelCountHeader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.3rem;
+}
+
+.hotelCountBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	width: 50px;
+	height: 50px;
+	color: #b31312;
+	font-size: 1.6rem;
+	background-color: white;
+}
+
+.hotelCountBtn:first-of-type {
+	color: #afafaf;
+}
+
+.hotelCount input {
+	border: none;
+	width: 40px;
+	height: 50px;
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+.hotelCountInfo {
+	color: #b31312;
+	margin-left: 25px;
+}

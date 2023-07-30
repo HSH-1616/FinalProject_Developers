@@ -26,4 +26,5 @@ public class Accommodation {
 	private Date acDate;
 	private double reviewGrade;
 	private List<AcFile> acFiles;
+	private List<AcPay> acPay;
 }

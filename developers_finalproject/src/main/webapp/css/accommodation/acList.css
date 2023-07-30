@@ -68,6 +68,11 @@
   margin-top: 5px;
   color: #999;
 }
+
+.priceStar{
+	height: 36px;
+}
+
 .starContainer {
   position: relative;
   left: 15px;
@@ -76,7 +81,7 @@
   position: relative;
   font-size: 1.5rem;
   color: #ddd;
-  bottom: 2px;
+  bottom: 1px;
 }
 
 .star span {

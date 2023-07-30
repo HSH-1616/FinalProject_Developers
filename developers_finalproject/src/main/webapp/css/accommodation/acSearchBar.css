@@ -160,6 +160,13 @@ header .main-menu .item .item__name {
 	width: 80px;
 }
 
+.checkDay input{
+	outline: none;
+	border: none;
+	background-color: transparent;
+	width: 100px;
+}
+
 .checkDay span {
 	display: block;
 }
@@ -194,6 +201,7 @@ header .main-menu .item .item__name {
 #checkPeople input{
 	width: 80px;
 	border: none;
+	outline: none;
 	background-color: inherit;
 }
 
@@ -301,6 +309,11 @@ header .main-menu .item .item__name {
 	color: #b31312;
 }
 
+.calBtnWrap{
+	width: 26px;
+	height: 26px;
+}
+
 .calBtn {
 	color: #b31312;
 	display: flex;
@@ -314,7 +327,7 @@ header .main-menu .item .item__name {
 }
 
 .calBtn.prev ion-icon {
-	display: none;
+
 }
 
 .calMonth {

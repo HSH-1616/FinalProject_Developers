@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
-<script src="${path }/js/accommodation/acSearchBar.js"></script>
 <section>
 	<div id="blurSection"></div>
 	<div id="searchMiniContainer">
@@ -22,8 +21,8 @@
 			<label class="searchLabel">
 				<div id="searchLoc">
 					<div id="searchForm">
-						<span>여행지</span> <input type="text" id="searchLocInput" name="loc"
-							placeholder="여행지 검색" />
+						<span>여행지</span> 
+						<input type="text" id="searchLocInput" name="loc" placeholder="여행지 검색" />
 					</div>
 				</div>
 			</label> <label class="searchLabel">
@@ -31,16 +30,16 @@
 					<div class="checkDay">
 						<span>체크인</span>
 						<div>
-						<input type="hidden" id="checkIn" name="checkIn" value="">
-							<span id="checkInDay">날짜 추가</span>
+							<input type="hidden" id="checkIn" name="checkIn" value="">
+							<input id="checkInDay" value="날짜추가" readonly>
 							<ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
 					</div>
 					<div class="checkDay">
 						<span>체크아웃</span>
 						<div>
-						<input type="hidden" id="checkOut" name="checkOut" value="">
-							<span id="checkOutDay">날짜 추가</span>
+							<input type="hidden" id="checkOut" name="checkOut" value="">
+							<input id="checkOutDay" value="날짜추가" readonly>
 							<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
 					</div>
@@ -48,13 +47,16 @@
 			</label> <label class="searchLabel">
 				<div id="searchPeople">
 					<div id="checkPeople">
-						<span>인원</span> <input name=people readonly type="text" value="인원 추가">
+						<span>인원</span>  
+						<input id="people" name=people type="text" value="인원추가" readonly>
 					</div>
-					
+
 				</div>
-			</label>	
+			</label>
 		</form>
-		<button type="submit" id="hotelSubmit" form="searchHotel"><ion-icon name="search-circle"></ion-icon></button>
+		<button type="submit" id="hotelSubmit" form="searchHotel">
+			<ion-icon name="search-circle"></ion-icon>
+		</button>
 	</div>
 	<div class="searchLoc detail">
 		<div id="searchMapContainer">
@@ -235,3 +237,4 @@
 		</div>
 	</div>
 	<div id="blurSearchBar"></div>
+	<script src="${path }/js/accommodation/acSearchBar.js"></script>
