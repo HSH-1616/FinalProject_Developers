@@ -27,6 +27,19 @@
 	min-height: 500px;
 }
 
+.nw-container{
+	display: block;
+	width: 1300px;
+
+}
+
+.notice-form{
+	width:1300px;
+}
+.notice-table{
+	margin-right: 10%;
+	width: 100%;
+}
 .search-notice{
 	margin-right: 15%;
 }
@@ -239,7 +252,7 @@ cursor: pointer;
 }
 }
 
-.table{
+.nolist-table{
     margin-left: 5%;
     width: 100%;
 }
