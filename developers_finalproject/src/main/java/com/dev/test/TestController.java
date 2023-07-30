@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -17,22 +21,33 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller
-public class TestController  {
-	
+public class TestController {
+
 	private TestService service;
-	
-		public TestController(TestService service) {
-			this.service=service;
-}	
-	
-		@GetMapping("/insert")
+
+	public TestController(TestService service) {
+		this.service = service;
+	}
+
+	@GetMapping("/insert")
 		public void InsertTest() throws IOException {
+			String host="14.36.141.71";
+			int port=8877;
+
+			Socket socket = new Socket(); 
+			SocketAddress socketAddress = new InetSocketAddress(host, port); 
+			socket.connect(socketAddress, 30000);
+			socket.setSoTimeout(30000);
+			
+			ServerSocket serverSocket = new ServerSocket(port);
+			serverSocket.setSoTimeout(40000);
+			
 //			12337
 //			서울, 인천, 대전,  대구, 광주,  부산,  울산, 세종특별자치시, 경기도, 강원특별자치도,충청북도, 충청남도,
 //			경상북도, 경상남도, 전라북도, 전라남도, 제주도,
 //			 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 
 //			먼저 콘텐트 ID api의 pk값을 가져오기 위한 처음 요청보낼 api주소
-			int[] areaCode = { 1 };
+			int[] areaCode = {1, 2, 3, 4, 5, 6, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
 			for (int i : areaCode) {
 
 				StringBuilder result = new StringBuilder();
@@ -52,6 +67,8 @@ public class TestController  {
 				URL url = new URL(urlStr);
 
 				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+				urlConnection.setConnectTimeout(60000);
+				urlConnection.setReadTimeout(60000);
 				urlConnection.setRequestMethod("GET");
 
 				BufferedReader br = new BufferedReader(
@@ -70,6 +87,7 @@ public class TestController  {
 //			파싱할 객체 생성
 				//JsonObject obj = paraser.parse(result.toString()).getAsJsonObject();
 				JsonObject obj=(JsonObject)JsonParser.parseString(result.toString()).getAsJsonObject();
+				
 				JsonArray arr = obj.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
 						.getAsJsonObject().get("item").getAsJsonArray();
 				for (JsonElement jsonElement : arr) {
@@ -103,6 +121,8 @@ public class TestController  {
 					URL url2 = new URL(urlStr2);
 
 					HttpURLConnection urlConnection2 = (HttpURLConnection) url2.openConnection();
+					urlConnection2.setConnectTimeout(60000);
+					urlConnection2.setReadTimeout(60000);
 					urlConnection2.setRequestMethod("GET");
 
 					BufferedReader br2 = new BufferedReader(
@@ -155,6 +175,8 @@ public class TestController  {
 						URL url3 = new URL(urlStr3);
 
 						HttpURLConnection urlConnection3 = (HttpURLConnection) url3.openConnection();
+						urlConnection3.setConnectTimeout(60000);
+						urlConnection3.setReadTimeout(60000);
 						urlConnection3.setRequestMethod("GET");
 
 						BufferedReader br3 = new BufferedReader(
@@ -202,13 +224,13 @@ public class TestController  {
 									.areaId(temp2.get("areacode")==null?"-":temp2.get("areacode").getAsString())
 									.build();
 							int testResult=service.insertTest(test);
-							System.out.println(testResult);
+							if(testResult >0)System.out.println("성공");
 						}
 						
 					}
 				}
 
 			}
-
-		}
 	}
+}
+
