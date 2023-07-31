@@ -50,16 +50,6 @@ public class TestController {
 //			 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 
 //			먼저 콘텐트 ID api의 pk값을 가져오기 위한 처음 요청보낼 api주소
 			int[] areaCode = {1};
-			List<String> list1=new ArrayList();
-			List<String> list2=new ArrayList();
-			List<String> list3=new ArrayList();
-			List<String> list4=new ArrayList();
-			List<String> list5=new ArrayList();
-			List<String> list6=new ArrayList();
-			List<String> list7=new ArrayList();
-			List<String> list8=new ArrayList();
-			List<String> list9=new ArrayList();
-			Map<String,Object> map=new HashMap();
 			for (int i : areaCode) {
 
 				StringBuilder result = new StringBuilder();
@@ -115,31 +105,8 @@ public class TestController {
 				System.out.println(temp.get("firstimage"));
 				System.out.println(temp.get("tel"));
 				System.out.println(temp.get("areacode"));
-				
-				list1.add(temp.get("contentid").getAsString());
-				list2.add(temp.get("title").getAsString());
-				list3.add(temp.get("addr1").getAsString());
-				list4.add(temp.get("mapy").getAsString());
-				list5.add(temp.get("mapx").getAsString());
-				list6.add(temp.get("mlevel").getAsString());
-				list7.add(temp.get("firstimage").getAsString());
-				list8.add(temp.get("tel").getAsString());
-				list9.add(temp.get("areacode").getAsString());
-				
-				map.put("contentid",list1);
-				map.put("title",list2);
-				map.put("addr1",list3);
-				map.put("mapy",list4);
-				map.put("mapx",list5);
-				map.put("mlevel",list6);
-				map.put("firstimage",list7);
-				map.put("tel",list8);
-				map.put("areacode",list9);
-				//list.add(temp.get("contentid").getAsString());
 				}
-				map.forEach((key,value)->{
-					System.out.println(key + " : " + value);
-				});
+				//list.add(temp.get("contentid").getAsString());
 //				for()
 //				Test test=Test.builder()
 //						.tourisId(temp.get("contentid").getAsString())
@@ -158,6 +125,7 @@ public class TestController {
 				//System.out.println(list.size());
 	}
 }
+
 			//여기서부터 상세내용에 대한 api주소 요청
 //				List<Object> list2=new ArrayList();
 //					StringBuilder commoncontent = new StringBuilder();
