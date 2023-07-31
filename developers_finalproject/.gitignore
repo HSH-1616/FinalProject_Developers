@@ -42,3 +42,9 @@ bin/
 tmp/
 /mappers/*
 /log/*
+.project
+.classpath
+.factorypath
+.buildpath
+.target
+.recommenders/
