@@ -65,7 +65,8 @@
 			<div id="mainHeader">
 				<ul class="main-menu">
 					<li class="item">
-						<button class="item__name">TRAVEL&FOOD</button>
+						<button class="item__name"
+							onclick="location.href='${path }/food/foodList.do'">TRAVEL&FOOD</button>
 					</li>
 					<li class="item">
 						<button class="item__name"
