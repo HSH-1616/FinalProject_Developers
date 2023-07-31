@@ -1,4 +1,4 @@
-package com.dev.food.service;
+package com.dev.food.model.service;
 
 public interface FoodService {
 
