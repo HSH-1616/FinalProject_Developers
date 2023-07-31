@@ -117,6 +117,7 @@
 
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
+        paramName: "files",
         url: "https://httpbin.org/post", // 파일을 업로드할 서버 주소 url.
         method: "post", // 기본 post로 request 감. put으로도 할수있음
         uploadMultiple: true,

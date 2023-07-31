@@ -4,19 +4,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
+<link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+      type="text/css"
+    />
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 <section>
-    <div>
-		
-	</div>
-    <div class="container p-3">
+   
+    <div class="container p-3 nw-container">
 
         <div><h3 class="text-center">공지사항 작성</h3></div>
-        <form class="">
-            <table class="table">
+        <form action="/notice/insertNotice.do" method="post" class="notice-form">
+            <table class="table notice-table">
                 <colgroup>
-                    <col style="width: 100px">
-                    <col style="width: 500px">
+                    <col style="width: 20%">
+                    <col style="width: 80%">
                     
                 </colgroup>
                 <tr>
@@ -95,7 +100,7 @@
                 </tr>
             </table>
             <div class="d-flex justify-content-center mt-4">
-           <button type="submit" class="btn btn-dark">저장</button>&nbsp
+           <button type="submit" class="w-btn file-submit">저장</button>&nbsp;
            <button type="reset" class="btn btn-dark">취소</button>
                 </div>
         </form>
@@ -124,10 +129,11 @@
 
 
       init: function () {
+    	  		const sub=document.querySelector(".file-submit")
                 /* 최초 dropzone 설정시 init을 통해 호출 */
                 var submitButton = document.querySelector("#btn-upload-file");
                 var myDropzone = this; //closure
-                submitButton.addEventListener("click", function () {
+                sub.addEventListener("click", function () {
                     console.log("업로드"); //tell Dropzone to process all queued files
                     myDropzone.processQueue();
                 });

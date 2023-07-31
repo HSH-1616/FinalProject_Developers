@@ -25,7 +25,7 @@
 	<button type="button" class="btn btn-dark">검색</button>
 </div>  
 <div class="list-area mt-3">
-		<table class="table table-hover text-center">
+		<table class="table nolist-table table-hover text-center">
 			<colgroup>
 			    <col width="50px"  />
 			    <col width="200px" />
@@ -81,13 +81,13 @@
 			</tbody>
 		</table>
 		<div class="text-end">
-			<button class="w-btn w-btn-red">작성하기</button>
+			<button class="w-btn w-btn-red" onclick="location.href='${path }/notice/noticeWrite.do'">작성하기</button>
 		</div>
 	</div>
-		<div class="write-area text-end">
-				<a href="#"
+	<%-- 	<div class="write-area text-end">
+				<a href="location.href='${path }/notice/noticeWrite.do'"
 					class="btn btn-dark btn-sm ms-1">작성하기</a>
-		</div>
+		</div> --%>
 
 
 	<div class="board-pasing">
