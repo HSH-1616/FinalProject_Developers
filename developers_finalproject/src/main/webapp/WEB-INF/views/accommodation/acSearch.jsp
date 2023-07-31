@@ -197,7 +197,7 @@
 											</span>
 										</c:if>
 										<c:if test="${al.reviewGrade=='0.0'}">
-											<span>리뷰 없음</span>
+											<span style="color:#b31312">리뷰 없음</span>
 										</c:if>
 									</div>
 								</div>
@@ -504,11 +504,11 @@
 			$.each(asList,function(i,l){		
 				
 				  if(l.type=="펜션"){
-			        	var imageSrc = '${path}/images/accommodation/pension.png'
+			        	var imageSrc = '${path}/images/accommodation/pensionMarker.png'
 			        }else if(l.type=="호텔"){
-			        	var imageSrc = '${path}/images/accommodation/hotel.png'		
+			        	var imageSrc = '${path}/images/accommodation/hotelMarker.png'		
 			        }else {
-			        	var imageSrc = '${path}/images/accommodation/motel.png'
+			        	var imageSrc = '${path}/images/accommodation/motelMarker.png'
 			        }
 			    	var imageSize = new kakao.maps.Size(60, 60) 
 			    	var imageOption = {offset: new kakao.maps.Point(27, 69)}; 
@@ -641,7 +641,7 @@
 		    	"height": "30px",
 		    	"box-shadow" : "0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07)",		    			    				  
 			})				
-		},50)
+		},100)
 		
 		
 	

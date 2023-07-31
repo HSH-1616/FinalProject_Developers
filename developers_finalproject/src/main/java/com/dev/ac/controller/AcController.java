@@ -33,24 +33,23 @@ public class AcController {
 
 	@GetMapping("/acSearch")
 	public String acSearch(Map param, String loc, String checkIn, String checkOut, String people, Model m) {
+		if (people.equals("인원추가")) {
+			people = "";
+		} else {
+			people.substring(0, people.length() - 1);
+		}
 		param.put("loc", loc);
 		param.put("checkIn", checkIn);
 		param.put("checkOut", checkOut);
-		param.put("people", people.substring(0,people.length()-1));
-		System.out.println(people);
+		param.put("people", people);
 		m.addAttribute("as", service.searchListAll(param));
 		return "/accommodation/acSearch";
 	}
 
-//	@GetMapping("/acSearch")
-//	@ResponseBody
-//	public List<Accommodation> acSearch(Map param, String loc, String checkIn, String checkOut, String people) {
-//		param.put("loc", loc);
-//		param.put("checkIn", checkIn);
-//		param.put("checkOut", checkOut);
-//		param.put("people", people);
-//
-//		return service.searchListAll(param);
-//	}
+	@GetMapping("/acDetail")
+	public String acDetail(int no, Model m) {
+		m.addAttribute("ad",service.acDetail(no));
+		return "/accommodation/acDetail";
+	}
 
 }

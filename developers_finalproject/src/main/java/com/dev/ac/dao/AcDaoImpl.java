@@ -21,4 +21,9 @@ public class AcDaoImpl implements AcDao {
 		return session.selectList("accommodation.searchListAll",param);
 	}
 
+	@Override
+	public Accommodation acDetail(SqlSessionTemplate session, int no) {
+		return session.selectOne("accommodation.acDetail",no);
+	}
+
 }

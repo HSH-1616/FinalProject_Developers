@@ -1,6 +1,6 @@
 #hotelListContainer {
 	justify-content: start;
-	height: 100%;
+	height: auto;
 }
 
 #hotelList {
@@ -115,8 +115,13 @@
 .mapDetailCount span {
 	margin-right: 5px;
 	font-size: 1rem;
+	color: #b31312;
 }
 
+.mapDetailCount span:first-child{
+	color: black;
+	margin-right: 20px;
+}
 .mapDetailPrice span {
 	font-size: 1rem;
 }

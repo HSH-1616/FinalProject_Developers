@@ -29,4 +29,9 @@ public class AcServiceImpl implements AcService {
 		return dao.acSearchAll(session,param);
 	}
 
+	@Override
+	public Accommodation acDetail(int no) {
+		return dao.acDetail(session,no);
+	}
+
 }

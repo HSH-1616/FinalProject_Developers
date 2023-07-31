@@ -10,4 +10,6 @@ public interface AcService {
 	List<Accommodation> acListAll();
 	
 	List<Accommodation> searchListAll(Map param);
+	
+	Accommodation acDetail(int no);
 }

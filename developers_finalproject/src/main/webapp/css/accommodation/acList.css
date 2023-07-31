@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   position: relative;
+  height: auto;
 }
 
 #hotelList {
@@ -17,7 +18,7 @@
 
 .hotelCard {
   width: 260px;
-  height: 100%;
+  height: auto;
   border-radius: 5%;
   margin-left: 20px;
   margin-right: 20px;

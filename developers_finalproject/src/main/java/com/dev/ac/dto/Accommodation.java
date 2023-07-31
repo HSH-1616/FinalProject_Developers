@@ -27,4 +27,6 @@ public class Accommodation {
 	private double reviewGrade;
 	private List<AcFile> acFiles;
 	private List<AcPay> acPay;
+	private List<AcReview> acReviews;
+	private AcFacilities afa;
 }
