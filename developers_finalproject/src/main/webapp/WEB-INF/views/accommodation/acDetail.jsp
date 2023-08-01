@@ -331,6 +331,10 @@
 							<h2>숙박기간</h2>
 							<hr />
 						</div>
+						<c:forEach var="ap" items="${ad.acPay }">
+						<input type="hidden" class="checkIn" val="${ap.checkIn }">
+						<input type="hidden" class="checkOut" val="${ap.checkOut }">
+						</c:forEach>
 						<div class="searchCalander">
 							<div class="calHeader">
 								<div class="calBtnWrap">
@@ -423,7 +427,7 @@
 								<span><span> ₩</span> <span id="exPrice1"><fmt:formatNumber
 											value="${ad.acPrice }" pattern="#,###" /></span> <span> /박</span></span>
 							</div>
-						</div>
+						</div>						
 						<div class="detailHotelFunc">
 							<div>
 								<div class="detailHotelCheckDay">
@@ -587,6 +591,15 @@
 										staticMapContainer, staticMapOption);
 							}
 						});
+		
+		var checkInOutDay = []
+
+		<c:forEach var="ap" items="${ad.acPay }">
+			checkInOutDay.push({
+					checkIn : [ "${ap.checkIn}"],
+					checkOut : [ "${ap.checkOut}"]
+			})
+		</c:forEach>
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acDetail.js"></script>

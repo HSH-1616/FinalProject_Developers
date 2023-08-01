@@ -338,6 +338,35 @@ function calender() {
 				});
 			});
 		}
+
+		$.each(checkInOutDay, function(i, l) {
+			fnum = l.checkIn
+			lnum = l.checkOut
+
+			if (fnum != '' && lnum != '') {
+				getDateRange(fnum, lnum, listDate);
+				$(listDate).each(function(index, item) {
+					$(".day").each(function(index2, item2) {
+						if ($(this).children().val() == item) {
+							$(this).attr("class", "outDay")
+
+						}
+					});
+					$(".notday").each(function(index2, item2) {
+						if ($(this).children().val() == item) {
+							$(this).attr("class", "outDay")
+
+						}
+					});
+				});
+			}
+
+		})
+
+
+		
+
+
 	}
 
 	//달력 기간 구하기
@@ -351,7 +380,6 @@ function calender() {
 				$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
 				$("#lnum,#checkOut").val($(".day.last").children().val());
 				$("#outDayBtn").show();
-				console.log("범인?")
 			} else {
 				$(this).addClass("first");
 				$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
@@ -371,7 +399,6 @@ function calender() {
 				: $(".day.last").children().val().replace("-", "").replace("-", "");
 
 		if ($(".day.first").length && fnum < num) {
-			console.log("범인")
 			$(".day").not(".first").css("background-color", "white");
 			$(".day").removeClass("last");
 			$(this).addClass("last");
@@ -379,7 +406,6 @@ function calender() {
 			$("#lnum,#checkOut").val($(".day.last").children().val());
 			$("#outDayBtn").show();
 		} else if ($(".day.first").length && fnum > num) {
-			console.log("범인")
 			$(".day").not(".last").css("background-color", "white");
 			$(".day").removeClass("first");
 			$(this).addClass("first");
@@ -445,6 +471,29 @@ function calender() {
 			});
 		}
 
+		if ($(".outDay").length) {
+			getDateRange(fnum, lnum, listDate);
+			$(listDate).each(function(index, item) {
+				$(".day input").each(function(index2, item2) {
+					$(".outday").each(function(index3, item3) {
+						if ($(this).children().val() == item) {
+							$(".day").removeClass("first last")
+							$(".day").css({ "background-color": "white" })
+							$("#fnum").val("")
+							$("#lnum").val("")
+							$("#detailHotelCheckIn").val("날짜추가")
+							$("#detailHotelCheckOut").val("날짜추가")
+							$("#inDayBtn").hide()
+							$("#outDayBtn").hide()
+							$("#exDay").text("1")
+							$("#resultPrice").text($("#exPrice1").text())
+							$("#realResultPrice").text($("#exPrice1").text())
+						}
+					});
+				});
+			})
+		}
+
 		$(".checkDay > div > ion-icon").on("click", function() {
 			if ($(this).attr("id") == "inDayBtn") {
 				$(".day").removeClass("first").removeClass("last");
@@ -461,9 +510,6 @@ function calender() {
 				$(".day").not(".first").css("background-color", "white");
 			}
 		});
-
-
-
 	});
 
 	// 이전달로 이동
@@ -497,8 +543,8 @@ function calender() {
 		}
 	}
 
-		$("#checkIn").val($("#fnum").val());
-		$("#checkOut").val($("#lnum").val());
+	$("#checkIn").val($("#fnum").val());
+	$("#checkOut").val($("#lnum").val());
 }
 // /달력함수/
 

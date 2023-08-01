@@ -131,28 +131,73 @@ $(document).on("click", ".detailHotelPeople", function() {
 })
 
 $(".detailHotelCheckDay div> ion-icon").on("click", function() {
-		if ($(this).attr("id") == "inDayBtn") {
-			$(".day").removeClass("first").removeClass("last");
-			$("#inDayBtn,#outDayBtn").hide();
-			$("#detailHotelCheckIn,#detailHotelCheckOut").val("날짜 추가");
-			$(".day").css("background-color", "white");
-			$("#fnum").val("");
-			$("#lnum").val("");
-			$("#exDay").text(1)
-			$("#resultPrice").text($("#exPrice1").text())
-			$("#realResultPrice").text($("#exPrice1").text())
-		} else {
-			$(".day").removeClass("last");
-			$("#outDayBtn").hide();
-			$("#lnum").val("");
-			$("#detailHotelCheckOut").val("날짜 추가");
-			$(".day").not(".first").css("background-color", "white");
-			$("#exDay").text(1)
-			$("#resultPrice").text($("#exPrice1").text())
-			$("#realResultPrice").text($("#exPrice1").text())
-		}
-	});
+	if ($(this).attr("id") == "inDayBtn") {
+		$(".day").removeClass("first").removeClass("last");
+		$("#inDayBtn,#outDayBtn").hide();
+		$("#detailHotelCheckIn,#detailHotelCheckOut").val("날짜 추가");
+		$(".day").css("background-color", "white");
+		$("#fnum").val("");
+		$("#lnum").val("");
+		$("#exDay").text(1)
+		$("#resultPrice").text($("#exPrice1").text())
+		$("#realResultPrice").text($("#exPrice1").text())
+	} else {
+		$(".day").removeClass("last");
+		$("#outDayBtn").hide();
+		$("#lnum").val("");
+		$("#detailHotelCheckOut").val("날짜 추가");
+		$(".day").not(".first").css("background-color", "white");
+		$("#exDay").text(1)
+		$("#resultPrice").text($("#exPrice1").text())
+		$("#realResultPrice").text($("#exPrice1").text())
+	}
+});
 
+$(document).ready(function(){
+/*var listDate=[]
+$.each(checkInOutDay,function(i,l){		
+	fnum=l.checkIn
+	lnum=l.checkOut
+	function getDateRange(fnum, lnum, listDate) {
+		var dateMove = new Date(fnum);
+		var strDate = fnum;
+
+		if (fnum == lnum) {
+			var strDate = dateMove.toISOString().slice(0, 10);
+
+			listDate.push(strDate);
+		} else {
+			while (strDate < lnum) {
+				var strDate = dateMove.toISOString().slice(0, 10);
+
+				listDate.push(strDate);
+
+				dateMove.setDate(dateMove.getDate() + 1);
+			}
+		}
+		return listDate;
+	}
+
+	if (fnum != '' && lnum != '') {
+		getDateRange(fnum, lnum, listDate);
+		$(listDate).each(function(index, item) {
+			$(".day").each(function(index2, item2) {
+				if ($(this).children().val() == item) {					
+					$(this).attr("class","outDay")
+						
+				}
+			});
+			$(".notday").each(function(index2, item2) {
+				if ($(this).children().val() == item) {					
+					$(this).attr("class","outDay")
+						
+				}
+			});
+		});
+	}
+	
+})*/
+})
 // 인원수 함수
 function countFn2(type) {
 	var count = $("#peopleCount").val();
@@ -205,20 +250,19 @@ function countFn2(type) {
 // /인원수 함수/
 setTimeout(function() {
 	$(document).on("click", ".day", function() {
-		console.log($(this).hasClass("first"))
 		if ($(this).hasClass("first")) {
 			$("#detailHotelCheckIn").val($(this).children().val())
 
 		} else if ($(this).hasClass("last")) {
 			$("#detailHotelCheckOut").val($(this).children().val())
 		}
-		if($(".last").length){
-		const oldDate = new Date($("#detailHotelCheckIn").val());
-		const newDate = new Date($("#detailHotelCheckOut").val());
-		let diff = Math.abs(newDate.getTime() - oldDate.getTime());
-		diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-		$("#exDay").text(diff)
-		$("#resultPrice,#realResultPrice").text(		String($("#exPrice2").text().replace(",", "")*diff).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+		if ($(".last").length) {
+			const oldDate = new Date($("#detailHotelCheckIn").val());
+			const newDate = new Date($("#detailHotelCheckOut").val());
+			let diff = Math.abs(newDate.getTime() - oldDate.getTime());
+			diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+			$("#exDay").text(diff)
+			$("#resultPrice,#realResultPrice").text(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 		}
 	})
 }, 100)
