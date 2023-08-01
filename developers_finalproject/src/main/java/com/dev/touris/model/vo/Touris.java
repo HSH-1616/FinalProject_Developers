@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Touris {
-	private int tourisId;
+	private String tourisId;
 	private String tourisName;
 	private String tourisAddress;
 	private String tourisContent;
@@ -27,5 +27,5 @@ public class Touris {
 	private String tourisParking;
 	private String tourisStartday;
 	private String tourisDayoff;
-	private int areaId;
+	private String areaId;
 }
