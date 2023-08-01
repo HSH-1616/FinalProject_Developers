@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.dev.notice.model.dto.Notice;
+import com.dev.notice.model.dto.NoticeFile;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao {
@@ -13,9 +14,8 @@ public class NoticeDaoImpl implements NoticeDao {
 	
 	
 	@Override
-	public List<Notice> NoticeList(SqlSession session) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Notice> noticeList(SqlSession session) {
+		return session.selectList("notice.noticeList");
 	}
 
 	@Override
@@ -27,6 +27,18 @@ public class NoticeDaoImpl implements NoticeDao {
 	public int deleteNotice(SqlSession session, String no) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int noticeSaveFile(SqlSession session, NoticeFile file) {
+		
+		return session.insert("notice.insertFile",file);
+	}
+
+	@Override
+	public Notice noticeView(SqlSession session, int no) {
+		
+		return session.selectOne("notice.noticeView",no);
 	}
 
 }

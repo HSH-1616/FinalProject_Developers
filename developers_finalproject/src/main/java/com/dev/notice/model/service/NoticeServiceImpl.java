@@ -1,12 +1,19 @@
 package com.dev.notice.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.notice.model.dao.NoticeDao;
 import com.dev.notice.model.dto.Notice;
+import com.dev.notice.model.dto.NoticeFile;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
@@ -19,9 +26,9 @@ public class NoticeServiceImpl implements NoticeService {
 		this.session=session;
 	}
 	@Override
-	public List<Notice> NoticeList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Notice> noticeList() {
+		
+		return dao.noticeList(session);
 	}
 
 	@Override
@@ -35,5 +42,47 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public String saveFile(MultipartFile file, HttpSession hsession) {
+		if(file.isEmpty()) {
+			return null;
+		}
+		String path=hsession.getServletContext().getRealPath("/upload/notice/");
+		
+		String oriName=file.getOriginalFilename();
+		String uuid=UUID.randomUUID().toString();
+		String extension=oriName.substring(oriName.lastIndexOf("."));
+		String fileName=uuid+extension;
+		NoticeFile nfile=NoticeFile.builder().oriName(oriName).fileName(fileName).build();
+		//파일 저장경로
+		String savePath=path+fileName;
+		try {
+			file.transferTo(new File(savePath));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		String[] split = path.split("webapp");
+		path = split[1]; // realPath에서 프로젝트 경로만 남김
+		
+//		int result=dao.noticeSaveFile(session,nfile);
+//		if(result>0) {
+//			return savePath;
+//		}
+		return path+fileName;
+	}
+	@Override
+	public Notice noticeView(int no) {
+		
+		return dao.noticeView(session, no);
+	}
 
+	
 }
+
+
+
+
+
+
+
+
