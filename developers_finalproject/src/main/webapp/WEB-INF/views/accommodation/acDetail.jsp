@@ -430,10 +430,12 @@
 									<div>
 										<span>체크인</span> <input type="text" id="detailHotelCheckIn"
 											placeholder="날짜선택" readonly/>
+											<ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
 									</div>
 									<div>
 										<span>체크아웃</span> <input type="text" id="detailHotelCheckOut"
 											placeholder="날짜선택" readonly/>
+											<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
 									</div>
 								</div>
 								<div class="detailHotelPeople">

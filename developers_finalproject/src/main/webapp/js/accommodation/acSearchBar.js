@@ -189,12 +189,15 @@ function calender() {
 			"-" +
 			(currentMonth < 9 ? "0" + (currentMonth + 1) : currentMonth + 1) +
 			"-";
-		var nextval =
-			currentYear +
-			"-" +
-			(currentMonth < 8 ? "0" + (currentMonth + 2) : currentMonth + 2) +
-			"-";
-
+		var nextval = ""
+		if (currentMonth == 11) {
+			nextval = currentYear + 1 + "-01-";
+		} else {
+			nextval = currentYear +
+				"-" +
+				(currentMonth < 8 ? "0" + (currentMonth + 2) : currentMonth + 2) +
+				"-";
+		}
 		// 지난달
 		for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
 			nowdate = nowdate + "<div class='notday'></div>";
@@ -203,7 +206,7 @@ function calender() {
 
 		// 이번달
 		for (var i = 1; i <= nextDate; i++) {
-			if (i < today.getDate() && currentMonth + 1 == today.getMonth() + 1) {				
+			if (i < today.getDate() && currentMonth + 1 == today.getMonth() + 1) {
 				nowdate =
 					nowdate +
 					"<div class='notday'>" +
@@ -321,10 +324,9 @@ function calender() {
 					dateMove.setDate(dateMove.getDate() + 1);
 				}
 			}
-
 			return listDate;
 		}
-		if ($(".first,.last").length) {
+		if ($("#fnum").val() != "" && $("#lnum").val() != "") {
 			getDateRange(fnum, lnum, listDate);
 			$(listDate).each(function(index, item) {
 				$(".day").each(function(index2, item2) {
@@ -342,20 +344,23 @@ function calender() {
 	$(document).on("click", ".day", function() {
 		var num = $(this).children().val().replace("-", "").replace("-", "");
 		if (!$(".day.first").length) {
-			if($("#fnum").val()!=""){
+			if ($("#fnum").val() != "") {
 				$(".day").not(".first").css("background-color", "white");
 				$(".day").removeClass("last");
 				$(this).addClass("last");
 				$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
-				$("#outDayBtn").show();	
+				$("#lnum,#checkOut").val($(".day.last").children().val());
+				$("#outDayBtn").show();
 				console.log("범인?")
-			}else{
-			$(this).addClass("first");
-			$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
-			$("#inDayBtn").show();
+			} else {
+				$(this).addClass("first");
+				$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
+				$("#inDayBtn").show();
+				$("#inDayBtn").show();
+				$("#fnum,#checkIn").val($(".day.first").children().val());
 			}
 		}
-		
+
 		var fnum =
 			$(".day.first").length == 0
 				? ""
@@ -371,6 +376,7 @@ function calender() {
 			$(".day").removeClass("last");
 			$(this).addClass("last");
 			$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
+			$("#lnum,#checkOut").val($(".day.last").children().val());
 			$("#outDayBtn").show();
 		} else if ($(".day.first").length && fnum > num) {
 			console.log("범인")
@@ -378,33 +384,34 @@ function calender() {
 			$(".day").removeClass("first");
 			$(this).addClass("first");
 			$(this).css({ "background-color": "#b31312", "border-radius": "100%" });
+			$("#fnum,#checkIn").val($(".day.first").children().val());
 		}
 
 		var fnum =
-			$(".day.first").length == 0
+			$("#fnum").val() == ""
 				? ""
-				: $(".day.first").children().val().replace("-", "").replace("-", "");
+				: $("#fnum").val().replace("-", "").replace("-", "");
 		var lnum =
-			$(".day.last").length == 0
+			$("#lnum").val() == ""
 				? ""
-				: $(".day.last").children().val().replace("-", "").replace("-", "");
+				: $("#lnum").val().replace("-", "").replace("-", "");
 		var inday =
-			$(".day.first").length == 0
+			$("#fnum").val() == ""
 				? "날짜 추가"
 				: fnum.substr(4, 2) + "월 " + fnum.substr(6, 2) + "일";
 		var outday =
-			$(".day.last").length == 0
+			$("#lnum").val() == ""
 				? "날짜 추가"
 				: lnum.substr(4, 2) + "월 " + lnum.substr(6, 2) + "일";
+
 		$("#checkInDay").val(inday);
 		$("#checkOutDay").val(outday);
 
 		var listDate = [];
 		var fnum =
-			$(".day.first").length == 0 ? "" : $(".day.first").children().val();
+			$("#fnum").val() == "" ? "" : $("#fnum").val();
 		var lnum =
-			$(".day.last").length == 0 ? "" : $(".day.last").children().val();
-
+			$("#lnum").val() == "" ? "" : $("#lnum").val();
 		function getDateRange(fnum, lnum, listDate) {
 			var dateMove = new Date(fnum);
 			var strDate = fnum;
@@ -425,7 +432,7 @@ function calender() {
 
 			return listDate;
 		}
-		if ($(".first,.last").length) {
+		if ($("#fnum").val() != "" && $("#lnum").val() != "") {
 			getDateRange(fnum, lnum, listDate);
 			$(listDate).each(function(index, item) {
 				$(".day").each(function(index2, item2) {
@@ -438,7 +445,7 @@ function calender() {
 			});
 		}
 
-		$(".checkDay > div > ion-icon").on("click",function() {
+		$(".checkDay > div > ion-icon").on("click", function() {
 			if ($(this).attr("id") == "inDayBtn") {
 				$(".day").removeClass("first").removeClass("last");
 				$("#inDayBtn,#outDayBtn").hide();
@@ -455,12 +462,7 @@ function calender() {
 			}
 		});
 
-		$(".day.first").length == 0
-			? ""
-			: $("#fnum,#checkIn").val($(".day.first").children().val());
-		$(".day.last").length == 0
-			? ""
-			: $("#lnum,#checkOut").val($(".day.last").children().val());
+
 
 	});
 
@@ -488,14 +490,16 @@ function calender() {
 		if (
 			currentMonth + 1 == today.getMonth() + 1 &&
 			currentYear == today.getFullYear()
-		) {	
-			$(".calBtn.prev").hide()		
+		) {
+			$(".calBtn.prev").hide()
 		} else {
 			$(".calBtn.prev").show()
 		}
 	}
-}
 
+		$("#checkIn").val($("#fnum").val());
+		$("#checkOut").val($("#lnum").val());
+}
 // /달력함수/
 
 
@@ -507,7 +511,7 @@ function countFn(type) {
 		if (count < 10) {
 			$("#countInfo").text("");
 			$("#peopleCount").val(++count);
-			$("#checkPeople input").val($("#peopleCount").val()+"명");
+			$("#checkPeople input").val($("#peopleCount").val() + "명");
 		} else {
 			$("#countInfo").text("최소 1명부터 10명까지 선택가능 합니다.");
 		}
@@ -515,7 +519,7 @@ function countFn(type) {
 		if (count > 1) {
 			$("#countInfo").text("");
 			$("#peopleCount").val(--count);
-			$("#checkPeople input").val($("#peopleCount").val()+"명");
+			$("#checkPeople input").val($("#peopleCount").val() + "명");
 		} else {
 			$("#countInfo").text("최소 1명부터 10명까지 선택가능 합니다.");
 		}

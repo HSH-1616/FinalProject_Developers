@@ -30,7 +30,7 @@
 					<div class="checkDay">
 						<span>체크인</span>
 						<div>
-							<input type="hidden" id="checkIn" name="checkIn" value="">
+							<input type="hidden" id="checkIn" name="checkIn">
 							<input id="checkInDay" value="날짜추가" readonly>
 							<ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
@@ -38,7 +38,7 @@
 					<div class="checkDay">
 						<span>체크아웃</span>
 						<div>
-							<input type="hidden" id="checkOut" name="checkOut" value="">
+							<input type="hidden" id="checkOut" name="checkOut">
 							<input id="checkOutDay" value="날짜추가" readonly>
 							<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
@@ -48,7 +48,7 @@
 				<div id="searchPeople">
 					<div id="checkPeople">
 						<span>인원</span>  
-						<input id="people" name=people type="text" value="인원추가" readonly>
+						<input id="people" name="people" type="text" value="인원추가" readonly>
 					</div>
 
 				</div>
@@ -196,7 +196,7 @@
 						<div class="day">SAT</div>
 						<div class="day">SUN</div>
 					</div>
-					<input type="hidden" id="fnum" value="" />
+					<input type="hidden" id="fnum" value="">
 					<div class="hotelDates now"></div>
 				</div>
 				<div class="calContainer">
@@ -208,8 +208,8 @@
 						<div class="day">FRI</div>
 						<div class="day">SAT</div>
 						<div class="day">SUN</div>
-					</div>
-					<input type="hidden" id="lnum" value="" />
+					</div>					
+					<input type="hidden" id="lnum" value="">
 					<div class="hotelDates next"></div>
 				</div>
 			</div>

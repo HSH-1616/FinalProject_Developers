@@ -36,7 +36,7 @@ public class AcController {
 		if (people.equals("인원추가")) {
 			people = "";
 		} else {
-			people.substring(0, people.length() - 1);
+			people=people.substring(0, people.length() - 1);
 		}
 		param.put("loc", loc);
 		param.put("checkIn", checkIn);

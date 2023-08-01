@@ -130,6 +130,29 @@ $(document).on("click", ".detailHotelPeople", function() {
 	}
 })
 
+$(".detailHotelCheckDay div> ion-icon").on("click", function() {
+		if ($(this).attr("id") == "inDayBtn") {
+			$(".day").removeClass("first").removeClass("last");
+			$("#inDayBtn,#outDayBtn").hide();
+			$("#detailHotelCheckIn,#detailHotelCheckOut").val("날짜 추가");
+			$(".day").css("background-color", "white");
+			$("#fnum").val("");
+			$("#lnum").val("");
+			$("#exDay").text(1)
+			$("#resultPrice").text($("#exPrice1").text())
+			$("#realResultPrice").text($("#exPrice1").text())
+		} else {
+			$(".day").removeClass("last");
+			$("#outDayBtn").hide();
+			$("#lnum").val("");
+			$("#detailHotelCheckOut").val("날짜 추가");
+			$(".day").not(".first").css("background-color", "white");
+			$("#exDay").text(1)
+			$("#resultPrice").text($("#exPrice1").text())
+			$("#realResultPrice").text($("#exPrice1").text())
+		}
+	});
+
 // 인원수 함수
 function countFn2(type) {
 	var count = $("#peopleCount").val();

@@ -712,6 +712,7 @@
 }
 
 .detailHotelCheckDay {
+
 	display: flex;
 }
 
@@ -725,12 +726,24 @@
 	margin-left: 10px;
 }
 
+.detailHotelCheckDay div> ion-icon{
+	display: none;
+	position: absolute;
+	font-size: 1.3rem;
+	color: #b31312;
+	top: 35px;
+	right: 25px;
+	
+}
+
 .detailHotelCheckDay>div:first-of-type {
 	border-top-left-radius: 10px;
+		position: relative;
 }
 
 .detailHotelCheckDay>div:last-of-type {
 	border-top-right-radius: 10px;
+		position: relative;
 }
 
 .detailHotelCheckDay>div span {
