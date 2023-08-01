@@ -151,8 +151,8 @@
                 		src:imgPath,
                 		
                 	}).css({
-                		max-width:'400px',
-                		max-height:'400px'
+                		width:'400px',
+                		height:'400px'
                 	});
            			
                 	const br=$("<br>");
