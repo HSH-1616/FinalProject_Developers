@@ -76,6 +76,129 @@
 	color: #b31312;
 }
 
+#shareCon {
+	position: relative;
+	display: none;
+}
+
+#shareBox {
+	position: absolute;
+	z-index: 100;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 400px;
+	height: 410px;
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+#share {
+	width: 90%;
+	height: 90%;
+}
+
+#share>span {
+	font-size: 1.2rem;
+}
+
+#shareHead {
+	display: flex;
+	justify-content: space-between;
+}
+
+#shareHead>button {
+	border: none;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#shareHead>button ion-icon {
+	font-size: 1.5rem;
+}
+
+
+#shareContent {
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+}
+
+#shareContent img {
+	border-radius: 10px;
+	width: 100px;
+	height: 100px;
+}
+
+#shareContent>div {
+	margin-left: 10px;
+	height: 80px;
+}
+
+#shareContent>div>div {
+	display: flex;
+	align-items: center;
+	height: 48px;
+	margin-bottom: 1rem;
+}
+
+#shareContent>div>p {
+	font-size: 0.8rem;
+	/*height: 48px;*/
+}
+
+#shareContent>div p>span:first-child {
+	color: #b31312;
+}
+
+#shareIconCon {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.shareIcon {
+	border-radius: 10px;
+	border: 1px solid #c3c3c3;
+	width: 48%;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.shareIcon:hover {
+	background-color: #eeeeee;
+}
+
+.shareIcon:nth-child(2),
+.shareIcon:nth-child(4) {
+	margin-left: 10px;
+}
+
+.shareIcon>div {
+	width: 150px;
+	height: 40px;
+}
+
+.shareIcon img {
+	border-radius: 5px;
+	width: 40px;
+	height: 40px;
+}
+
+.shareIcon span {
+	margin-left: 6px;
+	font-size: 0.75rem;
+}
+
 #detailHeart {
 	display: flex;
 	justify-content: center;
@@ -294,7 +417,7 @@
 	border: 0;
 	height: 0;
 	opacity: unset;
-	border-top: 2px solid #8c8c8c;
+	border-top: 2px solid #eeeeee;
 	margin-top: 0px;
 }
 
@@ -404,25 +527,29 @@
 	height: 550px;
 }
 
-.day{
-	height: 45px;
+.day {
+	height: 42px;
+}
+
+.notday{
+	height: 42px;
 }
 .calMonth {
-    right: 45px;
+	right: 45px;
 }
 
 .calNextMonth {
-    left: 45px;
+	left: 45px;
 }
 
 .calBtnWrap:first-child {
-    position: relative;
-    left: 45px;
+	position: relative;
+	left: 45px;
 }
 
-.calBtnWrap:last-child{
-    position: relative;
-    right: 45px;
+.calBtnWrap:last-child {
+	position: relative;
+	right: 45px;
 }
 
 .detailHotelReview {
@@ -557,7 +684,7 @@
 	font-weight: bold;
 }
 
-.detailHotelPrice div span:first-of-type span {
+.detailHotelPrice div span>span:last-child  {
 	font-size: 1.1rem;
 	font-weight: normal;
 	text-decoration: none;
@@ -574,12 +701,14 @@
 
 .detailHotelFunc>div {
 	width: 80%;
+	position: relative;
 }
 
 .detailHotelFunc input {
 	width: 80%;
 	height: 30px;
 	border: none;
+	outline: none;
 }
 
 .detailHotelCheckDay {
@@ -614,6 +743,7 @@
 	height: 70px;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+	position: relative;
 }
 
 .detailHotelPeople div>* {
@@ -625,9 +755,65 @@
 	font-size: 0.9rem;
 }
 
-.detailHotelPeople>div span:last-of-type {
-	color: gray;
+#payPeople{
+	border: none;
+	outline: none;
+	width: 80px;
+	font-size: 0.95rem;
+	
+}
+
+.detailHotelPeople ion-icon{
+	position: absolute;
+	font-size: 1.5rem;
+	right: 10px;
+	bottom: 12px;	
+}
+
+.detailHotelPeople ion-icon:last-child{
+	display: none;
+	position: absolute;
+	font-size: 1.5rem;
+	right: 10px;
+	bottom: 10px;	
+}
+
+.searchPeople.detail {
+	display: none;
+	position: absolute;
+	top: unset;
+	left: unset;
+	right: unset;
+	margin: unset;
+	width: 100%;
+}
+
+#searchCheckCon{
+	width: 100%;
+	border-radius: 10px;
+	height: 100px;
+}
+
+#searchCheck{
+	margin-top: 35px;
+}
+
+#peopleText{
 	font-size: 1rem;
+}
+
+.countBtn{
+	font-size: 1.3rem;
+}
+
+#peopleCount{
+	font-size: 1rem;
+}
+
+#countInfo{
+	font-size: 0.8rem;
+	margin-top: 0px;
+	
 }
 
 .detailHotelBtn {
@@ -668,6 +854,18 @@
 	opacity: unset;
 	border-top: 2px solid #8c8c8c;
 	margin-top: 0px;
+}
+
+#exDay{
+	font-size: 0.8rem;
+}
+
+#exPeople{
+	font-size: 0.8rem;
+}
+
+.multiply{
+	font-size: 0.8rem;
 }
 
 #resultPrice {
