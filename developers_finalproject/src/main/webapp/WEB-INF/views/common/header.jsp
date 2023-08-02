@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+<script>const path=""</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link
@@ -54,8 +55,20 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a>
 					</li>
+				<c:if test="${empty loginMember }">
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" id="btn-modal">Login</a></li>
+				</c:if>
+				<c:if test="${not empty loginMember }">
+					<c:if test="${loginMember.memberCategory ne'K'}">
+					<li class="nav-item"><a class="nav-link active" href="${path }/member/logout">LogOut</a>
+					</li>
+					</c:if>
+					<c:if test="${loginMember.memberCategory eq 'K'}">
+					<li class="nav-item"><a class="nav-link active" href="javascript:void(0)" id="kakaologout">LogOut</a>
+					</li>
+					</c:if>
+				</c:if>
 					<li class="nav-item"><a class="nav-link" href="">MyPage</a></li>
 				</ul>
 			</div>
