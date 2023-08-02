@@ -1,3 +1,9 @@
+/*$(".imageContainer").click(function(e) {
+  var pNo = $(this).siblings('.productDetails').find('input[type="hidden"]').val();
+  console.log(pNo);
+  location.assign(getContextPath() + "/store/storeView.do?no=" + pNo);
+});	*/	
+
 // 페이지 로드 후 실행
 window.onload = function() {
 	const likeCheckbox = document.querySelector('.like');

@@ -193,12 +193,12 @@ input[type="button"] {
   left: 10px;
 }
 button#food_list {
-    margin-left: 48.6%;
+    margin-left: 46.6%;
     height: 60px;
-    width: 60px;
+    width: 90px;
     border-radius: 10px;
     border: none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
-	margin-bottom: 8%;
-	margin-top: 3%;
+    margin-bottom: 8%;
+    margin-top: 3%;
 }
