@@ -231,7 +231,7 @@
 						<ion-icon name="add-circle-outline"></ion-icon>
 					</button>
 				</div>
-			</div>z
+			</div>
 
 			<div id="countInfo"></div>
 		</div>

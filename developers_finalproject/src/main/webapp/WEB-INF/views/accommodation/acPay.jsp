@@ -12,7 +12,7 @@
 	<div class="hotelPayCon">
 		<div class="hotelPay">
 			<div id="payTitle">
-				<button>
+				<button onclick="javascript:history.back()">
 					<ion-icon name="chevron-back"></ion-icon>
 				</button>
 				<span>확인 및 결제</span>

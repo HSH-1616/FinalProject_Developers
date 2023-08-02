@@ -130,6 +130,11 @@ $(document).on("click", ".detailHotelPeople", function() {
 	}
 })
 
+$(".detailHotelModal").on("click",function(){
+	//$(".searchPeople.detail").hide()
+})
+
+
 function payCheck(){
 	var checkIn=$("#detailHotelCheckIn").val()
 	var checkOut=$("#detailHotelCheckOut").val()
@@ -203,7 +208,7 @@ function countFn2(type) {
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 		} else {
-			$("#countInfo").text("최소 1명부터"+$("#maxPeople").val()+"명까지 선택가능 합니다.");
+			$("#countInfo").text("최소 1명부터 "+$("#maxPeople").val()+"명까지 선택가능 합니다.");
 		}
 	} else {
 		if (count > 1) {
@@ -222,7 +227,7 @@ function countFn2(type) {
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 		} else {
-			$("#countInfo").text("최소 1명부터"+$("#maxPeople").val()+"명까지 선택가능 합니다.");
+			$("#countInfo").text("최소 1명부터 "+$("#maxPeople").val()+"명까지 선택가능 합니다.");
 		}
 	}
 	if (count > 1) {
@@ -230,6 +235,15 @@ function countFn2(type) {
 	} else {
 		$("#peopleBtn button").first().css("color", "#afafaf");
 	}
+	if (count < $("#maxPeople").val()) {
+			$("#peopleBtn button")
+				.last()
+				.css("color", "#b31312");
+		} else {
+			$("#peopleBtn button")
+				.last()
+				.css("color", "#afafaf");
+		}
 	payCheck()
 }
 // /인원수 함수/
@@ -253,7 +267,4 @@ setTimeout(function() {
 	})
 	
 }, 100)
-
-$("detailHotelBtn on>button").on("click")
-
 
