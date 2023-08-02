@@ -11,7 +11,8 @@ public interface NoticeDao {
 
 	List<Notice> noticeList(SqlSession session);
 	int insertNotice(SqlSession session,Notice m);
-	int deleteNotice(SqlSession session,String no);
+	int deleteNotice(SqlSession session,int no);
+	int deleteNoticeFile(SqlSession session, String fileName);
 	int noticeSaveFile(SqlSession session,NoticeFile file);
 	Notice noticeView(SqlSession session,int no);
 }

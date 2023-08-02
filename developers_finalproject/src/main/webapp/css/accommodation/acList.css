@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   position: relative;
+  height: auto;
 }
 
 #hotelList {
@@ -17,7 +18,7 @@
 
 .hotelCard {
   width: 260px;
-  height: 100%;
+  height: auto;
   border-radius: 5%;
   margin-left: 20px;
   margin-right: 20px;
@@ -68,6 +69,11 @@
   margin-top: 5px;
   color: #999;
 }
+
+.priceStar{
+	height: 36px;
+}
+
 .starContainer {
   position: relative;
   left: 15px;
@@ -76,7 +82,7 @@
   position: relative;
   font-size: 1.5rem;
   color: #ddd;
-  bottom: 2px;
+  bottom: 1px;
 }
 
 .star span {

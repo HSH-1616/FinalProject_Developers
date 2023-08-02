@@ -345,7 +345,4 @@ public class FoodController {
 //		return mav2;
 		return "/food/foodImg";
 	}
-	
-	
-	
 }

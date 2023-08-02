@@ -24,9 +24,8 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 
 	@Override
-	public int deleteNotice(SqlSession session, String no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNotice(SqlSession session, int no) {
+		return session.delete("notice.deleteNotice",no);
 	}
 
 	@Override
@@ -39,6 +38,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	public Notice noticeView(SqlSession session, int no) {
 		
 		return session.selectOne("notice.noticeView",no);
+	}
+
+	@Override
+	public int deleteNoticeFile(SqlSession session, String fileName) {
+		return session.delete("notice.deleteNoticeFile",fileName);
 	}
 
 }

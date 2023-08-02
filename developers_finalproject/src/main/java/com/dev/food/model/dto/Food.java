@@ -20,5 +20,7 @@ public class Food {
 	private String foodPhone;
 	private int allow;
 	private int foodReadCount;
+
 	private FoodPhoto FoodPhoto;
+
 }

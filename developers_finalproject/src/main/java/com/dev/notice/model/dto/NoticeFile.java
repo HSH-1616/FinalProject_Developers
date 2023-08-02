@@ -12,9 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class NoticeFile {
 
-	private int fileNo;
-	private int NoticeNo;
-	private String oriName;
 	private String fileName;
-	private Date uploadDate;
+	private String oriName;
+	private String filePath;
+	
 }
