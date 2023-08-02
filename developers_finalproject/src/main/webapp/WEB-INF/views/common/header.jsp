@@ -45,7 +45,6 @@
 				<p>예약내역</p>
 			</div>
 		</div>
-
 		<nav class="navbar navbar-expand-sm navbar-dark fixed-top drop">
 			<a href="${path}/"> <img id="headerLogo"
 				src="${path }/images/common/logo.png" alt="" />
@@ -53,7 +52,6 @@
 			<div class="container-fluid">
 				<ion-icon name="menu" class="btn btn-primary" type="button"
 					data-bs-toggle="offcanvas" data-bs-target="#demo"></ion-icon>
-
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a>
 					</li>
@@ -78,7 +76,8 @@
 			<div id="mainHeader">
 				<ul class="main-menu">
 					<li class="item">
-						<button class="item__name">TRAVEL&FOOD</button>
+						<button class="item__name"
+							onclick="location.href='${path }/food/foodList.do'">TRAVEL&FOOD</button>
 					</li>
 					<li class="item">
 						<button class="item__name"

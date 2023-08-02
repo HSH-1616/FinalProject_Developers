@@ -27,11 +27,11 @@
 <div class="list-area mt-3">
 		<table class="table nolist-table table-hover text-center">
 			<colgroup>
-			    <col width="50px"  />
-			    <col width="200px" />
-			    <col width="100px" />
-			    <col width="100px" />
-                <col width="100px" />
+			    <col width="10%"  />
+			    <col width="30%" />
+			    <col width="20%" />
+			    <col width="20%" />
+                <col width="20%" />
             </colgroup>
 			<thead>
 				<tr>
@@ -43,41 +43,25 @@
 				</tr>
 			</thead>
 			<tbody>
-			
-				<!-- <tr>
+			<c:choose>
+			<c:when test="${empty noticeList }">
+				 <tr>
 					<td colspan="5">조회된 공지사항이 없습니다.</td>
-				</tr> -->
-			
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="n" items="${ noticeList}">
 				<tr>
-					<td>1</td>
-					<td>
-						<a href="">
-						ㅎㅎ</a>
+					<td>${n.noticeNo }</td>
+					<td><a href="${path }/notice/noticeView.do?no=${n.noticeNo}">${n.noticeTitle }</a>
 					</td>
 					<td>관리자</td>
-					<td>조회수</td>
-					<td>작성일</td>
+					<td>${n.noticeViews }</td>
+					<td>${n.writeDate }</td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>
-						<a href="">
-						ㅠㅠ</a>
-					</td>
-					<td>관리자</td>
-					<td>조회수</td>
-					<td>작성일</td>
-				</tr>
-				<tr>
-					<td>공지번호</td>
-					<td>
-						<a href="">
-						제목</a>
-					</td>
-					<td>관리자</td>
-					<td>조회수</td>
-					<td>작성일</td>
-				</tr>
+				</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			</tbody>
 		</table>
 		<div class="text-end">
