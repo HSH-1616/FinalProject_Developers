@@ -1,29 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-	<link rel="stylesheet" type="text/css" href="css/coStyle.css">
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-    
-<header>
-    <script src="./common/default.html"></script>
+<link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
 
-	
-</header>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/> 
+<section>
 
 
-<div class="container p-3">
+<div class="notice-container p-3">
 
 <div class="title text-align"><h3 class="text-center">공지사항</h3></div>
         
@@ -37,13 +25,13 @@
 	<button type="button" class="btn btn-dark">검색</button>
 </div>  
 <div class="list-area mt-3">
-		<table class="table table-hover text-center">
+		<table class="table nolist-table table-hover text-center">
 			<colgroup>
-			    <col width="50px"  />
-			    <col width="200px" />
-			    <col width="100px" />
-			    <col width="100px" />
-                <col width="100px" />
+			    <col width="10%"  />
+			    <col width="30%" />
+			    <col width="20%" />
+			    <col width="20%" />
+                <col width="20%" />
             </colgroup>
 			<thead>
 				<tr>
@@ -55,48 +43,35 @@
 				</tr>
 			</thead>
 			<tbody>
-			
-				<!-- <tr>
+			<c:choose>
+			<c:when test="${empty noticeList }">
+				 <tr>
 					<td colspan="5">조회된 공지사항이 없습니다.</td>
-				</tr> -->
-			
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="n" items="${ noticeList}">
 				<tr>
-					<td>1</td>
-					<td>
-						<a href="">
-						ㅎㅎ</a>
+					<td>${n.noticeNo }</td>
+					<td><a href="${path }/notice/noticeView.do?no=${n.noticeNo}">${n.noticeTitle }</a>
 					</td>
 					<td>관리자</td>
-					<td>조회수</td>
-					<td>작성일</td>
+					<td>${n.noticeViews }</td>
+					<td>${n.writeDate }</td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>
-						<a href="">
-						ㅠㅠ</a>
-					</td>
-					<td>관리자</td>
-					<td>조회수</td>
-					<td>작성일</td>
-				</tr>
-				<tr>
-					<td>공지번호</td>
-					<td>
-						<a href="">
-						제목</a>
-					</td>
-					<td>관리자</td>
-					<td>조회수</td>
-					<td>작성일</td>
-				</tr>
+				</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			</tbody>
 		</table>
-	</div>
-		<div class="write-area text-end">
-				<a href="#"
-					class="btn btn-dark btn-sm ms-1">작성하기</a>
+		<div class="text-end">
+			<button class="w-btn w-btn-red" onclick="location.href='${path }/notice/noticeWrite.do'">작성하기</button>
 		</div>
+	</div>
+	<%-- 	<div class="write-area text-end">
+				<a href="location.href='${path }/notice/noticeWrite.do'"
+					class="btn btn-dark btn-sm ms-1">작성하기</a>
+		</div> --%>
 
 
 	<div class="board-pasing">
@@ -119,6 +94,5 @@
 		  </nav>
 	</div>
 </div>
-</body>
-
-</html>
+</section>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 

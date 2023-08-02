@@ -22,7 +22,7 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="${path }/images/community/city-ged7162395_1280.jpg" class="d-block w-100" alt="...">
+                        <img src="${path }/images/community/city-ged7162395_1280.jpg" class="d-block w-100" alt="..." style="height:auto">
                       </div>
                       <div class="carousel-item">
                         <img src="${path }/images/community/bicycle-g3fc35f2a5_1280.jpg" class="d-block w-100" alt="...">
