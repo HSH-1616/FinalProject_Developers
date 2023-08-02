@@ -12,4 +12,6 @@ public interface AcService {
 	List<Accommodation> searchListAll(Map param);
 	
 	Accommodation acDetail(int no);
+	
+	Accommodation acPay(int no);
 }

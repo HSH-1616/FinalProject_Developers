@@ -244,6 +244,7 @@
 		var asFile=[]
 		<c:forEach var="al" items="${as}" varStatus="i">
 		asList.push({
+			id :"${al.acId}",
 			title : "${al.acTitle}",
 			price : "${al.acPrice}",
 			address : "${al.acAddress}",	
@@ -485,148 +486,150 @@
 		
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
-
+		var clickedOverlay = null;
 		$.each(asList,function(i,l){						
 			geocoder.addressSearch(l.address, function(result, status) {
 				 if (status === kakao.maps.services.Status.OK) {
 				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);			
 				        asList[i]['coords']=coords
-				    console.log(l.title)			
+				        if(l.type=="펜션"){
+				        	var imageSrc = '${path}/images/accommodation/pensionMarker.png'
+				        }else if(l.type=="호텔"){
+				        	var imageSrc = '${path}/images/accommodation/hotelMarker.png'		
+				        }else {
+				        	var imageSrc = '${path}/images/accommodation/motelMarker.png'
+				        }
+				    	var imageSize = new kakao.maps.Size(60, 60) 
+				    	var imageOption = {offset: new kakao.maps.Point(27, 69)}; 
+						
+				    	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+						markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+				    
+					
+						
+					var marker = new kakao.maps.Marker({
+			        	//map: map, // 마커를 표시할 지도
+			       	 	position: l.coords, // 마커의 위치 */
+			       	 	image: markerImage 
+			   		 });
+					
+					
+					// 클러스터러에 마커들을 추가합니다
+					clusterer.addMarker(marker);
+					clusterer.setMap(map);
+					
+					
+					map.setCenter(l.coords);								
+				  var content=
+					  '<a class="hotelItem" href="${path}/ac/acDetail?no='+l.id+'">'+
+			        	'<div class="mapDetail">'+		           	 	
+			                '<div id="mapDetailImg'+i+'"class="carousel slide">'+
+			                  '<div class="carousel-indicators">';
+			         
+			        		for(var j=0;j<l.img.length+1;j++){
+			        			content+=
+			                 	'<button type="button" data-bs-target="#mapDetailImg'+i+'"'+ 
+			                      	'data-bs-slide-to="'+j+'"'+
+			                      	'class="active"'+
+			                      	'aria-current="true"'+
+			                      	'aria-label="Slide '+(j+1)+'">'+
+			                     '</button>'                      		
+			        		}	                  
+			                 content+=
+			                 '</div>'+
+			                 '<div class="carousel-inner">'+
+			                    '<div class="carousel-item active">'+
+			                      '<img src="${path}/images/upload/accommodation/'+l.mainImg+'"class="d-block w-100" alt="..."/>'+
+			                  '</div>'
+			            	$.each(l.img,function(j,f){			        
+			                content+=  
+			                  '<div class="carousel-item">'+
+			                      '<img src="${path}/images/upload/accommodation/'+f+'"class="d-block w-100" alt="..."/>'+
+			                    '</div>'               
+			                 });
+			                 content+=
+			                 '</div>'+   
+			                  '<button class="carousel-control-prev" type="button"'+ 
+			                  'data-bs-target="#mapDetailImg'+i+'"'+ 
+			                   'data-bs-slide="prev">'+
+			                   '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
+			                   '<span class="visually-hidden">Previous</span>'+
+			                  '</button>'+
+			        		  '<button class="carousel-control-next" type="button"'+ 
+			                  'data-bs-target="#mapDetailImg'+i+'"'+ 
+			                   'data-bs-slide="next">'+
+			                   '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
+			                   '<span class="visually-hidden">Next</span>'+
+			                  '</button>'+
+			                '</div>'+
+			                '<div>'+
+			                  '<div class="mapDetailItem">'+
+			                    '<div class="mapDetailTitle">'+
+			                      '<span>'+l.title.substr(0,12)+"..."+'</span>'+
+			                      '<div class="starContainer">'
+			                      	if(l.review!="0.0"){
+			                        content+='<span class="star">★★★★★<span style="width:'+l.review*20+'%">★★★★★</span></span>'
+			                      	}else{
+			                      	content+='<span class="notReview">리뷰없음</span>'
+			                      	}
+			                     content+=
+			                      '</div>'+
+			                    '</div>'+
+			                    '<div class="mapDetailAddress">'+
+			                      '<span>'+l.address+'</span>'+
+			                    '</div>'+
+			                    '<div class="mapDetailCount">'+
+			                      '<span>최대 인원'+l.people+'명</span>'+
+			                      '<span>방'+l.room+'개</span>'+
+			                      '<span>침대'+l.bed+'개</span>'+
+			                      '<span>욕실'+l.bath+'개</span>'+
+			                    '</div>'+
+			                    '<div class="mapDetailPrice">'+
+			                      '<span>₩'+l.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'/박</span>'+            
+			                    '</div>'+
+			                  '</div>'+
+			                '</div>'+
+			              '</div>'+
+			              '</a>'
+							
+			              	var infowindow = new kakao.maps.InfoWindow({
+			    				content : '<div class="infoWindow">₩'+l.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</div>' // 인포윈도우에 표시할 내용
+							});
+
+							// 인포윈도우를 지도에 표시한다
+							//infowindow.open(map, marker);
+
+							
+			                var overlay = new kakao.maps.CustomOverlay({
+			                    content: content,
+			                    position: marker.getPosition(),       
+			                    clickable : true
+			                });
+							
+			               kakao.maps.event.addListener(marker, 'click', function() {
+			            	   if (clickedOverlay) {
+			            	        clickedOverlay.setMap(null);
+			            	    }
+			            	    overlay.setMap(map);
+			            	    clickedOverlay = overlay;
+			               });
+			                     
+			               kakao.maps.event.addListener(map, 'click', function() {
+			                    overlay.setMap(null);
+			               });	             
 				 }				
 			});
 		})
 		
 		//geocoder가 js코드보다 늦게 실행되기 때문에 지연시간을 줌
 		
-		var clickedOverlay = null;
-		
+	
+		/* 
 		setTimeout(function(){
 			$.each(asList,function(i,l){		
 				
-				  if(l.type=="펜션"){
-			        	var imageSrc = '${path}/images/accommodation/pensionMarker.png'
-			        }else if(l.type=="호텔"){
-			        	var imageSrc = '${path}/images/accommodation/hotelMarker.png'		
-			        }else {
-			        	var imageSrc = '${path}/images/accommodation/motelMarker.png'
-			        }
-			    	var imageSize = new kakao.maps.Size(60, 60) 
-			    	var imageOption = {offset: new kakao.maps.Point(27, 69)}; 
-					
-			    	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-					markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
-			    
 				
-					
-				var marker = new kakao.maps.Marker({
-		        	//map: map, // 마커를 표시할 지도
-		       	 	position: l.coords, // 마커의 위치 */
-		       	 	image: markerImage 
-		   		 });
-				
-				
-				// 클러스터러에 마커들을 추가합니다
-				clusterer.addMarker(marker);
-				clusterer.setMap(map);
-				
-				
-				map.setCenter(l.coords);								
-			  var content=
-		        	'<div class="mapDetail">'+		           	 	
-		                '<div id="mapDetailImg'+i+'"class="carousel slide">'+
-		                  '<div class="carousel-indicators">';
-		         
-		        		for(var j=0;j<l.img.length+1;j++){
-		        			content+=
-		                 	'<button type="button" data-bs-target="#mapDetailImg'+i+'"'+ 
-		                      	'data-bs-slide-to="'+j+'"'+
-		                      	'class="active"'+
-		                      	'aria-current="true"'+
-		                      	'aria-label="Slide '+(j+1)+'">'+
-		                     '</button>'                      		
-		        		}	                  
-		                 content+=
-		                 '</div>'+
-		                 '<div class="carousel-inner">'+
-		                    '<div class="carousel-item active">'+
-		                      '<img src="${path}/images/upload/accommodation/'+l.mainImg+'"class="d-block w-100" alt="..."/>'+
-		                  '</div>'
-		            	$.each(l.img,function(j,f){			        
-		                content+=  
-		                  '<div class="carousel-item">'+
-		                      '<img src="${path}/images/upload/accommodation/'+f+'"class="d-block w-100" alt="..."/>'+
-		                    '</div>'               
-		                 });
-		                 content+=
-		                 '</div>'+   
-		                  '<button class="carousel-control-prev" type="button"'+ 
-		                  'data-bs-target="#mapDetailImg'+i+'"'+ 
-		                   'data-bs-slide="prev">'+
-		                   '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
-		                   '<span class="visually-hidden">Previous</span>'+
-		                  '</button>'+
-		        		  '<button class="carousel-control-next" type="button"'+ 
-		                  'data-bs-target="#mapDetailImg'+i+'"'+ 
-		                   'data-bs-slide="next">'+
-		                   '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
-		                   '<span class="visually-hidden">Next</span>'+
-		                  '</button>'+
-		                '</div>'+
-		                '<div>'+
-		                  '<div class="mapDetailItem">'+
-		                    '<div class="mapDetailTitle">'+
-		                      '<span>'+l.title.substr(0,12)+"..."+'</span>'+
-		                      '<div class="starContainer">'
-		                      	if(l.review!="0.0"){
-		                        content+='<span class="star">★★★★★<span style="width:'+l.review*20+'%">★★★★★</span></span>'
-		                      	}else{
-		                      	content+='<span class="notReview">리뷰없음</span>'
-		                      	}
-		                     content+=
-		                      '</div>'+
-		                    '</div>'+
-		                    '<div class="mapDetailAddress">'+
-		                      '<span>'+l.address+'</span>'+
-		                    '</div>'+
-		                    '<div class="mapDetailCount">'+
-		                      '<span>최대 인원'+l.people+'명</span>'+
-		                      '<span>방'+l.room+'개</span>'+
-		                      '<span>침대'+l.bed+'개</span>'+
-		                      '<span>욕실'+l.bath+'개</span>'+
-		                    '</div>'+
-		                    '<div class="mapDetailPrice">'+
-		                      '<span>₩'+l.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'/박</span>'+            
-		                    '</div>'+
-		                  '</div>'+
-		                '</div>'+
-		              '</div>'
-						
-		              	var infowindow = new kakao.maps.InfoWindow({
-		    				content : '<div class="infoWindow">₩'+l.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</div>' // 인포윈도우에 표시할 내용
-						});
-
-						// 인포윈도우를 지도에 표시한다
-						//infowindow.open(map, marker);
-
-						
-		                var overlay = new kakao.maps.CustomOverlay({
-		                    content: content,
-		                    position: marker.getPosition(),       
-		                    clickable : true
-		                });
-						
-		               kakao.maps.event.addListener(marker, 'click', function() {
-		            	   if (clickedOverlay) {
-		            	        clickedOverlay.setMap(null);
-		            	    }
-		            	    overlay.setMap(map);
-		            	    clickedOverlay = overlay;
-		               });
-		                     
-		               kakao.maps.event.addListener(map, 'click', function() {
-		                    overlay.setMap(null);
-		               });	             
 			})
 			
 
@@ -642,10 +645,12 @@
 		    	"box-shadow" : "0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07)",		    			    				  
 			})				
 		},100)
+		 */
 		
-		
-	
+	var checkInOutDay = []
 </script>
+<script src="${path }/js/accommodation/acSearchBar.js"></script>
 <script src="${path }/js/accommodation/acSearch.js"></script>
+
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -100,7 +100,7 @@
 							<div class="shareIcon" onclick="twitterShare()">
 								<div>
 									<img src="${path }/images/accommodation/twitterIcon.png" alt="">
-									<span>페이스북 공유하기</span>
+									<span>트위터 공유하기</span>
 								</div>
 							</div>
 							<div class="shareIcon" onclick="linkShare()">
@@ -240,6 +240,11 @@
 									alt="" />
 								<p>욕실 ${ad.acBathRoom}개</p>
 							</div>
+							<div class="dt dr">
+								<img src="${path}/images/accommodation/peopleDetail.png"
+									alt="" />
+								<p>최대 ${ad.acPeople}명</p>
+							</div>
 						</div>
 					</div>
 					<div class="detailHotelInfoCon">
@@ -332,8 +337,8 @@
 							<hr />
 						</div>
 						<c:forEach var="ap" items="${ad.acPay }">
-						<input type="hidden" class="checkIn" val="${ap.checkIn }">
-						<input type="hidden" class="checkOut" val="${ap.checkOut }">
+							<input type="hidden" class="checkIn" val="${ap.checkIn }">
+							<input type="hidden" class="checkOut" val="${ap.checkOut }">
 						</c:forEach>
 						<div class="searchCalander">
 							<div class="calHeader">
@@ -359,8 +364,8 @@
 										<div class="day">SAT</div>
 										<div class="day">SUN</div>
 									</div>
-									<input type="hidden" id="reInDay" value="" />
-									<input type="hidden" id="fnum" value="" />
+									<input type="hidden" id="reInDay" value="" /> <input
+										type="hidden" id="fnum" value="" />
 									<div class="hotelDates now"></div>
 								</div>
 								<div class="calContainer">
@@ -373,8 +378,8 @@
 										<div class="day">SAT</div>
 										<div class="day">SUN</div>
 									</div>
-									<input type="hidden" id="reOutDay" value="" />
-									<input type="hidden" id="lnum" value="" />
+									<input type="hidden" id="reOutDay" value="" /> <input
+										type="hidden" id="lnum" value="" />
 									<div class="hotelDates next"></div>
 								</div>
 							</div>
@@ -427,80 +432,92 @@
 								<span><span> ₩</span> <span id="exPrice1"><fmt:formatNumber
 											value="${ad.acPrice }" pattern="#,###" /></span> <span> /박</span></span>
 							</div>
-						</div>						
-						<div class="detailHotelFunc">
-							<div>
-								<div class="detailHotelCheckDay">
-									<div>
-										<span>체크인</span> <input type="text" id="detailHotelCheckIn"
-											placeholder="날짜선택" readonly/>
+						</div>
+						<form id="detailForm" action="${path}/ac/acPay">
+							<div class="detailHotelFunc">
+								<input type="hidden" name="no" value="${ad.acId }">
+								<div>
+									<div class="detailHotelCheckDay">
+										<div>
+											<span>체크인</span> <input type="text" name="checkIn"
+												id="detailHotelCheckIn" placeholder="날짜추가" readonly />
 											<ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
-									</div>
-									<div>
-										<span>체크아웃</span> <input type="text" id="detailHotelCheckOut"
-											placeholder="날짜선택" readonly/>
-											<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
-									</div>
-								</div>
-								<div class="detailHotelPeople">
-									<div>
-										<span>인원</span> <input type="text" readonly id="payPeople"
-											value="인원추가">
-										<ion-icon name="chevron-down-outline"></ion-icon>
-										<ion-icon name="chevron-up-outline"></ion-icon>
-									</div>
-								</div>
-								<div class="searchPeople detail">
-									<div id="searchCheckCon">
-										<div id="searchCheck">
-											<div id="peopleText">인원수</div>
-											<div id="peopleBtn">
-												<button class="countBtn" onclick="countFn2('minus')">
-													<ion-icon class="people minus" name="remove-circle-outline"></ion-icon>
-												</button>
-												<div id="peopleCountCon">
-													<input type="number" name="count" id="peopleCount"
-														value="1" min="1" max="10" />
-												</div>
-												<button class="countBtn" onclick="countFn2('plus')">
-													<ion-icon name="add-circle-outline"></ion-icon>
-												</button>
-											</div>
 										</div>
+										<div>
+											<span>체크아웃</span> <input type="text" name="checkOut"
+												id="detailHotelCheckOut" placeholder="날짜추가" readonly />
+											<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
+										</div>
+									</div>
+									<div class="detailHotelPeople">
+										<div>
+											<span>인원</span> <input type="text" readonly id="payPeople"
+												name="people" value="인원추가"> <input type="hidden"
+												id="maxPeople" value="${ad.acPeople }">
+											<ion-icon name="chevron-down-outline"></ion-icon>
+											<ion-icon name="chevron-up-outline"></ion-icon>
+										</div>
+									</div>
+									<div class="searchPeople detail">
+										<div id="searchCheckCon">
+											<div id="searchCheck">
+												<div id="peopleText">인원수</div>
+												<div id="peopleBtn">
+													<button type="button" class="countBtn"
+														onclick="countFn2('minus')">
+														<ion-icon class="people minus"
+															name="remove-circle-outline"></ion-icon>
+													</button>
+													<div id="peopleCountCon">
+														<input type="number" id="peopleCount" value="1" min="1"
+															max="10" />
+													</div>
+													<button type="button" class="countBtn"
+														onclick="countFn2('plus')">
+														<ion-icon name="add-circle-outline"></ion-icon>
+													</button>
+												</div>
+											</div>
 
-										<div id="countInfo"></div>
+											<div id="countInfo"></div>
+										</div>
 									</div>
 								</div>
+
 							</div>
-						</div>
-						<div class="detailHotelBtn">
-							<button>예약하기</button>
-						</div>
-						<div class="detailHotelPriceCalc">
-							<div>
-								<div class="detailHotelEx">
-									<span> <span>₩</span> <span id="exPrice2"> <fmt:formatNumber
-												value="${ad.acPrice }" pattern="#,###" />
+
+							<div class="detailHotelPriceCalc">
+								<div>
+									<div class="detailHotelEx">
+										<span> <span>₩</span> <span id="exPrice2"> <fmt:formatNumber
+													value="${ad.acPrice }" pattern="#,###" />
+										</span>
+										</span> <span class="multiply">X</span> <span id="exDay">1</span><span
+											style="font-size: 0.8rem">박</span>
+									</div>
+									<span style="color: gray">₩ <span id="resultPrice"><fmt:formatNumber
+												value="${ad.acPrice }" pattern="#,###" /></span>
 									</span>
-									</span> <span class="multiply">X</span> <span id="exDay">1</span><span
-										style="font-size: 0.8rem">박</span>
 								</div>
-								<span style="color: gray">₩ <span id="resultPrice"><fmt:formatNumber
-											value="${ad.acPrice }" pattern="#,###" /></span>
-								</span>
 							</div>
-						</div>
-						<div class="hrCon">
-							<hr />
-						</div>
-						<div class="detailHotelPriceResult">
-							<div>
-								<span>총 합계</span> <span style="color: #b31312">₩ <span
-									id="realResultPrice"><fmt:formatNumber
-											value="${ad.acPrice }" pattern="#,###" /></span>
-								</span>
+							<div class="hrCon">
+								<hr />
 							</div>
-						</div>
+							<div class="detailHotelPriceResult">
+								<div>
+									<span>총 합계</span> <span style="color: #b31312">₩ <span
+										id="realResultPrice"><fmt:formatNumber
+												value="${ad.acPrice }" pattern="#,###" /></span>
+									</span>
+								</div>
+							</div>
+							<div class="detailHotelBtn">
+								<button type="button">예약하기</button>
+							</div>
+							<div class="detailHotelBtn on">
+								<button>예약하기</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

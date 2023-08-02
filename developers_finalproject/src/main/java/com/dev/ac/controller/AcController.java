@@ -51,5 +51,14 @@ public class AcController {
 		m.addAttribute("ad",service.acDetail(no));
 		return "/accommodation/acDetail";
 	}
-
+	
+	@GetMapping("/acPay")
+	public String acPay(int no,String checkIn, String checkOut, String people, Model m) {
+		people=people.substring(0, people.length() - 1);
+		m.addAttribute("checkIn",checkIn);
+		m.addAttribute("checkOut",checkOut);
+		m.addAttribute("people",people);
+		m.addAttribute("ap",service.acPay(no));
+		return "/accommodation/acPay";
+	}
 }

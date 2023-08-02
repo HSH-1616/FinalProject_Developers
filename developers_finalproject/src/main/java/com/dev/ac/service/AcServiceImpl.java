@@ -34,4 +34,9 @@ public class AcServiceImpl implements AcService {
 		return dao.acDetail(session,no);
 	}
 
+	@Override
+	public Accommodation acPay(int no) {
+		return dao.acPay(session,no);
+	}
+
 }

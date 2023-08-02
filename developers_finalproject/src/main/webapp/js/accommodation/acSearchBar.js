@@ -310,7 +310,6 @@ function calender() {
 		function getDateRange(fnum, lnum, listDate) {
 			var dateMove = new Date(fnum);
 			var strDate = fnum;
-
 			if (fnum == lnum) {
 				var strDate = dateMove.toISOString().slice(0, 10);
 
@@ -338,30 +337,30 @@ function calender() {
 				});
 			});
 		}
-
+		
+		var listDate2=[]
+		if(checkInOutDay.length){
 		$.each(checkInOutDay, function(i, l) {
 			fnum = l.checkIn
 			lnum = l.checkOut
-
 			if (fnum != '' && lnum != '') {
-				getDateRange(fnum, lnum, listDate);
-				$(listDate).each(function(index, item) {
+				getDateRange(fnum, lnum, listDate2);
+				$(listDate2).each(function(index, item) {
 					$(".day").each(function(index2, item2) {
 						if ($(this).children().val() == item) {
 							$(this).attr("class", "outDay")
-
 						}
 					});
-					$(".notday").each(function(index2, item2) {
+					$(".notday").each(function(index3, item3) {
 						if ($(this).children().val() == item) {
 							$(this).attr("class", "outDay")
-
 						}
 					});
 				});
 			}
 
 		})
+		}
 
 
 		

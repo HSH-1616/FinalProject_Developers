@@ -427,7 +427,7 @@
 }
 
 .dt {
-	width: 22%;
+	width: 18%;
 	height: auto;
 	/* border: 3px solid #b31312; */
 	border-radius: 30px;
@@ -436,7 +436,7 @@
 }
 
 .dt p {
-	font-size: 1.1rem;
+	font-size: 1rem;
 	margin-top: 10px;
 	margin-bottom: 5px;
 	color: black;
@@ -444,7 +444,7 @@
 
 .dt img {
 	width: 100%;
-	height: 150px;
+	height: 120px;
 	border-radius: 20px;
 }
 
@@ -531,9 +531,10 @@
 	height: 42px;
 }
 
-.notday{
+.notday {
 	height: 42px;
 }
+
 .calMonth {
 	right: 45px;
 }
@@ -552,19 +553,19 @@
 	right: 45px;
 }
 
-.outDay{
-	text-decoration:line-through #b31312 2px;
+.outDay {
+	text-decoration: line-through #b31312 2px;
 	color: #999;
 	display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 7);
-    height: 42px;
-    text-align: left;
-    font-size: 1rem;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
+	align-items: center;
+	justify-content: center;
+	width: calc(100% / 7);
+	height: 42px;
+	text-align: left;
+	font-size: 1rem;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .detailHotelReview {
@@ -699,7 +700,7 @@
 	font-weight: bold;
 }
 
-.detailHotelPrice div span>span:last-child  {
+.detailHotelPrice div span>span:last-child {
 	font-size: 1.1rem;
 	font-weight: normal;
 	text-decoration: none;
@@ -709,7 +710,7 @@
 .detailHotelPrice div span:last-child {}
 
 .detailHotelFunc {
-	margin-top: 30px;
+	margin-top: 20px;
 	display: flex;
 	justify-content: center;
 }
@@ -741,24 +742,24 @@
 	margin-left: 10px;
 }
 
-.detailHotelCheckDay div> ion-icon{
+.detailHotelCheckDay div>ion-icon {
 	display: none;
 	position: absolute;
 	font-size: 1.3rem;
 	color: #b31312;
 	top: 35px;
-	right: 25px;
-	
+	right: 20px;
+
 }
 
 .detailHotelCheckDay>div:first-of-type {
 	border-top-left-radius: 10px;
-		position: relative;
+	position: relative;
 }
 
 .detailHotelCheckDay>div:last-of-type {
 	border-top-right-radius: 10px;
-		position: relative;
+	position: relative;
 }
 
 .detailHotelCheckDay>div span {
@@ -783,27 +784,27 @@
 	font-size: 0.9rem;
 }
 
-#payPeople{
+#payPeople {
 	border: none;
 	outline: none;
 	width: 80px;
 	font-size: 0.95rem;
-	
+
 }
 
-.detailHotelPeople ion-icon{
+.detailHotelPeople ion-icon {
 	position: absolute;
 	font-size: 1.5rem;
 	right: 10px;
-	bottom: 12px;	
+	bottom: 12px;
 }
 
-.detailHotelPeople ion-icon:last-child{
+.detailHotelPeople ion-icon:last-child {
 	display: none;
 	position: absolute;
 	font-size: 1.5rem;
 	right: 10px;
-	bottom: 10px;	
+	bottom: 10px;
 }
 
 .searchPeople.detail {
@@ -814,34 +815,41 @@
 	right: unset;
 	margin: unset;
 	width: 100%;
+	z-index: 2;
 }
 
-#searchCheckCon{
+#searchCheckCon {
 	width: 100%;
 	border-radius: 10px;
 	height: 100px;
 }
 
-#searchCheck{
+#searchCheck {
 	margin-top: 35px;
 }
 
-#peopleText{
+#peopleText {
 	font-size: 1rem;
 }
 
-.countBtn{
+.countBtn {
 	font-size: 1.3rem;
 }
 
-#peopleCount{
+#peopleCount {
 	font-size: 1rem;
 }
 
-#countInfo{
+#countInfo {
 	font-size: 0.8rem;
 	margin-top: 0px;
-	
+
+}
+
+#detailForm{
+	width: 100%;
+	max-width: unset;
+	margin: 0;
 }
 
 .detailHotelBtn {
@@ -857,6 +865,10 @@
 	border-radius: 10px;
 	background-color: #afafaf;
 	color: white;
+}
+
+.detailHotelBtn.on {
+	display: none;
 }
 
 .detailHotelBtn.on button {
@@ -884,15 +896,15 @@
 	margin-top: 0px;
 }
 
-#exDay{
+#exDay {
 	font-size: 0.8rem;
 }
 
-#exPeople{
+#exPeople {
 	font-size: 0.8rem;
 }
 
-.multiply{
+.multiply {
 	font-size: 0.8rem;
 }
 

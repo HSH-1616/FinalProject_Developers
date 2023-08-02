@@ -1,5 +1,6 @@
 $(window).ready(function() {
-	//calender()
+		//calender()
+			var checkInOutDay=[]
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var loc = urlParams.get('loc');

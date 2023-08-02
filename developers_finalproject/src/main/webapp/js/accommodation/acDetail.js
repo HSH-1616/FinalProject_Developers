@@ -130,11 +130,26 @@ $(document).on("click", ".detailHotelPeople", function() {
 	}
 })
 
+function payCheck(){
+	var checkIn=$("#detailHotelCheckIn").val()
+	var checkOut=$("#detailHotelCheckOut").val()
+	var payPeople=$("#payPeople").val()
+	if((checkIn!="날짜추가"||checkIn!="")&&(checkOut!="날짜추가"||checkOut!="")&&payPeople!="인원추가"){
+		$(".detailHotelBtn").hide();
+		$(".detailHotelBtn.on").css("display","flex");
+	}
+	if(checkIn=="날짜추가"||checkOut=="날짜추가"||payPeople=="인원추가"){
+		$(".detailHotelBtn").css("display","flex");
+		$(".detailHotelBtn.on").hide();
+	}
+}
+
+
 $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 	if ($(this).attr("id") == "inDayBtn") {
 		$(".day").removeClass("first").removeClass("last");
 		$("#inDayBtn,#outDayBtn").hide();
-		$("#detailHotelCheckIn,#detailHotelCheckOut").val("날짜 추가");
+		$("#detailHotelCheckIn,#detailHotelCheckOut").val("날짜추가");
 		$(".day").css("background-color", "white");
 		$("#fnum").val("");
 		$("#lnum").val("");
@@ -145,65 +160,34 @@ $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 		$(".day").removeClass("last");
 		$("#outDayBtn").hide();
 		$("#lnum").val("");
-		$("#detailHotelCheckOut").val("날짜 추가");
+		$("#detailHotelCheckOut").val("날짜추가");
 		$(".day").not(".first").css("background-color", "white");
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
 	}
+	payCheck()
 });
 
-$(document).ready(function(){
-/*var listDate=[]
-$.each(checkInOutDay,function(i,l){		
-	fnum=l.checkIn
-	lnum=l.checkOut
-	function getDateRange(fnum, lnum, listDate) {
-		var dateMove = new Date(fnum);
-		var strDate = fnum;
 
-		if (fnum == lnum) {
-			var strDate = dateMove.toISOString().slice(0, 10);
+$(document).ready(function($) {
 
-			listDate.push(strDate);
-		} else {
-			while (strDate < lnum) {
-				var strDate = dateMove.toISOString().slice(0, 10);
-
-				listDate.push(strDate);
-
-				dateMove.setDate(dateMove.getDate() + 1);
-			}
-		}
-		return listDate;
-	}
-
-	if (fnum != '' && lnum != '') {
-		getDateRange(fnum, lnum, listDate);
-		$(listDate).each(function(index, item) {
-			$(".day").each(function(index2, item2) {
-				if ($(this).children().val() == item) {					
-					$(this).attr("class","outDay")
-						
-				}
-			});
-			$(".notday").each(function(index2, item2) {
-				if ($(this).children().val() == item) {					
-					$(this).attr("class","outDay")
-						
-				}
-			});
-		});
-	}
+	$(".detailHotelCheckDay").click(function(event) {
+		var offset = $(".detailHotelDayCon").offset();
+		$('html, body').animate({ scrollTop: offset.top }, 100);
+	});
 	
-})*/
-})
+	payCheck()
+
+
+});
+
 // 인원수 함수
 function countFn2(type) {
 	var count = $("#peopleCount").val();
 
 	if (type == "plus") {
-		if (count < 10) {
+		if (count < $("#maxPeople").val()) {
 			$("#countInfo").text("");
 			$("#peopleCount").val(++count);
 			$("#payPeople").val($("#peopleCount").val() + "명");
@@ -219,7 +203,7 @@ function countFn2(type) {
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 		} else {
-			$("#countInfo").text("최소 1명부터 10명까지 선택가능 합니다.");
+			$("#countInfo").text("최소 1명부터"+$("#maxPeople").val()+"명까지 선택가능 합니다.");
 		}
 	} else {
 		if (count > 1) {
@@ -238,7 +222,7 @@ function countFn2(type) {
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 		} else {
-			$("#countInfo").text("최소 1명부터 10명까지 선택가능 합니다.");
+			$("#countInfo").text("최소 1명부터"+$("#maxPeople").val()+"명까지 선택가능 합니다.");
 		}
 	}
 	if (count > 1) {
@@ -246,6 +230,7 @@ function countFn2(type) {
 	} else {
 		$("#peopleBtn button").first().css("color", "#afafaf");
 	}
+	payCheck()
 }
 // /인원수 함수/
 setTimeout(function() {
@@ -264,5 +249,11 @@ setTimeout(function() {
 			$("#exDay").text(diff)
 			$("#resultPrice,#realResultPrice").text(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 		}
+		payCheck()
 	})
+	
 }, 100)
+
+$("detailHotelBtn on>button").on("click")
+
+

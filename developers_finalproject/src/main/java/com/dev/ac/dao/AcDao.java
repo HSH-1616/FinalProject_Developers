@@ -14,4 +14,6 @@ public interface AcDao {
 	List<Accommodation> acSearchAll(SqlSessionTemplate session,Map param);
 	
 	Accommodation acDetail(SqlSessionTemplate session, int no);
+	
+	Accommodation acPay(SqlSessionTemplate session, int no);
 }

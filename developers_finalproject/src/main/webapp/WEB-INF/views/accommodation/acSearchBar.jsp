@@ -231,10 +231,10 @@
 						<ion-icon name="add-circle-outline"></ion-icon>
 					</button>
 				</div>
-			</div>
+			</div>z
 
 			<div id="countInfo"></div>
 		</div>
 	</div>
 	<div id="blurSearchBar"></div>
-	<script src="${path }/js/accommodation/acSearchBar.js"></script>
+	<%-- <script src="${path }/js/accommodation/acSearchBar.js"></script> --%>
