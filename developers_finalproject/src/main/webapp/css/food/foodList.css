@@ -16,25 +16,27 @@ a.on {
 
 .f_update {
     display: flex;
-    justify-content: flex-end;
     margin-right: 17.8%;
     height: 45px;
-    margin-top: 1.7%;
+    margin-top: 2.7%;
+    position: relative;
+    left: 1285px;
 }
 
 .page-bar {
-  display: flex;
+  /*display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 50px;
-  margin-top: 3.3%;
   position: absolute;
   width: 456px;
   height: 29px;
   left: calc(50% - 456px/2);
   top: 1760.98px;
-  margin-bottom: -7%;
+  margin-bottom: -7%;*/
+  margin-top: 3.3%;
+  margin-right: 45%;
 }
 
 .page-num {
@@ -113,7 +115,6 @@ a.on {
 .food_list img {
   width: 300px;
   height: 300px;
-  border: 1px solid #ccc;
   border-radius: 5%;
 }
 
@@ -247,7 +248,7 @@ span.comment_count {
   pointer-events: none;
 }
 
-.food_place {
+.food_menu {
   font-size: 25px;
 }
 
@@ -456,7 +457,13 @@ form.low_theme {
   filter: blur(1px);
   transform: scale(0.95, 0.95);
 }
+
+.pig {
+    text-decoration: none;
+    color: black;
+}
 button#food_add {
-  background-color: white;
-  border-radius: 10px;
+    border-radius: 10px;
+    border: none;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
 }
