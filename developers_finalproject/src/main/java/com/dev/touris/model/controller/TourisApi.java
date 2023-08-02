@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonArray;
