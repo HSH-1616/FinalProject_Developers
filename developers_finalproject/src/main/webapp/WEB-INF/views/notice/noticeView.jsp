@@ -26,6 +26,7 @@
             
         </div>
 			<div class="text-center"><button type="button" class="" onclick="location.href='/notice/noticeList.do'">목록</button> 
+			<button type="button" class="" onclick="location.href='/notice/updateNotice.do?no=${notice.noticeNo}'">수정하기</button>
             <button type="button" class="" onclick="deleteNotice(); $('.removeBtn').trigger('click');">삭제하기</button>
             </div>
     </section>
@@ -34,28 +35,17 @@
 <script>
 	const deleteNotice=()=>{
 		const no="<c:out value='${notice.noticeNo}'/>";
-		var fileName;
     	$(".removeBtn").click(function(e){
     		let target=$(this);
-        	fileName=target.data("name");
-        	console.log(fileName);
-        	console.log(no);
+        	const fileName=target.data("name");
+        	
+        	location.href="/notice/deleteNotice.do?no="+no+"&fileName="+fileName;
     	})
-        
+    	location.href="/notice/deleteNotice.do?no="+no;
     };	
         	
+        				
 
-        
-		
-		
-		/* let content=document.getElementById('ctn');
-		let img=content.querySelectorAll("img");
-		let $src;
-		img.forEach(function(e){
-			$src+=e.src;
-		}); */
-		
-		//location.href="/notice/deleteNotice.do?no="+no+"&src="+$src;
 	
 </script>
 
