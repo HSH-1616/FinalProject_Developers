@@ -1,10 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관광경로만들기 해당페이지</title>
+<script>
+	<c:forEach var="t" items="${tourislist}" varStatus="first">
+		<c:if test="${first.index == 0}">
+			const latitude = '${t.tourisarea.areaLatitude}';
+			const Longitude = '${t.tourisarea.areaLongitude}';
+		</c:if>
+	</c:forEach>
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/touris/tourisheader.jsp"/> 
@@ -16,8 +27,12 @@
         <div id="schedule-area">
           <div id="schedule-top">
             <div id="travelarea">
-              <div id="traveltitle">제주도</div>
-              <div>Jeju Island</div>
+            <c:forEach var="t" items="${tourislist}" varStatus="first">
+            	<c:if test="${first.index == 0}">
+              		<div id="traveltitle">${t.tourisarea.areaName}</div>
+              		<div>${t.tourisarea.areaEng }</div>
+              	</c:if>
+             </c:forEach>
               <div id="travels-chedule">3일</div>
             </div>
             <div id="travelplan">
@@ -59,30 +74,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                   </svg>
                 </li>
+          
                 
-                <!-- <li class="selectlist">
-                  <div class="listbox">
-                    <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-                    <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-                    </svg>
-                    </div>
-                  </div>
-                  <div class="listtext">
-                    <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-                  </div>
-                  <div class="listbtn">
-                    <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                      <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-                    </svg>
-                    </a>
-                    </div>
-                    <div class="delete-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#b31312">
-                      <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-                    </svg></a>
-                    </div>
-                  </div>
-                </li> -->
                 <!--  -->
               </ul>
             </div>
@@ -153,16 +146,18 @@
       <div id="travellist-area">
         <div id="travelplace"><b><span>추천장소</span></b></div>
         <ul class="listarea-right">
+
+        <c:forEach var="t" items="${tourislist }">
           <li class="selectlist2">
             <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
+              <div class="listboximg"><img src="${t.tourismainImge }" alt=""></div>
               <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
               </svg>
               </div>
             </div>
             <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
+              <h7 class="listtitle-text">${t.tourisName }</h7><br>
             </div>
             <div class="listbtn">
               <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
@@ -177,175 +172,9 @@
               </div>
             </div>
           </li>
+          </c:forEach>
           <!--  -->
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
+         
           </ul>
       </div>
       </div>
@@ -545,7 +374,13 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
           </svg>
           </div>
-          <h7 class="bigsidebarcentertitle"><b><span>제주도</span> " : " <span class="schedulecount">0</span><span>일 여행</span></b></h7>
+          <c:forEach var="t" items="${tourislist}" varStatus="first">
+            	<c:if test="${first.index == 0}">
+          <h7 class="bigsidebarcentertitle"><b><span>${t.tourisarea.areaName}</span> 
+          </c:if>
+          </c:forEach>
+          " : " 
+          <span class="schedulecount">0</span><span>일 여행</span></b></h7>
         </div>
       </div>
       <div calss="bigsidebartitleimgesarea">

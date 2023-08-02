@@ -1,0 +1,404 @@
+@charset "UTF-8";
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  /*font-family: "GmarketSansMedium" !important;*/
+}
+section{
+	display: flex;
+}
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "LINESeedKR-Bd";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "HANAMDAUM";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+#blurSection {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: 0.5;
+}
+/* 선택 지도css */
+.OUTLINE {
+  stroke-linejoin: round;
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+#CD11 {
+  fill: #f1c40f;
+}
+#CD26 {
+  fill: #16a085;
+}
+#CD27 {
+  fill: #f39c12;
+}
+#CD28 {
+  fill: #2ecc71;
+}
+#CD29 {
+  fill: #e67e22;
+}
+#CD30 {
+  fill: #27ae60;
+}
+#CD31 {
+  fill: #d35400;
+}
+#CD36 {
+  fill: #3498db;
+}
+#CD41 {
+  fill: #e74c3c;
+}
+#CD42 {
+  fill: #2980b9;
+}
+#CD43 {
+  fill: #c0392b;
+}
+#CD44 {
+  fill: #9b59b6;
+}
+#CD45 {
+  fill: #8e44ad;
+}
+#CD46 {
+  fill: #34495e;
+}
+#CD47 {
+  fill: #2c3e50;
+}
+#CD48 {
+  fill: #1abc9c;
+}
+#CD50 {
+  fill: #f1c40f;
+}
+.TEXT {
+  fill: #ffffff;
+  font-size: 16;
+  font-weight: bold;
+  text-anchor: middle;
+  alignment-baseline: middle;
+  cursor: pointer;
+}
+.selctmap{
+position: relative;
+padding-left: 3rem;
+width: 600px;
+padding-top: 5rem;
+}
+.selctmap svg{
+  display: flex;
+}
+/* 선택 지도 css */
+
+/*검색 리스트 영역 css*/
+.mainsearchlistarea{
+	position: relative;
+    width: 100%;
+    height: auto;
+    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-top: 5rem;
+}
+
+.mainsearchstyle{
+	margin-right: auto;
+	margin-left: auto;
+}
+.mainsearchtitle{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+.mainsearchtext{
+	font-weight: 700;
+	font-size: 1.875rem;
+	--tw-text-opacity: 1;
+    color: rgb(17 19 20/var(--tw-text-opacity));
+}
+.mainsearchinput{
+	width: 70%;
+	--tw-text-opacity: 1;
+    color: rgb(213 215 219/var(--tw-text-opacity));
+    padding: 2rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+}
+.mainsearchinputtext{
+	    padding-left: 1.7rem;
+	    --tw-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+    font-size: 1.125rem;
+    padding-right: 4rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255/var(--tw-bg-opacity));
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 4rem;
+    box-sizing: border-box;
+    border: 0 solid #3e4549;
+}
+.mainsearchinputtext:focus{
+	outline: none;
+}
+.mainsearchinputbtn{
+	 margin-right: 3rem;
+	 position: absolute;
+	 top: 0;
+	 right: 0;
+	 bottom: 0;
+	 cursor: pointer;
+	 background-color: transparent;
+	 box-sizing: border-box;
+   	 border: 0 solid #3e4549;
+}
+.mainsearchinputbtn svg {
+	    --tw-text-opacity: 1;
+    color: rgb(213 215 219/var(--tw-text-opacity));
+    width: 2rem;
+    height: 2rem;
+}
+.searchcardlistarea{
+	display: flex;
+	flex-wrap: wrap;
+	overflow:auto;
+}
+.searchcardliststyle{
+	width: 33%;
+	padding: 1rem;
+	box-sizing: border-box;
+    border: 0 solid #3e4549;
+}
+.searchcardconent{
+	display: contents;
+}
+.cardarea{
+	margin: 1rem;
+	transition-duration: .2s;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	cursor: pointer;
+	height: auto;
+}
+.cardimgarea{
+	padding: 0.5rem;
+}
+.cardimgstyle{
+	height: 20rem;
+	width: 100%;
+	--tw-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+    border-radius: 0.5rem;
+    position: relative;
+    box-sizing: border-box;
+    border: 0 solid #3e4549;
+	cursor: pointer;
+}
+.cardspanimg{
+	box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    width: initial;
+    height: initial;
+    background: none;
+    opacity: 1;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    inset: 0px;
+	cursor: pointer;
+}
+.cardspanimg img{
+	position: absolute;
+    inset: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: none;
+    margin: auto;
+    display: block;
+    width: 0px;
+    height: 0px;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+    vertical-align: middle;
+}
+.cardtextarea{
+	padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+.cardtexteng{
+	font-size: 1.5rem;
+	font-weight: 500;
+	font-family: Montserrat,Noto Sans KR,sans-serif;
+	white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cardtextkr{
+	font-size: .875rem;
+	--tw-text-opacity: 1;
+    color: rgb(62 69 73/var(--tw-text-opacity));
+    font-weight: 100;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.5rem;
+}
+/*검색 리스트 영역 css*/
+/* 모달 css */
+  /* modalcss*/
+.totalmodaldiv{
+  z-index: 9999999992 !important;
+  display: none;
+  top: 0;
+  position: fixed !important;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.mainmodaldiv{
+position: absolute;
+width: 1400px;
+height: 458.90px;
+background-color: #fff;
+transform: translate(-50%, -50%);
+top: 50%;
+left: 50%;
+z-index: 9999;
+color: #666;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+box-sizing: border-box;
+transition: box-shadow 0.1s ease-in-out;
+ display: none; 
+}
+.mainmodaldivflex{
+  display: flex;
+}
+.mainmodalspan{
+z-index: 1;
+position: absolute;
+right: 0;
+top: 0;
+padding: 20px;
+cursor: pointer;
+}
+.mainmodalspan svg{
+width: 20px;
+height: 20px;
+z-index: 1;
+font-size: 20px;
+font-weight: 900;
+color: #999;
+cursor: pointer;
+}
+.mainmodalfleximages{
+width: 456.5px;
+height: 458.90px;
+}
+.mainmodalimage{
+height: 458.90px;
+box-sizing: border-box;
+width: 456.5px;
+object-fit: cover;
+vertical-align: middle;
+}
+.mainmodalcontainer{
+padding-left: 15px;
+width: 100%;
+padding: 70px;
+}
+.mainmodaltextarea{
+width: 100%;
+height: 100%;
+}
+.mainmodaltitle{
+font-family: 'Montserrat';
+font-size: 2rem;
+font-weight: 900;
+margin-bottom: 0;
+color: #333;
+margin: 0 ;
+}
+.mainmodaltitle2 span{
+  font-family: 'Montserrat';
+  font-size: 1.2rem;
+  color: #000
+}
+.mainmodaldetail{
+color: #999;
+margin: 20px 0 20px 0;
+font-size: 15px;
+font-weight: 500;
+}
+.mainmodaldtailiconarea{
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center !important;
+  padding: 0;
+  list-style: none;
+}
+.mainmodaliconarea{
+width: 197px;
+height: 72px;
+}
+.mainmodaliconarea svg{
+width: 32px;
+margin: 8px;
+}
+.mainmodalbtn{
+width: 144.4px;
+height: 53px;
+background-color: #b31312;
+color: #fff;
+border: none;
+cursor: pointer;
+}
+
+
+/* modalcss */
+/* 모달 css */	
