@@ -101,3 +101,15 @@ upload.addEventListener('click', () => realUpload.click());
 realUpload.addEventListener('change', getImageFiles);
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  const registCancelBtn = document.getElementById("registOkBtn");
+
+  registOkBtn.addEventListener("click", function() {
+	  
+    const confirmation = confirm("등록하시겠습니까??");
+    if (confirmation) {
+		
+    }
+  });
+});
+

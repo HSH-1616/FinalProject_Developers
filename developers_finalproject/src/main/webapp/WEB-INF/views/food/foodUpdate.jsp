@@ -5,9 +5,6 @@
 
 <link rel="stylesheet" href="${path }/css/food/foodUpdate.css" />
 
-
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
 <head>
 
    <link
@@ -33,9 +30,11 @@
     
 </head>
 
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 <section>
 	<div class="food_update_theme">
-    <p>맛집 추가하기</p>
+    <p>맛집 추천하기</p>
   </div>
     <div class="food_update">
         <table class="table">
@@ -102,15 +101,13 @@
     <div class="registBtnCon">
       <div class="registBtn">
         <button id="registOkBtn">등록하기</button>
-        <button id="registCancelBtn">취소</button>
       </div>
     </div>
     <!-- /맛집 등록하는 버튼 -->
 
     <div class="bt_list">
-        <a href="" class="on">목록</a>
+        <button id="food_list" onclick="location.href='${path }/food/foodBackList.do'">목록</button>
     </div>
 </section>
-
 <script src="${path }/js/food/foodUpdate.js"/>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
