@@ -9,16 +9,24 @@
 </jsp:include>
 <section>
 
-		${fn:length(contentId)}
+		<h2>총 ${fn:length(foods)}개의 음식점</h2>
 		<table>
 		<tbody>
-			<c:forEach var="id" items="${contentId}" varStatus="vs">
+			<c:forEach var="f" items="${foods}" varStatus="vs">
 				<form action="/foodInfoApi" >
+					<input type="hidden" name="foods" value="${foods}">
+					<%-- <div th:value="${foods}"></div> --%>
 					<tr>
 						<td>
-							<c:set var="foodId" value="${id}"/>				
-							<input type="text" name="contentId" value="${foodId}">
+							<c:if test="${f.foodPhoto.FPMain == 1}">
+								<img alt="대표이미지" src="${f.foodPhoto.FPName}" style="width: 300px;height: 300px;"><br>							
+							</c:if>
+							<c:if test="${f.foodPhoto.FPMain != 1}"></c:if>
+							<input type="text" name="foodNo" value="${f.foodNo}"><br>
+							<input type="text" name="foodName" value="${f.foodName}"><br>
+							<input type="text" name="foodAddress" value="${f.foodAddress}">
 							<button>상세정보</button>
+							<br><br>
 						</td>
 					</tr>
 				</form>
