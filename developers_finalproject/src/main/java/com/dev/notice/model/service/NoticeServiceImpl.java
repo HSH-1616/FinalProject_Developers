@@ -38,9 +38,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int deleteNotice(String no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNotice(int no) {
+		return dao.deleteNotice(session, no);
 	}
 	@Override
 	public String saveFile(MultipartFile file, HttpSession hsession) {
@@ -53,7 +52,7 @@ public class NoticeServiceImpl implements NoticeService {
 		String uuid=UUID.randomUUID().toString();
 		String extension=oriName.substring(oriName.lastIndexOf("."));
 		String fileName=uuid+extension;
-		NoticeFile nfile=NoticeFile.builder().oriName(oriName).fileName(fileName).build();
+		NoticeFile nfile=NoticeFile.builder().oriName(oriName).fileName(fileName).filePath(path).build();
 		//파일 저장경로
 		String savePath=path+fileName;
 		try {
@@ -64,16 +63,19 @@ public class NoticeServiceImpl implements NoticeService {
 		String[] split = path.split("webapp");
 		path = split[1]; // realPath에서 프로젝트 경로만 남김
 		
-//		int result=dao.noticeSaveFile(session,nfile);
-//		if(result>0) {
-//			return savePath;
-//		}
-		return path+fileName;
+		dao.noticeSaveFile(session,nfile);
+		
+		return fileName;
 	}
 	@Override
 	public Notice noticeView(int no) {
 		
 		return dao.noticeView(session, no);
+	}
+	@Override
+	public int deleteNoticeFile(String fileName) {
+		
+		return dao.deleteNoticeFile(session, fileName);
 	}
 
 	

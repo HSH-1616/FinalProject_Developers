@@ -11,6 +11,7 @@
       href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
       type="text/css"
     />
+    <script>document.execCommand('defaultParagraphSeparator', false, 'p');</script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 <section>
    
@@ -118,7 +119,7 @@
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
   <script>
-		let imgPath;
+		let fileName;
         Dropzone.autoDiscover = false;
         var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
         dropzonePreviewNode.id = "";
@@ -145,27 +146,92 @@
                     myDropzone.processQueue();
                 });
                 this.on('success', function (data) {
-                	imgPath=data.xhr.response;
-         
-                	let uimg=$("<img>",{
+                	fileName=data.xhr.response;
+         			
+                	
+                	var str = "";
+                   
+                    str += "<div>";
+                    str += "<img src='/upload/notice/"+fileName+"' style='width:400px'; height:400px' readonly>";   
+                    str += "<button type='button' class='removeBtn' data-name='"+fileName+"'>Remove</button>";
+                    str += "</div>";
+                    str += "<br><br>";
+                     
+                    $("#contentArea").append(str);
+                	
+                	
+                	
+                	/* let uimg=$("<img>",{
                 		src:imgPath,
                 		
                 	}).css({
                 		width:'400px',
                 		height:'400px'
                 	});
-           			
+           			const div=$("<div>",{width:'450px'});
                 	const br=$("<br>");
+                	const $btn=$("<button>",{
+                		class:"removeBtn",
+                		name:imgPath,
+                		value:'remove'
+                	});
+                	
+                	div.append(uimg);
+                	div.append($btn);
                 	$("#contentArea").append(br);
-                	$("#contentArea").append(uimg);
+                	$("#contentArea").append(div); */
+                	
                  });
             },
         });
         
         
         const noticeWrite=()=>{
-   
+   			$(".removeBtn").css("display","none");
         	$("textarea[name=noticeContent]").val($("#contentArea").html());
+        	
         	$(".notice-form").submit();
         }
+        
+        
+        
+        
+        $("#contentArea").on("click",".removeBtn",function(e){
+        	let target=$(this);
+        	const fileName=target.data("name");
+        	const targetDiv=e.target.closest("div");
+        
+        	
+        	$.ajax({
+        		url: "/ncCommon/removeFile.do",
+        		data: {fileName:fileName},
+        		type:"post",
+        		success:(data)=>{
+        			if(data=="true"){
+        				targetDiv.remove();	
+        			}
+        			else{
+        				alert("삭제실패");
+        			}
+        			
+        		}
+        	})
+        });
+        
+        
+        
+        
+        
+        
   </script>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

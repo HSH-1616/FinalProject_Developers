@@ -1,5 +1,6 @@
 package com.dev.nc.common;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -28,13 +29,35 @@ public class FileController {
 	@PostMapping("/noticeUploadFile.do")
 	@ResponseBody
 	public String noticeUploadFile(MultipartHttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
-		  String path=null;
+		  String fileName=null;
 		  Map<String, MultipartFile> fileMap = request.getFileMap();
 
           for (MultipartFile mf : fileMap.values()) {
-        	 path=service.saveFile(mf, session);
+        	 fileName=service.saveFile(mf, session);
           }
-        System.out.println(path);
-		return path;
+        
+		return fileName;
+	}
+	
+	@PostMapping("/removeFile.do")
+	@ResponseBody
+	public String removeFile(String fileName,HttpSession session) {
+		String path=session.getServletContext().getRealPath("/upload/notice/");
+		File file=new File(path+fileName);
+		if(file.exists()) {
+			file.delete();
+			service.deleteNoticeFile(fileName);
+			return "true";
+		}
+		return "false";
 	}
 }
+
+
+
+
+
+
+
+
+

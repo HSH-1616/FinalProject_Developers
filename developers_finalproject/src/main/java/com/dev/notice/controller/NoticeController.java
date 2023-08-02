@@ -66,6 +66,14 @@ public class NoticeController {
 		m.addAttribute("notice",result);
 		return "/notice/noticeView";
 	}
+	
+//	@GetMapping("/deleteNotice.do")
+//	public String deleteNotice(int no,String fileName, Model m) {
+//		service.deleteNoticeFile(fileName);
+//		int result=service.deleteNotice(no);
+//		
+//		return "/common/msg";
+//	}
 
 	
 
