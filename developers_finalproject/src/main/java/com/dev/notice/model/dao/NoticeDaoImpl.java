@@ -1,6 +1,7 @@
 package com.dev.notice.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -43,6 +44,21 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public int deleteNoticeFile(SqlSession session, String fileName) {
 		return session.delete("notice.deleteNoticeFile",fileName);
+	}
+
+	@Override
+	public int updateNotice(SqlSession session, Notice n) {
+		return session.update("notice.updateNotice",n);
+	}
+
+	@Override
+	public int noticeViewCountUp(SqlSession session, int no) {
+		return session.update("notice.noticeViewCountUp",no);
+	}
+
+	@Override
+	public List<Notice> searchNotice(SqlSession session, Map<String, Object> params) {
+		return session.selectList("notice.noticeSearch",params);
 	}
 
 }

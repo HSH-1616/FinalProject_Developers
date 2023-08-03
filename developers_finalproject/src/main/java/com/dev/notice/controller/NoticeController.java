@@ -2,10 +2,12 @@ package com.dev.notice.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -61,18 +63,14 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/noticeView.do")
-	public String noticeView(int no,Model m) {
-		Notice result=service.noticeView(no);
+	public String noticeView(int no,Model m,HttpServletRequest req, HttpServletResponse res) {
+		Notice result=service.noticeView(no,req,res);
 		m.addAttribute("notice",result);
 		return "/notice/noticeView";
 	}
 	
 	@GetMapping("/deleteNotice.do")
-	public String deleteNotice(int no,String fileName, Model m) {
-		System.out.println(fileName);
-		if(fileName!=null) {
-			service.deleteNoticeFile(fileName);
-		}
+	public String deleteNotice(int no, Model m) {
 		
 		int result=service.deleteNotice(no);
 		
@@ -87,11 +85,43 @@ public class NoticeController {
 		return "/common/msg";
 	}
 
-	@GetMapping("/updateNotice.do")
-	public String updateNotice(int no) {
-		
-		return "/";
+	@GetMapping("/updateNoticePage.do")
+	public String updateNoticePage(int no,Model m,HttpServletRequest req, HttpServletResponse res) {
+		Notice result=service.noticeView(no,req,res);
+		m.addAttribute("notice",result);
+		return "/notice/noticeUpdate";
 	}
 	
+	@PostMapping("/updateNotice.do")
+	public String updateNotice(Model m,Notice n,int no) {
+		n.setNoticeNo(no);
+	
+		int result=service.updateNotice(n);
+		if(result>0) {
+			m.addAttribute("msg","수정성공");
+			m.addAttribute("loc","/notice/noticeView.do?no="+no);
+		}else {
+			m.addAttribute("msg","수정실패");
+			m.addAttribute("loc","/notice/noticeView.do?no="+no);
+		}
+		return "/common/msg";
+	}
+	
+	@GetMapping("/searchNotice.do")
+	public String searchNotice(@RequestParam("type") String type, @RequestParam("keyword") String keyword, Model m) {
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("type", type);
+		params.put("keyword", keyword);
+		List<Notice> noticeList= service.searchNotice(params);
+		m.addAttribute("noticeList",noticeList);
+		return "/notice/noticeList";
+	}
 
 }
+
+
+
+
+
+
+

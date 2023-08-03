@@ -1,6 +1,7 @@
 package com.dev.notice.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,4 +16,7 @@ public interface NoticeDao {
 	int deleteNoticeFile(SqlSession session, String fileName);
 	int noticeSaveFile(SqlSession session,NoticeFile file);
 	Notice noticeView(SqlSession session,int no);
+	int updateNotice(SqlSession session,Notice n);
+	int noticeViewCountUp(SqlSession session, int no);
+	List<Notice> searchNotice(SqlSession session, Map<String, Object> params);
 }
