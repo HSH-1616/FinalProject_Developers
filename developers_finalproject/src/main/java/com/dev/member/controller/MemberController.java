@@ -32,13 +32,38 @@ import com.google.gson.JsonParser;
 @RequestMapping("/member")
 public class MemberController {
 
-	private String CLIENT_ID = "TR_SQ2GAJzrrTPobWiSh"; // 애플리케이션 클라이언트 아이디값";
-	private String CLI_SECRET = "KzSC54sFgk"; // 애플리케이션 클라이언트 시크릿값";
+	private String CLIENT_ID = "TR_SQ2GAJzrrTPobWiSh"; //네이버 애플리케이션 클라이언트 아이디값;
+	private String CLI_SECRET = "KzSC54sFgk"; //네이버 애플리케이션 클라이언트 시크릿값;
+	private String clientId="839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com"; //구글 애플리케이션 클라이턴트 아이디값;
+	private String clientPwd="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";
 	private MemberService service;
 
 	public MemberController(MemberService service) {
 		this.service = service;
 	}
+//구글 로그인 처리
+	@GetMapping("/google/callback")
+	public String googleCallback(@RequestParam(value = "code") String code,Model model)
+			throws Exception  {
+		// String code = request.getParameter("code");
+		System.out.println(code);
+		// String state = request.getParameter("state");
+		String redirectURI = URLEncoder.encode("http://localhost:8888/member/google/callback", "UTF-8");
+		String apiURL;
+		apiURL = "https://oauth2.googleapis.com/token";
+		apiURL += "client_id=" + CLIENT_ID;
+		apiURL += "&client_secret=" + CLI_SECRET;
+		apiURL += "&redirect_uri=" + redirectURI;
+		apiURL += "&code=" + code;
+//		apiURL += "&state=" + state;
+		System.out.println("apiURL=" + apiURL);
+		String res = requestToServer(apiURL);
+		return "redirect:/";
+	}
+	
+	
+	
+//카카오 로그인 처리
 	@GetMapping("/KakaoLoginCheck")
 	@ResponseBody
 	public Member KakaoLoginCheck(@RequestParam Map param) {
@@ -68,7 +93,7 @@ public class MemberController {
 	
 //네이버로그인처리
 	@RequestMapping("/naver/callback")
-	public String naverCallback1(String code, String state, Model model) throws IOException, ParseException {
+	public String naverCallback(String code, String state, Model model) throws IOException, ParseException {
 		// String code = request.getParameter("code");
 		System.out.println(code);
 		// String state = request.getParameter("state");

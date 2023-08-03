@@ -88,6 +88,9 @@ const naverlogin=()=>{
 	location.assign("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="+CLIENT_ID+"&redirect_uri="+redirectURI+"&state="+state);
 	
 }
+const googlelogin=()=>{
+	location.assign("https://accounts.google.com/o/oauth2/v2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri=http://localhost:8888/member/google/callback&response_type=code&scope=email%20profile%20openid&access_type=offline")
+}
 /*카카오 로그인 서비스  */
   Kakao.init("c0e169307572ef60ba8671f2af4eaff4");
 	const kakaologin=()=>{
@@ -130,7 +133,7 @@ const naverlogin=()=>{
 				});
 		  }
   /*로그아웃 로직으로 구현  */
-if($("#kakaologout").length==1){
+/*if($("#kakaologout").length==1){
 const kakaologout=$("#kakaologout");  
 kakaologout.click(e=>{
 	Kakao.API.request({
@@ -146,5 +149,5 @@ kakaologout.click(e=>{
     	},
 	});
 })
-}
+}*/
 

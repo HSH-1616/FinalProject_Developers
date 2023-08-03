@@ -60,14 +60,8 @@
 						href="javascript:void(0)" id="btn-modal">Login</a></li>
 				</c:if>
 				<c:if test="${not empty loginMember }">
-					<c:if test="${loginMember.memberCategory ne'K'}">
 					<li class="nav-item"><a class="nav-link active" href="${path }/member/logout">LogOut</a>
 					</li>
-					</c:if>
-					<c:if test="${loginMember.memberCategory eq 'K'}">
-					<li class="nav-item"><a class="nav-link active" href="javascript:void(0)" id="kakaologout">LogOut</a>
-					</li>
-					</c:if>
 				</c:if>
 					<li class="nav-item"><a class="nav-link" href="">MyPage</a></li>
 				</ul>
@@ -115,7 +109,6 @@
 						<!-- google button -->
 						<img class="socialbtn" src="${path }/images/login/googlebtn.png"
 							alt="어딧니?" onclick="googlelogin();">
-						<button onclick="kakaologout();">카카오 연결끊기</button>
 					</div>
 				</div>
 			</div>
