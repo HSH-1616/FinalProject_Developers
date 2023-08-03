@@ -18,5 +18,6 @@ public class TestService {
 		int result=dao.insertTest(session,test);
 		return result;
 	}
+
 	
 }

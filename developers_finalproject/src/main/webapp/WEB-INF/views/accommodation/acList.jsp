@@ -118,5 +118,9 @@
 		</c:choose>
 	</div>
 </div>
+<<script type="text/javascript">
+	var checkInOutDay = []
+</script>
+<script src="${path }/js/accommodation/acSearchBar.js"></script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -47,7 +47,7 @@
 .list-area{
 	display: block;
 	margin-left: 10%;
-	width: 1300px;
+	width: 73%;
 }
 
 .card-box-write{
@@ -252,11 +252,11 @@ cursor: pointer;
 }
 }
 
-.nolist-table{
+/*.nolist-table{
     margin-left: 5%;
     width: 100%;
 }
-
+*/
 .carousel-item img{
     top: 0;
     left: 0;
