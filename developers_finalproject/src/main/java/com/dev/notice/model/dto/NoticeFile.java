@@ -15,5 +15,5 @@ public class NoticeFile {
 	private String fileName;
 	private String oriName;
 	private String filePath;
-	private int NoticeNo;
+	
 }

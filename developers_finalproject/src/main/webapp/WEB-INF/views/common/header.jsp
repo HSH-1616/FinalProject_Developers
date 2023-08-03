@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<script>const path=""</script>
+<script>
+	const path = ""
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link
@@ -95,10 +97,11 @@
 			<div class="content">
 				<div class="container">
 					<!-- Heading -->
-					<h1>DEVELOPERS</h1>
-					<div class="separator">
-						<p>소셜 로그인</p>
+					<!-- <h1>DEVELOPERS</h1> -->
+					<div>
+						<img alt="" src="${path}/images/common/logo.png">
 					</div>
+<<<<<<< HEAD
 					<div class="m-btn-container">
 						<!-- 카카오 button -->
 						<img class="socialbtn" src="${path }/images/login/kakaobtn.png"
@@ -109,9 +112,26 @@
 						<!-- google button -->
 						<img class="socialbtn" src="${path }/images/login/googlebtn.png"
 							alt="어딧니?" onclick="googlelogin();">
+=======
+					<p>소셜 로그인</p>
+				</div>
+				<div class="m-btn-container">
+					<!-- 카카오 button -->
+					<img class="socialbtn" src="${path }/images/login/kakaobtn.png"
+						alt="어딧니?" onclick="kakaologin();">
+					<!-- 네이버 button -->
+					<img class="socialbtn" src="${path }/images/login/naverbtn.png"
+						alt="어딧니?" onclick="naverlogin();">
+					<!-- google button -->
+					<img class="socialbtn" src="${path }/images/login/googlebtn.png"
+						alt="어딧니?" onclick="googlelogin();">
+					<div>
+						<button onclick="kakaologout();">카카오 연결끊기</button>
+>>>>>>> branch 'main' of https://github.com/HSH-1616/FinalProject_Developers.git
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<script src="${path }/js/login/login.js"></script>

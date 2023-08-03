@@ -67,14 +67,31 @@ public class NoticeController {
 		return "/notice/noticeView";
 	}
 	
-//	@GetMapping("/deleteNotice.do")
-//	public String deleteNotice(int no,String fileName, Model m) {
-//		service.deleteNoticeFile(fileName);
-//		int result=service.deleteNotice(no);
-//		
-//		return "/common/msg";
-//	}
+	@GetMapping("/deleteNotice.do")
+	public String deleteNotice(int no,String fileName, Model m) {
+		System.out.println(fileName);
+		if(fileName!=null) {
+			service.deleteNoticeFile(fileName);
+		}
+		
+		int result=service.deleteNotice(no);
+		
+		if(result>0) {
+			m.addAttribute("msg","삭제성공");
+			m.addAttribute("loc","/notice/noticeList.do");
+		}else {
+			m.addAttribute("msg","삭제실패");
+			m.addAttribute("loc","/notice/noticeView.do?no="+no);
+		}
+		
+		return "/common/msg";
+	}
 
+	@GetMapping("/updateNotice.do")
+	public String updateNotice(int no) {
+		
+		return "/";
+	}
 	
 
 }
