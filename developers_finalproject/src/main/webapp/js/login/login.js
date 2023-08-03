@@ -1,3 +1,8 @@
+//const path="/member";
+const CLIENT_ID="TR_SQ2GAJzrrTPobWiSh";
+const redirectURI="http://localhost:8888/member/naver/callback";
+const state="1";
+
 $(document).ready(function(){
     let signup = $(".links").find("li").find("#signup") ; 
     let signin = $(".links").find("li").find("#signin") ;
@@ -59,9 +64,10 @@ function modalOff() {
     modal.style.display = "none"
     document.body.style.overflow="unset";
 }
-const btnModal = document.getElementById("btn-modal")
-btnModal.addEventListener("click", e => {
-    modalOn()
+
+const btnModal=$("#btn-modal");
+btnModal.click(e=>{
+	modalOn();
 })
 const closeBtn = modal.querySelector(".close-area")
 closeBtn.addEventListener("click", e => {
@@ -78,63 +84,73 @@ window.addEventListener("keyup", e => {
         modalOff()
     }
 })
-
-/*카카오 로그인 서비스  */
+//네이버 로그인
 const naverlogin=()=>{
-	location.assign("${path}/login/naverLogin");
+	location.assign("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="+CLIENT_ID+"&redirect_uri="+redirectURI+"&state="+state);
+	
+}
+//구글 로그인
+const googlelogin=()=>{
+	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri=http://localhost:8888/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
 }
 
-const kakaologin=()=>{
+/*카카오 로그인 서비스  */
   Kakao.init("c0e169307572ef60ba8671f2af4eaff4");
-  console.log(Kakao.isInitialized()); 
-	let email,nickname,image;
-		Kakao.Auth.login({
-			scope:'profile_nickname,account_email,profile_image',
-			success:function(authObj){
-				console.log(authObj);
-				Kakao.API.request({
-					url:'/v2/user/me',
-					success:function(res){
-						const kakao_account=res.kakao_account;
-						console.log(kakao_account);
-						email=kakao_account.email;
-						nickname=kakao_account.profile.nickname;
-						image=kakao_account.profile_image;
-						console.log(email,nickname,image);
-							$.ajax({
-								url:'${path}/member/KakaoLoginCheck.do',
-								data:{memberEmail:email,memberNickname:nickname,memberImage:image},
-								dataType:"text",
-								success: function(data){
-									console.log(data, typeof data);
-										if(data=='null'){
-									        location.assign("${path}/member/Kakaoenroll.do?memberEmail="+email+"&memberNickname="+nickname+"&memberImage="+image);
-										}else{
-											location.assign("${path}/member/KakaoLogin.do?memberEmail="+email);
-										}
-										},
-								error:(r,m,e)=>{
-											console.log(r);
-											console.log(m);
-										}
-							});
+	const kakaologin=()=>{
+		  console.log(Kakao.isInitialized()); 
+			let email,nickname,image;
+				Kakao.Auth.login({
+					scope:'profile_nickname,account_email,profile_image',
+					success:function(authObj){
+						console.log(authObj);
+						Kakao.API.request({
+							url:'/v2/user/me',
+							success:function(res){
+								const kakao_account=res.kakao_account;
+								console.log(kakao_account);
+								email=kakao_account.email;
+								nickname=kakao_account.profile.nickname;
+								image=kakao_account.profile.profile_image_url;
+								console.log(email,nickname,image);
+									$.ajax({
+										type:"get",
+										url:path+"/member/KakaoLoginCheck",
+										data:{"memberEmail":email,"memberNickname":nickname,"memberImage":image},
+										dataType:"text",
+										success: data=>{
+											console.log(data, typeof data);
+												if(data==''){
+											        location.assign(path+"/member/Kakaoenroll?memberEmail="+email+"&memberNickname="+nickname+"&memberImage="+image);
+												}else{
+													location.assign(path+"/member/KakaoLogin?memberEmail="+email);
+												}
+												},
+										error:(r,m,e)=>{
+													console.log(r);
+													console.log(m);
+												}
+									});
+							}
+						});
 					}
 				});
-			}
-		});
-  }
+		  }
   /*로그아웃 로직으로 구현  */
-  function kakaologout() {
+/*if($("#kakaologout").length==1){
+const kakaologout=$("#kakaologout");  
+kakaologout.click(e=>{
 	Kakao.API.request({
     	url: '/v1/user/unlink',
     	success: function(response) {
     		console.log(response);
     		//callback(); //연결끊기(탈퇴)성공시 서버에서 처리할 함수
-    		//window.location.href="<%=request.getContextPath()%>/views/member/memberLogin.jsp"
+    		location.assign(path+"/member/logout");
     	},
     	fail: function(error) {
     		console.log('탈퇴 미완료')
     		console.log(error);
     	},
 	});
-};
+})
+}*/
+

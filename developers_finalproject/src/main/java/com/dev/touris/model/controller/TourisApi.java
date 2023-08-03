@@ -1,4 +1,5 @@
 package com.dev.touris.model.controller;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,11 +8,19 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
 public class TourisApi {
 	public static void main(String[] args) throws IOException {
 //		12337
@@ -19,7 +28,7 @@ public class TourisApi {
 //		경상북도, 경상남도, 전라북도, 전라남도, 제주도,
 //		 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 
 //		먼저 콘텐트 ID api의 pk값을 가져오기 위한 처음 요청보낼 api주소
-		int[] areaCode = { 1, 2 };
+		int[] areaCode = { 1 };
 		for (int i : areaCode) {
 
 			StringBuilder result = new StringBuilder();
@@ -54,9 +63,9 @@ public class TourisApi {
 
 //		여기서 부터 파싱 코드
 //		파싱 객체 생성 
-			JsonParser paraser = new JsonParser();
+//			JsonParser paraser = new JsonParser();
 //		파싱할 객체 생성
-			JsonObject obj = paraser.parse(result.toString()).getAsJsonObject();
+			JsonObject obj = JsonParser.parseString(result.toString()).getAsJsonObject();
 			JsonArray arr = obj.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
 					.getAsJsonObject().get("item").getAsJsonArray();
 			for (JsonElement jsonElement : arr) {
@@ -102,9 +111,9 @@ public class TourisApi {
 				}
 				urlConnection2.disconnect();
 //			System.out.println(commoncontent.toString());
-				JsonParser paraser2 = new JsonParser();
+
 //			파싱할 객체 생성
-				JsonObject obj2 = paraser.parse(commoncontent.toString()).getAsJsonObject();
+				JsonObject obj2 = JsonParser.parseString(commoncontent.toString()).getAsJsonObject();
 				JsonArray arr2 = obj2.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
 						.getAsJsonObject().get("item").getAsJsonArray();
 				for (JsonElement jsonElement2 : arr2) {
@@ -154,9 +163,8 @@ public class TourisApi {
 					}
 					urlConnection3.disconnect();
 //				 	여기서부터 파싱
-					JsonParser paraser3 = new JsonParser();
 //					파싱할 객체 생성
-					JsonObject obj3 = paraser.parse(details.toString()).getAsJsonObject();
+					JsonObject obj3 = JsonParser.parseString(details.toString()).getAsJsonObject();
 					JsonArray arr3 = obj3.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
 							.getAsJsonObject().get("item").getAsJsonArray();
 					for (JsonElement jsonElement3 : arr3) {
