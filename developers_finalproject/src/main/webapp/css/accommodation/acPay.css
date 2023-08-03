@@ -94,37 +94,37 @@
 	align-items: center;
 }
 
-.pcBtn:nth-child(1){
+.pcBtn:nth-of-type(1){
 	border: 3px solid #b31312;
 	font-size: 1.2rem;
 }
 
-.pcBtn:nth-child(1)>ion-icon{
+.pcBtn>ion-icon{
 	color: #b31312;
 	font-size: 2rem;
 	margin-right: 10px;
 }
 
-.pcBtn:nth-child(1)>span{
+.pcBtn>span{
 	position: relative;
 	top: 1px;
 }
 
-.pcBtn:nth-child(2){
+.pcBtn:nth-of-type(2){
 	border: 3px solid #1EC800;
 }
 
-.pcBtn:nth-child(2) img{
+.pcBtn:nth-of-type(2) img{
 	width: 50%;
 	height: 50%;
 }
 
-.pcBtn:nth-child(3){
+.pcBtn:nth-of-type(3){
 	background-color: white;
 	border: 3px solid #F7E600;
 }
 
-.pcBtn:nth-child(3) img{
+.pcBtn:nth-of-type(3) img{
 	width: 50%;
 	height: 50%;
 }
