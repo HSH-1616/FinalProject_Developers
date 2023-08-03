@@ -1,13 +1,14 @@
 package com.dev.touris.model.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dev.touris.model.service.TourisService;
-import com.dev.touris.model.vo.TourisArea;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,8 +30,9 @@ public class TourisController {
 	}
 	
 	@RequestMapping("/tourismap")
-	public String tourislist(String areaId, Model model) {
+	public String tourislist(String areaId, Model model) throws Exception{
 		model.addAttribute("tourislist", service.selecttourislist(areaId));
+		model.addAttribute("titletouris", service.selecttourisarealist(areaId));
 		return "touris/tourismap";
 	}
 	

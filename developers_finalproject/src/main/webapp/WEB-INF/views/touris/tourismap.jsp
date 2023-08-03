@@ -9,15 +9,12 @@
 <meta charset="UTF-8">
 <title>관광경로만들기 해당페이지</title>
 <script>
-	<c:forEach var="t" items="${tourislist}" varStatus="first">
-		<c:if test="${first.index == 0}">
-			const latitude = '${t.tourisarea.areaLatitude}';
-			const Longitude = '${t.tourisarea.areaLongitude}';
-		</c:if>
-	</c:forEach>
+ 	const latitude = '${titletouris.areaLatitude}';
+	const Longitude = '${titletouris.areaLongitude}';
 </script>
 </head>
 <body>
+
 <jsp:include page="/WEB-INF/views/touris/tourisheader.jsp"/> 
 	<section>
       <div class="" id="sidebar-left">
@@ -27,12 +24,8 @@
         <div id="schedule-area">
           <div id="schedule-top">
             <div id="travelarea">
-            <c:forEach var="t" items="${tourislist}" varStatus="first">
-            	<c:if test="${first.index == 0}">
-              		<div id="traveltitle">${t.tourisarea.areaName}</div>
-              		<div>${t.tourisarea.areaEng }</div>
-              	</c:if>
-             </c:forEach>
+              		<div id="traveltitle">${titletouris.areaName}</div>
+              		<div>${titletouris.areaEng }</div>
               <div id="travels-chedule">3일</div>
             </div>
             <div id="travelplan">
@@ -157,7 +150,8 @@
               </div>
             </div>
             <div class="listtext">
-              <h7 class="listtitle-text">${t.tourisName }</h7><br>
+              <h7 class="listtitle-text">${t.tourisName }</h7>
+              <h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">${t.tourisAddress }</h7></h7>
             </div>
             <div class="listbtn">
               <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
@@ -374,11 +368,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
           </svg>
           </div>
-          <c:forEach var="t" items="${tourislist}" varStatus="first">
-            	<c:if test="${first.index == 0}">
-          <h7 class="bigsidebarcentertitle"><b><span>${t.tourisarea.areaName}</span> 
-          </c:if>
-          </c:forEach>
+          <h7 class="bigsidebarcentertitle"><b><span>${titletouris.areaName}</span> 
           " : " 
           <span class="schedulecount">0</span><span>일 여행</span></b></h7>
         </div>

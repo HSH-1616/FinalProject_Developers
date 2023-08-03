@@ -1,5 +1,7 @@
 package com.dev.touris.model.service;
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,10 @@ public class TourisServiceImpl implements TourisService {
 	@Override
 	public List<Touris> selecttourislist(String areaId) {
 		return dao.selecttourislist(session, areaId);
+	}
+	@Override
+	public TourisArea selecttourisarealist(String areaId) {
+		return dao.selecttourisarea(session, areaId);
 	}
 	
 	

@@ -33,9 +33,8 @@ $(document).ready(function () {
 //-------------------------------------------------------------------------- 첫번재 지도 api
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-       /* center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표*/
-       	center: new kakao.maps.LatLng(latitude, Longitude),
-        level: 8 // 지도의 확대 레벨
+       	center: new kakao.maps.LatLng(latitude, Longitude), // 지도의 중심좌표
+        level: 7 // 지도의 확대 레벨
     };
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -55,50 +54,122 @@ var mapTypeControl = new kakao.maps.MapTypeControl();
 map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
 
-
-// 마커가 표시될 위치입니다 
- var markerPosition  = new kakao.maps.LatLng(); 
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-// 마커가 드래그 가능하도록 설정합니다 
-marker.setDraggable(true); 
-
-// 지도에 클릭 이벤트를 등록합니다
-// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+// 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    // 클릭한 위치에 마커를 표시합니다 
+    addMarker(mouseEvent.latLng);             
+});
+
+// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+var markers = [];
+
+// 마커 하나를 지도위에 표시합니다 
+addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
+
+// 마커를 생성하고 지도위에 표시하는 함수입니다
+function addMarker(position) {
     
-  // 클릭한 위도, 경도 정보를 가져옵니다 
-  var latlng = mouseEvent.latLng; 
-  
-  // 마커 위치를 클릭한 위치로 옮깁니다
-  marker.setPosition(latlng);
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: position
+    });
 
-});
-// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-var iwContent = '<div style="padding:5px;">Hello World!</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+    
+    // 생성된 마커를 배열에 추가합니다
+    markers.push(marker);
+}
 
-// 인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({
-    content : iwContent
-});
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setMarkers(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }            
+}
 
-// 마커에 마우스오버 이벤트를 등록합니다
-kakao.maps.event.addListener(marker, 'mouseover', function() {
-  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-    infowindow.open(map, marker);
-});
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showMarkers() {
+    setMarkers(map)    
+}
 
-// 마커에 마우스아웃 이벤트를 등록합니다
-kakao.maps.event.addListener(marker, 'mouseout', function() {
-    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-    infowindow.close();
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);    
+}
+
+
+
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+var overlay;
+// 주소로 좌표를 검색합니다
+$(document).on('mouseover','.selectlist2', function() {
+	const listbox = $(this).find('.listbox');
+	const listboximg = listbox.find(".listboximg img").attr("src");
+	
+	const listtext =  $(this).find('.listtext');
+	const listtitletext = listtext.find(".listtitle-text").text();
+	const listtitleaddr = listtext.find('.listtitleaddr');
+    const textaddr = listtitleaddr.find('.listtitle-textaddr').text();
+geocoder.addressSearch(textaddr, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+		
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+       
+           var content = '<div class="wrap">' + 
+            '    <div class="info">' + 
+            '        <div class="title">' + 
+             			listtitletext+ 
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="body">' + 
+            '            <div class="img">' +
+            '                <img src="'+listboximg+'" width="73" height="70">' +
+            '           </div>' + 
+            '            <div class="desc">' + 
+            			'<div class="ellipsis">'+textaddr+'</div>' + 
+            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>'
+
+            // 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
+            overlay = new kakao.maps.CustomOverlay({
+                content: content,
+                map: map,
+                position: marker.getPosition()       
+            });
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
 });
+    
+});
+function closeOverlay() {
+    overlay.setMap(null);    
+}
+
+// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+
+
+
+
 //-------------------------------------------------------------------------- 여기까지 첫번재 지도 api
 
 //모달창 지도 api
