@@ -3,8 +3,10 @@ package com.dev.food.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +18,7 @@ import com.dev.food.model.service.FoodService;
 @RequestMapping("/food")
 public class FoodController {
 
+	@Autowired
 	private FoodService service;
 	
 	public FoodController(FoodService service) {
@@ -44,28 +47,24 @@ public class FoodController {
 		return "/food/foodUpdate";
 	}
 	
-	@RequestMapping("/FoodView.do")
+	@RequestMapping("/foodDetail.do")
 	public String selectFoodByNo(Model m, int no) {
-		m.addAttribute("board",service.selectFoodById(no));
-		return "board/boardView";
+		m.addAttribute("food",service.selectFoodById(no));
+		return "food/foodDetail";
 	}
 	
-	@RequestMapping("/foodBackList.do")
-	public String foodBackList(){
+	@GetMapping("/list")
+    public String getSortedFoodList(@RequestParam("sortFilter") String sortFilter, Model model,
+    		@RequestParam(value="cPage",defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="12") int numPerpage) {
+        List<Food> foods = service.getSortedFoods(sortFilter,cPage,numPerpage); 
+        model.addAttribute("foods", foods);
+        
+        int totalData=service.selectFoodCount();
 		
-		return "/food/foodList";
-	}
+        model.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "foodlistData"));
+		model.addAttribute("totalData", totalData);
+		model.addAttribute("foods", foods);
+        return "food/foodlistData"; 
+    }
 	
-	
-	
-	/*
-	 * @RequestMapping("/paging") public String
-	 * paging(@RequestParam(value="cPage",defaultValue="1") int cPage,
-	 * 
-	 * @RequestParam(value="numPerpage", defaultValue="5") int numPerpage) {
-	 * 
-	 * List<Food> foods=service.selectPage(cPage,numPerpage);
-	 * 
-	 * return ""; }
-	 */
 }

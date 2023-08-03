@@ -4,7 +4,6 @@ public class PageFactory {
 
 	public static String getPage(int cPage, int numPerpage, int totalData,String url) {
 		
-		//매개변수값을 이용해서 pageBar만들어주는 함수
 		StringBuffer pageBar=new StringBuffer();
 		
 		int totalPage=(int)(Math.ceil((double)totalData/numPerpage));
@@ -39,10 +38,6 @@ public class PageFactory {
 			}
 			pageNo++;
 		}
-//		String str="""
-//				
-//		""".formatted(,,,,,,,);
-		
 		
 		if(pageNo>totalPage){
 			pageBar.append("<li class='page-item disabled'>");
@@ -57,7 +52,6 @@ public class PageFactory {
 		}
 		pageBar.append("</ul>");
 		
-		//스트립트문추가
 		pageBar.append("<script>");
 		pageBar.append("function fn_paging(no){");
 		pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');");

@@ -15,4 +15,6 @@ public interface FoodService {
 	
 	Food selectFoodById(int no);
 
+	List<Food> getSortedFoods(String sortFilter,int cPage, int numPerpage);
+
 }

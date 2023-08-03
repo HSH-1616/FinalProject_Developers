@@ -18,4 +18,7 @@ public interface FoodDao {
 	int selectFoodCount(SqlSession session);
 	
 	Food selectFoodByNo(SqlSession session, int no);
+
+	List<Food> getSortedFoods(SqlSession session, String sortFilter, int cPage, int numPerpage);
+
 }

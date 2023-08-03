@@ -1,3 +1,11 @@
+.non-click {
+  color: gold;
+}
+
+.click {
+  color: orchid;
+}
+
 .food_address{
 	margin-left: 5px;
 }
@@ -83,7 +91,7 @@ a.on {
 	transform: translateX(-50%);
 	display: flex;
 	align-items: center;
-	margin-top: 10%;
+	margin-top:9%;
 }
 
 /* input_search_text */
@@ -502,4 +510,23 @@ button#food_add {
 	border-radius: 10px;
 	border: none;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+select#searchType {
+    /* font-size: 30px; */
+    border-radius: 15px;
+    box-sizing: border-box;
+    /* flex: 1; */
+    height: 40px;
+    background: #FFFFFF;
+    /* border: 1px solid #1C0808; */
+    /* border-radius: 20px 0 0 20px; */
+    padding: 0 10px;
+    font-family: 'Inter';
+    /* font-style: normal; */
+    /* font-weight: 300; */
+    font-size: 20px;
+    /* line-height: 24px; */
+    /* color: #828282; */
+    /* position: relative; */
+    /* z-index: -1; */
 }

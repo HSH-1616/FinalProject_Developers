@@ -49,7 +49,11 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectFoodByNo(session, no);
 	}
 
-
+	@Override
+	public List<Food> getSortedFoods(String sortFilter,int cPage,int numPerpage){
+		
+		return dao.getSortedFoods(session, sortFilter, cPage, numPerpage);
+	}
 	
 	
 	

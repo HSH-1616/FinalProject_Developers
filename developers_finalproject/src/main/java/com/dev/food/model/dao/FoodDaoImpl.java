@@ -14,7 +14,7 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public List<Food> selectPage(SqlSession session, int cPage, int numPerpage) {
-		// TODO Auto-generated method stub
+		// TODO Aduto-generated method stub
 		return null;
 	}
 
@@ -46,8 +46,11 @@ public class FoodDaoImpl implements FoodDao {
 		return session.selectOne("food.selectFoodByNo",no);
 	}
 
-	
-
-	
+	@Override
+	public List<Food> getSortedFoods(SqlSession session, String sortFilter, int cPage, int numPerpage){
+		
+		RowBounds rn=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("food.getSortedFoods",sortFilter,rn);
+	}
 	
 }
