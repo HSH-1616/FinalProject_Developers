@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
     <section>
         <div class="rap m-4">
@@ -26,28 +27,13 @@
             
         </div>
 			<div class="text-center"><button type="button" class="" onclick="location.href='/notice/noticeList.do'">목록</button> 
-			<button type="button" class="" onclick="location.href='/notice/updateNotice.do?no=${notice.noticeNo}'">수정하기</button>
-            <button type="button" class="" onclick="deleteNotice(); $('.removeBtn').trigger('click');">삭제하기</button>
+			<button type="button" class="" onclick="location.href='/notice/updateNoticePage.do?no=${notice.noticeNo}'">수정하기</button>
+            <button type="button" class="" onclick="deleteNotice(${notice.noticeNo}); $('.removeBtn').trigger('click');">삭제하기</button>
+      
             </div>
     </section>
+    <script src="${path }/js/notice/notice.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
-
-<script>
-	const deleteNotice=()=>{
-		const no="<c:out value='${notice.noticeNo}'/>";
-    	$(".removeBtn").click(function(e){
-    		let target=$(this);
-        	const fileName=target.data("name");
-        	
-        	location.href="/notice/deleteNotice.do?no="+no+"&fileName="+fileName;
-    	})
-    	location.href="/notice/deleteNotice.do?no="+no;
-    };	
-        	
-        				
-
-	
-</script>
 
 
 
