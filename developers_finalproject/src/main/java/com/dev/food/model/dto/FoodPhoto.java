@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FoodPhoto {
 
-	private int FPNo;
-	private String FPName;
-	private int FPMain;
+	private int fpNo;
+	private int foodNo;
+	private String fpName;
+	private int fpMain;
 }

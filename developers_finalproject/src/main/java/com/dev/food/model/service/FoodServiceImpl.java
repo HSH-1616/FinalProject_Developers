@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dev.food.model.dao.FoodDao;
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodPhoto;
 
 @Service
 public class FoodServiceImpl implements FoodService{
@@ -23,16 +25,22 @@ public class FoodServiceImpl implements FoodService{
 
 
 	@Override
-	public int insertFood(Food f) {
-		// TODO Auto-generated method stub
-		return 0;
+	@Transactional(rollbackFor = {Exception.class})
+	public void insertFood(Food f,FoodPhoto fp) throws Exception {
+		dao.insertFood(session, f);
+		dao.insertFoodPhoto(session, fp);
 	}
 
 
 	@Override
-	public List<Food> selectFoodAll(Map<String, Object> param) {
+	public List<Food> selectFoodAll(Map<String,Object> param) {
 		// TODO Auto-generated method stub
 		return dao.selectFoodAll(session, param);
+	}
+	
+	@Override
+	public List<Food> selectFoodAllTest() {
+		return dao.selectFoodAllTest(session);
 	}
 
 

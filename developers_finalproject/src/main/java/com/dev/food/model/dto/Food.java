@@ -21,6 +21,4 @@ public class Food {
 	private int allow;
 	private int foodReadCount;
 
-	private FoodPhoto FoodPhoto;
-
 }

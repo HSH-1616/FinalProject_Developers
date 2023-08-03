@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodPhoto;
 
 @Repository
 public class FoodDaoImpl implements FoodDao {
@@ -20,8 +21,12 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public int insertFood(SqlSession session, Food f) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("food.insertFood", f);
+	}
+	
+	@Override
+	public int insertFoodPhoto(SqlSession session, FoodPhoto fp) {
+		return session.insert("food.insertFoodPhoto", fp);
 	}
 
 	@Override
@@ -32,6 +37,11 @@ public class FoodDaoImpl implements FoodDao {
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		
 		return session.selectList("food.selectFoodAll",null,rb);
+	}
+	
+	@Override
+	public List<Food> selectFoodAllTest(SqlSession session) {
+		return session.selectList("food.selectFoodAllTest");
 	}
 
 	@Override
