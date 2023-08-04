@@ -1,5 +1,6 @@
 package com.dev.food.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
@@ -49,13 +51,13 @@ public class FoodController {
 	
 	@RequestMapping("/foodDetail.do")
 	public String selectFoodByNo(Model m, int no) {
-		m.addAttribute("food",service.selectFoodById(no));
+//		m.addAttribute("food",service.selectFoodById(no));
 		return "food/foodDetail";
 	}
 	
 	@GetMapping("/list")
     public String getSortedFoodList(@RequestParam("sortFilter") String sortFilter, Model model,
-    		@RequestParam(value="cPage",defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="12") int numPerpage) {
+    	@RequestParam(value="cPage",defaultValue="1") int cPage,@RequestParam(value="numPerpage",defaultValue="12") int numPerpage) {
         List<Food> foods = service.getSortedFoods(sortFilter,cPage,numPerpage); 
         model.addAttribute("foods", foods);
         
@@ -66,5 +68,6 @@ public class FoodController {
 		model.addAttribute("foods", foods);
         return "food/foodlistData"; 
     }
+	
 	
 }

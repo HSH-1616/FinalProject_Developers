@@ -21,6 +21,13 @@
 
 <script nomodule
 	src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	
+	
+	<!-- 페이지 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
 <link rel="stylesheet" href="css/header.css" />
 <link rel="stylesheet" href="css/foodList.css" />
@@ -53,11 +60,13 @@
 
 		<!-- 맛집 검색 -->
 		<div id="store_search">
-			<select id="searchType" name="searchType">
+			<form id="searchType" name="searchType" action="${path }/food/search.do">
+			<select name="searchOption">
 				<option value="total">전체</option>
 				<option value="foodName">상호명</option>
 				<option value="foodAddress">주소</option>
 			</select>
+			</form>
 			<input id="input_search_text" type="text" placeholder="Search...">
 			<div id="search_button">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -126,7 +135,9 @@
 
 	<!-- 페이지바 -->
 	<div class="page-bar">
-		<c:out value="${pageBar }" escapeXml="false" />
+		<nav aria-label="food-pageNav">
+			<c:out value="${pageBar }" escapeXml="false" />
+		</nav>
 	</div>
 	<!-- /페이지바 -->
 
