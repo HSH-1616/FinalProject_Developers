@@ -16,14 +16,14 @@
 <div class="title text-align"><h3 class="text-center">공지사항</h3></div>
         
 <div class="search-notice text-end mt-3">
-	<form action="/notice/searchNotice.do" class="search-form" >
+	<form  class="search-form" ><!-- action="/notice/searchNotice.do" -->
 	<select name="type">
 		<option value="titile">제목</option>
 		<option value="content">내용</option>
 		<option value="title_content">제목+내용</option>
 	</select>
 	<input type="text" name="keyword" placeholder="검색어를 입력해주세요">
-	<button type="submit" class="" >검색</button><!-- onclick="searchNotice(); -->
+	<button type="button" class="" onclick="searchNotice();">검색</button>
 	</form>
 </div>  
 <div class="list-area mt-3">
@@ -78,7 +78,7 @@
 
 	<div class="board-pasing">
 		<nav aria-label="notice-pageNav">
-			<ul class="pagination justify-content-center">
+			<!-- <ul class="pagination justify-content-center">
 			  <li class="page-item">
 				<a class="page-link" href="#" aria-label="Previous">
 				  <span aria-hidden="true">&laquo;</span>
@@ -92,7 +92,7 @@
 				  <span aria-hidden="true">&raquo;</span>
 				</a>
 			  </li>
-			</ul>
+			</ul> -->
 		  </nav>
 	</div>
 </div>

@@ -1,11 +1,10 @@
 package com.dev.notice.controller;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.dev.nc.common.PageFactory;
 import com.dev.notice.model.dto.Notice;
 import com.dev.notice.model.service.NoticeService;
 
@@ -38,10 +36,29 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/noticeList.do")
-	public String noticeList(Model m) {
-		List<Notice> notices= service.noticeList();
-		m.addAttribute("noticeList",notices);
+	public String notice() {
 		return "/notice/noticeList";
+	}
+	
+	
+	@GetMapping("/noticeListEnd.do")
+	@ResponseBody
+	public Map<String,Object> noticeList(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="5") int numPerpage) {
+		
+		
+		Map<String, Object> paging=new HashMap<String, Object>();
+		Map<String,Object> result=new HashMap<>();
+		paging.put("cPage", cPage);
+		paging.put("numPerpage", numPerpage);
+		int totalData=service.noticeCount();
+		
+		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "nList");
+		
+		List<Notice> notices= service.noticeList(paging);
+		result.put("noticeList", notices);
+		result.put("pageBar", pageBar);
+		
+		return result;
 	}
 	
 	@GetMapping("/noticeWrite.do")
@@ -108,13 +125,22 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/searchNotice.do")
-	public String searchNotice(@RequestParam("type") String type, @RequestParam("keyword") String keyword, Model m) {
+	@ResponseBody
+	public Map<String,Object> searchNotice(@RequestParam("type") String type, @RequestParam("keyword") String keyword,@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="5") int numPerpage ,Model m) {
 		Map<String, Object> params=new HashMap<String, Object>();
+		Map<String, Object> paging=new HashMap<String, Object>();
+		Map<String,Object> result=new HashMap<>();
 		params.put("type", type);
 		params.put("keyword", keyword);
-		List<Notice> noticeList= service.searchNotice(params);
-		m.addAttribute("noticeList",noticeList);
-		return "/notice/noticeList";
+		paging.put("cPage", cPage);
+		paging.put("numPerpage", numPerpage);
+		List<Notice> noticeList= service.searchNotice(params,paging);
+		int totalData=service.noticeCount();
+		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData,"searchNotice");
+		//m.addAttribute("noticeList",noticeList);
+		result.put("noticeList", noticeList);
+		result.put("pageBar", pageBar);
+		return result;
 	}
 
 }
