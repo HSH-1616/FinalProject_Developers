@@ -25,6 +25,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Montserrat:500,800" />
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,20 +58,14 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a>
 					</li>
-					<c:if test="${empty loginMember }">
-						<li class="nav-item"><a class="nav-link"
-							href="javascript:void(0)" id="btn-modal">Login</a></li>
-					</c:if>
-					<c:if test="${not empty loginMember }">
-						<c:if test="${loginMember.memberCategory ne'K'}">
-							<li class="nav-item"><a class="nav-link active"
-								href="${path }/member/logout">LogOut</a></li>
-						</c:if>
-						<c:if test="${loginMember.memberCategory eq 'K'}">
-							<li class="nav-item"><a class="nav-link active"
-								href="javascript:void(0)" id="kakaologout">LogOut</a></li>
-						</c:if>
-					</c:if>
+				<c:if test="${empty loginMember }">
+					<li class="nav-item"><a class="nav-link"
+						href="javascript:void(0)" id="btn-modal">Login</a></li>
+				</c:if>
+				<c:if test="${not empty loginMember }">
+					<li class="nav-item"><a class="nav-link active" href="${path }/member/logout">LogOut</a>
+					</li>
+				</c:if>
 					<li class="nav-item"><a class="nav-link" href="">MyPage</a></li>
 				</ul>
 			</div>
@@ -107,24 +102,53 @@
 					<div>
 						<img alt="" src="${path}/images/common/logo.png">
 					</div>
-					<p>소셜 로그인</p>
-				</div>
-				<div class="m-btn-container">
-					<!-- 카카오 button -->
-					<img class="socialbtn" src="${path }/images/login/kakaobtn.png"
-						alt="어딧니?" onclick="kakaologin();">
-					<!-- 네이버 button -->
-					<img class="socialbtn" src="${path }/images/login/naverbtn.png"
-						alt="어딧니?" onclick="naverlogin();">
-					<!-- google button -->
-					<img class="socialbtn" src="${path }/images/login/googlebtn.png"
-						alt="어딧니?" onclick="googlelogin();">
-					<div>
-						<button onclick="kakaologout();">카카오 연결끊기</button>
+					<div class="m-btn-container">
+						<!-- 카카오 button -->
+						<img class="socialbtn" src="${path }/images/login/kakaobtn.png"
+							alt="어딧니?" onclick="kakaologin();">
+						<!-- 네이버 button -->
+						<img class="socialbtn" src="${path }/images/login/naverbtn.png"
+							alt="어딧니?" onclick="naverlogin();">
+						<!-- google button -->
+						<img class="socialbtn" src="${path }/images/login/googlebtn.png"
+							alt="어딧니?" onclick="googlelogin();">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+	<script>
+/* 	function googlelogin(){
+		   google.accounts.id.initialize({
+	            client_id: "839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com",
+	            callback: handleCredentialResponse
+	          });
+		   google.accounts.id.prompt();
+	}
+	  function handleCredentialResponse(response) {
+		     // decodeJwtResponse() is a custom function defined by you
+		     // to decode the credential response.
+		     const responsePayload = decodeJwtResponse(response.credential);
+		     console.log("ID: " + responsePayload.sub);
+		     console.log('Full Name: ' + responsePayload.name);
+		     console.log('Given Name: ' + responsePayload.given_name);
+		     console.log('Family Name: ' + responsePayload.family_name);
+		     console.log("Image URL: " + responsePayload.picture);
+		     console.log("Email: " + responsePayload.email);
+		  }
+     function decodeJwtResponse(token) {
+			  var base64Url = token.split(".")[1];
+			  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+			  var jsonPayload = decodeURIComponent(
+			    atob(base64)
+			      .split("")
+			      .map(function (c) {
+			        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+			      })
+			      .join("")
+			  );
+			
+			  return JSON.parse(jsonPayload);
+			} */
+	</script>
 	<script src="${path }/js/login/login.js"></script>
