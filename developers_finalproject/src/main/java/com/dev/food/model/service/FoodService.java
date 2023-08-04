@@ -5,17 +5,33 @@ import java.util.Map;
 
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodPhoto;
+import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodService {
 
-	void insertFood(Food f,FoodPhoto fp) throws Exception;
+	void insertFood(FoodTemp food,FoodPhotoTemp fp) throws Exception;
+	
+	void updateFood(FoodTemp food) throws Exception;
+	
+	void insertFoodPhoto(FoodPhotoTemp fp) throws Exception;
+	
+	void mergeFood();
+	
+	void mergeFoodPhoto();
 	
 	List<Food> selectFoodAll (Map<String,Object> param);
 	
 	List<Food> selectFoodAllTest ();
 	
+	List<Food> selectFoodByFoodNo (int foodNo);
+	
 	int selectFoodCount();
 	
-	Food selectFoodById(int no);
+	Food selectFoodByNo(int no);
+	
+	int searchByFoodNo(int foodNo);
+	
+	boolean searchByBoolean();
 
 }

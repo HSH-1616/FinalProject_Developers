@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Food {
+public class FoodTemp {
 
 	private int foodNo;
 	private String foodName;
@@ -22,6 +22,5 @@ public class Food {
 	private String foodPhone;
 	private int allow;
 	private int foodReadCount;
-	private List<FoodPhoto> foodPhoto;
-
+	private List<FoodPhotoTemp> foodPhotoTemp;
 }

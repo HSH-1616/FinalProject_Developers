@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dev.food.model.dao.FoodDao;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodPhoto;
+import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodTemp;
 
 @Service
 public class FoodServiceImpl implements FoodService{
@@ -26,11 +28,32 @@ public class FoodServiceImpl implements FoodService{
 
 	@Override
 	@Transactional(rollbackFor = {Exception.class})
-	public void insertFood(Food f,FoodPhoto fp) throws Exception {
+	public void insertFood(FoodTemp f,FoodPhotoTemp fp) throws Exception {
 		dao.insertFood(session, f);
 		dao.insertFoodPhoto(session, fp);
 	}
+	
+	@Override
+	@Transactional(rollbackFor = {Exception.class})
+	public void updateFood(FoodTemp f) throws Exception {
+		dao.updateFood(session,f);
+	}
+	
+	@Override
+	@Transactional(rollbackFor = {Exception.class})
+	public void insertFoodPhoto(FoodPhotoTemp fp) throws Exception {
+		dao.insertFoodPhoto(session, fp);
+	}
 
+	@Override
+	public void mergeFood() {
+		dao.mergeFood(session);
+	}
+	@Override
+	public void mergeFoodPhoto() {
+		dao.mergeFoodPhoto(session);		
+	}
+	
 
 	@Override
 	public List<Food> selectFoodAll(Map<String,Object> param) {
@@ -42,6 +65,11 @@ public class FoodServiceImpl implements FoodService{
 	public List<Food> selectFoodAllTest() {
 		return dao.selectFoodAllTest(session);
 	}
+	
+	@Override
+	public List<Food> selectFoodByFoodNo(int foodNo) {
+		return dao.selectFoodByFoodNo(session,foodNo);
+	}
 
 
 	@Override
@@ -52,13 +80,19 @@ public class FoodServiceImpl implements FoodService{
 
 
 	@Override
-	public Food selectFoodById(int no) {
+	public Food selectFoodByNo(int no) {
 		// TODO Auto-generated method stub
 		return dao.selectFoodByNo(session, no);
 	}
 
-
+	@Override
+	public int searchByFoodNo(int foodNo) {
+		return dao.searchByFoodNo(session,foodNo);
+	}
 	
-	
+	@Override
+	public boolean searchByBoolean() {
+		return dao.searchByBoolean(session);
+	}
 	
 }

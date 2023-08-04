@@ -8,7 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
-import com.dev.food.model.dto.FoodPhoto;
+import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodTemp;
 
 @Repository
 public class FoodDaoImpl implements FoodDao {
@@ -20,13 +21,28 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-	public int insertFood(SqlSession session, Food f) {
+	public int insertFood(SqlSession session, FoodTemp f) {
 		return session.insert("food.insertFood", f);
+	}
+	@Override
+	public int insertFoodPhoto(SqlSession session, FoodPhotoTemp fp) {
+		return session.insert("food.insertFoodPhoto", fp);
 	}
 	
 	@Override
-	public int insertFoodPhoto(SqlSession session, FoodPhoto fp) {
-		return session.insert("food.insertFoodPhoto", fp);
+	public int updateFood(SqlSession session, FoodTemp f) {
+		return session.update("food.updateFood",f);
+	}
+	
+	@Override
+	public int mergeFood(SqlSession session) {
+		return session.insert("food.mergeFood");
+		//merge한 이후엔 temp테이블 지우기
+	}
+	@Override
+	public int mergeFoodPhoto(SqlSession session) {
+		return session.insert("food.mergeFoodPhoto");
+		//merge한 이후엔 temp테이블 지우기
 	}
 
 	@Override
@@ -43,6 +59,11 @@ public class FoodDaoImpl implements FoodDao {
 	public List<Food> selectFoodAllTest(SqlSession session) {
 		return session.selectList("food.selectFoodAllTest");
 	}
+	
+	@Override
+	public List<Food> selectFoodByFoodNo(SqlSession session,int foodNo) {
+		return session.selectList("food.selectFoodByFoodNo",foodNo);
+	}
 
 	@Override
 	public int selectFoodCount(SqlSession session) {
@@ -56,8 +77,14 @@ public class FoodDaoImpl implements FoodDao {
 		return session.selectOne("food.selectFoodByNo",no);
 	}
 
-	
+	@Override
+	public int searchByFoodNo(SqlSession session,int foodNo) {
+		return session.selectOne("food.searchByFoodNo",foodNo);
+	}
 
-	
+	@Override
+	public boolean searchByBoolean(SqlSession session) {
+		return session.selectOne("food.searchByBoolean");
+	}
 	
 }

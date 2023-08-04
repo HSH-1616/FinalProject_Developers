@@ -10,14 +10,15 @@
 <section>
 	<table>
 		<tbody>
-			<c:forEach var="f" items="${foods}" varStatus="vs">
+			<c:set var="f" value="${foods[0]}"/>
 				<form action="/foodImgApi" >
 					<tr>
 						<td>
-							<c:if test="${f.foodPhoto.FPMain == 1}">
-								<img alt="대표이미지" src="${f.foodPhoto.FPName}" style="width: 300px;height: 300px;"><br>							
-							</c:if>
-							<c:if test="${f.foodPhoto.FPMain != 1}"></c:if>
+							<c:forEach var="fp" items="${f.foodPhoto}">
+								<span>
+									<img alt="대표이미지" src="${fp.fpName}" style="width: 100px;height: 100px;"><br>							
+								</span>						
+							</c:forEach>
 							<input type="text" name="foodNo" value="${f.foodNo}"><br>
 							<input type="text" name="foodName" value="${f.foodName}"><br>
 							<input type="text" name="foodOpenTime" value="${f.foodOpenTime}"><br>
@@ -29,7 +30,6 @@
 						</td>
 					</tr>
 				</form>
-			</c:forEach>
 		</tbody>
 		</table>
 </section>
