@@ -74,7 +74,11 @@
 				<ul class="main-menu">
 					<li class="item">
 						<button class="item__name"
-							onclick="location.href='${path }/food/foodList.do'">TRAVEL&FOOD</button>
+							onclick="location.href='${path }'">Touris</button>
+					</li>
+					<li class="item">
+						<button class="item__name"
+							onclick="location.href='${path }/food/foodList.do'">Food</button>
 					</li>
 					<li class="item">
 						<button class="item__name"
