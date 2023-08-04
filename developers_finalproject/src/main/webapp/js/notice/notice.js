@@ -2,6 +2,46 @@
 
 
 
+    
+	const nList = (no, numPerpage) => {
+		$.ajax({
+			url: "/notice/noticeListEnd.do",
+			data: {  cPage: no,numPerpage: numPerpage },
+			type: "get",
+			success: (data) => {
+				
+				let tb;
+
+				$(".nolist-table>tbody").empty();
+				if (data.noticeList.length > 0) {
+
+					for (const n of data.noticeList) {
+						tb = "<tr>";
+						tb += "<td>" + n.noticeNo + "</td>";
+						tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
+						tb += "<td>관리자</td>";
+						tb += "<td>" + n.noticeViews + "</td>";
+						tb += "<td>" + n.writeDate + "</td>";
+						tb += "</tr>";
+
+						$(".nolist-table>tbody").append(tb);
+					};
+					$(".board-pasing").empty();
+					$(".board-pasing").append(data.pageBar);
+
+				} else {
+					tb = "<tr>";
+					tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
+					tb += "</tr>";
+					$(".nolist-table>tbody").append(tb);
+
+				}
+			}
+
+		});
+	};
+$(document).ready(nList()) ;
+
 const noticeWrite = () => {
 	console.log($("input[name=noticeTitle").val());
 	if ($("input[name=noticeTitle").val() == "") {
@@ -65,7 +105,7 @@ const deleteNotice = (no) => {
 			data: { fileName: fileName },
 			type: "post",
 			success: (data) => {
-				
+
 				if (data == "true") {
 					console.log("파일삭제");
 				}
@@ -80,24 +120,47 @@ const deleteNotice = (no) => {
 	location.href = "/notice/deleteNotice.do?no=" + no;
 };
 
-/*const searchNotice=()=>{
-	let type=$("select[name=type]").val();
-	let keyword=$("input[name=keyword]").val();
+const searchNotice = (no, numPerpage) => {
+
+	let type = $("select[name=type]").val();
+	let keyword = $("input[name=keyword]").val();
 	$.ajax({
 		url: "/notice/searchNotice.do",
-		data: {type: type,keyword: keyword},
+		data: { type: type, keyword: keyword, cPage: no ,numPerpage:numPerpage},
 		type: "get",
-		success: (data)=>{
-			if(data!=null){
-				console.log(data);
-				$(".nolist-table").replaceWith(data);
-				let str=""
-				<tr><td colspan="5">조회된 공지사항이 없습니다.</td></tr>
+		success: (data) => {
+		
+			let tb;
+
+			$(".nolist-table>tbody").empty();
+			if (data.noticeList.length > 0) {
+			
+				for (const n of data.noticeList) {
+					tb = "<tr>";
+					tb += "<td>" + n.noticeNo + "</td>";
+					tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
+					tb += "<td>관리자</td>";
+					tb += "<td>" + n.noticeViews + "</td>";
+					tb += "<td>" + n.writeDate + "</td>";
+					tb += "</tr>";
+					
+					$(".nolist-table>tbody").append(tb);
+				};
+				$(".board-pasing").empty();
+				$(".board-pasing").append(data.pageBar);
+
+			} else {
+				tb = "<tr>";
+				tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
+				tb += "</tr>";
+				$(".nolist-table>tbody").append(tb);
+
 			}
 		}
+
 	});
-}*/
-	
+}
+
 
 
 

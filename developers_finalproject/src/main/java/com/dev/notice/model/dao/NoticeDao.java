@@ -10,7 +10,7 @@ import com.dev.notice.model.dto.NoticeFile;
 
 public interface NoticeDao {
 
-	List<Notice> noticeList(SqlSession session);
+	List<Notice> noticeList(SqlSession session,Map<String, Object> paging);
 	int insertNotice(SqlSession session,Notice m);
 	int deleteNotice(SqlSession session,int no);
 	int deleteNoticeFile(SqlSession session, String fileName);
@@ -18,5 +18,7 @@ public interface NoticeDao {
 	Notice noticeView(SqlSession session,int no);
 	int updateNotice(SqlSession session,Notice n);
 	int noticeViewCountUp(SqlSession session, int no);
-	List<Notice> searchNotice(SqlSession session, Map<String, Object> params);
+	List<Notice> searchNotice(SqlSession session, Map<String, Object> params,Map<String,Object> paging);
+	int noticeCount(SqlSession session);
+	
 }
