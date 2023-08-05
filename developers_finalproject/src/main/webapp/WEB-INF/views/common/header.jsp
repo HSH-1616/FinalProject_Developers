@@ -65,7 +65,9 @@
 			<div id="mainHeader">
 				<ul class="main-menu">
 					<li class="item">
-						<button class="item__name">TRAVEL&FOOD</button>
+						<!-- 관광지랑, 맛집이 같은 버튼에 있어도 되나?물어보기 -->
+						<button class="item__name"
+							onclick="location.href='${path }/food/foodList.do'">TRAVEL&FOOD</button>
 					</li>
 					<li class="item">
 						<button class="item__name"
