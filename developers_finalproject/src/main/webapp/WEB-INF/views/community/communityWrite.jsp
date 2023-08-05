@@ -93,7 +93,7 @@
                       </div>
                     
                       <div class="comu-buttons">
-                        <button class="w-btn w-btn-blue-outline">등록</button>&nbsp;&nbsp;&nbsp;
+                        <button class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
                         <button class="w-btn w-btn-gray-outline">취소</button>
                       </div>
                     
@@ -117,20 +117,27 @@
 
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
-        url: "https://httpbin.org/post", // 파일을 업로드할 서버 주소 url.
+        
+        url: "/notice/uploadFile.do", // 파일을 업로드할 서버 주소 url.
         method: "post", // 기본 post로 request 감. put으로도 할수있음
         uploadMultiple: true,
         maxFiles: 5,
         maxFilesize: 5,
+        parallelUploads: 5,
         acceptedFiles: "image/*",
         previewTemplate: previewTemplate, // 만일 기본 테마를 사용하지않고 커스텀 업로드 테마를 사용하고 싶다면
         previewsContainer: "#dropzone-preview", // 드롭존 영역을 .dropzone이 아닌 다른 엘리먼트에서 하고싶을때
         init: function () {
                 /* 최초 dropzone 설정시 init을 통해 호출 */
-                var submitButton = document.querySelector("#btn-upload-file");
-                var myDropzone = this; //closure
+                let submitButton = document.querySelector("#btn-upload-file");
+                let myDropzone = this; //closure
                 submitButton.addEventListener("click", function () {
                     console.log("업로드"); //tell Dropzone to process all queued files
+                    if (myDropzone.getRejectedFiles().length > 0) {
+                        let files = myDropzone.getRejectedFiles();
+                        alert("거부된 파일이 있습니다");
+                        return;
+                     }
                     myDropzone.processQueue();
                 });
             },

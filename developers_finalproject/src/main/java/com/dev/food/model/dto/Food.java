@@ -1,5 +1,7 @@
 package com.dev.food.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +22,6 @@ public class Food {
 	private String foodPhone;
 	private int allow;
 	private int foodReadCount;
-	
+	private List<FoodPhoto> foodPhoto;
+
 }

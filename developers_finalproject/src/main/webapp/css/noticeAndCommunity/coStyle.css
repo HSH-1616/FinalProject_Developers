@@ -3,6 +3,7 @@
     
 }
 
+
 .carousel-item{
       width: 100%;
       max-height: 400px;
@@ -27,14 +28,27 @@
 	min-height: 500px;
 }
 
+.nw-container{
+	display: block;
+	width: 1300px;
+
+}
+
+.notice-form{
+	width:1300px;
+}
+.notice-table{
+	margin-right: 10%;
+	width: 100%;
+}
 .search-notice{
-	margin-right: 15%;
+	margin-left: 20%;
 }
 
 .list-area{
 	display: block;
 	margin-left: 10%;
-	width: 1300px;
+	width: 73%;
 }
 
 .card-box-write{
@@ -239,11 +253,11 @@ cursor: pointer;
 }
 }
 
-.table{
+/*.nolist-table{
     margin-left: 5%;
     width: 100%;
 }
-
+*/
 .carousel-item img{
     top: 0;
     left: 0;

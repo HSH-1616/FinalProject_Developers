@@ -1,6 +1,7 @@
 package com.dev.ac.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,21 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public List<Accommodation> acListAll() {
 		return dao.acListAll(session);
+	}
+
+	@Override
+	public List<Accommodation> searchListAll(Map param) {
+		return dao.acSearchAll(session,param);
+	}
+
+	@Override
+	public Accommodation acDetail(int no) {
+		return dao.acDetail(session,no);
+	}
+
+	@Override
+	public Accommodation acPay(int no) {
+		return dao.acPay(session,no);
 	}
 
 }

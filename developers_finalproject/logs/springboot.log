@@ -1,272 +1,777 @@
-2023-07-26 16:13:40.870  INFO 13860 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on LAPTOP-JLR54FR5 with PID 13860 (C:\Users\cksdm\git\finalProject\developers_finalproject\target\classes started by cksdm in C:\Users\cksdm\git\finalProject\developers_finalproject)
-2023-07-26 16:13:40.872 DEBUG 13860 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
-2023-07-26 16:13:40.873  INFO 13860 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
-2023-07-26 16:13:40.989  INFO 13860 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\cksdm\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.5.0.0\ojdbc8-21.5.0.0.jar referenced one or more files that do not exist: file:/C:/Users/cksdm/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.5.0.0/oraclepki.jar
-2023-07-26 16:13:40.990  INFO 13860 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-07-26 16:13:40.990  INFO 13860 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-07-26 16:13:42.099  INFO 13860 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-26 16:13:42.102  INFO 13860 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2023-07-26 16:13:42.120  INFO 13860 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
-2023-07-26 16:13:42.137  INFO 13860 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-07-26 16:13:42.139  INFO 13860 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-07-26 16:13:42.149  INFO 13860 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
-2023-07-26 16:13:42.413  WARN 13860 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.dev]' package. Please check your configuration.
-2023-07-26 16:13:43.170  INFO 13860 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2023-07-26 16:13:43.183  INFO 13860 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-07-26 16:13:43.184  INFO 13860 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
-2023-07-26 16:13:43.548  INFO 13860 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-2023-07-26 16:13:43.559  INFO 13860 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-07-26 16:13:43.559  INFO 13860 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2568 ms
-2023-07-26 16:13:43.833  INFO 13860 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-07-26 16:13:44.965 ERROR 13860 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
-
-java.sql.SQLException: 부적합한 Oracle URL이 지정되었습니다
-	at oracle.jdbc.driver.PhysicalConnection.parseUrl(PhysicalConnection.java:1739) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.readConnectionProperties(PhysicalConnection.java:1420) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:944) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:929) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:558) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:69) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:733) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:649) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-4.0.3.jar:na]
-	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:160) ~[spring-jdbc-5.3.29.jar:5.3.29]
-	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:118) ~[spring-jdbc-5.3.29.jar:5.3.29]
-	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81) ~[spring-jdbc-5.3.29.jar:5.3.29]
-	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:332) ~[spring-jdbc-5.3.29.jar:5.3.29]
-	at org.springframework.boot.jdbc.EmbeddedDatabaseConnection.isEmbedded(EmbeddedDatabaseConnection.java:164) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateDefaultDdlAutoProvider.getDefaultDdlAuto(HibernateDefaultDdlAutoProvider.java:42) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration.lambda$getVendorProperties$1(HibernateJpaConfiguration.java:130) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings.getDdlAuto(HibernateSettings.java:41) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.determineDdlAuto(HibernateProperties.java:143) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.getAdditionalProperties(HibernateProperties.java:103) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.determineHibernateProperties(HibernateProperties.java:95) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration.getVendorProperties(HibernateJpaConfiguration.java:131) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.entityManagerFactory(JpaBaseConfiguration.java:132) ~[spring-boot-autoconfigure-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1157) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:911) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at com.dev.DevelopersFinalprojectApplication.main(DevelopersFinalprojectApplication.java:10) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-
-2023-07-26 16:13:45.078  INFO 13860 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-26 16:13:45.238  INFO 13860 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
-2023-07-26 16:13:45.497  INFO 13860 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-26 16:13:45.707  INFO 13860 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-07-26 16:13:46.723 ERROR 13860 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
-
-java.sql.SQLException: 부적합한 Oracle URL이 지정되었습니다
-	at oracle.jdbc.driver.PhysicalConnection.parseUrl(PhysicalConnection.java:1739) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.readConnectionProperties(PhysicalConnection.java:1420) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:944) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:929) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:558) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:69) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:733) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:649) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-4.0.3.jar:na]
-	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:181) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:272) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:246) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:223) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:295) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:252) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:223) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1157) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:911) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at com.dev.DevelopersFinalprojectApplication.main(DevelopersFinalprojectApplication.java:10) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-
-2023-07-26 16:13:46.726  WARN 13860 --- [restartedMain] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
-
-java.sql.SQLException: 부적합한 Oracle URL이 지정되었습니다
-	at oracle.jdbc.driver.PhysicalConnection.parseUrl(PhysicalConnection.java:1739) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.readConnectionProperties(PhysicalConnection.java:1420) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:944) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:929) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:558) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:69) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:733) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:649) ~[ojdbc8-21.5.0.0.jar:21.5.0.0.0]
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-4.0.3.jar:na]
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-4.0.3.jar:na]
-	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:181) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:272) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:246) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:223) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:295) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:252) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:223) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1157) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:911) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at com.dev.DevelopersFinalprojectApplication.main(DevelopersFinalprojectApplication.java:10) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-
-2023-07-26 16:13:46.730 ERROR 13860 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
-2023-07-26 16:13:46.731  WARN 13860 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
-2023-07-26 16:13:46.735  INFO 13860 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-07-26 16:13:46.747  INFO 13860 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2023-07-26 16:13:46.780 ERROR 13860 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1157) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:911) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.29.jar:5.3.29]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-	at com.dev.DevelopersFinalprojectApplication.main(DevelopersFinalprojectApplication.java:10) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-2.7.15-SNAPSHOT.jar:2.7.15-SNAPSHOT]
-Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:284) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:246) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:223) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:295) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:252) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:223) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863) ~[spring-beans-5.3.29.jar:5.3.29]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.29.jar:5.3.29]
-	... 21 common frames omitted
-Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
-	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:138) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:272) ~[hibernate-core-5.6.15.Final.jar:5.6.15.Final]
-	... 38 common frames omitted
-
+2023-07-31 11:23:44.227  INFO 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 12444 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:23:44.229 DEBUG 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:23:44.230  INFO 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:23:44.354  INFO 12444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:23:44.362  INFO 12444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:23:44.425  INFO 12444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:23:44.425  INFO 12444 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:23:44.425  INFO 12444 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:23:44.506  INFO 12444 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:23:44.508  INFO 12444 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:23:44.508  INFO 12444 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 276 ms
+2023-07-31 11:23:44.610  INFO 12444 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-07-31 11:23:44.691  INFO 12444 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-07-31 11:23:44.708  INFO 12444 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:23:44.716  INFO 12444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:23:44.719  INFO 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.526 seconds (JVM running for 473.397)
+2023-07-31 11:23:44.721  INFO 12444 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:23:51.531  INFO 12444 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-31 11:23:51.531  INFO 12444 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-31 11:23:51.532  INFO 12444 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-07-31 11:38:25.759  INFO 12444 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 11:38:25.767  INFO 12444 --- [Thread-14] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:38:25.767  INFO 12444 --- [Thread-14] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-07-31 11:38:25.770  INFO 12444 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-07-31 11:38:25.817  INFO 12444 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-07-31 11:38:25.877  INFO 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 12444 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:38:25.877 DEBUG 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:38:25.877  INFO 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:38:26.011  INFO 12444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:38:26.020  INFO 12444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:38:26.087  INFO 12444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:38:26.088  INFO 12444 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:38:26.088  INFO 12444 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:38:26.171  INFO 12444 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:38:26.172  INFO 12444 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:38:26.172  INFO 12444 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 293 ms
+2023-07-31 11:38:26.344  INFO 12444 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-07-31 11:38:26.454  INFO 12444 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-07-31 11:38:26.471  INFO 12444 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:38:26.480  INFO 12444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:38:26.483  INFO 12444 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.628 seconds (JVM running for 1355.16)
+2023-07-31 11:38:26.484  INFO 12444 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:38:52.294  INFO 12444 --- [RMI TCP Connection(39)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-07-31 11:38:52.299  INFO 12444 --- [RMI TCP Connection(39)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:38:52.302  INFO 12444 --- [RMI TCP Connection(39)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-07-31 11:38:52.335  INFO 12444 --- [RMI TCP Connection(39)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2023-07-31 11:41:05.533  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:41:05.533 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:41:05.533  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:41:05.665  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:41:05.674  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:41:05.731  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:41:05.731  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:41:05.731  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:41:05.816  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:41:05.818  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:41:05.818  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 283 ms
+2023-07-31 11:41:05.921  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-07-31 11:41:06.024  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-07-31 11:41:06.058  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:41:06.069  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:41:06.073  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.573 seconds (JVM running for 29.463)
+2023-07-31 11:41:06.075  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:45:23.665  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 11:45:23.685  INFO 1012 --- [Thread-9] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:45:23.692  INFO 1012 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-07-31 11:45:23.734  INFO 1012 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-07-31 11:45:23.797  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:45:23.797 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:45:23.797  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:45:23.925  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:45:23.933  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:45:24.002  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:45:24.002  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:45:24.002  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:45:24.086  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:45:24.087  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:45:24.088  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 289 ms
+2023-07-31 11:45:24.193  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-07-31 11:45:24.285  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-07-31 11:45:24.324  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:45:24.334  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:45:24.338  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.564 seconds (JVM running for 287.728)
+2023-07-31 11:45:24.339  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:49:09.070  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 11:49:09.077  INFO 1012 --- [Thread-14] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:49:09.081  INFO 1012 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-07-31 11:49:09.122  INFO 1012 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-07-31 11:49:09.179  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:49:09.179 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:49:09.179  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:49:09.312  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:49:09.320  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:49:09.385  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:49:09.386  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:49:09.386  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:49:09.467  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:49:09.469  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:49:09.469  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 288 ms
+2023-07-31 11:49:09.573  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-07-31 11:49:09.655  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-07-31 11:49:09.670  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:49:09.679  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:49:09.684  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.527 seconds (JVM running for 513.073)
+2023-07-31 11:49:09.685  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:49:28.524  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2023-07-31 11:49:28.532  INFO 1012 --- [Thread-19] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:49:28.535  INFO 1012 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-07-31 11:49:28.579  INFO 1012 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2023-07-31 11:49:28.633  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:49:28.633 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:49:28.633  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:49:28.746  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:49:28.754  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:49:28.804  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:49:28.805  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:49:28.805  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:49:28.880  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:49:28.881  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:49:28.881  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 247 ms
+2023-07-31 11:49:28.963  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2023-07-31 11:49:29.054  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2023-07-31 11:49:29.086  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:49:29.096  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:49:29.100  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.485 seconds (JVM running for 532.489)
+2023-07-31 11:49:29.101  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:49:41.804  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 11:49:41.812  INFO 1012 --- [Thread-24] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:49:41.815  INFO 1012 --- [Thread-24] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2023-07-31 11:49:41.867  INFO 1012 --- [Thread-24] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2023-07-31 11:49:41.920  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:49:41.921 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:49:41.921  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:49:42.036  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:49:42.044  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:49:42.094  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:49:42.094  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:49:42.094  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:49:42.166  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:49:42.167  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:49:42.168  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 246 ms
+2023-07-31 11:49:42.249  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2023-07-31 11:49:42.341  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2023-07-31 11:49:42.371  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:49:42.382  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:49:42.385  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.483 seconds (JVM running for 545.775)
+2023-07-31 11:49:42.387  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:52:05.894  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 11:52:05.902  INFO 1012 --- [Thread-29] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:52:05.905  INFO 1012 --- [Thread-29] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2023-07-31 11:52:05.943  INFO 1012 --- [Thread-29] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2023-07-31 11:52:05.995  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:52:05.996 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:52:05.996  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:52:06.111  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:52:06.118  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:52:06.174  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:52:06.175  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:52:06.175  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:52:06.249  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:52:06.250  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:52:06.250  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 253 ms
+2023-07-31 11:52:06.345  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2023-07-31 11:52:06.413  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2023-07-31 11:52:06.448  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:52:06.458  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:52:06.461  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.485 seconds (JVM running for 689.851)
+2023-07-31 11:52:06.462  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:52:24.621  INFO 1012 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-31 11:52:24.621  INFO 1012 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-31 11:52:24.622  INFO 1012 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-31 11:55:32.700  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2023-07-31 11:55:32.708  INFO 1012 --- [Thread-34] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:55:32.709  INFO 1012 --- [Thread-34] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-07-31 11:55:32.712  INFO 1012 --- [Thread-34] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2023-07-31 11:55:32.752  INFO 1012 --- [Thread-34] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2023-07-31 11:55:32.802  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:55:32.802 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:55:32.802  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:55:32.921  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:55:32.929  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:55:32.982  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:55:32.983  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:55:32.983  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:55:33.062  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:55:33.063  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:55:33.063  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 260 ms
+2023-07-31 11:55:33.147  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2023-07-31 11:55:33.235  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2023-07-31 11:55:33.245  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:55:33.253  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:55:33.256  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.473 seconds (JVM running for 896.646)
+2023-07-31 11:55:33.258  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:55:36.732  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2023-07-31 11:55:36.737  INFO 1012 --- [Thread-39] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:55:36.740  INFO 1012 --- [Thread-39] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2023-07-31 11:55:36.773  INFO 1012 --- [Thread-39] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+2023-07-31 11:55:36.822  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:55:36.822 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:55:36.822  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:55:36.943  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:55:36.950  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:55:37.004  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:55:37.004  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:55:37.004  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:55:37.088  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:55:37.089  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:55:37.089  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 266 ms
+2023-07-31 11:55:37.179  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Starting...
+2023-07-31 11:55:37.264  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Start completed.
+2023-07-31 11:55:37.274  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:55:37.281  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:55:37.284  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.48 seconds (JVM running for 900.674)
+2023-07-31 11:55:37.285  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 11:56:14.685  INFO 1012 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-31 11:56:14.686  INFO 1012 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-31 11:56:14.686  INFO 1012 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-07-31 11:59:02.325  INFO 1012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2023-07-31 11:59:02.333  INFO 1012 --- [Thread-44] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 11:59:02.333  INFO 1012 --- [Thread-44] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-07-31 11:59:02.336  INFO 1012 --- [Thread-44] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2023-07-31 11:59:02.377  INFO 1012 --- [Thread-44] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+2023-07-31 11:59:02.426  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 1012 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 11:59:02.426 DEBUG 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 11:59:02.426  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 11:59:02.546  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 11:59:02.554  INFO 1012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 11:59:02.611  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 11:59:02.611  INFO 1012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 11:59:02.611  INFO 1012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 11:59:02.689  INFO 1012 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 11:59:02.690  INFO 1012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 11:59:02.690  INFO 1012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 263 ms
+2023-07-31 11:59:02.785  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Starting...
+2023-07-31 11:59:02.869  INFO 1012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Start completed.
+2023-07-31 11:59:02.891  INFO 1012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 11:59:02.906  INFO 1012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 11:59:02.909  INFO 1012 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.503 seconds (JVM running for 1106.3)
+2023-07-31 11:59:02.910  INFO 1012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 12:00:18.722  INFO 1012 --- [RMI TCP Connection(46)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-07-31 12:00:18.727  INFO 1012 --- [RMI TCP Connection(46)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:00:18.731  INFO 1012 --- [RMI TCP Connection(46)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown initiated...
+2023-07-31 12:00:18.766  INFO 1012 --- [RMI TCP Connection(46)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown completed.
+2023-07-31 12:03:09.518  INFO 4376 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 4376 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 12:03:09.519 DEBUG 4376 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 12:03:09.519  INFO 4376 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 12:03:09.556  INFO 4376 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\GD\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.5.0.0\ojdbc8-21.5.0.0.jar referenced one or more files that do not exist: file:/C:/Users/GD/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.5.0.0/oraclepki.jar
+2023-07-31 12:03:09.557  INFO 4376 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-31 12:03:09.557  INFO 4376 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-31 12:03:09.985  INFO 4376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 12:03:10.001  INFO 4376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2023-07-31 12:03:10.466  INFO 4376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 12:03:10.475  INFO 4376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 12:03:10.475  INFO 4376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 12:03:10.665  INFO 4376 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 12:03:10.674  INFO 4376 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 12:03:10.674  INFO 4376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1117 ms
+2023-07-31 12:03:11.079  INFO 4376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-31 12:03:11.363  INFO 4376 --- [restartedMain] jdbc.connection                          : 1. Connection opened
+2023-07-31 12:03:11.363  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.new Connection returned 
+2023-07-31 12:03:11.363  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.getNetworkTimeout() returned 0
+2023-07-31 12:03:11.363  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.363  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.getAutoCommit() returned true
+2023-07-31 12:03:11.367  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.isValid(1) returned true
+2023-07-31 12:03:11.367  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.getTransactionIsolation() returned 2
+2023-07-31 12:03:11.369  INFO 4376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-31 12:03:11.375  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@7e1011e
+2023-07-31 12:03:11.381  INFO 4376 --- [restartedMain] jdbc.audit                               : 1. Connection.clearWarnings() returned 
+2023-07-31 12:03:11.490  INFO 4376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 12:03:11.522  INFO 4376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 12:03:11.530  INFO 4376 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 2.311 seconds (JVM running for 2.888)
+2023-07-31 12:03:11.549  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 2. Connection opened
+2023-07-31 12:03:11.549  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.new Connection returned 
+2023-07-31 12:03:11.549  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.549  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.getAutoCommit() returned true
+2023-07-31 12:03:11.624  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 3. Connection opened
+2023-07-31 12:03:11.624  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.new Connection returned 
+2023-07-31 12:03:11.624  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.624  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.getAutoCommit() returned true
+2023-07-31 12:03:11.727  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 4. Connection opened
+2023-07-31 12:03:11.727  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.new Connection returned 
+2023-07-31 12:03:11.727  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.727  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.getAutoCommit() returned true
+2023-07-31 12:03:11.802  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 5. Connection opened
+2023-07-31 12:03:11.802  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.new Connection returned 
+2023-07-31 12:03:11.802  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.802  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.getAutoCommit() returned true
+2023-07-31 12:03:11.872  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 6. Connection opened
+2023-07-31 12:03:11.872  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.new Connection returned 
+2023-07-31 12:03:11.873  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.873  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.getAutoCommit() returned true
+2023-07-31 12:03:11.957  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 7. Connection opened
+2023-07-31 12:03:11.957  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.new Connection returned 
+2023-07-31 12:03:11.957  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.isReadOnly() returned false
+2023-07-31 12:03:11.957  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.getAutoCommit() returned true
+2023-07-31 12:03:12.032  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 8. Connection opened
+2023-07-31 12:03:12.032  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.new Connection returned 
+2023-07-31 12:03:12.032  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.isReadOnly() returned false
+2023-07-31 12:03:12.032  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.getAutoCommit() returned true
+2023-07-31 12:03:12.099  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 9. Connection opened
+2023-07-31 12:03:12.099  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.new Connection returned 
+2023-07-31 12:03:12.099  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.isReadOnly() returned false
+2023-07-31 12:03:12.099  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.getAutoCommit() returned true
+2023-07-31 12:03:12.163  INFO 4376 --- [HikariPool-1 connection adder] jdbc.connection                          : 10. Connection opened
+2023-07-31 12:03:12.163  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.new Connection returned 
+2023-07-31 12:03:12.164  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.isReadOnly() returned false
+2023-07-31 12:03:12.164  INFO 4376 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.getAutoCommit() returned true
+2023-07-31 12:03:23.955  INFO 4376 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-31 12:03:23.955  INFO 4376 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-31 12:03:23.956  INFO 4376 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-31 12:06:14.004  INFO 4376 --- [RMI TCP Connection(11)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-07-31 12:06:14.015  INFO 4376 --- [RMI TCP Connection(11)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:06:14.016  INFO 4376 --- [RMI TCP Connection(11)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-07-31 12:06:14.024  INFO 4376 --- [RMI TCP Connection(11)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-31 12:06:14.029  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 1. Connection closed
+2023-07-31 12:06:14.029  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 1. Connection.close() returned 
+2023-07-31 12:06:14.032  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 2. Connection closed
+2023-07-31 12:06:14.033  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 2. Connection.close() returned 
+2023-07-31 12:06:14.037  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 3. Connection closed
+2023-07-31 12:06:14.037  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 3. Connection.close() returned 
+2023-07-31 12:06:14.041  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 4. Connection closed
+2023-07-31 12:06:14.042  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 4. Connection.close() returned 
+2023-07-31 12:06:14.045  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 5. Connection closed
+2023-07-31 12:06:14.046  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 5. Connection.close() returned 
+2023-07-31 12:06:14.050  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 6. Connection closed
+2023-07-31 12:06:14.050  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 6. Connection.close() returned 
+2023-07-31 12:06:14.055  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 7. Connection closed
+2023-07-31 12:06:14.055  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 7. Connection.close() returned 
+2023-07-31 12:06:14.058  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 8. Connection closed
+2023-07-31 12:06:14.058  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 8. Connection.close() returned 
+2023-07-31 12:06:14.062  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 9. Connection closed
+2023-07-31 12:06:14.062  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 9. Connection.close() returned 
+2023-07-31 12:06:14.066  INFO 4376 --- [HikariPool-1 connection closer] jdbc.connection                          : 10. Connection closed
+2023-07-31 12:06:14.066  INFO 4376 --- [HikariPool-1 connection closer] jdbc.audit                               : 10. Connection.close() returned 
+2023-07-31 12:06:14.066  INFO 4376 --- [RMI TCP Connection(11)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-31 12:06:17.167  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 11724 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 12:06:17.168 DEBUG 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 12:06:17.168  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 12:06:17.208  INFO 11724 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\GD\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.5.0.0\ojdbc8-21.5.0.0.jar referenced one or more files that do not exist: file:/C:/Users/GD/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.5.0.0/oraclepki.jar
+2023-07-31 12:06:17.208  INFO 11724 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-31 12:06:17.208  INFO 11724 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-31 12:06:17.653  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 12:06:17.670  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2023-07-31 12:06:18.142  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 12:06:18.149  INFO 11724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 12:06:18.150  INFO 11724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 12:06:18.341  INFO 11724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 12:06:18.352  INFO 11724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 12:06:18.353  INFO 11724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1145 ms
+2023-07-31 12:06:18.803  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-31 12:06:19.046  INFO 11724 --- [restartedMain] jdbc.connection                          : 1. Connection opened
+2023-07-31 12:06:19.046  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.new Connection returned 
+2023-07-31 12:06:19.047  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.getNetworkTimeout() returned 0
+2023-07-31 12:06:19.047  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.047  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.051  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.isValid(1) returned true
+2023-07-31 12:06:19.051  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.getTransactionIsolation() returned 2
+2023-07-31 12:06:19.053  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-31 12:06:19.057  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@322ee53c
+2023-07-31 12:06:19.064  INFO 11724 --- [restartedMain] jdbc.audit                               : 1. Connection.clearWarnings() returned 
+2023-07-31 12:06:19.179  INFO 11724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 12:06:19.215  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 12:06:19.224  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 2.413 seconds (JVM running for 2.966)
+2023-07-31 12:06:19.244  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 2. Connection opened
+2023-07-31 12:06:19.244  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.new Connection returned 
+2023-07-31 12:06:19.244  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.244  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.334  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 3. Connection opened
+2023-07-31 12:06:19.334  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.new Connection returned 
+2023-07-31 12:06:19.334  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.334  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.409  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 4. Connection opened
+2023-07-31 12:06:19.409  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.new Connection returned 
+2023-07-31 12:06:19.409  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.409  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.477  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 5. Connection opened
+2023-07-31 12:06:19.478  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.new Connection returned 
+2023-07-31 12:06:19.478  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.478  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.548  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 6. Connection opened
+2023-07-31 12:06:19.548  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.new Connection returned 
+2023-07-31 12:06:19.548  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.548  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.609  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 7. Connection opened
+2023-07-31 12:06:19.609  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.new Connection returned 
+2023-07-31 12:06:19.609  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.609  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.668  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 8. Connection opened
+2023-07-31 12:06:19.668  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.new Connection returned 
+2023-07-31 12:06:19.668  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.668  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.727  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 9. Connection opened
+2023-07-31 12:06:19.728  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.new Connection returned 
+2023-07-31 12:06:19.728  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.728  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.getAutoCommit() returned true
+2023-07-31 12:06:19.787  INFO 11724 --- [HikariPool-1 connection adder] jdbc.connection                          : 10. Connection opened
+2023-07-31 12:06:19.787  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.new Connection returned 
+2023-07-31 12:06:19.787  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.isReadOnly() returned false
+2023-07-31 12:06:19.787  INFO 11724 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.getAutoCommit() returned true
+2023-07-31 12:06:22.420  INFO 11724 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-31 12:06:22.421  INFO 11724 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-31 12:06:22.421  INFO 11724 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-07-31 12:08:38.905  INFO 11724 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2023-07-31 12:08:38.913  INFO 11724 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:08:38.914  INFO 11724 --- [Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-07-31 12:08:38.920  INFO 11724 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-31 12:08:38.925  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 1. Connection closed
+2023-07-31 12:08:38.926  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 1. Connection.close() returned 
+2023-07-31 12:08:38.929  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 2. Connection closed
+2023-07-31 12:08:38.929  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 2. Connection.close() returned 
+2023-07-31 12:08:38.934  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 3. Connection closed
+2023-07-31 12:08:38.934  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 3. Connection.close() returned 
+2023-07-31 12:08:38.939  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 4. Connection closed
+2023-07-31 12:08:38.939  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 4. Connection.close() returned 
+2023-07-31 12:08:38.942  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 5. Connection closed
+2023-07-31 12:08:38.943  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 5. Connection.close() returned 
+2023-07-31 12:08:38.945  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 6. Connection closed
+2023-07-31 12:08:38.946  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 6. Connection.close() returned 
+2023-07-31 12:08:38.950  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 7. Connection closed
+2023-07-31 12:08:38.950  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 7. Connection.close() returned 
+2023-07-31 12:08:38.954  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 8. Connection closed
+2023-07-31 12:08:38.954  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 8. Connection.close() returned 
+2023-07-31 12:08:38.958  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 9. Connection closed
+2023-07-31 12:08:38.958  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 9. Connection.close() returned 
+2023-07-31 12:08:38.961  INFO 11724 --- [HikariPool-1 connection closer] jdbc.connection                          : 10. Connection closed
+2023-07-31 12:08:38.961  INFO 11724 --- [HikariPool-1 connection closer] jdbc.audit                               : 10. Connection.close() returned 
+2023-07-31 12:08:38.961  INFO 11724 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-31 12:08:39.020  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 11724 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 12:08:39.020 DEBUG 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 12:08:39.020  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 12:08:39.148  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 12:08:39.156  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 12:08:39.215  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 12:08:39.216  INFO 11724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 12:08:39.216  INFO 11724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 12:08:39.298  INFO 11724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 12:08:39.300  INFO 11724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 12:08:39.300  INFO 11724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 278 ms
+2023-07-31 12:08:39.395  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-07-31 12:08:39.485  INFO 11724 --- [restartedMain] jdbc.connection                          : 11. Connection opened
+2023-07-31 12:08:39.485  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.new Connection returned 
+2023-07-31 12:08:39.485  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.getNetworkTimeout() returned 0
+2023-07-31 12:08:39.485  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.isReadOnly() returned false
+2023-07-31 12:08:39.486  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.getAutoCommit() returned true
+2023-07-31 12:08:39.488  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.isValid(1) returned true
+2023-07-31 12:08:39.489  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.getTransactionIsolation() returned 2
+2023-07-31 12:08:39.489  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-07-31 12:08:39.489  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@8717e19
+2023-07-31 12:08:39.489  INFO 11724 --- [restartedMain] jdbc.audit                               : 11. Connection.clearWarnings() returned 
+2023-07-31 12:08:39.507  INFO 11724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 12:08:39.515  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 12:08:39.519  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.519 seconds (JVM running for 143.26)
+2023-07-31 12:08:39.521  INFO 11724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 12:08:39.670  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 12. Connection opened
+2023-07-31 12:08:39.670  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 12. Connection.new Connection returned 
+2023-07-31 12:08:39.670  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 12. Connection.isReadOnly() returned false
+2023-07-31 12:08:39.670  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 12. Connection.getAutoCommit() returned true
+2023-07-31 12:08:39.747  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 13. Connection opened
+2023-07-31 12:08:39.747  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 13. Connection.new Connection returned 
+2023-07-31 12:08:39.747  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 13. Connection.isReadOnly() returned false
+2023-07-31 12:08:39.747  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 13. Connection.getAutoCommit() returned true
+2023-07-31 12:08:39.820  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 14. Connection opened
+2023-07-31 12:08:39.821  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 14. Connection.new Connection returned 
+2023-07-31 12:08:39.821  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 14. Connection.isReadOnly() returned false
+2023-07-31 12:08:39.821  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 14. Connection.getAutoCommit() returned true
+2023-07-31 12:08:39.899  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 15. Connection opened
+2023-07-31 12:08:39.900  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 15. Connection.new Connection returned 
+2023-07-31 12:08:39.900  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 15. Connection.isReadOnly() returned false
+2023-07-31 12:08:39.900  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 15. Connection.getAutoCommit() returned true
+2023-07-31 12:08:39.967  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 16. Connection opened
+2023-07-31 12:08:39.967  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 16. Connection.new Connection returned 
+2023-07-31 12:08:39.968  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 16. Connection.isReadOnly() returned false
+2023-07-31 12:08:39.968  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 16. Connection.getAutoCommit() returned true
+2023-07-31 12:08:40.035  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 17. Connection opened
+2023-07-31 12:08:40.035  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 17. Connection.new Connection returned 
+2023-07-31 12:08:40.036  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 17. Connection.isReadOnly() returned false
+2023-07-31 12:08:40.036  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 17. Connection.getAutoCommit() returned true
+2023-07-31 12:08:40.120  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 18. Connection opened
+2023-07-31 12:08:40.120  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 18. Connection.new Connection returned 
+2023-07-31 12:08:40.120  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 18. Connection.isReadOnly() returned false
+2023-07-31 12:08:40.120  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 18. Connection.getAutoCommit() returned true
+2023-07-31 12:08:40.201  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 19. Connection opened
+2023-07-31 12:08:40.201  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 19. Connection.new Connection returned 
+2023-07-31 12:08:40.201  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 19. Connection.isReadOnly() returned false
+2023-07-31 12:08:40.201  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 19. Connection.getAutoCommit() returned true
+2023-07-31 12:08:40.275  INFO 11724 --- [HikariPool-2 connection adder] jdbc.connection                          : 20. Connection opened
+2023-07-31 12:08:40.275  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 20. Connection.new Connection returned 
+2023-07-31 12:08:40.275  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 20. Connection.isReadOnly() returned false
+2023-07-31 12:08:40.275  INFO 11724 --- [HikariPool-2 connection adder] jdbc.audit                               : 20. Connection.getAutoCommit() returned true
+2023-07-31 12:10:48.981  INFO 11724 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 12:10:48.986  INFO 11724 --- [Thread-9] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:10:48.990  INFO 11724 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-07-31 12:10:48.996  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 11. Connection closed
+2023-07-31 12:10:48.997  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 11. Connection.close() returned 
+2023-07-31 12:10:49.002  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 12. Connection closed
+2023-07-31 12:10:49.002  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 12. Connection.close() returned 
+2023-07-31 12:10:49.008  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 13. Connection closed
+2023-07-31 12:10:49.009  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 13. Connection.close() returned 
+2023-07-31 12:10:49.012  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 14. Connection closed
+2023-07-31 12:10:49.013  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 14. Connection.close() returned 
+2023-07-31 12:10:49.019  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 15. Connection closed
+2023-07-31 12:10:49.019  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 15. Connection.close() returned 
+2023-07-31 12:10:49.027  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 16. Connection closed
+2023-07-31 12:10:49.027  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 16. Connection.close() returned 
+2023-07-31 12:10:49.034  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 17. Connection closed
+2023-07-31 12:10:49.034  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 17. Connection.close() returned 
+2023-07-31 12:10:49.040  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 18. Connection closed
+2023-07-31 12:10:49.040  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 18. Connection.close() returned 
+2023-07-31 12:10:49.048  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 19. Connection closed
+2023-07-31 12:10:49.048  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 19. Connection.close() returned 
+2023-07-31 12:10:49.054  INFO 11724 --- [HikariPool-2 connection closer] jdbc.connection                          : 20. Connection closed
+2023-07-31 12:10:49.054  INFO 11724 --- [HikariPool-2 connection closer] jdbc.audit                               : 20. Connection.close() returned 
+2023-07-31 12:10:49.054  INFO 11724 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-07-31 12:10:49.112  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 11724 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 12:10:49.112 DEBUG 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 12:10:49.113  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 12:10:49.237  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 12:10:49.245  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 12:10:49.298  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 12:10:49.299  INFO 11724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 12:10:49.299  INFO 11724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 12:10:49.378  INFO 11724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 12:10:49.379  INFO 11724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 12:10:49.379  INFO 11724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 265 ms
+2023-07-31 12:10:49.465  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-07-31 12:10:49.555  INFO 11724 --- [restartedMain] jdbc.connection                          : 21. Connection opened
+2023-07-31 12:10:49.555  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.new Connection returned 
+2023-07-31 12:10:49.556  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.getNetworkTimeout() returned 0
+2023-07-31 12:10:49.556  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.isReadOnly() returned false
+2023-07-31 12:10:49.557  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.getAutoCommit() returned true
+2023-07-31 12:10:49.561  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.isValid(1) returned true
+2023-07-31 12:10:49.561  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.getTransactionIsolation() returned 2
+2023-07-31 12:10:49.562  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-07-31 12:10:49.562  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@b7b2d0b
+2023-07-31 12:10:49.562  INFO 11724 --- [restartedMain] jdbc.audit                               : 21. Connection.clearWarnings() returned 
+2023-07-31 12:10:49.591  INFO 11724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 12:10:49.599  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 12:10:49.603  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.512 seconds (JVM running for 273.345)
+2023-07-31 12:10:49.604  INFO 11724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 12:10:49.758  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 22. Connection opened
+2023-07-31 12:10:49.758  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 22. Connection.new Connection returned 
+2023-07-31 12:10:49.758  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 22. Connection.isReadOnly() returned false
+2023-07-31 12:10:49.758  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 22. Connection.getAutoCommit() returned true
+2023-07-31 12:10:49.839  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 23. Connection opened
+2023-07-31 12:10:49.839  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 23. Connection.new Connection returned 
+2023-07-31 12:10:49.840  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 23. Connection.isReadOnly() returned false
+2023-07-31 12:10:49.840  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 23. Connection.getAutoCommit() returned true
+2023-07-31 12:10:49.928  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 24. Connection opened
+2023-07-31 12:10:49.928  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 24. Connection.new Connection returned 
+2023-07-31 12:10:49.928  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 24. Connection.isReadOnly() returned false
+2023-07-31 12:10:49.928  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 24. Connection.getAutoCommit() returned true
+2023-07-31 12:10:49.999  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 25. Connection opened
+2023-07-31 12:10:49.999  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 25. Connection.new Connection returned 
+2023-07-31 12:10:49.999  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 25. Connection.isReadOnly() returned false
+2023-07-31 12:10:49.999  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 25. Connection.getAutoCommit() returned true
+2023-07-31 12:10:50.074  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 26. Connection opened
+2023-07-31 12:10:50.074  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 26. Connection.new Connection returned 
+2023-07-31 12:10:50.074  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 26. Connection.isReadOnly() returned false
+2023-07-31 12:10:50.074  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 26. Connection.getAutoCommit() returned true
+2023-07-31 12:10:50.138  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 27. Connection opened
+2023-07-31 12:10:50.138  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 27. Connection.new Connection returned 
+2023-07-31 12:10:50.139  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 27. Connection.isReadOnly() returned false
+2023-07-31 12:10:50.139  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 27. Connection.getAutoCommit() returned true
+2023-07-31 12:10:50.211  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 28. Connection opened
+2023-07-31 12:10:50.211  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 28. Connection.new Connection returned 
+2023-07-31 12:10:50.211  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 28. Connection.isReadOnly() returned false
+2023-07-31 12:10:50.211  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 28. Connection.getAutoCommit() returned true
+2023-07-31 12:10:50.275  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 29. Connection opened
+2023-07-31 12:10:50.275  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 29. Connection.new Connection returned 
+2023-07-31 12:10:50.275  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 29. Connection.isReadOnly() returned false
+2023-07-31 12:10:50.275  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 29. Connection.getAutoCommit() returned true
+2023-07-31 12:10:50.337  INFO 11724 --- [HikariPool-3 connection adder] jdbc.connection                          : 30. Connection opened
+2023-07-31 12:10:50.337  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 30. Connection.new Connection returned 
+2023-07-31 12:10:50.337  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 30. Connection.isReadOnly() returned false
+2023-07-31 12:10:50.337  INFO 11724 --- [HikariPool-3 connection adder] jdbc.audit                               : 30. Connection.getAutoCommit() returned true
+2023-07-31 12:12:03.582  INFO 11724 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 12:12:03.589  INFO 11724 --- [Thread-14] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:12:03.593  INFO 11724 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-07-31 12:12:03.597  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 21. Connection closed
+2023-07-31 12:12:03.597  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 21. Connection.close() returned 
+2023-07-31 12:12:03.601  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 22. Connection closed
+2023-07-31 12:12:03.601  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 22. Connection.close() returned 
+2023-07-31 12:12:03.605  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 23. Connection closed
+2023-07-31 12:12:03.605  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 23. Connection.close() returned 
+2023-07-31 12:12:03.610  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 24. Connection closed
+2023-07-31 12:12:03.610  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 24. Connection.close() returned 
+2023-07-31 12:12:03.614  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 25. Connection closed
+2023-07-31 12:12:03.614  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 25. Connection.close() returned 
+2023-07-31 12:12:03.617  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 26. Connection closed
+2023-07-31 12:12:03.617  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 26. Connection.close() returned 
+2023-07-31 12:12:03.621  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 27. Connection closed
+2023-07-31 12:12:03.621  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 27. Connection.close() returned 
+2023-07-31 12:12:03.625  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 28. Connection closed
+2023-07-31 12:12:03.625  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 28. Connection.close() returned 
+2023-07-31 12:12:03.629  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 29. Connection closed
+2023-07-31 12:12:03.629  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 29. Connection.close() returned 
+2023-07-31 12:12:03.634  INFO 11724 --- [HikariPool-3 connection closer] jdbc.connection                          : 30. Connection closed
+2023-07-31 12:12:03.634  INFO 11724 --- [HikariPool-3 connection closer] jdbc.audit                               : 30. Connection.close() returned 
+2023-07-31 12:12:03.634  INFO 11724 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-07-31 12:12:03.687  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 11724 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 12:12:03.687 DEBUG 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 12:12:03.687  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 12:12:03.808  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 12:12:03.815  INFO 11724 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2023-07-31 12:12:03.864  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 12:12:03.865  INFO 11724 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 12:12:03.865  INFO 11724 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 12:12:03.941  INFO 11724 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 12:12:03.942  INFO 11724 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 12:12:03.942  INFO 11724 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 253 ms
+2023-07-31 12:12:04.024  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-07-31 12:12:04.104  INFO 11724 --- [restartedMain] jdbc.connection                          : 31. Connection opened
+2023-07-31 12:12:04.104  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.new Connection returned 
+2023-07-31 12:12:04.104  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.getNetworkTimeout() returned 0
+2023-07-31 12:12:04.104  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.104  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.107  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.isValid(1) returned true
+2023-07-31 12:12:04.107  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.getTransactionIsolation() returned 2
+2023-07-31 12:12:04.108  INFO 11724 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-07-31 12:12:04.108  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@70d2f56b
+2023-07-31 12:12:04.108  INFO 11724 --- [restartedMain] jdbc.audit                               : 31. Connection.clearWarnings() returned 
+2023-07-31 12:12:04.119  INFO 11724 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 12:12:04.126  INFO 11724 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 12:12:04.130  INFO 11724 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 0.461 seconds (JVM running for 347.871)
+2023-07-31 12:12:04.131  INFO 11724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-31 12:12:04.278  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 32. Connection opened
+2023-07-31 12:12:04.278  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 32. Connection.new Connection returned 
+2023-07-31 12:12:04.278  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 32. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.278  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 32. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.344  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 33. Connection opened
+2023-07-31 12:12:04.344  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 33. Connection.new Connection returned 
+2023-07-31 12:12:04.344  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 33. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.344  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 33. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.406  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 34. Connection opened
+2023-07-31 12:12:04.406  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 34. Connection.new Connection returned 
+2023-07-31 12:12:04.406  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 34. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.406  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 34. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.468  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 35. Connection opened
+2023-07-31 12:12:04.468  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 35. Connection.new Connection returned 
+2023-07-31 12:12:04.468  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 35. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.468  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 35. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.526  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 36. Connection opened
+2023-07-31 12:12:04.526  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 36. Connection.new Connection returned 
+2023-07-31 12:12:04.526  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 36. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.526  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 36. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.585  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 37. Connection opened
+2023-07-31 12:12:04.585  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 37. Connection.new Connection returned 
+2023-07-31 12:12:04.585  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 37. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.585  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 37. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.640  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 38. Connection opened
+2023-07-31 12:12:04.640  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 38. Connection.new Connection returned 
+2023-07-31 12:12:04.640  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 38. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.640  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 38. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.694  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 39. Connection opened
+2023-07-31 12:12:04.695  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 39. Connection.new Connection returned 
+2023-07-31 12:12:04.695  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 39. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.695  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 39. Connection.getAutoCommit() returned true
+2023-07-31 12:12:04.748  INFO 11724 --- [HikariPool-4 connection adder] jdbc.connection                          : 40. Connection opened
+2023-07-31 12:12:04.748  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 40. Connection.new Connection returned 
+2023-07-31 12:12:04.749  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 40. Connection.isReadOnly() returned false
+2023-07-31 12:12:04.749  INFO 11724 --- [HikariPool-4 connection adder] jdbc.audit                               : 40. Connection.getAutoCommit() returned true
+2023-07-31 12:12:08.992  INFO 11724 --- [RMI TCP Connection(24)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-07-31 12:12:08.997  INFO 11724 --- [RMI TCP Connection(24)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:12:09.000  INFO 11724 --- [RMI TCP Connection(24)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-07-31 12:12:09.004  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 31. Connection closed
+2023-07-31 12:12:09.004  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 31. Connection.close() returned 
+2023-07-31 12:12:09.007  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 32. Connection closed
+2023-07-31 12:12:09.007  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 32. Connection.close() returned 
+2023-07-31 12:12:09.010  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 33. Connection closed
+2023-07-31 12:12:09.010  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 33. Connection.close() returned 
+2023-07-31 12:12:09.015  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 34. Connection closed
+2023-07-31 12:12:09.015  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 34. Connection.close() returned 
+2023-07-31 12:12:09.019  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 35. Connection closed
+2023-07-31 12:12:09.019  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 35. Connection.close() returned 
+2023-07-31 12:12:09.024  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 36. Connection closed
+2023-07-31 12:12:09.024  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 36. Connection.close() returned 
+2023-07-31 12:12:09.028  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 37. Connection closed
+2023-07-31 12:12:09.028  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 37. Connection.close() returned 
+2023-07-31 12:12:09.032  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 38. Connection closed
+2023-07-31 12:12:09.032  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 38. Connection.close() returned 
+2023-07-31 12:12:09.037  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 39. Connection closed
+2023-07-31 12:12:09.037  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 39. Connection.close() returned 
+2023-07-31 12:12:09.041  INFO 11724 --- [HikariPool-4 connection closer] jdbc.connection                          : 40. Connection closed
+2023-07-31 12:12:09.041  INFO 11724 --- [HikariPool-4 connection closer] jdbc.audit                               : 40. Connection.close() returned 
+2023-07-31 12:12:09.041  INFO 11724 --- [RMI TCP Connection(24)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2023-07-31 12:12:10.745  INFO 13076 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Starting DevelopersFinalprojectApplication using Java 17.0.7 on DESKTOP-UTVUR1O with PID 13076 (C:\Users\GD\git\FinalProject_Developers\developers_finalproject\target\classes started by GD in C:\Users\GD\git\FinalProject_Developers\developers_finalproject)
+2023-07-31 12:12:10.746 DEBUG 13076 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Running with Spring Boot v2.7.15-SNAPSHOT, Spring v5.3.29
+2023-07-31 12:12:10.746  INFO 13076 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-07-31 12:12:10.785  INFO 13076 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\GD\.m2\repository\com\oracle\database\jdbc\ojdbc8\21.5.0.0\ojdbc8-21.5.0.0.jar referenced one or more files that do not exist: file:/C:/Users/GD/.m2/repository/com/oracle/database/jdbc/ojdbc8/21.5.0.0/oraclepki.jar
+2023-07-31 12:12:10.785  INFO 13076 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-31 12:12:10.785  INFO 13076 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-31 12:12:11.201  INFO 13076 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-07-31 12:12:11.217  INFO 13076 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JDBC repository interfaces.
+2023-07-31 12:12:11.669  INFO 13076 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2023-07-31 12:12:11.676  INFO 13076 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-31 12:12:11.676  INFO 13076 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.78]
+2023-07-31 12:12:11.855  INFO 13076 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-07-31 12:12:11.863  INFO 13076 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-31 12:12:11.864  INFO 13076 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1079 ms
+2023-07-31 12:12:12.260  INFO 13076 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-31 12:12:12.502  INFO 13076 --- [restartedMain] jdbc.connection                          : 1. Connection opened
+2023-07-31 12:12:12.502  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.new Connection returned 
+2023-07-31 12:12:12.503  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.getNetworkTimeout() returned 0
+2023-07-31 12:12:12.503  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.isReadOnly() returned false
+2023-07-31 12:12:12.503  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.getAutoCommit() returned true
+2023-07-31 12:12:12.506  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.isValid(1) returned true
+2023-07-31 12:12:12.507  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.getTransactionIsolation() returned 2
+2023-07-31 12:12:12.509  INFO 13076 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-31 12:12:12.514  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.getMetaData() returned oracle.jdbc.driver.OracleDatabaseMetaData@7157992
+2023-07-31 12:12:12.521  INFO 13076 --- [restartedMain] jdbc.audit                               : 1. Connection.clearWarnings() returned 
+2023-07-31 12:12:12.634  INFO 13076 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-31 12:12:12.670  INFO 13076 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2023-07-31 12:12:12.678  INFO 13076 --- [restartedMain] c.dev.DevelopersFinalprojectApplication  : Started DevelopersFinalprojectApplication in 2.226 seconds (JVM running for 2.763)
+2023-07-31 12:12:12.684  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 2. Connection opened
+2023-07-31 12:12:12.684  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.new Connection returned 
+2023-07-31 12:12:12.684  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.isReadOnly() returned false
+2023-07-31 12:12:12.684  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 2. Connection.getAutoCommit() returned true
+2023-07-31 12:12:12.751  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 3. Connection opened
+2023-07-31 12:12:12.752  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.new Connection returned 
+2023-07-31 12:12:12.752  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.isReadOnly() returned false
+2023-07-31 12:12:12.752  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 3. Connection.getAutoCommit() returned true
+2023-07-31 12:12:12.818  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 4. Connection opened
+2023-07-31 12:12:12.818  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.new Connection returned 
+2023-07-31 12:12:12.818  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.isReadOnly() returned false
+2023-07-31 12:12:12.818  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 4. Connection.getAutoCommit() returned true
+2023-07-31 12:12:12.889  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 5. Connection opened
+2023-07-31 12:12:12.889  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.new Connection returned 
+2023-07-31 12:12:12.890  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.isReadOnly() returned false
+2023-07-31 12:12:12.890  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 5. Connection.getAutoCommit() returned true
+2023-07-31 12:12:12.951  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 6. Connection opened
+2023-07-31 12:12:12.951  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.new Connection returned 
+2023-07-31 12:12:12.951  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.isReadOnly() returned false
+2023-07-31 12:12:12.951  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 6. Connection.getAutoCommit() returned true
+2023-07-31 12:12:13.009  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 7. Connection opened
+2023-07-31 12:12:13.009  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.new Connection returned 
+2023-07-31 12:12:13.009  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.isReadOnly() returned false
+2023-07-31 12:12:13.009  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 7. Connection.getAutoCommit() returned true
+2023-07-31 12:12:13.066  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 8. Connection opened
+2023-07-31 12:12:13.066  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.new Connection returned 
+2023-07-31 12:12:13.066  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.isReadOnly() returned false
+2023-07-31 12:12:13.066  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 8. Connection.getAutoCommit() returned true
+2023-07-31 12:12:13.122  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 9. Connection opened
+2023-07-31 12:12:13.122  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.new Connection returned 
+2023-07-31 12:12:13.122  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.isReadOnly() returned false
+2023-07-31 12:12:13.122  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 9. Connection.getAutoCommit() returned true
+2023-07-31 12:12:13.186  INFO 13076 --- [HikariPool-1 connection adder] jdbc.connection                          : 10. Connection opened
+2023-07-31 12:12:13.187  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.new Connection returned 
+2023-07-31 12:12:13.187  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.isReadOnly() returned false
+2023-07-31 12:12:13.187  INFO 13076 --- [HikariPool-1 connection adder] jdbc.audit                               : 10. Connection.getAutoCommit() returned true
+2023-07-31 12:12:28.243  INFO 13076 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-31 12:12:28.243  INFO 13076 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-31 12:12:28.244  INFO 13076 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-31 12:13:05.286  INFO 13076 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-31 12:13:05.296  INFO 13076 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-31 12:13:05.297  INFO 13076 --- [Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-07-31 12:13:05.304  INFO 13076 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-31 12:13:05.309  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 1. Connection closed
+2023-07-31 12:13:05.309  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 1. Connection.close() returned 
+2023-07-31 12:13:05.312  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 2. Connection closed
+2023-07-31 12:13:05.312  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 2. Connection.close() returned 
+2023-07-31 12:13:05.316  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 3. Connection closed
+2023-07-31 12:13:05.317  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 3. Connection.close() returned 
+2023-07-31 12:13:05.321  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 4. Connection closed
+2023-07-31 12:13:05.321  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 4. Connection.close() returned 
+2023-07-31 12:13:05.325  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 5. Connection closed
+2023-07-31 12:13:05.325  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 5. Connection.close() returned 
+2023-07-31 12:13:05.329  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 6. Connection closed
+2023-07-31 12:13:05.329  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 6. Connection.close() returned 
+2023-07-31 12:13:05.333  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 7. Connection closed
+2023-07-31 12:13:05.333  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 7. Connection.close() returned 
+2023-07-31 12:13:05.338  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 8. Connection closed
+2023-07-31 12:13:05.338  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 8. Connection.close() returned 
+2023-07-31 12:13:05.342  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 9. Connection closed
+2023-07-31 12:13:05.342  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 9. Connection.close() returned 
+2023-07-31 12:13:05.346  INFO 13076 --- [HikariPool-1 connection closer] jdbc.connection                          : 10. Connection closed
+2023-07-31 12:13:05.346  INFO 13076 --- [HikariPool-1 connection closer] jdbc.audit                               : 10. Connection.close() returned 
+2023-07-31 12:13:05.346  INFO 13076 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
