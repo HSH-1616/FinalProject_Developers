@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <script type="text/javascript"
-	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
 <link rel="stylesheet" href="${path }/css/accommodation/acPay.css" />
@@ -36,30 +36,20 @@
 						</div>
 					</div>
 					<hr />
-					<form method="post" id="payCategory">
-						<input type="hidden" name="acId" value="${ap.acId}">
-						<input type="hidden" name="userId" value="10000">
-						<input type="hidden" name="acTitle" value="${ap.acTitle}">
-						<input type="hidden" name="acPrice" value="">
-						<input type="hidden" name="checkIn" value="">
-						<input type="hidden" name="checkOut" value="">
-						<input type="hidden" name="people" value="">
-						<button class="pcBtn">
+					<div id="payCategory">						
+						<button class="pcBtn" type="button" id="cardPay">
 							<ion-icon name="card-outline"></ion-icon>
 							<span>카드 결제</span>
 						</button>
-						
-						<button class="pcBtn">
+
+						<button class="pcBtn" type="button" id="naverPay">
 							<img alt="" src="${path}/images/accommodation/naverPay.jpg">
 						</button>
-						
-						<button class="pcBtn" 
-							<%-- formaction="${path}/pay/kakao">  --%>
-							type="button" id="kakaoPay" > 
-							
+
+						<button class="pcBtn" type="button" id="kakaoPay">
 							<img alt="" src="${path}/images/accommodation/kakaoPay2.jpeg">
 						</button>
-					</form>
+					</div>
 
 					<hr />
 					<div id="hotelPayBtnCon">
@@ -97,8 +87,9 @@
 									<div>
 										<span>₩ <span id="exPrice"> <fmt:formatNumber
 													value="${ap.acPrice }" pattern="#,###" />
-										</span>x <span id="exDay"></span>박
-										</span> <span> ₩ <span id="resultPrice"></span>
+										</span>x <span id="exDay">${diff}</span>박
+										</span> <span> ₩ <span id="resultPrice"><fmt:formatNumber
+													value="${resultPrice }" pattern="#,###" /></span>
 										</span>
 									</div>
 								</div>
@@ -107,7 +98,8 @@
 								<hr />
 							</div>
 							<div class="hotelPayRealInfo">
-								<span>총합계</span> <span> ₩ <span id="realResultPrice"></span>
+								<span>총합계</span> <span> ₩ <span id="realResultPrice"><fmt:formatNumber
+													value="${resultPrice }" pattern="#,###" /></span>
 								</span>
 							</div>
 						</div>
@@ -117,6 +109,16 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		const acId=${ap.acId}
+		const acTitle='${ap.acTitle}'
+		const acPrice=${resultPrice}
+		const people=${fn:replace(people,"명","")}
+		const checkIn='${checkIn}'
+		const checkOut='${checkOut}'
+		const memberId='${loginMember.memberId}'
+		const memberName='${loginMember.memberNickname}'
+		const memberEmail='${loginMember.memberEmail}'
+		
 	</script>
 	<script src="${path }/js/accommodation/acPay.js"></script>
 </section>

@@ -1,6 +1,7 @@
 package com.dev.ac.dto;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +20,5 @@ public class AcFacilities {
 	private int afaWifi;
 	private int afaWasher;
 	private int afaParking;
-	private List<AfaList> afal;
+	private List<AfaList> afal=new ArrayList();
 }

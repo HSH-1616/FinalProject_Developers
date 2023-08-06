@@ -3,6 +3,7 @@ package com.dev.ac.service;
 import java.util.List;
 import java.util.Map;
 
+import com.dev.ac.dto.AcPay;
 import com.dev.ac.dto.Accommodation;
 
 public interface AcService {
@@ -14,4 +15,16 @@ public interface AcService {
 	Accommodation acDetail(int no);
 	
 	Accommodation acPay(int no);
+	
+	AcPay checkPayRefund(int no);
+	
+	int insertPay(Map param);
+	
+	int deletePay(int apId);
+	
+	List<Accommodation> acRefundTest();
+	
+	int insertHeart(Map param);
+	
+	int deleteHeart(Map param);
 }

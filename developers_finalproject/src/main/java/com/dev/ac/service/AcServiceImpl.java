@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dev.ac.dao.AcDao;
+import com.dev.ac.dto.AcPay;
 import com.dev.ac.dto.Accommodation;
 
 @Service
@@ -38,5 +39,34 @@ public class AcServiceImpl implements AcService {
 	public Accommodation acPay(int no) {
 		return dao.acPay(session,no);
 	}
+	
+	@Override
+	public AcPay checkPayRefund(int no) {
+		return dao.checkPayRefund(session,no);
+	}
+	
+	@Override
+	public int insertPay(Map param) {
+		return dao.insertPay(session,param);
+	}
+	
+	@Override
+	public int deletePay(int apId) {
+		return dao.deletePay(session,apId);
+	}
+	
+	@Override
+	public List<Accommodation> acRefundTest() {
+		return dao.acRefundTest(session);
+	}
 
+	@Override
+	public int insertHeart(Map param) {	
+		return dao.insertHeart(session,param);
+	}
+	
+	@Override
+	public int deleteHeart(Map param) {	
+		return dao.deleteHeart(session,param);
+	}
 }

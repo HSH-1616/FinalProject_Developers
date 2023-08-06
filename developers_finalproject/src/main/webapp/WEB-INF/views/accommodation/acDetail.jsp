@@ -48,6 +48,9 @@
 							<ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
 							<ion-icon id="detailHeartOn" name="heart"></ion-icon>
 							찜하기
+							<c:forEach var="ah" items="${ad.acHearts }">
+							<p>${ah.memberId}</p>
+							</c:forEach>
 						</button>
 					</div>
 				</div>
@@ -166,7 +169,7 @@
 			</div>
 			<div class="detailHotelImage">
 				<div>
-					<div class="container">
+					<div class="container2">
 						<div class="images">
 							<div class="imageFlex1">
 								<img
@@ -433,9 +436,10 @@
 											value="${ad.acPrice }" pattern="#,###" /></span> <span> /박</span></span>
 							</div>
 						</div>
-						<form id="detailForm" action="${path}/ac/acPay">
+						<form id="detailForm" action="${path}/ac/acPay" method="post">
 							<div class="detailHotelFunc">
 								<input type="hidden" name="no" value="${ad.acId }">
+								<input type="hidden" name="resultPrice" value="${ad.acId }">
 								<div>
 									<div class="detailHotelCheckDay">
 										<div>
@@ -452,8 +456,8 @@
 									<div class="detailHotelPeople">
 										<div>
 											<span>인원</span> <input type="text" readonly id="payPeople"
-												name="people" value="인원추가"> <input type="hidden"
-												id="maxPeople" value="${ad.acPeople }">
+												name="people" value="인원추가"> 
+												<input type="hidden"id="maxPeople" value="${ad.acPeople }">
 											<ion-icon name="chevron-down-outline"></ion-icon>
 											<ion-icon name="chevron-up-outline"></ion-icon>
 										</div>
@@ -469,7 +473,7 @@
 															name="remove-circle-outline"></ion-icon>
 													</button>
 													<div id="peopleCountCon">
-														<input type="number" id="peopleCount" value="1" min="1"
+														<input type="number" id="peopleCount" value="0" min="1"
 															max="10" />
 													</div>
 													<button type="button" class="countBtn"
@@ -489,8 +493,9 @@
 							<div class="detailHotelPriceCalc">
 								<div>
 									<div class="detailHotelEx">
-										<span> <span>₩</span> <span id="exPrice2"> <fmt:formatNumber
-													value="${ad.acPrice }" pattern="#,###" />
+										<span> <span>₩</span> 
+										<span id="exPrice2"> 
+										<fmt:formatNumber value="${ad.acPrice }" pattern="#,###" />
 										</span>
 										</span> <span class="multiply">X</span> <span id="exDay">1</span><span
 											style="font-size: 0.8rem">박</span>
@@ -536,6 +541,11 @@
 		</div>
 	</div>
 	<script>
+	
+	 <c:if test="${not empty loginMember }">
+
+	</c:if> 
+	
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host) + location.host.length;
 		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
@@ -617,9 +627,21 @@
 					checkOut : [ "${ap.checkOut}"]
 			})
 		</c:forEach>
+			
+		$(".detailHotelBtn.on").on("click",function(e){			
+			if(${empty loginMember}){
+				e.preventDefault()
+				$("#modal").css("display","flex")
+			}else{
+				
+			}
+		})
+	
+			
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acDetail.js"></script>
 
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+

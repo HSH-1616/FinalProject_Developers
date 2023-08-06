@@ -16,7 +16,8 @@
 						<a class="hotelItem" href="${path}/ac/acDetail?no=${al.acId}">
 							<div class="heartContainer">
 								<div class="con-like">
-									<input title="like" type="checkbox" class="like" />
+									<input title="like" type="checkbox" class="like"
+										value="${al.acId}" />
 									<div class="checkmark">
 										<svg viewBox="0 0 24 24" class="outline"
 											xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +104,7 @@
 											</span>
 										</c:if>
 										<c:if test="${al.reviewGrade=='0.0'}">
-										<span>리뷰 없음</span>
+											<span>리뷰 없음</span>
 										</c:if>
 									</div>
 								</div>
@@ -118,9 +119,32 @@
 		</c:choose>
 	</div>
 </div>
-<<script type="text/javascript">
+<script type="text/javascript">
+<c:if test="${not empty loginMember }">
+<c:forEach var="al" items="${ac}">
+<c:forEach var="ah" items="${al.acHearts}">
+	<c:if test="${loginMember.memberId==ah.memberId}">
+		$(".like").each(function(i,l){
+			if($(this).val()==${ah.acId}){
+				$(this).prop("checked",true)
+			}
+		})
+	</c:if>
+</c:forEach>
+</c:forEach>
+</c:if>
 	var checkInOutDay = []
+	var memberId=""
+	$(".like").on("click",function(e){			
+		if(${empty loginMember}){
+			e.preventDefault()
+			$("#modal").css("display","flex")
+		}else{
+			memberId="${loginMember.memberId}"
+		}
+	})
 </script>
+<script src="${path }/js/accommodation/acList.js"></script>
 <script src="${path }/js/accommodation/acSearchBar.js"></script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

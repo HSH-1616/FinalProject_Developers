@@ -1,51 +1,153 @@
 package com.dev.ac.pay.controller;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dev.ac.dto.AcPay;
 import com.dev.ac.pay.dto.KaKaoPayApproval;
 import com.dev.ac.pay.dto.KaKaoPayReady;
-import com.dev.ac.pay.service.AcPayService;
+import com.dev.ac.pay.dto.KaKaoRefund;
+import com.dev.ac.pay.service.AcPayServiceImpl;
+import com.dev.ac.service.AcService;
 import com.dev.member.model.dto.Member;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 
 @RequestMapping("/pay")
 @Controller
 public class AcPayController {
-	
-	
-	
-	private AcPayService service;
+
+	private AcService service;
+	private AcPayServiceImpl serviceImpl;
 	private HttpSession session;
-	
-	public AcPayController(AcPayService service,HttpSession session) {
+	private IamportClient api;
+
+	public AcPayController(AcService service, AcPayServiceImpl serviceImpl, HttpSession session) {
 		this.service = service;
-		this.session=session;
+		this.serviceImpl = serviceImpl;
+		this.session = session;
+		this.api = new IamportClient("1316386156744513",
+				"qRK7TjTXM7d8eMSMJ6VHCRFhBOUnfmE5zLYZiuunvsaIT9qODtziOmeJvq5bPcLjRWdv7I7g02kG4HG1");
+	}
+
+	@PostMapping("/kakaoPay")
+	@ResponseBody
+	public KaKaoPayReady kakaoPayReady(@RequestBody Map<String, String> param) {
+		/*
+		 * Member member = (Member) session.getAttribute("loginMember"); String memberId
+		 * = String.valueOf(member.getMemberId()); param.put("memberId", memberId);
+		 */
+
+		return serviceImpl.kakaoPayReady(param);
 	}
 	
-	@GetMapping("/kakao")
-	@ResponseBody
-	public KaKaoPayReady kakaoPayReady(String acId, String acTitle, String acPrice) {
-		Member member=(Member)session.getAttribute("loginMember");
-		String memberId=String.valueOf(member.getMemberId());
-		return service.kakaoPayReady(acId,memberId,acTitle,acPrice);
+	@GetMapping("/kakaoPayOk")
+	public String kakaoPayApporval(Map param, @RequestParam("pg_token") String pgToken,
+			@RequestParam("acId") String acId, @RequestParam("acPrice") String acPrice,
+			@RequestParam("checkIn") String checkIn, @RequestParam("checkOut") String checkOut,
+			@RequestParam("people") String people, @RequestParam("orderId") String orderId, RedirectAttributes ra) {
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+
+		KaKaoPayApproval KaKaoPayApproval = serviceImpl.kakaoPayApproval(pgToken, memberId, orderId);
+
+		if (KaKaoPayApproval != null) {
+			param.put("acId", acId);
+			param.put("memberId", memberId);
+			param.put("acPrice", acPrice);
+			param.put("checkIn", checkIn);
+			param.put("checkOut", checkOut);
+			param.put("people", people);
+			param.put("orderId", orderId);
+			param.put("keyId", KaKaoPayApproval.getTid());
+
+			// 결제가 승인되면 DB에 저장하기 위해 controller로 redirect
+			// 결제키가 담겨있어 POST로 전송하기 위해 flashAttribute 사용
+			ra.addFlashAttribute("param", param);
+
+			return "redirect:/ac/insertPay";
+
+		} else {
+			return "";
+		}
 	}
 	
 	@GetMapping("/kakaoPayCancel")
 	public String kakaoPayCancel() {
-		return "redirect:";
+		return "/accommodation/acError";
 	}
 	
-	@GetMapping("/kakaoPayOk")
-    public String kakaoPayApporval(@RequestParam("pg_token") String pgToken,@ModelAttribute("tid") String tid) {
-		Member member=(Member)session.getAttribute("loginMember");
-		String memberId=String.valueOf(member.getMemberId());
-		KaKaoPayApproval KaKaoPayApproval = service.KaKaoPayApproval(pgToken,memberId);
-		return "/accommodation/acPayResult";
-    }
+	@GetMapping("/kakaoPayFail")
+	public String kakaoPayFail() {
+		return "/accommodation/acError";
+	}
+
+	@PostMapping("/kakaoRefund")
+	@ResponseBody
+	public KaKaoRefund kakaoRefund(String acPrice, int apId) {
+
+		AcPay ap = service.checkPayRefund(apId);
+		String keyId = ap.getApKeyId();
+		KaKaoRefund kakaoRefund = serviceImpl.kakaoRefund(keyId, acPrice);
+		if (kakaoRefund != null) {
+			int result = service.deletePay(apId);
+		}
+		return kakaoRefund;
+	}
+
+	public IamportResponse<Payment> checkIamport(String impUid) throws IamportResponseException, IOException {
+		return api.paymentByImpUid(impUid);
+	}
+
+	@ResponseBody
+	@PostMapping("/cardPay")
+	public IamportResponse<Payment> verifyIamport(@RequestBody Map param) throws IamportResponseException, IOException {
+
+		String impUid = (String) param.get("imp_uid");// 실제 결제금액 조회위한 아임포트 서버쪽에서 id
+		// 아임포트 서버쪽에 결제된 정보 조회.
+		IamportResponse<Payment> irsp = checkIamport(impUid);
+
+		if (irsp != null) {
+			param.put("keyId", impUid);
+			service.insertPay(param);
+		}
+
+		return irsp;
+	}
+
+	@ResponseBody
+	@PostMapping("refundIamport")
+	public IamportResponse<Payment> refundIamport(String acPrice, int apId)
+			throws IamportResponseException, IOException {
+
+		AcPay ap = service.checkPayRefund(apId);
+		String keyId = ap.getApKeyId();
+
+		CancelData data = new CancelData(keyId, true);
+		data.setChecksum(new BigDecimal(acPrice));
+		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(data);// 취소
+		if (cancel != null) {
+			int result = service.deletePay(apId);
+			if (result > 0) {
+				return cancel;
+			}
+		}
+		return cancel;
+	}
+
 }

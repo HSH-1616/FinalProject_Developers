@@ -1,0 +1,868 @@
+#hotelRegistCon {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: unset;
+	margin: unset;
+}
+
+.hotelRegist {
+	width: 1300px;
+}
+
+/* 등록페이지 헤더 */
+.registHeader {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	display: flex;
+	align-items: center;
+}
+
+.registHeader button {
+	border: none;
+	background-color: white;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.registHeader span {
+	margin-left: 10px;
+	font-size: 1.5rem;
+}
+
+.registHeader ion-icon {
+	margin-bottom: 7px;
+}
+
+/* /등록페이지 헤더/ */
+
+/* 구역별 제목 */
+.registTitle {
+	margin-top: 50px;
+	margin-bottom: 25px;
+}
+
+.registTitle h2 {
+	font-size: 1.3rem;
+	color: #b31312;
+}
+
+.registTitle hr {
+	border: 0;
+	height: 0;
+	opacity: unset;
+	border-top: 2px solid #eeeeee;
+	margin-top: 0px;
+}
+
+/* /구역별 제목/ */
+
+/* 이미지 파일 업로드 */
+.registImgCon {
+	display: flex;
+	justify-content: center;
+}
+
+.registImg {
+	width: 90%;
+}
+
+#imgInfo {
+	margin-top: 15px;
+}
+
+.registImg p {
+	color: #b31312;
+}
+
+#dropPreview ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#dropPreview li {
+	width: 30%;
+	margin: 1%;
+}
+
+#dropPreview>ul>li h6,
+#dropPreview>ul>li p {
+	font-size: 0.9rem;
+	width: 200px;
+}
+
+.flex-grow-1 {
+	position: relative;
+	height: 90px;
+}
+
+.pt-1 {
+	word-break: break-all;
+}
+
+.ms-3 {
+	position: absolute;
+	top: 60px;
+	left: 70px;
+
+}
+
+#dropDiv {
+	border: 3px solid #afafaf;
+	height: 400px;
+	background-image: url("../../images/common/logo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 20px;
+}
+
+.dropzonePreview {
+	/* width: 200px; */
+	height: 200px;
+	/* display: flex;
+  align-items: center; */
+}
+
+.dropzonePreview img {
+	width: 150px;
+	height: 150px;
+}
+
+.dropzonePreview h6 {
+	font-size: 0.8rem;
+}
+
+.shrink-0.ms-3 button {
+	background-color: #b31312;
+	top: unset;
+	width: 100px;
+	height: 40px;
+}
+
+/* /이미지 파일 업로드/ */
+
+/* 상세정보 왼쪽  */
+.registDetail {
+	display: flex;
+	justify-content: space-between;
+}
+
+.registDetail h5 {
+	font-size: 1.2rem;
+	margin-bottom: 15px;
+}
+
+.registDetail h5>span {
+	font-size: 1rem;
+	color: #b31312;
+	margin-left: 10px;
+}
+
+#rdLeft {
+	position: relative;
+	width: 47%;
+}
+
+#rdLeft>input {
+	margin-bottom: 30px;
+	border: 2px solid #b31312;
+	height: 40px;
+	padding: 5px;
+	border-radius: 8px;
+}
+
+#rdLeft>input:focus {
+	border: 2px solid #b31312;
+}
+
+#rdLeft>input:nth-of-type(1) {
+	width: 100%;
+}
+
+#rdLeft>input:nth-of-type(2) {
+	width: 40%;
+}
+
+.warnReg {
+	display: none;
+	margin-top: -15px;
+	margin-bottom: 15px;
+	color: #b31312;
+}
+
+.textNumCheck {
+	position: absolute;
+	right: 8px;
+	margin-top: 8px;
+}
+
+.registHotelType {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.rt {
+	position: relative;
+	width: 25%;
+	text-align: center;
+}
+
+.rt img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+.rt p {
+	font-size: 1.1rem;
+	margin-top: 10px;
+	color: #999;
+}
+
+.rt input {
+	display: none;
+}
+
+.blurRt {
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	height: 75%;
+	width: 100%;
+	background: #000;
+	opacity: 0.6;
+	border-radius: 10px;
+}
+
+.blurRt.on {
+	opacity: 0;
+}
+
+.rtTitle.on {
+	color: #b31312;
+}
+
+.rt:hover>.blurRt {
+	cursor: pointer;
+	opacity: 0;
+}
+
+.rt:hover>p {
+	color: #b31312;
+}
+
+.hotelCountTable {
+	border-collapse: separate;
+	border-spacing: 0 20px;
+}
+
+.hotelCountTable tr>td:nth-child(2) {
+	display: flex;
+	margin-bottom: 3px;
+	margin-left: 10px;
+}
+
+.hotelCountTable tr>td:nth-child(2) input {
+	border: none;
+	width: 30px;
+	font-size: 1.2rem;
+	text-align: center;
+	outline: none;
+}
+
+.hotelCountHeader {
+	font-size: 1.2rem;
+}
+
+.hotelCountBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	color: #b31312;
+	font-size: 1.5rem;
+	background-color: white;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.hotelCountBtn:first-of-type {
+	color: #afafaf;
+}
+
+.hotelCountInput {
+	text-align: center;
+}
+
+.hotelCount input {
+	border: none;
+	width: 30px;
+	font-size: 1.2rem;
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.hotelCountInfo {
+	color: #b31312;
+	margin-left: 10px;
+}
+
+/* /상세정보 왼쪽/  */
+
+/* 상세정보 오른쪽 */
+
+#rdRight {
+	width: 47%;
+}
+
+#rdRight input {
+	margin-bottom: 30px;
+	border: 2px solid #b31312;
+	height: 40px;
+	padding: 5px;
+	border-radius: 8px;
+}
+
+#zipDiv {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+#zipDiv input {
+	width: 30%;
+	margin: 0;
+}
+
+#zipDiv button {
+	background-color: #b31312;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	width: 70px;
+	height: 40px;
+	font-size: 0.8rem;
+	position: relative;
+	left: 10px;
+}
+
+#addressDiv {
+	display: flex;
+	justify-content: space-between;
+}
+
+#addressDiv input {
+	width: 48%;
+}
+
+#aaDetail {
+	width: 48%;
+}
+
+#registMap {
+	display: block;
+	height: 410px;
+	border: 3px solid #b31312;
+}
+
+/* /상세정보 오른쪽/ */
+
+/* 숙박업소 설명 */
+
+.registIntroduce {
+	display: flex;
+	justify-content: center;
+	/* position: relative; */
+}
+
+.registIntroduce div {
+	position: relative;
+	width: 90%;
+}
+
+.registIntroduce textarea {
+	width: 100%;
+	border: 3px solid #afafaf;
+	border-radius: 20px;
+	padding: 15px;
+	height: 400px;
+	/* margin-top: 20px; */
+	resize: none;
+	overflow: auto;
+}
+
+.registIntroduce div>span {
+	position: absolute;
+	top: 350px;
+	right: 30px;
+}
+
+/* /숙박업소 설명/ */
+
+/* 편의시설 */
+/* 편의시설 왼쪽 */
+.detailHotelFcCon {
+	display: flex;
+	justify-content: space-between;
+	height: 380px;
+}
+
+.detailHotelFcCon h5 {
+	font-size: 1.2rem;
+	margin-bottom: -5px;
+}
+
+#fcLeft {
+	width: 47%;
+}
+
+.detailHotelFc {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.detailHotelFc>div {
+	position: relative;
+	width: 30%;
+	height: 120px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.detailHotelFc img {
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+}
+
+.detailHotelFc div>p {
+	margin-top: 10px;
+	font-size: 1rem;
+	z-index: 3;
+	color: #afafaf;
+}
+
+.detailHotelFc div>input {
+	display: none;
+}
+
+.blurFc {
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	opacity: 0.6;
+	border-radius: 20px;
+}
+
+.blurFc.on {
+	opacity: 0;
+}
+
+.blurFc:hover {
+	opacity: 0;
+}
+
+.blurFc:hover~.fcTitle {
+	color: #b31312;
+}
+
+.fcTitle.on {
+	color: #b31312;
+}
+
+
+
+/* /편의시설 왼쪽/ */
+
+/* 편의시설 오른쪽 */
+#fcRight {
+	width: 47%;
+}
+
+#fcRight h5>span {
+	font-size: 1rem;
+	color: #b31312;
+	margin-left: 10px;
+}
+
+.insertFc {
+	width: 30%;
+	height: 120px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	text-align: center;
+	border: 3px solid #afafaf;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#insertFcCon {
+	display: flex;
+	flex-wrap: wrap;
+	height: 320px;
+	margin-bottom: 30px;
+}
+
+.insertFc {
+	margin-left: 5%;
+}
+
+.insertFc:nth-child(1),
+.insertFc:nth-child(4) {
+	margin-left: 0;
+}
+
+.insertFc div {
+	text-align: center;
+}
+
+.insertFc ion-icon {
+	font-size: 3rem;
+	width: 100%;
+	display: block;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	color: #afafaf;
+}
+
+.insertFc p {
+	color: #afafaf;
+}
+
+.insertFc:hover {
+	border: 3px solid #b31312;
+}
+
+.insertFc:hover * {
+	color: #b31312;
+}
+
+.insertFcImageCon {
+	width: 30%;
+	height: 120px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	text-align: center;
+	border: 3px solid #b31312;
+	border-radius: 20px;
+	margin-left: 5%;
+}
+
+.insertFcImageCon:nth-of-type(1),
+.insertFcImageCon:nth-of-type(4) {
+	margin-left: 0;
+}
+
+.insertFcImage {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.deleteFc {
+	cursor: pointer;
+	position: absolute;
+	color: #b31312;
+	font-size: 1.7rem;
+	right: 5px;
+	top: 5px;
+}
+
+.insertFcImage label {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.insertFcImage>label ion-icon {
+	font-size: 3rem;
+	color: #b31312;
+	display: block;
+	margin-top: 22px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.insertFcImage p {
+	color: #b31312;
+}
+
+.insertFcImage label:hover {
+	cursor: pointer;
+}
+
+.insertFcImage input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+.insertFcImage img {
+	display: none;
+	position: absolute;
+	width: 185px;
+	height: 100%;
+	border-radius: 20px;
+	bottom: 3px;
+	z-index: 2;
+}
+
+.blurInsertFc {
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	z-index: 3;
+	width: 103%;
+	height: 100%;
+	bottom: 3px;
+	background: #000;
+	opacity: 0;
+	border-radius: 20px;
+}
+
+.insertFcDelete {
+	position: absolute;
+	font-size: 1rem;
+	width: 100px;
+	height: 30px;
+	background-color: transparent;
+	color: white;
+	border: 1px solid white;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 37%;
+	opacity: 1;
+}
+
+.blurInsertFc:hover {
+	opacity: 0.7;
+}
+
+.blurInsertFc:hover>.insertFcDelete {
+	display: block;
+}
+
+.insertFcDelete:hover~.blurInsertFc {
+	opacity: 0.4;
+}
+
+#insertFcName {
+	width: 100%;
+	text-align: center;
+	border: none;
+	font-size: 1rem;
+	font-weight: normal;
+	margin-top: 5px;
+	z-index: 2;
+}
+
+#insertFcWarn {
+	display: none;
+	color: #b31312;
+	font-size: 1.2rem;
+}
+
+/* /편의시설 오른쪽/ */
+/* /편의시설 */
+
+/* 등록 버튼 */
+
+.registBtnCon {
+	margin: 0 0 45px;
+}
+
+.registBtnCon hr {
+	border: 0;
+	height: 0;
+	opacity: unset;
+	border-top: 2px solid #eeeeee;
+	margin-top: 40px;
+	margin-bottom: 45px;
+}
+
+.registBtn {
+	display: flex;
+	justify-content: center;
+}
+
+.registBtn button {
+	width: 200px;
+	height: 70px;
+	font-size: 1.3rem;
+	border-radius: 10px;
+}
+
+#registOkBtn {
+	border: none;
+	background-color: #eeeeee;
+	color: white;
+	margin-right: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+#registOkBtn:hover {
+	background-color: #b31312;
+}
+
+#registCancelBtn {
+	border: none;
+	background-color: #eeeeee;
+	color: black;
+	margin-left: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+/* /등록 버튼/ */
+
+#registCalander {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.searchCalander {
+	width: 800px;
+	height: 550px;
+
+}
+
+.calHeader {
+	width: 700px;
+}
+
+.calMonth {
+	right: 60px;
+}
+
+.calNextMonth {
+	left: 60px;
+}
+
+
+.day {
+	height: 45px;
+}
+
+#registHoliday {
+	width: 400px;
+}
+
+#registHoliday h5 {
+	font-size: 1.2rem;
+	margin-bottom: 15px;
+}
+
+#holyInput {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#holyInput>div {
+	position: relative;
+	width: 47%;
+	text-align: center;
+}
+
+#holyInput>div:last-child {
+	width: 100%;
+	display: flex;
+	justify-content: end;
+}
+
+#holyInput>div:last-child >button {
+	margin-top: 20px;
+	width: 100px;
+	height: 40px;
+	background-color: #b31312;
+	color: white;
+	border: none;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	border-radius: 10px;
+}
+
+#holyInput>div p {
+	font-size: 1.1rem;
+	margin-bottom: 5px;
+}
+
+#holyInput>div input {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	border: 2px solid #b31312;
+	outline:none;
+	border-radius: 8px;
+	font-size: 1rem;
+}
+
+#holyInput>div ion-icon {
+	display: none;
+	position: absolute;
+	color: #b31312;
+	font-size: 1.5rem;
+	margin-top: 7px;
+	right: 8px;
+	
+}
+
+#registHoliday hr{
+	border: 0;
+    height: 0;
+    opacity: unset;
+    border-top: 2px solid #eeeeee;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#holyResult>div{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	align-items: center;
+}
+
+#holyResult>div>input{
+	width: 125px;
+	border: none;
+	outline: none;
+	text-align: center;
+	
+	
+}
+
+#holyResult>div>button{
+	width: 55px;
+	height: 30px;
+	background-color: #b31312;
+	color: white;
+	border: none;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	border-radius: 5px;
+	font-size: 0.9rem;
+}

@@ -4,18 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<link rel="stylesheet" href="${path }/css/accommodation/acPayResult.css" />
+<link rel="stylesheet" href="${path }/css/accommodation/acError.css" />
 <section>
 	<div>
-		<div id="timerCon">
-			<div id="timer">
-				<h3>예약이완료 되었습니다.</h3>
-				<h3>
-					<span>10</span>초 후에 예약내역으로 이동합니다.
-				</h3>
-				<img src="${path}/images/accommodation/payCheck.png" alt="" />
+		<div id="errorCon">
+			<div id="error">
+				<h3>잘못된 요청입니다.</h3>				
+				<img src="${path}/images/accommodation/acError.png" alt="" />
 				<div>
-					<button>예약내역 바로가기</button>
+					<button onclick="history.back()">뒤로가기</button>
 				</div>
 			</div>
 		</div>

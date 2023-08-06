@@ -130,6 +130,7 @@ $(document).on("click", ".detailHotelPeople", function() {
 	}
 })
 
+
 $(".detailHotelModal").on("click",function(){
 	//$(".searchPeople.detail").hide()
 })
@@ -161,6 +162,7 @@ $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
+		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",",""))
 	} else {
 		$(".day").removeClass("last");
 		$("#outDayBtn").hide();
@@ -170,6 +172,7 @@ $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
+		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",",""))
 	}
 	payCheck()
 });
@@ -207,6 +210,7 @@ function countFn2(type) {
 			}
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+			$("input[name=resultPrice]").val(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",",""))
 		} else {
 			$("#countInfo").text("최소 1명부터 "+$("#maxPeople").val()+"명까지 선택가능 합니다.");
 		}
@@ -226,6 +230,7 @@ function countFn2(type) {
 			}
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+			$("input[name=resultPrice]").val(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",",""))
 		} else {
 			$("#countInfo").text("최소 1명부터 "+$("#maxPeople").val()+"명까지 선택가능 합니다.");
 		}
@@ -262,6 +267,7 @@ setTimeout(function() {
 			diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 			$("#exDay").text(diff)
 			$("#resultPrice,#realResultPrice").text(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+			$("input[name=resultPrice]").val(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",",""))
 		}
 		payCheck()
 	})
