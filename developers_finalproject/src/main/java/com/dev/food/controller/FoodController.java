@@ -43,9 +43,9 @@ public class FoodController {
 	@GetMapping("/foodApi")
 	public String callApi(Model m) throws Exception {
 		
-		boolean result = service.searchByBoolean();
-		System.out.println(result);
-		if(result == false) {
+		int result = service.selectFoodCount();
+		System.out.println("음식점 수 : "+result);
+		if(result != 0) {
 			//api -> DB
 			System.out.println("api -> DB");
 
@@ -111,11 +111,13 @@ public class FoodController {
 							.foodNo(Integer.parseInt(StringType))
 							.fpName(item.get("firstimage").toString().replaceAll("\"", ""))
 							.fpMain(1)
+							.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
 							.build();
 //					System.out.println(food);
 //					System.out.println(fp);
 					service.insertFood(food,fp);
 					service.mergeFood();
+					service.mergeFoodPhoto();
 				}
 			}
 		}
@@ -130,9 +132,9 @@ public class FoodController {
 	@GetMapping("/foodInfoApi")
 	public String foodInfoApi(int foodNo, Model m) throws IOException,Exception {
 		
-		int result = service.searchByFoodNo(foodNo);
-		System.out.println(result);
-		if(result == 0) {
+		String result = service.searchByFoodNo(foodNo);
+		System.out.println("상세정보 유무 : "+result);
+		if(result == null) {
 			//api -> DB
 			System.out.println("api -> DB");
 			StringBuilder result2 = new StringBuilder();
@@ -260,6 +262,7 @@ public class FoodController {
 				.foodNo(foodNo)
 				.fpName(item3.get("originimgurl").toString().replaceAll("\"", ""))
 				.fpMain(0)
+				.fpId(item3.get("originimgurl").toString().replaceAll("\"", ""))
 				.build();
 			service.insertFoodPhoto(fp);
 			service.mergeFoodPhoto();

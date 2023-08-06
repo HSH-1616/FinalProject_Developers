@@ -86,13 +86,8 @@ public class FoodServiceImpl implements FoodService{
 	}
 
 	@Override
-	public int searchByFoodNo(int foodNo) {
+	public String searchByFoodNo(int foodNo) {
 		return dao.searchByFoodNo(session,foodNo);
-	}
-	
-	@Override
-	public boolean searchByBoolean() {
-		return dao.searchByBoolean(session);
 	}
 	
 }

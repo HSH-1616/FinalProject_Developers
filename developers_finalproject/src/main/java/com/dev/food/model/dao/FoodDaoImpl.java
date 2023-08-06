@@ -78,13 +78,8 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-	public int searchByFoodNo(SqlSession session,int foodNo) {
+	public String searchByFoodNo(SqlSession session,int foodNo) {
 		return session.selectOne("food.searchByFoodNo",foodNo);
-	}
-
-	@Override
-	public boolean searchByBoolean(SqlSession session) {
-		return session.selectOne("food.searchByBoolean");
 	}
 	
 }

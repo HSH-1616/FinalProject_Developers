@@ -30,8 +30,6 @@ public interface FoodService {
 	
 	Food selectFoodByNo(int no);
 	
-	int searchByFoodNo(int foodNo);
-	
-	boolean searchByBoolean();
+	String searchByFoodNo(int foodNo);
 
 }

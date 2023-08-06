@@ -30,7 +30,5 @@ public interface FoodDao {
 	
 	Food selectFoodByNo(SqlSession session, int no);
 	
-	int searchByFoodNo(SqlSession session,int foodNo);
-	
-	boolean searchByBoolean(SqlSession session);
+	String searchByFoodNo(SqlSession session,int foodNo);
 }

@@ -13,14 +13,16 @@
 		<table>
 		<tbody>
 			<c:forEach var="f" items="${foods}" varStatus="vs">
-				<c:set var="fp" value="${f.foodPhoto[0]}"/>
+				<%-- <c:set var="fp" value="${f.foodPhoto[0]}"/> --%>
 				<form action="/foodInfoApi" >
 					<tr>
 						<td>
-							<c:if test="${fp.fpMain == 1}">
-								<img alt="대표이미지" src="${fp.fpName}" style="width: 300px;height: 300px;"><br>						
-							</c:if>
-							<c:if test="${fp.fpMain != 1}"></c:if>
+							<c:forEach var="fp" items="${f.foodPhoto}">
+								<c:if test="${fp.fpMain == 1}">
+									<img alt="대표이미지" src="${fp.fpName}" style="width: 300px;height: 300px;"><br>						
+								</c:if>
+								<c:if test="${fp.fpMain != 1}"></c:if>
+							</c:forEach>
 							<input type="text" name="foodNo" value="${f.foodNo}"><br>
 							<input type="text" name="foodName" value="${f.foodName}"><br>
 							<input type="text" name="foodAddress" value="${f.foodAddress}">

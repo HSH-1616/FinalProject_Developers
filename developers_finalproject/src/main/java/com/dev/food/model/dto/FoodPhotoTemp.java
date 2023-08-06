@@ -15,4 +15,5 @@ public class FoodPhotoTemp {
 	private int foodNo;
 	private String fpName;
 	private int fpMain;
+	private String fpId;
 }
