@@ -38,6 +38,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <section>
+<h1>ㅎㅇ</h1>
 	<!-- 맛집 리스트 순서 -->
 	<div id="foodList_theme">
 		<div id="food_main_theme">
