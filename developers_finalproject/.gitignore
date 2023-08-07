@@ -43,10 +43,7 @@ tmp/
 /mappers/*
 /log/*
 .project
-<<<<<<< HEAD
 .classpath
 .factorypath
-=======
-.factorypath
-.classpath
->>>>>>> branch 'main' of https://github.com/HSH-1616/FinalProject_Developers.git
+
+
