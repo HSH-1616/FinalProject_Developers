@@ -43,5 +43,7 @@ tmp/
 /mappers/*
 /log/*
 .project
-.factorypath
 .classpath
+.factorypath
+
+
