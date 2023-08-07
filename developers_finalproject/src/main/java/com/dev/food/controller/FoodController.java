@@ -168,6 +168,7 @@ public class FoodController {
 			}
 		}
 		//DB 불러오는 과정
+		System.out.println("DB 불러오는 과정");	
 		List<Food> foods = service.selectFoodAllTest(); //FOOD + FOODPHOTO
 		System.out.println("flag : "+foods);
 		m.addAttribute("foods", foods);			
@@ -272,7 +273,7 @@ public class FoodController {
 		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
-		return "/food/foodView";
+		return "/food/foodDetail";
 	}
 	
 	

@@ -12,9 +12,9 @@
 		<h2>총 ${fn:length(foods)}개의 음식점</h2>
 		<table>
 		<tbody>
-			<c:forEach var="f" items="${foods}" varStatus="vs">
+			<c:forEach var="f" items="${foods}" end="50">
 				<%-- <c:set var="fp" value="${f.foodPhoto[0]}"/> --%>
-				<form action="/foodInfoApi" >
+				<form action="/food/foodInfoApi" >
 					<tr>
 						<td>
 							<c:forEach var="fp" items="${f.foodPhoto}">
