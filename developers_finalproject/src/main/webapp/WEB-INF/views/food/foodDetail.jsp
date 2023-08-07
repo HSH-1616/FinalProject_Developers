@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/> 
 
 <head>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -26,14 +27,11 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
-    <link rel="stylesheet" href="./css/header.css"/>
-    <link rel="stylesheet" href="./css/foodDetail.css"/>
-    <link rel="stylesheet" href="./css/default.css" />
-    <link rel="stylesheet" href="./css/hotel.css" />
+    <link rel="stylesheet" href="${path }/css/food/foodDetail.css"/>
+    <link rel="stylesheet" href="${path }/css/default.css" />
 
     <script src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
 
-   <link rel="stylesheet" href="css/food/foodDetail.css" />
    <script src="${path }/js/food/foodList.js" />
    <c:set var="f" value="${foods[0]}"/>
 </head>
@@ -46,7 +44,7 @@
       <div class="row align-items-end">
          <span class="col w-auto">
             <div class="d-flex flex-row">
-               <h3 class="display-6">${f.foodName }</h3>
+               <h3 class="display-6">${f.foodName}</h3>
                &nbsp;
                <p class="align-self-end food_type">이탈리안</p>
             </div>
@@ -68,31 +66,32 @@
 
       <div class="row">
          <!-- 음식 슬라이드 -->
-	  	<c:forEach var="fp" items="${f.foodPhoto}">
-		  	<c:if test="${fp.foodNo != f.foodNo }"></c:if>
-	  		<c:if test="${fp.foodNo = f.foodNo }">
-	         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-			  <div class="carousel-indicators">
-			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-			  </div>
-			  <div class="carousel-inner">
-	  			<div class="carousel-item active">
-			      <img src="${fp.fpName }" class="d-block w-100" alt="참고 이미지">
-			    </div>
-			  </div>
-			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="visually-hidden">Previous</span>
-			  </button>
-			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="visually-hidden">Next</span>
-			  </button>
-			 </div>
-	  		</c:if>
-	  	</c:forEach>
+	  	<c:set var="fp" value="${f.foodPhoto}"/>
+<%-- 	  	<c:if test="${fp.foodNo != f.foodNo }"></c:if>
+  		<c:if test="${fp.foodNo = f.foodNo }"> --%>
+         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 500px;">
+            <div class="carousel-indicators">
+               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+               <c:forEach var="imgs" items="${fp}">
+                  <div class="carousel-item active">
+                     <img src="${imgs.fpName}" class="d-block w-100" alt="참고 이미지">
+                  </div>
+               </c:forEach>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+            </button>
+		   </div>
+  		<%-- </c:if> --%>
 
          <!-- 맛집 상세정보 텍스트 -->
          <div class="col">
@@ -102,7 +101,7 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top">영업시간</th>
                   <td>
-                     <div class="food_runtime">매일 12:00 ~ 22:00</div>
+                     <div class="food_runtime">${f.foodOpenTime}</div>
                      <div class="food_runtime">휴게시간 15:00 ~ 18:00</div>
                   </td>
                </tr>
@@ -111,7 +110,7 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top">메뉴</th>
                   <td>
-                     <div class="food_main_mainmenu">젓갈스파게티 19,000원</div>
+                     <div class="food_main_mainmenu">${f.foodMenu }</div>
                      <div class="food_main_mainmenu">런치코스 36,000원</div>
                      <div class="food_main_mainmenu">디너코스 79,000원</div>
                   </td>
@@ -121,7 +120,7 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top">연락처</th>
                   <td>
-                     <div class="food_main_phone">010-1234-1234</div>
+                     <div class="food_main_phone">${f.foodPhone }</div>
                   </td>
                </tr>
             </table>
@@ -143,7 +142,7 @@
                <div class="headerLine"></div>
                <div class="modal-header p-4">
                   <span class="row">
-                     <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">가디록</h3>
+                     <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">${f.foodName }</h3>
                      <h5 class="modal-title p-0 pt-2 w-auto">&nbsp;에 대한 솔직한 후기를
                         적어주세요.</h5>
                   </span> <span class="row mr-1 p-0 align-items-center"> <span
@@ -215,7 +214,7 @@
                   <div class="headerLine"></div>
                   <div class="modal-header p-4">
                      <span class="row">
-                        <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">가디록</h3>
+                        <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">${f.foodName }</h3>
                         <h5 class="modal-title p-0 pt-2 w-auto">&nbsp;에 대한 솔직한 후기를
                            적어주세요.</h5>
                      </span> <span class="row mr-1 p-0 align-items-center"> <span

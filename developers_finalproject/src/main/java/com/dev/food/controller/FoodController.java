@@ -271,7 +271,7 @@ public class FoodController {
 		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
-		return "food/foodView";
+		return "/food/foodDetail";
 	}
 	
 	
