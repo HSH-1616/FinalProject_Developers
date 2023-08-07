@@ -28,7 +28,7 @@ public interface FoodDao {
 	
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> paging);
 	
-	List<Food> selectFoodAllTest(SqlSession session);
+	List<Food> selectFoodAllTest(SqlSession session,int count);
 	List<Food> selectFoodByFoodNo(SqlSession session,int foodNo);
 	
 	int selectFoodCount(SqlSession session);

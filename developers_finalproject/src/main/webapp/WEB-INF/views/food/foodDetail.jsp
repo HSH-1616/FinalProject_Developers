@@ -35,7 +35,7 @@
 
    <link rel="stylesheet" href="css/food/foodDetail.css" />
    <script src="${path }/js/food/foodList.js" />
-   <c:set var="f" value="${foods}"/>
+   <c:set var="f" value="${foods[0]}"/>
 </head>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />

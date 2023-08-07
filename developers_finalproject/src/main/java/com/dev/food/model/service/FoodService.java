@@ -26,7 +26,7 @@ public interface FoodService {
 	
 	List<Food> selectFoodAll (Map<String,Object> paging);
 	
-	List<Food> selectFoodAllTest ();
+	List<Food> selectFoodAllTest (int count);
 	
 	List<Food> selectFoodByFoodNo (int foodNo);
 	

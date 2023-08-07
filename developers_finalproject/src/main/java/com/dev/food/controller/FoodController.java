@@ -157,20 +157,17 @@ public class FoodController {
 							.fpMain(1)
 							.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
 							.build();
-//					System.out.println(food);
-//					System.out.println(fp);
 					service.insertFood(food,fp);
 					service.mergeFood();
 					service.mergeFoodPhoto();
-					service.deleteFoodTemp();
-					service.deleteFoodPhotoTemp();
 				}
 			}
 		}
 		//DB 불러오는 과정
-		List<Food> foods = service.selectFoodAllTest(); //FOOD + FOODPHOTO
+		int count = 50;
+		List<Food> foods = service.selectFoodAllTest(count); //FOOD + FOODPHOTO
 		System.out.println("flag : "+foods);
-		m.addAttribute("foods", foods);			
+		m.addAttribute("foods", foods);
 		return "food/foodList2";
 	}
 	
@@ -261,9 +258,11 @@ public class FoodController {
 					.foodPhone(item2.get("infocenterfood").toString().replaceAll("\"", ""))
 					.build();
 			service.updateFood(food); //TEMP에 UPDATE
+			System.out.println("updateflag : "+service.selectFoodByFoodNo(foodNo));
 			service.mergeFood(); //FOOD에 없으면 MERGE
-			//다하면 TEMP는 지워야할까?
+			System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
 			foodImgApi(foodNo);
+			//사용할 일 없으니 삭제
 			service.deleteFoodTemp();
 			service.deleteFoodPhotoTemp();
 		}
@@ -272,7 +271,7 @@ public class FoodController {
 		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
-		return "/food/foodView";
+		return "food/foodView";
 	}
 	
 	

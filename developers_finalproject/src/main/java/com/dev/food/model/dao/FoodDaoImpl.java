@@ -59,8 +59,8 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public List<Food> selectFoodAllTest(SqlSession session) {
-		return session.selectList("food.selectFoodAllTest");
+	public List<Food> selectFoodAllTest(SqlSession session,int count) {
+		return session.selectList("food.selectFoodAllTest",count);
 	}
 	
 	@Override

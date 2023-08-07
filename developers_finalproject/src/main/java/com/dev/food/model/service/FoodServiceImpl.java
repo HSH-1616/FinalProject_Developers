@@ -77,8 +77,8 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
-	public List<Food> selectFoodAllTest() {
-		return dao.selectFoodAllTest(session);
+	public List<Food> selectFoodAllTest(int count) {
+		return dao.selectFoodAllTest(session,count);
 	}
 	
 	@Override
