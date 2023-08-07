@@ -32,19 +32,51 @@
 					</div>
 				</div>
 			</div>
-	<%-- 		<div class="hotelCard">
-				<div id="carouselExampleIndicators${status.index}"
+			<div class="hotelCard">
+				<div id="carouselExampleIndicators"class="carousel slide">
+				  	<div class="carousel-indicators">
+					  	<c:forEach var="i" begin="0" end="${fn:length(touris.tourisImages)}" step="1">
+						    <button type="button" 
+						    		data-bs-target="#carouselExampleIndicators" 
+						    		data-bs-slide-to="${i}" class="active" aria-current="true"
+									aria-label="Slide ${i+1}">
+							</button>
+					    </c:forEach>
+					</div>
+				  <div class="carousel-inner">
+					    <div class="carousel-item active">
+					      <img class="d-block w-100" src="${touris.tourismainImge}" alt="First slide">
+					    </div>
+				 	<c:forEach var="image" items="${touris.tourisImages}">
+					    <div class="carousel-item">
+					      <img class="d-block w-100" src="${image.tourisImages}" alt="Next slide">
+					    </div>
+					</c:forEach>
+				  </div>
+					<button class="carousel-control-prev" type="button"
+							data-bs-target="#carouselExampleIndicators"
+							data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#carouselExampleIndicators"
+							data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+<%-- 				<div id="carouselExampleIndicators${status.index}"
 					class="carousel slide">
 					<div class="carousel-indicators">
-						<c:forEach var="i" begin="0" end="${fn:length(al.acFiles)-1}"
-							step="1">
-							<button type="button"
-								data-bs-target="#carouselExampleIndicators${status.index}"
-								data-bs-slide-to="${i}" class="active" aria-current="true"
-								aria-label="Slide ${i+1}"></button>
-						</c:forEach>
+						<button type="button"
+							data-bs-target="#carouselExampleIndicators${status.index}"
+							data-bs-slide-to="${i}" class="active" aria-current="true"
+							aria-label="Slide ${i+1}"></button>
 					</div>
 					<div class="carousel-inner">
+					
 						<c:forEach var="af" items="${al.acFiles}">
 							<c:if test="${fn:contains(af.afMain, 'Y')}">
 								<div class="carousel-item active">
@@ -179,8 +211,6 @@
 					</div> --%>
 				</div>
 			</div>
-		</div>
-	</div>
 	<div class="detailHotelLocCon">
 		<div class="detailHotelLoc">
 			<div class="detailHotelTitle">

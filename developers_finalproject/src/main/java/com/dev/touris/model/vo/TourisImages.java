@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TourisImages {
 	
-	private int tourisImagesId;
+	private String tourisImagesId;
 	private String tourisImages;
 	private String tourisId;
 }

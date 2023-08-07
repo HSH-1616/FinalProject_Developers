@@ -25,8 +25,7 @@ public class TourisDetailDaoImpl implements TourisDetailDao {
 
 	@Override
 	public void insertImage(SqlSession session, Map param) {
-		System.out.println("여기서 파람값은?"+param);
-		session.insert("tourisDetail.insertImage");
+		session.insert("tourisDetail.insertImage",param);
 		
 	}
 	
