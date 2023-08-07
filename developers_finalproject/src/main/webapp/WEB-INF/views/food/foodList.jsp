@@ -90,12 +90,13 @@
 				<button type="button" class="" onclick="searchFood();">검색</button>
 			</form>
 		</div>
+		
 		<!-- /맛집 검색 -->
 	</div>
 
 	<div class="food_main_list">
 		<c:if test="${not empty foods }">
-			<c:forEach var="f" items="${foods }" varStatus="vs">
+			<c:forEach var="f" items="${foods }">
 				<div class="food_list">
 					<div class="con-like" style="position:relative;z-index:2;">
 						<input title="like" type="checkbox" class="like">
@@ -121,6 +122,7 @@
                 </svg>
 						</div>
 					</div>
+					
 					<c:forEach var="fp" items="${f.foodPhoto}">
 						<c:if test="${fp.fpMain == 1}">
 							<a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">
@@ -129,19 +131,15 @@
 						</c:if>
 						<c:if test="${fp.fpMain != 1}"></c:if>
 					</c:forEach>
-					<%-- <a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">	
-						<img src="${path }/images/food/blacknoodle.jpg" width="300" height="300".
-							alt="삼결살" style="position:relative;z-index:1"/>
-							</a> --%>
-
 					<div class="food_menu">${f.foodName }</div>
 						<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
 						<span class="heart_count">1</span> 
 						<img class="comment" src="${path }/images/food/comment.png"> 
-						<span class="comment_count">${f.foodReadCount}</span> <span class="star"> ★★★★★ <span>★★★★★</span>
-						<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10"></span>
+						<span class="comment_count">${f.foodReadCount}</span> 
+						<!-- <span class="star"> ★★★★★ <span>★★★★★</span> -->
+						<!-- <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10"></span> -->
 					</div>
 				</div>
 			</c:forEach>
@@ -157,8 +155,8 @@
 
 	<!-- 페이지바 -->
 	<div class="board-pasing">
-		<!-- <nav aria-label="notice-pagenav"></nav> -->
-		<ul class="pagination justify-content-center">
+		<nav aria-label="notice-pagenav"></nav>
+		<!-- <ul class="pagination justify-content-center">
 			  <li class="page-item">
 				<a class="page-link" href="#" aria-label="previous">
 				  <span aria-hidden="true">&laquo;</span>
@@ -174,7 +172,7 @@
 				  <span aria-hidden="true">&raquo;</span>
 				</a>
 			  </li>
-			</ul> 
+			</ul> --> 
 	</div>
 	<!-- /페이지바 -->
 

@@ -10,7 +10,7 @@ const fList = (no, numPerpage) => {
       if (data.foodList.length > 0) {
         for (const f of data.foodList) {
           let foodItem = $("<div>", { class: "food-item" });
-          foodItem.append($("<div>", { class: "food-id", text: f.noticeNo }));
+          foodItem.append($("<div>", { class: "food-id", text: f.foodNo }));
           foodItem.append(
             $("<a>", {
               href: "/food/noticeView.do?no=" + f.noticeNo,
@@ -19,7 +19,7 @@ const fList = (no, numPerpage) => {
             })
           );
           foodItem.append($("<div>", { class: "food-author", text: "관리자" }));
-          foodItem.append($("<div>", { class: "food-views", text: f.noticeViews }));
+          foodItem.append($("<div>", { class: "food-views", text: f.foodViews }));
           foodItem.append($("<div>", { class: "food-date", text: f.writeDate }));
 
           foodListContainer.append(foodItem);

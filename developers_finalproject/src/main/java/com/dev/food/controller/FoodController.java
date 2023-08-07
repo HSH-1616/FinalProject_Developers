@@ -60,6 +60,8 @@ public class FoodController {
 	 * return "/food/foodList"; }
 	 */
 	
+	
+	
 	@GetMapping("/foodList.do")
 	@ResponseBody
 	public ModelAndView selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="12") int numPerpage) {
@@ -82,6 +84,12 @@ public class FoodController {
 		mav.setViewName("/food/foodList");
 
 		return mav;
+	}
+	
+	@RequestMapping("/insertFood.do")
+	public String insertFood() {
+		
+		return "/food/foodUpdate";
 	}
 	
 	@GetMapping("/foodApi")
