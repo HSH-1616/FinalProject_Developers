@@ -1,6 +1,6 @@
-/*const fList = (no, numPerpage) => {
+const fList = (no, numPerpage) => {
   $.ajax({
-    url: "/food/foodListEnd.do",
+    url: "/food/foodList.do",
     data: { cPage: no, numPerpage: numPerpage },
     type: "get",
     success: (data) => {
@@ -40,7 +40,7 @@
 };
 
 	
-const searchNotice = (no, numPerpage) => {
+/*const searchNotice = (no, numPerpage) => {
 
 	let type = $("select[name=type]").val();
 	let keyword = $("input[name=keyword]").val();
@@ -79,7 +79,7 @@ const searchNotice = (no, numPerpage) => {
 		}
 
 	});
-}	*/
+}*/	
 
 
 const nonClick = document.querySelectorAll(".non-click");
