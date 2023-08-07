@@ -32,6 +32,7 @@ import com.google.gson.JsonParser;
 
 
 @Controller
+@RequestMapping("/food")
 public class FoodController {
 
 	private FoodService service;
@@ -71,7 +72,7 @@ public class FoodController {
 		paging.put("numPerpage", numPerpage);
 		int totalData=service.selectFoodCount();
 		
-		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "foodListEnd.do");
+		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do");
 		
 		List<Food> foods= service.selectFoodAll(paging);
 		result.put("foodList", foods);

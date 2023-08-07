@@ -1,3 +1,10 @@
+.board-pasing {
+    /* display: flex; */
+    /* align-items: stretch; */
+    margin-right: 41%;
+    margin-top: 3%;
+}
+
 .non-click {
   color: gold;
 }

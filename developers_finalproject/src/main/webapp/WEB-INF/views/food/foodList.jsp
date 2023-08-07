@@ -157,8 +157,24 @@
 
 	<!-- 페이지바 -->
 	<div class="board-pasing">
-		<nav aria-label="notice-pageNav"></nav>
-		<%-- <c:out value="${pageBar }"/> --%>
+		<!-- <nav aria-label="notice-pagenav"></nav> -->
+		<ul class="pagination justify-content-center">
+			  <li class="page-item">
+				<a class="page-link" href="#" aria-label="previous">
+				  <span aria-hidden="true">&laquo;</span>
+				</a>
+			  </li>
+			  <li class="page-item"><a class="page-link" href="#">1</a></li>
+			  <li class="page-item"><a class="page-link" href="#">2</a></li>
+			  <li class="page-item"><a class="page-link" href="#">3</a></li>
+			  <li class="page-item"><a class="page-link" href="#">4</a></li>
+			  <li class="page-item"><a class="page-link" href="#">5</a></li>
+			  <li class="page-item">
+				<a class="page-link" href="#" aria-label="next">
+				  <span aria-hidden="true">&raquo;</span>
+				</a>
+			  </li>
+			</ul> 
 	</div>
 	<!-- /페이지바 -->
 
