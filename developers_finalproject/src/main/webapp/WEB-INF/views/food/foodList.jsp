@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" href="${path }/css/food/foodList.css" />
 
@@ -59,9 +60,9 @@
 		<!-- /맛집 리스트 순서 -->
 
 		<!-- 맛집 검색 -->
-		<div id="store_search">
-			<form id="searchType" name="searchType" action="${path }/food/search.do">
-			<select name="searchOption">
+		<!-- <div id="store_search">
+			<form id="searchType" name="searchType">
+			<select name="searchType">
 				<option value="total">전체</option>
 				<option value="foodName">상호명</option>
 				<option value="foodAddress">주소</option>
@@ -76,13 +77,24 @@
 						fill="white" />
                     </svg>
 			</div>
+		</div> -->
+		<div class="search-notice text-end mt-3">
+			<form class="search-form">
+				<!-- action="/food/searchFood.do" -->
+				<select name="type">
+					<option value="titile">상호명</option>
+					<option value="content">주소</option>
+				</select> 
+				<input type="text" name="keyword" placeholder="검색어를 입력해주세요">
+				<button type="button" class="" onclick="searchFood();">검색</button>
+			</form>
 		</div>
+		<!-- /맛집 검색 -->
 	</div>
-	<!-- /맛집 검색 -->
 
 	<div class="food_main_list">
 		<c:if test="${not empty foods }">
-			<c:forEach var="f" items="${foods }">
+			<c:forEach var="f" items="${foods }" varStatus="vs">
 				<div class="food_list">
 					<div class="con-like" style="position:relative;z-index:2;">
 						<input title="like" type="checkbox" class="like">
@@ -108,11 +120,20 @@
                 </svg>
 						</div>
 					</div>
-					<a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">	
+					<c:forEach var="fp" items="${f.foodPhoto}">
+						<c:if test="${fp.fpMain == 1}">
+							<a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">
+								<img alt="대표이미지" src="${fp.fpName}" style="width: 300px; height: 300px;"><br>
+							</a>
+						</c:if>
+						<c:if test="${fp.fpMain != 1}"></c:if>
+					</c:forEach>
+					<%-- <a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">	
 						<img src="${path }/images/food/blacknoodle.jpg" width="300" height="300".
 							alt="삼결살" style="position:relative;z-index:1"/>
-							</a>
-						<div class="food_menu">${f.foodMenu }</div>
+							</a> --%>
+
+					<div class="food_menu">${f.foodName }</div>
 						<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
@@ -134,10 +155,9 @@
 	<!-- /맛집 추천버튼 -->
 
 	<!-- 페이지바 -->
-	<div class="page-bar">
-		<nav aria-label="food-pageNav">
-			<c:out value="${pageBar }" escapeXml="false" />
-		</nav>
+	<div class="board-pasing">
+		<nav aria-label="notice-pageNav"></nav>
+		<%-- <c:out value="${pageBar }"/> --%>
 	</div>
 	<!-- /페이지바 -->
 

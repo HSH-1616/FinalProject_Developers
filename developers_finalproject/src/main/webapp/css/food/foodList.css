@@ -119,17 +119,22 @@ a.on {
     margin-left: -18px;
 }
 
-select {
-    position: relative;
-    bottom: 16px;
-    border-radius: 19px;
-    font-weight: 30px;
-    height: 40px;
-    left: 6px;
-}
+
 
 form {
     margin-left: 7%;
+}
+
+form.search-form {
+    position: relative;
+    left: 330px;
+    width: 50%;
+    height: 5%;
+}
+
+input[type="text"] {
+    width: 317px;
+    height: 37px;
 }
 
 .food_main_list {
@@ -138,7 +143,6 @@ form {
 	justify-content: space-between;
 	max-width: 1400px;
 	margin: 0 auto;
-	margin-top: 7%;
 }
 
 .food_list {
@@ -193,6 +197,14 @@ div#food_main_theme {
 
 span.select-store-menu {
 	color: #000000;
+}
+select{
+	height: 37px;
+}
+
+.search-notice.text-end.mt-3 button {
+    width: 37px;
+    height: 37px;
 }
 
 #sectionContainer {
@@ -516,4 +528,5 @@ button#food_add {
 	border-radius: 10px;
 	border: none;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	width: 85px;
 }

@@ -9,12 +9,14 @@ public interface FoodService {
 
 	int insertFood(Food f);
 	
-	List<Food> selectFoodAll (Map<String,Object> param);
+	List<Food> selectFoodAll (Map<String,Object> paging);
 	
 	int selectFoodCount();
 	
 	Food selectFoodById(int no);
 
-	List<Food> getSortedFoods(String sortFilter,int cPage, int numPerpage);
+	/* List<Food> getSortedFoods(String sortFilter,int cPage, int numPerpage); */
 
+	List<Food> searchFood(Map<String, Object> params,Map<String, Object>paging);
+	
 }

@@ -6,19 +6,24 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dev.food.model.dto.Food;
+import com.dev.notice.model.dto.Notice;
 
 public interface FoodDao {
 	
-	List<Food> selectPage(SqlSession session, int cPage, int numPerpage);
-
 	int insertFood(SqlSession session, Food f);
 	
-	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
+	List<Food> selectFoodAll(SqlSession session, Map<String,Object> paging);
 	
 	int selectFoodCount(SqlSession session);
 	
 	Food selectFoodByNo(SqlSession session, int no);
+	
+	List<Food> searchFood(SqlSession session, Map<String, Object> params,Map<String,Object> paging);
 
-	List<Food> getSortedFoods(SqlSession session, String sortFilter, int cPage, int numPerpage);
+	/*
+	 * List<Food> getSortedFoods(SqlSession session, String sortFilter, int cPage,
+	 * int numPerpage);
+	 */
+	
 
 }
