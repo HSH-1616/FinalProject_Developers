@@ -35,6 +35,19 @@ public class TourisDetailServiceImpl implements TourisDetailService {
 		dao.insertImage(session,param);
 		
 	}
+
+	@Override
+	public void insertHeart(Map param) {
+		dao.insertHeart(session,param);
+		
+	}
+
+	@Override
+	public void deleteHeart(Map param) {
+		dao.deleteHeart(session,param);
+	}
+	
+	
 	
 	
 	

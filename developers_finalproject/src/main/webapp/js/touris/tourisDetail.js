@@ -22,21 +22,28 @@ $(document).on("click", ".detailHotelInfoBtn button", function(e) {
 });
 
 $(document).on("click", "#detailHeart", function(e) {
-	if ($("#detailHeartOn").css("display") == "none") {
-		$("#detailHeartOn").show();
-		$("#detailHeartOff").hide();
-		swal({
-			title: "찜하기에 등록되었습니다!",
-			imageUrl: "../../images/accommodation/heartIcon.png",
-			imageWidth: 200,
-			imageHeight: 200,
-			confirmButtonText: "확인",
-			confirmButtonColor: "#b31312",
-		});
-
-	} else {
-		$("#detailHeartOn").hide();
-		$("#detailHeartOff").show();
+	if(memberId!=null){
+		if ($("#detailHeartOn").css("display") == "none") {
+			$("#detailHeartOn").show();
+			$("#detailHeartOff").hide();
+			swal({
+				title: "찜하기에 등록되었습니다!",
+				imageUrl: "../../images/accommodation/heartIcon.png",
+				imageWidth: 200,
+				imageHeight: 200,
+				confirmButtonText: "확인",
+				confirmButtonColor: "#b31312",
+			});
+			$.get("/tourisDetail/insertHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{
+					console.log(data);
+			});
+	
+		} else {
+			$("#detailHeartOn").hide();
+			$("#detailHeartOff").show();
+		}
+	}else{
+		alert("로그인 후 이용해주세요!");
 	}
 });
 

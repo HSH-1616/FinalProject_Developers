@@ -12,6 +12,11 @@
 <link rel="stylesheet" href="${path }/css/touris/tourisDetail.css" />
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=737cdc9322ba7fec26566e0863b53498&libraries=services,clusterer"></script>
+<script>
+	var tourisId=${touris.tourisId}
+	var memberId=${loginMember.memberId}
+	console.log('${loginMember.tourisHeart[0]}');
+</script>
 <section>
 	<div class="hotelDetailCon">
 		<div id="hotelDetail">
@@ -24,8 +29,18 @@
 					</div>
 					<div class="detailShare">
 						<button id="detailHeart">
+						<c:if test="${loginMember==null}">
 							<ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
 							<ion-icon id="detailHeartOn" name="heart"></ion-icon>
+						</c:if>
+						<c:if test="${loginMember.tourisHeart[0].tourisId !=null && loginMember.tourisHeart[0].tourisId ne touris.tourisId}">
+							<ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
+							<ion-icon id="detailHeartOn" name="heart"></ion-icon>
+						</c:if>
+						<c:if test="${loginMember.tourisHeart[0].tourisId !=null && loginMember.tourisHeart[0].tourisId eq touris.tourisId}">
+							<ion-icon id="detailHeartOff" name="heart-outline" style="display:none;"></ion-icon>
+							<ion-icon id="detailHeartOn" name="heart" style="display:inline;"></ion-icon>
+						</c:if>
 							찜하기
 						</button>
 					</div>
@@ -44,11 +59,11 @@
 					</div>
 				  <div class="carousel-inner">
 					    <div class="carousel-item active">
-					      <img class="d-block w-100" src="${touris.tourismainImge}" alt="First slide">
+					      <img class="d-block w-100" src="${touris.tourismainImge}" alt="First slide" width="500px" height="333px">
 					    </div>
 				 	<c:forEach var="image" items="${touris.tourisImages}">
 					    <div class="carousel-item">
-					      <img class="d-block w-100" src="${image.tourisImages}" alt="Next slide">
+					      <img class="d-block w-100" src="${image.tourisImages}" alt="Next slide" width="500px" height="333px">
 					    </div>
 					</c:forEach>
 				  </div>
@@ -65,110 +80,49 @@
 							<span class="visually-hidden">Next</span>
 					</button>
 				</div>
+<!-- 		          <div class="">
+		            <table class="text-start align-top food_info_table">
+		              <tr class="">
+		                <th valign="top"><i class="fa-solid fa-location-dot fa-2xl" style="color: #000000;"></i></th>
+		                <th class="fs-4" valign="top">영업시간</th>
+		                <td>
+		                  <div class="food_runtime">매일 12:00 ~ 22:00</div>
+		                  <div class="food_runtime">휴게시간 15:00 ~ 18:00</div>
+		                </td>
+		              </tr>
+		              <tr>
+		                <th valign="top"><i class="fa-solid fa-utensils fa-2xl" style="color: #000000;"></i></th>
+		                <th class="fs-4" valign="top">메뉴</th>
+		                <td>
+		                  <div class="food_main_mainmenu">젓갈스파게티 19,000원</div>
+		                  <div class="food_main_mainmenu">런치코스 36,000원</div>
+		                  <div class="food_main_mainmenu">디너코스 79,000원</div>
+		                </td>
+		              </tr>
+		              <tr>
+		                <th valign="top"><i class="fa-solid fa-phone fa-2xl" style="color: #000000;"></i></th>
+		                <th class="fs-4" valign="top">연락처</th>
+		                <td>
+		                  <div class="food_main_phone">010-1234-1234</div>
+		                </td>
+		              </tr>
+		            </table>
+		          </div> -->
 			</div>
-<%-- 				<div id="carouselExampleIndicators${status.index}"
-					class="carousel slide">
-					<div class="carousel-indicators">
-						<button type="button"
-							data-bs-target="#carouselExampleIndicators${status.index}"
-							data-bs-slide-to="${i}" class="active" aria-current="true"
-							aria-label="Slide ${i+1}"></button>
+				<div class="detailHotelInfoCon">
+					<div class="detailHotelTitle">
+						<h2>상세설명</h2>
+						<hr />
 					</div>
-					<div class="carousel-inner">
-					
-						<c:forEach var="af" items="${al.acFiles}">
-							<c:if test="${fn:contains(af.afMain, 'Y')}">
-								<div class="carousel-item active">
-									<img src="${path}/images/upload/accommodation/${af.afName}"
-										class="d-block w-100" alt="..." />
-								</div>
-							</c:if>
-							<c:if test="${fn:contains(af.afMain, 'N')}">
-								<div class="carousel-item">
-									<img src="${path}/images/upload/accommodation/${af.afName}"
-										class="d-block w-100" alt="..." />
-								</div>
-							</c:if>
-						</c:forEach>
+					<div class="detailHotelInfo">
+						<pre>
+	          				<c:out value="${touris.tourisContent}" escapeXml="false"/>
+	           			</pre>
+						<div class="detailHotelInfoBtn">
+							<button>더보기</button>
+						</div>
 					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#carouselExampleIndicators${status.index}"
-						data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#carouselExampleIndicators${status.index}"
-						data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
 				</div>
-			</div> --%>
-			
-<%-- 			<div class="hotelDetailBody">
-				<div class="detailHotelCon">
-					<div class="detailhotelTypeCon">
-						<div class="detailHotelTitle">
-							<h2>숙박장소</h2>
-							<hr />
-						</div>
-						<div class="detailHotelType">
-							<input type="hidden" id="acType" value="${ad.acType}">
-							<c:if test="${ad.acType=='펜션' }">
-								<div class="dt pension">
-									<img src="${path}/images/accommodation/pensiondetail.png"
-										alt="" />
-									<p>펜션</p>
-								</div>
-							</c:if>
-							<c:if test="${ad.acType=='호텔' }">
-								<div class="dt pension">
-									<img src="${path}/images/accommodation/hoteldetail.png" alt="" />
-									<p>호텔</p>
-								</div>
-							</c:if>
-							<c:if test="${ad.acType=='모텔' }">
-								<div class="dt pension">
-									<img src="${path}/images/accommodation/moteldetail.png" alt="" />
-									<p>모텔</p>
-								</div>
-							</c:if>
-							<div class="dt dr">
-								<img src="${path}/images/accommodation/roomdetail.png" alt="" />
-								<p>방 ${ad.acRoom}개</p>
-							</div>
-							<div class="dt dr">
-								<img src="${path}/images/accommodation/beddetail.png" alt="" />
-								<p>침대 ${ad.acBed}개</p>
-							</div>
-							<div class="dt dr">
-								<img src="${path}/images/accommodation/bathroomdetail.png"
-									alt="" />
-								<p>욕실 ${ad.acBathRoom}개</p>
-							</div>
-							<div class="dt dr">
-								<img src="${path}/images/accommodation/peopleDetail.png"
-									alt="" />
-								<p>최대 ${ad.acPeople}명</p>
-							</div>
-						</div>
-					</div> --%>
-					
-					<div class="detailHotelInfoCon">
-						<div class="detailHotelTitle">
-							<h2>상세설명</h2>
-							<hr />
-						</div>
-						<div class="detailHotelInfo">
-							<pre>
-                   				<c:out value="${touris.tourisContent}" escapeXml="false"/>
-                 			</pre>
-							<div class="detailHotelInfoBtn">
-								<button>더보기</button>
-							</div>
-						</div>
-					</div>
 <%-- 					<div class="detailHotelReviewCon">
 						<div class="detailHotelTitle">
 							<h2>후기</h2>

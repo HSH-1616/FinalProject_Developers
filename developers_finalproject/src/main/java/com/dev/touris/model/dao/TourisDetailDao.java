@@ -11,4 +11,6 @@ public interface TourisDetailDao {
 	Touris selectById(SqlSession session, String id);
 	void insertDetail(SqlSession session, Map param);
 	void insertImage(SqlSession session, Map param);
+	void insertHeart(SqlSession session, Map param);
+	void deleteHeart(SqlSession session, Map param);
 }

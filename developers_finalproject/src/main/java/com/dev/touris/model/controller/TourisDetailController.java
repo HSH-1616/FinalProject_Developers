@@ -50,10 +50,8 @@ public class TourisDetailController {
 
 			String urlStr2 = "http://apis.data.go.kr/B551011/KorService1/detailCommon1?"
 					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-					+ URLEncoder.encode(
-							"0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==",
-							"UTF-8")
-					+ "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
+					+ URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8")+ "&"
+					+ URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8") + "&"
@@ -105,10 +103,8 @@ public class TourisDetailController {
 
 			String urlStr3 = "http://apis.data.go.kr/B551011/KorService1/detailIntro1?"
 					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-					+ URLEncoder.encode(
-							"0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==",
-							"UTF-8")
-					+ "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
+					+ URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8") + "&" 
+					+ URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8") + "&"
@@ -162,15 +158,12 @@ public class TourisDetailController {
 
 			}
 			
-
 			StringBuilder images = new StringBuilder();
 
 			String urlStr4 = "http://apis.data.go.kr/B551011/KorService1/detailImage1?"
 					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-					+ URLEncoder.encode(
-							"0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==",
-							"UTF-8")
-					+ "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
+					+ URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8") + "&" 
+					+ URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8") + "&"
@@ -198,12 +191,9 @@ public class TourisDetailController {
 					.getAsJsonObject().get("item").getAsJsonArray();
 			for (JsonElement jsonElement2 : arr4) {
 				JsonObject temp = jsonElement2.getAsJsonObject();
-				System.out.println(temp);
-
 				System.out.println("=============================");
 				System.out.println("오리지날url : " + temp.get("originimgurl"));
 				System.out.println("contentid : " + temp.get("contentid"));
-
 				String tourisImages=temp.get("originimgurl").getAsString();
 				String tourisId2=temp.get("contentid").getAsString();
 				Map<String,String> param2=new HashMap();
@@ -214,8 +204,22 @@ public class TourisDetailController {
 			service.insertDetail(param);
 		}
 		Touris result = service.selectById(id); 
-//		System.out.println(result);
 		model.addAttribute("touris", result);
 		return "touris/tourisDetail";
+	}
+	
+	@GetMapping("/insertHeart")
+	public void insertHeart(@RequestParam Map param) {
+		System.out.println("여기오니?");
+		System.out.println(param.get("tourisId"));
+		System.out.println(param.get("memberId"));
+		service.insertHeart(param);
+	}
+	@GetMapping("/deleteHeart")
+	public void deleteHeart(@RequestParam Map param) {
+		System.out.println("여기오니2?");
+//		System.out.println(param.get("tourisId"));
+//		System.out.println(param.get("memberId"));
+//		service.deleteHeart(param);
 	}
 }
