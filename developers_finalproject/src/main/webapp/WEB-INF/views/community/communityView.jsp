@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
 
-    <section class="container ">
+    <section class="communityView-container ">
         
         <div class="card-box">
             <div class="card" style="width: 40rem;">

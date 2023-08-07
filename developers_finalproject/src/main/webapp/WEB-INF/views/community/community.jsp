@@ -7,10 +7,12 @@
 <section>
    
    
-    <div class="text-end"><button class="w-btn w-btn-red" onclick="location.href='${path }/community/communityWrite.do'">글쓰기</button></div>
+    <div class="text-end"><button class="w-btn w-btn-red" onclick="location.href='${path }/community/communityWritePage.do'">글쓰기</button></div>
     
     <div class="row row-cols-1 row-cols-md-3 mx-5 g-4 p-2" >
+    
         <div class="col">
+        
           <div class="card" onclick="location.assign('${path}/community/communityView.do')">
             <div class="d-flex">
               <a><img src="${path }/images/community/free-icon-profile-6522516.png" style="height: 30px;"></a>&nbsp;
@@ -32,6 +34,10 @@
             </div>
           </div>
         </div>
+        
+        
+        
+        
         <div class="col">
           <div class="card">
             <div class="d-flex">

@@ -2,7 +2,10 @@
     cursor: pointer;
     
 }
-
+.board-pasing{
+	display: block;
+	
+}
 
 .carousel-item{
       width: 100%;
@@ -34,6 +37,8 @@
 
 }
 
+
+
 .notice-form{
 	width:1300px;
 }
@@ -42,7 +47,7 @@
 	width: 100%;
 }
 .search-notice{
-	margin-left: 20%;
+	margin-left: 30%;
 }
 
 .list-area{
@@ -57,22 +62,27 @@
 	min-height: 1500px;
 }
 
-.card-box{
-	min-height: 1500px;
-}
-
-.card-box-form{
+/*.communityView-container{
 	display: block;
-	margin-right: 48%;
+	margin: auto;
+}*/
+
+
+
+/*.card-box-form{
+	display: block;
+	margin:auto;
 	padding-top: 0%;
-}
+}*/
 
 
  div.card-box{
     display: block;
     position: relative;
     top: 100px;
-    
+    min-height: 1500px;
+   	width:40%;
+   	margin:auto;
 } 
 .comment-body{
     margin:10px;
