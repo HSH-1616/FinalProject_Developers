@@ -9,8 +9,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
-<link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
-<link rel="stylesheet" href="${path }/css/accommodation/acDetail.css" />
+<link rel="stylesheet" href="${path }/css/touris/tourisDetail.css" />
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=737cdc9322ba7fec26566e0863b53498&libraries=services,clusterer"></script>
 <section>

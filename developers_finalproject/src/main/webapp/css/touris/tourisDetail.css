@@ -1,15 +1,17 @@
+
+.hotelDetailCon {
+	display: flex;
+	justify-content: center;
+}
 .hotelCard {
-  width: 260px;
+  width: 500px;
   height: auto;
   border-radius: 5%;
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 40px;
   text-decoration: none;
-}
-.hotelDetailCon {
-	display: flex;
-	justify-content: center;
+  margin:auto;
 }
 #hotelDetail {
 	width: 1300px;
