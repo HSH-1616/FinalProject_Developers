@@ -45,7 +45,7 @@ public class FoodController {
 		
 		int result = service.selectFoodCount();
 		System.out.println("음식점 수 : "+result);
-		if(result != 0) {
+		if(result == 0) {
 			//api -> DB
 			System.out.println("api -> DB");
 
@@ -54,7 +54,7 @@ public class FoodController {
 					+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 					+ "&" + "MobileOS"+"="+"ETC"
 					+ "&" + "MobileApp"+"="+"foodTest"
-					+ "&" + "numOfRows"+"="+ "10" //"17055"
+					+ "&" + "numOfRows"+"="+ "10000" //"17055"
 					+ "&" + "pageNo"+"="+"1"
 					+ "&" + "contentTypeId"+"="+"39"
 					+ "&" + "_type"+"="+"json";
@@ -118,6 +118,8 @@ public class FoodController {
 					service.insertFood(food,fp);
 					service.mergeFood();
 					service.mergeFoodPhoto();
+					service.deleteFoodTemp();
+					service.deleteFoodPhotoTemp();
 				}
 			}
 		}
@@ -194,7 +196,9 @@ public class FoodController {
 			service.updateFood(food); //TEMP에 UPDATE
 			service.mergeFood(); //FOOD에 없으면 MERGE
 			//다하면 TEMP는 지워야할까?
-			foodImgApi(foodNo);	
+			foodImgApi(foodNo);
+			service.deleteFoodTemp();
+			service.deleteFoodPhotoTemp();
 		}
 		
 		//DB에서 불러오는 과정

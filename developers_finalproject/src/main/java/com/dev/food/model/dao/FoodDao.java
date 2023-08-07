@@ -21,6 +21,9 @@ public interface FoodDao {
 	int mergeFood(SqlSession session);
 	int mergeFoodPhoto(SqlSession session);
 	
+	void deleteFoodTemp(SqlSession session);
+	void deleteFoodPhotoTemp(SqlSession session);
+	
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
 	
 	List<Food> selectFoodAllTest(SqlSession session);

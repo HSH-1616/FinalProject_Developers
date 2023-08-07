@@ -20,6 +20,10 @@ public interface FoodService {
 	
 	void mergeFoodPhoto();
 	
+	void deleteFoodTemp();
+	
+	void deleteFoodPhotoTemp();
+	
 	List<Food> selectFoodAll (Map<String,Object> param);
 	
 	List<Food> selectFoodAllTest ();

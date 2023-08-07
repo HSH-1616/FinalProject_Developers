@@ -44,6 +44,15 @@ public class FoodDaoImpl implements FoodDao {
 		return session.insert("food.mergeFoodPhoto");
 		//merge한 이후엔 temp테이블 지우기
 	}
+	
+	@Override
+	public void deleteFoodTemp(SqlSession session) {
+		session.delete("food.deleteFoodTemp");
+	}
+	@Override
+	public void deleteFoodPhotoTemp(SqlSession session) {
+		session.delete("food.deleteFoodPhotoTemp");
+	}
 
 	@Override
 	public List<Food> selectFoodAll(SqlSession session, Map<String, Object> param) {

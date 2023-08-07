@@ -54,6 +54,16 @@ public class FoodServiceImpl implements FoodService{
 		dao.mergeFoodPhoto(session);		
 	}
 	
+	@Override
+	public void deleteFoodTemp() {
+		dao.deleteFoodTemp(session);
+	}
+	
+	@Override
+	public void deleteFoodPhotoTemp() {
+		dao.deleteFoodPhotoTemp(session);
+	}
+	
 
 	@Override
 	public List<Food> selectFoodAll(Map<String,Object> param) {
