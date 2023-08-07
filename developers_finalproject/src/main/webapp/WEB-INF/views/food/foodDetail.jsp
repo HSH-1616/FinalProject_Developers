@@ -33,7 +33,6 @@
 
     <script src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
 
-
    <link rel="stylesheet" href="css/food/foodDetail.css" />
    <script src="${path }/js/food/foodList.js" />
    <c:set var="f" value="${foods}"/>
@@ -79,7 +78,6 @@
 			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			  </div>
 			  <div class="carousel-inner">
-			  	c:foreach
 	  			<div class="carousel-item active">
 			      <img src="${fp.fpName }" class="d-block w-100" alt="참고 이미지">
 			    </div>
@@ -322,8 +320,6 @@
             </div>
          </div>
       </div>
-      <!-- </div> -->
    </div>
-
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

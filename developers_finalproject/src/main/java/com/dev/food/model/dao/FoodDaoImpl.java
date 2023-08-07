@@ -14,12 +14,8 @@ import com.dev.food.model.dto.FoodTemp;
 @Repository
 public class FoodDaoImpl implements FoodDao {
 
-	@Override
-	public List<Food> selectPage(SqlSession session, int cPage, int numPerpage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
 	@Override
 	public int insertFood(SqlSession session, FoodTemp f) {
 		return session.insert("food.insertFood", f);
@@ -55,13 +51,11 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-	public List<Food> selectFoodAll(SqlSession session, Map<String, Object> param) {
+	public List<Food> selectFoodAll(SqlSession session, Map<String, Object> paging) {
 		
-		int cPage=(int)param.get("cPage");
-		int numPerpage=(int)param.get("numPerpage");
-		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
-		
-		return session.selectList("food.selectFoodAll",null,rb);
+		int cPage=(int)paging.get("cPage");
+		int numPerpage=(int)paging.get("numPerpage");
+		return session.selectList("food.foodList",null,new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 	
 	@Override
@@ -87,8 +81,33 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
+	public List<Food> searchFood(SqlSession session, Map<String, Object> params, Map<String, Object> paging) {
+		int cPage=(int)paging.get("cPage");
+		int numPerpage=(int)paging.get("numPerpage");
+		return session.selectList("food.foodSearch",params,new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+
+	
+	/*
+	 * @Override public List<Food> getSortedFoods(SqlSession session, String
+	 * sortFilter, int cPage, int numPerpage){
+	 * 
+	 * RowBounds rn=new RowBounds((cPage-1)*numPerpage,numPerpage); return
+	 * session.selectList("food.getSortedFoods",sortFilter,rn); }
+	 */
+	@Override
 	public String searchByFoodNo(SqlSession session,int foodNo) {
 		return session.selectOne("food.searchByFoodNo",foodNo);
+	}
+	@Override
+	public int insertFood(SqlSession session, Food f) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<Food> selectPage(SqlSession session, int cPage, int numPerpage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

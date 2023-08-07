@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" href="${path }/css/food/foodList.css" />
 
@@ -21,6 +22,13 @@
 
 <script nomodule
 	src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	
+	
+	<!-- 페이지 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
 <link rel="stylesheet" href="css/header.css" />
 <link rel="stylesheet" href="css/foodList.css" />
@@ -30,81 +38,66 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <section>
+
 	<!-- 맛집 리스트 순서 -->
 	<div id="foodList_theme">
 		<div id="food_main_theme">
 			<p>맛집 목록</p>
-			<input type="hidden" id="sortFilter" value="">
 		</div>
+		<div class="container">
 		<nav id="food_menu">
+		<input type="hidden" id="sortFilter" value="sortFilter">
 			<ul>
 				<li class="bar">|</li>
-				<li class="menu_style" id="review_high">리뷰순</li>
+				<li class="menu_style" id="all"><span class="color_ch">제목순</span></li>
 				<li class="bar">|</li>
-				<li class="menu_style" id="popular"><span class="">좋아요순</span></li>
+				<li class="menu_style" id="popular"><span class="color_ch">조회순</span></li>
 				<li class="bar">|</li>
-				<li class="menu_style" id="title"><span class="">제목순</span></li>
+				<li class="menu_style" id="review"><span class="color_ch">리뷰순</span></li>
 				<li class="bar">|</li>
 			</ul>
 		</nav>
-	</div>
-	<!-- /맛집 리스트 순서 -->
-
-	<!-- 맛집 검색 -->
-	<div id="store_search">
-		<input id="input_search_text" type="text" placeholder="Search...">
-		<div id="search_button">
-			<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-				xmlns="http://www.w3.org/2000/svg">
-                        <path
-					d="M21.5 23.25L13.625 15.375C13 15.875 12.2812 16.2708 11.4688 16.5625C10.6562 16.8542 9.79167 17 8.875 17C6.60417 17 4.6825 16.2133 3.11 14.64C1.5375 13.0667 0.750833 11.145 0.75 8.875C0.75 6.60417 1.53667 4.6825 3.11 3.11C4.68333 1.5375 6.605 0.750833 8.875 0.75C11.1458 0.75 13.0675 1.53667 14.64 3.11C16.2125 4.68333 16.9992 6.605 17 8.875C17 9.79167 16.8542 10.6562 16.5625 11.4688C16.2708 12.2812 15.875 13 15.375 13.625L23.25 21.5L21.5 23.25ZM8.875 14.5C10.4375 14.5 11.7658 13.9529 12.86 12.8588C13.9542 11.7646 14.5008 10.4367 14.5 8.875C14.5 7.3125 13.9529 5.98417 12.8588 4.89C11.7646 3.79583 10.4367 3.24917 8.875 3.25C7.3125 3.25 5.98417 3.79708 4.89 4.89125C3.79583 5.98542 3.24917 7.31333 3.25 8.875C3.25 10.4375 3.79708 11.7658 4.89125 12.86C5.98542 13.9542 7.31333 14.5008 8.875 14.5Z"
-					fill="white" />
-                    </svg>
 		</div>
+		<!-- /맛집 리스트 순서 -->
+
+		<!-- 맛집 검색 -->
+		<!-- <div id="store_search">
+			<form id="searchType" name="searchType">
+			<select name="searchType">
+				<option value="total">전체</option>
+				<option value="foodName">상호명</option>
+				<option value="foodAddress">주소</option>
+			</select>
+			</form>
+			<input id="input_search_text" type="text" placeholder="Search...">
+			<div id="search_button">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+                        <path
+						d="M21.5 23.25L13.625 15.375C13 15.875 12.2812 16.2708 11.4688 16.5625C10.6562 16.8542 9.79167 17 8.875 17C6.60417 17 4.6825 16.2133 3.11 14.64C1.5375 13.0667 0.750833 11.145 0.75 8.875C0.75 6.60417 1.53667 4.6825 3.11 3.11C4.68333 1.5375 6.605 0.750833 8.875 0.75C11.1458 0.75 13.0675 1.53667 14.64 3.11C16.2125 4.68333 16.9992 6.605 17 8.875C17 9.79167 16.8542 10.6562 16.5625 11.4688C16.2708 12.2812 15.875 13 15.375 13.625L23.25 21.5L21.5 23.25ZM8.875 14.5C10.4375 14.5 11.7658 13.9529 12.86 12.8588C13.9542 11.7646 14.5008 10.4367 14.5 8.875C14.5 7.3125 13.9529 5.98417 12.8588 4.89C11.7646 3.79583 10.4367 3.24917 8.875 3.25C7.3125 3.25 5.98417 3.79708 4.89 4.89125C3.79583 5.98542 3.24917 7.31333 3.25 8.875C3.25 10.4375 3.79708 11.7658 4.89125 12.86C5.98542 13.9542 7.31333 14.5008 8.875 14.5Z"
+						fill="white" />
+                    </svg>
+			</div>
+		</div> -->
+		<div class="search-notice text-end mt-3">
+			<form class="search-form">
+				<!-- action="/food/searchFood.do" -->
+				<select name="type">
+					<option value="titile">상호명</option>
+					<option value="content">주소</option>
+				</select> 
+				<input type="text" name="keyword" placeholder="검색어를 입력해주세요">
+				<button type="button" class="" onclick="searchFood();">검색</button>
+			</form>
+		</div>
+		<!-- /맛집 검색 -->
 	</div>
-	<!-- /맛집 검색 -->
 
-	<!--       음식 종류
-      <form class="low_theme">
-          <p>
-            <label>
-              <input name="group1" type="radio" checked />
-              <span>전체</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input name="group1" type="radio" />
-              <span>한식</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input class="with-gap" name="group1" type="radio"  />
-              <span>중식</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input class="with-gap" name="group1" type="radio"  />
-            <span>일식</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input class="with-gap" name="group1" type="radio"  />
-              <span>양식</span>
-            </label>
-          </p>
-        </form>
-        /음식 종류 -->
-
-	<!-- 음식 목록 -->
 	<div class="food_main_list">
 		<c:if test="${not empty foods }">
-			<c:forEach var="f" items="${foods }">
+			<c:forEach var="f" items="${foods }" varStatus="vs">
 				<div class="food_list">
-					<div class="con-like">
+					<div class="con-like" style="position:relative;z-index:2;">
 						<input title="like" type="checkbox" class="like">
 						<div class="checkmark">
 							<svg viewBox="0 0 24 24" class="outline"
@@ -128,17 +121,28 @@
                 </svg>
 						</div>
 					</div>
-					<a href="${path}/food/foodDetail.do?no=${f.foodNo}">
-					<img src="${path }/images/food/pork.jpg" width="300" height="300"
-						alt="삼결살" />
-					<div class="food_place">${f.foodName }</div>
-					<div class="food_name" style="color: #828282;">${f.foodMenu}</div>
-					</a>
-					<img class="heart" src="${path }/images/food/fillheart.svg">
-					<span class="heart_count">1</span> 
-					<img class="comment" src="${path }/images/food/comment.png"> 
-					<span class="comment_count">${f.foodReadCount}</span> <span class="star"> ★★★★★ <span>★★★★★</span>
-					<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10"></span>
+					<c:forEach var="fp" items="${f.foodPhoto}">
+						<c:if test="${fp.fpMain == 1}">
+							<a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">
+								<img alt="대표이미지" src="${fp.fpName}" style="width: 300px; height: 300px;"><br>
+							</a>
+						</c:if>
+						<c:if test="${fp.fpMain != 1}"></c:if>
+					</c:forEach>
+					<%-- <a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">	
+						<img src="${path }/images/food/blacknoodle.jpg" width="300" height="300".
+							alt="삼결살" style="position:relative;z-index:1"/>
+							</a> --%>
+
+					<div class="food_menu">${f.foodName }</div>
+						<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
+					<div class="countDiv">
+						<img class="heart" src="${path }/images/food/fillheart.svg">
+						<span class="heart_count">1</span> 
+						<img class="comment" src="${path }/images/food/comment.png"> 
+						<span class="comment_count">${f.foodReadCount}</span> <span class="star"> ★★★★★ <span>★★★★★</span>
+						<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10"></span>
+					</div>
 				</div>
 			</c:forEach>
 		</c:if>
@@ -152,25 +156,25 @@
 	<!-- /맛집 추천버튼 -->
 
 	<!-- 페이지바 -->
-	<div class="page-bar">
-		<!-- <svg class="arrow-left" width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21.9873 23.4766L23.7498 21.7141L18.0248 15.9766L23.7498 10.2391L21.9873 8.47656L14.4873 15.9766L21.9873 23.4766Z" fill="black"/>
-              <path d="M13.75 23.4766L15.5125 21.7141L9.7875 15.9766L15.5125 10.2391L13.75 8.47656L6.25 15.9766L13.75 23.4766Z" fill="black"/>
-          </svg>
-          <svg class="double-arrow-left" width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19.2625 21.7141L13.5375 15.9766L19.2625 10.2391L17.5 8.47656L10 15.9766L17.5 23.4766L19.2625 21.7141Z" fill="black"/>
-          </svg>
-          <a class="page-num select">1</a>
-          <a class="page-num">2</a>
-          <a class="page-num">3</a>
-          <svg class="arrow-right" width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.7375 10.2391L16.4625 15.9766L10.7375 21.7141L12.5 23.4766L20 15.9766L12.5 8.47656L10.7375 10.2391Z" fill="black"/>
-          </svg>
-          <svg class="double-arrow-right" width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.0127 8.47656L6.2502 10.2391L11.9752 15.9766L6.2502 21.7141L8.0127 23.4766L15.5127 15.9766L8.0127 8.47656Z" fill="black"/>
-              <path d="M16.25 8.47656L14.4875 10.2391L20.2125 15.9766L14.4875 21.7141L16.25 23.4766L23.75 15.9766L16.25 8.47656Z" fill="black"/>
-          </svg>-->
-		<c:out value="${pageBar }" escapeXml="false" />
+	<div class="board-pasing">
+		<!-- <nav aria-label="notice-pagenav"></nav> -->
+		<ul class="pagination justify-content-center">
+			  <li class="page-item">
+				<a class="page-link" href="#" aria-label="previous">
+				  <span aria-hidden="true">&laquo;</span>
+				</a>
+			  </li>
+			  <li class="page-item"><a class="page-link" href="#">1</a></li>
+			  <li class="page-item"><a class="page-link" href="#">2</a></li>
+			  <li class="page-item"><a class="page-link" href="#">3</a></li>
+			  <li class="page-item"><a class="page-link" href="#">4</a></li>
+			  <li class="page-item"><a class="page-link" href="#">5</a></li>
+			  <li class="page-item">
+				<a class="page-link" href="#" aria-label="next">
+				  <span aria-hidden="true">&raquo;</span>
+				</a>
+			  </li>
+			</ul> 
 	</div>
 	<!-- /페이지바 -->
 

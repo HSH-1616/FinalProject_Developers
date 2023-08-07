@@ -24,7 +24,7 @@ public interface FoodService {
 	
 	void deleteFoodPhotoTemp();
 	
-	List<Food> selectFoodAll (Map<String,Object> param);
+	List<Food> selectFoodAll (Map<String,Object> paging);
 	
 	List<Food> selectFoodAllTest ();
 	
@@ -36,4 +36,8 @@ public interface FoodService {
 	
 	String searchByFoodNo(int foodNo);
 
+	/* List<Food> getSortedFoods(String sortFilter,int cPage, int numPerpage); */
+
+	List<Food> searchFood(Map<String, Object> params,Map<String, Object>paging);
+	
 }

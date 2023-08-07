@@ -6,11 +6,13 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dev.food.model.dto.Food;
+
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodDao {
 	
+	int insertFood(SqlSession session, Food f);
 	List<Food> selectPage(SqlSession session, int cPage, int numPerpage);
 
 	int insertFood(SqlSession session, FoodTemp f);
@@ -24,7 +26,7 @@ public interface FoodDao {
 	void deleteFoodTemp(SqlSession session);
 	void deleteFoodPhotoTemp(SqlSession session);
 	
-	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
+	List<Food> selectFoodAll(SqlSession session, Map<String,Object> paging);
 	
 	List<Food> selectFoodAllTest(SqlSession session);
 	List<Food> selectFoodByFoodNo(SqlSession session,int foodNo);
@@ -33,5 +35,13 @@ public interface FoodDao {
 	
 	Food selectFoodByNo(SqlSession session, int no);
 	
+	List<Food> searchFood(SqlSession session, Map<String, Object> params,Map<String,Object> paging);
+
+	/*
+	 * List<Food> getSortedFoods(SqlSession session, String sortFilter, int cPage,
+	 * int numPerpage);
+	 */
+	
+
 	String searchByFoodNo(SqlSession session,int foodNo);
 }

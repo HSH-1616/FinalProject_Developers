@@ -66,9 +66,14 @@ public class FoodServiceImpl implements FoodService{
 	
 
 	@Override
-	public List<Food> selectFoodAll(Map<String,Object> param) {
-		// TODO Auto-generated method stub
-		return dao.selectFoodAll(session, param);
+	public List<Food> searchFood(Map<String, Object> params, Map<String, Object> paging) {
+		return dao.searchFood(session,params,paging);
+	}
+
+	@Override
+	public List<Food> selectFoodAll(Map<String, Object> paging) {
+
+		return dao.selectFoodAll(session, paging);
 	}
 	
 	@Override
@@ -95,6 +100,12 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectFoodByNo(session, no);
 	}
 
+	/*
+	 * @Override public List<Food> getSortedFoods(String sortFilter,int cPage,int
+	 * numPerpage){
+	 * 
+	 * return dao.getSortedFoods(session, sortFilter, cPage, numPerpage); }
+	 */
 	@Override
 	public String searchByFoodNo(int foodNo) {
 		return dao.searchByFoodNo(session,foodNo);
