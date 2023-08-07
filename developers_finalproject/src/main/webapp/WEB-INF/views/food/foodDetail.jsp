@@ -47,11 +47,11 @@
       <div class="row align-items-end">
          <span class="col w-auto">
             <div class="d-flex flex-row">
-               <h3 class="display-6">가디록</h3>
+               <h3 class="display-6">${f.foodName }</h3>
                &nbsp;
                <p class="align-self-end food_type">이탈리안</p>
             </div>
-            <h5 class="">서울 강남구 도산대로 45길 18~4 2층</h5>
+            <h5 class="">${f.foodAddress }</h5>
          </span>
          <button id="detailHeart" class="col-sm-1 mx-0 h-50">
             <ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
@@ -69,28 +69,32 @@
 
       <div class="row">
          <!-- 음식 슬라이드 -->
-         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-		  <div class="carousel-indicators">
-		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-		  </div>
-		  <div class="carousel-inner">
-		  	<c:forEach var="fp" items="">
-			    <div class="carousel-item active">
-			      <img src="..." class="d-block w-100" alt="참고 이미지">
+	  	<c:forEach var="fp" items="${f.foodPhoto}">
+		  	<c:if test="${fp.foodNo != f.foodNo }"></c:if>
+	  		<c:if test="${fp.foodNo = f.foodNo }">
+	         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-indicators">
+			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			  </div>
+			  <div class="carousel-inner">
+			  	c:foreach
+	  			<div class="carousel-item active">
+			      <img src="${fp.fpName }" class="d-block w-100" alt="참고 이미지">
 			    </div>
-		  	</c:forEach>
-		  </div>
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
-		 </div>
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
+			 </div>
+	  		</c:if>
+	  	</c:forEach>
 
          <!-- 맛집 상세정보 텍스트 -->
          <div class="col">
