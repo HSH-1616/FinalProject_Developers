@@ -4,8 +4,8 @@ form.searchForm {
 
 div#pageBar {
     position: relative;
-    top: 49px;
-    right: 600px;
+    right: 23px;
+    bottom: 25px;
 }
 
 .board-pasing {
@@ -542,8 +542,11 @@ form.low_theme {
 }
 
 button#food_add {
-	border-radius: 10px;
-	border: none;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
-	width: 85px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+    width: 90px;
+    position: relative;
+    top: 12px;
+    left: 340px;
 }

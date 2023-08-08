@@ -97,7 +97,7 @@
 		<c:if test="${not empty foods }">
 			<c:forEach var="f" items="${foods }">
 				<div class="food_list">
-					<div class="con-like" style="position:relative;z-index:2;">
+					<div class="con-like" style="position: relative; z-index: 2;">
 						<input title="like" type="checkbox" class="like">
 						<div class="checkmark">
 							<svg viewBox="0 0 24 24" class="outline"
@@ -121,30 +121,34 @@
                 </svg>
 						</div>
 					</div>
-					
+
 					<c:forEach var="fp" items="${f.foodPhoto}">
 						<c:if test="${fp.fpMain == 1}">
 							<a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">
-								<img alt="대표이미지" src="${fp.fpName}" style="width: 300px; height: 300px;"><br>
+								<img alt="대표이미지" src="${fp.fpName}"
+								style="width: 300px; height: 300px;"><br>
 							</a>
 						</c:if>
 						<c:if test="${fp.fpMain != 1}"></c:if>
 					</c:forEach>
 					<div class="food_menu">${f.foodName }</div>
-						<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
+					<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
-						<span class="heart_count">1</span> 
-						<img class="comment" src="${path }/images/food/comment.png"> 
-						<span class="comment_count">${f.foodReadCount}</span> 
+						<span class="heart_count">1</span> <img class="comment"
+							src="${path }/images/food/comment.png"> <span
+							class="comment_count">${f.foodReadCount}</span>
 						<!-- <span class="star"> ★★★★★ <span>★★★★★</span> -->
 						<!-- <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10"></span> -->
 					</div>
 				</div>
 			</c:forEach>
 		</c:if>
-	<!-- /음식 목록 -->
+		<!-- /음식 목록 -->
 
+
+	</div>
+		
 	<!-- 맛집 추천버튼 -->
 	<div class="f_update">
 		<button id="food_add"
@@ -154,10 +158,9 @@
 
 	<!-- 페이지바 -->
 	<div id="pageBar">
-		<c:out value="${pageBar }" escapeXml='false'/>
+		<c:out value="${pageBar }" escapeXml='false' />
 	</div>
 	<!-- /페이지바 -->
 
-	</div>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
