@@ -45,6 +45,5 @@ tmp/
 .project
 .classpath
 .factorypath
-.buildpath
-.target
-.recommenders/
+
+

@@ -1,462 +1,539 @@
+.board-pasing {
+    /* display: flex; */
+    /* align-items: stretch; */
+    margin-right: 41%;
+    margin-top: 3%;
+}
+
+.non-click {
+  color: gold;
+}
+
+.click {
+  color: orchid;
+}
+
+.food_address{
+	margin-left: 5px;
+}
+
+form#searchType {
+    position: relative;
+    left: 5.3%;
+}
+/*이미지 호버*/
+
+img {
+	transform: scale(1.0);
+	transition: transform .5s;
+}
+
+img:hover {
+	transform: scale(1.1);
+	/* 이미지 확대 */
+
+	transition: transform .5s;
+	/*  시간 설정  */
+
+}
+
 a.on {
-  font-size: 1.5rem;
-  display: inline-block;
-  min-width: 73px;
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #B5B5B5;
-  margin-bottom: 5%;
-  background-color: white;
-  color: black;
-  text-decoration: none;
-  margin-left: 48.2%;
-  border-radius: 15%;
-  margin-top: 3%;
+	font-size: 1.5rem;
+	display: inline-block;
+	min-width: 73px;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #B5B5B5;
+	margin-bottom: 5%;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	margin-left: 48.2%;
+	border-radius: 15%;
+	margin-top: 3%;
 }
 
 .f_update {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 17.8%;
-    height: 45px;
-    margin-top: 1.7%;
+	display: flex;
+	margin-right: 17.8%;
+	height: 45px;
+	margin-top: 2.7%;
+	position: relative;
+	left: 1285px;
 }
 
 .page-bar {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 50px;
-  margin-top: 3.3%;
-  position: absolute;
-  width: 456px;
-  height: 29px;
-  left: calc(50% - 456px/2);
-  top: 1760.98px;
-  margin-bottom: -7%;
+	margin-top: 3.3%;
+	margin-right: 45%;
 }
 
 .page-num {
-  width: 13px;
-  height: 29px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #828282;
+	width: 13px;
+	height: 29px;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 24px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #828282;
 }
 
 /* store_search */
 #store_search {
-  position: absolute;
-  width: 500px;
-  height: 40px;
-  left: 50%;
-  top: 170px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  margin-top: 10%;
+	position: absolute;
+	width: 540px;
+	height: 40px;
+	left: 50%;
+	top: 170px;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	margin-top:9%;
 }
 
 /* input_search_text */
 #input_search_text {
-  box-sizing: border-box;
-  flex: 1;
-  height: 40px;
-  background: #FFFFFF;
-  border: 1px solid #1C0808;
-  border-radius: 20px 0 0 20px;
-  padding: 0 10px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 24px;
-  color: #828282;
-  position: relative;
-  z-index: -1;
+	box-sizing: border-box;
+	flex: 1;
+	height: 40px;
+	background: #FFFFFF;
+	border: 1px solid #1C0808;
+	border-radius: 20px 0 0 20px;
+	padding: 0 10px;
+	font-family: 'Inter';
+	font-size: 32.57px;
+	font-weight: 300;
+	font-size: 30px;
+	line-height: 24px;
+	color: #828282;
+	position: relative;
+	z-index: -1;
 }
 
 /* search_button */
 #search_button {
-  width: 40px;
-  height: 40px;
-  background: #1C0808;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-left: -20px;
+    width: 32%;
+    height: 40px;
+    background: #1C0808;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: -18px;
+}
+
+
+
+form {
+    margin-left: 7%;
+}
+
+form.search-form {
+    position: relative;
+    left: 330px;
+    width: 50%;
+    height: 5%;
+}
+
+input[type="text"] {
+    width: 317px;
+    height: 37px;
 }
 
 .food_main_list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-top: 7%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	max-width: 1400px;
+	margin: 0 auto;
 }
 
 .food_list {
-  width: 23%;
-  margin-bottom: 20px;
+	width: 23%;
+	margin-bottom: 20px;
 }
 
 .food_list img {
-  width: 300px;
-  height: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5%;
+	width: 300px;
+	height: 300px;
+	border-radius: 10%;
 }
 
 
 div#food_main_theme {
-  display: flex;
-  justify-content: center;
-  margin-top: -7%;
+	display: flex;
+	justify-content: center;
+	margin-top: -7%;
 }
 
 /* 공통 스타일 */
 .menu_style,
 .bar {
-  width: 100px;
-  height: auto;
-  white-space: nowrap;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 24px;
-  text-align: center;
+	width: 100px;
+	height: auto;
+	white-space: nowrap;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 23px;
+	line-height: 24px;
+	text-align: center;
 }
 
 /* | */
 .bar {
-  height: 26px;
-  font-size: 20px;
-  color: #828282;
-  flex: none;
+	height: 26px;
+	font-size: 20px;
+	color: #828282;
+	flex: none;
 }
 
 .menu_style span {
-  color: #828282;
-  flex: none;
+	color: #828282;
+	font-size: 23px;
+	flex: none;
 }
 
 .menu_style span:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 span.select-store-menu {
-  color: #000000;
+	color: #000000;
+}
+select{
+	height: 37px;
+}
+
+.search-notice.text-end.mt-3 button {
+    width: 37px;
+    height: 37px;
 }
 
 #sectionContainer {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  /* 수정: 중앙 정렬을 위해 margin 속성 추가 */
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	/* 수정: 중앙 정렬을 위해 margin 속성 추가 */
 }
 
 #food_menu a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .center-abs {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #food_menu ul {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 0px;
-  gap: 10px;
-  width: 100%;
-  /* 수정: 부모 요소에 맞게 100%로 설정 */
-  height: 26px;
-  margin-top: 10px;
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+	gap: 10px;
+	width: 100%;
+	/* 수정: 부모 요소에 맞게 100%로 설정 */
+	height: 26px;
+	margin-top: 10px;
 }
 
 div#food_main_theme p {
-  font-size: 45px;
-  margin-top: 10%;
+	font-size: 35px;
+	font-weight: bold;
+	margin-top: 10%;
 }
 
-select#searchType {
-  font-size: 30px;
-  border-radius: 15px;
+form.searchType {
+	font-size: 30px;
+	border-radius: 15px;
+}
+
+.countDiv{
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
 }
 
 img.heart {
-  width: 20px;
-  height: 20px;
-  /* text-decoration: none; */
+	width: 20px;
+	height: 20px;
+	margin-right: 3px;
+	/* text-decoration: none; */
 }
 
 span.heart_count {
-  font-size: 24px;
+	font-size: 17px;
+	margin-right: 10px;
 }
 
 img.comment {
-  width: 20px;
-  height: 20px;
+	width: 20px;
+	height: 20px;
+	margin-right: 3px;
 }
 
 span.comment_count {
-  font-size: 24px;
+	font-size: 17px;
+	margin-right: 10px;
 }
 
 .star {
-  position: relative;
-  font-size: 2rem;
-  color: #ddd;
+	position: relative;
+	font-size: 2rem;
+	color: #ddd;
 }
 
 .star input {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  cursor: pointer;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
 }
 
 .star span {
-  width: 0;
-  position: absolute;
-  left: 0;
-  color: red;
-  overflow: hidden;
-  pointer-events: none;
+	width: 0;
+	position: absolute;
+	left: 0;
+	color: red;
+	overflow: hidden;
+	pointer-events: none;
 }
 
-.food_place {
-  font-size: 25px;
+.food_menu {
+	font-size: 21px;
+	margin-top: 10px;
+	font-weight: bold;
+    margin-left: 5px;
 }
 
 div#footer {
-  margin-top: 5%;
+	margin-top: 5%;
 }
 
 .star {
-  position: relative;
-  font-size: 24px;
+	position: relative;
+	font-size: 24px;
 }
 
 .clear {
-  clear: both;
+	clear: both;
 }
 
 .checkBox {
-  display: block;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  border: 3px solid rgba(255, 255, 255, 0);
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0px 0px 0px 2px black;
+	display: block;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border: 3px solid rgba(255, 255, 255, 0);
+	border-radius: 10px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0px 0px 0px 2px black;
 }
 
 .checkBox div {
-  width: 60px;
-  height: 60px;
-  background-color: black;
-  top: -52px;
-  left: -52px;
-  position: absolute;
-  transform: rotateZ(45deg);
-  z-index: 100;
+	width: 60px;
+	height: 60px;
+	background-color: black;
+	top: -52px;
+	left: -52px;
+	position: absolute;
+	transform: rotateZ(45deg);
+	z-index: 100;
 }
 
 .checkBox input[type=checkbox]:checked+div {
-  left: -10px;
-  top: -10px;
+	left: -10px;
+	top: -10px;
 }
 
 .checkBox input[type=checkbox] {
-  position: absolute;
-  left: 50px;
-  visibility: hidden;
+	position: absolute;
+	left: 50px;
+	visibility: hidden;
 }
 
 .transition {
-  transition: 300ms ease;
+	transition: 300ms ease;
 }
 
 form.low_theme {
-  display: flex;
-  font-size: 20px;
-  justify-content: space-between;
-  max-width: 400px;
-  margin-left: 39%;
-  margin-top: 8%;
+	display: flex;
+	font-size: 20px;
+	justify-content: space-between;
+	max-width: 400px;
+	margin-left: 39%;
+	margin-top: 8%;
 }
 
 /* 하트 */
 .con-like {
-  --red: rgb(255, 50, 50);
-  position: relative;
-  width: 40px;
-  height: 40px;
-  left: 253px;
-  top: 44px;
+	--red: rgb(255, 50, 50);
+	position: relative;
+	width: 40px;
+	height: 40px;
+	left: 253px;
+	top: 44px;
 }
 
 .con-like .like {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 20;
-  cursor: pointer;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 20;
+	cursor: pointer;
 }
 
 .con-like .checkmark {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .con-like .outline,
 .con-like .filled {
-  fill: var(--red);
-  position: absolute;
+	fill: var(--red);
+	position: absolute;
 }
 
 .con-like .filled {
-  animation: kfr-filled 0.5s;
-  display: none;
+	animation: kfr-filled 0.5s;
+	display: none;
 }
 
 .con-like .celebrate {
-  position: absolute;
-  animation: kfr-celebrate 0.5s;
-  animation-fill-mode: forwards;
-  display: none;
+	position: absolute;
+	animation: kfr-celebrate 0.5s;
+	animation-fill-mode: forwards;
+	display: none;
 }
 
 .con-like .poly {
-  stroke: var(--red);
-  fill: var(--red);
+	stroke: var(--red);
+	fill: var(--red);
 }
 
 .con-like .like:checked~.checkmark .filled {
-  display: block
+	display: block
 }
 
 .con-like .like:checked~.checkmark .celebrate {
-  display: block
+	display: block
 }
 
 @keyframes kfr-filled {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
 
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
 }
 
 @keyframes kfr-celebrate {
-  0% {
-    transform: scale(0);
-  }
+	0% {
+		transform: scale(0);
+	}
 
-  50% {
-    opacity: 0.8;
-  }
+	50% {
+		opacity: 0.8;
+	}
 
-  100% {
-    transform: scale(1.2);
-    opacity: 0;
-    display: none;
-  }
+	100% {
+		transform: scale(1.2);
+		opacity: 0;
+		display: none;
+	}
 }
 
 /* 토글이벤트 */
 .input {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  background-color: #0D1117;
-  justify-content: center;
-  border-radius: 5px
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	background-color: #0D1117;
+	justify-content: center;
+	border-radius: 5px
 }
 
 .value {
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  color: white;
-  display: flex;
-  position: relative;
-  gap: 5px;
-  cursor: pointer;
-  border-radius: 4px;
+	background-color: transparent;
+	border: none;
+	padding: 10px;
+	color: white;
+	display: flex;
+	position: relative;
+	gap: 5px;
+	cursor: pointer;
+	border-radius: 4px;
 }
 
 .value:not(:active):hover,
 .value:focus {
-  background-color: #21262C;
+	background-color: #21262C;
 }
 
 .value:focus,
 .value:active {
-  background-color: #1A1F24;
-  outline: none;
+	background-color: #1A1F24;
+	outline: none;
 }
 
 .value::before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: -10px;
-  width: 5px;
-  height: 80%;
-  background-color: #2F81F7;
-  border-radius: 5px;
-  opacity: 0;
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: -10px;
+	width: 5px;
+	height: 80%;
+	background-color: #2F81F7;
+	border-radius: 5px;
+	opacity: 0;
 }
 
 .value:focus::before,
 .value:active::before {
-  opacity: 1;
+	opacity: 1;
 }
 
 .value svg {
-  width: 15px
+	width: 15px
 }
 
 .input:hover> :not(.value:hover) {
-  transition: 300ms;
-  filter: blur(1px);
-  transform: scale(0.95, 0.95);
+	transition: 300ms;
+	filter: blur(1px);
+	transform: scale(0.95, 0.95);
 }
+
+.pig {
+	text-decoration: none;
+	color: black;
+}
+
 button#food_add {
-  background-color: white;
-  border-radius: 10px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	width: 85px;
 }
