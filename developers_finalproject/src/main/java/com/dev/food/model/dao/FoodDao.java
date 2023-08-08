@@ -35,7 +35,7 @@ public interface FoodDao {
 	
 	Food selectFoodByNo(SqlSession session, int no);
 	
-	List<Food> searchFood(SqlSession session, Map<String, Object> params,Map<String,Object> paging);
+	List<Food> searchFood(SqlSession session, Map<String, Object> params);
 
 	/*
 	 * List<Food> getSortedFoods(SqlSession session, String sortFilter, int cPage,

@@ -41,50 +41,6 @@ public class FoodController {
 		this.service = service;
 	}
 	
-	/*
-	 * @RequestMapping("/foodList.do") public String
-	 * selectFoodAll(@RequestParam(value="cPage",defaultValue="1") int cPage,
-	 * 
-	 * @RequestParam(value="numPerpage",defaultValue="12") int numPerpage, Model m)
-	 * {
-	 * 
-	 * List<Food>
-	 * foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
-	 * int totalData=service.selectFoodCount();
-	 * 
-	 * //페이징 m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage,
-	 * totalData, "foodList.do"));
-	 * 
-	 * m.addAttribute("totalData",totalData); m.addAttribute("foods",foods);
-	 * 
-	 * return "/food/foodList"; }
-	 */
-	
-	
-	
-	/*
-	 * @GetMapping("/foodList.do")
-	 * 
-	 * @ResponseBody public ModelAndView
-	 * selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int
-	 * cPage, @RequestParam(value="numPerpage",defaultValue ="12") int numPerpage) {
-	 * 
-	 * ModelAndView mav = new ModelAndView();
-	 * 
-	 * Map<String, Object> paging=new HashMap<String, Object>(); Map<String,Object>
-	 * result=new HashMap<>(); paging.put("cPage", cPage); paging.put("numPerpage",
-	 * numPerpage); int totalData=service.selectFoodCount();
-	 * 
-	 * String pageBar=PageFactory.getPage(cPage, numPerpage, totalData,
-	 * "foodList.do");
-	 * 
-	 * List<Food> foods= service.selectFoodAll(paging); result.put("foodList",
-	 * foods); result.put("pageBar", pageBar);
-	 * 
-	 * mav.addObject("foods", foods); mav.setViewName("/food/foodList");
-	 * 
-	 * return mav; }
-	 */
 	
 	@GetMapping("/foodList.do")
 	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
@@ -101,6 +57,20 @@ public class FoodController {
 		return "food/foodList";
 	}
 	
+	@GetMapping("/searchFood.do")
+	public String searchFood(@RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword,
+			@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="12") int numPerpage ,Model m) {
+		
+		Map<String, Object> searchPage=new HashMap<String, Object>();
+		List<Food> foodList= service.searchFood(Map.of("cPage",cPage,"numPerpage",numPerpage,"searchType",searchType,"keyword",keyword));
+		int totalData=service.selectFoodCount();
+		
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"foodList.do"));
+
+		m.addAttribute("foods",foodList);
+		
+		return "food/foodList";
+	}
 	
 	
 	@RequestMapping("/insertFood.do")
@@ -203,24 +173,6 @@ public class FoodController {
 	public String selectFoodByNo(Model m, int no) {
 //		m.addAttribute("food",service.selectFoodById(no));
 		return "food/foodDetail";
-	}
-	
-	@GetMapping("/searchFood.do")
-	@ResponseBody
-	public Map<String,Object> searchFood(@RequestParam("type") String type, @RequestParam("keyword") String keyword,@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="12") int numPerpage ,Model m) {
-		Map<String, Object> params=new HashMap<String, Object>();
-		Map<String, Object> paging=new HashMap<String, Object>();
-		Map<String,Object> result=new HashMap<>();
-		params.put("type", type);
-		params.put("keyword", keyword);
-		paging.put("cPage", cPage);
-		paging.put("numPerpage", numPerpage);
-		List<Food> foodList= service.searchFood(params,paging);
-		int totalData=service.selectFoodCount();
-		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData,"searchFood");
-		result.put("foodList", foodList);
-		result.put("pageBar", pageBar);
-		return result;
 	}
 
 	@GetMapping("/foodInfoApi")

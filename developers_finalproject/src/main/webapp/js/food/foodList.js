@@ -1,19 +1,23 @@
-const nonClick = document.querySelectorAll(".non-click");
+function searchFood(page) {
 
-function handleClick(event) {
-  // div에서 모든 "click" 클래스 제거
-  nonClick.forEach((e) => {
-    e.classList.remove("click");
-  });
-  // 클릭한 div만 "click"클래스 추가
-  event.target.classList.add("click");
+	const form = document.getElementById('searchForm');
+
+	const queryParams = {
+		page: (page) ? page : 1,
+		recordSize: 5,
+		pageSize: 5,
+		searchType: $("select[name=searchType]").val(),
+		keyword: $("input[name=keyword]").val()
+	}
+	console.log(queryParams);
+
+	//location.href = location.pathname + "/food/searchFood.do?type=" + queryParams.searchType + "&keyword=" + queryParams.keyword;
+	
+	const queryString = new URLSearchParams(queryParams).toString();
+        const redirectURL = "/food/searchFood.do?" + queryString;
+        location.href = redirectURL;
+
 }
-
-nonClick.forEach((e) => {
-  e.addEventListener("click", handleClick);
-});
-
-
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 // 페이지 로드 후 실행

@@ -67,6 +67,11 @@ public class PageFactory {
       return new String(pageBar);
       
    }
+
+public static Object getPage(int cPage, int numPerpage, int totalData, String type, String keyword, String string) {
+	// TODO Auto-generated method stub
+	return null;
+}
    
    
    

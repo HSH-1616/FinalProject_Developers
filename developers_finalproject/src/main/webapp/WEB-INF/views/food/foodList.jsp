@@ -80,13 +80,12 @@
 			</div>
 		</div> -->
 		<div class="search-notice text-end mt-3">
-			<form class="search-form">
-				<!-- action="/food/searchFood.do" -->
-				<select name="type">
-					<option value="titile">상호명</option>
-					<option value="content">주소</option>
+			<form action="${path }/food/searchFood.do" class="searchForm" method="GET">
+				<select name="searchType">
+					<option value="titile" name="title">상호명</option>
+					<option value="address" name="address">주소</option>
 				</select> 
-				<input type="text" name="keyword" placeholder="검색어를 입력해주세요">
+				<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력해주세요">
 				<button type="button" class="" onclick="searchFood();">검색</button>
 			</form>
 		</div>
@@ -147,15 +146,15 @@
 	<!-- /음식 목록 -->
 
 	<!-- 맛집 추천버튼 -->
-	<div id="pageBar">
-		<c:out value="${pageBar }" escapeXml='false'/>
+	<div class="f_update">
+		<button id="food_add"
+			onclick="location.href='${path }/food/insertFood.do'">맛집 추천</button>
 	</div>
 	<!-- /맛집 추천버튼 -->
 
 	<!-- 페이지바 -->
-	<div class="board-pasing">
-		<nav aria-label="notice-pagenav">
-		</nav>
+	<div id="pageBar">
+		<c:out value="${pageBar }" escapeXml='false'/>
 	</div>
 	<!-- /페이지바 -->
 

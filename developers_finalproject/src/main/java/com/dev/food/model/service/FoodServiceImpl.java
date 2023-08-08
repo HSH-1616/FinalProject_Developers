@@ -65,10 +65,10 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 
-	@Override
-	public List<Food> searchFood(Map<String, Object> params, Map<String, Object> paging) {
-		return dao.searchFood(session,params,paging);
-	}
+	/*
+	 * @Override public List<Food> searchFood(Map<String, Object> params,
+	 * Map<String, Object> paging) { return dao.searchFood(session,params,paging); }
+	 */
 
 	@Override
 	public List<Food> selectFoodAll(Map<String, Object> param) {
@@ -109,6 +109,13 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public String searchByFoodNo(int foodNo) {
 		return dao.searchByFoodNo(session,foodNo);
+	}
+
+
+	@Override
+	public List<Food> searchFood(Map<String, Object> params) {
+
+		return dao.searchFood(session, params);
 	}
 	
 }

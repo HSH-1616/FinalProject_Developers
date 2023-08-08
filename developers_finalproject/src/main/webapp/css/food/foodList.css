@@ -1,8 +1,11 @@
+form.searchForm {
+    margin-right: 18%;
+}
+
 div#pageBar {
     position: relative;
-    left: 570px;
-    top: 22px;
-    /* width: 20px; */
+    top: 49px;
+    right: 600px;
 }
 
 .board-pasing {
