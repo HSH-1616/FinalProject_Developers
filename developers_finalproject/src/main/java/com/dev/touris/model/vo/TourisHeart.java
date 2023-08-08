@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TourisImages {
+public class TourisHeart {
 	
-	private String tourisImagesId;
-	private String tourisImages;
+	private String tourisHeartId;
 	private String tourisId;
+	private int memberId;
 }
