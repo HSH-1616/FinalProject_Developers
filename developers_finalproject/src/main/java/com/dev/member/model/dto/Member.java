@@ -23,5 +23,5 @@ public class Member {
 	private String memberEmail;
 	private Date memberEnrolldate;
 	private String memberStatus;
-	private List<TourisHeart> tourisHeart;
+	private List<TourisHeart> tourisHeartlist;
 }

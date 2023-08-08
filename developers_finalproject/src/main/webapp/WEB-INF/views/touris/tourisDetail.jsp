@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css" />
@@ -13,10 +14,21 @@
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=737cdc9322ba7fec26566e0863b53498&libraries=services,clusterer"></script>
 <script>
-	var tourisId=${touris.tourisId}
-	var memberId=${loginMember.memberId}
-	console.log('${loginMember.tourisHeart[0]}');
+	var tourisId="${touris.tourisId}";
+	if('${loginMember}'==''){
+		var memberId=null;
+	}else{
+		var memberId="${loginMember.memberId}";
+	}
+	console.log('${loginMember.tourisHeartlist}');
+	/* console.log("이건뭐니?"+'${touris.tourisImages[0].tourisImages}'); */
 </script>
+<style>
+	.m-table{
+		border-collapse:separate;
+		border-spacing: 50px 0px;
+	}
+</style>
 <section>
 	<div class="hotelDetailCon">
 		<div id="hotelDetail">
@@ -33,39 +45,63 @@
 							<ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
 							<ion-icon id="detailHeartOn" name="heart"></ion-icon>
 						</c:if>
-						<c:if test="${loginMember.tourisHeart[0].tourisId !=null && loginMember.tourisHeart[0].tourisId ne touris.tourisId}">
-							<ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
-							<ion-icon id="detailHeartOn" name="heart"></ion-icon>
-						</c:if>
-						<c:if test="${loginMember.tourisHeart[0].tourisId !=null && loginMember.tourisHeart[0].tourisId eq touris.tourisId}">
-							<ion-icon id="detailHeartOff" name="heart-outline" style="display:none;"></ion-icon>
-							<ion-icon id="detailHeartOn" name="heart" style="display:inline;"></ion-icon>
+						<c:if test="${loginMember!=null}">
+							<c:set var="loop_flag" value="false" />
+							<c:forEach var="list" items="${loginMember.tourisHeartlist}">
+									<c:if test='${fn:contains(list.tourisId,touris.tourisId)}'>
+										<ion-icon id="detailHeartOff" name="heart-outline" style="display:none;"></ion-icon>
+										<ion-icon id="detailHeartOn" name="heart" style="display:inline;"></ion-icon>
+										 <c:set var="loop_flag" value="true" />
+									</c:if>
+							</c:forEach>
+							 <c:if test="${not loop_flag}">
+							 		<ion-icon id="detailHeartOff" name="heart-outline" style="display:inline;"></ion-icon>
+									<ion-icon id="detailHeartOn" name="heart" style="display:none;"></ion-icon>
+							 </c:if>
 						</c:if>
 							찜하기
 						</button>
 					</div>
 				</div>
 			</div>
+			
 			<div class="hotelCard">
-				<div id="carouselExampleIndicators"class="carousel slide">
+				<div id="carouselExampleIndicators"class="carousel slide" style="width:500px; height:333px;">
 				  	<div class="carousel-indicators">
-					  	<c:forEach var="i" begin="0" end="${fn:length(touris.tourisImages)}" step="1">
 						    <button type="button" 
 						    		data-bs-target="#carouselExampleIndicators" 
-						    		data-bs-slide-to="${i}" class="active" aria-current="true"
+						    		data-bs-slide-to="0" class="active" aria-current="true"
+									aria-label="Slide 1">
+							</button>
+					  	<c:forEach var="i" begin="1" end="${fn:length(touris.tourisImages)}" step="1">
+						    <button type="button" 
+						    		data-bs-target="#carouselExampleIndicators" 
+						    		data-bs-slide-to="${i}" aria-current="true"
 									aria-label="Slide ${i+1}">
 							</button>
 					    </c:forEach>
 					</div>
 				  <div class="carousel-inner">
+				  <c:if test="${not empty touris.tourismainImge}">
 					    <div class="carousel-item active">
-					      <img class="d-block w-100" src="${touris.tourismainImge}" alt="First slide" width="500px" height="333px">
+					      <img class="d-block w-100 h-100" src="${touris.tourismainImge}" alt="First slide" >
 					    </div>
 				 	<c:forEach var="image" items="${touris.tourisImages}">
 					    <div class="carousel-item">
-					      <img class="d-block w-100" src="${image.tourisImages}" alt="Next slide" width="500px" height="333px">
+					      <img class="d-block w-100 h-100" src="${image.tourisImages}" alt="Next slide" >
 					    </div>
 					</c:forEach>
+				  </c:if>
+  				  <c:if test="${empty touris.tourismainImge}">
+					    <div class="carousel-item active">
+					      <img class="d-block w-100 h-100" src="${touris.tourisImages[0].tourisImages}" alt="" >
+					    </div>
+				 	<c:forEach var="image" items="${touris.tourisImages}">
+					    <div class="carousel-item">
+					      <img class="d-block w-100 h-100" src="${image.tourisImages}" alt="Next slide" >
+					    </div>
+					</c:forEach>
+				  </c:if>
 				  </div>
 					<button class="carousel-control-prev" type="button"
 							data-bs-target="#carouselExampleIndicators"
@@ -80,35 +116,53 @@
 							<span class="visually-hidden">Next</span>
 					</button>
 				</div>
-<!-- 		          <div class="">
-		            <table class="text-start align-top food_info_table">
-		              <tr class="">
-		                <th valign="top"><i class="fa-solid fa-location-dot fa-2xl" style="color: #000000;"></i></th>
-		                <th class="fs-4" valign="top">영업시간</th>
-		                <td>
-		                  <div class="food_runtime">매일 12:00 ~ 22:00</div>
-		                  <div class="food_runtime">휴게시간 15:00 ~ 18:00</div>
-		                </td>
-		              </tr>
-		              <tr>
-		                <th valign="top"><i class="fa-solid fa-utensils fa-2xl" style="color: #000000;"></i></th>
-		                <th class="fs-4" valign="top">메뉴</th>
-		                <td>
-		                  <div class="food_main_mainmenu">젓갈스파게티 19,000원</div>
-		                  <div class="food_main_mainmenu">런치코스 36,000원</div>
-		                  <div class="food_main_mainmenu">디너코스 79,000원</div>
-		                </td>
-		              </tr>
-		              <tr>
-		                <th valign="top"><i class="fa-solid fa-phone fa-2xl" style="color: #000000;"></i></th>
-		                <th class="fs-4" valign="top">연락처</th>
-		                <td>
-		                  <div class="food_main_phone">010-1234-1234</div>
-		                </td>
-		              </tr>
-		            </table>
-		          </div> -->
-			</div>
+	          		<div class="">
+			            <table class="w-100 h-100 m-table">
+			              <tr>
+			                <th class="fs-4">홈페이지</th>
+			                <td>
+		                 		<div class="ft-blue2"><a href="${touris.tourispage}" target="_blank">${touris.tourispage}</a></div>
+			                </td>
+			              </tr>
+			              <tr>
+			                <th class="fs-4">주소</th>
+			                <td>
+			                	<div class="">${touris.tourisAddress}</div>
+			                </td>
+			              </tr>
+			              <tr>
+			                <th class="fs-4" style="margin-right:10px;">문의 및 안내</th>
+			                <td style="margin-left:10px;">
+			                <c:if test="${empty touris.tourisPhone }">
+			                	<div>${touris.tourisTel}</div>
+			                </c:if>
+			                <c:if test="${not empty touris.tourisPhone }">
+			                	<div>${touris.tourisPhone}</div>
+			                </c:if>
+			                </td>
+			              </tr>
+           	              <tr>
+			                <th class="fs-4">쉬는날</th>
+			                <td>
+			                  <div class="">${touris.tourisDayoff}</div>
+			                </td>
+			              </tr>
+           	              <tr>
+			                <th class="fs-4">이용시간</th>
+			                <td>
+			                  <div class="">${touris.tourisUsetime}</div>
+			                </td>
+			              </tr>
+           	              <tr>
+			                <th class="fs-4">주차시설</th>
+			                <td>
+			                  <div class="">${touris.tourisParking}</div>
+			                </td>
+			              </tr>
+			            </table>
+			          </div>		
+				</div>
+			
 				<div class="detailHotelInfoCon">
 					<div class="detailHotelTitle">
 						<h2>상세설명</h2>

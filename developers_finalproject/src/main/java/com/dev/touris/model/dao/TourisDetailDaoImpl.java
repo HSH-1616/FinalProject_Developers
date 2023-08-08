@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
 
 @Repository
@@ -32,7 +33,13 @@ public class TourisDetailDaoImpl implements TourisDetailDao {
 
 	@Override
 	public void deleteHeart(SqlSession session, Map param) {
-		session.delete("",param);
+		session.delete("tourisDetail.deleteHeart",param);
 	}
+
+	@Override
+	public Member selectByIdforMember(SqlSession session, Map param) {
+		return session.selectOne("tourisDetail.selectByIdforMember",param);
+	}
+	
 	
 }

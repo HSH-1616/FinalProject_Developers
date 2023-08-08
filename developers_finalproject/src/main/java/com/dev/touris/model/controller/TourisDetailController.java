@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dev.member.model.dto.Member;
 import com.dev.touris.model.service.TourisDetailService;
 import com.dev.touris.model.vo.Touris;
 import com.google.gson.JsonArray;
@@ -24,6 +26,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller
+@SessionAttributes({"loginMember"})
 @RequestMapping("/tourisDetail")
 public class TourisDetailController {
 
@@ -37,9 +40,9 @@ public class TourisDetailController {
 	public String TourisSelectById(@RequestParam(value = "tourisId") String id, Model model) throws IOException {
 		System.out.println(id);
 		Touris touris = service.selectById(id);
-		//System.out.println(touris);
+//		System.out.println(touris);
 		String content=touris.getTourisContent();
-		//System.out.println(content);
+//		System.out.println(content);
 		if (content==null) {
 			String tourisId = touris.getTourisId();
 			//System.out.println(tourisId);
@@ -187,39 +190,47 @@ public class TourisDetailController {
 			urlConnection4.disconnect();
 //파싱할 객체 생성
 			JsonObject obj4 = JsonParser.parseString(images.toString()).getAsJsonObject();
-			JsonArray arr4 = obj4.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
-					.getAsJsonObject().get("item").getAsJsonArray();
-			for (JsonElement jsonElement2 : arr4) {
-				JsonObject temp = jsonElement2.getAsJsonObject();
-				System.out.println("=============================");
-				System.out.println("오리지날url : " + temp.get("originimgurl"));
-				System.out.println("contentid : " + temp.get("contentid"));
-				String tourisImages=temp.get("originimgurl").getAsString();
-				String tourisId2=temp.get("contentid").getAsString();
-				Map<String,String> param2=new HashMap();
-				param2.put("tourisImages",tourisImages);
-				param2.put("tourisId",tourisId2);
-				service.insertImage(param2);
-			}
-			service.insertDetail(param);
-		}
-		Touris result = service.selectById(id); 
-		model.addAttribute("touris", result);
+			//System.out.println(obj4);
+			//System.out.println("이거뜨니?"+obj4.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items").isJsonObject());
+			if(!obj4.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items").isJsonObject()) {
+				if(obj4.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items").getAsString().equals("")) {
+					//System.out.println("여기들어오니?");
+					service.insertDetail(param);
+				}
+			}else {
+				JsonArray arr4 = obj4.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
+						.getAsJsonObject().get("item").getAsJsonArray();
+				for (JsonElement jsonElement2 : arr4) {
+					JsonObject temp = jsonElement2.getAsJsonObject();
+					System.out.println("=============================");
+					System.out.println("오리지날url : " + temp.get("originimgurl"));
+					System.out.println("contentid : " + temp.get("contentid"));
+					String tourisImages=temp.get("originimgurl").getAsString();
+					String tourisId2=temp.get("contentid").getAsString();
+					Map<String,String> param2=new HashMap();
+					param2.put("tourisImages",tourisImages);
+					param2.put("tourisId",tourisId2);
+					service.insertImage(param2);
+					service.insertDetail(param);
+					}
+				}
+		}//content if문 닫기
+		
+			Touris result = service.selectById(id); 
+			model.addAttribute("touris", result);
 		return "touris/tourisDetail";
 	}
 	
 	@GetMapping("/insertHeart")
-	public void insertHeart(@RequestParam Map param) {
-		System.out.println("여기오니?");
-		System.out.println(param.get("tourisId"));
-		System.out.println(param.get("memberId"));
+	public void insertHeart(@RequestParam Map param, Model model) {
 		service.insertHeart(param);
+		Member m=service.selectByIdforMember(param);
+		model.addAttribute("loginMember",m);
 	}
 	@GetMapping("/deleteHeart")
-	public void deleteHeart(@RequestParam Map param) {
-		System.out.println("여기오니2?");
-//		System.out.println(param.get("tourisId"));
-//		System.out.println(param.get("memberId"));
-//		service.deleteHeart(param);
+	public void deleteHeart(@RequestParam Map param, Model model) {
+		service.deleteHeart(param);
+		Member m=service.selectByIdforMember(param);
+		model.addAttribute("loginMember",m);
 	}
 }
