@@ -84,20 +84,19 @@
    	width:40%;
    	margin:auto;
 } 
-.comment-body{
-    margin:10px;
-}
+
 
 
 div.comments{
     display: inline-block;
-    width: 100%;
+    width: 40rem;
     margin-top: 10px;
     
 }
 
 #inputComment{
     margin-top: 10px;
+    width:40rem;
 }
 
 #comment_input{

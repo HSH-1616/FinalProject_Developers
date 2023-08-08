@@ -31,14 +31,14 @@ public class CommunityServiceImpl implements CommunityService {
 	
 	@Override
 	public List<Community> communityList(Map<String, Object> paging) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.communityList(session, paging);
 	}
 
 	@Override
 	public Community communityView(int no, HttpServletRequest req, HttpServletResponse res) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.communityView(session, no);
 	}
 
 	@Override

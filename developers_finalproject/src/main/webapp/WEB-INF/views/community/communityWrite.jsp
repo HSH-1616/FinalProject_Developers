@@ -134,12 +134,8 @@
                     myDropzone.processQueue();
                 });
                 this.on("successmultiple", function(files, response){
-                	console.log(files);
+         
                 	let fileNames=files[0].xhr.responseText;
-                	
-                	
-                	
-                	
                 	
                  	$.ajax({
                 		url: "/community/communityWrite.do",

@@ -1,10 +1,15 @@
 package com.dev.community.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dev.community.model.dto.Community;
 import com.dev.community.model.dto.CommunityFile;
 import com.dev.community.model.service.CommunityService;
+import com.dev.member.model.dto.Member;
 
 @Controller
 @RequestMapping("/community")
@@ -29,8 +35,22 @@ public class CommunityController {
 		return "/community/community";
 	}
 	
+	@PostMapping("/communityListEnd.do")
+	@ResponseBody
+	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="3") int numPerpage) {
+		Map<String, Object> pasing=new HashMap<String, Object>();
+		pasing.put("cPage", cPage);
+		pasing.put("numPerpage", numPerpage);
+		//int totalData=service.communityCount();
+		 
+		return service.communityList(pasing);
+	}
+	
 	@GetMapping("/communityView.do")
-	public String communityView() {
+	public String communityView(int no,Model m,HttpServletRequest req, HttpServletResponse res) {
+		Community comuView=service.communityView(no, req, res);
+		m.addAttribute("comuView",comuView);
+		
 		return "/community/communityView";
 	}
 	
@@ -44,8 +64,8 @@ public class CommunityController {
 	public int communityWrite(@RequestParam("memberId") int id ,@RequestParam("communityTitle") String title, @RequestParam("communityContent") String content, @RequestParam("files") String files,HttpSession session) {
 		
 		String[] file=files.split(" ");
-		
-		Community communityBoard=Community.builder().memberId(id).communityTitle(title).communityContent(content).build();
+		Member m=Member.builder().memberId(id).build();
+		Community communityBoard=Community.builder().memberId(m).communityTitle(title).communityContent(content).thumbnail(file[0]).build();
 		int result=service.insertCommunity(communityBoard);
 		if(result>0) {
 			for(String f:file) {
