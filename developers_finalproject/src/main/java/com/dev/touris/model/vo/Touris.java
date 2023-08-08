@@ -1,5 +1,7 @@
 package com.dev.touris.model.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +30,5 @@ public class Touris {
 	private String tourisStartday;
 	private String tourisDayoff;
 	private String areaId;
+	private List<TourisImages> tourisImages;
 }
