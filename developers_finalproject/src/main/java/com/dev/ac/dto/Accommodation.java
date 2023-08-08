@@ -1,6 +1,7 @@
 package com.dev.ac.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class Accommodation {
 	private int reviewCount;
 	private List<AcHeart> acHearts;
 	private List<AcReview> acReviews;
-	private List<AcFile> acFiles;
-	private List<AcPay> acPay;	
+	private List<AcFile> acFiles=new ArrayList();
+	private List<AcReservation> arv;	
 	private AcFacilities afa;	
 }

@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.dev.ac.dto.AcFacilities;
-import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcFile;
+import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 import com.dev.ac.service.AcService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RequestMapping("/ac")
 @Controller
@@ -117,41 +120,41 @@ public class AcController {
 
 	}
 
-	@GetMapping("/insertPay")
-	// @RequestMapping(value="/insertPay", method=RequestMethod.POST)
-	public String insertPay(Map param, HttpServletRequest req) {
-
-		// flashMap에 담겨있는 object 가져오기
-		Map redirectParam = RequestContextUtils.getInputFlashMap(req);
-		if (redirectParam != null) {
-			param = (Map) redirectParam.get("param"); // 오브젝트 타입이라 캐스팅해줌
-		}
-		int result = service.insertPay(param);
-
-		if (result > 0) {
-			return "redirect:/ac/acPayResult";
-		} else {
-			return "redirect:/ac/acError";
-		}
-	}
-
-	@PostMapping("/deletetPay")
-	// @RequestMapping(value="/insertPay", method=RequestMethod.POST)
-	public String deletePay(Map param, HttpServletRequest req) {
-
-		// flashMap에 담겨있는 object 가져오기
-		Map redirectParam = RequestContextUtils.getInputFlashMap(req);
-		if (redirectParam != null) {
-			param = (Map) redirectParam.get("param"); // 오브젝트 타입이라 캐스팅해줌
-		}
-		int result = service.insertPay(param);
-
-		if (result > 0) {
-			return "/accommodation/acPayResult";
-		} else {
-			return "/accommodation/acError";
-		}
-	}
+//	@GetMapping("/insertPay")
+//	// @RequestMapping(value="/insertPay", method=RequestMethod.POST)
+//	public String insertPay(Map param, HttpServletRequest req) {
+//
+//		// flashMap에 담겨있는 object 가져오기
+//		Map redirectParam = RequestContextUtils.getInputFlashMap(req);
+//		if (redirectParam != null) {
+//			param = (Map) redirectParam.get("param"); // 오브젝트 타입이라 캐스팅해줌
+//		}
+//		int result = service.insertPay(param);
+//
+//		if (result > 0) {
+//			return "redirect:/ac/acPayResult";
+//		} else {
+//			return "redirect:/ac/acError";
+//		}
+//	}
+//
+//	@PostMapping("/deletetPay")
+//	// @RequestMapping(value="/insertPay", method=RequestMethod.POST)
+//	public String deletePay(Map param, HttpServletRequest req) {
+//
+//		// flashMap에 담겨있는 object 가져오기
+//		Map redirectParam = RequestContextUtils.getInputFlashMap(req);
+//		if (redirectParam != null) {
+//			param = (Map) redirectParam.get("param"); // 오브젝트 타입이라 캐스팅해줌
+//		}
+//		int result = service.insertPay(param);
+//
+//		if (result > 0) {
+//			return "/accommodation/acPayResult";
+//		} else {
+//			return "/accommodation/acError";
+//		}
+//	}
 
 	@GetMapping("/acPayResult")
 	public String acPayResult() {
@@ -190,57 +193,61 @@ public class AcController {
 	}
 
 	@PostMapping("/insertRegist")
-	public String insertRegist(HttpServletRequest req, Accommodation ac, AcFacilities afa, AcPay ap, String[] afalName,
-			MultipartFile[] afalImg, HttpSession session) {
+	public String insertRegist(String[] checkIn, String[] checkOut, Accommodation ac, AcFacilities afa,
+			String[] afalName, MultipartFile[] afImage, MultipartFile[] afalImage, HttpSession session) {
 
-		String path = session.getServletContext().getRealPath("/images/upload/accommodation/afal/afa");
-		String[] checkIn = req.getParameterValues("checkIn");
-		String[] checkOut = req.getParameterValues("checkOut");
-		if (checkIn != null&&checkOut !=null) {
+		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
+		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
+		List<AcReservation> arv = new ArrayList();
+		if (checkIn != null && checkOut != null) {
 			for (int i = 0; i < checkIn.length; i++) {
 				System.out.println(checkIn[i]);
-				System.out.println(checkOut[i]);
+				java.sql.Date checkInDate = java.sql.Date.valueOf(checkIn[i]);
+				java.sql.Date checkOutDate = java.sql.Date.valueOf(checkOut[i]);
+				arv.add(AcReservation.builder().checkIn(checkInDate).checkOut(checkOutDate).build());
+				ac.setArv(arv);
 			}
 		}
-
-		/*
-		 * if (afalImg != null) { for (MultipartFile mf : afalImg) { if (!mf.isEmpty())
-		 * { String oriName = mf.getOriginalFilename(); String ext =
-		 * oriName.substring(oriName.lastIndexOf(".")); Date today = new
-		 * Date(System.currentTimeMillis()); SimpleDateFormat sdf = new
-		 * SimpleDateFormat("yyyyMMdd_HHmmssSSS"); int rdn = (int) (Math.random() *
-		 * 10000) + 1; String rename = sdf.format(today) + "_" + rdn + ext;
-		 * 
-		 * try { mf.transferTo(new File(path + rename)); } catch (IOException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * AfaList file = AfaList.builder().afalImg(rename).build();
-		 * 
-		 * afa.getAfal().add(file);
-		 * 
-		 * System.out.println(ap); System.out.println(file); System.out.println(afa); }
-		 * } }
-		 */
-
-
 	
-		if (afalImg!= null && afalName!=null) {
-			for (int i = 0; i < afalImg.length; i++) {
-				String oriName = afalImg[i].getOriginalFilename();
+		if (afImage != null) {
+			for (MultipartFile mf : afImage) {
+				if (!mf.isEmpty()) {
+					String oriName = mf.getOriginalFilename();
+					String ext = oriName.substring(oriName.lastIndexOf("."));
+					Date today = new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn = (int) (Math.random() * 10000) + 1;
+					String rename = "ac"+sdf.format(today) + "_" + rdn + ext;
+
+					try {
+						mf.transferTo(new File(acPath + rename));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					AcFile file = AcFile.builder().afName(rename).build();
+					System.out.println(file);
+					ac.getAcFiles().add(file);
+				}
+			}
+		}
+		System.out.println(afalImage);
+		if (afalImage!= null && afalName!=null) {
+			for (int i = 0; i < afalImage.length; i++) {
+				String oriName = afalImage[i].getOriginalFilename();
 				String ext = oriName.substring(oriName.lastIndexOf("."));
 				Date today = new Date(System.currentTimeMillis());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 				int rdn = (int) (Math.random() * 10000) + 1;
-				String rename = sdf.format(today) + "_" + rdn + ext;
+				String rename = "afa"+sdf.format(today) + "_" + rdn + ext;
 
 				try {
-					afalImg[i].transferTo(new File(path + rename));
+					afalImage[i].transferTo(new File(afaPath + rename));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				AfaList file = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
-
 				afa.getAfal().add(file);
 			}
 		}
@@ -248,6 +255,77 @@ public class AcController {
 		ac.setAfa(afa);
 		System.out.println(ac);
 
+		return "/";
+	}
+	
+	@PostMapping("/insertRegist2")
+	@ResponseBody
+	public String insertRegist2(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session) {
+		Accommodation ac = null;
+		List<AcReservation> arv= null;
+		AcFacilities afa=new AcFacilities();
+		ObjectMapper mapper=new ObjectMapper();
+		//List<User> userList = Arrays.asList(objectMapper.readValue(userArray, User[].class));
+		
+		try {
+		  	ac=mapper.readValue(acData, Accommodation.class);
+			//arv =mapper.readValue(arvData, new TypeReference<List<AcReservation>>() {});
+			System.out.println(ac);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
+		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
+		
+		System.out.println(afImage);
+		
+		if (afImage != null) {
+			for (MultipartFile mf : afImage) {
+				if (!mf.isEmpty()) {
+					String oriName = mf.getOriginalFilename();
+					String ext = oriName.substring(oriName.lastIndexOf("."));
+					Date today = new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn = (int) (Math.random() * 10000) + 1;
+					String rename = "ac"+sdf.format(today) + "_" + rdn + ext;
+
+					try {
+						mf.transferTo(new File(acPath + rename));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					AcFile file = AcFile.builder().afName(rename).build();
+					System.out.println(file);
+					ac.getAcFiles().add(file);
+				}
+			}
+		}
+		
+		System.out.println(afalImg);
+		if (afalImg!= null) {
+			for (int i = 0; i < afalImg.length; i++) {
+				String oriName = afalImg[i].getOriginalFilename();
+				String ext = oriName.substring(oriName.lastIndexOf("."));
+				Date today = new Date(System.currentTimeMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rdn = (int) (Math.random() * 10000) + 1;
+				String rename = "afa"+sdf.format(today) + "_" + rdn + ext;
+
+				try {
+					afalImg[i].transferTo(new File(afaPath + rename));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				AfaList file = AfaList.builder().afalImg(rename).build();
+				afa.getAfal().add(file);
+			}
+		}
+		ac.setAfa(afa);
+		System.out.println(ac);
 		return "/";
 	}
 

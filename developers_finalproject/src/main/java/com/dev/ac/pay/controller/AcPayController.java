@@ -2,12 +2,16 @@ package com.dev.ac.pay.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.http.HttpRequest;
+import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,30 +61,25 @@ public class AcPayController {
 	}
 	
 	@GetMapping("/kakaoPayOk")
-	public String kakaoPayApporval(Map param, @RequestParam("pg_token") String pgToken,
-			@RequestParam("acId") String acId, @RequestParam("acPrice") String acPrice,
-			@RequestParam("checkIn") String checkIn, @RequestParam("checkOut") String checkOut,
-			@RequestParam("people") String people, @RequestParam("orderId") String orderId, RedirectAttributes ra) {
+	public String kakaoPayApporval(AcPay ap,@RequestParam("pg_token") String pgToken,
+			@RequestParam("checkIn") String checkIn, @RequestParam("checkOut") String checkOut
+			) {
 		Member member = (Member) session.getAttribute("loginMember");
 		String memberId = String.valueOf(member.getMemberId());
 
-		KaKaoPayApproval KaKaoPayApproval = serviceImpl.kakaoPayApproval(pgToken, memberId, orderId);
+		KaKaoPayApproval KaKaoPayApproval = serviceImpl.kakaoPayApproval(pgToken, memberId, ap.getApOrderId());
 
 		if (KaKaoPayApproval != null) {
-			param.put("acId", acId);
-			param.put("memberId", memberId);
-			param.put("acPrice", acPrice);
-			param.put("checkIn", checkIn);
-			param.put("checkOut", checkOut);
-			param.put("people", people);
-			param.put("orderId", orderId);
-			param.put("keyId", KaKaoPayApproval.getTid());
+//			ap.setAcId(acId);
+//			ap.setMemberId(memberId);
+//			ap.setApPrice(acPrice);
+//			ap.setApPeople(people);
+//			ap.setApOrderId(orderId);
+			ap.setApKeyId(KaKaoPayApproval.getTid());
 
-			// 결제가 승인되면 DB에 저장하기 위해 controller로 redirect
-			// 결제키가 담겨있어 POST로 전송하기 위해 flashAttribute 사용
-			ra.addFlashAttribute("param", param);
+			service.insertPay(ap,checkIn,checkOut);
 
-			return "redirect:/ac/insertPay";
+			return "accommodation/acPayResult";
 
 		} else {
 			return "";
@@ -118,13 +117,22 @@ public class AcPayController {
 	@PostMapping("/cardPay")
 	public IamportResponse<Payment> verifyIamport(@RequestBody Map param) throws IamportResponseException, IOException {
 
-		String impUid = (String) param.get("imp_uid");// 실제 결제금액 조회위한 아임포트 서버쪽에서 id
+		String impUid = (String) param.get("impUid");// 실제 결제금액 조회위한 아임포트 서버쪽에서 id
 		// 아임포트 서버쪽에 결제된 정보 조회.
 		IamportResponse<Payment> irsp = checkIamport(impUid);
 
 		if (irsp != null) {
-			param.put("keyId", impUid);
-			service.insertPay(param);
+			AcPay ap=new AcPay();
+			ap.setAcId((int) param.get("acId"));
+			ap.setMemberId((String) param.get("memberId"));
+			ap.setApPrice((int) param.get("apPrice"));
+			ap.setApPeople((int) param.get("apPeople"));
+			ap.setApOrderId((String) param.get("apOrderId"));
+			ap.setApKeyId(impUid);
+			String checkIn=(String)param.get("checkIn");
+			String checkOut=(String)param.get("checkOut");
+//			param.put("keyId", impUid);
+			service.insertPay(ap,checkIn,checkOut);
 		}
 
 		return irsp;

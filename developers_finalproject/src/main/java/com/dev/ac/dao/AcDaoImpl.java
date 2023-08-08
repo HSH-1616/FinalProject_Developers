@@ -38,8 +38,13 @@ public class AcDaoImpl implements AcDao {
 	}
 	
 	@Override
-	public int insertPay(SqlSessionTemplate session, Map param) {
-		return session.insert("accommodation.insertPay",param);
+	public int insertPay(SqlSessionTemplate session, AcPay ap) {
+		return session.insert("accommodation.insertPay",ap);
+	}
+	
+	@Override
+	public int insertReservation(SqlSessionTemplate session, Map param) {
+		return session.insert("accommodation.insertReservation",param);
 	}
 
 	@Override
@@ -61,6 +66,8 @@ public class AcDaoImpl implements AcDao {
 	public int deleteHeart(SqlSessionTemplate session,Map param) {
 		return session.delete("accommodation.deleteHeart",param);
 	}
+
+	
 
 	
 

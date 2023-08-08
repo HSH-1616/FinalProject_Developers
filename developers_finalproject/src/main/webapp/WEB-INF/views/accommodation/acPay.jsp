@@ -111,8 +111,8 @@
 	<script type="text/javascript">
 		const acId=${ap.acId}
 		const acTitle='${ap.acTitle}'
-		const acPrice=${resultPrice}
-		const people=${fn:replace(people,"명","")}
+		const apPrice=${resultPrice}
+		const apPeople=${fn:replace(people,"명","")}
 		const checkIn='${checkIn}'
 		const checkOut='${checkOut}'
 		const memberId='${loginMember.memberId}'

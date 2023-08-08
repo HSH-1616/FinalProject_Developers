@@ -133,9 +133,19 @@ $(document).on("click", "#holyBtn", function() {
 		$("#holyResult").append(con)
 		$("#holyResult>div").last().children("input[name=checkIn]").val($("#holyStart").val())
 		$("#holyResult>div").last().children("input[name=checkOut]").val($("#holyLast").val())
+		checkInOutDay.push({
+			checkIn: $("#holyStart").val(),
+			checkOut: $("#holyLast").val()
+		})
 		resetStart()
 		resetLast()
 	}
+
+
+	console.log(checkInOutDay)
+	calender()
+	console.log(checkInOutDay)
+
 })
 
 $(document).on("click", "#holyResult button", function() {
@@ -172,7 +182,7 @@ $(document).on("click", ".insertFc", function() {
 	const label = $("<label for='inputFileindex" + count + "'>");
 	const icon = $(" <ion-icon name='images-sharp'>");
 	const p = $("<p>이미지 추가</p>");
-	const inputFile = $(" <input type='file' name='afalImg' id='inputFileindex" + count + "' required/>");
+	const inputFile = $(" <input type='file' name='afalImage' id='inputFileindex" + count + "' required/>");
 	// onchange='previewImg(this)'
 	const insertFcImg = $("<img class='insertFcImg' src='' alt=''/>");
 	const blurInsertFc = $("<div class='blurInsertFc'>");
@@ -340,22 +350,79 @@ function kakaoAddress() {
 	}).open();
 }
 
-Dropzone.autoDiscover = false;
-var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
-dropzonePreviewNode.id = "";
-var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
-dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
+var sel_files = [];
 
-const dropzone = new Dropzone(".dropzone", {
-	url: "https://httpbin.org/post", // 파일을 업로드할 서버 주소 url.
-	method: "post", // 기본 post로 request 감. put으로도 할수있음
-	uploadMultiple: true,
-	maxFiles: 10,
-	maxFilesize: 5,
-	acceptedFiles: "image/*",
-	previewTemplate: previewTemplate, // 만일 기본 테마를 사용하지않고 커스텀 업로드 테마를 사용하고 싶다면
-	previewsContainer: "#dropzone-preview", // 드롭존 영역을 .dropzone이 아닌 다른 엘리먼트에서 하고싶을때
-});
+$(document).ready(function() {
+	$("#afImage").on("change", handleImgsFiles)
+})
 
+function handleImgsFiles(e) {
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
 
+	filesArr.forEach(function(f) {
+		if (!f.type.match("image.*")) {
+			alert("이미지만 가능합니다.")
+			return;
+		}
+		sel_files.push(f);
+		var reader = new FileReader();
 
+		reader.onload = function(e) {
+			var img_html = "<img src=\"" + e.target.result + "\" />"
+
+			$(".preview").append(img_html)
+		}
+		reader.readAsDataURL(f)
+	})
+
+}
+$("#registOkBtn").on("click", function() {
+
+	acData = {
+		acTitle: $("input[name=acTitle]").val(),
+		acPrice: $("input[name=acPrice]").val(),
+		acAddress: $("input[name=acAddress]").val(),
+		acType: $("input[name=acType]").val(),
+		acPeople: $("input[name=acPeople]").val(),
+		acRoom: $("input[name=acRoom]").val(),
+		acBed: $("input[name=acBed]").val(),
+		acBathRoom: $("input[name=acBathRoom]").val(),
+		acContent: $("textarea[name=acContent]").val(),
+		arv: checkInOutDay
+	}
+
+	const afalImg = []; 
+	const files=document.getElementsByName("afalImage");
+	console.log(sel_files	)
+	$.each(files,function(i,l){
+		afalImg.push(l.files)
+	})
+	console.log(files)
+	console.log(afalImg)
+		
+	const form = new FormData();	
+	form.append("acData", JSON.stringify(acData))	
+	$.each(sel_files,function(i,l){
+		form.append("afImage",l)	
+	})
+	
+	$.each(afalImg,function(i,l){
+		form.append("afalImg",l[i].files)	
+	})
+
+	for (let [key, value] of form) {
+		console.log(key, value);
+	}
+
+	$.ajax({
+		url: "/ac/insertRegist2",
+		type: "post",
+		data: form,
+		processData: false,
+		contentType: false,
+		success: {
+
+		}
+	});
+})

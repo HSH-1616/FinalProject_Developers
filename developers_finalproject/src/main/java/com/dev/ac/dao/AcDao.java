@@ -20,7 +20,9 @@ public interface AcDao {
 	
 	AcPay checkPayRefund(SqlSessionTemplate session, int no);
 	
-	int insertPay(SqlSessionTemplate session,Map param);
+	int insertPay(SqlSessionTemplate session, AcPay ap);
+	
+	int insertReservation(SqlSessionTemplate session, Map param);
 	
 	int deletePay(SqlSessionTemplate session,int acId);
 	

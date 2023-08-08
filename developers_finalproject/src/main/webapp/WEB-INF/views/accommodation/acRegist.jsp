@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
 <link rel="stylesheet" href="${path }/css/accommodation/acRegist.css" />
 <section>
-	<form id="hotelRegistCon" action="${path}/ac/insertRegist" method="post" enctype="multipart/form-data">
+	<form id="hotelRegistCon" action="${path}/ac/insertRegist"
+		method="post" enctype="multipart/form-data">
 		<div class="hotelRegist">
 			<div class="registHeader">
 				<button>
@@ -29,43 +30,17 @@
 			</div>
 			<div class="registImgCon">
 				<div class="registImg">
-					<div class="dropzone" id="dropDiv"></div>
+					<div class="acImgCon">
+						<label class="afLabel" for="afImage">
+							<div class="afInner" id="inner">드래그하거나 클릭해서 업로드</div>
+						</label> 
+						<input id="afImage" name="afImage" accept="image/*" type="file" multiple="true" hidden="true">
+						<p class="preview-title">preview</p>
+						<div class="preview" id="preview"></div>
+					</div>
 					<div id="imgInfo">
 						<p>-파일은 최대 10개까지 등록 가능합니다.</p>
 						<p>-권장 사이즈(500px * 500px)</p>
-					</div>
-					<!-- 포스팅 - 이미지/동영상 dropzone 영역 -->
-					<div id="dropPreview">
-						<ul class="list-unstyled mb-0" id="dropzone-preview">
-							<li class="mt-2" id="dropzone-preview-list">
-								<!-- This is used as the file preview template -->
-								<div class="border rounded-3">
-									<div class="d-flex align-items-center p-2">
-										<div class="flex-shrink-0 me-3">
-											<div class="width-8 h-auto rounded-3">
-												<img data-dz-thumbnail="data-dz-thumbnail"
-													class="w-full h-auto rounded-3 block" src="#"
-													alt="Dropzone-Image" style="width: 120px" />
-											</div>
-										</div>
-										<div class="flex-grow-1">
-											<div class="pt-1">
-												<h6 class="font-semibold mb-1" data-dz-name="data-dz-name">
-													&nbsp;</h6>
-												<p class="text-sm text-muted fw-normal"
-													data-dz-size="data-dz-size"></p>
-												<strong class="error text-danger"
-													data-dz-errormessage="data-dz-errormessage"></strong>
-											</div>
-											<div class="shrink-0 ms-3">
-												<button type="button" 23data-dz-remove="data-dz-remove"
-													class="btn btn-sm btn-danger">삭제하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>
@@ -116,8 +91,8 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput people">
-											<input type="text" name="acPeople" id="peopleCount"
-												value="1" min="1" max="10" readonly />
+											<input type="text" name="acPeople" id="peopleCount" value="1"
+												min="1" max="10" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn people" id="plus">
 											<ion-icon name="add-circle-outline"></ion-icon>
@@ -250,22 +225,22 @@
 						<div id=holyInput>
 							<div>
 								<p>시작일</p>
-								<input type="text" id="holyStart" placeholder="시작일 선택" readonly/>
-								<ion-icon id="startBtn" name="close-circle-outline" role="img" class="md hydrated"></ion-icon>
+								<input type="text" id="holyStart" placeholder="시작일 선택" readonly />
+								<ion-icon id="startBtn" name="close-circle-outline" role="img"
+									class="md hydrated"></ion-icon>
 							</div>
 							<div>
 								<p>종료일</p>
-								<input type="text" id="holyLast" placeholder="종료일 선택" readonly/>
-								<ion-icon id="lastBtn" name="close-circle-outline" role="img" class="md hydrated"></ion-icon>
+								<input type="text" id="holyLast" placeholder="종료일 선택" readonly />
+								<ion-icon id="lastBtn" name="close-circle-outline" role="img"
+									class="md hydrated"></ion-icon>
 							</div>
 							<div>
-							<button id="holyBtn" type="button">등록하기</button>						
-							</div>							
+								<button id="holyBtn" type="button">등록하기</button>
+							</div>
 						</div>
 						<hr>
-						<div id="holyResult">
-									
-						</div>
+						<div id="holyResult"></div>
 					</div>
 				</div>
 				<div class="registTitle">
@@ -349,7 +324,7 @@
 				<div class="registBtnCon">
 					<hr />
 					<div class="registBtn">
-						<button type="submit" id="registOkBtn">등록하기</button>
+						<button type="button" id="registOkBtn">등록하기</button>
 						<button id="registCancelBtn">취소</button>
 					</div>
 				</div>

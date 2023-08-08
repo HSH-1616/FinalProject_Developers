@@ -18,7 +18,7 @@ public interface AcService {
 	
 	AcPay checkPayRefund(int no);
 	
-	int insertPay(Map param);
+	int insertPay(AcPay ap,String checkIn, String checkOut);
 	
 	int deletePay(int apId);
 	

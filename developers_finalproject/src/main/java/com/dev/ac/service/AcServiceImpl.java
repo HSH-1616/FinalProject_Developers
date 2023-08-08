@@ -1,5 +1,6 @@
 package com.dev.ac.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,21 @@ public class AcServiceImpl implements AcService {
 	}
 	
 	@Override
-	public int insertPay(Map param) {
-		return dao.insertPay(session,param);
+	public int insertPay(AcPay ap, String checkIn, String checkOut) {
+		System.out.println(ap);
+		System.out.println(ap.getApId());
+		int result=dao.insertPay(session,ap);
+		Map param = new HashMap();
+		if(result>0) {
+			param.put("acId",ap.getAcId());
+			param.put("apId",ap.getApId());
+			param.put("checkIn",checkIn);
+			param.put("checkOut",checkOut);
+			System.out.println(param);
+			result+=dao.insertReservation(session, param);
+		}
+
+		return result;
 	}
 	
 	@Override

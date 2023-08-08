@@ -63,8 +63,8 @@ public class AcPayServiceImpl {
 		params.add("quantity", "1");
 		params.add("total_amount", acPrice);
 		params.add("tax_free_amount", "0");
-		params.add("approval_url", path+"/pay/kakaoPayOk?acId=" + acId + "&checkIn=" + checkIn
-				+ "&checkOut=" + checkOut + "&people=" + people + "&acPrice=" + acPrice + "&orderId=" + orderId);
+		params.add("approval_url", path+"/pay/kakaoPayOk?acId=" + acId + "&checkIn=" + checkIn+ "&memberId=" + memberId
+				+ "&checkOut=" + checkOut + "&apPeople=" + people + "&apPrice=" + acPrice + "&apOrderId=" + orderId);
 		params.add("cancel_url", path+"/pay/kakaoPayCancel");
 		params.add("fail_url", path+"/pay/kakaoPayFail");
 

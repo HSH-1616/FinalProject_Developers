@@ -49,7 +49,7 @@ $("#hotelPayBtn").on("click", function() {
 				pay_method: "card",		//결제 방법
 				merchant_uid: uid,//주문번호
 				name: acTitle,		//상품 명
-				amount: acPrice,			//금액
+				amount: apPrice,			//금액
 				buyer_email: memberEmail,
 				buyer_name: memberName,
 			},
@@ -57,13 +57,13 @@ $("#hotelPayBtn").on("click", function() {
 				//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
 				if (rsp.success) {
 					let data = {
-						imp_uid: rsp.imp_uid,
-						orderId: uid,
+						impUid: rsp.imp_uid,
+						apOrderId: uid,
 						acId: acId,
 						memberId: memberId,
 						acTitle: acTitle,
-						acPrice: acPrice,
-						people: people,
+						apPrice: apPrice,
+						apPeople: apPeople,
 						checkIn: checkIn,
 						checkOut: checkOut,
 					};
@@ -92,8 +92,8 @@ $("#hotelPayBtn").on("click", function() {
 			acId: acId,
 			memberId: memberId,
 			acTitle: acTitle,
-			acPrice: acPrice,
-			people: people,
+			apPrice: apPrice,
+			apPeople: apPeople,
 			checkIn: checkIn,
 			checkOut: checkOut,
 		};

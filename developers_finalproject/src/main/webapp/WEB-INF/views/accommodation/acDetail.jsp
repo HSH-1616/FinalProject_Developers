@@ -339,9 +339,9 @@
 							<h2>숙박기간</h2>
 							<hr />
 						</div>
-						<c:forEach var="ap" items="${ad.acPay }">
-							<input type="hidden" class="checkIn" val="${ap.checkIn }">
-							<input type="hidden" class="checkOut" val="${ap.checkOut }">
+						<c:forEach var="arv" items="${ad.arv }">
+							<input type="hidden" class="checkIn" val="${arv.checkIn }">
+							<input type="hidden" class="checkOut" val="${arv.checkOut }">
 						</c:forEach>
 						<div class="searchCalander">
 							<div class="calHeader">
@@ -621,10 +621,10 @@
 		
 		var checkInOutDay = []
 
-		<c:forEach var="ap" items="${ad.acPay }">
+		<c:forEach var="arv" items="${ad.arv}">
 			checkInOutDay.push({
-					checkIn : [ "${ap.checkIn}"],
-					checkOut : [ "${ap.checkOut}"]
+					checkIn : [ "${arv.checkIn}"],
+					checkOut : [ "${arv.checkOut}"]
 			})
 		</c:forEach>
 			
