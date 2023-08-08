@@ -253,7 +253,7 @@ public class FoodController {
 			String StringType = item2.get("contentid").toString().replaceAll("\"", "");
 			FoodTemp food = FoodTemp.builder()
 					.foodNo(Integer.parseInt(StringType))
-					.foodOpenTime("오픈시간 : "+item2.get("opentimefood")+"\n\r"+"휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""))
+					.foodOpenTime("오픈시간 : "+item2.get("opentimefood").toString().replaceAll("\"", "")+"\n\r"+"휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""))
 					.foodMenu(item2.get("treatmenu").toString().replaceAll("\"", ""))
 					.foodPhone(item2.get("infocenterfood").toString().replaceAll("\"", ""))
 					.build();
