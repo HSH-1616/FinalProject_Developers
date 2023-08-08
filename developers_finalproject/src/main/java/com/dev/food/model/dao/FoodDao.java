@@ -26,7 +26,7 @@ public interface FoodDao {
 	void deleteFoodTemp(SqlSession session);
 	void deleteFoodPhotoTemp(SqlSession session);
 	
-	List<Food> selectFoodAll(SqlSession session, Map<String,Object> paging);
+	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
 	
 	List<Food> selectFoodAllTest(SqlSession session);
 	List<Food> selectFoodByFoodNo(SqlSession session,int foodNo);

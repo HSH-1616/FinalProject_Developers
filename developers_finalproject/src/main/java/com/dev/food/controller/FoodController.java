@@ -62,29 +62,46 @@ public class FoodController {
 	
 	
 	
+	/*
+	 * @GetMapping("/foodList.do")
+	 * 
+	 * @ResponseBody public ModelAndView
+	 * selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int
+	 * cPage, @RequestParam(value="numPerpage",defaultValue ="12") int numPerpage) {
+	 * 
+	 * ModelAndView mav = new ModelAndView();
+	 * 
+	 * Map<String, Object> paging=new HashMap<String, Object>(); Map<String,Object>
+	 * result=new HashMap<>(); paging.put("cPage", cPage); paging.put("numPerpage",
+	 * numPerpage); int totalData=service.selectFoodCount();
+	 * 
+	 * String pageBar=PageFactory.getPage(cPage, numPerpage, totalData,
+	 * "foodList.do");
+	 * 
+	 * List<Food> foods= service.selectFoodAll(paging); result.put("foodList",
+	 * foods); result.put("pageBar", pageBar);
+	 * 
+	 * mav.addObject("foods", foods); mav.setViewName("/food/foodList");
+	 * 
+	 * return mav; }
+	 */
+	
 	@GetMapping("/foodList.do")
-	@ResponseBody
-	public ModelAndView selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="12") int numPerpage) {
+	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
+			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m) {
 		
-		ModelAndView mav = new ModelAndView();
-		
-		Map<String, Object> paging=new HashMap<String, Object>();
-		Map<String,Object> result=new HashMap<>();
-		paging.put("cPage", cPage);
-		paging.put("numPerpage", numPerpage);
+		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
-		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do");
-		
-		List<Food> foods= service.selectFoodAll(paging);
-		result.put("foodList", foods);
-		result.put("pageBar", pageBar);
-		
-		mav.addObject("foods", foods);
-		mav.setViewName("/food/foodList");
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
 
-		return mav;
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("foods",foods);
+		
+		return "food/foodList";
 	}
+	
+	
 	
 	@RequestMapping("/insertFood.do")
 	public String insertFood() {

@@ -51,11 +51,13 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-	public List<Food> selectFoodAll(SqlSession session, Map<String, Object> paging) {
+	public List<Food> selectFoodAll(SqlSession session, Map<String, Object> param) {
 		
-		int cPage=(int)paging.get("cPage");
-		int numPerpage=(int)paging.get("numPerpage");
-		return session.selectList("food.foodList",null,new RowBounds((cPage-1)*numPerpage, numPerpage));
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		
+		return session.selectList("food.selectFoodAll",null,rb);
 	}
 	
 	@Override

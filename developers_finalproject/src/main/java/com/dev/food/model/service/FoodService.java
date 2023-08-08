@@ -24,7 +24,7 @@ public interface FoodService {
 	
 	void deleteFoodPhotoTemp();
 	
-	List<Food> selectFoodAll (Map<String,Object> paging);
+	List<Food> selectFoodAll (Map<String,Object> param);
 	
 	List<Food> selectFoodAllTest ();
 	
