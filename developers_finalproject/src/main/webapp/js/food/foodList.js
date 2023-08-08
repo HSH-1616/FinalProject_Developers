@@ -1,3 +1,21 @@
+function updateFoodList(sortFilter) {
+    // Make an AJAX request to the server with the chosen sortFilter
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `/foods?sortFilter=${sortFilter}`, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const newFoodList = xhr.responseText;
+            const foodListContainer = document.querySelector(".food_main_list");
+            foodListContainer.innerHTML = newFoodList;
+        }
+    };
+
+    xhr.send();
+}
+
+
+
 function searchFood(page) {
 
 	const form = document.getElementById('searchForm');

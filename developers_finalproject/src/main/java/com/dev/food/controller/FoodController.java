@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +36,14 @@ import com.google.gson.JsonParser;
 @RequestMapping("/food")
 public class FoodController {
 
+	@Autowired
 	private FoodService service;
 	
 	public FoodController(FoodService service) {
 		this.service = service;
 	}
+	
+	
 	
 	
 	@GetMapping("/foodList.do")
@@ -71,7 +75,6 @@ public class FoodController {
 		
 		return "food/foodList";
 	}
-	
 	
 	@RequestMapping("/insertFood.do")
 	public String insertFood() {
@@ -316,6 +319,9 @@ public class FoodController {
 			System.out.println("이미지 list 결과 : "+fp);
 		}
 	}
+	
+
+	
 	
 	
 }
