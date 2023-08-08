@@ -208,7 +208,7 @@ public class AcController {
 				ac.setArv(arv);
 			}
 		}
-	
+
 		if (afImage != null) {
 			for (MultipartFile mf : afImage) {
 				if (!mf.isEmpty()) {
@@ -217,14 +217,14 @@ public class AcController {
 					Date today = new Date(System.currentTimeMillis());
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 					int rdn = (int) (Math.random() * 10000) + 1;
-					String rename = "ac"+sdf.format(today) + "_" + rdn + ext;
+					String rename = "ac" + sdf.format(today) + "_" + rdn + ext;
 
 					try {
 						mf.transferTo(new File(acPath + rename));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					
+
 					AcFile file = AcFile.builder().afName(rename).build();
 					System.out.println(file);
 					ac.getAcFiles().add(file);
@@ -232,14 +232,14 @@ public class AcController {
 			}
 		}
 		System.out.println(afalImage);
-		if (afalImage!= null && afalName!=null) {
+		if (afalImage != null && afalName != null) {
 			for (int i = 0; i < afalImage.length; i++) {
 				String oriName = afalImage[i].getOriginalFilename();
 				String ext = oriName.substring(oriName.lastIndexOf("."));
 				Date today = new Date(System.currentTimeMillis());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 				int rdn = (int) (Math.random() * 10000) + 1;
-				String rename = "afa"+sdf.format(today) + "_" + rdn + ext;
+				String rename = "afa" + sdf.format(today) + "_" + rdn + ext;
 
 				try {
 					afalImage[i].transferTo(new File(afaPath + rename));
@@ -248,6 +248,7 @@ public class AcController {
 				}
 
 				AfaList file = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
+				System.out.println(file);
 				afa.getAfal().add(file);
 			}
 		}
@@ -257,62 +258,49 @@ public class AcController {
 
 		return "/";
 	}
-	
+
 	@PostMapping("/insertRegist2")
 	@ResponseBody
-	public String insertRegist2(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session) {
+	public String insertRegist2(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session,
+			String[] afalName, String[] afMain) {
 		Accommodation ac = null;
-		List<AcReservation> arv= null;
-		AcFacilities afa=new AcFacilities();
-		ObjectMapper mapper=new ObjectMapper();
-		//List<User> userList = Arrays.asList(objectMapper.readValue(userArray, User[].class));
-		
+		AcFacilities afa = new AcFacilities();
+		ObjectMapper mapper = new ObjectMapper();
 		try {
-		  	ac=mapper.readValue(acData, Accommodation.class);
-			//arv =mapper.readValue(arvData, new TypeReference<List<AcReservation>>() {});
-			System.out.println(ac);
+			ac = mapper.readValue(acData, Accommodation.class);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
 		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
-		
-		System.out.println(afImage);
-		
-		if (afImage != null) {
-			for (MultipartFile mf : afImage) {
-				if (!mf.isEmpty()) {
-					String oriName = mf.getOriginalFilename();
-					String ext = oriName.substring(oriName.lastIndexOf("."));
-					Date today = new Date(System.currentTimeMillis());
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-					int rdn = (int) (Math.random() * 10000) + 1;
-					String rename = "ac"+sdf.format(today) + "_" + rdn + ext;
+		if (afImage != null && afMain != null) {
+			for (int i = 0; i < afImage.length; i++) {
+				String oriName = afImage[i].getOriginalFilename();
+				String ext = oriName.substring(oriName.lastIndexOf("."));
+				Date today = new Date(System.currentTimeMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rdn = (int) (Math.random() * 10000) + 1;
+				String rename = "ac" + sdf.format(today) + "_" + rdn + ext;
 
-					try {
-						mf.transferTo(new File(acPath + rename));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					
-					AcFile file = AcFile.builder().afName(rename).build();
-					System.out.println(file);
-					ac.getAcFiles().add(file);
+				try {
+					afImage[i].transferTo(new File(acPath + rename));
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+				AcFile file = AcFile.builder().afName(rename).afMain(afMain[i].charAt(0)).build();
+				ac.getAcFiles().add(file);
 			}
 		}
-		
-		System.out.println(afalImg);
-		if (afalImg!= null) {
+
+		if (afalImg != null && afalName != null) {
 			for (int i = 0; i < afalImg.length; i++) {
 				String oriName = afalImg[i].getOriginalFilename();
 				String ext = oriName.substring(oriName.lastIndexOf("."));
 				Date today = new Date(System.currentTimeMillis());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 				int rdn = (int) (Math.random() * 10000) + 1;
-				String rename = "afa"+sdf.format(today) + "_" + rdn + ext;
+				String rename = "afa" + sdf.format(today) + "_" + rdn + ext;
 
 				try {
 					afalImg[i].transferTo(new File(afaPath + rename));
@@ -320,12 +308,14 @@ public class AcController {
 					e.printStackTrace();
 				}
 
-				AfaList file = AfaList.builder().afalImg(rename).build();
+				AfaList file = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
 				afa.getAfal().add(file);
 			}
 		}
 		ac.setAfa(afa);
-		System.out.println(ac);
+
+		int result=service.insertAc(ac);
+		
 		return "/";
 	}
 

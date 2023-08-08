@@ -32,15 +32,35 @@
 				<div class="registImg">
 					<div class="acImgCon">
 						<label class="afLabel" for="afImage">
-							<div class="afInner" id="inner">드래그하거나 클릭해서 업로드</div>
-						</label> 
-						<input id="afImage" name="afImage" accept="image/*" type="file" multiple="true" hidden="true">
-						<p class="preview-title">preview</p>
-						<div class="preview" id="preview"></div>
-					</div>
-					<div id="imgInfo">
-						<p>-파일은 최대 10개까지 등록 가능합니다.</p>
-						<p>-권장 사이즈(500px * 500px)</p>
+							<div class="afInner" id="inner">
+								<div>
+									<img alt="" src="${path}/images/common/logo.png">
+									<h6>드래그하거나 클릭해서 업로드</h6>
+								</div>
+							</div>
+						</label> <input id="afImage" name="afImage" accept="image/*" type="file"
+							multiple="true" hidden="true">
+						<div id="imgInfo">
+							<p>-파일은 최대 10개까지 등록 가능합니다.</p>
+							<p>-권장 사이즈(500px * 500px)</p>
+						</div>
+						<h6>메인 이미지 설정</h6>
+						<hr>
+						<div class="preview" id="preview">
+<%-- 
+							 <div class="previewImgWrap">
+								<div class="blurPreview">
+									<img alt="" src="${path}/images/accommodation/checkImage.png">
+								</div>
+								<div class="mainCheck">
+									<div>메인</div>
+								</div>
+								<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>
+								<input type="hidden" name="acMain" value="N">
+								<img alt="" src="${path}/images/accommodation/pensiondetail.png">
+							</div>  --%>
+
+						</div>
 					</div>
 				</div>
 			</div>
@@ -330,6 +350,7 @@
 				</div>
 			</div>
 		</div>
+
 	</form>
 	<script>
 		var checkInOutDay = []

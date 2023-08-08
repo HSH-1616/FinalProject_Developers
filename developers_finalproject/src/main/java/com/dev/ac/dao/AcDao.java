@@ -31,4 +31,8 @@ public interface AcDao {
 	int insertHeart(SqlSessionTemplate session,Map param);
 	
 	int deleteHeart(SqlSessionTemplate session,Map param);
+	
+	int insertAc(SqlSessionTemplate session,Accommodation ac);
+	
+	int insertAcFile(SqlSessionTemplate session,Accommodation ac);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dev.ac.dao.AcDao;
+import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcPay;
 import com.dev.ac.dto.Accommodation;
 
@@ -48,8 +49,6 @@ public class AcServiceImpl implements AcService {
 	
 	@Override
 	public int insertPay(AcPay ap, String checkIn, String checkOut) {
-		System.out.println(ap);
-		System.out.println(ap.getApId());
 		int result=dao.insertPay(session,ap);
 		Map param = new HashMap();
 		if(result>0) {
@@ -82,5 +81,19 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public int deleteHeart(Map param) {	
 		return dao.deleteHeart(session,param);
+	}
+
+	@Override
+	public int insertAc(Accommodation ac) {
+		int result=dao.insertAc(session,ac);
+		if(result>0) {
+			for(int i=0;i<ac.getAcFiles().size();i++){
+				AcFile no=AcFile.builder().acId(ac.getAcId()).build();
+				System.out.println(ac);
+				ac.getAcFiles().add(no);
+			}
+			result+=dao.insertAcFile(session,ac);
+		}
+		return 0;
 	}
 }

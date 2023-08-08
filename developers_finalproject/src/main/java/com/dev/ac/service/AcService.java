@@ -27,4 +27,6 @@ public interface AcService {
 	int insertHeart(Map param);
 	
 	int deleteHeart(Map param);
+	
+	int insertAc(Accommodation ac);
 }

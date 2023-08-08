@@ -66,11 +66,12 @@
 }
 
 .registImg {
-	width: 90%;
+	width: 100%;
 }
 
 #imgInfo {
 	margin-top: 15px;
+	margin-bottom: 40px;
 }
 
 .registImg p {
@@ -890,60 +891,146 @@
 
 .acImgCon {
 	width: 100%;
-	height: 100%;
 	margin: 32px auto;
-	text-align: center;
+
 }
 
 .afLabel {
 	width: 100%;
-	height: 500px;
-	margin: 0px auto;
-	cursor: pointer;
-	background-color: var(--bgColor);
+	height: 362px;
+	border-radius: 15px;
+	border: 3px solid #afafaf;
 }
 
 .afInner {
-	width: 100%;
-	height: 362px;
-	margin: 64px auto;
-	border-radius: 8px;
-	font-size: 16px;
-	line-height: 128px;
-	background-color: var(--bgColor);
-	color: var(--text);
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-@media (any-hover: hover) {
-	.afInner:hover {
-		background-color: var(--hoverBg);
-	}
+.afInner>div {
+	text-align: center;
 }
+
+.afInner img {
+	display: block;
+	width: 300px;
+	height: 150px;
+}
+
+.afInner h6 {
+	font-family: "LINESeedKR-Bd" !important;
+	display: block;
+	font-size: 1.5rem;
+	margin-top: 30px;
+	font-weight: bold;
+	color: #b31312;
+}
+
 
 .afLabel--hover {
 	background-color: var(--hoverBg);
 }
 
-.preview-title {
-	font-size: 32px;
-	margin-bottom: 8px;
-}
 
 .preview {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 16px;
-	padding: 16px;
-	margin-bottom: 16px;
-	border-radius: 8px;
-	align-items: center;
-	background-color: var(--bgColor);
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 30px;
 }
 
-.embed-img {
+.previewImgWrap {
+	width: 224px;
+	height: 200px;
+	margin-left: 20px;
+	margin-right: 20px;
+	border-radius: 10px;
+	margin-bottom:25px;
+	position: relative;
+}
+
+.previewImgWrap:nth-child(1) {
+	margin-left: 0;
+}
+
+.previewImgWrap:nth-child(6) {
+	margin-left: 0;
+}
+
+.previewImgWrap img {
 	width: 100%;
-	height: 128px;
-	object-position: center;
-	object-fit: cover;
-	border-radius: 8px;
+	height: 100%;
+	border-radius: 10px;
+}
+
+.previewImg {
+	width: 200px;
+	height: 200px;
+}
+
+.acImgCon>h6 {
+	font-size: 1.2rem;
+}
+
+.acImgCon>hr {
+	border: 0;
+    height: 0;
+    opacity: unset;
+    border-top: 2px solid #eeeeee;
+    margin-top: 0px;
+}
+
+.blurPreview{
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	opacity: 0;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.blurPreview:hover{
+	opacity: 0.6;
+	transition: 0.5s;
+}
+
+.blurPreview img{
+	width: 100px;
+	height: 100px;
+	z-index: 4;
+	opacity: unset;
+}
+
+.mainCheck{
+	position: absolute;
+	width: 60px;
+	height: 30px;
+	background-color: #b31312;
+	color: white;
+	font-size: 0.9rem;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 8px;
+	left: 8px;
+	display: none;
+}
+
+.deletePreview{
+	cursor: pointer;
+	position: absolute;
+	color: #b31312;
+	font-size: 1.7rem;
+	right: 5px;
+	top: 5px;
+	z-index: 5;
 }

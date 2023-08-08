@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AcFile {
 	private int afId;
+	private int acId;
 	private String afName;
 	private char afMain;
 }

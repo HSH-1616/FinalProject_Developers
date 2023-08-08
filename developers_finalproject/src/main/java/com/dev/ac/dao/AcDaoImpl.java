@@ -67,6 +67,17 @@ public class AcDaoImpl implements AcDao {
 		return session.delete("accommodation.deleteHeart",param);
 	}
 
+	@Override
+	public int insertAc(SqlSessionTemplate session, Accommodation ac) {
+		return session.insert("accommodation.insertAc",ac);
+	}
+
+	@Override
+	public int insertAcFile(SqlSessionTemplate session, Accommodation ac) {
+		System.out.println(ac);
+		return session.insert("accommodation.insertAcFile",ac);
+	}
+
 	
 
 	

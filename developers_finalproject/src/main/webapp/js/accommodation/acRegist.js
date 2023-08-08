@@ -350,33 +350,73 @@ function kakaoAddress() {
 	}).open();
 }
 
+
+
 var sel_files = [];
 
 $(document).ready(function() {
 	$("#afImage").on("change", handleImgsFiles)
 })
-
 function handleImgsFiles(e) {
 	var files = e.target.files;
 	var filesArr = Array.prototype.slice.call(files);
 
+	//파일 추가
 	filesArr.forEach(function(f) {
-		if (!f.type.match("image.*")) {
-			alert("이미지만 가능합니다.")
-			return;
-		}
 		sel_files.push(f);
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			var img_html = "<img src=\"" + e.target.result + "\" />"
+			var img_html = "<img class='previewImg' src=\"" + e.target.result + "\" />"
 
-			$(".preview").append(img_html)
+			const div = $('<div class="previewImgWrap">')
+			const blur = $('<div class="blurPreview"><img alt="" src="/images/accommodation/checkImage.png"></div > ')
+			const main = $('<div class="mainCheck"><div>메인</div></div>')
+			const icon = $('<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>')
+			const input = $('<input type="hidden" name="afMain" value="N">')
+			const afImage = $("<img class='previewImg' src=\"" + e.target.result + "\" />")
+
+			div.append(blur).append(main).append(icon).append(input).append(afImage)
+
+			$(".preview").append(div)
+			if ($(".previewImgWrap").length == 1) {
+				$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
+				$(".previewImgWrap").first().children("input[name=afMain]").val("Y")
+			}
+			$(".previewImgWrap").click(function() {
+				$(".mainCheck").hide()
+				$("input[name=afMain]").val("N")
+				$(this).children(".mainCheck").css("display", "flex");
+				$(this).children("input[name=afMain]").val("Y")
+			})
 		}
 		reader.readAsDataURL(f)
 	})
 
+	//파일 삭제
+
 }
+var $item = $(document).on("click", '.deletePreview', function(e) {
+
+	console.log(sel_files)
+	var seq = $item.index(this)
+	var num = $(".deletePreview").index(this)
+	console.log(num)
+	var dataTransfer = new DataTransfer();
+	var files = $('input[name=afImage]')[0].files;
+	var fileArray = Array.from(files);
+	fileArray.splice(seq, 1);
+	fileArray.forEach(file => { dataTransfer.items.add(file); });
+	$('input[name=afImage]')[0].files = dataTransfer.files;
+	$(this).parents(".previewImgWrap").remove()
+	sel_files.splice(num, 1)
+	console.log(sel_files)
+	if ($(this).parents("previwImgWrap").children(".mainCheck").css("display", "flex")) {
+		$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
+		$(".previewImgWrap").first().children("input[name=afMain]").val("Y")
+	}
+
+});
 $("#registOkBtn").on("click", function() {
 
 	acData = {
@@ -392,23 +432,34 @@ $("#registOkBtn").on("click", function() {
 		arv: checkInOutDay
 	}
 
-	const afalImg = []; 
-	const files=document.getElementsByName("afalImage");
-	console.log(sel_files	)
-	$.each(files,function(i,l){
-		afalImg.push(l.files)
+	const afalImg = [];
+
+	var files = document.getElementsByName("afalImage")
+	$.each(files, function(i, l) {
+		var filesArr = Array.prototype.slice.call(l.files);
+		filesArr.forEach(function(f) {
+			afalImg.push(f);
+		})
 	})
-	console.log(files)
-	console.log(afalImg)
-		
-	const form = new FormData();	
-	form.append("acData", JSON.stringify(acData))	
-	$.each(sel_files,function(i,l){
-		form.append("afImage",l)	
+
+	const form = new FormData();
+
+	form.append("acData", JSON.stringify(acData))
+
+	$.each(sel_files, function(i, l) {
+		form.append("afImage", l)
 	})
 	
-	$.each(afalImg,function(i,l){
-		form.append("afalImg",l[i].files)	
+	$.each($("input[name=afMain]"), function(i, l) {
+		form.append("afMain", $(this).val())
+	})
+
+	$.each(afalImg, function(i, l) {
+		form.append("afalImg", l)
+	})
+
+	$.each($("input[name=afalName]"), function(i, l) {
+		form.append("afalName", $(this).val())
 	})
 
 	for (let [key, value] of form) {
