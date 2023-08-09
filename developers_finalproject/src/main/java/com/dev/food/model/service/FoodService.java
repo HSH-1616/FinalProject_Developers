@@ -20,9 +20,9 @@ public interface FoodService {
 	
 	void mergeFoodPhoto();
 	
-	void deleteFoodTemp();
+	void deleteFoodTemp(int foodNo);
 	
-	void deleteFoodPhotoTemp();
+	void deleteFoodPhotoTemp(int foodNo);
 	
 	List<Food> selectFoodAll (Map<String,Object> paging);
 	

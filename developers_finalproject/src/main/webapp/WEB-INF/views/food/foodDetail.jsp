@@ -16,6 +16,9 @@
     <!-- <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4428a904f18357ee0a3f795c4918e96a&libraries=services,clusterer,drawing"></script>
+
+
     
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/> -->
@@ -30,7 +33,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <section>
    <!-- ==================================================맛집 상세페이지============================================================== -->
-   <div class="foodDetailCon">
+   <div class="foodDetailCon col justify-content-center">
       <!-- <div id="hotelDetail" class="row"> -->
       <div class="row align-items-end">
          <span class="col w-auto">
@@ -55,9 +58,9 @@
          <p class="fs-4">상세정보</p>
       </div>
 
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" style="height: 450px;">
          <!-- 음식 슬라이드 -->
-         <div class="foodInfosection d-flex flex-row justify-content-around align-items-center">
+         <div class="foodInfosection d-flex flex-row justify-content-center align-items-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 550px;">
                <div class="carousel-indicators">
                   <button type="button"
@@ -106,7 +109,7 @@
                   <tr class="">
                      <th valign="top"><i class="fa-solid fa-location-dot fa-2xl"
                         style="color: #000000;"></i></th>
-                     <th class="fs-4" valign="top">영업시간</th>
+                     <th class="fs-4" valign="top" style="width: 95px;">영업시간</th>
                      <td>
                         <% pageContext.setAttribute("LF", "\n"); %>
                         <div class="food_runtime">${fn:replace(f.foodOpenTime,LF,'<br>')}</div>
@@ -132,13 +135,17 @@
             </div>
          </div>
       </div>
-
+      <!-- ============================================================================================================= -->
+      <!-- ====================================================지도===================================================== -->
+      <!-- ============================================================================================================= -->
+      <div id="map" class="row" style="width:auto;height:450px;margin: 5rem;"></div>
+      
       <hr class="m-3">
 
-      <!-- 맛집 리뷰 페이지 -->
+      <!-- 맛집 리뷰 생성&수정 -->
       <div class="align-items-end" style="height: 75px;">
          <button type="button" class="yoonbtn btnColorDefault m-3 float-end w-auto"
-            data-bs-toggle="modal" data-bs-target="#reviewModal">리뷰쓰기</button>
+            data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="insertModal();">리뷰쓰기</button>
       </div>
 
       <div class="modal fade" id="reviewModal" tabindex="-1"
@@ -146,48 +153,49 @@
          <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                <div class="headerLine"></div>
+               <form action="/insertFoodReview" method="post" enctype="multipart/form-data" class="modelForm">
+               <input type="hidden" name="foodNo" value="${f.foodNo}">
+               <input type="hidden" name="memberId" value="">
                <div class="modal-header p-4">
                   <div class="row">
                      <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">${f.foodName }</h3>
-                     <h5 class="modal-title p-0 pt-2 w-auto">&nbsp;에 대한 솔직한 후기를
-                        적어주세요.</h5>
+                     <h5 class="modal-title p-0 pt-2 w-auto">&nbsp;에 대한 솔직한 후기를 적어주세요.</h5>
                   </div>
                   <div class="row mr-1 p-0 align-items-center">
                      <span class="star w-auto p-0">★★★★★
-                        <span class="review_insert_rating">★★★★★</span>
-                           <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-                           <div class="star_insert_rating text-center text-dark">
+                        <span class="review_rating">★★★★★</span>
+                           <input type="range" name="frGrade" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                           <div class="star_rating text-center text-dark">
                               <h5>0/5</h5>
                            </div>
                      </span>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                           aria-label="Close"></button>
+                     <button type="button" class="btn-close" 
+                     data-bs-dismiss="modal" aria-label="Close">
+                     </button>
                   </div>
                </div>
-               <form action="${path }/loginEnd" method="post"
-                  enctype="multipart/form-data" class="modelForm">
                   <div class="modal-body ml-4 mr-4 mt-4 mb-4">
-                     <textarea name="FR_CONTENT" class="form-control" id="FR_CONTENT"
+                     <textarea name="frContent" class="form-control" id="FR_CONTENT"
                         rows="10">작성내용은 매인페이지와 장소상세에 노출되며 매장주를 포함한 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.
                      </textarea>
                   </div>
                   <div class="custom-file pl-5 pr-5 mx-3 mt-4 mb-4 d-flex flex-row justify-content-between">
                      <span class="input_file_container row"> <span
                         class="col-lg-8 ">
-                           <input type="file" class="form-control insert_review_File"
+                           <input type="file" name="rpName" class="form-control review_File insertFlag"
                            accept="image/*" onchange="setThumbnail(event);" multiple>
-                     </span> <!-- 파일을 업로드 해야지만 전체삭제 옵션 활성화 --> 
-                     <span class="pt-2 text-muted w-auto deleteAllImg" aria-hidden="true"
-                        style="cursor: pointer;" onclick="fileDeleteAll(event);">전체삭제&times;</span>
+                     </span> 
+                     <!-- 파일을 업로드 해야지만 전체삭제 옵션 활성화 --> 
+                     <span class="pt-2 text-muted w-auto deleteAllImg" aria-hidden="true"></span>
                      </span>
-                     <button type="submit" class="yoonBtn btnColorRed">리뷰
-                        올리기</button>
+                     <button type="submit" class="yoonBtn btnColorRed submitModal"></button>
                   </div>
                   <div class="image_container insertFood"></div>
                </form>
             </div>
          </div>
       </div>
+
 
       <div class="detailFoodInfoCon flex-column">
          <div class="detailUserInfo justify-content-between">
@@ -205,55 +213,11 @@
            
              <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuLink" style="width: 100px;">
                <li><a class="dropdown-item" href="#" 
-                 data-bs-toggle="modal" data-bs-target="#reviewUpdateModal">수정</a></li>
+                 data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal();">수정</a></li>
                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
                  data-bs-target="#removeFood" onclick="">삭제</a></li>
              </ul>
            </div>
-         </div>
-
-         <!-- 수정 모달창 -->
-         <div class="modal fade" id="reviewUpdateModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-               <div class="modal-content">
-                  <div class="headerLine"></div>
-                  <div class="modal-header p-4">
-                     <span class="row">
-                        <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">${f.foodName }</h3>
-                        <h5 class="modal-title p-0 pt-2 w-auto" >&nbsp;에 대한 솔직한 후기를 적어주세요.</h5>
-                     </span>
-                     <span class="row mr-1 p-0 align-items-center">
-                        <span class="star w-auto p-0">
-                           ★★★★★
-                           <span class="review_update_rating">★★★★★</span>
-                           <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-                           <div class="star_update_rating text-center text-dark"><h5>0/5</h5></div>
-                        </span>
-                        <button type="button" class="btn-close" 
-                        data-bs-dismiss="modal" aria-label="Close">
-                        </button>
-                     </span>
-                  </div>
-                  <form action="${path }/loginEnd" method="post" enctype="multipart/form-data" class="modelForm">
-                     <div class="modal-body ml-4 mr-4 mt-4 mb-4">
-                        <textarea name="FR_CONTENT" class="form-control" id="FR_CONTENT" rows="10">(수정중)작성내용은 매인페이지와 장소상세에 노출되며 매장주를 포함한 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.
-                        </textarea>
-                     </div>
-                     <div class="custom-file pl-5 pr-5 mx-3 mt-4 mb-4 d-flex flex-row justify-content-between">
-                        <span class="input_file_container row">
-                           <span class="col-lg-8 ">
-                              <input type="file" class="form-control update_review_File"
-                              accept="image/*" onchange="setThumbnail(event);" multiple>
-                           </span>
-                           <!-- 파일을 업로드 해야지만 전체삭제 옵션 활성화 -->
-                           <span class="pt-2 text-muted w-auto" aria-hidden="true" style="cursor:pointer;" onclick="fileDeleteAll(event);">전체삭제&times;</span>
-                        </span>
-                        <button type="submit" class="yoonBtn btnColorRed">리뷰 수정하기</button>
-                     </div>
-                     <div class="image_container "></div>
-                  </form>
-               </div>
-            </div>
          </div>
 
          <!-- 삭제 모달창 -->
@@ -269,13 +233,12 @@
                   정말 삭제하시겠습니까?
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                     <button type="button" class="btn btn-danger" id="remove_food_btn">삭제하기</button>
+                     <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
+                     <button type="button" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
                   </div>
                </div>
             </div>
          </div>
-
 
          <div class="starContainer">
             <span class="star">
@@ -330,6 +293,81 @@
          </div>
       </div>
    </div>
+
+   <script>
+      var foodName = '${f.foodName}';
+      var foodAddr = '${f.foodAddress}';
+      var mapx;
+      var mapy;
+      var foodImg = '${f.foodPhoto[0].fpName}';
+
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+         level: 3 // 지도의 확대 레벨
+      };  
+
+      // 지도를 생성합니다    
+      var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+      // 주소-좌표 변환 객체를 생성합니다
+      var geocoder = new kakao.maps.services.Geocoder();
+
+      // 주소로 좌표를 검색합니다
+      geocoder.addressSearch(foodAddr, function(result, status) {
+
+         // 정상적으로 검색이 완료됐으면 
+         if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            mapx = result[0].x;
+            mapy = result[0].y;
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+            });
+
+            var content = '<div class="wrap">' + 
+            '                 <div class="info">' + 
+            '                    <div class="title text-wrap">' + 
+                                    foodName + 
+            '                       <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+            '                    </div>' + 
+            '                    <div class="body">' + 
+            '                       <div class="img">' +
+            '                          <img src='+foodImg+' width="73" height="70">' +
+            '                       </div>' + 
+            '                       <div class="desc">' + 
+            '                          <div class="ellipsis">'+foodAddr+'</div>' +  
+            '                          <div><a href="https://map.kakao.com/link/search/'+foodName+'" target="_blank" class="link">자세히 보기</a></div>' + 
+            '                       </div>' + 
+            '                    </div>' + 
+            '                 </div>' +    
+            '               </div>'
+            '               ::after';
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+
+            var overlay = new kakao.maps.CustomOverlay({
+               content: content,
+               map: map,
+               position: marker.getPosition()       
+            });
+
+            // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+            kakao.maps.event.addListener(marker, 'click', function() {
+               overlay.setMap(map);
+            });
+
+            function closeOverlay() {
+               overlay.setMap(null);     
+            }
+         } 
+      });
+   </script>
 
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

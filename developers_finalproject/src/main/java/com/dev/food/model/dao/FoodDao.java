@@ -23,8 +23,8 @@ public interface FoodDao {
 	int mergeFood(SqlSession session);
 	int mergeFoodPhoto(SqlSession session);
 	
-	void deleteFoodTemp(SqlSession session);
-	void deleteFoodPhotoTemp(SqlSession session);
+	void deleteFoodTemp(SqlSession session,int foodNo);
+	void deleteFoodPhotoTemp(SqlSession session,int foodNo);
 	
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> paging);
 	

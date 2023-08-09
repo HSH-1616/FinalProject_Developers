@@ -16,6 +16,31 @@ $(document).on("click", "#detailHeart", function (e) {
 	}
   });
 
+function insertModal() {
+	// 초기화
+	$('.review_File').val('');
+	$(".image_container").children().remove();
+	$(".review_rating").css("width", 0 + "%");
+	$(".star_rating h5").text(0 + "/5");
+	// 값 변경하기
+	$(".modelForm").attr("action","/food/insertReview");
+	$(".submitModal").text("리뷰 올리기");
+}
+
+function updateModal() {
+	// 초기화
+	$('.review_File').val('');
+	$(".image_container").children().remove();
+	$(".review_rating").css("width", 0 + "%");
+	$(".star_rating h5").text(0 + "/5");
+	//DB에서 가져오기
+
+	// 값 변경하기
+	$(".modelForm").attr("action","/food/updateReview");
+	$(".submitModal").text("리뷰 수정하기");
+}
+
+
 function setThumbnail(event) {
 	const container = $(".image_container");
 	container.children().remove();
@@ -33,39 +58,34 @@ function setThumbnail(event) {
 				container.css("margin-bottom", "15px");
 				container.append(img);
 			};
-			console.log(image);
 			reader.readAsDataURL(image);
 		}
+		$(".deleteAllImg").html("전체삭제&times;").attr({"style":"cursor:pointer;","onClick":"fileDeleteAll(event);"});
+		// $('.deleteAllImg').on("click", fileDeleteAll(event));
 	} else {
-		alert("선택한 파일이 " + event.target.files.length + "개 입니다. 사진을 줄여주세요.");
+		alert("선택한 파일이 " + event.target.files.length + "개 입니다. 사진을 5개까지 줄여주세요.");
+		fileDeleteAll(event);
 	}
 }
-$(deleteAllImg);
-
 
 function fileDeleteAll(event) {
 	const result = confirm("전체 삭제 하시겠습니까?");
 	if (result == true) {
-		if(event.target.prev().hasClass("insert_review_File") === true){
-			$('.insert_review_File').val('');
-			$(".insertFood").children().remove();
-		}
-		if(event.target.prev().hasClass("update_review_File") === true){
-			$('.update_review_File').val('');
-			$(".updateFood").children().remove();
-		}
+		console.log($(event.target).prev().children()[0].files.length);
+		$('.review_File').val('');
+		$(".image_container").children().remove();
+		$(".deleteAllImg").html("");
 	}
 }
 
 const drawStar = (target) => {
-	console.log($(target).prev().attr('class'));
-	if ($(target).prev().attr('class').includes("review_insert_rating")) {
-		$(".review_insert_rating").css("width", target.value * 10 + "%");
-		$(".star_insert_rating h5").text(target.value / 2 + "/5");
-	} else {
-		$(".review_update_rating").css("width", target.value * 10 + "%");
-		$(".star_update_rating h5").text(target.value / 2 + "/5");
-	}
+	$(".review_rating").css("width", target.value * 10 + "%");
+	$(".star_rating h5").text(target.value / 2 + "/5");
+	// if ($(target).prev().attr('class').includes("review_insert_rating")) {
+	// } else {
+	// 	$(".review_update_rating").css("width", target.value * 10 + "%");
+	// 	$(".star_update_rating h5").text(target.value / 2 + "/5");
+	// }
 }
 
 $(document).on("click", ".detailFoodInfoBtn button", function(e) {
@@ -83,5 +103,4 @@ $(document).on("click", ".detailFoodInfoBtn button", function(e) {
 	}
 	// console.log("end");
 });
-
 

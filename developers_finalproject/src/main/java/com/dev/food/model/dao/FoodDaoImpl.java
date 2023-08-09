@@ -42,12 +42,12 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public void deleteFoodTemp(SqlSession session) {
-		session.delete("food.deleteFoodTemp");
+	public void deleteFoodTemp(SqlSession session,int foodNo) {
+		session.delete("food.deleteFoodTemp",foodNo);
 	}
 	@Override
-	public void deleteFoodPhotoTemp(SqlSession session) {
-		session.delete("food.deleteFoodPhotoTemp");
+	public void deleteFoodPhotoTemp(SqlSession session,int foodNo) {
+		session.delete("food.deleteFoodPhotoTemp",foodNo);
 	}
 
 	@Override

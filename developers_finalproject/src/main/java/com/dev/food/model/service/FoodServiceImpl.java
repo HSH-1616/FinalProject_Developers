@@ -55,13 +55,13 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
-	public void deleteFoodTemp() {
-		dao.deleteFoodTemp(session);
+	public void deleteFoodTemp(int foodNo) {
+		dao.deleteFoodTemp(session,foodNo);
 	}
 	
 	@Override
-	public void deleteFoodPhotoTemp() {
-		dao.deleteFoodPhotoTemp(session);
+	public void deleteFoodPhotoTemp(int foodNo) {
+		dao.deleteFoodPhotoTemp(session,foodNo);
 	}
 	
 

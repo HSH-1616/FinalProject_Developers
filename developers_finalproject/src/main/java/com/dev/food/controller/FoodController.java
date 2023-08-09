@@ -14,6 +14,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
 import com.google.gson.Gson;
@@ -263,8 +265,8 @@ public class FoodController {
 			System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
 			foodImgApi(foodNo);
 			//사용할 일 없으니 삭제
-			service.deleteFoodTemp();
-			service.deleteFoodPhotoTemp();
+			service.deleteFoodTemp(Integer.parseInt(StringType));
+			service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
 		}
 		
 		//DB에서 불러오는 과정
@@ -339,5 +341,16 @@ public class FoodController {
 		}
 	}
 	
+	@PostMapping("/insertFoodReview")
+	public String insertFoodReview(FoodReview review) {
+		
+		int result = service.insertFoodReview(review);
+		if(result > 0) {
+			System.out.println("등록성공");
+		}else {
+			System.out.println("등록실패");
+		}
+		return "views/food/foodDetail";
+	}
 	
 }
