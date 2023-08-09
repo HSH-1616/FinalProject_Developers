@@ -10,7 +10,7 @@
 <section class="communityView-container ">
 
 	<div class="card-box">
-		<div class="card" style="width: 40rem;">
+		<div class="card reply-append" style="width: 40rem;">
 			<div class="d-flex">
 				<c:choose>
 					<c:when test="${not empty comuView.memberId.memberImage }">
@@ -52,6 +52,7 @@
 					<c:forEach var="f" items="${comuView.files }" varStatus="status">
 						<c:if test="${status.index == 0 }">
 								<div class="carousel-item active">
+								
 									<img src="${path }/upload/community/${f.fileName}"
 										class="d-block w-100" alt="..." style="height: auto">
 								</div>
@@ -80,6 +81,10 @@
 				</button>
 			</div>
 			<div class="card-body">
+				<input type="hidden" value="${comuView.communityNo }" id="like_comuNo">
+				<input type="hidden" value="${loginMember.memberId }" id="like_memberId">
+				<input type="hidden" value="${likeCheck }" id="like_check">
+				
 				<h5 class="card-title">${comuView.communityTitle }</h5>
 				<p class="card-text">${comuView.communityContent }</p>
 			</div>
@@ -106,12 +111,19 @@
 		<div class="collapse" id="inputComment">
 			<div class="card card-body">
 				<input type="text" id="comment_input">
-				<button class="w-btn w-btn-blue">등록</button>
+				<button class="w-btn w-btn-blue" onclick="insertReply();">등록</button>
 			</div>
 		</div>
+		
+	<!-- 	<div class="collapse" id="inputReplies">
+			<div class="card card-body">
+				<input type="text" id="comment_input">
+				<button class="w-btn w-btn-blue">등록</button>
+			</div>
+		</div> -->
 
-		<div class="comments  p-2 border rounded">
-			<div class="comment">
+	 	<div class="comments  p-2 border rounded">
+			<!-- <div class="comment">
 				<div class="comment_detail">
 					<div class="comment_user">
 						<span>user01</span>
@@ -119,11 +131,11 @@
 					<div class="comment_body">
 						<span>좋아요</span>
 					</div>
-
 				</div>
-			</div>
-
-		</div>
+			</div> -->
+		</div> 
+		
+		
 	</div>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

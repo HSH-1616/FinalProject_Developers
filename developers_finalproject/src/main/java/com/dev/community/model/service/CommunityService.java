@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.community.model.dto.Community;
 import com.dev.community.model.dto.CommunityFile;
+import com.dev.community.model.dto.Reply;
 
 
 public interface CommunityService {
@@ -23,5 +24,8 @@ public interface CommunityService {
 	int communityCount();
 	int communitySaveFileDB(CommunityFile file);
 	int removeCommunityFile(String fileName,HttpSession session);
-	
+	int communityLike(int id, int no);
+	Map<String,Object> CommunityLikeCheck(int id, int no);
+	int insertReply(Reply reply);
+	List<Reply> replyList(int communityNo);
 }

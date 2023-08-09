@@ -2,6 +2,8 @@ package com.dev.community.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dev.community.model.dao.CommunityDao;
 import com.dev.community.model.dto.Community;
 import com.dev.community.model.dto.CommunityFile;
+import com.dev.community.model.dto.Reply;
 import com.dev.notice.model.dto.NoticeFile;
 
 @Service
@@ -98,6 +101,64 @@ public class CommunityServiceImpl implements CommunityService {
 		}
 		return 0;
 	}
+
+	@Override
+	public int communityLike(int id, int no) {
+		Map<String, Object> like=new HashMap<>();
+		like.put("memberId", id);
+		like.put("communityNo",no);
+		Map<String, Object>likeResult= dao.selectLike(session,like );
+		System.out.println(likeResult);
+		if(likeResult==null) {
+			dao.insertLike(session, like);
+			dao.likeCountUp(session, no);
+			return 1;
+		}else {
+			dao.deleteLike(session, like);
+			dao.likeCountDown(session, no);
+		}
+		return 0;
+	}
+
+	@Override
+	public Map<String,Object> CommunityLikeCheck(int id, int no) {
+		
+		return dao.selectLike(session, Map.of("memberId",id,"communityNo",no));
+	}
+
+	@Override
+	public int insertReply(Reply reply) {
+		int result=0;
+		if(reply.getReplyRef()==0) {
+			result=dao.insertReply(session, reply);
+		}else {
+			result=dao.insertReplies(session, reply);
+		}
+		return result;
+		
+	}
+
+	
+
+	@Override
+	public List<Reply> replyList(int communityNo) {
+		List<Reply>replyList= dao.replyList(session, communityNo);
+		List<Reply>resultList=new ArrayList<>();
+		for(Reply r:replyList) {
+			if(r.getReplyLevel()==0) {
+				int temp=r.getReplyNo();
+				resultList.add(r);
+				for(Reply p:replyList) {
+					if(temp==p.getReplyRef()) {
+						resultList.add(p);
+					}
+				}
+			}
+		}
+		
+		return resultList;
+	}
+	
 	
 
 }

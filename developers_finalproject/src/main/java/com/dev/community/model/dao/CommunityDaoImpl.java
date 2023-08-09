@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dev.community.model.dto.Community;
 import com.dev.community.model.dto.CommunityFile;
+import com.dev.community.model.dto.Reply;
 
 @Repository
 public class CommunityDaoImpl implements CommunityDao {
@@ -50,6 +51,53 @@ public class CommunityDaoImpl implements CommunityDao {
 	public int deleteCommunityFile(SqlSession session, String fileName) {
 		
 		return session.delete("community.deleteCommunityFile",fileName);
+	}
+
+	@Override
+	public int insertLike(SqlSession session, Map<String, Object> like) {
+		
+		return session.insert("community.insertLike",like);
+	}
+
+	@Override
+	public int deleteLike(SqlSession session, Map<String, Object> like) {
+		
+		return session.delete("community.deleteLike",like);
+	}
+
+	@Override
+	public Map<String, Object> selectLike(SqlSession session, Map<String, Object> like) {
+		
+		return session.selectOne("community.selectLike",like);
+	}
+
+	@Override
+	public int likeCountUp(SqlSession session, int communityNo) {
+		return session.update("community.likeCountUp",communityNo);
+	}
+
+	@Override
+	public int likeCountDown(SqlSession session, int communityNo) {
+		
+		return session.update("community.likeCountDown",communityNo);
+	}
+
+	@Override
+	public int insertReply(SqlSession session, Reply reply) {
+		
+		return session.insert("community.insertReply",reply);
+	}
+
+	@Override
+	public int insertReplies(SqlSession session, Reply replies) {
+		
+		return session.insert("community.insertReplies",replies);
+	}
+
+	@Override
+	public List<Reply> replyList(SqlSession session, int communityNo) {
+		
+		return session.selectList("community.replyList",communityNo);
 	}
 
 	

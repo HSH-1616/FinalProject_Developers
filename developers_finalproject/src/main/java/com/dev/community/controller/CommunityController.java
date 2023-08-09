@@ -1,5 +1,6 @@
 package com.dev.community.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dev.community.model.dto.Community;
 import com.dev.community.model.dto.CommunityFile;
+import com.dev.community.model.dto.Reply;
 import com.dev.community.model.service.CommunityService;
 import com.dev.member.model.dto.Member;
 
@@ -49,6 +51,7 @@ public class CommunityController {
 	@GetMapping("/communityView.do")
 	public String communityView(int no,Model m,HttpServletRequest req, HttpServletResponse res) {
 		Community comuView=service.communityView(no, req, res);
+		
 		m.addAttribute("comuView",comuView);
 		
 		return "/community/communityView";
@@ -81,4 +84,59 @@ public class CommunityController {
 		
 		return 0;
 	}
+	
+	@PostMapping("/communityLike.do")
+	@ResponseBody
+	public int communityLike(@RequestParam("memberId") int id,@RequestParam("communityNo") int no) {
+		
+		return service.communityLike(id, no);
+	}
+	
+	@PostMapping("/communityLikeCheck.do")
+	@ResponseBody
+	public int communityLikeCheck(@RequestParam("memberId") int id, @RequestParam("communityNo") int no) {
+		Map<String, Object>result= service.CommunityLikeCheck(id, no);
+		if(result!=null) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	@GetMapping("/replyList.do")
+	@ResponseBody
+	public List<Reply> replyList(int communityNo){
+		
+		
+		
+		
+		return service.replyList(communityNo);
+	}
+	
+	@PostMapping("/insertReply.do")
+	@ResponseBody
+	public int insertReply(int memberId,int communityNo,String replyContent,@RequestParam(value = "replyRef", defaultValue = "0") int replyRef) {
+		Member m=new Member();
+		m.setMemberId(memberId);
+		Reply reply=Reply.builder().memberId(m).communityNo(communityNo).replyContent(replyContent).replyRef(replyRef).build();
+		
+		
+		return service.insertReply(reply);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
