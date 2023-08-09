@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="${path }/css/touris/tourisDetail.css" />
 <script
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=737cdc9322ba7fec26566e0863b53498&libraries=services,clusterer"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0e169307572ef60ba8671f2af4eaff4&libraries=services,clusterer"></script>
 <script>
 	var tourisId="${touris.tourisId}";
 	if('${loginMember}'==''){
@@ -241,7 +241,7 @@
 
 		// init 체크
 		if (!Kakao.isInitialized()) {
-			Kakao.init('737cdc9322ba7fec26566e0863b53498');
+			Kakao.init('c0e169307572ef60ba8671f2af4eaff4');
 		}
 		var addr = $("#kakaoAddr").val()
 		var geocoder = new kakao.maps.services.Geocoder();
