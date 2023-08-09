@@ -6,6 +6,7 @@ import java.util.Map;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 
@@ -42,4 +43,6 @@ public interface AcService {
 	int deleteAc(int acId);
 	
 	Accommodation updateRegist(int acId);
+	
+	List<AcReservation> updateRegistArv(int acId);
 }

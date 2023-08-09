@@ -58,5 +58,6 @@ public interface AcDao {
 	int deleteAc(SqlSessionTemplate session,int acId);
 	
 	Accommodation updateRegist(SqlSessionTemplate session, int acId);
-
+	
+	List<AcReservation> updateRegistArv(SqlSessionTemplate session, int acId);
 }

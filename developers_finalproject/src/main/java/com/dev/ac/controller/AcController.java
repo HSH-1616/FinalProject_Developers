@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dev.ac.dto.AcFile;
+import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 import com.dev.ac.service.AcService;
@@ -278,13 +279,20 @@ public class AcController {
 	@GetMapping("/updateRegist")
 	public String updateRegist(int acId, HttpSession session,Model m) {
 		Accommodation ac=service.updateRegist(acId);
+		List<AcReservation> arv=service.updateRegistArv(acId);
+		
 		System.out.println(ac);
 		
-		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
-		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
-		
 		m.addAttribute("ac",ac);
-		
+		m.addAttribute("arv",arv);
 		return "accommodation/acUpdate";
 	}
+	
+	@PostMapping("/updateAc")
+	@ResponseBody
+	public int updateAc() {
+		
+		return 0;
+	}
+	
 }

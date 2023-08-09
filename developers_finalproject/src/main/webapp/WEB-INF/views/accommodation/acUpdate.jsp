@@ -15,8 +15,7 @@
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
 <link rel="stylesheet" href="${path }/css/accommodation/acRegist.css" />
 <section>
-	<div id="hotelRegistCon" action="${path}/ac/insertRegist" method="post"
-		enctype="multipart/form-data">
+	<div id="hotelRegistCon">
 		<div class="hotelRegist">
 			<div class="registHeader">
 				<button>
@@ -52,13 +51,26 @@
 									<div class="blurPreview">
 										<img alt="" src="/images/accommodation/checkImage.png">
 									</div>
-									<div class="mainCheck">
-										<div>메인</div>
-									</div>
-									<ion-icon class="deletePreview" name="close-circle-outline"
-										role="img"></ion-icon>
-									<input type="hidden" name="afMain" value="N"> <img
-										class='previewImg' src="${path}/images/upload/accommodation/${af.afName}" />
+									<c:if test="${fn:contains(af.afMain,'Y')}">
+										<div class="mainCheck" style="display: flex">
+											<div>메인</div>
+										</div>
+										<ion-icon class="deletePreview" name="close-circle-outline"
+											role="img"></ion-icon>
+										<input type="hidden" name="afMain" value="Y">
+										<img class='previewImg'
+											src="${path}/images/upload/accommodation/${af.afName}" />
+									</c:if>
+									<c:if test="${fn:contains(af.afMain,'N')}">
+										<div class="mainCheck">
+											<div>메인</div>
+										</div>
+										<ion-icon class="deletePreview" name="close-circle-outline"
+											role="img"></ion-icon>
+										<input type="hidden" name="afMain" value="N">
+										<img class='previewImg'
+											src="${path}/images/upload/accommodation/${af.afName}" />
+									</c:if>
 								</div>
 							</c:forEach>
 						</div>
@@ -75,20 +87,20 @@
 						<h5>
 							숙박업소명 <span>* 최대 30자 특수기호 금지</span>
 						</h5>
-						<input type="text" id="acTitle" name="acTitle" placeholder="숙박업소명" value="${ac.acTitle }" />
-						<span class="textNumCheck"><span>0</span>/30</span>
+						<input type="text" id="acTitle" name="acTitle" placeholder="숙박업소명"
+							value="${ac.acTitle }" /> <span class="textNumCheck"><span>0</span>/30</span>
 						<div class="warnReg"></div>
 						<h5>1박당 가격</h5>
 						<!-- <input type="hidden" name="acPrice"/> -->
 						<input type="text" id="acPrice" name="acPrice"
 							placeholder="1박당 가격" value="${ac.acPrice }" />
 						<h5>숙박업소 유형</h5>
-						<div class="registHotelType">	
+						<div class="registHotelType">
 							<div class="rt pension">
 								<input type="radio" name="acType" value="펜션">
-								<div class="blurRt on"></div>
+								<div class="blurRt"></div>
 								<img src="${path}/images/accommodation/pensiondetail.png" alt="" />
-								<p class="rtTitle pension on">펜션</p>
+								<p class="rtTitle pension">펜션</p>
 							</div>
 							<div class="rt hotel">
 								<input type="radio" name="acType" value="호텔">
@@ -112,8 +124,8 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput people">
-											<input type="text" name="acPeople" id="peopleCount" value="${ac.acPeople }"
-												min="1" max="10" readonly />
+											<input type="text" name="acPeople" id="peopleCount"
+												value="${ac.acPeople }" min="1" max="10" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn people" id="plus">
 											<ion-icon name="add-circle-outline"></ion-icon>
@@ -128,8 +140,8 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput room">
-											<input type="text" name="acRoom" id="roomCount" value="${ac.acRoom }"
-												min="1" max="5" readonly />
+											<input type="text" name="acRoom" id="roomCount"
+												value="${ac.acRoom }" min="1" max="5" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn room" id="plus">
 											<ion-icon name="add-circle-outline"></ion-icon>
@@ -144,8 +156,8 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput bed">
-											<input type="text" name="acBed" id="bedCount" value="${ac.acBed }"
-												min="1" max="5" readonly />
+											<input type="text" name="acBed" id="bedCount"
+												value="${ac.acBed }" min="1" max="5" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn bed" id="plus">
 											<ion-icon name="add-circle-outline"></ion-icon>
@@ -183,8 +195,8 @@
 							<div>
 								<div id="addressDiv">
 									<input type="text" id="aaAddress" name="acAddress"
-										placeholder="도로명 주소" readonly /> <input type="text"
-										id="aaJibun" placeholder="지번 주소" readonly />
+										placeholder="도로명 주소" readonly value="${ac.acAddress }" /> <input
+										type="text" id="aaJibun" placeholder="지번 주소" readonly />
 								</div>
 								<input type="text" id="aaDetail" placeholder="상세 주소" />
 							</div>
@@ -261,7 +273,18 @@
 							</div>
 						</div>
 						<hr>
-						<div id="holyResult"></div>
+						<div id="holyResult">
+							<c:forEach var="arv" items="${arv}">
+								<c:if test="${arv.apId==0}">
+									<div>
+										<span>휴무일</span> <input type='text' name='checkIn' readonly
+											value="${arv.checkIn }"> <input type='text'
+											name='checkOut' readonly value="${arv.checkOut }">
+										<button type='button'>삭제</button>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 				<div class="registTitle">
@@ -270,7 +293,7 @@
 				</div>
 				<div class="registIntroduce">
 					<div>
-						<textarea name="acContent" id="acContent" cols="30" rows="10"></textarea>
+						<textarea name="acContent" id="acContent" cols="30" rows="10">${ac.acContent}</textarea>
 						<span id="contentCheckNum"><span>0</span>/2000</span>
 					</div>
 				</div>
@@ -331,6 +354,27 @@
 							편의 시설 추가 <span>*최대 6개 등록가능 *권장 사이즈(240px * 120px)</span>
 						</h5>
 						<div id="insertFcCon">
+							<c:if test="${not empty ac.afa.afal }">
+								<c:forEach var="afal" items="${ac.afa.afal}" varStatus="i">
+									<div class='insertFcImageCon'>
+										<div class='insertFcImage'>
+											<ion-icon class='deleteFc' name='close-circle-outline'></ion-icon>
+											<label for='inputFileindex${i.index}'> <ion-icon
+													name='images-sharp'></ion-icon>
+												<p>이미지 추가</p> <%-- <input type='file' name='afalImage' id="inputFileindex${i.index}" required /> --%>
+												<img class='insertFcImg'
+												src='${path}/images/upload/accommodation/afal/${afal.afalImg}'
+												alt='' style="display: block" />
+												<div class='blurInsertFc' style="display: block">
+													<button type='button' class='insertFcDelete'>삭제하기</button>
+												</div>
+										</div>
+										<input type='text' id='insertFcName' name='afalName'
+											placeholder='편의시설 이름' value="${afal.afalName }" required />
+									</div>
+								</c:forEach>
+							</c:if>
+
 							<div class="insertFc">
 								<div class="insertCon">
 									<ion-icon name="add-sharp"></ion-icon>
@@ -345,7 +389,7 @@
 				<div class="registBtnCon">
 					<hr />
 					<div class="registBtn">
-						<button type="button" id="registOkBtn">등록하기</button>
+						<button type="button" id="UpdateOkBtn">수정하기</button>
 						<button id="registCancelBtn">취소</button>
 					</div>
 				</div>
@@ -355,16 +399,122 @@
 	</div>
 	<button id="deleteRegist">삭제하기</button>
 	<script>
-	
-	$(document).ready(function(){
-		if($("input[name=acType]").val()=="${ac.acType}"){
-			$(this).prop("checked",true)
-		}
-		
-	})
+		$(document).ready(function() {
+			$("input[name=acType]").prop("checked", false)
+			$("input[value=${ac.acType}]").prop("checked", true)
+			$("input[value=${ac.acType}]").nextAll(".blurRt").addClass("on");
+			$("input[value=${ac.acType}]").nextAll(".rtTitle").addClass("on");
+
+			<c:if test="${ac.afa.afaCamera==1}">
+			$("input[name=afaCamera]").val(1)
+			$("input[name=afaCamera]").prev().addClass("on")
+			$("input[name=afaCamera]").nextAll("p").addClass("on")
+			</c:if>
+			<c:if test="${ac.afa.afaAircon==1}">
+			$("input[name=afaAircon]").val(1)
+			$("input[name=afaAircon]").prev().addClass("on")
+			$("input[name=afaAircon]").nextAll("p").addClass("on")
+			</c:if>
+			<c:if test="${ac.afa.afaKitchen==1}">
+			$("input[name=afaKitchen]").val(1)
+			$("input[name=afaKitchen]").prev().addClass("on")
+			$("input[name=afaKitchen]").nextAll("p").addClass("on")
+			</c:if>
+			<c:if test="${ac.afa.afaWifi==1}">
+			$("input[name=afaWifi]").val(1)
+			$("input[name=afaWifi]").prev().addClass("on")
+			$("input[name=afaWifi]").nextAll("p").addClass("on")
+			</c:if>
+			<c:if test="${ac.afa.afaWasher==1}">
+			$("input[name=afaWasher]").val(1)
+			$("input[name=afaWasher]").prev().addClass("on")
+			$("input[name=afaWasher]").nextAll("p").addClass("on")
+			</c:if>
+			<c:if test="${ac.afa.afaParking==1}">
+			$("input[name=afaParking]").val(1)
+			$("input[name=afaParking]").prev().addClass("on")
+			$("input[name=afaParking]").nextAll("p").addClass("on")
+			</c:if>
+			
+			<c:if test="${ac.acPeople>1}">
+				$(".hotelCountInput.people").prev().css("color","#b31312")
+			</c:if>
+			<c:if test="${ac.acPeople==10}">
+				$(".hotelCountInput.people").next().css("color","#afafaf")
+			</c:if>
+			<c:if test="${ac.acRoom>1}">
+				$(".hotelCountInput.Room").prev().css("color","#b31312")
+			</c:if>
+			<c:if test="${ac.acRoom==5}">
+				$(".hotelCountInput.Room").next().css("color","#afafaf")
+			</c:if>
+			<c:if test="${ac.acBed>1}">
+				$(".hotelCountInput.Bed").prev().css("color","#b31312")
+			</c:if>
+			<c:if test="${ac.acBed==5}">
+				$(".hotelCountInput.Bed").next().css("color","#afafaf")
+			</c:if>
+			<c:if test="${ac.acBathRoom>1}">
+				$(".hotelCountInput.BathRoom").prev().css("color","#b31312")
+			</c:if>
+			<c:if test="${ac.acBathRoom==5}">
+				$(".hotelCountInput.BathRoom").next().css("color","#afafaf")
+			</c:if>	
+		})
+
+		var mapContainer = document.getElementById("registMap"), // 지도를 표시할 div
+		mapOption = {
+			center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+			level : 5, // 지도의 확대 레벨
+		};
+
+		//지도를 미리 생성
+		var map = new daum.maps.Map(mapContainer, mapOption);
+
+		//주소-좌표 변환 객체를 생성
+		var geocoder = new daum.maps.services.Geocoder();
+
+		//마커를 미리 생성
+		var marker = new daum.maps.Marker({
+			position : new daum.maps.LatLng(37.537187, 127.005476),
+			map : map,
+		});
+
+		geocoder.addressSearch("${ac.acAddress}", function(results, status) {
+			// 정상적으로 검색이 완료됐으면
+			if (status === daum.maps.services.Status.OK) {
+				var result = results[0]; //첫번째 결과의 값을 활용
+
+				// 해당 주소에 대한 좌표를 받아서
+				var coords = new daum.maps.LatLng(result.y, result.x);
+				// 지도를 보여준다.
+				mapContainer.style.display = "block";
+				map.relayout();
+				// 지도 중심을 변경한다.
+				map.setCenter(coords);
+				// 마커를 결과값으로 받은 위치로 옮긴다.
+				marker.setPosition(coords);
+			}
+		});
+
 		var checkInOutDay = []
+		var checkHolyDay = []
+		<c:forEach var="arv" items="${arv}">
+		<c:if test="${arv.apId!=0}">
+		checkInOutDay.push({
+			checkIn : "${arv.checkIn}",
+			checkOut : "${arv.checkOut}"
+		})
+		</c:if>
+		<c:if test="${arv.apId==0}">
+		checkHolyDay.push({
+			checkIn : "${arv.checkIn}",
+			checkOut : "${arv.checkOut}"
+		})
+		</c:if>
+		</c:forEach>
 		
-		
+		var afName=[]
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>

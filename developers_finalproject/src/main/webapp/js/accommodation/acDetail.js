@@ -163,7 +163,8 @@ function payCheck() {
 	var checkIn = $("#detailHotelCheckIn").val()
 	var checkOut = $("#detailHotelCheckOut").val()
 	var payPeople = $("#payPeople").val()
-	if ((checkIn != "날짜추가" || checkIn != "") && (checkOut != "날짜추가" || checkOut != "") && payPeople != "인원추가") {
+	console.log(checkIn)
+	if ((checkIn != "날짜추가" && checkIn != "") && (checkOut != "날짜추가" && checkOut != "") && payPeople != "인원추가") {
 		$(".detailHotelBtn").hide();
 		$(".detailHotelBtn.on").css("display", "flex");
 	}
@@ -205,7 +206,7 @@ $(document).ready(function($) {
 
 	$(".detailHotelCheckDay").click(function(event) {
 		var offset = $(".detailHotelDayCon").offset();
-		$('html, body').animate({ scrollTop: offset.top }, 100);
+		$('html, body').animate({ scrollTop: offset.top-130 }, 100);
 	});
 
 	payCheck()

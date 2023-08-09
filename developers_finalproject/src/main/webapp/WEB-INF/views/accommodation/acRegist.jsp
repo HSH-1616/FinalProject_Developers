@@ -355,6 +355,7 @@
 		<button id="deleteRegist">삭제하기</button>
 	<script>
 		var checkInOutDay = []
+		var checkHolyDay=[]
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>

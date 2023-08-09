@@ -722,7 +722,20 @@
 		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
 }
 
+#updateOkBtn {
+	border: none;
+	background-color: #eeeeee;
+	color: white;
+	margin-right: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
 #registOkBtn:hover {
+	background-color: #b31312;
+}
+
+#updateOkBtn:hover {
 	background-color: #b31312;
 }
 
@@ -828,6 +841,7 @@
 	font-size: 1.5rem;
 	margin-top: 7px;
 	right: 8px;
+	cursor: pointer;
 
 }
 
@@ -866,27 +880,6 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
 	border-radius: 5px;
 	font-size: 0.9rem;
-}
-
-.outDay {
-	text-decoration: line-through #b31312 2px;
-	color: #999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: calc(100% / 7);
-	height: 42px;
-	text-align: left;
-	font-size: 1rem;
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-:root {
-	--bgColor: #3a3a3a;
-	--hoverBg: #616161;
-	--text: #bbb;
 }
 
 .acImgCon {

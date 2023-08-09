@@ -1,6 +1,5 @@
 $(document).ready(function() {
-	$(".dz-default.dz-message").remove();
-
+	console.log(checkInOutDay)
 });
 
 // input 정규식
@@ -134,7 +133,7 @@ $(document).on("click", "#holyBtn", function() {
 		$("#holyResult").append(con)
 		$("#holyResult>div").last().children("input[name=checkIn]").val($("#holyStart").val())
 		$("#holyResult>div").last().children("input[name=checkOut]").val($("#holyLast").val())
-		checkInOutDay.push({
+		checkHolyDay.push({
 			checkIn: $("#holyStart").val(),
 			checkOut: $("#holyLast").val()
 		})
@@ -142,15 +141,18 @@ $(document).on("click", "#holyBtn", function() {
 		resetLast()
 	}
 
-
-	console.log(checkInOutDay)
 	calender()
-	console.log(checkInOutDay)
-
 })
 
 $(document).on("click", "#holyResult button", function() {
 	$(this).parent("div").remove()
+	for (var i = 0; i < checkHolyDay.length; i++) {
+		if (checkHolyDay[i].checkOut === $(this).prev().val()) {
+			checkHolyDay.splice(i, 1);
+			calender()			
+		}
+	}
+	
 })
 
 // /휴무일 체크/
@@ -176,7 +178,9 @@ $(document).on("click", ".blurFc", function() {
 // 편의시설 추가
 
 $(document).on("click", ".insertFc", function() {
+
 	var count = $(".insertFcImageCon").length;
+	console.log(count)
 	const copy = $(this).clone();
 	const insertFcImageCon = $("<div class='insertFcImageCon'>");
 	const xIcon = $("<ion-icon class='deleteFc'name='close-circle-outline'></ion-icon>")
@@ -226,23 +230,7 @@ $(document).on("click", ".insertFc", function() {
 		}
 	}
 
-	$(".deleteFc").click(function(e) {
-		if ($(".insertFcImageCon").length == 6) {
-			$(this).parents(".insertFcImageCon").remove();
-			$("#insertFcCon").append(copy);
-		} else {
-			$(this).parents(".insertFcImageCon").remove();
-		}
-	});
-
-	$(".insertFcDelete").click(function(e) {
-		if ($(".insertFcImageCon").length == 6) {
-			$(this).parents(".insertFcImageCon").remove();
-			$("#insertFcCon").append(copy);
-		} else {
-			$(this).parents(".insertFcImageCon").remove();
-		}
-	})
+	
 });
 
 $(document).on("click", ".insertFcImage label", function() {
@@ -262,6 +250,27 @@ $(document).on("click", ".insertFcImage label", function() {
 		}
 	});
 });
+
+$(document).on("click",".deleteFc",function(e) {
+	console.log(2)
+		const copy = $(".insertFc").clone();
+		if ($(".insertFcImageCon").length == 6) {
+			$(this).parents(".insertFcImageCon").remove();
+			$("#insertFcCon").append(copy);
+		} else {
+			$(this).parents(".insertFcImageCon").remove();
+		}
+	});
+
+$(document).on("click",".insertFcDelete",function(e) {
+		const copy = $(".insertFc").clone();
+	if ($(".insertFcImageCon").length == 6) {
+		$(this).parents(".insertFcImageCon").remove();
+			$("#insertFcCon").append(copy);
+		} else {
+			$(this).parents(".insertFcImageCon").remove();
+		}
+	})
 
 // /편의시설 추가/
 
@@ -284,19 +293,14 @@ var mapContainer = document.getElementById("registMap"), // 지도를 표시할 
 	};
 
 //지도를 미리 생성
-var imageSrc = "./image/maker.png", // 마커이미지의 주소입니다
-	imageSize = new kakao.maps.Size(80, 80), // 마커이미지의 크기입니다
-	imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다
-
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
 var map = new daum.maps.Map(mapContainer, mapOption);
+
 //주소-좌표 변환 객체를 생성
 var geocoder = new daum.maps.services.Geocoder();
+
 //마커를 미리 생성
 var marker = new daum.maps.Marker({
 	position: new daum.maps.LatLng(37.537187, 127.005476),
-	image: markerImage, // 마커이미지 설정
 	map: map,
 });
 
@@ -385,40 +389,44 @@ function handleImgsFiles(e) {
 				$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
 				$(".previewImgWrap").first().children("input[name=afMain]").val("Y")
 			}
-			$(".previewImgWrap").click(function() {
-				$(".mainCheck").hide()
-				$("input[name=afMain]").val("N")
-				$(this).children(".mainCheck").css("display", "flex");
-				$(this).children("input[name=afMain]").val("Y")
-			})
+
 		}
 		reader.readAsDataURL(f)
 	})
 
-	//파일 삭제
+
 
 }
-var $item = $(document).on("click", '.deletePreview', function(e) {
 
-	console.log(sel_files)
+$(".blurPreview").on("click", function() {
+	$(".mainCheck").hide()
+	$("input[name=afMain]").val("N")
+	$(this).next().css("display", "flex");
+	$(this).nextAll("input[name=afMain]").val("Y")
+})
+
+var $item = $(document).on("click", '.deletePreview', function(e) {
 	var seq = $item.index(this)
 	var num = $(".deletePreview").index(this)
-	console.log(num)
 	var dataTransfer = new DataTransfer();
 	var files = $('input[name=afImage]')[0].files;
 	var fileArray = Array.from(files);
 	fileArray.splice(seq, 1);
 	fileArray.forEach(file => { dataTransfer.items.add(file); });
 	$('input[name=afImage]')[0].files = dataTransfer.files;
-	$(this).parents(".previewImgWrap").remove()
+
 	sel_files.splice(num, 1)
-	console.log(sel_files)
-	if ($(this).parents("previwImgWrap").children(".mainCheck").css("display", "flex")) {
+
+	if ($(this).parents(".previewImgWrap").children(".mainCheck").css("display") == "flex") {
+		$(this).parents(".previewImgWrap").remove()
 		$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
 		$(".previewImgWrap").first().children("input[name=afMain]").val("Y")
-	}
 
+	} else {
+		$(this).parents(".previewImgWrap").remove()
+	}
 });
+
 $("#registOkBtn").on("click", function() {
 
 	acData = {
@@ -431,7 +439,7 @@ $("#registOkBtn").on("click", function() {
 		acBed: $("input[name=acBed]").val(),
 		acBathRoom: $("input[name=acBathRoom]").val(),
 		acContent: $("textarea[name=acContent]").val(),
-		arv: checkInOutDay,
+		arv: checkHolyDay,
 		afa: {
 			afaCamera: $("input[name=afaCamera]").val(),
 			afaAircon: $("input[name=afaAircon]").val(),
@@ -478,6 +486,8 @@ $("#registOkBtn").on("click", function() {
 		console.log(key, value);
 	}
 
+
+
 	$.ajax({
 		url: "/ac/insertRegist",
 		type: "post",
@@ -486,6 +496,86 @@ $("#registOkBtn").on("click", function() {
 		contentType: false,
 		success: function(result) {
 			alert("등록완료")
+			location.href = "/"
+		},
+		error: function(result) {
+			location.href = "/ac/acError"
+		}
+	});
+	
+	
+})
+
+
+$("#updateOkBtn").on("click", function() {
+
+	acData = {
+		acTitle: $("input[name=acTitle]").val(),//update
+		acPrice: $("input[name=acPrice]").val(),//update
+		acAddress: $("input[name=acAddress]").val(),//update
+		acType: $("input[name=acType]:checked").val(),//update
+		acPeople: $("input[name=acPeople]").val(),//update
+		acRoom: $("input[name=acRoom]").val(),//update
+		acBed: $("input[name=acBed]").val(),//update
+		acBathRoom: $("input[name=acBathRoom]").val(),//update
+		acContent: $("textarea[name=acContent]").val(),//update
+		arv: checkHolyDay,
+		afa: {
+			afaCamera: $("input[name=afaCamera]").val(),//update
+			afaAircon: $("input[name=afaAircon]").val(),//update
+			afaKitchen: $("input[name=afaKitchen]").val(),//update
+			afaWifi: $("input[name=afaWifi]").val(),//update
+			afaWasher: $("input[name=afaWasher]").val(),//update
+			afaParking: $("input[name=afaParking]").val(),//update
+		}
+
+
+	}
+
+	const afalImg = [];
+
+	var files = document.getElementsByName("afalImage")
+	$.each(files, function(i, l) {
+		var filesArr = Array.prototype.slice.call(l.files);
+		filesArr.forEach(function(f) {
+			afalImg.push(f);
+		})
+	})
+
+	const form = new FormData();
+
+	form.append("acData", JSON.stringify(acData))
+
+	$.each(sel_files, function(i, l) {
+		form.append("afImage", l)
+	})
+
+	$.each($("input[name=afMain]"), function(i, l) {
+		form.append("afMain", $(this).val())
+	})
+
+	$.each(afalImg, function(i, l) {
+		form.append("afalImg", l)
+	})
+
+	$.each($("input[name=afalName]"), function(i, l) {
+		form.append("afalName", $(this).val())
+	})
+
+	for (let [key, value] of form) {
+		console.log(key, value);
+	}
+
+
+
+	$.ajax({
+		url: "/ac/updateRegist",
+		type: "post",
+		data: form,
+		processData: false,
+		contentType: false,
+		success: function(result) {
+			alert("수정완료")
 			location.href = "/"
 		},
 		error: function(result) {

@@ -363,7 +363,29 @@ function calender() {
 		}
 
 
-		
+		var listDate3 = []
+		if (checkHolyDay.length) {
+			$.each(checkHolyDay, function(i, l) {
+				fnum = l.checkIn
+				lnum = l.checkOut
+				if (fnum != '' && lnum != '') {
+					getDateRange(fnum, lnum, listDate3);
+					$(listDate3).each(function(index, item) {
+						$(".day").each(function(index2, item2) {
+							if ($(this).children().val() == item) {
+								$(this).attr("class", "holyDay")
+							}
+						});
+						$(".notday").each(function(index3, item3) {
+							if ($(this).children().val() == item) {
+								$(this).attr("class", "holyDay")
+							}
+						});
+					});
+				}
+
+			})
+		}
 
 
 	}
@@ -492,6 +514,35 @@ function calender() {
 				});
 			})
 		}
+		
+		
+		if ($(".holyDay").length) {
+			getDateRange(fnum, lnum, listDate);
+			$(listDate).each(function(index, item) {
+				$(".day input").each(function(index2, item2) {
+					$(".holyDay").each(function(index3, item3) {
+						if ($(this).children().val() == item) {
+							$(".day").removeClass("first last")
+							$(".day").css({ "background-color": "white" })
+							$("#fnum").val("")
+							$("#lnum").val("")
+							$("#detailHotelCheckIn").val("날짜추가")
+							$("#detailHotelCheckOut").val("날짜추가")
+							$("#holyStart").val("")
+							$("#holyLast").val("")
+							$("#inDayBtn").hide()
+							$("#outDayBtn").hide()
+							$("#startBtn").hide()
+							$("#lastBtn").hide()
+							$("#exDay").text("1")
+							$("#resultPrice").text($("#exPrice1").text())
+							$("#realResultPrice").text($("#exPrice1").text())
+						}
+					});
+				});
+			})
+		}
+		
 
 		$(".checkDay > div > ion-icon").on("click", function() {
 			if ($(this).attr("id") == "inDayBtn") {

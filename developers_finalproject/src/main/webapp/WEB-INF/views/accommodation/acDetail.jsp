@@ -615,13 +615,24 @@
 						});
 		
 		var checkInOutDay = []
-
+		var checkHolyDay=[]
 		<c:forEach var="arv" items="${ad.arv}">
-			checkInOutDay.push({
-					checkIn : [ "${arv.checkIn}"],
-					checkOut : [ "${arv.checkOut}"]
-			})
+		<c:if test="${arv.apId!=0}">
+		checkInOutDay.push({
+			checkIn : "${arv.checkIn}",
+			checkOut : "${arv.checkOut}"
+		})
+		</c:if>
+		<c:if test="${arv.apId==0}">
+		checkHolyDay.push({
+			checkIn : "${arv.checkIn}",
+			checkOut : "${arv.checkOut}"
+		})
+		</c:if>
 		</c:forEach>
+		
+			
+			
 			
 		$(".detailHotelBtn.on").on("click",function(e){			
 			if(${empty loginMember}){

@@ -110,7 +110,8 @@
 						<a class="hotelItem" href="${path}/ac/acDetail?no=${al.acId}">
 							<div class="heartContainer">
 								<div class="con-like">
-									<input title="like" type="checkbox" class="like" value="${al.acId }" />
+									<input title="like" type="checkbox" class="like"
+										value="${al.acId }" />
 									<div class="checkmark">
 										<svg viewBox="0 0 24 24" class="outline"
 											xmlns="http://www.w3.org/2000/svg">
@@ -193,7 +194,7 @@
 								<c:if test="${fn:length(al.acAddress)<16 }">
 									<div class="contentAddress">${al.acAddress}</div>
 								</c:if>
-								
+
 								<div class="priceStar">
 									<div class="contentPrice">
 										₩
@@ -693,7 +694,8 @@
 		},100)
 		 */
 		
-	var checkInOutDay = []
+		 var checkInOutDay = []
+		 var checkHolyDay = []
 </script>
 <script src="${path }/js/accommodation/acSearchBar.js"></script>
 <script src="${path }/js/accommodation/acSearch.js"></script>

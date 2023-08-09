@@ -553,21 +553,6 @@
 	right: 45px;
 }
 
-.outDay {
-	text-decoration: line-through #b31312 2px;
-	color: #999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: calc(100% / 7);
-	height: 42px;
-	text-align: left;
-	font-size: 1rem;
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
 .detailHotelReview {
 	margin-bottom: 50px;
 }
@@ -749,6 +734,7 @@
 	color: #b31312;
 	top: 35px;
 	right: 20px;
+	cursor: pointer;
 
 }
 

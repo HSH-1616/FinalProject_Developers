@@ -14,6 +14,7 @@ import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 
@@ -142,6 +143,11 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public Accommodation updateRegist(int acId) {
 		return dao.updateRegist(session,acId);
+	}
+
+	@Override
+	public List<AcReservation> updateRegistArv(int acId) {
+		return dao.updateRegistArv(session,acId);
 	}
 	
 

@@ -144,6 +144,7 @@
 </c:forEach>
 </c:if>
 	var checkInOutDay = []
+	var checkHolyDay=[]
 	var memberId=""
 	$(".like").on("click",function(e){			
 		if(${empty loginMember}){
