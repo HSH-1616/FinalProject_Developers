@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AcFacilities {
 	private int afaId;
+	private int acId;
 	private int afaCamera;
 	private int afaAircon;
 	private int afaKitchen;

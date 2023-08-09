@@ -1,6 +1,6 @@
 $(window).ready(function() {
-		//calender()
-			var checkInOutDay=[]
+	//calender()
+	var checkInOutDay = []
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var loc = urlParams.get('loc');
@@ -28,7 +28,7 @@ $(window).ready(function() {
 
 	$("#fnum").val(checkIn)
 	$("#lnum").val(checkOut)
-	
+
 	$(".day").each(function(index, obj) {
 		if (checkIn != "") {
 			if ($(this).children().val() == checkIn) {
@@ -101,3 +101,36 @@ $(window).ready(function() {
 
 })
 
+$(".like").on("change", function() {
+
+	var acId = $(this).val();
+
+	if ($(this).is(":checked")) {
+		$.ajax({
+			url: "/ac/insertHeart",
+			data: {
+				memberId: memberId,
+				acId: acId
+			},
+			success: function(result) {
+				if (result > 0) {
+
+				}
+			}
+		})
+	} else {
+		$.ajax({
+			url: "/ac/deleteHeart",
+			data: {
+				memberId: memberId,
+				acId: acId
+			},
+			success: function(result) {
+				if (result > 0) {
+
+				}
+			}
+		})
+	}
+
+})

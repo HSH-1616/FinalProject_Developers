@@ -88,8 +88,18 @@
 								</button>
 							</div>
 							<div class="itemContent">
-								<div class="contentTitle">${fn:substring(al.acTitle, 0, 16)}...</div>
-								<div class="contentAddress">${fn:substringBefore(al.acAddress, "시")}시</div>
+								<c:if test="${fn:length(al.acTitle)>16 }">
+									<div class="contentTitle">${fn:substring(al.acTitle, 0, 16)}...</div>
+								</c:if>
+								<c:if test="${fn:length(al.acTitle)<16 }">
+									<div class="contentTitle">${al.acTitle}</div>
+								</c:if>
+								<c:if test="${fn:length(al.acAddress)>16 }">
+									<div class="contentAddress">${fn:substring(al.acAddress, 0, 16)}...</div>
+								</c:if>
+								<c:if test="${fn:length(al.acAddress)<16 }">
+									<div class="contentAddress">${al.acAddress}</div>
+								</c:if>
 								<div class="priceStar">
 									<div class="contentPrice">
 										₩

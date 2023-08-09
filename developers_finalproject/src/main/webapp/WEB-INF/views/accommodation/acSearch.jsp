@@ -110,7 +110,7 @@
 						<a class="hotelItem" href="${path}/ac/acDetail?no=${al.acId}">
 							<div class="heartContainer">
 								<div class="con-like">
-									<input title="like" type="checkbox" class="like" />
+									<input title="like" type="checkbox" class="like" value="${al.acId }" />
 									<div class="checkmark">
 										<svg viewBox="0 0 24 24" class="outline"
 											xmlns="http://www.w3.org/2000/svg">
@@ -181,8 +181,19 @@
 								</button>
 							</div>
 							<div class="itemContent">
-								<div class="contentTitle">${fn:substring(al.acTitle, 0, 16)}...</div>
-								<div class="contentAddress">${fn:substringBefore(al.acAddress, "시")}시</div>
+								<c:if test="${fn:length(al.acTitle)>16 }">
+									<div class="contentTitle">${fn:substring(al.acTitle, 0, 16)}...</div>
+								</c:if>
+								<c:if test="${fn:length(al.acTitle)<16 }">
+									<div class="contentTitle">${al.acTitle}</div>
+								</c:if>
+								<c:if test="${fn:length(al.acAddress)>16 }">
+									<div class="contentAddress">${fn:substring(al.acAddress, 0, 16)}...</div>
+								</c:if>
+								<c:if test="${fn:length(al.acAddress)<16 }">
+									<div class="contentAddress">${al.acAddress}</div>
+								</c:if>
+								
 								<div class="priceStar">
 									<div class="contentPrice">
 										₩
@@ -197,7 +208,7 @@
 											</span>
 										</c:if>
 										<c:if test="${al.reviewGrade=='0.0'}">
-											<span style="color:#b31312">리뷰 없음</span>
+											<span style="color: #b31312">리뷰 없음</span>
 										</c:if>
 									</div>
 								</div>
@@ -212,17 +223,21 @@
 		</c:choose>
 	</div>
 	<div id="mapContainer">
-	<div id="acSearchMapWrapper">
-		<div id="acSearchMap" style="width:100%;height:100%"></div>
-		<div id="roadviewControl" onclick="setRoadviewRoad()"></div>
-	</div>
-	  <div id="rvWrapper">
-        <div id="roadview"  style="width:100%;height:100%;"></div> <!-- 로드뷰를 표시할 div 입니다 -->
-         <div id="close" title="로드뷰닫기" onclick="closeRoadview()"><span class="img"></span></div>
-    </div>
-    
-    <input type="button" id="btnRoadview" onclick="toggleMap(false)" title="로드뷰 보기" value="로드뷰">
-    <input type="button" id="btnMap" onclick="toggleMap(true)" title="지도 보기" value="지도">
+		<div id="acSearchMapWrapper">
+			<div id="acSearchMap" style="width: 100%; height: 100%"></div>
+			<div id="roadviewControl" onclick="setRoadviewRoad()"></div>
+		</div>
+		<div id="rvWrapper">
+			<div id="roadview" style="width: 100%; height: 100%;"></div>
+			<!-- 로드뷰를 표시할 div 입니다 -->
+			<div id="close" title="로드뷰닫기" onclick="closeRoadview()">
+				<span class="img"></span>
+			</div>
+		</div>
+
+		<input type="button" id="btnRoadview" onclick="toggleMap(false)"
+			title="로드뷰 보기" value="로드뷰"> <input type="button" id="btnMap"
+			onclick="toggleMap(true)" title="지도 보기" value="지도">
 		<!-- 지도타입 컨트롤 div 입니다 -->
 		<div class="custom_typecontrol radius_border">
 			<span id="btnRoadmap" class="selected_btn"
@@ -240,6 +255,31 @@
 	</div>
 </div>
 <script>
+<c:if test="${not empty loginMember }">
+<c:forEach var="al" items="${as}">
+<c:forEach var="ah" items="${al.acHearts}">
+	<c:if test="${loginMember.memberId==ah.memberId}">
+		$(".like").each(function(i,l){
+			if($(this).val()==${ah.acId}){
+				$(this).prop("checked",true)
+			}
+		})
+	</c:if>
+</c:forEach>
+</c:forEach>
+</c:if>
+
+	var memberId=""
+	$(".like").on("click",function(e){			
+		if(${empty loginMember}){
+			e.preventDefault()
+			$("#modal").css("display","flex")
+		}else{
+			memberId="${loginMember.memberId}"
+		}
+	})
+
+
 		var asList=[]
 		var asFile=[]
 		<c:forEach var="al" items="${as}" varStatus="i">
@@ -566,7 +606,13 @@
 			                '<div>'+
 			                  '<div class="mapDetailItem">'+
 			                    '<div class="mapDetailTitle">'+
-			                      '<span>'+l.title.substr(0,12)+"..."+'</span>'+
+			                      '<span>'
+			                   	 	if(l.title.length>12){
+			                   		content+= l.title.substr(0,12) +"..."
+			                      }else{
+			                  		  content+=l.title
+			                      }
+			                    content+='</span>'+
 			                      '<div class="starContainer">'
 			                      	if(l.review!="0.0"){
 			                        content+='<span class="star">★★★★★<span style="width:'+l.review*20+'%">★★★★★</span></span>'

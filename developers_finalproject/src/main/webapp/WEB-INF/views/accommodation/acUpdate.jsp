@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
 <link rel="stylesheet" href="${path }/css/accommodation/acRegist.css" />
 <section>
-	<div id="hotelRegistCon" action="${path}/ac/insertRegist"
-		method="post" enctype="multipart/form-data">
+	<div id="hotelRegistCon" action="${path}/ac/insertRegist" method="post"
+		enctype="multipart/form-data">
 		<div class="hotelRegist">
 			<div class="registHeader">
 				<button>
@@ -47,19 +47,20 @@
 						<h6>메인 이미지 설정</h6>
 						<hr>
 						<div class="preview" id="preview">
-<%-- 
-							 <div class="previewImgWrap">
-								<div class="blurPreview">
-									<img alt="" src="${path}/images/accommodation/checkImage.png">
+							<c:forEach var="af" items="${ac.acFiles}">
+								<div class="previewImgWrap">
+									<div class="blurPreview">
+										<img alt="" src="/images/accommodation/checkImage.png">
+									</div>
+									<div class="mainCheck">
+										<div>메인</div>
+									</div>
+									<ion-icon class="deletePreview" name="close-circle-outline"
+										role="img"></ion-icon>
+									<input type="hidden" name="afMain" value="N"> <img
+										class='previewImg' src="${path}/images/upload/accommodation/${af.afName}" />
 								</div>
-								<div class="mainCheck">
-									<div>메인</div>
-								</div>
-								<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>
-								<input type="hidden" name="acMain" value="N">
-								<img alt="" src="${path}/images/accommodation/pensiondetail.png">
-							</div>  --%>
-
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -74,17 +75,17 @@
 						<h5>
 							숙박업소명 <span>* 최대 30자 특수기호 금지</span>
 						</h5>
-						<input type="text" id="acTitle" name="acTitle" placeholder="숙박업소명" />
+						<input type="text" id="acTitle" name="acTitle" placeholder="숙박업소명" value="${ac.acTitle }" />
 						<span class="textNumCheck"><span>0</span>/30</span>
 						<div class="warnReg"></div>
 						<h5>1박당 가격</h5>
 						<!-- <input type="hidden" name="acPrice"/> -->
 						<input type="text" id="acPrice" name="acPrice"
-							placeholder="1박당 가격" />
+							placeholder="1박당 가격" value="${ac.acPrice }" />
 						<h5>숙박업소 유형</h5>
-						<div class="registHotelType">
+						<div class="registHotelType">	
 							<div class="rt pension">
-								<input type="radio" name="acType" value="펜션" checked>
+								<input type="radio" name="acType" value="펜션">
 								<div class="blurRt on"></div>
 								<img src="${path}/images/accommodation/pensiondetail.png" alt="" />
 								<p class="rtTitle pension on">펜션</p>
@@ -111,7 +112,7 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput people">
-											<input type="text" name="acPeople" id="peopleCount" value="1"
+											<input type="text" name="acPeople" id="peopleCount" value="${ac.acPeople }"
 												min="1" max="10" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn people" id="plus">
@@ -127,7 +128,7 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput room">
-											<input type="text" name="acRoom" id="roomCount" value="1"
+											<input type="text" name="acRoom" id="roomCount" value="${ac.acRoom }"
 												min="1" max="5" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn room" id="plus">
@@ -143,7 +144,7 @@
 											<ion-icon name="remove-circle-outline"></ion-icon>
 										</button>
 										<div class="hotelCountInput bed">
-											<input type="text" name="acBed" id="bedCount" value="1"
+											<input type="text" name="acBed" id="bedCount" value="${ac.acBed }"
 												min="1" max="5" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn bed" id="plus">
@@ -161,7 +162,7 @@
 										</button>
 										<div class="hotelCountInput bathroom">
 											<input type="text" name="acBathRoom" id="bathroomCount"
-												value="1" min="1" max="5" readonly />
+												value="${ac.acBathRoom }" min="1" max="5" readonly />
 										</div>
 										<button type="button" class="hotelCountBtn bathroom" id="plus">
 											<ion-icon name="add-circle-outline"></ion-icon>
@@ -350,11 +351,20 @@
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
-		<button id="deleteRegist">삭제하기</button>
+	<button id="deleteRegist">삭제하기</button>
 	<script>
+	
+	$(document).ready(function(){
+		if($("input[name=acType]").val()=="${ac.acType}"){
+			$(this).prop("checked",true)
+		}
+		
+	})
 		var checkInOutDay = []
+		
+		
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>

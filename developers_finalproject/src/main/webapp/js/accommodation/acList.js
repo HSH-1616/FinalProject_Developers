@@ -7,7 +7,6 @@ $(".like").on("change",function(){
 	var acId=$(this).val();
 	
 	if($(this).is(":checked")){
-		console.log("o")
 		$.ajax({
 			url : "/ac/insertHeart",
 			data :{
@@ -21,7 +20,6 @@ $(".like").on("change",function(){
 			}
 		})
 	}else{
-		console.log("x")
 		$.ajax({
 			url : "/ac/deleteHeart",
 			data :{

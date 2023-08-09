@@ -23,20 +23,43 @@ $(document).on("click", ".detailHotelInfoBtn button", function(e) {
 
 $(document).on("click", "#detailHeart", function(e) {
 	if ($("#detailHeartOn").css("display") == "none") {
-		$("#detailHeartOn").show();
-		$("#detailHeartOff").hide();
-		swal({
-			title: "찜하기에 등록되었습니다!",
-			imageUrl: "../../images/accommodation/heartIcon.png",
-			imageWidth: 200,
-			imageHeight: 200,
-			confirmButtonText: "확인",
-			confirmButtonColor: "#b31312",
-		});
 
+		$.ajax({
+			url: "/ac/insertHeart",
+			data: {
+				memberId: memberId,
+				acId: acId
+			},
+			success: function(result) {
+				if (result > 0) {
+					$("#detailHeartOn").show();
+					$("#detailHeartOff").hide();
+					swal({
+						title: "찜하기에 등록되었습니다!",
+						imageUrl: "../../images/accommodation/heartIcon.png",
+						imageWidth: 200,
+						imageHeight: 200,
+						confirmButtonText: "확인",
+						confirmButtonColor: "#b31312",
+					});
+				}
+			}
+		})
 	} else {
-		$("#detailHeartOn").hide();
-		$("#detailHeartOff").show();
+		$.ajax({
+			url: "/ac/deleteHeart",
+			data: {
+				memberId: memberId,
+				acId: acId
+			},
+			success: function(result) {
+				if (result > 0) {
+					$("#detailHeartOn").hide();
+					$("#detailHeartOff").show();
+				}
+			}
+		})
+
 	}
 });
 
@@ -131,21 +154,21 @@ $(document).on("click", ".detailHotelPeople", function() {
 })
 
 
-$(".detailHotelModal").on("click",function(){
+$(".detailHotelModal").on("click", function() {
 	//$(".searchPeople.detail").hide()
 })
 
 
-function payCheck(){
-	var checkIn=$("#detailHotelCheckIn").val()
-	var checkOut=$("#detailHotelCheckOut").val()
-	var payPeople=$("#payPeople").val()
-	if((checkIn!="날짜추가"||checkIn!="")&&(checkOut!="날짜추가"||checkOut!="")&&payPeople!="인원추가"){
+function payCheck() {
+	var checkIn = $("#detailHotelCheckIn").val()
+	var checkOut = $("#detailHotelCheckOut").val()
+	var payPeople = $("#payPeople").val()
+	if ((checkIn != "날짜추가" || checkIn != "") && (checkOut != "날짜추가" || checkOut != "") && payPeople != "인원추가") {
 		$(".detailHotelBtn").hide();
-		$(".detailHotelBtn.on").css("display","flex");
+		$(".detailHotelBtn.on").css("display", "flex");
 	}
-	if(checkIn=="날짜추가"||checkOut=="날짜추가"||payPeople=="인원추가"){
-		$(".detailHotelBtn").css("display","flex");
+	if (checkIn == "날짜추가" || checkOut == "날짜추가" || payPeople == "인원추가") {
+		$(".detailHotelBtn").css("display", "flex");
 		$(".detailHotelBtn.on").hide();
 	}
 }
@@ -162,7 +185,7 @@ $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
-		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",",""))
+		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",", ""))
 	} else {
 		$(".day").removeClass("last");
 		$("#outDayBtn").hide();
@@ -172,7 +195,7 @@ $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
-		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",",""))
+		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",", ""))
 	}
 	payCheck()
 });
@@ -184,7 +207,7 @@ $(document).ready(function($) {
 		var offset = $(".detailHotelDayCon").offset();
 		$('html, body').animate({ scrollTop: offset.top }, 100);
 	});
-	
+
 	payCheck()
 
 
@@ -210,9 +233,9 @@ function countFn2(type) {
 			}
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-			$("input[name=resultPrice]").val(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",",""))
+			$("input[name=resultPrice]").val(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",", ""))
 		} else {
-			$("#countInfo").text("최소 1명부터 "+$("#maxPeople").val()+"명까지 선택가능 합니다.");
+			$("#countInfo").text("최소 1명부터 " + $("#maxPeople").val() + "명까지 선택가능 합니다.");
 		}
 	} else {
 		if (count > 1) {
@@ -230,9 +253,9 @@ function countFn2(type) {
 			}
 			$("#resultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 			$("#realResultPrice").text(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-			$("input[name=resultPrice]").val(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",",""))
+			$("input[name=resultPrice]").val(String(($("#exPrice1").text().replace(",", "")) * $("#exDay").text()).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",", ""))
 		} else {
-			$("#countInfo").text("최소 1명부터 "+$("#maxPeople").val()+"명까지 선택가능 합니다.");
+			$("#countInfo").text("최소 1명부터 " + $("#maxPeople").val() + "명까지 선택가능 합니다.");
 		}
 	}
 	if (count > 1) {
@@ -241,14 +264,14 @@ function countFn2(type) {
 		$("#peopleBtn button").first().css("color", "#afafaf");
 	}
 	if (count < $("#maxPeople").val()) {
-			$("#peopleBtn button")
-				.last()
-				.css("color", "#b31312");
-		} else {
-			$("#peopleBtn button")
-				.last()
-				.css("color", "#afafaf");
-		}
+		$("#peopleBtn button")
+			.last()
+			.css("color", "#b31312");
+	} else {
+		$("#peopleBtn button")
+			.last()
+			.css("color", "#afafaf");
+	}
 	payCheck()
 }
 // /인원수 함수/
@@ -267,10 +290,10 @@ setTimeout(function() {
 			diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 			$("#exDay").text(diff)
 			$("#resultPrice,#realResultPrice").text(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-			$("input[name=resultPrice]").val(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",",""))
+			$("input[name=resultPrice]").val(String($("#exPrice2").text().replace(",", "") * diff).replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(",", ""))
 		}
 		payCheck()
 	})
-	
+
 }, 100)
 

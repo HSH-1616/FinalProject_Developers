@@ -56,7 +56,7 @@ public class AcPayController {
 		 * Member member = (Member) session.getAttribute("loginMember"); String memberId
 		 * = String.valueOf(member.getMemberId()); param.put("memberId", memberId);
 		 */
-
+		System.out.println(param);
 		return serviceImpl.kakaoPayReady(param);
 	}
 	

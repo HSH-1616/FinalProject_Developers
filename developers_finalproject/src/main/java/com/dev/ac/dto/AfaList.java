@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AfaList {
 	private int afalId;
+	private int afaId;
 	private String afalName;
 	private String afalImg;
 }

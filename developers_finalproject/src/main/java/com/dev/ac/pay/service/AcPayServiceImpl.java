@@ -49,11 +49,11 @@ public class AcPayServiceImpl {
 		//변수
 		String memberId=param.get("memberId");
 		String acTitle=param.get("acTitle");
-		String acPrice=param.get("acPrice");
+		String apPrice=param.get("apPrice");
 		String acId=param.get("acId");
 		String checkIn=param.get("checkIn");
 		String checkOut=param.get("checkOut");
-		String people=param.get("people");
+		String people=param.get("apPeople");
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", cid);
@@ -61,10 +61,10 @@ public class AcPayServiceImpl {
 		params.add("partner_user_id", memberId);
 		params.add("item_name", acTitle);
 		params.add("quantity", "1");
-		params.add("total_amount", acPrice);
+		params.add("total_amount", apPrice);
 		params.add("tax_free_amount", "0");
 		params.add("approval_url", path+"/pay/kakaoPayOk?acId=" + acId + "&checkIn=" + checkIn+ "&memberId=" + memberId
-				+ "&checkOut=" + checkOut + "&apPeople=" + people + "&apPrice=" + acPrice + "&apOrderId=" + orderId);
+				+ "&checkOut=" + checkOut + "&apPeople=" + people + "&apPrice=" + apPrice + "&apOrderId=" + orderId);
 		params.add("cancel_url", path+"/pay/kakaoPayCancel");
 		params.add("fail_url", path+"/pay/kakaoPayFail");
 

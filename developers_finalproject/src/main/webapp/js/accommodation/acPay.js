@@ -105,8 +105,10 @@ $("#hotelPayBtn").on("click", function() {
 			data: JSON.stringify(data),
 			dataType: "json",
 			success: function(data) {
-				//window.open(data.next_redirect_pc_url, "_blank", "width=500, height=700");
 				location.href = data.next_redirect_pc_url
+			},
+			error: function(data) {
+				location.href = "/ac/acError"
 			}
 		})
 	}

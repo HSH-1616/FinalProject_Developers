@@ -68,6 +68,7 @@ $(document).on("click", ".rt", function() {
 	$(this).children(".blurRt").addClass("on");
 	$(this).children(".rtTitle").addClass("on");
 	$(this).children("input").prop("checked", true)
+	console.log($("input[name=acType]:checked").val())
 });
 
 // /숙박업소 유형 체크/
@@ -158,12 +159,13 @@ $(document).on("click", "#holyResult button", function() {
 
 $(document).on("click", ".blurFc", function() {
 	if ($(this).hasClass("on")) {
-		$(this).next().prop("checked", false)
+		$(this).next().val(0);
 		$(this).removeClass("on");
 		$(this).parent().children("p").removeClass("on");
+
 	} else {
 		$(this).addClass("on");
-		$(this).next().prop("checked", true)
+		$(this).next().val(1);
 		$(this).parent().children("p").addClass("on");
 	}
 });
@@ -423,13 +425,23 @@ $("#registOkBtn").on("click", function() {
 		acTitle: $("input[name=acTitle]").val(),
 		acPrice: $("input[name=acPrice]").val(),
 		acAddress: $("input[name=acAddress]").val(),
-		acType: $("input[name=acType]").val(),
+		acType: $("input[name=acType]:checked").val(),
 		acPeople: $("input[name=acPeople]").val(),
 		acRoom: $("input[name=acRoom]").val(),
 		acBed: $("input[name=acBed]").val(),
 		acBathRoom: $("input[name=acBathRoom]").val(),
 		acContent: $("textarea[name=acContent]").val(),
-		arv: checkInOutDay
+		arv: checkInOutDay,
+		afa: {
+			afaCamera: $("input[name=afaCamera]").val(),
+			afaAircon: $("input[name=afaAircon]").val(),
+			afaKitchen: $("input[name=afaKitchen]").val(),
+			afaWifi: $("input[name=afaWifi]").val(),
+			afaWasher: $("input[name=afaWasher]").val(),
+			afaParking: $("input[name=afaParking]").val(),
+		}
+
+
 	}
 
 	const afalImg = [];
@@ -449,7 +461,7 @@ $("#registOkBtn").on("click", function() {
 	$.each(sel_files, function(i, l) {
 		form.append("afImage", l)
 	})
-	
+
 	$.each($("input[name=afMain]"), function(i, l) {
 		form.append("afMain", $(this).val())
 	})
@@ -467,13 +479,34 @@ $("#registOkBtn").on("click", function() {
 	}
 
 	$.ajax({
-		url: "/ac/insertRegist2",
+		url: "/ac/insertRegist",
 		type: "post",
 		data: form,
 		processData: false,
 		contentType: false,
-		success: {
+		success: function(result) {
+			alert("등록완료")
+			location.href = "/"
+		},
+		error: function(result) {
+			location.href = "/ac/acError"
+		}
+	});
+})
 
+$("#deleteRegist").on("click", function() {
+	$.ajax({
+		url: "/ac/deleteRegist",
+		type: "get",
+		data: { acId: 40 },
+		success: function(result) {
+			if (result > 0) {
+				alert("삭제완료")
+				location.href = "/"
+			}
+		},
+		error: function() {
+			location.href = "/ac/acError"
 		}
 	});
 })

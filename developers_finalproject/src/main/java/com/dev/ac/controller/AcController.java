@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,15 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
-import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 import com.dev.ac.service.AcService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RequestMapping("/ac")
@@ -68,6 +66,7 @@ public class AcController {
 	@GetMapping("/acDetail")
 	public String acDetail(int no, Model m) {
 		m.addAttribute("ad", service.acDetail(no));
+		m.addAttribute("ah", service.acHeart(no));
 		return "/accommodation/acDetail";
 	}
 
@@ -104,7 +103,7 @@ public class AcController {
 				checkPrice += 20000;
 			}
 		}
-
+		System.out.println(resultPrice);
 		// db가격과 비교
 		if (checkPrice * diffDays == resultPrice) {
 			m.addAttribute("checkIn", checkIn);
@@ -188,83 +187,15 @@ public class AcController {
 
 	@GetMapping("/acRegist")
 	public String acRegist() {
-
 		return "/accommodation/acRegist";
 	}
 
 	@PostMapping("/insertRegist")
-	public String insertRegist(String[] checkIn, String[] checkOut, Accommodation ac, AcFacilities afa,
-			String[] afalName, MultipartFile[] afImage, MultipartFile[] afalImage, HttpSession session) {
-
-		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
-		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
-		List<AcReservation> arv = new ArrayList();
-		if (checkIn != null && checkOut != null) {
-			for (int i = 0; i < checkIn.length; i++) {
-				System.out.println(checkIn[i]);
-				java.sql.Date checkInDate = java.sql.Date.valueOf(checkIn[i]);
-				java.sql.Date checkOutDate = java.sql.Date.valueOf(checkOut[i]);
-				arv.add(AcReservation.builder().checkIn(checkInDate).checkOut(checkOutDate).build());
-				ac.setArv(arv);
-			}
-		}
-
-		if (afImage != null) {
-			for (MultipartFile mf : afImage) {
-				if (!mf.isEmpty()) {
-					String oriName = mf.getOriginalFilename();
-					String ext = oriName.substring(oriName.lastIndexOf("."));
-					Date today = new Date(System.currentTimeMillis());
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-					int rdn = (int) (Math.random() * 10000) + 1;
-					String rename = "ac" + sdf.format(today) + "_" + rdn + ext;
-
-					try {
-						mf.transferTo(new File(acPath + rename));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-					AcFile file = AcFile.builder().afName(rename).build();
-					System.out.println(file);
-					ac.getAcFiles().add(file);
-				}
-			}
-		}
-		System.out.println(afalImage);
-		if (afalImage != null && afalName != null) {
-			for (int i = 0; i < afalImage.length; i++) {
-				String oriName = afalImage[i].getOriginalFilename();
-				String ext = oriName.substring(oriName.lastIndexOf("."));
-				Date today = new Date(System.currentTimeMillis());
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-				int rdn = (int) (Math.random() * 10000) + 1;
-				String rename = "afa" + sdf.format(today) + "_" + rdn + ext;
-
-				try {
-					afalImage[i].transferTo(new File(afaPath + rename));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				AfaList file = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
-				System.out.println(file);
-				afa.getAfal().add(file);
-			}
-		}
-
-		ac.setAfa(afa);
-		System.out.println(ac);
-
-		return "/";
-	}
-
-	@PostMapping("/insertRegist2")
 	@ResponseBody
-	public String insertRegist2(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session,
+	public int insertRegist(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session,
 			String[] afalName, String[] afMain) {
 		Accommodation ac = null;
-		AcFacilities afa = new AcFacilities();
+
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			ac = mapper.readValue(acData, Accommodation.class);
@@ -274,6 +205,7 @@ public class AcController {
 
 		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
 		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
+
 		if (afImage != null && afMain != null) {
 			for (int i = 0; i < afImage.length; i++) {
 				String oriName = afImage[i].getOriginalFilename();
@@ -309,14 +241,50 @@ public class AcController {
 				}
 
 				AfaList file = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
-				afa.getAfal().add(file);
+				ac.getAfa().getAfal().add(file);
 			}
 		}
-		ac.setAfa(afa);
 
-		int result=service.insertAc(ac);
-		
-		return "/";
+		int result = service.insertAc(ac);
+
+		return result;
 	}
 
+	@GetMapping("/deleteRegist")
+	@ResponseBody
+	public int deleteRegist(int acId, HttpSession session) {
+
+		acId = 27;
+		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
+		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
+		List<AcFile> af = service.deleteImage(acId);
+		List<AfaList> afal = service.deleteAfalImage(acId);
+		File file;
+
+		int result = service.deleteAc(acId);
+		if (result > 1) {
+			for (AcFile afImg : af) {
+				file = new File(acPath + afImg.getAfName());
+				file.delete();
+				for (AfaList afalImg : afal) {
+					file = new File(afaPath + afalImg.getAfalImg());
+					file.delete();	
+				}
+			}
+		}
+		return result;
+	}
+	
+	@GetMapping("/updateRegist")
+	public String updateRegist(int acId, HttpSession session,Model m) {
+		Accommodation ac=service.updateRegist(acId);
+		System.out.println(ac);
+		
+		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
+		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
+		
+		m.addAttribute("ac",ac);
+		
+		return "accommodation/acUpdate";
+	}
 }
