@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="${path }/css/accommodation/acRegist.css" />
 <section>
 	<div id="hotelRegistCon">
+	<input type="hidden" name="acId" value="${ac.acId}">
 		<div class="hotelRegist">
 			<div class="registHeader">
 				<button>
@@ -354,6 +355,7 @@
 							편의 시설 추가 <span>*최대 6개 등록가능 *권장 사이즈(240px * 120px)</span>
 						</h5>
 						<div id="insertFcCon">
+						<input type="hidden" name="afaId" value=${ac.afa.afaId }>
 							<c:if test="${not empty ac.afa.afal }">
 								<c:forEach var="afal" items="${ac.afa.afal}" varStatus="i">
 									<div class='insertFcImageCon'>
@@ -389,7 +391,7 @@
 				<div class="registBtnCon">
 					<hr />
 					<div class="registBtn">
-						<button type="button" id="UpdateOkBtn">수정하기</button>
+						<button type="button" id="updateOkBtn">수정하기</button>
 						<button id="registCancelBtn">취소</button>
 					</div>
 				</div>
@@ -514,7 +516,15 @@
 		</c:if>
 		</c:forEach>
 		
-		var afName=[]
+		/* var acFiles=[]
+		<c:forEach var="af" items="${ac.acFiles}">
+
+		acFiles.push({
+			afId : "${af.afId}",
+			afName : "${af.afName}"
+		})
+
+		</c:forEach> */
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>

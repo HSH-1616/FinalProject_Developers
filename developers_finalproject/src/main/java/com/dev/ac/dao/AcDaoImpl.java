@@ -129,7 +129,26 @@ public class AcDaoImpl implements AcDao {
 
 	@Override
 	public List<AcReservation> updateRegistArv(SqlSessionTemplate session, int acId) {
-		// TODO Auto-generated method stub
 		return session.selectList("accommodation.updateRegistArv",acId);
+	}
+
+	@Override
+	public List<AcFile> updateRegistCheckAf(SqlSessionTemplate session, int acId) {
+		return session.selectList("accommodation.updateRegistCheckAf",acId);
+	}
+
+	@Override
+	public int updateRegistDelAf(SqlSessionTemplate session, int acId) {
+		return session.delete("accommodation.updateRegistDelAf",acId);
+	}
+
+	@Override
+	public List<AfaList> updateRegistCheckAfal(SqlSessionTemplate session, int afaId) {
+		return session.selectList("accommodation.updateRegistCheckAfal",afaId);
+	}
+
+	@Override
+	public int updateRegistDelAfal(SqlSessionTemplate session, int afaId) {
+		return session.delete("accommodation.updateRegistDelAfal",afaId);
 	}
 }

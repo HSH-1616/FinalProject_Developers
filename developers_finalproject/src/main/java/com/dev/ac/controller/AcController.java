@@ -29,6 +29,8 @@ import com.dev.ac.service.AcService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kotlin.collections.CollectionSystemProperties;
+
 @RequestMapping("/ac")
 @Controller
 public class AcController {
@@ -269,30 +271,121 @@ public class AcController {
 				file.delete();
 				for (AfaList afalImg : afal) {
 					file = new File(afaPath + afalImg.getAfalImg());
-					file.delete();	
+					file.delete();
 				}
 			}
 		}
 		return result;
 	}
-	
+
 	@GetMapping("/updateRegist")
-	public String updateRegist(int acId, HttpSession session,Model m) {
-		Accommodation ac=service.updateRegist(acId);
-		List<AcReservation> arv=service.updateRegistArv(acId);
-		
-		System.out.println(ac);
-		
-		m.addAttribute("ac",ac);
-		m.addAttribute("arv",arv);
+	public String updateRegist(int acId, HttpSession session, Model m) {
+		Accommodation ac = service.updateRegist(acId);
+		List<AcReservation> arv = service.updateRegistArv(acId);
+
+		m.addAttribute("ac", ac);
+		m.addAttribute("arv", arv);
 		return "accommodation/acUpdate";
 	}
-	
+
 	@PostMapping("/updateAc")
 	@ResponseBody
-	public int updateAc() {
+	public int updateAc(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session,
+			String[] afalName, String[] afMain, String[] afalImgSrc) {
+		Accommodation ac = null;
+		File file;
+
+		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
+		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
+
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			ac = mapper.readValue(acData, Accommodation.class);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		List<AcFile> af = service.updateRegistCheckAf(ac.getAcId());
+		List<AfaList> afal = service.updateRegistCheckAfal(ac.getAfa().getAfaId());
+
+		// db에 일치하지 않는 파일만 지우고 db는 다지움
+		// 새로운 list를 만들어서 파일이름이랑 mainType 집어넣는다. 기존에 있던 파일은 이름만 넣어도 상관없음
+		for (int i = 0; i < af.size(); i++) {
+
+			for (int j = 0; j < ac.getAcFiles().size(); j++) {
+				if (af.get(i).getAfName().equals(ac.getAcFiles().get(j).getAfName())) {
+					af.remove(i);
+				}
+			}
+		}
+		for (AcFile afImg : af) {
+			file = new File(acPath + afImg.getAfName());
+			if (file.delete()) {
+				// service.updateRegistDelAf(ac.getAcId());
+			}
+		}
+
+		for (int i = 0; i < afal.size(); i++) {
+			for (int j = 0; j < afalImgSrc.length; j++) {
+				if (afal.get(i).getAfalImg().equals(afalImgSrc[j])) {
+					afal.remove(i);
+				}
+			}
+		}
+		for (AfaList afalImage : afal) {
+			file = new File(afaPath + afalImage.getAfalImg());
+			if (file.delete()) {
+				// service.updateRegistDelAfal(ac.getAfa().getAfaId());
+			}
+		}
 		
+		List<AcFile> acFile=(List<AcFile>) new AcFile();
+		for(int i=0;i<ac.getAcFiles().size();i++) {
+			acFile.add(null) 
+		}
+		
+
+		if (afImage != null && afMain != null) {
+			for (int i = 0; i < afImage.length; i++) {
+				String oriName = afImage[i].getOriginalFilename();
+				String ext = oriName.substring(oriName.lastIndexOf("."));
+				Date today = new Date(System.currentTimeMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rdn = (int) (Math.random() * 10000) + 1;
+				String rename = "ac" + sdf.format(today) + "_" + rdn + ext;
+
+				try {
+					afImage[i].transferTo(new File(acPath + rename));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				AcFile files = AcFile.builder().afName(rename).afMain(afMain[i].charAt(0)).build();
+				ac.getAcFiles().add(files);
+			}
+		}
+
+		if (afalImg != null && afalName != null) {
+			for (int i = 0; i < afalImg.length; i++) {
+				String oriName = afalImg[i].getOriginalFilename();
+				String ext = oriName.substring(oriName.lastIndexOf("."));
+				Date today = new Date(System.currentTimeMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rdn = (int) (Math.random() * 10000) + 1;
+				String rename = "afa" + sdf.format(today) + "_" + rdn + ext;
+
+				try {
+					afalImg[i].transferTo(new File(afaPath + rename));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				AfaList files = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
+				ac.getAfa().getAfal().add(files);
+			}
+		}
+
+		System.out.println(ac);
 		return 0;
 	}
-	
+
 }

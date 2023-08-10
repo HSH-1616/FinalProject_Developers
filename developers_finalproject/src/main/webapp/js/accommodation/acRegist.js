@@ -398,7 +398,7 @@ function handleImgsFiles(e) {
 
 }
 
-$(".blurPreview").on("click", function() {
+$(document).on("click",".blurPreview", function() {
 	$(".mainCheck").hide()
 	$("input[name=afMain]").val("N")
 	$(this).next().css("display", "flex");
@@ -506,10 +506,18 @@ $("#registOkBtn").on("click", function() {
 	
 })
 
-
+var acFiles=[]
 $("#updateOkBtn").on("click", function() {
 
+$(".previewImg").each(function(i,l){
+
+	acFiles.push({
+		afName : $(this).attr("src").replace("/images/upload/accommodation/","")
+	})
+})
+
 	acData = {
+		acId:$("input[name=acId]").val(),
 		acTitle: $("input[name=acTitle]").val(),//update
 		acPrice: $("input[name=acPrice]").val(),//update
 		acAddress: $("input[name=acAddress]").val(),//update
@@ -520,7 +528,9 @@ $("#updateOkBtn").on("click", function() {
 		acBathRoom: $("input[name=acBathRoom]").val(),//update
 		acContent: $("textarea[name=acContent]").val(),//update
 		arv: checkHolyDay,
+		acFiles:acFiles,
 		afa: {
+			afaId : $("input[name=afaId]").val(),//update
 			afaCamera: $("input[name=afaCamera]").val(),//update
 			afaAircon: $("input[name=afaAircon]").val(),//update
 			afaKitchen: $("input[name=afaKitchen]").val(),//update
@@ -557,7 +567,11 @@ $("#updateOkBtn").on("click", function() {
 	$.each(afalImg, function(i, l) {
 		form.append("afalImg", l)
 	})
-
+	
+	$.each($(".insertFcImg"), function(i, l) {
+		form.append("afalImgSrc", $(this).attr("src").replace("/images/upload/accommodation/afal/",""))
+	})
+	
 	$.each($("input[name=afalName]"), function(i, l) {
 		form.append("afalName", $(this).val())
 	})
@@ -569,14 +583,14 @@ $("#updateOkBtn").on("click", function() {
 
 
 	$.ajax({
-		url: "/ac/updateRegist",
+		url: "/ac/updateAc",
 		type: "post",
 		data: form,
 		processData: false,
 		contentType: false,
 		success: function(result) {
-			alert("수정완료")
-			location.href = "/"
+			/*alert("수정완료")
+			location.href = "/"*/
 		},
 		error: function(result) {
 			location.href = "/ac/acError"

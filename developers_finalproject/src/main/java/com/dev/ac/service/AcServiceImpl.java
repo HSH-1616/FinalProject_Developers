@@ -149,6 +149,27 @@ public class AcServiceImpl implements AcService {
 	public List<AcReservation> updateRegistArv(int acId) {
 		return dao.updateRegistArv(session,acId);
 	}
+
+	@Override
+	public List<AcFile> updateRegistCheckAf(int acId) {
+		return dao.updateRegistCheckAf(session,acId);
+	}
+
+	@Override
+	public int updateRegistDelAf(int acId) {
+		return dao.updateRegistDelAf(session,acId);
+	}
+
+	@Override
+	public List<AfaList> updateRegistCheckAfal(int afaId) {
+		return dao.updateRegistCheckAfal(session,afaId);
+	}
+
+	@Override
+	public int updateRegistDelAfal(int afaId) {
+		return dao.updateRegistDelAfal(session,afaId);
+	}
+	
 	
 
 

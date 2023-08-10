@@ -45,4 +45,12 @@ public interface AcService {
 	Accommodation updateRegist(int acId);
 	
 	List<AcReservation> updateRegistArv(int acId);
+	
+	List<AcFile> updateRegistCheckAf(int acId);
+	
+	int updateRegistDelAf(int acId);
+	
+	List<AfaList> updateRegistCheckAfal(int afaId);
+	
+	int updateRegistDelAfal(int afaId);
 }
