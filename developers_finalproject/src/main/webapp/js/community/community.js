@@ -159,6 +159,7 @@ const replyList=()=>{
 		data: {communityNo:communityNo},
 		success:(data)=>{
 			console.log(data);
+			$(".comments").empty();
 			for(const i of data){
 				if(i.replyLevel==0){
 					let str="";
@@ -173,20 +174,43 @@ const replyList=()=>{
 					str+="</div>";
 					str+="</div>";
 					str+="<div class='text-end mb-3 p-2'>";
-					str+="<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies' role='button'"
+					str+="<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies"+i.replyNo+"' role='button'"
 					+"aria-expanded='false' aria-controls='collapseComment'> 댓글쓰기 </a>";
 					str+="</div>";
 					str+="</div>";
-					str+="<div class='collapse mt-3' id='inputReplies'>";
+					str+="<div class='collapse mt-3' id='inputReplies"+i.replyNo+"'>";
 					str+="<div class='card card-body'>";
 					str+="<input type='text' id='comment_input'>";
 					str+="<input type='hidden' value="+i.replyNo+">";
 					str+="<button class='w-btn w-btn-blue insertReplies'>등록</button>";
 					str+="</div>";
+					str+="</div>";
+					str+="</div>";
 					
-
+					
 					$(".comments").append(str);
 		
+				}else{
+					let str="";
+					str+="<div class='comment'>";
+					str+="<div class='comment_detail'>";
+					str+="<div class='comment_user'>";
+					str+="<span>"+i.memberId.memberNickname+"</span>";
+					str+="</div>";
+					str+="<div class='comment_body'>";
+					str+="<span>"+i.replyContent+"</span>";
+					str+="</div>";
+					str+="</div>";
+					str+="</div>";
+					str+="<div class='text-end mb-3 p-2'>";
+				
+					str+="</div>";
+					str+="</div>";
+				
+					str+="</div>";
+					
+					
+					$(".comments").append(str);
 				}
 			}
 			
