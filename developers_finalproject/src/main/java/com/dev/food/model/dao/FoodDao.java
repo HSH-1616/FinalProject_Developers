@@ -6,8 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dev.food.model.dto.Food;
-
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodDao {
@@ -44,4 +45,8 @@ public interface FoodDao {
 	
 
 	String searchByFoodNo(SqlSession session,int foodNo);
+	
+	int insertFoodReview(SqlSession session,FoodReview fr);
+	
+	int insertFoodReviewPhoto(SqlSession session,FoodReviewPhoto rp);
 }

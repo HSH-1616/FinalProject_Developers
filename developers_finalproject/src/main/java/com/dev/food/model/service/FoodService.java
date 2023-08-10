@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.dev.food.model.dto.Food;
-import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodService {
@@ -39,5 +39,7 @@ public interface FoodService {
 	/* List<Food> getSortedFoods(String sortFilter,int cPage, int numPerpage); */
 
 	List<Food> searchFood(Map<String, Object> params,Map<String, Object>paging);
+	
+	int insertFoodReview(FoodReview fr);
 	
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 @Repository
@@ -108,6 +110,16 @@ public class FoodDaoImpl implements FoodDao {
 	public List<Food> selectPage(SqlSession session, int cPage, int numPerpage) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public int insertFoodReview(SqlSession session, FoodReview fr) {
+		return session.insert("food.insertFoodReview",fr);
+	}
+	
+	@Override
+	public int insertFoodReviewPhoto(SqlSession session, FoodReviewPhoto rp) {
+		return session.insert("food.insertFoodReviewPhoto",rp);
 	}
 	
 }

@@ -153,9 +153,10 @@
          <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                <div class="headerLine"></div>
-               <form action="/insertFoodReview" method="post" enctype="multipart/form-data" class="modelForm">
+               <div class="modalForm">
+               <!-- <form action="${path }/food/insertFoodReview.do" method="post" enctype="multipart/form-data" class="modalForm"> -->
                <input type="hidden" name="foodNo" value="${f.foodNo}">
-               <input type="hidden" name="memberId" value="">
+               <input type="hidden" name="memberId" value="${loginMember.memberId}">
                <div class="modal-header p-4">
                   <div class="row">
                      <h3 class="modal-title p-0 w-auto" id="reviewModalLabel">${f.foodName }</h3>
@@ -182,7 +183,7 @@
                   <div class="custom-file pl-5 pr-5 mx-3 mt-4 mb-4 d-flex flex-row justify-content-between">
                      <span class="input_file_container row"> <span
                         class="col-lg-8 ">
-                           <input type="file" name="rpName" class="form-control review_File insertFlag"
+                           <input type="file" id="upFile" name="Files" class="form-control review_File insertFlag"
                            accept="image/*" onchange="setThumbnail(event);" multiple>
                      </span> 
                      <!-- 파일을 업로드 해야지만 전체삭제 옵션 활성화 --> 
@@ -191,7 +192,8 @@
                      <button type="submit" class="yoonBtn btnColorRed submitModal"></button>
                   </div>
                   <div class="image_container insertFood"></div>
-               </form>
+               <!-- </form> -->
+               </div>
             </div>
          </div>
       </div>
@@ -367,6 +369,77 @@
             }
          } 
       });
+
+      //ajax 통신
+      // $(document).ready(function(){
+      //    $(".submitModal").click(ajaxInsertReview);
+      // });
+
+      // const starRating = $('input[name="frGrade"]').val() / 2;
+      // console.log(starRating);
+      // const data = {
+      //    foodNo:"${f.foodNo}",
+      //    memberId:"${loginMember.memberId}",
+      //    frGrade:starRating,
+      //    frContent:$("#FR_CONTENT").val(),
+      //    upFile:$(".upFile").val()
+      // }
+
+      // var formData = new FormData($(".modalForm")[0]);
+      // $.ajax({
+      //    url:"${path}/food/insertFoodReview.do",
+      //    type:"post",
+      //    enctype: "multipart/form-data",
+      //    processData: false,
+      //    contentType: false,
+      //    cache: false,
+      //    data: formData,
+      //    //data:JSON.stringify(data),
+      //    contentType:"application/json;charset=utf-8",
+      //    success:data=>{
+      //       console.log(data);
+      //    }
+      // })
+
+      $(".submitModal").click(e=>{
+			//js가 제공하는 FormData클래스를 이용함
+			const form=new FormData();
+			//append로 서버에 전송할 데이터를 넣을 수 있음
+			//key-value형식으로 저장
+			const fileInput=$("#upFile");
+			//console.log(fileInput[0].files);
+			$.each(fileInput[0].files,(i,f)=>{
+				form.append("upFile",f);
+            console.log(form);
+			});
+			form.append("foodNo","${f.foodNo}");
+         form.append("memberId","${loginMember.memberId}");
+         form.append("frGrade",$('input[name="frGrade"]').val()/2);
+         form.append("frContent",$("#FR_CONTENT").val());
+			//form.append : FormData클래스에 append를 이용하여 파일을 넣는 것이 가능하다.
+			//form.append("name","유병승")하는 이유? : ==================================
+			$.ajax({
+				url:"${path}/food/insertFoodReview.do",
+				data:form,
+				type:"post",
+            enctype: "multipart/form-data",
+				processData:false,
+				contentType:false,
+            cache: false,
+				success:data=>{
+					alert("업로드가 완료되었습니다.");
+               location.reload();
+               $('window').scrollTop(0,300);
+				},
+				error:(r,s,e)=>{
+					console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
+               alert("업로드 실패");
+				},
+				complete:()=>{
+					$(".upFile").val('');
+				}
+			});
+		});
    </script>
 
 </section>

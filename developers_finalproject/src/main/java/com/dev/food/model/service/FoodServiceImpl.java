@@ -11,6 +11,8 @@ import com.dev.food.model.dao.FoodDao;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 @Service
@@ -109,6 +111,22 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public String searchByFoodNo(int foodNo) {
 		return dao.searchByFoodNo(session,foodNo);
+	}
+	
+	@Override
+	public int insertFoodReview(FoodReview fr) {
+		int result = dao.insertFoodReview(session,fr);
+		if(result>0) {
+			if(fr.getFoodReviewPhoto().size()>0) {
+				for(FoodReviewPhoto rp:fr.getFoodReviewPhoto()) {
+					rp.setFrNo(fr.getFrNo());
+					result+=dao.insertFoodReviewPhoto(session,rp);
+				}
+			}
+		}
+		//트렌젝션 처리
+		if(result!=fr.getFoodReviewPhoto().size()+1)throw new RuntimeException("업로드의 문제가 발생했습니다.");
+		return result;
 	}
 	
 }

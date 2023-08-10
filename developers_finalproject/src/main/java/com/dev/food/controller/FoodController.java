@@ -1,15 +1,20 @@
 package com.dev.food.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +23,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
 import com.google.gson.Gson;
@@ -341,16 +349,54 @@ public class FoodController {
 		}
 	}
 	
-	@PostMapping("/insertFoodReview")
-	public String insertFoodReview(FoodReview review) {
+	@PostMapping("/insertFoodReview.do")
+	@ResponseBody
+	public String insertFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
 		
-		int result = service.insertFoodReview(review);
-		if(result > 0) {
-			System.out.println("등록성공");
-		}else {
-			System.out.println("등록실패");
+		//파일을 저장할경로 가져오기
+		String path = session.getServletContext().getRealPath("/images/upload/food/");
+		System.out.println("path : "+path);
+		System.out.println("upFile : "+upFile);
+		//파일 업로드+dto에 추가
+		if(upFile!=null) {
+			for(MultipartFile mf:upFile) {
+				if(!mf.isEmpty()) {
+					//원래이름 + 개명된 이름 설정
+					String rpName = mf.getOriginalFilename();
+					String ext = rpName.substring(rpName.lastIndexOf("."));
+					Date today = new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn = (int)(Math.random()*10000)+1;
+					String rename = sdf.format(today)+"_"+rdn+ext;
+					
+					try {
+						mf.transferTo(new File(path+rename));				
+					}catch(IOException e) {
+						e.printStackTrace();
+					}
+	
+					FoodReviewPhoto rp = FoodReviewPhoto.builder()
+							.rpName(rpName)
+							.rpRename(rename)
+							.build();
+					System.out.println("photo : "+rp);
+					fr.getFoodReviewPhoto().add(rp);
+				}
+			}
 		}
-		return "views/food/foodDetail";
+		try {
+			service.insertFoodReview(fr);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			//실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이 필요하다.
+			for(FoodReviewPhoto p : fr.getFoodReviewPhoto()) {
+				File delFile=new File(path+p.getRpRename());
+				delFile.delete();
+			}
+			
+		}
+		
+		return "redirect:/views/food/foodDetail";
 	}
 	
 }

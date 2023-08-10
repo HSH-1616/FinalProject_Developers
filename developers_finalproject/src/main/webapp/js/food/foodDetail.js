@@ -23,7 +23,7 @@ function insertModal() {
 	$(".review_rating").css("width", 0 + "%");
 	$(".star_rating h5").text(0 + "/5");
 	// 값 변경하기
-	$(".modelForm").attr("action","/food/insertReview");
+	//$(".modalForm").attr("action","/food/insertFoodReview.do");
 	$(".submitModal").text("리뷰 올리기");
 }
 
@@ -36,7 +36,7 @@ function updateModal() {
 	//DB에서 가져오기
 
 	// 값 변경하기
-	$(".modelForm").attr("action","/food/updateReview");
+	//$(".modalForm").attr("action","/food/updateFoodReview.do");
 	$(".submitModal").text("리뷰 수정하기");
 }
 
@@ -64,7 +64,7 @@ function setThumbnail(event) {
 		// $('.deleteAllImg').on("click", fileDeleteAll(event));
 	} else {
 		alert("선택한 파일이 " + event.target.files.length + "개 입니다. 사진을 5개까지 줄여주세요.");
-		fileDeleteAll(event);
+		$('.review_File').val('');
 	}
 }
 
@@ -88,6 +88,7 @@ const drawStar = (target) => {
 	// }
 }
 
+//리뷰 더보기 버튼
 $(document).on("click", ".detailFoodInfoBtn button", function(e) {
 	// console.log("start");
 	if ($(".detailFoodInfoCon pre").height() == 100) {
