@@ -25,17 +25,6 @@
 					</select>
 				</div>	        
 			</div>
-<%-- 			<div class="dropdown mb-2">
-		  	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-		    	회원분류
-		  	</button>
-			 	<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-				 	<li><a class="dropdown-item" href="${path}/admin/selectMemberAll">전체회원</a></li>
-				    <li><a class="dropdown-item" href="${path}/admin/selectBySocial?memberCategory=K">카카오회원</a></li>
-				    <li><a class="dropdown-item" href="${path}/admin/selectBySocial?memberCategory=N">네이버회원</a></li>
-				    <li><a class="dropdown-item" href="${path}/admin/selectBySocial?memberCategory=G">구글회원</a></li>
-			  	</ul>
-			</div> --%>
 	        <div class="col">
 	            <table class="table bg-white rounded shadow-sm table-hover text-center align-middle">
 	                <thead>
@@ -144,15 +133,15 @@
 	<script>
 	const selectMember=()=>{
 		let index = $("#m-selectMember option").index($("#m-selectMember option:selected"));
-		let memberSt=$("#m-selectMember").val();
+		let memberCategory=$("#m-selectMember").val();
 		if(index==0){
 			location.replace('${path}/admin/selectMemberAll');
 		}else if(index==1){
-			location.assign('${path}/admin/selectBySocial?memberCategory=K');
+			location.assign('${path}/admin/selectBySocial?memberCategory='+memberCategory);
 		}else if(index==2){
-			location.assign('${path}/admin/selectBySocial?memberCategory=N');
+			location.assign('${path}/admin/selectBySocial?memberCategory='+memberCategory);
 		}else if(index==3){
-			location.assign('${path}/admin/selectBySocial?memberCategory=G');
+			location.assign('${path}/admin/selectBySocial?memberCategory='+memberCategory);
 		}
 	};
 	function black(memberId){

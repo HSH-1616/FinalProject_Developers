@@ -18,10 +18,11 @@ import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
+import com.dev.touris.model.vo.Touris;
 
 
 @Controller
-@SessionAttributes({"memberId"})
+@SessionAttributes({"memberId","loginAdmin"})
 @RequestMapping("/admin")
 public class AdminController {
 	
@@ -44,6 +45,7 @@ public class AdminController {
 		Admin a=service.adminLogin(param);
 		System.out.println(a);
 		if(a!=null) {
+			m.addAttribute("loginAdmin",a);
 			return "redirect:/admin/adminMain";
 		}else {
 			return "admin/loginadmin";			
@@ -102,5 +104,52 @@ public class AdminController {
 		m.addAttribute("memberCategory",memberCategory);
 		return "admin/memberList";
 	}
-	
+	@GetMapping("/selectTourisAll")
+	public String selectTourisAll(@RequestParam(value="cPage",defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage,Model m){
+		Map<String,Object> param=new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		Map<String,Object> type=new HashMap<>();
+		List<Touris> tourises=service.selectTourisAll(param);
+		int totalData=service.selectTourisAllCount();
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectTourisAll",type));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("tourises",tourises);
+		return "admin/tourisList";
+	}
+	@GetMapping("/searchTouris")
+	public String searchTouris(@RequestParam(value="cPage",defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, @RequestParam Map data, Model m) {
+		Map<String,Object> param=new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		param.put("tourisName", data.get("tourisName"));
+		Map<String,Object> type=new HashMap<>();
+		type.put("typeId", "tourisName");
+		type.put("value", data.get("tourisName"));
+		List<Touris> tourises=service.searchTouris(param);
+		int totalData=service.searchTourisCount(param);
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"searchTouris",type));
+		m.addAttribute("tourises",tourises);
+		m.addAttribute("tourisName",data.get("tourisName"));
+		return "admin/tourisList";
+	}
+	@GetMapping("/selectBytourisAreaId")
+	public String selectBytourisAreaId(@RequestParam(value="cPage",defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, @RequestParam Map data, Model m) {
+		Map<String,Object> param=new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		param.put("tourisAreaId", data.get("tourisAreaId"));
+		Map<String,Object> type=new HashMap<>();
+		type.put("typeId", "tourisAreaId");
+		type.put("value", data.get("tourisAreaId"));
+		List<Touris> tourises=service.selectBytourisAreaId(param);
+		int totalData=service.selectBytourisAreaIdCount(param);
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectBytourisAreaId",type));
+		m.addAttribute("tourises",tourises);
+		m.addAttribute("tourisAreaId",data.get("tourisAreaId"));
+		return "admin/tourisList";
+	}
 }

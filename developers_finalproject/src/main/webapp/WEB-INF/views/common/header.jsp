@@ -58,15 +58,20 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a>
 					</li>
-				<c:if test="${empty loginMember }">
+				<c:if test="${empty loginMember && empty loginAdmin }">
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" id="btn-modal">Login</a></li>
 				</c:if>
-				<c:if test="${not empty loginMember }">
+				<c:if test="${not empty loginMember || not empty loginAdmin}">
 					<li class="nav-item"><a class="nav-link active" href="${path }/member/logout">LogOut</a>
 					</li>
 				</c:if>
+				<c:if test="${not empty loginMember}">
 					<li class="nav-item"><a class="nav-link" href="">MyPage</a></li>
+				</c:if>
+				<c:if test="${empty loginMember && not empty loginAdmin }">
+					<li class="nav-item"><a class="nav-link" href="${path }/admin/adminMain">AdminPage</a></li>
+				</c:if>
 				</ul>
 			</div>
 
