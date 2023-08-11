@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
@@ -29,10 +29,11 @@ import com.dev.ac.service.AcService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kotlin.collections.CollectionSystemProperties;
+import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/ac")
 @Controller
+@Slf4j
 public class AcController {
 
 	private AcService service;
@@ -282,19 +283,25 @@ public class AcController {
 	public String updateRegist(int acId, HttpSession session, Model m) {
 		Accommodation ac = service.updateRegist(acId);
 		List<AcReservation> arv = service.updateRegistArv(acId);
-
+		AcFacilities afa = service.updateRegistAfa(acId);
+		List<AcFile> af = service.updateRegistAf(acId);
+		List<AfaList> afal = service.updateRegistAfal(afa.getAfaId());
 		m.addAttribute("ac", ac);
 		m.addAttribute("arv", arv);
+		m.addAttribute("afa", afa);
+		m.addAttribute("afal", afal);
+		m.addAttribute("af", af);
+
 		return "accommodation/acUpdate";
 	}
 
 	@PostMapping("/updateAc")
 	@ResponseBody
-	public int updateAc(String acData, MultipartFile[] afImage, MultipartFile[] afalImg, HttpSession session,
-			String[] afalName, String[] afMain, String[] afalImgSrc) {
-		Accommodation ac = null;
+	public int updateAc(String acData, MultipartFile[] afImage, MultipartFile[] afalImage, HttpSession session,
+			String[] afalName, String[] afMain) {
+		Accommodation ac = null;		
 		File file;
-
+	
 		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
 		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
 
@@ -304,48 +311,42 @@ public class AcController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		System.out.println(ac);
+		
+//		1. 기존파일 이름을 js배열에 집어넣는다.
+//		2. 삭제버튼을 누를시 배열에서 삭제
+//		3. db에서 해당 숙박업소에 파일리스트를 가져온다
+//		4. db와 가져온 배열과 비교해서 일치하지 않는 이름은  리스트에서 삭제 &&파일 삭제&& db전체 삭제
+//		5. 새로 추가한 파일은 mulltifile로 따로 불러온다
+//		6. 새로운 file리스트를 만들어서 db와비교한 리스트와 multifile리스트 추가
+//		7. 메인 배열 file리스트에 추가
 
-		List<AcFile> af = service.updateRegistCheckAf(ac.getAcId());
-		List<AfaList> afal = service.updateRegistCheckAfal(ac.getAfa().getAfaId());
+		// 기존 파일 이름 list
+		log.info("////////////////////////////");
+		log.info("js에서 가져온 list : " + ac.getAcFiles());
+		// db에서 가져온 파일list
+		List<AcFile> afDb = service.updateRegistCheckAf(ac.getAcId());
+		List<String> requestFileName = ac.getAcFiles().stream().map(e -> e.getAfName()).toList();
+		List<AcFile> resultFile = afDb.stream().filter(e -> !requestFileName.contains(e.getAfName())).toList();
 
-		// db에 일치하지 않는 파일만 지우고 db는 다지움
-		// 새로운 list를 만들어서 파일이름이랑 mainType 집어넣는다. 기존에 있던 파일은 이름만 넣어도 상관없음
-		for (int i = 0; i < af.size(); i++) {
-
-			for (int j = 0; j < ac.getAcFiles().size(); j++) {
-				if (af.get(i).getAfName().equals(ac.getAcFiles().get(j).getAfName())) {
-					af.remove(i);
-				}
-			}
-		}
-		for (AcFile afImg : af) {
+		log.info("db와 비교 결과 : " + resultFile);
+		// 파일이 삭제되면 db에서 전체 삭제
+		for (AcFile afImg : resultFile) {
 			file = new File(acPath + afImg.getAfName());
-			if (file.delete()) {
-				// service.updateRegistDelAf(ac.getAcId());
-			}
+			file.delete();
 		}
+		// 새로운 파일리스트를 만든다
+		List<AcFile> acFiles = new ArrayList();
 
-		for (int i = 0; i < afal.size(); i++) {
-			for (int j = 0; j < afalImgSrc.length; j++) {
-				if (afal.get(i).getAfalImg().equals(afalImgSrc[j])) {
-					afal.remove(i);
-				}
-			}
+		// js에서 가져온 리스트를 새로운 리스트에 추가
+		for (int i = 0; i < ac.getAcFiles().size(); i++) {
+			acFiles.add(ac.getAcFiles().get(i));
 		}
-		for (AfaList afalImage : afal) {
-			file = new File(afaPath + afalImage.getAfalImg());
-			if (file.delete()) {
-				// service.updateRegistDelAfal(ac.getAfa().getAfaId());
-			}
-		}
-		
-		List<AcFile> acFile=(List<AcFile>) new AcFile();
-		for(int i=0;i<ac.getAcFiles().size();i++) {
-			acFile.add(null) 
-		}
-		
+		log.info("새로운 리스트에 비교 추가 : " + acFiles);
+		// 새로 추가한 파일 업로드후 새로운 리스트에 추가
 
-		if (afImage != null && afMain != null) {
+		if (afImage != null) {
+			log.info("새로 추가된 파일 : " + afImage.length);
 			for (int i = 0; i < afImage.length; i++) {
 				String oriName = afImage[i].getOriginalFilename();
 				String ext = oriName.substring(oriName.lastIndexOf("."));
@@ -359,14 +360,58 @@ public class AcController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				AcFile files = AcFile.builder().afName(rename).afMain(afMain[i].charAt(0)).build();
-				ac.getAcFiles().add(files);
+				AcFile files = AcFile.builder().afName(rename).build();
+				acFiles.add(files);
 			}
 		}
+		log.info("새로 추가한 파일 추가 : " + acFiles);
 
-		if (afalImg != null && afalName != null) {
-			for (int i = 0; i < afalImg.length; i++) {
-				String oriName = afalImg[i].getOriginalFilename();
+		// mainType 배열을 순서대로 추가 후 accommodation에 세팅
+		if (afMain != null) {
+			for (int i = 0; i < afMain.length; i++) {
+				acFiles.get(i).setAcId(ac.getAcId());
+				acFiles.get(i).setAfMain(afMain[i].charAt(0));
+			}
+		}
+		ac.setAcFiles(acFiles);
+		log.info("메인타입 추가 : " + acFiles);
+		log.info("////////////////////////////");
+
+		///////////////////////////////////////////////////////////////////////////////
+		log.info("js로 불러온 편의시설 : " + ac.getAfa().getAfal());
+		//System.out.println(afalImgSrc.get(0).getAfalImg());
+		// db에서 가져온 list
+		List<AfaList> afalDb = service.updateRegistCheckAfal(ac.getAfa().getAfaId());
+		log.info("db에서 불러온 리스트 :" + afalDb);
+		List<String> requesAfalFileName = ac.getAfa().getAfal().stream().map(e -> e.getAfalImg()).toList();
+		List<AfaList> resultAfalFile = afalDb.stream().filter(e -> !requesAfalFileName.contains(e.getAfalImg()))
+				.toList();
+
+		log.info("db와 비교 결과 : " + resultAfalFile);
+		
+		// db값과 비교한 파일 삭제
+		for (AfaList afalImg : resultAfalFile) {
+			file = new File(afaPath + afalImg.getAfalImg());
+			file.delete();
+		}
+
+		// 새로운 파일리스트와 객체를 만든다
+		List<AfaList> afal = new ArrayList();
+		
+		// js에서 가져온 리스트 새로운 리스트에 추가
+		if (ac.getAfa().getAfal() != null) {
+			for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
+				AfaList afa = AfaList.builder().afaId(ac.getAfa().getAfal().get(i).getAfaId())
+						.afalImg(ac.getAfa().getAfal().get(i).getAfalImg()).afalName(ac.getAfa().getAfal().get(i).getAfalName()).build();
+				afal.add(afa);
+			}
+		}
+		log.info("새로운 리스트에 추가 : " + afal);
+
+		// 업로드 한 파일 추가
+		if (afalImage != null) {
+			for (int i = 0; i < afalImage.length; i++) {
+				String oriName = afalImage[i].getOriginalFilename();
 				String ext = oriName.substring(oriName.lastIndexOf("."));
 				Date today = new Date(System.currentTimeMillis());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
@@ -374,17 +419,28 @@ public class AcController {
 				String rename = "afa" + sdf.format(today) + "_" + rdn + ext;
 
 				try {
-					afalImg[i].transferTo(new File(afaPath + rename));
+					afalImage[i].transferTo(new File(afaPath + rename));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
-				AfaList files = AfaList.builder().afalName(afalName[i]).afalImg(rename).build();
-				ac.getAfa().getAfal().add(files);
+				AfaList files = AfaList.builder().afalImg(rename).build();
+				afal.add(files);
 			}
 		}
+		log.info("업로드 파일 추가 : " + afal);
+		// 편의시설 이름 배열을 순서대로 추가 후 accommodation에 세팅
+		if (afalName!=null) {
+			for (int i = 0; i < afalName.length; i++) {
+				afal.get(i).setAfaId(ac.getAfa().getAfaId());
+				afal.get(i).setAfalName(afalName[i]);
+			}
+		}
+		ac.getAfa().setAfal(afal);
+		log.info("편의시설 이름 추가 : " + afal);
+		log.info("////////////////////////////");
 
-		System.out.println(ac);
+		int result = service.updateAc(ac);
 		return 0;
 	}
 

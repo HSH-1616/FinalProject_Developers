@@ -61,6 +61,12 @@ public interface AcDao {
 	
 	List<AcReservation> updateRegistArv(SqlSessionTemplate session, int acId);
 	
+	AcFacilities updateRegistAfa(SqlSessionTemplate session, int acId);
+	
+	List<AcFile> updateRegistAf(SqlSessionTemplate session, int acId);
+	
+	List<AfaList> updateRegistAfal(SqlSessionTemplate session, int afaId);
+	
 	List<AcFile> updateRegistCheckAf(SqlSessionTemplate session, int acId);
 	
 	int updateRegistDelAf(SqlSessionTemplate session, int acId);
@@ -68,4 +74,16 @@ public interface AcDao {
 	List<AfaList> updateRegistCheckAfal(SqlSessionTemplate session,int afaId);
 	
 	int updateRegistDelAfal(SqlSessionTemplate session, int afaId);
+	
+	int updateAc(SqlSessionTemplate session, Accommodation ac);
+	
+	int updateInAcFile(SqlSessionTemplate session, AcFile af);
+	
+	int updateAfa(SqlSessionTemplate session, AcFacilities afa);
+	
+	int updateInAfal(SqlSessionTemplate session, AfaList afal);
+	
+	int updateDelArv(SqlSessionTemplate session, int acId);
+	
+	int updateInArv(SqlSessionTemplate session, AcReservation arv);
 }

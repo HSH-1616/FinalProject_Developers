@@ -66,7 +66,6 @@ public class AcPayController {
 			) {
 		Member member = (Member) session.getAttribute("loginMember");
 		String memberId = String.valueOf(member.getMemberId());
-
 		KaKaoPayApproval KaKaoPayApproval = serviceImpl.kakaoPayApproval(pgToken, memberId, ap.getApOrderId());
 
 		if (KaKaoPayApproval != null) {

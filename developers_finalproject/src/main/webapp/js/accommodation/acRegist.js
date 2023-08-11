@@ -149,10 +149,10 @@ $(document).on("click", "#holyResult button", function() {
 	for (var i = 0; i < checkHolyDay.length; i++) {
 		if (checkHolyDay[i].checkOut === $(this).prev().val()) {
 			checkHolyDay.splice(i, 1);
-			calender()			
+			calender()
 		}
 	}
-	
+
 })
 
 // /휴무일 체크/
@@ -230,7 +230,7 @@ $(document).on("click", ".insertFc", function() {
 		}
 	}
 
-	
+
 });
 
 $(document).on("click", ".insertFcImage label", function() {
@@ -251,26 +251,32 @@ $(document).on("click", ".insertFcImage label", function() {
 	});
 });
 
-$(document).on("click",".deleteFc",function(e) {
+$(document).on("click", ".deleteFc", function(e) {
 	console.log(2)
-		const copy = $(".insertFc").clone();
-		if ($(".insertFcImageCon").length == 6) {
-			$(this).parents(".insertFcImageCon").remove();
-			$("#insertFcCon").append(copy);
-		} else {
-			$(this).parents(".insertFcImageCon").remove();
-		}
-	});
-
-$(document).on("click",".insertFcDelete",function(e) {
-		const copy = $(".insertFc").clone();
+	const copy = $(".insertFc").clone();
 	if ($(".insertFcImageCon").length == 6) {
 		$(this).parents(".insertFcImageCon").remove();
-			$("#insertFcCon").append(copy);
-		} else {
-			$(this).parents(".insertFcImageCon").remove();
+		$("#insertFcCon").append(copy);
+	} else {
+		$(this).parents(".insertFcImageCon").remove();
+	}
+});
+
+$(document).on("click", ".insertFcDelete", function(e) {
+	const copy = $(".insertFc").clone();
+	if ($(".insertFcImageCon").length == 6) {
+		$(this).parents(".insertFcImageCon").remove();
+		$("#insertFcCon").append(copy);
+	} else {
+		$(this).parents(".insertFcImageCon").remove();
+	}
+
+	for (var i = 0; i < afalImgSrc.length; i++) {
+		if (afalImgSrc[i].afalImg === $(this).parent().prev("img").attr("src").replace("/images/upload/accommodation/afal/", "")) {
+			afalImgSrc.splice(i, 1);
 		}
-	})
+	}
+})
 
 // /편의시설 추가/
 
@@ -389,7 +395,7 @@ function handleImgsFiles(e) {
 				$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
 				$(".previewImgWrap").first().children("input[name=afMain]").val("Y")
 			}
-
+			console.log(sel_files)
 		}
 		reader.readAsDataURL(f)
 	})
@@ -398,7 +404,7 @@ function handleImgsFiles(e) {
 
 }
 
-$(document).on("click",".blurPreview", function() {
+$(document).on("click", ".blurPreview", function() {
 	$(".mainCheck").hide()
 	$("input[name=afMain]").val("N")
 	$(this).next().css("display", "flex");
@@ -415,7 +421,7 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	fileArray.forEach(file => { dataTransfer.items.add(file); });
 	$('input[name=afImage]')[0].files = dataTransfer.files;
 
-	sel_files.splice(num, 1)
+
 
 	if ($(this).parents(".previewImgWrap").children(".mainCheck").css("display") == "flex") {
 		$(this).parents(".previewImgWrap").remove()
@@ -425,6 +431,19 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	} else {
 		$(this).parents(".previewImgWrap").remove()
 	}
+
+	for (var i = 0; i < acFiles.length; i++) {
+		if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
+			acFiles.splice(i, 1);
+		}
+	}
+	for (var i = 0; i < sel_files.length; i++) {
+		if (sel_files[i].name === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
+			sel_files.splice(i, 1)
+		}
+	}
+
+
 });
 
 $("#registOkBtn").on("click", function() {
@@ -502,22 +521,15 @@ $("#registOkBtn").on("click", function() {
 			location.href = "/ac/acError"
 		}
 	});
-	
-	
+
+
 })
 
-var acFiles=[]
 $("#updateOkBtn").on("click", function() {
 
-$(".previewImg").each(function(i,l){
-
-	acFiles.push({
-		afName : $(this).attr("src").replace("/images/upload/accommodation/","")
-	})
-})
-
+	console.log(acFiles)
 	acData = {
-		acId:$("input[name=acId]").val(),
+		acId: $("input[name=acId]").val(),
 		acTitle: $("input[name=acTitle]").val(),//update
 		acPrice: $("input[name=acPrice]").val(),//update
 		acAddress: $("input[name=acAddress]").val(),//update
@@ -528,15 +540,18 @@ $(".previewImg").each(function(i,l){
 		acBathRoom: $("input[name=acBathRoom]").val(),//update
 		acContent: $("textarea[name=acContent]").val(),//update
 		arv: checkHolyDay,
-		acFiles:acFiles,
+		acFiles: acFiles,
 		afa: {
-			afaId : $("input[name=afaId]").val(),//update
+			acId: $("input[name=acId]").val(),
+			afaId: $("input[name=afaId]").val(),//update
 			afaCamera: $("input[name=afaCamera]").val(),//update
 			afaAircon: $("input[name=afaAircon]").val(),//update
 			afaKitchen: $("input[name=afaKitchen]").val(),//update
 			afaWifi: $("input[name=afaWifi]").val(),//update
 			afaWasher: $("input[name=afaWasher]").val(),//update
 			afaParking: $("input[name=afaParking]").val(),//update
+			afal: afalImgSrc
+
 		}
 
 
@@ -565,13 +580,9 @@ $(".previewImg").each(function(i,l){
 	})
 
 	$.each(afalImg, function(i, l) {
-		form.append("afalImg", l)
+		form.append("afalImage", l)
 	})
-	
-	$.each($(".insertFcImg"), function(i, l) {
-		form.append("afalImgSrc", $(this).attr("src").replace("/images/upload/accommodation/afal/",""))
-	})
-	
+
 	$.each($("input[name=afalName]"), function(i, l) {
 		form.append("afalName", $(this).val())
 	})
@@ -592,9 +603,9 @@ $(".previewImg").each(function(i,l){
 			/*alert("수정완료")
 			location.href = "/"*/
 		},
-		error: function(result) {
+		/*error: function(result) {
 			location.href = "/ac/acError"
-		}
+		}*/
 	});
 })
 

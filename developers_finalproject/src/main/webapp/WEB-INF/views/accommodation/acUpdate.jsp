@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="${path }/css/accommodation/acRegist.css" />
 <section>
 	<div id="hotelRegistCon">
-	<input type="hidden" name="acId" value="${ac.acId}">
+		<input type="hidden" name="acId" value="${ac.acId}">
 		<div class="hotelRegist">
 			<div class="registHeader">
 				<button>
@@ -47,33 +47,37 @@
 						<h6>메인 이미지 설정</h6>
 						<hr>
 						<div class="preview" id="preview">
-							<c:forEach var="af" items="${ac.acFiles}">
-								<div class="previewImgWrap">
-									<div class="blurPreview">
-										<img alt="" src="/images/accommodation/checkImage.png">
+							<c:if test="${not empty af}">
+								<c:forEach var="af" items="${af}">
+
+									<div class="previewImgWrap">
+										<div class="blurPreview">
+											<img alt="" src="/images/accommodation/checkImage.png">
+										</div>
+										<c:if test="${fn:contains(af.afMain,'Y')}">
+											<div class="mainCheck" style="display: flex">
+												<div>메인</div>
+											</div>
+											<ion-icon class="deletePreview" name="close-circle-outline"
+												role="img"></ion-icon>
+											<input type="hidden" name="afMain" value="Y">
+											<img class='previewImg'
+												src="${path}/images/upload/accommodation/${af.afName}" />
+										</c:if>
+										<c:if test="${fn:contains(af.afMain,'N')}">
+											<div class="mainCheck">
+												<div>메인</div>
+											</div>
+											<ion-icon class="deletePreview" name="close-circle-outline"
+												role="img"></ion-icon>
+											<input type="hidden" name="afMain" value="N">
+											<img class='previewImg'
+												src="${path}/images/upload/accommodation/${af.afName}" />
+										</c:if>
 									</div>
-									<c:if test="${fn:contains(af.afMain,'Y')}">
-										<div class="mainCheck" style="display: flex">
-											<div>메인</div>
-										</div>
-										<ion-icon class="deletePreview" name="close-circle-outline"
-											role="img"></ion-icon>
-										<input type="hidden" name="afMain" value="Y">
-										<img class='previewImg'
-											src="${path}/images/upload/accommodation/${af.afName}" />
-									</c:if>
-									<c:if test="${fn:contains(af.afMain,'N')}">
-										<div class="mainCheck">
-											<div>메인</div>
-										</div>
-										<ion-icon class="deletePreview" name="close-circle-outline"
-											role="img"></ion-icon>
-										<input type="hidden" name="afMain" value="N">
-										<img class='previewImg'
-											src="${path}/images/upload/accommodation/${af.afName}" />
-									</c:if>
-								</div>
-							</c:forEach>
+
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -354,10 +358,11 @@
 						<h5>
 							편의 시설 추가 <span>*최대 6개 등록가능 *권장 사이즈(240px * 120px)</span>
 						</h5>
+						<input type="hidden" name="afaId" value=${afa.afaId }>
 						<div id="insertFcCon">
-						<input type="hidden" name="afaId" value=${ac.afa.afaId }>
-							<c:if test="${not empty ac.afa.afal }">
-								<c:forEach var="afal" items="${ac.afa.afal}" varStatus="i">
+							<c:if test="${not empty afal }">
+								<c:forEach var="afal" items="${afal}" varStatus="i">
+
 									<div class='insertFcImageCon'>
 										<div class='insertFcImage'>
 											<ion-icon class='deleteFc' name='close-circle-outline'></ion-icon>
@@ -374,9 +379,9 @@
 										<input type='text' id='insertFcName' name='afalName'
 											placeholder='편의시설 이름' value="${afal.afalName }" required />
 									</div>
+
 								</c:forEach>
 							</c:if>
-
 							<div class="insertFc">
 								<div class="insertCon">
 									<ion-icon name="add-sharp"></ion-icon>
@@ -407,32 +412,32 @@
 			$("input[value=${ac.acType}]").nextAll(".blurRt").addClass("on");
 			$("input[value=${ac.acType}]").nextAll(".rtTitle").addClass("on");
 
-			<c:if test="${ac.afa.afaCamera==1}">
+			<c:if test="${afa.afaCamera==1}">
 			$("input[name=afaCamera]").val(1)
 			$("input[name=afaCamera]").prev().addClass("on")
 			$("input[name=afaCamera]").nextAll("p").addClass("on")
 			</c:if>
-			<c:if test="${ac.afa.afaAircon==1}">
+			<c:if test="${afa.afaAircon==1}">
 			$("input[name=afaAircon]").val(1)
 			$("input[name=afaAircon]").prev().addClass("on")
 			$("input[name=afaAircon]").nextAll("p").addClass("on")
 			</c:if>
-			<c:if test="${ac.afa.afaKitchen==1}">
+			<c:if test="${afa.afaKitchen==1}">
 			$("input[name=afaKitchen]").val(1)
 			$("input[name=afaKitchen]").prev().addClass("on")
 			$("input[name=afaKitchen]").nextAll("p").addClass("on")
 			</c:if>
-			<c:if test="${ac.afa.afaWifi==1}">
+			<c:if test="${afa.afaWifi==1}">
 			$("input[name=afaWifi]").val(1)
 			$("input[name=afaWifi]").prev().addClass("on")
 			$("input[name=afaWifi]").nextAll("p").addClass("on")
 			</c:if>
-			<c:if test="${ac.afa.afaWasher==1}">
+			<c:if test="${afa.afaWasher==1}">
 			$("input[name=afaWasher]").val(1)
 			$("input[name=afaWasher]").prev().addClass("on")
 			$("input[name=afaWasher]").nextAll("p").addClass("on")
 			</c:if>
-			<c:if test="${ac.afa.afaParking==1}">
+			<c:if test="${afa.afaParking==1}">
 			$("input[name=afaParking]").val(1)
 			$("input[name=afaParking]").prev().addClass("on")
 			$("input[name=afaParking]").nextAll("p").addClass("on")
@@ -516,15 +521,24 @@
 		</c:if>
 		</c:forEach>
 		
-		/* var acFiles=[]
-		<c:forEach var="af" items="${ac.acFiles}">
+		var acFiles=[]
+		<c:forEach var="af" items="${af}">
 
 		acFiles.push({
 			afId : "${af.afId}",
 			afName : "${af.afName}"
 		})
-
-		</c:forEach> */
+		</c:forEach> 
+		
+		var afalImgSrc=[]
+		<c:forEach var="afal" items="${afal}">
+		afalImgSrc.push({
+			afalId : "0",
+			afaId : "${afa.afaId}",
+			afalName : "${afal.afalName}",
+			afalImg : "${afal.afalImg}"
+		})
+		</c:forEach> 
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>

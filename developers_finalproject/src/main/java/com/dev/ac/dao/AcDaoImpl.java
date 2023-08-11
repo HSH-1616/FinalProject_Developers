@@ -131,7 +131,23 @@ public class AcDaoImpl implements AcDao {
 	public List<AcReservation> updateRegistArv(SqlSessionTemplate session, int acId) {
 		return session.selectList("accommodation.updateRegistArv",acId);
 	}
+	
+	@Override
+	public AcFacilities updateRegistAfa(SqlSessionTemplate session, int acId) {
+		return session.selectOne("accommodation.updateRegistAfa",acId);
+	}
+	
+	@Override
+	public List<AcFile> updateRegistAf(SqlSessionTemplate session, int acId) {
+		return session.selectList("accommodation.updateRegistAf",acId);
+	}
+	
+	@Override
+	public List<AfaList> updateRegistAfal(SqlSessionTemplate session, int afaId) {
+		return session.selectList("accommodation.updateRegistAfal",afaId);
+	}
 
+	
 	@Override
 	public List<AcFile> updateRegistCheckAf(SqlSessionTemplate session, int acId) {
 		return session.selectList("accommodation.updateRegistCheckAf",acId);
@@ -151,4 +167,40 @@ public class AcDaoImpl implements AcDao {
 	public int updateRegistDelAfal(SqlSessionTemplate session, int afaId) {
 		return session.delete("accommodation.updateRegistDelAfal",afaId);
 	}
+
+	@Override
+	public int updateAc(SqlSessionTemplate session, Accommodation ac) {
+		return session.update("accommodation.updateAc",ac);
+	}
+
+	@Override
+	public int updateInAcFile(SqlSessionTemplate session, AcFile af) {
+		return session.insert("accommodation.updateInAcFile",af);
+	}
+
+	@Override
+	public int updateAfa(SqlSessionTemplate session, AcFacilities afa) {
+		return session.update("accommodation.updateAfa",afa);
+	}
+
+	@Override
+	public int updateInAfal(SqlSessionTemplate session, AfaList afal) {
+		return session.insert("accommodation.updateInAfal",afal);
+	}
+
+	@Override
+	public int updateDelArv(SqlSessionTemplate session, int acId) {
+		return session.delete("accommodation.updateDelArv",acId);
+	}
+
+	@Override
+	public int updateInArv(SqlSessionTemplate session, AcReservation arv) {
+		return session.insert("accommodation.updateInArv",arv);
+	}
+
+	
+
+	
+	
+	
 }

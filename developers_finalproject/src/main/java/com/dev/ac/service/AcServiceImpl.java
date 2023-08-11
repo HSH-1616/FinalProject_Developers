@@ -18,7 +18,10 @@ import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class AcServiceImpl implements AcService {
 
 	@Autowired
@@ -41,12 +44,12 @@ public class AcServiceImpl implements AcService {
 	public Accommodation acDetail(int no) {
 		return dao.acDetail(session, no);
 	}
-	
+
 	@Override
 	public List<AcHeart> acHeart(int no) {
-		return dao.acHeart(session,no);
+		return dao.acHeart(session, no);
 	}
-	
+
 	@Override
 	public Accommodation acPay(int no) {
 		return dao.acPay(session, no);
@@ -113,7 +116,7 @@ public class AcServiceImpl implements AcService {
 					result += dao.insertAfal(session, ac.getAfa().getAfal().get(i));
 				}
 			}
-			if (result == ac.getAcFiles().size()+ac.getAfa().getAfal().size()+ 2) {
+			if (result == ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 2) {
 				for (int i = 0; i < ac.getArv().size(); i++) {
 					ac.getArv().get(i).setAcId(ac.getAcId());
 					result += dao.insertArv(session, ac.getArv().get(i));
@@ -124,54 +127,120 @@ public class AcServiceImpl implements AcService {
 	}
 
 	@Override
-	public List<AcFile>  deleteImage(int acId) {
-		return dao.deleteImage(session,acId);
+	public List<AcFile> deleteImage(int acId) {
+		return dao.deleteImage(session, acId);
 	}
 
 	@Override
 	public List<AfaList> deleteAfalImage(int acId) {
-		AcFacilities afa=dao.deleteAfa(session, acId);
-		int afaId=afa.getAfaId();
-		return dao.deleteAfalImage(session,afaId);
+		AcFacilities afa = dao.deleteAfa(session, acId);
+		int afaId = afa.getAfaId();
+		return dao.deleteAfalImage(session, afaId);
 	}
 
 	@Override
 	public int deleteAc(int acId) {
-		return dao.deleteAc(session,acId);
+		return dao.deleteAc(session, acId);
 	}
 
 	@Override
 	public Accommodation updateRegist(int acId) {
-		return dao.updateRegist(session,acId);
+		return dao.updateRegist(session, acId);
 	}
 
 	@Override
 	public List<AcReservation> updateRegistArv(int acId) {
-		return dao.updateRegistArv(session,acId);
+		return dao.updateRegistArv(session, acId);
+	}
+
+	@Override
+	public AcFacilities updateRegistAfa(int acId) {
+		return dao.updateRegistAfa(session, acId);
+	}
+
+	@Override
+	public List<AcFile> updateRegistAf(int acId) {
+		return dao.updateRegistAf(session, acId);
+	}
+
+	@Override
+	public List<AfaList> updateRegistAfal(int afaId) {
+		return dao.updateRegistAfal(session, afaId);
 	}
 
 	@Override
 	public List<AcFile> updateRegistCheckAf(int acId) {
-		return dao.updateRegistCheckAf(session,acId);
+		return dao.updateRegistCheckAf(session, acId);
 	}
 
 	@Override
 	public int updateRegistDelAf(int acId) {
-		return dao.updateRegistDelAf(session,acId);
+		return dao.updateRegistDelAf(session, acId);
 	}
 
 	@Override
 	public List<AfaList> updateRegistCheckAfal(int afaId) {
-		return dao.updateRegistCheckAfal(session,afaId);
+		return dao.updateRegistCheckAfal(session, afaId);
 	}
 
 	@Override
 	public int updateRegistDelAfal(int afaId) {
-		return dao.updateRegistDelAfal(session,afaId);
+		return dao.updateRegistDelAfal(session, afaId);
 	}
-	
-	
 
+	@Override
+	public int updateAc(Accommodation ac) {
+		int result = dao.updateAc(session, ac);
+		log.info("acUpdate 결과 : " + result);
 
+		if (result > 0) {
+			result += dao.updateRegistDelAf(session, ac.getAcId());
+
+			log.info("파일delete 결과 : " + result);
+
+			if (result > 1) {
+				for (int i = 0; i < ac.getAcFiles().size(); i++) {
+					result += dao.updateInAcFile(session, ac.getAcFiles().get(i));
+				}
+			}
+
+			log.info("파일insert 결과 : " + result);
+
+			if (result > ac.getAcFiles().size() + 2) {
+				result += dao.updateAfa(session, ac.getAfa());
+			}
+
+			log.info("편의시설update 결과 : " + result);
+			
+			if (result > ac.getAcFiles().size() + 3) {
+				result += dao.updateRegistDelAfal(session, ac.getAfa().getAfaId());
+			}
+
+			log.info("편의시설delete 결과 : " + result);
+			
+			if (result > ac.getAcFiles().size() + 4) {
+				for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
+					result += dao.updateInAfal(session, ac.getAfa().getAfal().get(i));
+				}
+			}
+
+			log.info("편의시설insert 결과 : " + result);
+
+			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 4) {
+				result += dao.updateDelArv(session, ac.getAcId());
+			}
+
+			log.info("예약내역 삭제 결과 : " + result);
+			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 5) {
+				for (int i = 0; i < ac.getArv().size(); i++) {
+					ac.getArv().get(i).setAcId(ac.getAcId());
+					result += dao.updateInArv(session, ac.getArv().get(i));
+				}
+				log.info("업데이트 성공");
+			}
+
+		}
+		return result;
+	}
 
 }

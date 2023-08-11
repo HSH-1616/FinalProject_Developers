@@ -3,6 +3,7 @@ package com.dev.ac.service;
 import java.util.List;
 import java.util.Map;
 
+import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
@@ -46,6 +47,12 @@ public interface AcService {
 	
 	List<AcReservation> updateRegistArv(int acId);
 	
+	AcFacilities updateRegistAfa(int acId);
+	
+	List<AcFile> updateRegistAf(int acId);
+	
+	List<AfaList> updateRegistAfal(int afaId);
+	
 	List<AcFile> updateRegistCheckAf(int acId);
 	
 	int updateRegistDelAf(int acId);
@@ -53,4 +60,6 @@ public interface AcService {
 	List<AfaList> updateRegistCheckAfal(int afaId);
 	
 	int updateRegistDelAfal(int afaId);
+	
+	int updateAc(Accommodation ac);
 }
