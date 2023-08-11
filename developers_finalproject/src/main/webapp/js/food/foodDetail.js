@@ -77,10 +77,11 @@ function fileDeleteAll(event) {
 		$(".deleteAllImg").html("");
 	}
 }
-
+//뭐 분기문 추가해야하는데 기억안남
 const drawStar = (target) => {
 	$(".review_rating").css("width", target.value * 10 + "%");
 	$(".star_rating h5").text(target.value / 2 + "/5");
+	var count = target.value/2;
 	// if ($(target).prev().attr('class').includes("review_insert_rating")) {
 	// } else {
 	// 	$(".review_update_rating").css("width", target.value * 10 + "%");

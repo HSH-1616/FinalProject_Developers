@@ -165,7 +165,7 @@
                   <div class="row mr-1 p-0 align-items-center">
                      <span class="star w-auto p-0">★★★★★
                         <span class="review_rating">★★★★★</span>
-                           <input type="range" name="frGrade" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                           <input type="range" class="starcountnum" name="frGrade" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
                            <div class="star_rating text-center text-dark">
                               <h5>0/5</h5>
                            </div>
@@ -197,103 +197,79 @@
             </div>
          </div>
       </div>
-
-
-      <div class="detailFoodInfoCon flex-column">
-         <div class="detailUserInfo justify-content-between">
-           <div class="float-start d-flex flex-row ms-0">
-             <img src="${path}/images/common/user.jpg" alt="" />
-             <div>
-               <span>유저닉네임</span>
-               <span>2023-07-23</span>
-             </div>
-           </div>
-           <div class="dropdown mx-3 h5">
-             <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-               :
-             </a>
-           
-             <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuLink" style="width: 100px;">
-               <li><a class="dropdown-item" href="#" 
-                 data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal();">수정</a></li>
-               <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
-                 data-bs-target="#removeFood" onclick="">삭제</a></li>
-             </ul>
-           </div>
-         </div>
-
-         <!-- 삭제 모달창 -->
-         <div class="modal fade" id="removeFood" tabindex="-1" aria-labelledby="removeFoodModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <h5 class="modal-title" id="removeFoodModalLabel">리뷰 삭제</h5>
-                     <input type="hidden" id="selected_food_no" name="foodNo" value="">
-                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                  정말 삭제하시겠습니까?
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
-                     <button type="button" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
+      <c:if test="${f.foodReview != null}">
+      <c:forEach var="fr" items="${f.foodReview}">
+         <div class="detailFoodInfoCon flex-column">
+            <div class="detailUserInfo justify-content-between">
+              <div class="float-start d-flex flex-row ms-0">
+                <img src="${fr.member.memberImage}" alt="프로필사진" />
+                <div>
+                  <span>${fr.member.memberNickname}</span>
+                  <span>${fr.frWriterDate}</span>
+                </div>
+              </div>
+              <div class="dropdown mx-3 h5">
+                <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  :
+                </a>
+              
+                <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuLink" style="width: 100px;">
+                  <li><a class="dropdown-item" href="#" 
+                    data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal();">수정</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
+                    data-bs-target="#removeFood" onclick="">삭제</a></li>
+                </ul>
+              </div>
+            </div>
+   
+            <!-- 삭제 모달창 -->
+            <div class="modal fade" id="removeFood" tabindex="-1" aria-labelledby="removeFoodModalLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="removeFoodModalLabel">리뷰 삭제</h5>
+                        <input type="hidden" id="selected_food_no" name="foodNo" value="">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                     정말 삭제하시겠습니까?
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-
-         <div class="starContainer">
-            <span class="star">
-               ★★★★★
-               <span style="width: 88%">★★★★★</span>
-            </span>
-         </div>
-         <div class="detailReviewImg">
-           <img
-             src="https://a0.muscache.com/im/pictures/33357308-3507-49e5-aaaf-0b5b9fe234fc.jpg?im_w=720"
-             alt=""
-           />
-           <img
-             src="https://a0.muscache.com/im/pictures/ff86ea07-d2f2-4f2d-a07a-ac7f7427f9b5.jpg?im_w=720"
-             alt=""
-           />
-           <img
-             src="https://a0.muscache.com/im/pictures/243cb4d5-aa38-4162-82a0-453018af3d90.jpg?im_w=720
-           "
-             alt=""
-           />
-           <img
-             src="https://a0.muscache.com/im/pictures/e9e304c6-c95b-46d1-87a5-c8a28066314d.jpg?im_w=720"
-             alt=""
-           />
-           <img
-             src="https://a0.muscache.com/im/pictures/4e4cba04-2ca3-43e3-9808-42976cecdac6.jpg?im_w=720"
-             alt=""
-           />
-         </div>
-         <div class="detailReviewText detailFoodInfo">
-            <pre style="overflow-y: hidden" class="default_food_review_height">
-             깨끗하고
-경치 좋고
-해변에 가깝고 속초 아이도 보여서
-안녕하세요. 저희는 다양한 휴식 공간을 연구하고 제공하는 Onda입니다. 이 곳에서 머무르실 모든 분들께서 편안하고 행복한 시간을 보내시길 바랍니다.
-
-       [숙소 소개]
-       청량한 동해 바다를 바라보며 여행을 즐길 수 있는 숙소입니다.
-       
-       [객실 유형]
-       분리형(더블침대1)+화장실1+주방+거실
-       * 입실하시는 인원을 정확히 설정하여 예약하셨다면 인원에 맞게 침구류를 제공해드립니다.
-       숙소
-       ※ 퇴실시간 초과 시 시간당 10,000원의 추가비용이 발생합니다.
-       ※ 전기밥솥과 커피포트 이용을 원하실 경우 반드시 숙소로 사전문의 부탁드립니다.
-            </pre>
-            <div class="detailFoodInfoBtn d-flex justify-content-center">
-               <button id="food_review_more" class="visually-hidden"></button>
-               <label for="food_review_more"><i class="fa-solid fa-angles-down" style="color: #000000;"></i></label>
+   
+            <div class="starContainer">
+               <span class="star">
+                  ★★★★★
+                  <span style="width: ${fr.frGrade * 20}%">★★★★★</span>
+               </span>
+            </div>
+            <!-- 리뷰 이미지 -->
+            <div class="detailReviewImg">
+               <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
+	              <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/>
+               </c:forEach>
+            </div>
+            <div class="detailReviewText detailFoodInfo">
+               <pre style="overflow-y: hidden" class="default_food_review_height">
+                ${fr.frContent}
+               </pre>
+               <div class="detailFoodInfoBtn d-flex justify-content-center">
+                  <button id="food_review_more" class="visually-hidden"></button>
+                  <label for="food_review_more"><i class="fa-solid fa-angles-down" style="color: #000000;"></i></label>
+               </div>
             </div>
          </div>
-      </div>
+         <div style="height: 50px;"></div>
+      </c:forEach>
+      </c:if>
+      <c:if test="${f.foodReview == null}">
+      	<div>등록된 리뷰가 없습니다.</div>
+      </c:if>
    </div>
 
    <script>
@@ -369,55 +345,26 @@
             }
          } 
       });
-
+      $(".starcountnum").click(e=>{
+         console.log($(".starcountnum").val()/2);
+      })
       //ajax 통신
-      // $(document).ready(function(){
-      //    $(".submitModal").click(ajaxInsertReview);
-      // });
-
-      // const starRating = $('input[name="frGrade"]').val() / 2;
-      // console.log(starRating);
-      // const data = {
-      //    foodNo:"${f.foodNo}",
-      //    memberId:"${loginMember.memberId}",
-      //    frGrade:starRating,
-      //    frContent:$("#FR_CONTENT").val(),
-      //    upFile:$(".upFile").val()
-      // }
-
-      // var formData = new FormData($(".modalForm")[0]);
-      // $.ajax({
-      //    url:"${path}/food/insertFoodReview.do",
-      //    type:"post",
-      //    enctype: "multipart/form-data",
-      //    processData: false,
-      //    contentType: false,
-      //    cache: false,
-      //    data: formData,
-      //    //data:JSON.stringify(data),
-      //    contentType:"application/json;charset=utf-8",
-      //    success:data=>{
-      //       console.log(data);
-      //    }
-      // })
-
       $(".submitModal").click(e=>{
-			//js가 제공하는 FormData클래스를 이용함
+         //js가 제공하는 FormData클래스를 이용함
 			const form=new FormData();
 			//append로 서버에 전송할 데이터를 넣을 수 있음
 			//key-value형식으로 저장
 			const fileInput=$("#upFile");
 			//console.log(fileInput[0].files);
 			$.each(fileInput[0].files,(i,f)=>{
-				form.append("upFile",f);
+            form.append("upFile",f);
             console.log(form);
 			});
 			form.append("foodNo","${f.foodNo}");
-         form.append("memberId","${loginMember.memberId}");
-         form.append("frGrade",$('input[name="frGrade"]').val()/2);
+         //form.append("memberId","${loginMember.memberId}");
+         form.append("frGrade",$(".starcountnum").val()/2);
          form.append("frContent",$("#FR_CONTENT").val());
-			//form.append : FormData클래스에 append를 이용하여 파일을 넣는 것이 가능하다.
-			//form.append("name","유병승")하는 이유? : ==================================
+
 			$.ajax({
 				url:"${path}/food/insertFoodReview.do",
 				data:form,
@@ -427,16 +374,16 @@
 				contentType:false,
             cache: false,
 				success:data=>{
-					alert("업로드가 완료되었습니다.");
+               alert("업로드가 완료되었습니다.");
                location.reload();
                $('window').scrollTop(0,300);
 				},
 				error:(r,s,e)=>{
-					console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
+               console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
                alert("업로드 실패");
 				},
 				complete:()=>{
-					$(".upFile").val('');
+               $(".upFile").val('');
 				}
 			});
 		});

@@ -129,4 +129,9 @@ public class FoodServiceImpl implements FoodService{
 		return result;
 	}
 	
+	@Override
+	public List<FoodReview> selectFoodReviewByFoodNo(int foodNo) {
+		return dao.selectFoodReviewByFoodNo(session,foodNo);
+	}
+	
 }

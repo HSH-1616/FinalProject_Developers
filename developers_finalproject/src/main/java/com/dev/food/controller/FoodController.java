@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.common.PageFactory;
@@ -34,6 +33,7 @@ import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
+import com.dev.member.model.dto.Member;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -276,9 +276,14 @@ public class FoodController {
 			service.deleteFoodTemp(Integer.parseInt(StringType));
 			service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
 		}
+//		//음식점의 리뷰 불러오기
+//		System.out.println(foodNo);
+//		List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
+//		System.out.println("reviews : "+reviews);
+//		m.addAttribute("reviews", reviews);
 		
-		//DB에서 불러오는 과정
-		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO
+		//DB에서 불러오는 과정(리뷰)
+		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO + FOODREVIEW
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
 		return "/food/foodDetail";
@@ -352,6 +357,14 @@ public class FoodController {
 	@PostMapping("/insertFoodReview.do")
 	@ResponseBody
 	public String insertFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
+		
+		//session에서 직접 받아오기
+		Member member = (Member)session.getAttribute("loginMember");
+		//member에서 객체를 생성해서 int 주입
+		fr.setMember(Member.builder().memberId(member.getMemberId()).build());
+		fr.setMemberId(member.getMemberId());
+		System.out.println("dto : "+fr);
+		System.out.println("FRGRADE CHECK : "+fr.getFrGrade());
 		
 		//파일을 저장할경로 가져오기
 		String path = session.getServletContext().getRealPath("/images/upload/food/");

@@ -49,4 +49,6 @@ public interface FoodDao {
 	int insertFoodReview(SqlSession session,FoodReview fr);
 	
 	int insertFoodReviewPhoto(SqlSession session,FoodReviewPhoto rp);
+	
+	List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo);
 }

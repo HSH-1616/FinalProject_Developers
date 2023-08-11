@@ -122,4 +122,9 @@ public class FoodDaoImpl implements FoodDao {
 		return session.insert("food.insertFoodReviewPhoto",rp);
 	}
 	
+	@Override
+	public List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo) {
+		return session.selectList("food.selectFoodReviewByFoodNo",foodNo);
+	}
+	
 }
