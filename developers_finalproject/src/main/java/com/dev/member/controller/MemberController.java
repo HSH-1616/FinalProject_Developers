@@ -8,42 +8,58 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.tomcat.util.json.JSONParser;
 import org.apache.tomcat.util.json.ParseException;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.client.RestTemplate;
 
 import com.dev.member.model.dto.Member;
 import com.dev.member.service.MemberService;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","loginAdmin"})
 @RequestMapping("/member")
 public class MemberController {
 
-	private String CLIENT_ID = "TR_SQ2GAJzrrTPobWiSh"; // 애플리케이션 클라이언트 아이디값";
-	private String CLI_SECRET = "KzSC54sFgk"; // 애플리케이션 클라이언트 시크릿값";
-	private MemberService service;
+	private final Environment env;
+	private final RestTemplate restTemplate = new RestTemplate();
+	private String CLIENT_ID = "TR_SQ2GAJzrrTPobWiSh"; //네이버 애플리케이션 클라이언트 아이디값;
+	private String CLI_SECRET = "KzSC54sFgk"; //네이버 애플리케이션 클라이언트 시크릿값;
 
-	public MemberController(MemberService service) {
+	private MemberService service;
+    
+	public MemberController(MemberService service,Environment env) {
+		this.env = env;
 		this.service = service;
 	}
+	
+//카카오 로그인 처리
 	@GetMapping("/KakaoLoginCheck")
 	@ResponseBody
 	public Member KakaoLoginCheck(@RequestParam Map param) {
+		System.out.println("여기오니?");
 		String memberEmail=(String)param.get("memberEmail");
 		Member m=service.selectByEmail(memberEmail);
+		System.out.println(m);
 		return m;
 	}
 	@GetMapping("/Kakaoenroll")
@@ -68,11 +84,9 @@ public class MemberController {
 	
 //네이버로그인처리
 	@RequestMapping("/naver/callback")
-	public String naverCallback1(String code, String state, Model model) throws IOException, ParseException {
-		// String code = request.getParameter("code");
-		System.out.println(code);
-		// String state = request.getParameter("state");
-		System.out.println(state);
+	public String naverLogin(String code, String state, Model model) throws IOException, ParseException {
+//		System.out.println(code);
+//		System.out.println(state);
 		String redirectURI = URLEncoder.encode("http://localhost:8888/member/naver/callback", "UTF-8");
 		String apiURL;
 		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
@@ -81,34 +95,34 @@ public class MemberController {
 		apiURL += "&redirect_uri=" + redirectURI;
 		apiURL += "&code=" + code;
 		apiURL += "&state=" + state;
-		System.out.println("apiURL=" + apiURL);
+		//System.out.println("apiURL=" + apiURL);
 		String res = requestToServer(apiURL);
 		if (res != null && !res.equals("")) {
-			System.out.println(res);
+//			System.out.println(res);
 			model.addAttribute("res", res);
 			Map<String, Object> parsedJson = new JSONParser(res).parseObject();
-			System.out.println(parsedJson);
+//			System.out.println(parsedJson);
 			String accessToken = (String) parsedJson.get("access_token");
 			// 액세스 토큰으로 네이버에서 프로필 받기
 			String apiURL2 = "https://openapi.naver.com/v1/nid/me";
 			String headerStr = "Bearer " + accessToken; // Bearer 다음에 공백 추가
 			String res2 = requestToServer(apiURL2, headerStr);
 			if (res2 != null && !res.equals("")) {
-				System.out.println(res2);
+//				System.out.println(res2);
 				model.addAttribute("res", res2);
 				// Map<String, Object> parsedJson2 = new JSONParser(res2).parseObject();
 				JsonObject obj = JsonParser.parseString(res2.toString()).getAsJsonObject();
 				JsonObject arr = (JsonObject) obj.get("response");
-				System.out.println("arr : " + arr);
+//				System.out.println("arr : " + arr);
 				String memberNickname = arr.get("nickname").getAsString();
 				String memberImage = arr.get("profile_image").getAsString();
 				String memberEmail = arr.get("email").getAsString();
-				Member member = service.selectByEmail(memberEmail.trim());
-				System.out.println(member);
+				Member member = service.selectByEmail(memberEmail);
+//				System.out.println(member);
 				if(member==null) {
 				Member m = Member.builder().memberNickname(memberNickname)
 						.memberImage(memberImage)
-						.memberEmail(memberEmail.trim()).memberCategory("N").build();
+						.memberEmail(memberEmail).memberCategory("N").build();
 				service.insertMember(m);
 				}
 				model.addAttribute("loginMember",member);
@@ -118,32 +132,18 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
-	
-//로그아웃
-	/**
-	 * 세션 무효화(로그아웃)
-	 * 
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("/logout")
-	public String logout(SessionStatus status) {
-		if(!status.isComplete()) status.setComplete();
-		return "redirect:/";
-	}
-	
 
 	private String requestToServer(String apiURL, String headerStr) throws IOException {
 		URL url = new URL(apiURL);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
-		System.out.println("header Str: " + headerStr);
+//		System.out.println("header Str: " + headerStr);
 		if (headerStr != null && !headerStr.equals("")) {
 			con.setRequestProperty("Authorization", headerStr);
 		}
 		int responseCode = con.getResponseCode();
 		BufferedReader br;
-		System.out.println("responseCode=" + responseCode);
+//		System.out.println("responseCode=" + responseCode);
 		if (responseCode == 200) { // 정상 호출
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		} else { // 에러 발생
@@ -161,67 +161,69 @@ public class MemberController {
 			return null;
 		}
 	}
-
-	/**
-	 * 토큰 갱신 요청 페이지 컨트롤러
-	 * 
-	 * @param session
-	 * @param request
-	 * @param model
-	 * @param refreshToken
-	 * @return
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	@RequestMapping("/naver/refreshToken")
-	public String refreshToken(HttpSession session, HttpServletRequest request, Model model, String refreshToken)
-			throws IOException, ParseException {
-		String apiURL;
-		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=refresh_token&";
-		apiURL += "client_id=" + CLIENT_ID;
-		apiURL += "&client_secret=" + CLI_SECRET;
-		apiURL += "&refresh_token=" + refreshToken;
-		System.out.println("apiURL=" + apiURL);
-		String res = requestToServer(apiURL);
-		model.addAttribute("res", res);
-		session.invalidate();
-		return "test-naver-callback";
-	}
-
-	/**
-	 * 토큰 삭제 컨트롤러
-	 * 
-	 * @param session
-	 * @param request
-	 * @param model
-	 * @param accessToken
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping("/naver/deleteToken")
-	public String deleteToken(HttpSession session, HttpServletRequest request, Model model, String accessToken)
-			throws IOException {
-		String apiURL;
-		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=delete&";
-		apiURL += "client_id=" + CLIENT_ID;
-		apiURL += "&client_secret=" + CLI_SECRET;
-		apiURL += "&access_token=" + accessToken;
-		apiURL += "&service_provider=NAVER";
-		System.out.println("apiURL=" + apiURL);
-		String res = requestToServer(apiURL);
-		model.addAttribute("res", res);
-		session.invalidate();
-		return "test-naver-callback";
-	}
-	/**
-	 * 서버 통신 메소드
-	 * 
-	 * @param apiURL
-	 * @return
-	 * @throws IOException
-	 */
 	private String requestToServer(String apiURL) throws IOException {
 		return requestToServer(apiURL, "");
 	}
+	
+//구글 로그인 처리
+    @GetMapping("/login/oauth2/code/{registrationId}")
+    public String googleLogin(@RequestParam String code,@PathVariable String registrationId, Model model) {
+        String accessToken = getAccessToken(code, registrationId);
+        JsonNode userResourceNode = getUserResource(accessToken, registrationId);
+
+        String memberEmail = userResourceNode.get("email").asText();
+        String memberNickname = userResourceNode.get("name").asText();
+        String memberImage = userResourceNode.get("picture").asText();
+        
+		Member member = service.selectByEmail(memberEmail);
+//		System.out.println(member);
+		if(member==null) {
+		Member m = Member.builder().memberNickname(memberNickname)
+				.memberImage(memberImage)
+				.memberEmail(memberEmail).memberCategory("G").build();
+		service.insertMember(m);
+		}
+		model.addAttribute("loginMember",member);
+		return "redirect:/";
+    }
+    private String getAccessToken(String authorizationCode, String registrationId) {
+        String clientId = env.getProperty("oauth2." + registrationId + ".client-id");
+        String clientSecret = env.getProperty("oauth2." + registrationId + ".client-secret");
+        String redirectUri = env.getProperty("oauth2." + registrationId + ".redirect-uri");
+        String tokenUri = env.getProperty("oauth2." + registrationId + ".token-uri");
+
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("code", authorizationCode);
+        params.add("client_id", clientId);
+        params.add("client_secret", clientSecret);
+        params.add("redirect_uri", redirectUri);
+        params.add("grant_type", "authorization_code");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity entity = new HttpEntity(params, headers);
+
+        ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity, JsonNode.class);
+        JsonNode accessTokenNode = responseNode.getBody();
+        return accessTokenNode.get("access_token").asText();
+    }
+
+    private JsonNode getUserResource(String accessToken, String registrationId) {
+        String resourceUri = env.getProperty("oauth2."+registrationId+".resource-uri");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
+        HttpEntity entity = new HttpEntity(headers);
+        return restTemplate.exchange(resourceUri, HttpMethod.GET, entity, JsonNode.class).getBody();
+    }
+	
+ //로그아웃
+  	@RequestMapping("/logout")
+  	public String logout(SessionStatus status) {
+  		if(!status.isComplete()) status.setComplete();
+  		return "redirect:/";
+  	}	
+	
 	
 }

@@ -84,10 +84,16 @@ window.addEventListener("keyup", e => {
         modalOff()
     }
 })
+//네이버 로그인
 const naverlogin=()=>{
 	location.assign("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="+CLIENT_ID+"&redirect_uri="+redirectURI+"&state="+state);
 	
 }
+//구글 로그인
+const googlelogin=()=>{
+	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri=http://localhost:8888/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
+}
+
 /*카카오 로그인 서비스  */
   Kakao.init("c0e169307572ef60ba8671f2af4eaff4");
 	const kakaologin=()=>{
@@ -104,7 +110,7 @@ const naverlogin=()=>{
 								console.log(kakao_account);
 								email=kakao_account.email;
 								nickname=kakao_account.profile.nickname;
-								image=kakao_account.profile.profile_image_url;
+								image=kakao_account.profile.thumbnail_image_url;
 								console.log(email,nickname,image);
 									$.ajax({
 										type:"get",
@@ -130,7 +136,7 @@ const naverlogin=()=>{
 				});
 		  }
   /*로그아웃 로직으로 구현  */
-if($("#kakaologout").length==1){
+/*if($("#kakaologout").length==1){
 const kakaologout=$("#kakaologout");  
 kakaologout.click(e=>{
 	Kakao.API.request({
@@ -146,5 +152,5 @@ kakaologout.click(e=>{
     	},
 	});
 })
-}
+}*/
 

@@ -2,6 +2,11 @@
     cursor: pointer;
     
 }
+.board-pasing{
+	display: block;
+	
+}
+
 
 .carousel-item{
       width: 100%;
@@ -33,6 +38,8 @@
 
 }
 
+
+
 .notice-form{
 	width:1300px;
 }
@@ -41,7 +48,7 @@
 	width: 100%;
 }
 .search-notice{
-	margin-right: 15%;
+	margin-left: 30%;
 }
 
 .list-area{
@@ -56,37 +63,43 @@
 	min-height: 1500px;
 }
 
-.card-box{
-	min-height: 1500px;
-}
-
-.card-box-form{
+/*.communityView-container{
 	display: block;
-	margin-right: 48%;
+	margin: auto;
+}*/
+
+
+
+/*.card-box-form{
+	display: block;
+	margin:auto;
 	padding-top: 0%;
-}
+}*/
 
 
  div.card-box{
     display: block;
     position: relative;
     top: 100px;
-    
+    min-height: 1500px;
+   
+   	width:40%;
+   	margin:auto;
+   	margin-bottom: 10%;
 } 
-.comment-body{
-    margin:10px;
-}
+
 
 
 div.comments{
     display: inline-block;
-    width: 100%;
+    width: 40rem;
     margin-top: 10px;
     
 }
 
 #inputComment{
     margin-top: 10px;
+    width:40rem;
 }
 
 #comment_input{
@@ -251,6 +264,14 @@ cursor: pointer;
     opacity: 0;
 }
 }
+
+.s-btn {
+  	padding:5px;
+    background-color:#0a0a23;
+    color: #fff;
+    border:none;
+    border-radius:10px;
+  }
 
 /*.nolist-table{
     margin-left: 5%;

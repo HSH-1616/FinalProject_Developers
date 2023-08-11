@@ -107,8 +107,8 @@ public class PublicData {
 						.tourisLevel(data.get("mlevel"))
 						.tourismainImge(data.get("firstimage"))
 						.tourisPhone(data.get("phone"))
-						.tourisAreaid(data.get("areacode")).build();
-				tourisMapper.insertTouris(touris);
+						.tourisAreaId(data.get("areacode")).build();
+//					System.out.println(touris);			
 				
 			}
 			

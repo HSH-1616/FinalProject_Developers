@@ -1,6 +1,9 @@
 package com.dev.member.model.dto;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.dev.touris.model.vo.TourisHeart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,4 +23,5 @@ public class Member {
 	private String memberEmail;
 	private Date memberEnrolldate;
 	private String memberStatus;
+	private List<TourisHeart> tourisHeartlist;
 }

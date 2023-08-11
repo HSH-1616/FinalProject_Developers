@@ -25,6 +25,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Montserrat:500,800" />
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,15 +38,22 @@
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 			</div>
 			<div id="userProfile">
-				<img src="${path }/images/common/user.jpg" alt="" />
-				<p>UserId</p>
-				<button>MyPage</button>
-				<b> | </b>
-				<button>Logout</button>
+				<c:if test="${empty loginMember }">
+					<p>로그인 후 이용해주세요</p>
+				</c:if>
+				<c:if test="${not empty loginMember }">
+					<img src="${loginMember.memberImage}" alt="" />
+					<p>${loginMember.memberNickname }</p>
+					<button>MyPage</button>
+					<b> | </b>
+					<button><a class="nav-link active" href="${path }/member/logout">Logout</a></button>
+				</c:if>
 			</div>
+			<c:if test="${not empty loginMember }">
 			<div class="offcanvas-body">
 				<p>예약내역</p>
 			</div>
+			</c:if>
 		</div>
 		<nav class="navbar navbar-expand-sm navbar-dark fixed-top drop">
 			<a href="${path}/"> <img id="headerLogo"
@@ -57,21 +65,21 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a>
 					</li>
-					<c:if test="${empty loginMember }">
-						<li class="nav-item"><a class="nav-link"
-							href="javascript:void(0)" id="btn-modal">Login</a></li>
-					</c:if>
-					<c:if test="${not empty loginMember }">
-						<c:if test="${loginMember.memberCategory ne'K'}">
-							<li class="nav-item"><a class="nav-link active"
-								href="${path }/member/logout">LogOut</a></li>
-						</c:if>
-						<c:if test="${loginMember.memberCategory eq 'K'}">
-							<li class="nav-item"><a class="nav-link active"
-								href="javascript:void(0)" id="kakaologout">LogOut</a></li>
-						</c:if>
-					</c:if>
+
+				<c:if test="${empty loginMember && empty loginAdmin }">
+					<li class="nav-item"><a class="nav-link"
+						href="javascript:void(0)" id="btn-modal">Login</a></li>
+				</c:if>
+				<c:if test="${not empty loginMember || not empty loginAdmin}">
+					<li class="nav-item"><a class="nav-link active" href="${path }/member/logout">LogOut</a>
+					</li>
+				</c:if>
+				<c:if test="${not empty loginMember}">
 					<li class="nav-item"><a class="nav-link" href="${path }/mypage/mypage">MyPage</a></li>
+				</c:if>
+				<c:if test="${empty loginMember && not empty loginAdmin }">
+					<li class="nav-item"><a class="nav-link" href="${path }/admin/adminMain">AdminPage</a></li>
+				</c:if>
 				</ul>
 			</div>
 
@@ -79,7 +87,11 @@
 				<ul class="main-menu">
 					<li class="item">
 						<button class="item__name"
-							onclick="location.href='${path }/food/foodList.do'">TRAVEL&FOOD</button>
+							onclick="location.href='${path }'">Touris</button>
+					</li>
+					<li class="item">
+						<button class="item__name"
+							onclick="location.href='${path }/food/foodList.do'">Food</button>
 					</li>
 					<li class="item">
 						<button class="item__name"
@@ -101,30 +113,25 @@
 		<div class="modal-window">
 			<div class="close-area">X</div>
 			<div class="content">
-				<div class="container">
+				<div class="login-container">
 					<!-- Heading -->
 					<!-- <h1>DEVELOPERS</h1> -->
 					<div>
 						<img alt="" src="${path}/images/common/logo.png">
 					</div>
-					<p>소셜 로그인</p>
-				</div>
-				<div class="m-btn-container">
-					<!-- 카카오 button -->
-					<img class="socialbtn" src="${path }/images/login/kakaobtn.png"
-						alt="어딧니?" onclick="kakaologin();">
-					<!-- 네이버 button -->
-					<img class="socialbtn" src="${path }/images/login/naverbtn.png"
-						alt="어딧니?" onclick="naverlogin();">
-					<!-- google button -->
-					<img class="socialbtn" src="${path }/images/login/googlebtn.png"
-						alt="어딧니?" onclick="googlelogin();">
-					<div>
-						<button onclick="kakaologout();">카카오 연결끊기</button>
+					<div class="m-btn-container">
+						<!-- 카카오 button -->
+						<img class="socialbtn" src="${path }/images/login/kakaobtn.png"
+							alt="어딧니?" onclick="kakaologin();">
+						<!-- 네이버 button -->
+						<img class="socialbtn" src="${path }/images/login/naverbtn.png"
+							alt="어딧니?" onclick="naverlogin();">
+						<!-- google button -->
+						<img class="socialbtn" src="${path }/images/login/googlebtn.png"
+							alt="어딧니?" onclick="googlelogin();">
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<script src="${path }/js/login/login.js"></script>
