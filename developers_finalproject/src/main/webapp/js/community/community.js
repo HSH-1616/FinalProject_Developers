@@ -126,9 +126,10 @@ $(document).on("click",".insertReplies",function(){
 })
 
 const insertReply=(ref,con)=>{
-	
-	let content=$("#comment_input").val();
-	if(content==""){
+	let content;
+	if(con==""||con==null){
+		content=$("#comment_input").val();
+	}else{
 		content=con;
 	}
 	const communityNo=$("#like_comuNo").val();
@@ -139,7 +140,6 @@ const insertReply=(ref,con)=>{
 		type:"post",
 		data: {memberId: memberId,communityNo:communityNo,replyContent:content,replyRef:ref},
 		success:(data)=>{
-			console.log(data);
 			replyList();
 		}
 	});
@@ -147,33 +147,41 @@ const insertReply=(ref,con)=>{
 
 
 $(document).ready(()=>{
-	if($(".comments").length>0){
+	if($(".reply-list").length>0){
 		replyList();
 	}
 })
 const replyList=()=>{
 	const communityNo=$("#like_comuNo").val();
+	const memberId=$("#like_memberId").val();
 	$.ajax({
 		url: "/community/replyList.do",
 		type:"get",
 		data: {communityNo:communityNo},
 		success:(data)=>{
 			console.log(data);
-			$(".comments").empty();
+			$(".reply-list").empty();
 			for(const i of data){
 				if(i.replyLevel==0){
-					let str="";
+					let str="<div class='comments  p-2 border rounded'>";
 					str+="<div class='comment'>";
 					str+="<div class='comment_detail'>";
 					str+="<div class='comment_user'>";
 					str+="<span>"+i.memberId.memberNickname+"</span>";
 					str+="</div>";
 					str+="<div class='comment_body'>";
-					str+="<span>"+i.replyContent+"</span>";
+					str+="<span class='"+i.replyNo+"'>"+i.replyContent+"</span>";
 					str+="</div>";
 					str+="</div>";
 					str+="</div>";
+				
 					str+="<div class='text-end mb-3 p-2'>";
+					if(memberId==i.memberId.memberId){
+						str+="<button class='reply-update s-btn m-2' data-name='"+i.replyNo+"' >수정</button>";
+					}
+					if(memberId==i.memberId.memberId){
+						str+="<button class='reply-delete s-btn' onclick='deleteReply("+i.replyLevel+","+i.replyNo+")'>삭제</button>";
+					}
 					str+="<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies"+i.replyNo+"' role='button'"
 					+"aria-expanded='false' aria-controls='collapseComment'> 댓글쓰기 </a>";
 					str+="</div>";
@@ -186,31 +194,35 @@ const replyList=()=>{
 					str+="</div>";
 					str+="</div>";
 					str+="</div>";
+					str+="</div>";
 					
-					
-					$(".comments").append(str);
+					$(".reply-list").append(str);
 		
 				}else{
-					let str="";
+					let str="<div class='comments mx-3 p-2 border rounded'>";
 					str+="<div class='comment'>";
 					str+="<div class='comment_detail'>";
 					str+="<div class='comment_user'>";
 					str+="<span>"+i.memberId.memberNickname+"</span>";
 					str+="</div>";
 					str+="<div class='comment_body'>";
-					str+="<span>"+i.replyContent+"</span>";
+					str+="<span class='"+i.replyNo+"'>"+i.replyContent+"</span>";
 					str+="</div>";
 					str+="</div>";
 					str+="</div>";
 					str+="<div class='text-end mb-3 p-2'>";
-				
+					if(memberId==i.memberId.memberId){
+						str+="<button class='reply-update s-btn m-2' data-name='"+i.replyNo+"'>수정</button>";
+					}
+					if(memberId==i.memberId.memberId){
+						str+="<button class='reply-delete s-btn' onclick='deleteReply("+i.replyLevel+","+i.replyNo+")'>삭제</button>";
+					}
 					str+="</div>";
 					str+="</div>";
-				
 					str+="</div>";
 					
-					
-					$(".comments").append(str);
+					str+="</div>";
+					$(".reply-list").append(str);
 				}
 			}
 			
@@ -218,8 +230,47 @@ const replyList=()=>{
 	});
 }
 
+$(".reply-list").on("click",".reply-update",function(e){
+	let target=$(this);
+	const no = target.data("name");
+	
+	let updateForm="<span><input type='text' id='editReply"+no+"' value='"+$("."+no+"").html()+"'>";
+	updateForm+="<button class='s-btn m-2' onclick='updateReply("+no+");'>수정</button>"
+	updateForm+="<button class='s-btn m-2' onclick='replyList()'>취소</button>"
+	
+	$("."+no+"").parent().replaceWith(updateForm);
+})
 
 
+const updateReply=(no)=>{
+	console.log(no);
+	const reContent=$("#editReply"+no+"").val();
+	
+	$.ajax({
+		url:"/community/updateReply.do",
+		type:"post",
+		data:{replyNo:no,replyContent:reContent},
+		success:()=>{
+			replyList();
+		},error:()=>{
+			alert("댓글 수정 실패");
+		}
+	})
+	
+}
+
+const deleteReply=(level,no)=>{
+	$.ajax({
+		url:"/community/deleteReply.do",
+		type:"post",
+		data:{replyNo:no,replyLevel:level},
+		success:(data)=>{
+			replyList();
+		},error:()=>{
+			alert("댓글 삭제 실패");
+		}
+	})
+}
 
 
 

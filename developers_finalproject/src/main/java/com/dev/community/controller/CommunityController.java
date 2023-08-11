@@ -34,6 +34,7 @@ public class CommunityController {
 
 	@RequestMapping("/communityList.do")
 	public String communityList() {
+		
 		return "/community/community";
 	}
 	
@@ -121,6 +122,21 @@ public class CommunityController {
 		
 		
 		return service.insertReply(reply);
+	}
+	
+	@PostMapping("/updateReply.do")
+	@ResponseBody
+	public int updateReply(int replyNo, String replyContent) {
+		Reply r=Reply.builder().replyNo(replyNo).replyContent(replyContent).build();
+		
+		return service.updateReply(r);
+	}
+	
+	@PostMapping("/deleteReply.do")
+	@ResponseBody
+	public int deleteReply(int replyNo, int replyLevel) {
+		Reply r=Reply.builder().replyNo(replyNo).replyLevel(replyLevel).build();
+		return service.deleteReply(r);
 	}
 	
 }

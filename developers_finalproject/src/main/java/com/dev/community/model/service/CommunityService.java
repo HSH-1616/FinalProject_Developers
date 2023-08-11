@@ -28,4 +28,6 @@ public interface CommunityService {
 	Map<String,Object> CommunityLikeCheck(int id, int no);
 	int insertReply(Reply reply);
 	List<Reply> replyList(int communityNo);
+	int updateReply(Reply r);
+	int deleteReply(Reply r);
 }

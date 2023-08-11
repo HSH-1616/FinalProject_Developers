@@ -100,6 +100,24 @@ public class CommunityDaoImpl implements CommunityDao {
 		return session.selectList("community.replyList",communityNo);
 	}
 
+	@Override
+	public int updateReply(SqlSession session, Reply r) {
+		
+		return session.update("community.updateReply",r);
+	}
+
+	@Override
+	public int deleteReply(SqlSession session, int replyNo) {
+
+		return session.update("community.deleteReply",replyNo);
+	}
+
+	@Override
+	public int deleteReplies(SqlSession session, int replyNo) {
+		
+		return session.delete("community.deleteReplies",replyNo);
+	}
+
 	
 
 }

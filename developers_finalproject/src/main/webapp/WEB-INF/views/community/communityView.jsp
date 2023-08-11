@@ -99,13 +99,14 @@
 
 			</div>
 			<div class="card-body comment-body">
-
+			
 				<a class="w-btn-outline w-btn-blue-outline" data-title="댓글달기"
 					data-bs-toggle="collapse" href="#inputComment" role="button"
 					aria-expanded="false" aria-controls="collapseComment"> 댓글쓰기 </a>
-
-
-
+				<!-- <button class="s-btn" >수정</button>
+				<button class="s=btn">삭제</button> -->
+				
+			
 			</div>
 		</div>
 		<div class="collapse" id="inputComment">
@@ -121,8 +122,8 @@
 				<button class="w-btn w-btn-blue">등록</button>
 			</div>
 		</div> -->
-
-	 	<div class="comments  p-2 border rounded">
+		<div class="p-2 reply-list"></div>
+	 	<!-- <div class="comments  p-2 border rounded"> -->
 			<!-- <div class="comment">
 				<div class="comment_detail">
 					<div class="comment_user">
@@ -135,10 +136,11 @@
 			</div> -->
 			
 			
-		</div> 
+		<!-- </div>  -->
 		
 		
 	</div>
+	
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script src="${path }/js/community/community.js"></script>

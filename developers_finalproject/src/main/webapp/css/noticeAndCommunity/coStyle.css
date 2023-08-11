@@ -7,6 +7,7 @@
 	
 }
 
+
 .carousel-item{
       width: 100%;
       max-height: 400px;
@@ -81,8 +82,10 @@
     position: relative;
     top: 100px;
     min-height: 1500px;
+   
    	width:40%;
    	margin:auto;
+   	margin-bottom: 10%;
 } 
 
 
@@ -261,6 +264,14 @@ cursor: pointer;
     opacity: 0;
 }
 }
+
+.s-btn {
+  	padding:5px;
+    background-color:#0a0a23;
+    color: #fff;
+    border:none;
+    border-radius:10px;
+  }
 
 /*.nolist-table{
     margin-left: 5%;

@@ -28,4 +28,7 @@ public interface CommunityDao {
 	int insertReply(SqlSession session,Reply reply);
 	int insertReplies(SqlSession session,Reply replies);
 	List<Reply> replyList(SqlSession session,int communityNo);
+	int updateReply(SqlSession session,Reply r);
+	int deleteReply(SqlSession session,int replyNo);
+	int deleteReplies(SqlSession session, int replyNo);
 }

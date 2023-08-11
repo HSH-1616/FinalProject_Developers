@@ -158,6 +158,22 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		return resultList;
 	}
+
+	@Override
+	public int updateReply(Reply r) {
+		
+		return dao.updateReply(session, r);
+	}
+
+	@Override
+	public int deleteReply(Reply r) {
+		int level=r.getReplyLevel();
+		int replyNo=r.getReplyNo();
+		if(level==0) {
+			return dao.deleteReply(session, replyNo);
+		}
+		return dao.deleteReplies(session, replyNo);
+	}
 	
 	
 
