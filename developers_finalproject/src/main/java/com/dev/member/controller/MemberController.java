@@ -56,9 +56,10 @@ public class MemberController {
 	@GetMapping("/KakaoLoginCheck")
 	@ResponseBody
 	public Member KakaoLoginCheck(@RequestParam Map param) {
-		System.out.println("여기오니?");
+		System.out.println("memberPk : "+ param.get("memberPk"));
+		String memberPk=(String)param.get("memberPk");
 		String memberEmail=(String)param.get("memberEmail");
-		Member m=service.selectByEmail(memberEmail);
+		Member m=service.selectByMemberPk(memberPk);
 		System.out.println(m);
 		return m;
 	}
@@ -67,17 +68,18 @@ public class MemberController {
 		String memberNickname=(String)param.get("memberNickname");
 		String memberImage=(String)param.get("memberImage");
 		String memberEmail=(String)param.get("memberEmail");
+		String memberPk=(String)param.get("memberPk");
 		Member m = Member.builder().memberNickname(memberNickname)
 				.memberImage(memberImage)
-				.memberEmail(memberEmail.trim()).memberCategory("K").build();
+				.memberEmail(memberEmail.trim()).memberCategory("K").memberPk(memberPk).build();
 		service.insertMember(m);
-		Member member=service.selectByEmail(memberEmail);
+		Member member=service.selectByMemberPk(memberPk);
 		model.addAttribute("loginMember",member);
 		return "redirect:/";
 	}
 	@GetMapping("KakaoLogin")
 	public String KakaoLogin(@RequestParam Map param,Model model) {
-		Member member=service.selectByEmail((String)param.get("memberEmail"));
+		Member member=service.selectByMemberPk((String)param.get("memberPk"));
 		model.addAttribute("loginMember",member);
 		return "redirect:/";
 	}
@@ -113,19 +115,21 @@ public class MemberController {
 				// Map<String, Object> parsedJson2 = new JSONParser(res2).parseObject();
 				JsonObject obj = JsonParser.parseString(res2.toString()).getAsJsonObject();
 				JsonObject arr = (JsonObject) obj.get("response");
-//				System.out.println("arr : " + arr);
+				System.out.println("arr : " + arr);
 				String memberNickname = arr.get("nickname").getAsString();
 				String memberImage = arr.get("profile_image").getAsString();
 				String memberEmail = arr.get("email").getAsString();
-				Member member = service.selectByEmail(memberEmail);
+				String memberPk = arr.get("id").getAsString();
+				Member member = service.selectByMemberPk(memberPk);
 //				System.out.println(member);
 				if(member==null) {
 				Member m = Member.builder().memberNickname(memberNickname)
 						.memberImage(memberImage)
-						.memberEmail(memberEmail).memberCategory("N").build();
+						.memberEmail(memberEmail).memberCategory("N").memberPk(memberPk).build();
 				service.insertMember(m);
 				}
-				model.addAttribute("loginMember",member);
+				Member member2 = service.selectByMemberPk(memberPk);
+				model.addAttribute("loginMember",member2);
 			}
 		} else {
 			model.addAttribute("res", "Login failed!");
@@ -170,20 +174,21 @@ public class MemberController {
     public String googleLogin(@RequestParam String code,@PathVariable String registrationId, Model model) {
         String accessToken = getAccessToken(code, registrationId);
         JsonNode userResourceNode = getUserResource(accessToken, registrationId);
-
+        System.out.println("userResourceNode : "+ userResourceNode);
         String memberEmail = userResourceNode.get("email").asText();
         String memberNickname = userResourceNode.get("name").asText();
         String memberImage = userResourceNode.get("picture").asText();
-        
-		Member member = service.selectByEmail(memberEmail);
+        String memberPk = userResourceNode.get("id").asText();
+		Member member = service.selectByMemberPk(memberPk);
 //		System.out.println(member);
 		if(member==null) {
 		Member m = Member.builder().memberNickname(memberNickname)
 				.memberImage(memberImage)
-				.memberEmail(memberEmail).memberCategory("G").build();
+				.memberEmail(memberEmail).memberCategory("G").memberPk(memberPk).build();
 		service.insertMember(m);
 		}
-		model.addAttribute("loginMember",member);
+		Member member2 = service.selectByMemberPk(memberPk);
+		model.addAttribute("loginMember",member2);
 		return "redirect:/";
     }
     private String getAccessToken(String authorizationCode, String registrationId) {

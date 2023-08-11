@@ -4,6 +4,6 @@ import com.dev.member.model.dto.Member;
 
 public interface MemberService {
 	
-	Member selectByEmail(String email);
+	Member selectByMemberPk(String memberPk);
 	void insertMember(Member m);
 }

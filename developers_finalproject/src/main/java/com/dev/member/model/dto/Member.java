@@ -23,5 +23,6 @@ public class Member {
 	private String memberEmail;
 	private Date memberEnrolldate;
 	private String memberStatus;
+	private String memberPk;
 	private List<TourisHeart> tourisHeartlist;
 }
