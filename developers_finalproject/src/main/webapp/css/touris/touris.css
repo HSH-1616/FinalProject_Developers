@@ -3,7 +3,7 @@
   margin: 0px;
   padding: 0px;
   list-style: none;
-  /* font-family: "GmarketSansMedium" !important; */
+  font-family: "GmarketSansMedium" !important;
 }
  a{
   cursor: pointer;
@@ -70,6 +70,7 @@ section {
   margin: 0;
   padding: 0;
   overflow: auto;
+  overflow-x: hidden;
 }
 #sidebtn{
     position: absolute;
@@ -90,7 +91,7 @@ section {
 #schedule-top{
   position:absolute;
   width: 100%;
-  height: 87%;
+  height: 83%;
   margin:0;
   padding:0;
   border-bottom: 1px solid #d9d9d9; 
@@ -122,11 +123,11 @@ section {
   margin:0;
   padding:0;
   top: 0;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #fafafa;
 }
 #traveltitle{
   font-size: 1.5rem;
@@ -164,24 +165,61 @@ section {
   letter-spacing: -1px;
   font-size: 1.2rem !important;
   text-align: center;
+  background-color: #fafafa;
 }
 #travel-weather{
     position: absolute;
+    display: flex;
     width:100%;
     height: 70%;
     left: 0;
     right: 0;
     top: 30%;
+    background-color: #3296D7;
     /* display: flex;
     justify-content: center;
     align-items: center; */
     /* margin-bottom: 16px; */
 }
-
+.weatherexarea{
+	position: relative;
+	width: 155.42px;
+	max-width: 155.42px;
+	display: grid;
+	color: ghostwhite;
+}
+.temperature{
+	position: relative;
+    
+    width: auto;
+}
+.temperature span {
+	font-size: 20px;
+	float: right;
+	position: relative;
+    top: 10px;
+}
+.wethertext{
+	position: relative;
+    width: auto;
+    
+}
+.wethertext span{
+ 	float: right;
+ 	font-size: 14px;
+    font-weight: 300;
+}
+.wethercity span{
+	float: right;
+	font-size: 14px;
+    font-weight: 300;
+	position: relative;
+    bottom: 15px;
+}
 #select-traveltitle{
   position: absolute;
   width: 100%;
-  height: 13%;
+  height: 17%;
   margin: 0;
   bottom: 0;
   padding: 0;
@@ -191,6 +229,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #d9d9d94d;
 }
 #select-traveltitle span{
   font-weight: 700
@@ -462,6 +501,17 @@ section {
   width: 100%;
   height: 90%;
 }
+.listarea2{
+  position: absolute;
+  display: none;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 90%;
+}
 .selectlist{
   /* width: 100%; */
   height: 80px;
@@ -487,24 +537,29 @@ section {
 .list-text svg{
   position: absolute;
   right: 47%;
-  bottom: 40%;
+  bottom: 35%;
   cursor: pointer;
 }
 .list-text hs{
-  font-size: 9px;
+  font-size: 12px;
   margin: 10px;
+  position: relative;
+  /*left: 15px;*/
 }
 .span1{
     position: relative;
     left: 6%;
+    top: 10px;
 }
 .span2{
   position: relative;
   left: 16%;
+  top: 20px;
 }
 .span3{
   position: relative;
   left: 10%;
+  top: 30px
 }
 .selectlist2{
   height: 80px;
@@ -834,7 +889,6 @@ color: #000;
 white-space: nowrap;
 text-overflow: ellipsis;
 overflow: hidden;
-margin: 8px 0;
 font-weight: 900;
 position: relative;
 bottom: 7%;
@@ -845,18 +899,18 @@ height: 20px;
 .modaltable{
 position: relative;
 bottom: 9%;
-width: 376.37px;
+width: 100%;
 height: 140px;
 }
 .modaltrarea{
-width: 140px;
+width: 171px;
 }
 .madaltr{
 width: 100%;
 height: 23px;
 display: flex ;
 }
-.modalth{
+.modalth, .modalthhomepage,.modalthtime, .modalthinfo, .modalthtel, .modalthusetime{
 font-size: 12.5px;
 color: #616161 !important;
 font-family: 'Montserrat';
@@ -867,10 +921,21 @@ font-weight: 500;
 vertical-align: top;
 min-width: 100px;
 }
-.modaltr2{
-width: 236.36px;
+.modalthaddress{
+font-size: 12.5px;
+color: #616161 !important;
+font-family: 'Montserrat';
+word-break: keep-all;
+margin: 7px 0;
+text-align: left;
+font-weight: 500;
+vertical-align: top;
+width: 37px;
 }
-.modaltd{
+.modaltr2{
+width: 100%
+}
+.modaltd, .modaltdtime, .modaltdhomepage,.modaltdaddress, .modaltdinfo, .modaltdusetime, .modaltdtel {
 font-size: 12.5px;
 color: #616161 !important;
 font-family: 'Montserrat';
@@ -1478,6 +1543,7 @@ border: 1px solid beige;
     margin-left: 0px;
     position: relative;
     width: auto;
+    max-width: 1400px;
 }
 
 /* 큰 모달창 검색버튼 css */
@@ -1735,6 +1801,22 @@ border: 1px solid beige;
   padding: 0;
   margin: 0;
 }
+.defaulttext{
+	display: grid;
+    justify-items: center;
+    position: relative;
+    text-align: center;
+    top: 20px;
+    color: #aaa !important;
+}
+.defaulttext span{
+}
+.defaulttext svg{
+	width: 30px;
+	height: 30px;
+	position: relative;
+    top: 10px;
+}
 .makeroutesearchlistli{
   display: flex;
   position: relative;
@@ -1748,10 +1830,18 @@ border: 1px solid beige;
   border-radius: 4px;
 }
 .makesearchimg{
-  width: 65px;
-  height: 65px;
+  width: 60px;
+  height: 60px;
   box-sizing: border-box;
   vertical-align: middle;
+  border-radius: 2px;
+  
+}
+.makeroutesearchlistliimges{
+	padding-top: 5px;
+    padding-bottom: 5px;
+    /* padding: 5px; */
+    padding-left: 5px;
 }
 .makeroutesearchlistliimgesicon{
   width: 14px;
@@ -1777,6 +1867,7 @@ border: 1px solid beige;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  width: 150px;
 }
 .makeroutelisttextarea>h7{
   font-size: 11px !important;
@@ -1859,7 +1950,18 @@ border: 1px solid beige;
     clear: both;
     padding: 3px;
     margin: 5px;
-    width: auto;
+    /*width: auto;*/
+    width: 264px;
+    display: table;
+    background-color: #fafafa !important;
+    border-radius: 3px;
+}
+#detailroutetareaid{
+	clear: both;
+    padding: 3px;
+    margin: 5px;
+    /*width: auto;*/
+    width: 264px;
     display: table;
     background-color: #fafafa !important;
     border-radius: 3px;
@@ -1929,7 +2031,7 @@ border: 1px solid beige;
 }
 .routedatailslists{
     text-align: left;
-    min-height: 50px;
+    min-height: 600px;
 }
 .arrowarea{
     display: flex;
@@ -2468,6 +2570,7 @@ border: 1px solid beige;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 .dailyroutearea{
+  display: none;
   font-size: 12px;
   overflow: auto;
   max-height: 87vh;
@@ -2634,17 +2737,165 @@ border: 1px solid beige;
   }
 }
 /*지도 오버레이 */
- .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-    .wrap * {padding: 0;margin: 0;}
-    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-    .info .close:hover {cursor: pointer;}
-    .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-    .info .link {color: #5085BB;}
+.wrap {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	width: 288px;
+	height: 132px;
+	margin-left: -144px;
+	text-align: left;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap .info {
+	width: 286px;
+	height: 120px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+	padding: 5px 0 0 10px;
+	height: 30px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.info .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #888;
+	width: 17px;
+	height: 17px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	overflow: hidden;
+}
+
+.info .desc {
+	position: relative;
+	margin: 13px 0 0 90px;
+	height: 75px;
+}
+
+.desc .ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.desc .jibun {
+	font-size: 11px;
+	color: #888;
+	margin-top: -2px;
+}
+
+.info .img {
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 73px;
+	height: 71px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+}
+
+.info:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: 0;
+	width: 22px;
+	height: 12px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.info .link {
+	color: #5085BB;
+}
+.iwcontentarea{
+	position: absolute;
+	background-color: white;
+	width: 26px;
+	height: 26px;
+	border-radius:50%;
+	padding: 2px;
+	right:-6.7px;
+	bottom: 36px;
+	align-items: center;
+	text-align: center;
+}
+.iwcontent{
+	z-index: 5;
+	/*color: white;*/
+	font-weight: 700;
+	padding-bottom: 2px;
+}
+/*조건에 대한 알려주는 태그 */
+.center-wrapper {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 30%;
+  width: 700px;
+  
+  z-index: 3;
+  text-align: center;
+  background-color: #b31312;
+}
+
+.random-tag {
+  /*background-color: #f0f0f0;*/
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #f0f0f0;
+}
+.hiddenid{
+	display: none;
+}
+.hiddencontentid{
+	display: none;
+	}
+#hiddenidtag{
+	display: none;
+}	
+/*드래그앤드롭*/
+.hide {
+    display: none;
+}
+.drag-over {
+    border: dashed 2px red;
+}
+/*ㅋㅋㅋㅋㅋ*/

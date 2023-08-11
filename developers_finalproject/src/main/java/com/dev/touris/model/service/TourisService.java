@@ -9,6 +9,8 @@ import com.dev.touris.model.vo.TourisArea;
 public interface TourisService {
 	List<TourisArea> tourisMainSelectMapPage();
 	List<TourisArea> selectTourisArea(String areaName);
-	TourisArea selecttourisarealist(String areaId);
-	List<Touris> selecttourislist(String areaId);
+	TourisArea selecttourisarealist(String areaEng);
+	List<Touris> selecttourislist(String areaEng);
+	List<Touris> searchtouris(Map<String, Object> param);
+	int inserttourismember(int loginmemberid, String tustartDate, String tuendDate, List<Map> tourismemberdata);
 }

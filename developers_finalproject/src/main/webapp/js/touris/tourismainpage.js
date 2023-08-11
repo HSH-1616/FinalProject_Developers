@@ -11,6 +11,7 @@ $(document).ready(function () {
 	        $(".totalmodaldiv").hide();
 	        $(".mainmodaldiv").hide();
 	    }
+	    
 
 	    function loadData(areaName) {
 	        // 데이터를 로드하는 함수
@@ -44,7 +45,7 @@ $(document).ready(function () {
 	                    p.insertBefore(".mainmodaltextarea");
 	                
 	                    /*const clickareaId = "location.href="+"'"+path+'${path}/touris/tourismap?areaId=" + t.areaId + "'";*/
-	                	const clickareaId = "location.href="+"'"+path+"/touris/tourismap?areaId=" + t.areaId + "'";	                    
+	                	const clickareaId = "location.href="+"'"+path+"/touris/tourismap?areaEng=" + t.areaEng + "'";	                    
 	                	$(".mainmodalbtn").attr("onclick", clickareaId);
 	                });
 

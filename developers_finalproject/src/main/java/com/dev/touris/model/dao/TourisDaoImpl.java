@@ -1,6 +1,7 @@
 package com.dev.touris.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -28,13 +29,26 @@ public class TourisDaoImpl implements TourisDao {
 		return session.selectList("touris.selecttourisarea", areaName);
 	}
 	@Override
-	public List<Touris> selecttourislist(SqlSessionTemplate session, String areaId) {
-		return session.selectList("touris.selecttourislist", areaId);
+	public List<Touris> selecttourislist(SqlSessionTemplate session, String areaEng) {
+		return session.selectList("touris.selecttourislist", areaEng);
 	}
 	@Override
-	public TourisArea selecttourisarea(SqlSessionTemplate session, String areaId) {
-		return session.selectOne("touris.selecttourisarealist", areaId);
+	public TourisArea selecttourisarea(SqlSessionTemplate session, String areaEng) {
+		return session.selectOne("touris.selecttourisarealist", areaEng);
 	}
+	@Override
+	public List<Touris> searchtouris(SqlSessionTemplate session, Map<String, Object> param) {
+		return session.selectList("touris.searchtourislist", param);
+	}
+	@Override
+	public int inserttourismember(SqlSessionTemplate session, Map tourismemberdata) {
+		return session.insert("touris.inserttourismember", tourismemberdata);
+	}
+	@Override
+	public int inserttourisroute(SqlSessionTemplate session, Map routedata) {
+		return session.insert("touris.inserttourisroute", routedata);
+	}
+	
 
 	
 }

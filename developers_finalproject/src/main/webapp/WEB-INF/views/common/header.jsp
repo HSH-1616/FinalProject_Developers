@@ -71,7 +71,7 @@
 								href="javascript:void(0)" id="kakaologout">LogOut</a></li>
 						</c:if>
 					</c:if>
-					<li class="nav-item"><a class="nav-link" href="">MyPage</a></li>
+					<li class="nav-item"><a class="nav-link" href="${path }/mypage/mypage">MyPage</a></li>
 				</ul>
 			</div>
 

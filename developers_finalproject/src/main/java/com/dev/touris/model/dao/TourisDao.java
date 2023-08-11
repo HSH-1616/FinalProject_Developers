@@ -18,4 +18,8 @@ public interface TourisDao {
 	TourisArea selecttourisarea(SqlSessionTemplate session, String areaId);
 	//여행경로 관광지 보여주는 페이지
 	List<Touris> selecttourislist(SqlSessionTemplate session, String areaId);
+	//관광지 검색어 검색했을때 뿌려주는
+	List<Touris> searchtouris(SqlSessionTemplate session, Map<String, Object> param);
+	int inserttourisroute(SqlSessionTemplate session, Map routedata);
+	int inserttourismember(SqlSessionTemplate session, Map tourismemberdata);
 }

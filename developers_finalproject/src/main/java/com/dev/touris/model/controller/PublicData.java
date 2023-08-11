@@ -15,6 +15,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,92 +28,91 @@ import com.google.gson.JsonParser;
 
 import lombok.extern.slf4j.Slf4j;
 //
-//@RestController
-//@Slf4j
-//public class PublicData {
+@RestController
+@Slf4j
+public class PublicData {
 	
-//	 @Autowired
-//	    private TourisMapper tourisMapper;
+	 @Autowired
+	    private TourisMapper tourisMapper;
 //	 
-//	@GetMapping("/api")
-////	@Transactional
-//	public ResponseEntity<String> callApi() throws IOException {
-////	12027
-////	서울, 인천, 대전,  대구, 광주,  부산,  울산, 세종특별자치시, 경기도, 강원특별자치도,충청북도, 충청남도,
-////	경상북도, 경상남도, 전라북도, 전라남도, 제주도,
-////	 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 
-////	먼저 콘텐트 ID api의 pk값을 가져오기 위한 처음 요청보낼 api주소
-////		int[] areaCode = {1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39};
-////		for (int i : areaCode) {
-//		List<Map<String, String>> list = new ArrayList();
-//		
-//			StringBuilder result = new StringBuilder();
-//
-//			String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
-//					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-//					+ URLEncoder.encode(
-//							"0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==",
-//							"UTF-8")
-//					+ "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
-//					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("12027", "UTF-8") + "&"
-//					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
-//					+ URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8") + "&"
-//					+ URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8") + "&"
-//					+ URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8");
-//			URL url = new URL(urlStr);
-//
-//			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//			urlConnection.setRequestMethod("GET");
-//
-//			BufferedReader br = new BufferedReader(
-//					new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
-//
-//			String returnLine;
-//
-//			while ((returnLine = br.readLine()) != null) {
-//				result.append(returnLine + "\n\r");
+	@GetMapping("/api")
+	@Transactional
+	public ResponseEntity<String> callApi() throws IOException {
+//	12027
+//	서울, 인천, 대전,  대구, 광주,  부산,  울산, 세종특별자치시, 경기도, 강원특별자치도,충청북도, 충청남도,
+//	경상북도, 경상남도, 전라북도, 전라남도, 제주도,
+//	 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 
+//	먼저 콘텐트 ID api의 pk값을 가져오기 위한 처음 요청보낼 api주소
+//		int[] areaCode = {1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39};
+//		for (int i : areaCode) {
+		List<Map<String, String>> list = new ArrayList();
+		
+			StringBuilder result = new StringBuilder();
+
+			String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
+					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
+					+ URLEncoder.encode(
+							"0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==",
+							"UTF-8")
+					+ "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
+					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("12027", "UTF-8") + "&"
+					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
+					+ URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8") + "&"
+					+ URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8") + "&"
+					+ URLEncoder.encode("_type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8");
+			URL url = new URL(urlStr);
+
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setRequestMethod("GET");
+
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
+
+			String returnLine;
+
+			while ((returnLine = br.readLine()) != null) {
+				result.append(returnLine + "\n\r");
 //			}
-//			urlConnection.disconnect();
-////	여기서 부터 파싱 코드
-////	파싱 객체 생성 
-////		JsonParser paraser = new JsonParser();
-////	파싱할 객체 생성
-//			JsonObject obj = JsonParser.parseString(result.toString()).getAsJsonObject();
-//			JsonArray arr = obj.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
-//					.getAsJsonObject().get("item").getAsJsonArray();
-//			for (JsonElement jsonElement : arr) {
-//				JsonObject temp = jsonElement.getAsJsonObject();
-//				Map<String, String> pklist=new HashMap();
-//				pklist.put("contentid",temp.get("contentid").getAsString());
-//				pklist.put("title", temp.get("title").getAsString());
-//				pklist.put("addr1",temp.get("addr1").getAsString());
-//				pklist.put("mapy",temp.get("mapy").getAsString());
-//				pklist.put("mapx",temp.get("mapx").getAsString());
-//				pklist.put("mlevel",temp.get("mlevel").getAsString());
-//				pklist.put("firstimage",temp.get("firstimage").getAsString());
-//				pklist.put("phone",temp.get("tel").getAsString());
-//				pklist.put("areacode",temp.get("areacode").getAsString());
-//				list.add(pklist);
-//				
-//			}
-////			System.out.println(list);
-//			for ( Map<String,String> data : list) {
-//				Touris touris = Touris.builder()
-//						.tourisId(data.get("contentid"))
-//						.tourisName(data.get("title"))
-//						.tourisAddress(data.get("addr1"))
-//						.tourislatitude(data.get("mapy"))
-//						.tourisLongitude(data.get("mapx"))
-//						.tourisLevel(data.get("mlevel"))
-//						.tourismainImge(data.get("firstimage"))
-//						.tourisPhone(data.get("phone"))
-//						.areaId(data.get("areacode")).build();
-////					System.out.println(touris);			
-//				tourisMapper.insertTouris(touris);
-//				
-//			}
-//			
-//			System.out.println("성공");
+			urlConnection.disconnect();
+//	여기서 부터 파싱 코드
+//	파싱 객체 생성 
+		JsonParser paraser = new JsonParser();
+//	파싱할 객체 생성
+			JsonObject obj = JsonParser.parseString(result.toString()).getAsJsonObject();
+			JsonArray arr = obj.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
+					.getAsJsonObject().get("item").getAsJsonArray();
+			for (JsonElement jsonElement : arr) {
+				JsonObject temp = jsonElement.getAsJsonObject();
+				Map<String, String> pklist=new HashMap();
+				pklist.put("contentid",temp.get("contentid").getAsString());
+				pklist.put("title", temp.get("title").getAsString());
+				pklist.put("addr1",temp.get("addr1").getAsString());
+				pklist.put("mapy",temp.get("mapy").getAsString());
+				pklist.put("mapx",temp.get("mapx").getAsString());
+				pklist.put("mlevel",temp.get("mlevel").getAsString());
+				pklist.put("firstimage",temp.get("firstimage").getAsString());
+				pklist.put("phone",temp.get("tel").getAsString());
+				pklist.put("areacode",temp.get("areacode").getAsString());
+				list.add(pklist);
+				
+			}
+			System.out.println(list);
+			for ( Map<String,String> data : list) {
+				Touris touris = Touris.builder()
+						.tourisId(data.get("contentid"))
+						.tourisName(data.get("title"))
+						.tourisAddress(data.get("addr1"))
+						.tourislatitude(data.get("mapy"))
+						.tourisLongitude(data.get("mapx"))
+						.tourisLevel(data.get("mlevel"))
+						.tourismainImge(data.get("firstimage"))
+						.tourisPhone(data.get("phone"))
+						.tourisAreaid(data.get("areacode")).build();
+				tourisMapper.insertTouris(touris);
+				
+			}
+			
+			System.out.println("성공");
 
 //	여기서부터 상세내용에 대한 api주소 요청
 
@@ -255,9 +255,10 @@ import lombok.extern.slf4j.Slf4j;
 //				                .build();
 //			            tourisMapper.insertTouris(touris);
 //					
-//					}
-//		return ResponseEntity.status(HttpStatus.OK).body("Data saved successfully.");
+					}
+		return ResponseEntity.status(HttpStatus.OK).body("Data saved successfully.");
 //	}
 //
 //
-//}
+}
+}

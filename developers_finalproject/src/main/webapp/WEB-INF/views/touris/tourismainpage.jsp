@@ -75,7 +75,7 @@
           <text id="LCD31" class="TEXT" x="531" y="622">울산</text>
           <text id="LCD36" class="TEXT" x="199" y="418">세종특별자치시</text>
           <text id="LCD41" class="TEXT" x="216" y="245">경기도</text>
-          <text id="LCD42" class="TEXT" x="370" y="179">강원특별자치도</text>
+          <text id="LCD42" class="TEXT" x="370" y="179">강원도</text>
           <text id="LCD43" class="TEXT" x="294" y="381">충청북도</text>
           <text id="LCD44" class="TEXT" x="105" y="449">충청남도</text>
           <text id="LCD45" class="TEXT" x="179" y="592">전라북도</text>

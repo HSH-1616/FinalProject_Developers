@@ -27,4 +27,5 @@ public class Touris {
 	private String tourisParking;
 	private String tourisStartday;
 	private String tourisDayoff;
+	private String tourisAreaid;
 }

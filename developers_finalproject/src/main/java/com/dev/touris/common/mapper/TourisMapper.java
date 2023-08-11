@@ -16,8 +16,8 @@ import com.dev.touris.model.vo.TourisArea;
 @Mapper
 public interface TourisMapper {
 	
-	@Insert("INSERT INTO TOURIS(touris_id, touris_name, touris_address, touris_latitude, touris_longitude, touris_level, touris_mainimg, touris_phone, area_id) "
-			+ "VALUES (#{tourisId}, #{tourisName}, #{tourisAddress}, #{tourislatitude}, #{tourisLongitude}, #{tourisLevel}, #{tourismainImge}, #{tourisPhone}, #{areaId})")
+	@Insert("INSERT INTO TOURIS(touris_id, touris_name, touris_address, touris_latitude, touris_longitude, touris_level, touris_mainimg, touris_phone, touris_area_id) "
+			+ "VALUES (#{tourisId}, #{tourisName}, #{tourisAddress}, #{tourislatitude}, #{tourisLongitude}, #{tourisLevel}, #{tourismainImge}, #{tourisPhone}, #{tourisAreaid})")
 	void insertTouris(Touris touris);
 	
 	@Results(id="tourismap",value= {

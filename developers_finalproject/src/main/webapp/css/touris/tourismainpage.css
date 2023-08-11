@@ -115,6 +115,11 @@ padding-top: 5rem;
 }
 .selctmap svg{
   display: flex;
+  position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 /* 선택 지도 css */
 

@@ -31,4 +31,5 @@ public class RestTourisController {
 		return service.selectTourisArea(areaName);
 	}
 	
+	
 }
