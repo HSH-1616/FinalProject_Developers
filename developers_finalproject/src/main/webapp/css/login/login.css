@@ -3,20 +3,20 @@ body {
 	background: white;
 }
 
-.container {
+.login-container {
 	display: block;
 	max-width: 800px;
 	width: 80%;
 	margin: auto;
 }
 
-.container>div:first-child {
+.login-container>div:first-child {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 }
 
-.container p {
+.login-container p {
 	color: #b31312;
 	text-align: center;
 	font-size: 1.2rem;
