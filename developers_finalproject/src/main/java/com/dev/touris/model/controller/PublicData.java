@@ -15,7 +15,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,16 +26,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import lombok.extern.slf4j.Slf4j;
-//
+
 @RestController
 @Slf4j
 public class PublicData {
 	
 	 @Autowired
 	    private TourisMapper tourisMapper;
-//	 
+	 
+	
 	@GetMapping("/api")
-	@Transactional
+//	@Transactional
 	public ResponseEntity<String> callApi() throws IOException {
 //	12027
 //	서울, 인천, 대전,  대구, 광주,  부산,  울산, 세종특별자치시, 경기도, 강원특별자치도,충청북도, 충청남도,
@@ -72,11 +72,11 @@ public class PublicData {
 
 			while ((returnLine = br.readLine()) != null) {
 				result.append(returnLine + "\n\r");
-//			}
+			}
 			urlConnection.disconnect();
 //	여기서 부터 파싱 코드
 //	파싱 객체 생성 
-		JsonParser paraser = new JsonParser();
+//		JsonParser paraser = new JsonParser();
 //	파싱할 객체 생성
 			JsonObject obj = JsonParser.parseString(result.toString()).getAsJsonObject();
 			JsonArray arr = obj.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
@@ -96,7 +96,7 @@ public class PublicData {
 				list.add(pklist);
 				
 			}
-			System.out.println(list);
+//			System.out.println(list);
 			for ( Map<String,String> data : list) {
 				Touris touris = Touris.builder()
 						.tourisId(data.get("contentid"))
@@ -109,6 +109,7 @@ public class PublicData {
 						.tourisPhone(data.get("phone"))
 						.tourisAreaId(data.get("areacode")).build();
 //					System.out.println(touris);			
+				tourisMapper.insertTouris(touris);
 				
 			}
 			
@@ -255,10 +256,9 @@ public class PublicData {
 //				                .build();
 //			            tourisMapper.insertTouris(touris);
 //					
-					}
+//					}
 		return ResponseEntity.status(HttpStatus.OK).body("Data saved successfully.");
-//	}
-//
-//
-}
+	}
+
+
 }
