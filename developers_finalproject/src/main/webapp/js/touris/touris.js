@@ -262,10 +262,10 @@ var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 var addedMarkers = []; // 마커 
 var linePath = []; // 경로 선 
 let markerIndex = 0; // 클로저를 이용하여 클릭한 순서를 기억할 변수 선언
-var inforwindow; // 숫자를 띄어주는 infowindow
+ // 숫자를 띄어주는 infowindow
 var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배열
-
 function pulastravel(){
+	
 		$(".listarea .selectlist").each(function(index, e){
 			const listtitleTextValue = $(e).find(".listtitle-text").text();
             const textaddr = $(e).find('.listtitle-textaddr').text();
@@ -287,7 +287,7 @@ function pulastravel(){
 					/*addmarkers.push(marker);*/
 					var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (index+1) + '</div></div>';
 					// 인포윈도우를 생성합니다
-					inforwindow = new kakao.maps.CustomOverlay({
+					var inforwindow = new kakao.maps.CustomOverlay({
 						content: iwContent,
 						map: map,
 						position: marker.getPosition()
@@ -302,17 +302,17 @@ function pulastravel(){
 						strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 						strokeStyle: 'solid' // 선의 스타일입니다
 					});
-					/*// 지도에 선을 표시합니다 
-					polyline.setMap(map);*/
+					// 지도에 선을 표시합니다 
 					$(document).on('click', '.select-delte', function() {
-						addmarkers.setMap(null);
-						lastInfoWindow.setMap(null);
+						marker.setMap(null);
 						polyline.setMap(null);
+						inforwindow.setMap(null);
+						
 					});
 					linePath[index] = markerPosition;
        	 			lastInfoWindow[index] = inforwindow; 
        	 			polyline.setMap(map);
-					addmarkers.push(marker);
+					addedMarkers.push(marker);
 					
 					// 인포윈도우로 장소에 대한 설명을 표시합니다
 					kakao.maps.event.addListener(marker, 'click', function() {
@@ -359,17 +359,15 @@ function pulastravel(){
 
 };
 $(document).on('click', '.delete-travel', function() {
-		 if (addedMarkers.length > 0) {
-        var markerToRemove = addedMarkers.pop();
-        markerToRemove.setMap(null); 
-    }
+	
+	addedMarkers.setMap(null);
+	pulastravel();
+	/*$(".listarea .selectlist").each(function(index) {
+		var indexWithinList = $(this).index();
+		console.log(indexWithinList);
+	});*/
+});
 
-		$(".listarea .selectlist").each(function(index) {
-			var indexWithinList = $(this).index();
-			console.log(indexWithinList);
-
-		});
-	});
 
 
 
