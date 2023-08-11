@@ -2,8 +2,7 @@ package com.dev.nc.common;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -67,6 +66,19 @@ public class FileController {
 		if(file.exists()) {
 			file.delete();
 			service.deleteNoticeFile(fileName);
+			return "true";
+		}
+		return "false";
+	}
+	
+	@PostMapping("/removeCommunityFile.do")
+	@ResponseBody
+	public String removeCommunityFile(String fileName,HttpSession session) {
+		String path=session.getServletContext().getRealPath("/upload/community/");
+		File file=new File(path+fileName);
+		if(file.exists()) {
+			file.delete();
+			communityService.removeCommunityFile(fileName, session);
 			return "true";
 		}
 		return "false";

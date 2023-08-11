@@ -50,8 +50,8 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/communityView.do")
-	public String communityView(int no,Model m,HttpServletRequest req, HttpServletResponse res) {
-		Community comuView=service.communityView(no, req, res);
+	public String communityView(int no,Model m) {
+		Community comuView=service.communityView(no);
 		
 		m.addAttribute("comuView",comuView);
 		
@@ -139,6 +139,34 @@ public class CommunityController {
 		return service.deleteReply(r);
 	}
 	
+	@GetMapping("/updateCommunity.do")
+	public String updateCommunity(Model m, int no) {
+		Community co=service.communityView(no);
+		m.addAttribute("comuView",co);
+		return "/community/communityUpdate";
+	}
+	
+	@PostMapping("/communityUpdateEnd.do")
+	@ResponseBody
+	public int communityUpdateEnd(@RequestParam("memberId") int id ,@RequestParam("communityTitle") String title, @RequestParam("communityContent") String content, @RequestParam("files") String files, int communityNo, HttpSession session) {
+		String[] file=files.split(" ");
+		Member m=Member.builder().memberId(id).build();
+		Community communityBoard=Community.builder().communityNo(communityNo).memberId(m).communityTitle(title).communityContent(content).thumbnail(file[0]).build();
+		int result=service.updateCommunity(communityBoard);
+		if(result>0) {
+			for(String f:file) {
+				CommunityFile cf=CommunityFile.builder().fileName(f).build();
+				service.communitySaveFileDB(cf);
+			};
+			return 1;
+		}else {
+			for(String f:file) {
+				service.removeCommunityFile(f, session);
+			};
+		}
+		
+		return 0;
+	}
 }
 
 

@@ -103,9 +103,10 @@
 				<a class="w-btn-outline w-btn-blue-outline" data-title="댓글달기"
 					data-bs-toggle="collapse" href="#inputComment" role="button"
 					aria-expanded="false" aria-controls="collapseComment"> 댓글쓰기 </a>
-				<!-- <button class="s-btn" >수정</button>
-				<button class="s=btn">삭제</button> -->
-				
+			<c:if test="${loginMember.memberId == comuView.memberId.memberId}">
+				<button class="s-btn ms-2" onclick="location.href='${path}/community/updateCommunity.do?no=${comuView.communityNo }'">수정</button>
+				<button class="s-btn">삭제</button>
+			</c:if>
 			
 			</div>
 		</div>

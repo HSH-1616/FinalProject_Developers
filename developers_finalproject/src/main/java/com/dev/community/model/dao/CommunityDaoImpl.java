@@ -118,6 +118,12 @@ public class CommunityDaoImpl implements CommunityDao {
 		return session.delete("community.deleteReplies",replyNo);
 	}
 
+	@Override
+	public int updateCommunity(SqlSession session, Community c) {
+		
+		return session.update("community.updateCommunity",c);
+	}
+
 	
 
 }

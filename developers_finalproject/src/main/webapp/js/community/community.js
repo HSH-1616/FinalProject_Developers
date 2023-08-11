@@ -180,7 +180,7 @@ const replyList=()=>{
 						str+="<button class='reply-update s-btn m-2' data-name='"+i.replyNo+"' >수정</button>";
 					}
 					if(memberId==i.memberId.memberId){
-						str+="<button class='reply-delete s-btn' onclick='deleteReply("+i.replyLevel+","+i.replyNo+")'>삭제</button>";
+						str+="<button class='reply-delete s-btn mx-2' onclick='deleteReply("+i.replyLevel+","+i.replyNo+")'>삭제</button>";
 					}
 					str+="<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies"+i.replyNo+"' role='button'"
 					+"aria-expanded='false' aria-controls='collapseComment'> 댓글쓰기 </a>";
@@ -271,6 +271,26 @@ const deleteReply=(level,no)=>{
 		}
 	})
 }
+
+$(".file-del").click(()=>{
+	let target=$(this);
+	const fileName= target.data("name");
+			$.ajax({
+			url: "/ncCommon/removeCommunityFile.do",
+			data: { fileName: fileName },
+			type: "post",
+			success: (data) => {
+
+				if (data == "true") {
+					console.log("파일삭제");
+				}
+				else {
+					alert("삭제실패");
+				}
+
+			}
+		});
+})
 
 
 

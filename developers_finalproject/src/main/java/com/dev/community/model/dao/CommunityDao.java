@@ -31,4 +31,5 @@ public interface CommunityDao {
 	int updateReply(SqlSession session,Reply r);
 	int deleteReply(SqlSession session,int replyNo);
 	int deleteReplies(SqlSession session, int replyNo);
+	int updateCommunity(SqlSession session, Community c);
 }

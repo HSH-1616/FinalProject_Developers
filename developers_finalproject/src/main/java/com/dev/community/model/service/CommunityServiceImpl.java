@@ -39,7 +39,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public Community communityView(int no, HttpServletRequest req, HttpServletResponse res) {
+	public Community communityView(int no) {
 		
 		return dao.communityView(session, no);
 	}
@@ -173,6 +173,12 @@ public class CommunityServiceImpl implements CommunityService {
 			return dao.deleteReply(session, replyNo);
 		}
 		return dao.deleteReplies(session, replyNo);
+	}
+
+	@Override
+	public int updateCommunity(Community c) {
+		
+		return dao.updateCommunity(session, c);
 	}
 	
 	
