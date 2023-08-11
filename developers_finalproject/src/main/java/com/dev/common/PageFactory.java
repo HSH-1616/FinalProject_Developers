@@ -66,7 +66,3 @@ public static String getPage(int cPage, int numPerpage, int totalData, String ur
 
 }
    
-   
-   
-   
-}
