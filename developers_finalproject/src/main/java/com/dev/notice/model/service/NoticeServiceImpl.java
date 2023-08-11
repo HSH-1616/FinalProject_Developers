@@ -90,7 +90,7 @@ public class NoticeServiceImpl implements NoticeService {
 				dao.noticeViewCountUp(session, no);
 				oldCookie.setValue(oldCookie.getValue()+"_["+noticeNo+"]");
 				oldCookie.setPath("/");
-				oldCookie.setMaxAge(60*60*1);
+				oldCookie.setMaxAge(60*60*12);
 				res.addCookie(oldCookie);
 			}
 		}else {

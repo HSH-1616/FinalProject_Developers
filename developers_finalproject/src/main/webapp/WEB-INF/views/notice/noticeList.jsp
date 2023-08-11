@@ -45,25 +45,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:choose>
-			<c:when test="${empty noticeList }">
-				 <tr>
-					<td colspan="5">조회된 공지사항이 없습니다.</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="n" items="${ noticeList}">
-				<tr>
-					<td>${n.noticeNo }</td>
-					<td><a href="${path }/notice/noticeView.do?no=${n.noticeNo}">${n.noticeTitle }</a>
-					</td>
-					<td>관리자</td>
-					<td>${n.noticeViews }</td>
-					<td>${n.writeDate }</td>
-				</tr>
-				</c:forEach>
-				</c:otherwise>
-			</c:choose>
+	
 			</tbody>
 		</table>
 		<div class="text-end">
@@ -78,21 +60,7 @@
 
 	<div class="board-pasing">
 		<nav aria-label="notice-pageNav">
-			<!-- <ul class="pagination justify-content-center">
-			  <li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-				  <span aria-hidden="true">&laquo;</span>
-				</a>
-			  </li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-				  <span aria-hidden="true">&raquo;</span>
-				</a>
-			  </li>
-			</ul> -->
+	
 		  </nav>
 	</div>
 </div>

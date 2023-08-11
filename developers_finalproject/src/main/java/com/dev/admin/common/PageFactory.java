@@ -1,8 +1,9 @@
-package com.dev.common;
+package com.dev.admin.common;
+
+import java.util.Map;
 
 public class PageFactory {
-
-public static String getPage(int cPage, int numPerpage, int totalData, String url) {
+public static String getPage(int cPage, int numPerpage, int totalData, String url,Map type) {
 		
 		//매개변수값을 이용해서 pageBar만들어주는 함수
 		StringBuffer pageBar=new StringBuffer();
@@ -56,17 +57,18 @@ public static String getPage(int cPage, int numPerpage, int totalData, String ur
 		
 		pageBar.append("<script>");
 		pageBar.append("function fn_paging(no){");
-		pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');");
+		if(type.isEmpty()) {
+			pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"');");
+		}else {
+			String typeId=(String)type.get("typeId");
+			String value=(String)type.get("value");
+			pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"&"+typeId+"="+value+"');");
+		}
 		pageBar.append("}");
 		pageBar.append("</script>");
 		
 		return new String(pageBar);
 	}
 	
+}
 
-}
-   
-   
-   
-   
-}
