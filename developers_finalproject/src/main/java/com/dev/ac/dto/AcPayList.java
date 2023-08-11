@@ -2,6 +2,8 @@ package com.dev.ac.dto;
 
 import java.sql.Date;
 
+import com.dev.member.model.dto.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,16 +13,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AcPay {
+public class AcPayList {
 	private int apId;
-	private int acId;
-	private String memberId;
 	private int apPrice;
 	private Date apDate;
 	private Date apReDate;
+	private Date checkIn;
+	private Date checkOut;
 	private int apPeople;
 	private char apCancel;
 	private String apOrderId;
 	private String apKeyId;
-	AcReservation arv;
+	private Accommodation acDetail;
+	private Member member;
 }

@@ -1,19 +1,21 @@
 package com.dev.ac.dto;
 
+import java.io.Serializable;
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode(exclude = {"afMain","acId"})
-public class AcFile {
-	private int afId;
+public class AcReservation{
+	private int arvId;
 	private int acId;
-	private String afName;
-	private char afMain;
+	private int apId;
+	private Date checkIn;
+	private Date checkOut;
 }

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+SELECT * FROM ACCOMMODATION a ;
+SELECT * FROM AC_FILE;
+=======
 
 SELECT * FROM FOOD;
 SELECT COUNT(*) FROM FOOD;
@@ -86,3 +90,4 @@ SELECT *
 FROM FOOD_TEMP
 WHERE EXISTS(SELECT * FROM FOOD_TEMP WHERE FOOD_NO != NULL);
 
+>>>>>>> branch 'main' of https://github.com/HSH-1616/FinalProject_Developers
