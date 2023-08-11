@@ -36,7 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","loginAdmin"})
 @RequestMapping("/member")
 public class MemberController {
 
@@ -56,8 +56,10 @@ public class MemberController {
 	@GetMapping("/KakaoLoginCheck")
 	@ResponseBody
 	public Member KakaoLoginCheck(@RequestParam Map param) {
+		System.out.println("여기오니?");
 		String memberEmail=(String)param.get("memberEmail");
 		Member m=service.selectByEmail(memberEmail);
+		System.out.println(m);
 		return m;
 	}
 	@GetMapping("/Kakaoenroll")

@@ -6,22 +6,18 @@
 
 
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
-      type="text/css"
-    />
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+	<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>   
     <section>
     <div class="card-box-write">
     <div style="margin-top:2%;">
      	<h2>게시글 작성</h2>
      	</div>
-        <form action="" class="card-box-form">
+        <form class="card-box-form">
       
-        <div class="card-box">
-            <div class="card" style="width:1300px;">
+        <div class="co-card-box">
+            <div class="card" style="width:40rem;">
                 <div class="registImgCon form-control">
                     <div class="registImg">
                       <div class="dropzone" id="dropDiv"></div>
@@ -85,15 +81,15 @@
                     
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">제목</label>
-                        <input type="text" class="form-control border border-danger" id="exampleFormControlInput1">
+                        <input type="text" class="form-control border border-danger" id="communityTitle">
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-                        <textarea class="form-control border border-danger" id="exampleFormControlTextarea1" rows="7"></textarea>
+                        <textarea class="form-control border border-danger" id="communityContent" rows="7"></textarea>
                       </div>
                     
                       <div class="comu-buttons">
-                        <button class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
                         <button class="w-btn w-btn-gray-outline">취소</button>
                       </div>
                     
@@ -108,7 +104,9 @@
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
-
+		let memberId="<c:out value='${loginMember.memberId}' escapeXml="false"/>";
+		
+		
         Dropzone.autoDiscover = false;
         var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
         dropzonePreviewNode.id = "";
@@ -118,11 +116,11 @@
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
         
-        url: "/notice/uploadFile.do", // 파일을 업로드할 서버 주소 url.
-        method: "post", // 기본 post로 request 감. put으로도 할수있음
+        url: "/ncCommon/communityUploadFile.do", 
+        method: "post", 
         uploadMultiple: true,
         maxFiles: 5,
-        maxFilesize: 5,
+        maxFilesize: 10,
         parallelUploads: 5,
         acceptedFiles: "image/*",
         previewTemplate: previewTemplate, // 만일 기본 테마를 사용하지않고 커스텀 업로드 테마를 사용하고 싶다면
@@ -133,15 +131,42 @@
                 let myDropzone = this; //closure
                 submitButton.addEventListener("click", function () {
                     console.log("업로드"); //tell Dropzone to process all queued files
-                    if (myDropzone.getRejectedFiles().length > 0) {
-                        let files = myDropzone.getRejectedFiles();
-                        alert("거부된 파일이 있습니다");
-                        return;
-                     }
                     myDropzone.processQueue();
+                });
+                this.on("successmultiple", function(files, response){
+         
+                	let fileNames=files[0].xhr.responseText;
+                	
+                 	$.ajax({
+                		url: "/community/communityWrite.do",
+                		type:"post",
+                		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
+                			communityContent: $("#communityContent").val(), files:fileNames },
+                		success:(data)=>{
+                			if(data>0){
+                				location.replace("<c:out value='${path}'/>/community/communityList.do");
+                			}else{
+                				alert("글작성 실패");
+                			}
+                		}
+                	});  
+                	
+                	
+                	
+                	
                 });
             },
         });
   </script>
 
-</html>
+
+
+
+
+
+
+
+
+
+
+

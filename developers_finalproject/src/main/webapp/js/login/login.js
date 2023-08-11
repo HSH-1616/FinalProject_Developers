@@ -110,7 +110,7 @@ const googlelogin=()=>{
 								console.log(kakao_account);
 								email=kakao_account.email;
 								nickname=kakao_account.profile.nickname;
-								image=kakao_account.profile.profile_image_url;
+								image=kakao_account.profile.thumbnail_image_url;
 								console.log(email,nickname,image);
 									$.ajax({
 										type:"get",

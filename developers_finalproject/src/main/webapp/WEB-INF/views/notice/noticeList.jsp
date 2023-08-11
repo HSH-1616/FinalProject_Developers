@@ -16,14 +16,14 @@
 <div class="title text-align"><h3 class="text-center">공지사항</h3></div>
         
 <div class="search-notice text-end mt-3">
-	<form action="/notice/searchNotice.do" class="search-form" >
+	<form  class="search-form" ><!-- action="/notice/searchNotice.do" -->
 	<select name="type">
 		<option value="titile">제목</option>
 		<option value="content">내용</option>
 		<option value="title_content">제목+내용</option>
 	</select>
 	<input type="text" name="keyword" placeholder="검색어를 입력해주세요">
-	<button type="submit" class="" >검색</button><!-- onclick="searchNotice(); -->
+	<button type="button" class="" onclick="searchNotice();">검색</button>
 	</form>
 </div>  
 <div class="list-area mt-3">
@@ -45,25 +45,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:choose>
-			<c:when test="${empty noticeList }">
-				 <tr>
-					<td colspan="5">조회된 공지사항이 없습니다.</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="n" items="${ noticeList}">
-				<tr>
-					<td>${n.noticeNo }</td>
-					<td><a href="${path }/notice/noticeView.do?no=${n.noticeNo}">${n.noticeTitle }</a>
-					</td>
-					<td>관리자</td>
-					<td>${n.noticeViews }</td>
-					<td>${n.writeDate }</td>
-				</tr>
-				</c:forEach>
-				</c:otherwise>
-			</c:choose>
+	
 			</tbody>
 		</table>
 		<div class="text-end">
@@ -78,21 +60,7 @@
 
 	<div class="board-pasing">
 		<nav aria-label="notice-pageNav">
-			<ul class="pagination justify-content-center">
-			  <li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-				  <span aria-hidden="true">&laquo;</span>
-				</a>
-			  </li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-				  <span aria-hidden="true">&raquo;</span>
-				</a>
-			  </li>
-			</ul>
+	
 		  </nav>
 	</div>
 </div>

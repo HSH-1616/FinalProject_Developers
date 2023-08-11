@@ -13,12 +13,14 @@ import com.dev.notice.model.dto.Notice;
 
 public interface NoticeService {
 
-	List<Notice> noticeList();
+	List<Notice> noticeList(Map<String, Object> paging);
 	Notice noticeView(int no,HttpServletRequest req, HttpServletResponse res);
 	int insertNotice(Notice m);
 	int deleteNotice(int no);
 	int deleteNoticeFile(String fileName);
 	String saveFile(MultipartFile file,HttpSession session);
 	int updateNotice(Notice n);
-	List<Notice> searchNotice(Map<String, Object> params);
+	List<Notice> searchNotice(Map<String, Object> params,Map<String, Object> paging);
+	int noticeCount();
+	
 }

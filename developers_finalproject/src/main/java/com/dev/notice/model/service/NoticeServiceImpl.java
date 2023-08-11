@@ -31,9 +31,9 @@ public class NoticeServiceImpl implements NoticeService {
 		this.session=session;
 	}
 	@Override
-	public List<Notice> noticeList() {
+	public List<Notice> noticeList(Map<String, Object> paging) {
 		
-		return dao.noticeList(session);
+		return dao.noticeList(session,paging);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class NoticeServiceImpl implements NoticeService {
 				dao.noticeViewCountUp(session, no);
 				oldCookie.setValue(oldCookie.getValue()+"_["+noticeNo+"]");
 				oldCookie.setPath("/");
-				oldCookie.setMaxAge(60*60*1);
+				oldCookie.setMaxAge(60*60*12);
 				res.addCookie(oldCookie);
 			}
 		}else {
@@ -114,9 +114,14 @@ public class NoticeServiceImpl implements NoticeService {
 		return dao.updateNotice(session, n);
 	}
 	@Override
-	public List<Notice> searchNotice(Map<String, Object> params) {
+	public List<Notice> searchNotice(Map<String, Object> params, Map<String, Object> paging) {
 		
-		return dao.searchNotice(session,params);
+		return dao.searchNotice(session,params,paging);
+	}
+	@Override
+	public int noticeCount() {
+		
+		return dao.noticeCount(session);
 	}
 
 	
