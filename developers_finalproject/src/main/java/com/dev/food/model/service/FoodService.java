@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodTemp;
 
@@ -25,6 +26,8 @@ public interface FoodService {
 	
 	List<Food> selectFoodAll (Map<String,Object> param);
 	
+	List<Food> foodListTitle(Map<String,Object> param);
+	
 	List<Food> selectFoodAllTest ();
 	
 	List<Food> selectFoodByFoodNo (int foodNo);
@@ -35,9 +38,12 @@ public interface FoodService {
 	
 	String searchByFoodNo(int foodNo);
 
-	/* list<food> getsortedfoods(string sortfilter,int cpage, int numperpage); */
-
 	List<Food> searchFood(Map<String, Object> params);
+	
+	FoodHeart getFoodById(String memberId);
+	
+	int toggleHeartAndGetCount(Map params);
 
+	/* list<food> getsortedfoods(string sortfilter,int cpage, int numperpage); */
 	
 }

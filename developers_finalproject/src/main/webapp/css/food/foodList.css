@@ -1,5 +1,5 @@
 form.searchForm {
-    margin-right: 18%;
+    margin-right: 16%;
 }
 
 div#pageBar {
@@ -280,7 +280,6 @@ img.heart {
 	width: 20px;
 	height: 20px;
 	margin-right: 3px;
-	/* text-decoration: none; */
 }
 
 span.heart_count {
@@ -548,5 +547,5 @@ button#food_add {
     width: 90px;
     position: relative;
     top: 12px;
-    left: 340px;
+    left: 253px;
 }

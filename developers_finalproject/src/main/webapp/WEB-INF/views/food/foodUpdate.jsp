@@ -42,7 +42,7 @@
                 <th>상호명</th>
                 <td><input type="text" class="" placeholder="상호명을 입력해주세요." name="" id="" required></td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th>음식 종류</th>
                 <td>
                   <form class="low_theme">
@@ -72,7 +72,7 @@
                       </p>
                   </form>        
                 </td>
-            </tr>
+            </tr> -->
             <tr>
                 <th>상세 위치</th>
                 <td><div style="display: flex;">
@@ -90,10 +90,13 @@
             </tr>
             <tr>
                 <th>첨부사진</th>
-                <td><input type="file" class="real-upload" accept="image/*" required multiple>
-                  <div class="upload"></div>
-                  <ul class="image-preview"></ul>
-                </td>
+                <td>
+                	<form action="/submit" method="post" enctype="multipart/form-data">
+						<input type="file" class="real-upload" accept="image/*" required multiple>
+						<div class="upload"></div>
+						<ul class="image-preview"></ul>
+					</form>
+				</td>
             </tr>
         </table>
     </div>
@@ -105,9 +108,7 @@
     </div>
     <!-- /맛집 등록하는 버튼 -->
 
-    <div class="bt_list">
-        <button id="food_list" onclick="location.href='${path }/food/foodBackList.do'">목록</button>
-    </div>
 </section>
+
 <script src="${path }/js/food/foodUpdate.js"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 

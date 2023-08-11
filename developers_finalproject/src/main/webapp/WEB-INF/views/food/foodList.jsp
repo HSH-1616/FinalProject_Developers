@@ -48,6 +48,7 @@
 		<nav id="food_menu">
 		<input type="hidden" id="sortFilter" value="sortFilter">
 			<ul>
+			<%-- href="${path}/food/foodListTitle.do" --%>
 				<li class="bar">|</li>
 				<li class="menu_style" id="all"><span class="color_ch">제목순</span></li>
 				<li class="bar">|</li>
@@ -140,4 +141,6 @@
 	<!-- /페이지바 -->
 
 </section>
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -15,13 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
@@ -42,9 +43,6 @@ public class FoodController {
 	public FoodController(FoodService service) {
 		this.service = service;
 	}
-	
-	
-	
 	
 	@GetMapping("/foodList.do")
 	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
@@ -79,7 +77,22 @@ public class FoodController {
 	@RequestMapping("/insertFood.do")
 	public String insertFood() {
 		
-		return "/food/foodUpdate";
+		return "food/foodUpdate";
+	}
+	
+	@RequestMapping("/foodListTitle.do")
+	public String foodListTitle(@RequestParam(value="cPage",defaultValue ="1") int cPage, 
+			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m) {
+		
+		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
+		int totalData=service.selectFoodCount();
+		
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("foods",foods);		
+		
+		return "food/foodListTitle";
 	}
 	
 	@GetMapping("/foodApi")
@@ -165,6 +178,7 @@ public class FoodController {
 				}
 			}
 		}
+		
 		//DB 불러오는 과정
 		List<Food> foods = service.selectFoodAllTest(); //FOOD + FOODPHOTO
 		System.out.println("flag : "+foods);
@@ -208,6 +222,7 @@ public class FoodController {
 			while ((returnLine2 = br2.readLine()) != null) {
 				result2.append(returnLine2 + "\n\r");
 			}
+			
 			urlConnection2.disconnect();
 			
 			//여기서 부터 파싱 코드
@@ -255,8 +270,6 @@ public class FoodController {
 		return "/food/foodView";
 	}
 	
-	
-	
 //	@GetMapping("/foodImgApi")
 	public void foodImgApi(int foodNo) throws IOException,Exception {
 
@@ -284,6 +297,7 @@ public class FoodController {
 		while ((returnLine3 = br3.readLine()) != null) {
 			result3.append(returnLine3 + "\n\r");
 		}
+		
 		urlConnection3.disconnect();
 		
 		//여기서 부터 파싱 코드
@@ -320,7 +334,30 @@ public class FoodController {
 		}
 	}
 	
+	//좋아요 기능
+	@ResponseBody
+    @PostMapping("/food/toggleHeart")
+    public int toggleHeart(@RequestParam Map params, int fhNo, String memberId, int foodNo) {
+       
+		params.put("fhNo", fhNo);
+        params.put("memberId", memberId);
+        params.put("foodNo", foodNo);
 
+        int updatedCount = service.toggleHeartAndGetCount(params);
+        return updatedCount;
+    }
+	
+	/*
+	 * //분류기능(제목)
+	 * 
+	 * @GetMapping("/foodListTitle.do") public String
+	 * foodListTitle(@RequestParam("sortFilter") String sortFilter, Model model) {
+	 * // 여기에서 sortFilter를 기준으로 필요한 데이터를 가져오는 로직을 구현 // 데이터를 모델에 담아서 JSP로 전달
+	 * model.addAttribute("foods", sortedFoods); // foods는 JSP에서 사용하는 변수명, 가져온 데이터를
+	 * 할당해야 합니다.
+	 * 
+	 * return "foodList	"; }
+	 */
 	
 	
 	

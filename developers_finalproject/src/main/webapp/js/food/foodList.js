@@ -1,3 +1,75 @@
+//좋아요
+$(document).ready(function () {
+    $(".con-like").click(function () {
+        var heartCountElement = $(this).siblings(".countDiv").find(".heart_count");
+        var currentHeartCount = parseInt(heartCountElement.text(), 10);
+        
+        console.log(heartCountElement);
+        console.log(currentHeartCount);
+        $.ajax({
+				url:"/food/toggleHeart",
+				type:"post",
+				data:{heartCountElement : heartCountElement, currentHeartCount : currentHeartCount},
+				success:(data)=>{
+					console.log(data);
+				}
+				
+			});
+        if ($(this).prop("checked")) {
+            heartCountElement.text(currentHeartCount + 1);
+            
+        } else {
+			
+            if (currentHeartCount > 0) {
+                heartCountElement.text(currentHeartCount - 1);
+            }
+        }
+    });
+});
+
+
+function sortFoodList(sortType) {
+    // 서버 요청을 보낼 URL 설정 (적절한 URL로 변경해야 함)
+    var url = "${path}/food/sortFoodList.do";
+    
+    // AJAX를 이용한 POST 요청
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // 성공적으로 응답을 받았을 때, 응답 데이터를 이용해 목록을 업데이트
+                var response = JSON.parse(xhr.responseText);
+                updateFoodList(response.foods);
+            } else {
+                console.error("Error:", xhr.statusText);
+            }
+        }
+    };
+    xhr.send("sortType=" + sortType);
+}
+
+// 음식 목록 업데이트 함수
+function updateFoodList(foods) {
+    var foodListContainer = document.querySelector(".food_main_list");
+    foodListContainer.innerHTML = ""; // 목록 비우기
+    
+    for (var i = 0; i < foods.length; i++) {
+        // 음식 정보를 이용하여 각 목록 아이템 생성
+        var f = foods[i];
+        var foodItem = `
+            <div class="food_list">
+                <!-- ... 음식 정보 표시 ... -->
+            </div>
+        `;
+        foodListContainer.innerHTML += foodItem;
+    }
+}
+
+
+
+
 function updateFoodList(sortFilter) {
     // Make an AJAX request to the server with the chosen sortFilter
     const xhr = new XMLHttpRequest();
@@ -157,10 +229,31 @@ window.onload = function() {
   
   
   
-  
-  
-  
-  
-  
-  
+  // 페이지가 로드되었을 때 실행되는 함수
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 좋아요 버튼에 이벤트 리스너 등록
+    var likeButtons = document.querySelectorAll(".like");
+    likeButtons.forEach(function(button) {
+        button.addEventListener("change", function() {
+            // 선택된 버튼의 음식 아이디 가져오기
+            var foodId = button.getAttribute("data-food-id");
+            if (button.checked) {
+                incrementLike(foodId);
+            } else {
+                decrementLike(foodId);
+            }
+        });
+    });
+});
+
+
+
+// 숫자 업데이트 함수
+function updateLikeCount(foodId, change) {
+    var likeCountElement = document.getElementById("likeCount_" + foodId);
+    var currentCount = parseInt(likeCountElement.textContent);
+    var newCount = currentCount + change;
+    likeCountElement.textContent = newCount;
+}
+
   
