@@ -13,6 +13,33 @@
 <link rel="stylesheet" href="${path }/css/touris/tourisDetail.css" />
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0e169307572ef60ba8671f2af4eaff4&libraries=services,clusterer"></script>
+<style>
+.yoonBtn{
+   display: flex;
+   justify-content: center;
+   font-weight: 400;
+   text-align: center;
+   border: 1px solid transparent;
+   padding: .375rem .75rem;
+   font-size: 1rem;
+   line-height: 1.5;
+   border-radius: .25rem;
+   margin-bottom : 30px;
+   text-align: center;
+}
+.btnColorDefault{
+   background-color: #ffffff;
+   color: #424242;
+}
+.btnColorRed{
+   background-color: rgb(179, 19, 18);
+   color: #ffffff;
+}
+
+.yoonBtn:hover{
+   background-color: #cccccc;
+}
+</style>
 <script>
 	var tourisId="${touris.tourisId}";
 	if('${loginMember}'==''){
@@ -230,6 +257,11 @@
 			</div>
 		</div>
 	</div>
+	<c:if test="${empty loginMember and not empty loginAdmin }">
+	<div class="d-flex justify-content-center">
+			<button class="yoonBtn btnColorRed" onclick="history.back(-1);" style="justify-content:center; width:500px;">목록으로</button>
+	</div>
+	</c:if>
 	<script>
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host) + location.host.length;

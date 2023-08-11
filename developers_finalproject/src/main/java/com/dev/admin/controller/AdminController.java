@@ -148,6 +148,7 @@ public class AdminController {
 		List<Touris> tourises=service.selectBytourisAreaId(param);
 		int totalData=service.selectBytourisAreaIdCount(param);
 		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectBytourisAreaId",type));
+		m.addAttribute("totalData",totalData);
 		m.addAttribute("tourises",tourises);
 		m.addAttribute("tourisAreaId",data.get("tourisAreaId"));
 		return "admin/tourisList";

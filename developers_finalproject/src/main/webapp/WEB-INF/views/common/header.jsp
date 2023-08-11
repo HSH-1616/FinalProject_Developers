@@ -38,15 +38,22 @@
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 			</div>
 			<div id="userProfile">
-				<img src="${path }/images/common/user.jpg" alt="" />
-				<p>UserId</p>
-				<button>MyPage</button>
-				<b> | </b>
-				<button>Logout</button>
+				<c:if test="${empty loginMember }">
+					<p>로그인 후 이용해주세요</p>
+				</c:if>
+				<c:if test="${not empty loginMember }">
+					<img src="${loginMember.memberImage}" alt="" />
+					<p>${loginMember.memberNickname }</p>
+					<button>MyPage</button>
+					<b> | </b>
+					<button><a class="nav-link active" href="${path }/member/logout">Logout</a></button>
+				</c:if>
 			</div>
+			<c:if test="${not empty loginMember }">
 			<div class="offcanvas-body">
 				<p>예약내역</p>
 			</div>
+			</c:if>
 		</div>
 		<nav class="navbar navbar-expand-sm navbar-dark fixed-top drop">
 			<a href="${path}/"> <img id="headerLogo"

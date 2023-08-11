@@ -18,6 +18,9 @@
 	<div class="container-fluid full-width row">
 	    <div class="col my-5">
 	        <h3 class="fs-4 mb-3">관광지 관리</h3>
+	        <div>
+	        	<span>${totalData}개 / ?개</span>
+	        </div>
 				<div id="search-container" class="d-flex w-30 h-10" style="float:right;">
 		        	검색타입 : &nbsp;
 		        	<select id="searchType" class="mb-3" style="width:100px; height:30px;">
@@ -150,7 +153,7 @@
 		                        	<td>-</td>
 		                        </c:otherwise>
 	                        </c:choose>
-	                        <td><button type="button" class="btn btn-outline-dark btn-sm" onclick="">삭제</button></td>
+	                        <td><button type="button" class="btn btn-outline-dark btn-sm" onclick="pageDetail('${t.tourisId}')">상세보기</button></td>
 	                    </tr>
 	                </c:forEach>
 	                </tbody>
@@ -165,6 +168,9 @@
 	    
 	</div>
 <script>
+function pageDetail(tourisId){
+	location.assign('${path}/tourisDetail/selectById?tourisId='+tourisId);
+}
 $(()=>{
    	$("#searchType").change(e=>{
    		const type=$(e.target).val();

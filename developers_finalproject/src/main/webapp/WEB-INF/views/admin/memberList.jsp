@@ -93,7 +93,7 @@
 	                        <th scope="col">회원관리</th>
 	                    </tr>
 	                </thead>
-	                <tbody>
+	                <tbody id="m-blackList">
 	                <c:forEach var="b" items="${blacks}" varStatus="no">
 	                    <tr>
 	                        <th scope="row">${no.index+1}</th>
@@ -127,10 +127,18 @@
 	                </tbody>
 	            </table>
 	        </div>
+    	    <div class="pageBar2">
+	            <c:if test="${not empty pageBar2 }">
+	            	${pageBar2}
+	           	</c:if>
+            </div>
 	    </div>
 	    
 	</div>
 	<script>
+	$(()=>{
+		
+	})
 	const selectMember=()=>{
 		let index = $("#m-selectMember option").index($("#m-selectMember option:selected"));
 		let memberCategory=$("#m-selectMember").val();
