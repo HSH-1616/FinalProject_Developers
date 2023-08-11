@@ -22,4 +22,5 @@ public interface NoticeService {
 	int updateNotice(Notice n);
 	List<Notice> searchNotice(Map<String, Object> params,Map<String, Object> paging);
 	int noticeCount();
+	
 }
