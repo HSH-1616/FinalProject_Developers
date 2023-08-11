@@ -1,6 +1,7 @@
 package com.dev.common;
 
 public class PageFactory {
+
 public static String getPage(int cPage, int numPerpage, int totalData, String url) {
 		
 		//매개변수값을 이용해서 pageBar만들어주는 함수
@@ -62,5 +63,6 @@ public static String getPage(int cPage, int numPerpage, int totalData, String ur
 		return new String(pageBar);
 	}
 	
-}
 
+}
+   
