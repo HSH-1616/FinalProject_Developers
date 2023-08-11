@@ -24,4 +24,5 @@ public class Food {
 	private int foodReadCount;
 	private List<FoodPhoto> foodPhoto;
 	private List<FoodReview> foodReview;
+
 }

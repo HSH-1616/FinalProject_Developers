@@ -156,8 +156,6 @@ const dropzone = new Dropzone(".dropzone", {
 		this.on('success', function(data) {
 			
 			fileName = data.xhr.response;
-			console.log(data);
-			console.log(fileName);
 			var str = "";
 	
 			str += "<div>";

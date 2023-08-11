@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dev.member.model.dto.Member;
@@ -222,12 +223,14 @@ public class TourisDetailController {
 	}
 	
 	@GetMapping("/insertHeart")
+	@ResponseBody
 	public void insertHeart(@RequestParam Map param, Model model) {
 		service.insertHeart(param);
 		Member m=service.selectByIdforMember(param);
 		model.addAttribute("loginMember",m);
 	}
 	@GetMapping("/deleteHeart")
+	@ResponseBody
 	public void deleteHeart(@RequestParam Map param, Model model) {
 		service.deleteHeart(param);
 		Member m=service.selectByIdforMember(param);

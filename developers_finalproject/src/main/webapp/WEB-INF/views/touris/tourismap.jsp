@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관광경로만들기 해당페이지</title>
+<script>
+ 	const latitude = '${titletouris.areaLatitude}';
+	const Longitude = '${titletouris.areaLongitude}';
+	const path='${path}';
+	const tourisAreaid = '${titletouris.areaId }';
+	const loginmemberid = '${loginMember.memberId}';
+</script>
 </head>
 <body>
+
 <jsp:include page="/WEB-INF/views/touris/tourisheader.jsp"/> 
 	<section>
       <div class="" id="sidebar-left">
@@ -16,21 +27,101 @@
         <div id="schedule-area">
           <div id="schedule-top">
             <div id="travelarea">
-              <div id="traveltitle">제주도</div>
-              <div>Jeju Island</div>
-              <div id="travels-chedule">3일</div>
+              		<div id="traveltitle">${titletouris.areaName}</div>
+              		<div>${titletouris.areaEng }</div>
+              <div id="travels-chedule"></div>
             </div>
             <div id="travelplan">
               <div id="travelplan-input"><input type="text" id="calander" name="datefilter" value onfocus="blur()" /></div>
               <div id="travel-weather">
-                <img src="https://cdn.icon-icons.com/icons2/2106/PNG/512/night_rain_weather_icon_129629.png" alt="" width="100px" height="100px">
+              <div class="weatherimgarea">
+                <img src="http://openweathermap.org/img/w/${weatherIcon}.png" alt="" width="120px" height="120px">
+              </div>
+              <div class="weatherexarea">
+              	<div class="temperature"><span>${temperature } &#8451;</span></div>
+              	<div class="wethertext"><span>${weatherDescription }</span></div>
+              	<div class="wethercity"><span>${city }, ${country }</span></div>
+              </div>
               </div>
             </div>
           </div>
-          <div id="select-traveltitle">
-            <span>선택목록</span>
-          </div>
-          </div>
+					<div id="select-traveltitle">
+						<div class="weatherbottomarea"
+							style="display: flex; width: 290.13px; justify-content: space-around;">
+							<div style="display: grid">
+								<svg version="1.1" id="Layer_1"
+									xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									viewBox="0 0 30 30" style="enable-background: new 0 0 30 30;"
+									width="30" height="30" xml:space="preserve">
+     <path
+										d="M3.1,16.97c0,0.24,0.09,0.45,0.28,0.62c0.16,0.19,0.37,0.28,0.63,0.28H18.7c0.29,0,0.53,0.1,0.73,0.3
+       c0.2,0.2,0.3,0.45,0.3,0.74c0,0.29-0.1,0.53-0.3,0.72c-0.2,0.19-0.44,0.29-0.74,0.29c-0.29,0-0.54-0.1-0.73-0.29
+       c-0.16-0.18-0.36-0.26-0.6-0.26c-0.25,0-0.46,0.09-0.64,0.26s-0.27,0.38-0.27,0.61c0,0.25,0.09,0.46,0.28,0.63
+       c0.56,0.55,1.22,0.83,1.96,0.83c0.78,0,1.45-0.27,2.01-0.81c0.56-0.54,0.83-1.19,0.83-1.97s-0.28-1.44-0.84-2
+       c-0.56-0.56-1.23-0.84-2-0.84H4.01c-0.25,0-0.46,0.09-0.64,0.26C3.19,16.51,3.1,16.72,3.1,16.97z M3.1,13.69
+       c0,0.23,0.09,0.43,0.28,0.61c0.17,0.18,0.38,0.26,0.63,0.26h20.04c0.78,0,1.45-0.27,2.01-0.82c0.56-0.54,0.84-1.2,0.84-1.97
+       c0-0.77-0.28-1.44-0.84-1.99s-1.23-0.83-2.01-0.83c-0.77,0-1.42,0.27-1.95,0.8c-0.18,0.16-0.27,0.38-0.27,0.67
+       c0,0.26,0.09,0.47,0.26,0.63c0.17,0.16,0.38,0.24,0.63,0.24c0.24,0,0.45-0.08,0.63-0.24c0.19-0.21,0.42-0.31,0.7-0.31
+       c0.29,0,0.53,0.1,0.73,0.3c0.2,0.2,0.3,0.44,0.3,0.73c0,0.29-0.1,0.53-0.3,0.72c-0.2,0.19-0.44,0.29-0.73,0.29H4.01
+       c-0.25,0-0.46,0.09-0.64,0.26C3.19,13.23,3.1,13.44,3.1,13.69z" />
+     </svg>
+								<span style="font-size: 12.5px; font-weight: 500;">${windSpeed}m/s</span>
+							</div>
+							<div style="display: grid">
+								<svg version="1.1" id="Layer_1"
+									xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									viewBox="0 0 30 30" style="enable-background: new 0 0 30 30;"
+									width="30" height="30" xml:space="preserve">
+<path
+										d="M7.56,17.19c0-0.88,0.24-1.89,0.72-3.03s1.1-2.25,1.86-3.31c1.56-2.06,2.92-3.62,4.06-4.67l0.75-0.72
+ c0.25,0.26,0.53,0.5,0.83,0.72c0.41,0.42,1.04,1.11,1.88,2.09s1.57,1.85,2.17,2.65c0.71,1.01,1.32,2.1,1.81,3.25
+ s0.74,2.16,0.74,3.03c0,1-0.19,1.95-0.58,2.86c-0.39,0.91-0.91,1.7-1.57,2.36c-0.66,0.66-1.45,1.19-2.37,1.58
+ c-0.92,0.39-1.89,0.59-2.91,0.59c-1,0-1.95-0.19-2.86-0.57c-0.91-0.38-1.7-0.89-2.36-1.55c-0.66-0.65-1.19-1.44-1.58-2.35
+ S7.56,18.23,7.56,17.19z M9.82,14.26c0,0.83,0.17,1.49,0.52,1.99c0.35,0.49,0.88,0.74,1.59,0.74c0.72,0,1.25-0.25,1.61-0.74
+ c0.35-0.49,0.53-1.15,0.54-1.99c-0.01-0.84-0.19-1.5-0.54-2c-0.35-0.49-0.89-0.74-1.61-0.74c-0.71,0-1.24,0.25-1.59,0.74
+ C9.99,12.76,9.82,13.42,9.82,14.26z M11.39,14.26c0-0.15,0-0.27,0-0.35s0.01-0.19,0.02-0.33c0.01-0.14,0.02-0.25,0.05-0.32
+ s0.05-0.16,0.09-0.24c0.04-0.08,0.09-0.15,0.15-0.18c0.07-0.04,0.14-0.06,0.23-0.06c0.14,0,0.25,0.04,0.33,0.12s0.14,0.21,0.17,0.38
+ c0.03,0.18,0.05,0.32,0.06,0.45s0.01,0.3,0.01,0.52c0,0.23,0,0.4-0.01,0.52c-0.01,0.12-0.03,0.27-0.06,0.45
+ c-0.03,0.17-0.09,0.3-0.17,0.38s-0.19,0.12-0.33,0.12c-0.09,0-0.16-0.02-0.23-0.06c-0.07-0.04-0.12-0.1-0.15-0.18
+ c-0.04-0.08-0.07-0.17-0.09-0.24c-0.02-0.08-0.04-0.19-0.05-0.32c-0.01-0.14-0.02-0.25-0.02-0.32S11.39,14.41,11.39,14.26z
+  M11.98,22.01h1.32l4.99-10.74h-1.35L11.98,22.01z M16.28,19.02c0.01,0.84,0.2,1.5,0.55,2c0.35,0.49,0.89,0.74,1.6,0.74
+ c0.72,0,1.25-0.25,1.6-0.74c0.35-0.49,0.52-1.16,0.53-2c-0.01-0.84-0.18-1.5-0.53-1.99c-0.35-0.49-0.88-0.74-1.6-0.74
+ c-0.71,0-1.25,0.25-1.6,0.74C16.47,17.52,16.29,18.18,16.28,19.02z M17.85,19.02c0-0.23,0-0.4,0.01-0.52
+ c0.01-0.12,0.03-0.27,0.06-0.45s0.09-0.3,0.17-0.38s0.19-0.12,0.33-0.12c0.09,0,0.17,0.02,0.24,0.06c0.07,0.04,0.12,0.1,0.16,0.19
+ c0.04,0.09,0.07,0.17,0.1,0.24s0.04,0.18,0.05,0.32l0.01,0.32l0,0.34c0,0.16,0,0.28,0,0.35l-0.01,0.32l-0.05,0.32l-0.1,0.24
+ l-0.16,0.19l-0.24,0.06c-0.14,0-0.25-0.04-0.33-0.12s-0.14-0.21-0.17-0.38c-0.03-0.18-0.05-0.33-0.06-0.45S17.85,19.25,17.85,19.02z
+ " />
+</svg>
+								<span style="font-size: 12.5px; font-weight: 500;">${humidity}%</span>
+							</div>
+							<div style="display: grid">
+								<svg version="1.1" id="Layer_1"
+									xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									viewBox="0 0 30 30" style="enable-background: new 0 0 30 30;"
+									width="30" height="30" xml:space="preserve">
+     <path
+										d="M3.89,17.6c0-0.99,0.31-1.88,0.93-2.65s1.41-1.27,2.38-1.49c0.26-1.17,0.85-2.14,1.78-2.88c0.93-0.75,2-1.12,3.22-1.12
+       c1.18,0,2.24,0.36,3.16,1.09c0.93,0.73,1.53,1.66,1.8,2.8h0.27c1.18,0,2.18,0.41,3.01,1.24s1.25,1.83,1.25,3
+       c0,1.18-0.42,2.18-1.25,3.01s-1.83,1.25-3.01,1.25H8.16c-0.58,0-1.13-0.11-1.65-0.34S5.52,21,5.14,20.62
+       c-0.38-0.38-0.68-0.84-0.91-1.36S3.89,18.17,3.89,17.6z M5.34,17.6c0,0.76,0.28,1.42,0.82,1.96s1.21,0.82,1.99,0.82h9.28
+       c0.77,0,1.44-0.27,1.99-0.82c0.55-0.55,0.83-1.2,0.83-1.96c0-0.76-0.27-1.42-0.83-1.96c-0.55-0.54-1.21-0.82-1.99-0.82h-1.39
+       c-0.1,0-0.15-0.05-0.15-0.15l-0.07-0.49c-0.1-0.94-0.5-1.73-1.19-2.35s-1.51-0.93-2.45-0.93c-0.94,0-1.76,0.31-2.46,0.94
+       c-0.7,0.62-1.09,1.41-1.18,2.34l-0.07,0.42c0,0.1-0.05,0.15-0.16,0.15l-0.45,0.07c-0.72,0.06-1.32,0.36-1.81,0.89
+       C5.59,16.24,5.34,16.87,5.34,17.6z M14.19,8.88c-0.1,0.09-0.08,0.16,0.07,0.21c0.43,0.19,0.79,0.37,1.08,0.55
+       c0.11,0.03,0.19,0.02,0.22-0.03c0.61-0.57,1.31-0.86,2.12-0.86c0.81,0,1.5,0.27,2.1,0.81c0.59,0.54,0.92,1.21,0.99,2l0.09,0.64h1.42
+       c0.65,0,1.21,0.23,1.68,0.7c0.47,0.47,0.7,1.02,0.7,1.66c0,0.6-0.21,1.12-0.62,1.57s-0.92,0.7-1.53,0.77c-0.1,0-0.15,0.05-0.15,0.16
+       v1.13c0,0.11,0.05,0.16,0.15,0.16c1.01-0.06,1.86-0.46,2.55-1.19s1.04-1.6,1.04-2.6c0-1.06-0.37-1.96-1.12-2.7
+       c-0.75-0.75-1.65-1.12-2.7-1.12h-0.15c-0.26-1-0.81-1.82-1.65-2.47c-0.83-0.65-1.77-0.97-2.8-0.97C16.28,7.29,15.11,7.82,14.19,8.88
+       z" />
+     </svg>
+								<span style="font-size: 12.5px; font-weight: 500;">${clouds}%</span>
+							</div>
+						</div>
+					</div>
+				</div>
           <div id="select-area">
             <div class="select-travelname">
             <div class="mydict">
@@ -59,31 +150,19 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                   </svg>
                 </li>
+          
                 
-                <!-- <li class="selectlist">
-                  <div class="listbox">
-                    <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-                    <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-                    </svg>
-                    </div>
-                  </div>
-                  <div class="listtext">
-                    <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-                  </div>
-                  <div class="listbtn">
-                    <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                      <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-                    </svg>
-                    </a>
-                    </div>
-                    <div class="delete-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#b31312">
-                      <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-                    </svg></a>
-                    </div>
-                  </div>
-                </li> -->
                 <!--  -->
+              </ul>
+                  <ul class="listarea2">
+                 <li class="list-text"><hs><span class="span1">가고 싶은 장소들을 검색하여 추가해주세요.</span><br><span class="span2">설정하신 일자별 여행기간 내에서</span><br><span class="span3">여행경로를 순서대로 작성 할 수 있습니다.</span><br></hs>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="list-texticon" fill="none" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                  </svg>
+                </li>
+          
+                
+                
               </ul>
             </div>
           </div>
@@ -130,8 +209,8 @@
         <div id="search-traveltitle">
         <div id="row1" class="row">
           <div class="form__group">
-            <input type="text" class="form__field w-100" placeholder="Input text">
-            <label for="name" class="form__label"> Input text </label>
+            <input type="text" class="form__field w-100"  id="searchtouirsinput" placeholder="관광지 검색">
+            <label for="name" class="form__label"> 관광지 입력 </label>
             <button class="invite-btn1" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                 <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
@@ -153,19 +232,31 @@
       <div id="travellist-area">
         <div id="travelplace"><b><span>추천장소</span></b></div>
         <ul class="listarea-right">
+
+        <c:forEach var="t" items="${tourislist }">
           <li class="selectlist2">
             <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
+              <div class="listboximg">
+              <c:if test="${not empty t.tourismainImge}">
+              <img src="${t.tourismainImge }" alt="">
+              </c:if>
+              <c:if test="${empty t.tourismainImge || t.tourismainImge == null }">
+				<img
+					src="http://skhdt.hagiang.gov.vn/assets/img/default.jpg"
+					alt="">
+			  </c:if>
+              </div>
               <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
               </svg>
               </div>
             </div>
             <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
+              <h7 class="listtitle-text">${t.tourisName }</h7>
+              <h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">${t.tourisAddress }</h7></h7>
             </div>
             <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
+              <div class="detail-travellist"><a><div class="tourisidhidden" style="display: none">${t.tourisId }</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
                 <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
               </svg>
               </a>
@@ -177,175 +268,9 @@
               </div>
             </div>
           </li>
+          </c:forEach>
           <!--  -->
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
-          <li class="selectlist2">
-            <div class="listbox">
-              <div class="listboximg"><img src="	https://www.myro.co.kr/getSpotImage/seoul?no=3449" alt=""></div>
-              <div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-              </div>
-            </div>
-            <div class="listtext">
-              <h7 class="listtitle-text">카카오프렌즈 강남플래그십스토어(Kakao Store)</h7><br>
-            </div>
-            <div class="listbtn">
-              <div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-              </svg>
-              </a>
-              </div>
-              <div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>              
-              </a>
-              </div>
-            </div>
-          </li>
+         
           </ul>
       </div>
       </div>
@@ -373,20 +298,26 @@
        </div>
          <div class="modalcontainer">
            <h3 class="modalplacetitle">멀라이언 파크 </h3>
-           <div class="modalplacetitleeng">Merlion</div>
+           <!-- <div class="modalplacetitleeng">Merlion</div> -->
            <div class="modalplacetitlebar">-</div>
              <div class="modaltable">
                <div class="madaltr">
                  <div class="modaltrarea">
-                   <div class="modalth">영업시간 : </div>
-                   <div class="modalth">홈페이지 : </div>
-                   <div class="modalth">주소 : </div>
-                   <div class="modalth">전화번호 : </div>
+                   <div class="modalthtime">영업시간 : </div>
+                   <div class="modalthhomepage">홈페이지 : </div>
+                   <div class="modalthaddress">주소  : </div>
+                   <div class="modalthinfo">체험 및 문의안내 : </div>
+                    <div class="modalthusetime">이용시기 및 이용시간 : </div>
+                   <div class="modalthtel">전화번호 : </div>
                  </div>
                  <div class="modaltr2">
-                   <div class="modaltd">용산구 용산2가동 남산공원길 105</div>
-                   <div class="modaltd">용산구 용산2가동 남산공원길 105</div>
-                   <div class="modaltd">용산구 용산2가동 남산공원길 105</div>
+                   <div class="modaltdtime"><span style="cursor: pointer;">더보기</span></div>
+                   
+                   <div class="modaltdhomepage"></div>
+                   <div class="modaltdaddress"></div>
+                   <div class="modaltdinfo"></div>
+                   <div class="modaltdusetime"></div>
+                   <div class="modaltdtel"></div>
                  </div>
                </div>
               
@@ -545,7 +476,9 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
           </svg>
           </div>
-          <h7 class="bigsidebarcentertitle"><b><span>제주도</span> " : " <span class="schedulecount">0</span><span>일 여행</span></b></h7>
+          <h7 class="bigsidebarcentertitle"><b><span>${titletouris.areaName}</span> 
+          " : " 
+          <span class="schedulecount"></span><span>일 여행</span></b></h7>
         </div>
       </div>
       <div calss="bigsidebartitleimgesarea">
@@ -560,13 +493,11 @@
         <div class="detailroutetour">
           <div class="alldayinputfield">
             <select id="dayselectbox">
-              <option value="1">1DAY 8월 21일 월</option>
-              <option value="2">1DAY 8월 22일 화</option>
-              <option value="3">1DAY 8월 23일 수</option>
+             
             </select>
           </div>
           <div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>
-          <!-- 리스트 영역 -->
+        
           <div class="dailyroutedetaillist">
             <div class="dailyroutecountarea">
               <div class="dailyroutetext">
@@ -766,441 +697,13 @@
       <!-- 각 일자별 일정 영역 -->
       
 
-      <div class="detailroutetour">
-        <div class="alldayinputfield">
-          <select id="dayselectbox">
-            <option value="1">1DAY 8월 21일 월</option>
-            <option value="2">1DAY 8월 22일 화</option>
-            <option value="3">1DAY 8월 23일 수</option>
-          </select>
-        </div>
-        <div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>
-        <!-- 리스트 영역 -->
-        <div class="dailyroutedetaillist">
-          <div class="dailyroutecountarea">
-            <div class="dailyroutetext">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />
-              </svg>
-              <div class="dailytext1">3</div> 
-              <div class="dailytext2">장소</div>               
-            </div>
-          </div>
-          <hr class="hr2"></hr>
-          <div class="routedatailslists">
-            <div class="selectroutedetailslist">
-              <div class="arrowarea">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                  <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-                </svg>                  
-              </div>
-              <div class="selectdetailsroutelist">
-                <div class="selectdetailscardarea">
-                  <div class="selectdetailsimagesarea">
-                    <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                    </svg></div>
-                    <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                  </div>
-                  
-                  <div class="selectrighttextarea">
-                    <div class="selectdetailslisttitletextarea">
-                      <div class="selectdetailslisttitletext">
-                        <div class="selectdetailsmaxarea"></div>
-                        <span class="selectdetailstext">교원스위트호텔</span>
-                        <span class="selectdetailstextaddress">제주시 </span>
-                      </div>
-                      <div class="selectdetailstitleicon">
-                        <label class="ui-bookmark">
-                          <input type="checkbox">
-                          <div class="bookmark">
-                            <svg viewBox="0 0 32 32">
-                              <g>
-                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                              </g>
-                            </svg>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="selectdetailsdeletearea">
-                      <div class="selectdetailsbtn">시간표</div>
-                      <div class="selectdetailsbtn2">상세설명</div>
-                      <div class="selectdetailsbtn3">삭제</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--여기서부터 하나씩 생성  -->
-            <div class="selectroutedetailslist">
-              <div class="arrowarea">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                  <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-                </svg>                  
-              </div>
-              <div class="selectdetailsroutelist">
-                <div class="selectdetailscardarea">
-                  <div class="selectdetailsimagesarea">
-                    <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                    </svg></div>
-                    <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                  </div>
-                  
-                  <div class="selectrighttextarea">
-                    <div class="selectdetailslisttitletextarea">
-                      <div class="selectdetailslisttitletext">
-                        <div class="selectdetailsmaxarea"></div>
-                        <span class="selectdetailstext">교원스위트호텔</span>
-                        <span class="selectdetailstextaddress">제주시 </span>
-                      </div>
-                      <div class="selectdetailstitleicon">
-                        <label class="ui-bookmark">
-                          <input type="checkbox">
-                          <div class="bookmark">
-                            <svg viewBox="0 0 32 32">
-                              <g>
-                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                              </g>
-                            </svg>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="selectdetailsdeletearea">
-                      <div class="selectdetailsbtn">시간표</div>
-                      <div class="selectdetailsbtn2">상세설명</div>
-                      <div class="selectdetailsbtn3">삭제</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="selectroutedetailslist">
-            <div class="arrowarea">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-              </svg>                  
-            </div>
-            <div class="selectdetailsroutelist">
-              <div class="selectdetailscardarea">
-                <div class="selectdetailsimagesarea">
-                  <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                  </svg></div>
-                  <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                </div>
-                
-                <div class="selectrighttextarea">
-                  <div class="selectdetailslisttitletextarea">
-                    <div class="selectdetailslisttitletext">
-                      <div class="selectdetailsmaxarea"></div>
-                      <span class="selectdetailstext">교원스위트호텔</span>
-                      <span class="selectdetailstextaddress">제주시 </span>
-                    </div>
-                    <div class="selectdetailstitleicon">
-                      <label class="ui-bookmark">
-                        <input type="checkbox">
-                        <div class="bookmark">
-                          <svg viewBox="0 0 32 32">
-                            <g>
-                              <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                            </g>
-                          </svg>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="selectdetailsdeletearea">
-                    <div class="selectdetailsbtn">시간표</div>
-                    <div class="selectdetailsbtn2">상세설명</div>
-                    <div class="selectdetailsbtn3">삭제</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="selectroutedetailslist">
-            <div class="arrowarea">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-              </svg>                  
-            </div>
-            <div class="selectdetailsroutelist">
-              <div class="selectdetailscardarea">
-                <div class="selectdetailsimagesarea">
-                  <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                  </svg></div>
-                  <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                </div>
-                
-                <div class="selectrighttextarea">
-                  <div class="selectdetailslisttitletextarea">
-                    <div class="selectdetailslisttitletext">
-                      <div class="selectdetailsmaxarea"></div>
-                      <span class="selectdetailstext">교원스위트호텔</span>
-                      <span class="selectdetailstextaddress">제주시 </span>
-                    </div>
-                    <div class="selectdetailstitleicon">
-                      <label class="ui-bookmark">
-                        <input type="checkbox">
-                        <div class="bookmark">
-                          <svg viewBox="0 0 32 32">
-                            <g>
-                              <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                            </g>
-                          </svg>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="selectdetailsdeletearea">
-                    <div class="selectdetailsbtn">시간표</div>
-                    <div class="selectdetailsbtn2">상세설명</div>
-                    <div class="selectdetailsbtn3">삭제</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--  -->
-          
-          <!--  -->
-        </div>
-      </div>
-      <div class="detailroutetour">
-        <div class="alldayinputfield">
-          <select id="dayselectbox">
-            <option value="1">1DAY 8월 21일 월</option>
-            <option value="2">1DAY 8월 22일 화</option>
-            <option value="3">1DAY 8월 23일 수</option>
-          </select>
-        </div>
-        <div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>
-        <!-- 리스트 영역 -->
-        <div class="dailyroutedetaillist">
-          <div class="dailyroutecountarea">
-            <div class="dailyroutetext">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />
-              </svg>
-              <div class="dailytext1">3</div> 
-              <div class="dailytext2">장소</div>               
-            </div>
-          </div>
-          <hr class="hr2"></hr>
-          <div class="routedatailslists">
-            <div class="selectroutedetailslist">
-              <div class="arrowarea">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                  <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-                </svg>                  
-              </div>
-              <div class="selectdetailsroutelist">
-                <div class="selectdetailscardarea">
-                  <div class="selectdetailsimagesarea">
-                    <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                    </svg></div>
-                    <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                  </div>
-                  
-                  <div class="selectrighttextarea">
-                    <div class="selectdetailslisttitletextarea">
-                      <div class="selectdetailslisttitletext">
-                        <div class="selectdetailsmaxarea"></div>
-                        <span class="selectdetailstext">교원스위트호텔</span>
-                        <span class="selectdetailstextaddress">제주시 </span>
-                      </div>
-                      <div class="selectdetailstitleicon">
-                        <label class="ui-bookmark">
-                          <input type="checkbox">
-                          <div class="bookmark">
-                            <svg viewBox="0 0 32 32">
-                              <g>
-                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                              </g>
-                            </svg>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="selectdetailsdeletearea">
-                      <div class="selectdetailsbtn">시간표</div>
-                      <div class="selectdetailsbtn2">상세설명</div>
-                      <div class="selectdetailsbtn3">삭제</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--여기서부터 하나씩 생성  -->
-            <div class="selectroutedetailslist">
-              <div class="arrowarea">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                  <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-                </svg>                  
-              </div>
-              <div class="selectdetailsroutelist">
-                <div class="selectdetailscardarea">
-                  <div class="selectdetailsimagesarea">
-                    <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                    </svg></div>
-                    <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                  </div>
-                  
-                  <div class="selectrighttextarea">
-                    <div class="selectdetailslisttitletextarea">
-                      <div class="selectdetailslisttitletext">
-                        <div class="selectdetailsmaxarea"></div>
-                        <span class="selectdetailstext">교원스위트호텔</span>
-                        <span class="selectdetailstextaddress">제주시 </span>
-                      </div>
-                      <div class="selectdetailstitleicon">
-                        <label class="ui-bookmark">
-                          <input type="checkbox">
-                          <div class="bookmark">
-                            <svg viewBox="0 0 32 32">
-                              <g>
-                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                              </g>
-                            </svg>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="selectdetailsdeletearea">
-                      <div class="selectdetailsbtn">시간표</div>
-                      <div class="selectdetailsbtn2">상세설명</div>
-                      <div class="selectdetailsbtn3">삭제</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="selectroutedetailslist">
-            <div class="arrowarea">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-              </svg>                  
-            </div>
-            <div class="selectdetailsroutelist">
-              <div class="selectdetailscardarea">
-                <div class="selectdetailsimagesarea">
-                  <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                  </svg></div>
-                  <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                </div>
-                
-                <div class="selectrighttextarea">
-                  <div class="selectdetailslisttitletextarea">
-                    <div class="selectdetailslisttitletext">
-                      <div class="selectdetailsmaxarea"></div>
-                      <span class="selectdetailstext">교원스위트호텔</span>
-                      <span class="selectdetailstextaddress">제주시 </span>
-                    </div>
-                    <div class="selectdetailstitleicon">
-                      <label class="ui-bookmark">
-                        <input type="checkbox">
-                        <div class="bookmark">
-                          <svg viewBox="0 0 32 32">
-                            <g>
-                              <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                            </g>
-                          </svg>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="selectdetailsdeletearea">
-                    <div class="selectdetailsbtn">시간표</div>
-                    <div class="selectdetailsbtn2">상세설명</div>
-                    <div class="selectdetailsbtn3">삭제</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="selectroutedetailslist">
-            <div class="arrowarea">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-              </svg>                  
-            </div>
-            <div class="selectdetailsroutelist">
-              <div class="selectdetailscardarea">
-                <div class="selectdetailsimagesarea">
-                  <div class="selectdetailsicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                  </svg></div>
-                  <img class="selectdetailsimage" src="https://www.myro.co.kr/getSpotImage/jeju?no=3728" alt="Image" loading="lazy">
-                </div>
-                
-                <div class="selectrighttextarea">
-                  <div class="selectdetailslisttitletextarea">
-                    <div class="selectdetailslisttitletext">
-                      <div class="selectdetailsmaxarea"></div>
-                      <span class="selectdetailstext">교원스위트호텔</span>
-                      <span class="selectdetailstextaddress">제주시 </span>
-                    </div>
-                    <div class="selectdetailstitleicon">
-                      <label class="ui-bookmark">
-                        <input type="checkbox">
-                        <div class="bookmark">
-                          <svg viewBox="0 0 32 32">
-                            <g>
-                              <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                            </g>
-                          </svg>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="selectdetailsdeletearea">
-                    <div class="selectdetailsbtn">시간표</div>
-                    <div class="selectdetailsbtn2">상세설명</div>
-                    <div class="selectdetailsbtn3">삭제</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--  -->
-          
-          <!--  -->
-        </div>
-      </div>
+      
+     
       <!-- 전체일정리스트 영역 여기까지 -->
       <!-- 전체일정리스트 영역 여기까지 -->
       </div>
       <div class="dailyroutearea">
-        <div class="dailyroutelists">
-          <div class="dailyrouteliststyle">
-            <div class="dailyroutecard">
-              <div class="dailyroutecardtitle">
-                <span class="dailyroutecardtitletext">STEP1</span>
-              </div>
-            </div>
-            <div class="dailyroutecardcontentarea">
-              <div class="dailyroutecardcontent-L">
-                <span class="dailyroutecardspan">제주항공</span>
-                <div class="dailyroutecardspan">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" class="ionicon" viewBox="0 0 512 512"><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
-                </div>
-                <span class="dailyroutecardspan">교원스위트호텔제주</span>
-              </div>
-              <div class="dailyroutecardcontent-R">
-                <div class="dailyroutecardcontent-Rtext">상세경로</div>
-              </div>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </div>
     <div class="routesearcharea">
@@ -1215,9 +718,9 @@
         </a>
     </div>
     <div class="dailyrightarea">
-      <span class="dailyrightspan">1</span>일차<br>
+      <span class="dailyrightspan"></span>일차<br>
       <span><svg xmlns="http://www.w3.org/2000/svg" width="14" class="ionicon" viewBox="0 0 512 512"><path d="M256 32C167.67 32 96 96.51 96 176c0 128 160 304 160 304s160-176 160-304c0-79.49-71.67-144-160-144zm0 224a64 64 0 1164-64 64.07 64.07 0 01-64 64z"/></svg></span>
-      <span class="dailyrightnumber">5</span>
+      <span class="dailyrightnumber"></span>
       <span data-langnum="57">개의 장소</span>
     </div>
     <div class="routesearchmodalarea">
@@ -1226,7 +729,7 @@
         <div class="routesearchinputarea">
           <div class="routesearchinput">
             <div class="input-container">
-              <input required="" placeholder="Email Address" type="email">
+              <input class="searchinputtag2" required="" placeholder="장소를 입력해주세요" type="email">
               <button class="invite-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                   <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
@@ -1242,28 +745,16 @@
             </div>
           </div>
           <div class="makeroutesearchlistarea">
-            <ul class="makeroutesearchlistul">
-              <li class="makeroutesearchlistli">
-                <div class="makeroutesearchlistliimges"><img class="makesearchimg" src="https://www.myro.co.kr/getSpotImage/jeju?no=1001" alt=""></div>
-                <div class="makeroutesearchlistliimgesicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
-                </svg></div>
-                <div class="makeroutesearchlistdetaile">
-                  <span class="makeroutelisttextarea">
-                    <h7>도두 무지개 해안도로<br>
-                      <div class="smailspottext">여기에 없으면 없는있으면 있는text
-                        <div class="makerouteplusbtnarea">
-                          <div title="포함되지 않은 장소에 추가" class="makerouteplusicon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                            <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" />
-                          </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </h7>
-                  </span>
-                </div>
-              </li>
-            </ul>
+								<ul class="makeroutesearchlistul">
+									<li class="defaulttext"><span>검색한 관광지가 없습니다.</span>
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+</svg>
+										
+									</li>
+								</ul>
+								<!--  -->
+            
           </div>
         </div>
       </div>
@@ -1272,7 +763,7 @@
       <a class="userguidemenu" href="#"><h7>이용방법</h7></a>
       <a class="userguidemenu" href="#"><h7>수정저장</h7></a>
       <a class="userguidemenu" href="#"><h7>수정삭제</h7></a>
-      <a class="userguidemenu" href="#"><h7>경로저장</h7></a>
+      <a class="userguidemenu" href="#" onclick="saveRoute()"><h7>경로저장</h7></a>
     </div>
     <div class="fullscreen">
       <a href="#"class="routesearchmodalbtn2" title="전체화면">
@@ -1284,7 +775,10 @@
     <!--  -->
  </div>
 </div>
-
+<!-- 클릭했을때 조건에 대한 알려주는 태그 -->
+<div class="center-wrapper">
+  
+</div>
     </section>
      <script src="${path }/js/touris/touris.js"></script>
     <script src="${path }/js/touris/defaulttouris.js"></script>

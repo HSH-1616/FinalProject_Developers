@@ -1,6 +1,7 @@
 package com.dev.ac.dto;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -13,11 +14,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AcFacilities {
 	private int afaId;
+	private int acId;
 	private int afaCamera;
 	private int afaAircon;
 	private int afaKitchen;
 	private int afaWifi;
 	private int afaWasher;
 	private int afaParking;
-	private List<AfaList> afal;
+	private List<AfaList> afal=new ArrayList();
 }

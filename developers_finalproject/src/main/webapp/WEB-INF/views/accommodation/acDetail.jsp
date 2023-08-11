@@ -166,7 +166,7 @@
 			</div>
 			<div class="detailHotelImage">
 				<div>
-					<div class="container">
+					<div class="container2">
 						<div class="images">
 							<div class="imageFlex1">
 								<img
@@ -241,8 +241,7 @@
 								<p>욕실 ${ad.acBathRoom}개</p>
 							</div>
 							<div class="dt dr">
-								<img src="${path}/images/accommodation/peopleDetail.png"
-									alt="" />
+								<img src="${path}/images/accommodation/peopleDetail.png" alt="" />
 								<p>최대 ${ad.acPeople}명</p>
 							</div>
 						</div>
@@ -269,7 +268,7 @@
 						<c:if test="${empty ad.afa }">
 						편의시설이 없습니다.
 						</c:if>
-						<c:if test="${not empty ad.acReviews }">
+						<c:if test="${not empty ad.afa }">
 
 							<div class="detailHotelFc">
 								<c:if test="${ad.afa.afaCamera==1 }">
@@ -336,9 +335,9 @@
 							<h2>숙박기간</h2>
 							<hr />
 						</div>
-						<c:forEach var="ap" items="${ad.acPay }">
-							<input type="hidden" class="checkIn" val="${ap.checkIn }">
-							<input type="hidden" class="checkOut" val="${ap.checkOut }">
+						<c:forEach var="arv" items="${ad.arv }">
+							<input type="hidden" class="checkIn" val="${arv.checkIn }">
+							<input type="hidden" class="checkOut" val="${arv.checkOut }">
 						</c:forEach>
 						<div class="searchCalander">
 							<div class="calHeader">
@@ -433,9 +432,10 @@
 											value="${ad.acPrice }" pattern="#,###" /></span> <span> /박</span></span>
 							</div>
 						</div>
-						<form id="detailForm" action="${path}/ac/acPay">
+						<form id="detailForm" action="${path}/ac/acPay" method="post">
 							<div class="detailHotelFunc">
-								<input type="hidden" name="no" value="${ad.acId }">
+								<input type="hidden" name="no" value="${ad.acId }"> <input
+									type="hidden" name="resultPrice" value="${ad.acId }">
 								<div>
 									<div class="detailHotelCheckDay">
 										<div>
@@ -469,7 +469,7 @@
 															name="remove-circle-outline"></ion-icon>
 													</button>
 													<div id="peopleCountCon">
-														<input type="number" id="peopleCount" value="1" min="1"
+														<input type="number" id="peopleCount" value="0" min="1"
 															max="10" />
 													</div>
 													<button type="button" class="countBtn"
@@ -536,6 +536,11 @@
 		</div>
 	</div>
 	<script>
+	
+	 <c:if test="${not empty loginMember }">
+
+	</c:if> 
+	
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host) + location.host.length;
 		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
@@ -610,13 +615,56 @@
 						});
 		
 		var checkInOutDay = []
-
-		<c:forEach var="ap" items="${ad.acPay }">
-			checkInOutDay.push({
-					checkIn : [ "${ap.checkIn}"],
-					checkOut : [ "${ap.checkOut}"]
-			})
+		var checkHolyDay=[]
+		<c:forEach var="arv" items="${ad.arv}">
+		<c:if test="${arv.apId!=0}">
+		checkInOutDay.push({
+			checkIn : "${arv.checkIn}",
+			checkOut : "${arv.checkOut}"
+		})
+		</c:if>
+		<c:if test="${arv.apId==0}">
+		checkHolyDay.push({
+			checkIn : "${arv.checkIn}",
+			checkOut : "${arv.checkOut}"
+		})
+		</c:if>
 		</c:forEach>
+		
+			
+			
+			
+		$(".detailHotelBtn.on").on("click",function(e){			
+			if(${empty loginMember}){
+				e.preventDefault()
+				$("#modal").css("display","flex")
+			}else{
+				
+			}
+		})
+		
+		var acId=${ad.acId}
+		var memberId=""
+		$("#detailHeart").on("click",function(e){			
+		if(${empty loginMember}){
+			e.preventDefault()
+			$("#modal").css("display","flex")
+		}else{
+			memberId="${loginMember.memberId}"
+		}
+		})
+		
+		<c:forEach var="ah" items="${ah}">
+			<c:if test="${ah.memberId==loginMember.memberId }">
+				$("#detailHeartOn").show()
+				$("#detailHeartOff").hide()
+			</c:if>
+			<c:if test="${ah.memberId!=loginMember.memberId }">
+				$("#detailHeartOn").hide()
+				$("#detailHeartOff").show()
+			</c:if>
+		</c:forEach>
+			
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acDetail.js"></script>
