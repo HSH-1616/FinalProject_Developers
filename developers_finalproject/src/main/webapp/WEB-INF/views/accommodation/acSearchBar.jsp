@@ -30,16 +30,16 @@
 					<div class="checkDay">
 						<span>체크인</span>
 						<div>
-							<input type="hidden" id="checkIn" name="checkIn">
-							<input id="checkInDay" value="날짜추가" readonly>
+							<input type="text" id="checkIn" name="checkIn" readonly>
+							<!-- <input id="checkInDay" value="날짜추가" readonly> -->
 							<ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
 					</div>
 					<div class="checkDay">
 						<span>체크아웃</span>
 						<div>
-							<input type="hidden" id="checkOut" name="checkOut">
-							<input id="checkOutDay" value="날짜추가" readonly>
+							<input type="text" id="checkOut" name="checkOut" readonly>
+							<!-- <input id="checkOutDay" value="날짜추가" readonly> -->
 							<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
 					</div>

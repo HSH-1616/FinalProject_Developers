@@ -158,6 +158,8 @@ header .main-menu .item .item__name {
 
 .checkDay {
 	width: 80px;
+	position: relative;
+	right: 10px;
 }
 
 .checkDay input{
@@ -165,6 +167,7 @@ header .main-menu .item .item__name {
 	border: none;
 	background-color: transparent;
 	width: 100px;
+	font-size: 0.9rem;
 }
 
 .checkDay span {
@@ -181,9 +184,13 @@ header .main-menu .item .item__name {
 	display: none;
 	position: absolute;
 	color: #b31312;
-	left: 83px;
-	bottom: 3px;
+	left: 90px;
+	bottom: 1px;
 	font-size: 1.3rem;
+}
+
+.checkDay:last-child>div>ion-icon{
+	left: 95px;
 }
 
 #searchPeople {

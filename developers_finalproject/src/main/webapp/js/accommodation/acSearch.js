@@ -10,14 +10,14 @@ $(window).ready(function() {
 	var people = urlParams.get('people');
 	$("#searchLocInput").val(loc)
 	if (checkIn == "") {
-		$("#checkInDay").val("날짜추가")
+		$("#checkIn").val("날짜추가")
 	} else {
-		$("#checkInDay").val(checkIn.substr(5, 2) + "월 " + checkIn.substr(8, 2) + "일")
+		$("#checkIn").val(checkIn)
 	}
 	if (checkOut == "") {
-		$("#checkOutDay").val("날짜추가")
+		$("#checkOut").val("날짜추가")
 	} else {
-		$("#checkOutDay").val(checkOut.substr(5, 2) + "월 " + checkOut.substr(8, 2) + "일")
+		$("#checkOut").val(checkOut)
 	}
 
 	$("#people").val(people)
