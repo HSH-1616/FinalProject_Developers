@@ -128,7 +128,7 @@
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
         
-        url: "/ncCommon/communityUploadFile.do", 
+        url: "/ncCommon/communityUploadFile.do?no="+communityNo, 
         method: "post", 
         uploadMultiple: true,
         maxFiles: 5,
@@ -142,13 +142,27 @@
                 let submitButton = document.querySelector("#btn-upload-file");
                 let myDropzone = this; //closure
                 submitButton.addEventListener("click", function () {
-                    console.log("업로드"); //tell Dropzone to process all queued files
-                    myDropzone.processQueue();
+                   	if(myDropzone.getQueuedFiles().length>0){
+                   		myDropzone.processQueue();
+                   	}else{
+                   		$.ajax({
+                    		url: "/community/communityUpdateEnd.do",
+                    		type:"post",
+                    		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
+                    			communityContent: $("#communityContent").val(), communityNo:communityNo },
+                    		success:(data)=>{
+                    			if(data>0){
+                    				location.replace("<c:out value='${path}'/>/community/communityView.do?no='${comuView.communityNo }'");
+                    			}else{
+                    				alert("수정 실패");
+                    			}
+                    		}
+                    	});  
+                   	}
                 });
                 this.on("successmultiple", function(files, response){
-         			console.log(files);
+         			
                 	let fileNames=files[0].xhr.responseText;
-                	
                  	$.ajax({
                 		url: "/community/communityUpdateEnd.do",
                 		type:"post",

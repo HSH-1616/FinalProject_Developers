@@ -148,24 +148,18 @@ public class CommunityController {
 	
 	@PostMapping("/communityUpdateEnd.do")
 	@ResponseBody
-	public int communityUpdateEnd(@RequestParam("memberId") int id ,@RequestParam("communityTitle") String title, @RequestParam("communityContent") String content, @RequestParam("files") String files, int communityNo, HttpSession session) {
-		String[] file=files.split(" ");
+	public int communityUpdateEnd(@RequestParam("memberId") int id ,@RequestParam("communityTitle") String title, @RequestParam("communityContent") String content, @RequestParam(value = "files",required = false) String files, int communityNo, HttpSession session) {
+		
 		Member m=Member.builder().memberId(id).build();
-		Community communityBoard=Community.builder().communityNo(communityNo).memberId(m).communityTitle(title).communityContent(content).thumbnail(file[0]).build();
-		int result=service.updateCommunity(communityBoard);
-		if(result>0) {
-			for(String f:file) {
-				CommunityFile cf=CommunityFile.builder().fileName(f).build();
-				service.communitySaveFileDB(cf);
-			};
-			return 1;
+		Community communityBoard=new Community();
+		if(files!=null) {
+			String[] file=files.split(" ");
+			communityBoard=Community.builder().communityNo(communityNo).memberId(m).communityTitle(title).communityContent(content).thumbnail(file[0]).build();
 		}else {
-			for(String f:file) {
-				service.removeCommunityFile(f, session);
-			};
+			communityBoard=Community.builder().communityNo(communityNo).memberId(m).communityTitle(title).communityContent(content).build();
 		}
 		
-		return 0;
+		return service.updateCommunity(communityBoard);
 	}
 }
 
