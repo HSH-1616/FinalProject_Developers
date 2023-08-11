@@ -36,7 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","loginAdmin"})
 @RequestMapping("/member")
 public class MemberController {
 

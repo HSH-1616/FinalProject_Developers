@@ -406,6 +406,55 @@ header .main-menu .item .item__name {
 	border-radius: 100%;
 }
 
+.outDay {
+	text-decoration: line-through #b31312 2px;
+	color: #999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(100% / 7);
+	height: 42px;
+	text-align: left;
+	font-size: 1rem;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.outDay::after{
+    color: #b31312;
+    content: "예약";
+    position: absolute;
+    font-size: 0.8rem;
+    bottom: -13px;
+}
+
+.holyDay {
+	text-decoration: line-through #afafaf 2px;
+	color: #999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(100% / 7);
+	height: 42px;
+	text-align: left;
+	font-size: 1rem;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.holyDay::after{
+    color: #afafaf;
+    content: "휴무";
+    position: absolute;
+    font-size: 0.8rem;
+    bottom: -13px;
+}
+
+
 /* /달력 영역/ */
 
 /* 인원수 영역 */

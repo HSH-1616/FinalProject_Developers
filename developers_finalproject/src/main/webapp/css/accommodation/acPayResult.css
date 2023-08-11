@@ -1,0 +1,50 @@
+section > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#timerCon {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 1300px;
+  display: flex;
+  justify-content: center;
+}
+
+#timer {
+  text-align: center;
+}
+
+#timer h3 {
+  font-family: "LINESeedKR-Bd" !important;
+  font-size: 1.7rem;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+#timer h3:first-child {
+  font-size: 2.5rem;
+}
+
+#timer h3 > span {
+  color: #b31312;
+}
+
+#timer img {
+  width: 400px;
+  height: 400px;
+}
+
+#timer button {
+  margin-top: 50px;
+  border: none;
+  color: white;
+  background-color: #b31312;
+  border-radius: 10px;
+  width: 300px;
+  height: 60px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+  font-size: 1.5rem;
+}

@@ -25,3 +25,4 @@ public class TourisArea {
 	private String areaContent;
 	List<Touris> tourises;
 }
+

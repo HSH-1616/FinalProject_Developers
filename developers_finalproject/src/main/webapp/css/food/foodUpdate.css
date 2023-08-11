@@ -1,3 +1,19 @@
+img {
+    margin-left: 5px;
+}
+
+td input.real-upload {
+    position: relative;
+    bottom: 32px;
+}
+
+th {
+    position: relative;
+    top: 10px;
+}
+
+
+
 a.on {
   font-size: 1.5rem;
   display: inline-block;
@@ -53,6 +69,12 @@ th {
 
 select {
   font-size: 28px;
+}
+
+form {
+    width: 100%;
+    max-width: 704px;
+    margin: 40px auto 10px;
 }
 
 form.low_theme {
@@ -176,10 +198,10 @@ input[type=text] {
   border-radius: 10px;
 }
 ul.image-preview {
-  display: flex;
-  position: relative;
-  right: 31px;
-  top: 10px;
+	display: flex;
+    position: relative;
+    right: 37px;
+    bottom: 8px;
 }
 input[type="button"] {
   background-color: #b31312;
@@ -193,7 +215,7 @@ input[type="button"] {
   left: 10px;
 }
 button#food_list {
-    margin-left: 47.6%;
+    margin-left: 47%;
     height: 60px;
     width: 90px;
     border-radius: 10px;
