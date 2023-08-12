@@ -1,103 +1,113 @@
-/*const fList = (no, numPerpage) => {
-  $.ajax({
-    url: "/food/foodListEnd.do",
-    data: { cPage: no, numPerpage: numPerpage },
-    type: "get",
-    success: (data) => {
-      let foodListContainer = $(".food-list");
-      foodListContainer.empty();
-
-      if (data.foodList.length > 0) {
-        for (const f of data.foodList) {
-          let foodItem = $("<div>", { class: "food-item" });
-          foodItem.append($("<div>", { class: "food-id", text: f.noticeNo }));
-          foodItem.append(
-            $("<a>", {
-              href: "/food/noticeView.do?no=" + f.noticeNo,
-              class: "food-title",
-              text: f.noticeTitle,
-            })
-          );
-          foodItem.append($("<div>", { class: "food-author", text: "관리자" }));
-          foodItem.append($("<div>", { class: "food-views", text: f.noticeViews }));
-          foodItem.append($("<div>", { class: "food-date", text: f.writeDate }));
-
-          foodListContainer.append(foodItem);
-        }
-
-        $(".food-paging").empty();
-        $(".food-paging").append(data.pageBar);
-      } else {
-        let noResultMessage = $("<div>", {
-          class: "no-result-message",
-          text: "조회된 내용이 없습니다.",
-        });
-
-        foodListContainer.append(noResultMessage);
-      }
-    },
-  });
-};
-
-	
-const searchNotice = (no, numPerpage) => {
-
-	let type = $("select[name=type]").val();
-	let keyword = $("input[name=keyword]").val();
-	$.ajax({
-		url: "/notice/searchNotice.do",
-		data: { type: type, keyword: keyword, cPage: no ,numPerpage:numPerpage},
-		type: "get",
-		success: (data) => {
-		
-			let tb;
-
-			$(".nolist-table>tbody").empty();
-			if (data.noticeList.length > 0) {
+//좋아요
+$(document).ready(function () {
+    $(".con-like").click(function () {
+        var heartCountElement = $(this).siblings(".countDiv").find(".heart_count");
+        var currentHeartCount = parseInt(heartCountElement.text(), 10);
+        
+        console.log(heartCountElement);
+        console.log(currentHeartCount);
+        $.ajax({
+				url:"/food/toggleHeart",
+				type:"post",
+				data:{heartCountElement : heartCountElement, currentHeartCount : currentHeartCount},
+				success:(data)=>{
+					console.log(data);
+				}
+				
+			});
+        if ($(this).prop("checked")) {
+            heartCountElement.text(currentHeartCount + 1);
+            
+        } else {
 			
-				for (const n of data.noticeList) {
-					tb = "<tr>";
-					tb += "<td>" + n.noticeNo + "</td>";
-					tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
-					tb += "<td>관리자</td>";
-					tb += "<td>" + n.noticeViews + "</td>";
-					tb += "<td>" + n.writeDate + "</td>";
-					tb += "</tr>";
-					
-					$(".nolist-table>tbody").append(tb);
-				};
-				$(".board-pasing").empty();
-				$(".board-pasing").append(data.pageBar);
-
-			} else {
-				tb = "<tr>";
-				tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
-				tb += "</tr>";
-				$(".nolist-table>tbody").append(tb);
-
-			}
-		}
-
-	});
-}	*/
-
-
-const nonClick = document.querySelectorAll(".non-click");
-
-function handleClick(event) {
-  // div에서 모든 "click" 클래스 제거
-  nonClick.forEach((e) => {
-    e.classList.remove("click");
-  });
-  // 클릭한 div만 "click"클래스 추가
-  event.target.classList.add("click");
-}
-
-nonClick.forEach((e) => {
-  e.addEventListener("click", handleClick);
+            if (currentHeartCount > 0) {
+                heartCountElement.text(currentHeartCount - 1);
+            }
+        }
+    });
 });
 
 
+function sortFoodList(sortType) {
+    // 서버 요청을 보낼 URL 설정 (적절한 URL로 변경해야 함)
+    var url = "${path}/food/sortFoodList.do";
+    
+    // AJAX를 이용한 POST 요청
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // 성공적으로 응답을 받았을 때, 응답 데이터를 이용해 목록을 업데이트
+                var response = JSON.parse(xhr.responseText);
+                updateFoodList(response.foods);
+            } else {
+                console.error("Error:", xhr.statusText);
+            }
+        }
+    };
+    xhr.send("sortType=" + sortType);
+}
+
+// 음식 목록 업데이트 함수
+function updateFoodList(foods) {
+    var foodListContainer = document.querySelector(".food_main_list");
+    foodListContainer.innerHTML = ""; // 목록 비우기
+    
+    for (var i = 0; i < foods.length; i++) {
+        // 음식 정보를 이용하여 각 목록 아이템 생성
+        var f = foods[i];
+        var foodItem = `
+            <div class="food_list">
+                <!-- ... 음식 정보 표시 ... -->
+            </div>
+        `;
+        foodListContainer.innerHTML += foodItem;
+    }
+}
+
+
+
+
+function updateFoodList(sortFilter) {
+    // Make an AJAX request to the server with the chosen sortFilter
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `/foods?sortFilter=${sortFilter}`, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const newFoodList = xhr.responseText;
+            const foodListContainer = document.querySelector(".food_main_list");
+            foodListContainer.innerHTML = newFoodList;
+        }
+    };
+
+    xhr.send();
+}
+
+
+
+function searchFood(page) {
+
+	const form = document.getElementById('searchForm');
+
+	const queryParams = {
+		page: (page) ? page : 1,
+		recordSize: 5,
+		pageSize: 5,
+		searchType: $("select[name=searchType]").val(),
+		keyword: $("input[name=keyword]").val()
+	}
+	console.log(queryParams);
+
+	//location.href = location.pathname + "/food/searchFood.do?type=" + queryParams.searchType + "&keyword=" + queryParams.keyword;
+	
+	const queryString = new URLSearchParams(queryParams).toString();
+        const redirectURL = "/food/searchFood.do?" + queryString;
+        location.href = redirectURL;
+
+}
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 // 페이지 로드 후 실행
@@ -219,10 +229,31 @@ window.onload = function() {
   
   
   
-  
-  
-  
-  
-  
-  
+  // 페이지가 로드되었을 때 실행되는 함수
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 좋아요 버튼에 이벤트 리스너 등록
+    var likeButtons = document.querySelectorAll(".like");
+    likeButtons.forEach(function(button) {
+        button.addEventListener("change", function() {
+            // 선택된 버튼의 음식 아이디 가져오기
+            var foodId = button.getAttribute("data-food-id");
+            if (button.checked) {
+                incrementLike(foodId);
+            } else {
+                decrementLike(foodId);
+            }
+        });
+    });
+});
+
+
+
+// 숫자 업데이트 함수
+function updateLikeCount(foodId, change) {
+    var likeCountElement = document.getElementById("likeCount_" + foodId);
+    var currentCount = parseInt(likeCountElement.textContent);
+    var newCount = currentCount + change;
+    likeCountElement.textContent = newCount;
+}
+
   

@@ -23,5 +23,6 @@ public class Food {
 	private int allow;
 	private int foodReadCount;
 	private List<FoodPhoto> foodPhoto;
-
+	
+	
 }

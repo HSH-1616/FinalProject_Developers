@@ -224,7 +224,7 @@
 						<ion-icon class="people minus" name="remove-circle-outline"></ion-icon>
 					</button>
 					<div id="peopleCountCon">
-						<input type="number" name="count" id="peopleCount" value="1"
+						<input type="number" name="count" id="peopleCount" value="0"
 							min="1" max="10" />
 					</div>
 					<button class="countBtn" onclick="countFn('plus')">

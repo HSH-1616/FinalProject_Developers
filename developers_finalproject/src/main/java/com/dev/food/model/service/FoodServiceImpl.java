@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dev.food.model.dao.FoodDao;
 import com.dev.food.model.dto.Food;
-import com.dev.food.model.dto.FoodPhoto;
+import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodTemp;
 
@@ -19,12 +19,10 @@ public class FoodServiceImpl implements FoodService{
 	private FoodDao dao;
 	private SqlSession session;
 	
-	
 	public FoodServiceImpl(FoodDao dao, SqlSession session) {
 		this.dao = dao;
 		this.session = session;
 	}
-
 
 	@Override
 	@Transactional(rollbackFor = {Exception.class})
@@ -49,6 +47,7 @@ public class FoodServiceImpl implements FoodService{
 	public void mergeFood() {
 		dao.mergeFood(session);
 	}
+	
 	@Override
 	public void mergeFoodPhoto() {
 		dao.mergeFoodPhoto(session);		
@@ -64,16 +63,10 @@ public class FoodServiceImpl implements FoodService{
 		dao.deleteFoodPhotoTemp(session);
 	}
 	
-
 	@Override
-	public List<Food> searchFood(Map<String, Object> params, Map<String, Object> paging) {
-		return dao.searchFood(session,params,paging);
-	}
+	public List<Food> selectFoodAll(Map<String, Object> param) {
 
-	@Override
-	public List<Food> selectFoodAll(Map<String, Object> paging) {
-
-		return dao.selectFoodAll(session, paging);
+		return dao.selectFoodAll(session, param);
 	}
 	
 	@Override
@@ -86,13 +79,11 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectFoodByFoodNo(session,foodNo);
 	}
 
-
 	@Override
 	public int selectFoodCount() {
 		// TODO Auto-generated method stub
 		return dao.selectFoodCount(session);
 	}
-
 
 	@Override
 	public Food selectFoodByNo(int no) {
@@ -106,9 +97,42 @@ public class FoodServiceImpl implements FoodService{
 	 * 
 	 * return dao.getSortedFoods(session, sortFilter, cPage, numPerpage); }
 	 */
+	
 	@Override
 	public String searchByFoodNo(int foodNo) {
 		return dao.searchByFoodNo(session,foodNo);
 	}
+
+	@Override
+	public List<Food> searchFood(Map<String, Object> params) {
+
+		return dao.searchFood(session, params);
+	}
+
+	@Override
+	public FoodHeart getFoodById(String memberId) {
+
+		return dao.getFoodById(session, memberId);
+	}
+
+	@Override
+    public int toggleHeartAndGetCount(Map params) {
+        boolean isLiked = dao.checkHeart(session, params);
+        
+        if (isLiked) {
+        	dao.deleteHeart(session, params);
+        } else {
+        	dao.insertHeart(session, params);
+        }
+        return dao.getHeartCount(session, params);
+    }
+
+	@Override
+	public List<Food> foodListTitle(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 }

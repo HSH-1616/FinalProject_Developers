@@ -2,45 +2,45 @@
 
 
 
-    
-	const nList = (no, numPerpage) => {
-		$.ajax({
-			url: "/notice/noticeListEnd.do",
-			data: {  cPage: no,numPerpage: numPerpage },
-			type: "get",
-			success: (data) => {
-				
-				let tb;
 
-				$(".nolist-table>tbody").empty();
-				if (data.noticeList.length > 0) {
+const nList = (no, numPerpage) => {
+	$.ajax({
+		url: "/notice/noticeListEnd.do",
+		data: { cPage: no, numPerpage: numPerpage },
+		type: "get",
+		success: (data) => {
 
-					for (const n of data.noticeList) {
-						tb = "<tr>";
-						tb += "<td>" + n.noticeNo + "</td>";
-						tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
-						tb += "<td>관리자</td>";
-						tb += "<td>" + n.noticeViews + "</td>";
-						tb += "<td>" + n.writeDate + "</td>";
-						tb += "</tr>";
+			let tb;
 
-						$(".nolist-table>tbody").append(tb);
-					};
-					$(".board-pasing").empty();
-					$(".board-pasing").append(data.pageBar);
+			$(".nolist-table>tbody").empty();
+			if (data.noticeList.length > 0) {
 
-				} else {
+				for (const n of data.noticeList) {
 					tb = "<tr>";
-					tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
+					tb += "<td>" + n.noticeNo + "</td>";
+					tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
+					tb += "<td>관리자</td>";
+					tb += "<td>" + n.noticeViews + "</td>";
+					tb += "<td>" + n.writeDate + "</td>";
 					tb += "</tr>";
+
 					$(".nolist-table>tbody").append(tb);
+				};
+				$(".board-pasing").empty();
+				$(".board-pasing").append(data.pageBar);
 
-				}
+			} else {
+				tb = "<tr>";
+				tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
+				tb += "</tr>";
+				$(".nolist-table>tbody").append(tb);
+
 			}
+		}
 
-		});
-	};
-$(document).ready(nList()) ;
+	});
+};
+$(document).ready(nList());
 
 const noticeWrite = () => {
 	console.log($("input[name=noticeTitle").val());
@@ -126,15 +126,15 @@ const searchNotice = (no, numPerpage) => {
 	let keyword = $("input[name=keyword]").val();
 	$.ajax({
 		url: "/notice/searchNotice.do",
-		data: { type: type, keyword: keyword, cPage: no ,numPerpage:numPerpage},
+		data: { type: type, keyword: keyword, cPage: no, numPerpage: numPerpage },
 		type: "get",
 		success: (data) => {
-		
+
 			let tb;
 
 			$(".nolist-table>tbody").empty();
 			if (data.noticeList.length > 0) {
-			
+
 				for (const n of data.noticeList) {
 					tb = "<tr>";
 					tb += "<td>" + n.noticeNo + "</td>";
@@ -143,7 +143,7 @@ const searchNotice = (no, numPerpage) => {
 					tb += "<td>" + n.noticeViews + "</td>";
 					tb += "<td>" + n.writeDate + "</td>";
 					tb += "</tr>";
-					
+
 					$(".nolist-table>tbody").append(tb);
 				};
 				$(".board-pasing").empty();
