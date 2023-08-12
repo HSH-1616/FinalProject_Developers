@@ -49,6 +49,8 @@ public interface FoodService {
 	
 	int insertFoodReview(FoodReview fr);
 	
+	int deleteFoodReview(int frNo);
+	
 	List<FoodReview> selectFoodReviewByFoodNo(int foodNo);
 	
 }

@@ -154,6 +154,24 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
+	public int deleteFoodReview(int frNo) {
+		int result = dao.deleteFoodReview(session,frNo);
+		int result2 = 1;
+		System.out.println("first : "+result);
+		if(result>0) {
+			int count = dao.searchFoodReivewPhoto(session,frNo);
+			System.out.println("count : "+count);
+			if(count>0) {
+				result2 = dao.deleteFoodReviewPhoto(session,frNo);	//문제가 생길 때에만 0출력			
+				System.out.println("second : "+result2);
+			}
+		}
+		//트렌젝션 처리
+		if(result<0||result2<0)throw new RuntimeException("삭제의 문제가 발생했습니다.");
+		return result;
+	}
+	
+	@Override
 	public List<FoodReview> selectFoodReviewByFoodNo(int foodNo) {
 		return dao.selectFoodReviewByFoodNo(session,foodNo);
 	}

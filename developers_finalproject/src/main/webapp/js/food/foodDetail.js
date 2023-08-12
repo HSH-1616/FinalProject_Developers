@@ -40,6 +40,11 @@ function updateModal() {
 	$(".submitModal").text("리뷰 수정하기");
 }
 
+function insertFrNo(frNo){
+	console.log(frNo);
+	$("#selected_food_no").val(frNo);
+}
+
 
 function setThumbnail(event) {
 	const container = $(".image_container");

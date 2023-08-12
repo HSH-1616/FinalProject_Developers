@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
-import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -348,7 +347,7 @@ public class FoodController {
 	
 	@PostMapping("/insertFoodReview.do")
 	@ResponseBody
-	public String insertFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
+	public void insertFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
 		
 		//session에서 직접 받아오기
 		Member member = (Member)session.getAttribute("loginMember");
@@ -400,8 +399,12 @@ public class FoodController {
 			}
 			
 		}
-		
-		return "redirect:/views/food/foodDetail";
+	}
+	
+	@PostMapping("/deleteFoodReview.do")
+	@ResponseBody
+	public void deleteFoodReview(int frNo) {
+		service.deleteFoodReview(frNo);
 	}
 
 	//좋아요 기능

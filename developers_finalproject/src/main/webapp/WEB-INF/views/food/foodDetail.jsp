@@ -198,7 +198,7 @@
          </div>
       </div>
       <c:if test="${f.foodReview != null}">
-      <c:forEach var="fr" items="${f.foodReview}">
+      <c:forEach var="fr" items="${f.foodReview}" varStatus="vs">
          <div class="detailFoodInfoCon flex-column">
             <div class="detailUserInfo justify-content-between">
               <div class="float-start d-flex flex-row ms-0">
@@ -217,7 +217,7 @@
                   <li><a class="dropdown-item" href="#" 
                     data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal();">수정</a></li>
                   <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
-                    data-bs-target="#removeFood" onclick="">삭제</a></li>
+                    data-bs-target="#removeFood" onclick="insertFrNo(${fr.frNo});">삭제</a></li>
                 </ul>
               </div>
             </div>
@@ -226,18 +226,18 @@
             <div class="modal fade" id="removeFood" tabindex="-1" aria-labelledby="removeFoodModalLabel" aria-hidden="true">
                <div class="modal-dialog">
                   <div class="modal-content">
-                     <div class="modal-header">
-                        <h5 class="modal-title" id="removeFoodModalLabel">리뷰 삭제</h5>
-                        <input type="hidden" id="selected_food_no" name="foodNo" value="">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     </div>
-                     <div class="modal-body">
-                     정말 삭제하시겠습니까?
-                     </div>
-                     <div class="modal-footer">
-                        <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
-                     </div>
+                     <!-- <form action="${path}/food/deleteFoodReview.do" style="margin:0px;" > -->
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="removeFoodModalLabel">리뷰 삭제</h5>
+                           <input type="hidden" id="selected_food_no" name="frNo" value="">
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">정말 삭제하시겠습니까?</div>
+                        <div class="modal-footer">
+                           <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
+                           <button type="submit" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
+                        </div>
+                     <!-- </form> -->
                   </div>
                </div>
             </div>
@@ -345,10 +345,12 @@
             }
          } 
       });
+      //별점 확인
       $(".starcountnum").click(e=>{
          console.log($(".starcountnum").val()/2);
       })
-      //ajax 통신
+
+      //ajax 통신(등록)
       $(".submitModal").click(e=>{
          //js가 제공하는 FormData클래스를 이용함
 			const form=new FormData();
@@ -384,6 +386,33 @@
 				},
 				complete:()=>{
                $(".upFile").val('');
+				}
+			});
+		});
+
+      //ajax 통신(삭제)
+      $("#remove_food_btn").click(e=>{
+			// const form=new FormData();
+
+			// form.append("frNo",$("#selected_food_no").val());
+
+         const data = {frNo:$("#selected_food_no").val()};
+
+			$.ajax({
+				url:"${path}/food/deleteFoodReview.do",
+				type:"post",
+            data:data,
+				success:data=>{
+               alert("삭제가 완료되었습니다.");
+               location.reload();
+               $('window').scrollTop(0,300);
+				},
+				error:(r,s,e)=>{
+               console.log("삭제실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
+               alert("삭제 실패");
+				},
+				complete:()=>{
+               // $(".upFile").val('');
 				}
 			});
 		});
