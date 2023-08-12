@@ -355,13 +355,13 @@
 							<div class="calWrapper">
 								<div class="calContainer">
 									<div class="calDays">
-										<div class="day">MON</div>
-										<div class="day">TUE</div>
-										<div class="day">WED</div>
-										<div class="day">THU</div>
-										<div class="day">FRI</div>
-										<div class="day">SAT</div>
-										<div class="day">SUN</div>
+										<div class="weekDay">SUN</div>
+										<div class="weekDay">MON</div>
+										<div class="weekDay">TUE</div>
+										<div class="weekDay">WED</div>
+										<div class="weekDay">THU</div>
+										<div class="weekDay">FRI</div>
+										<div class="weekDay">SAT</div>
 									</div>
 									<input type="hidden" id="reInDay" value="" /> <input
 										type="hidden" id="fnum" value="" />
@@ -369,13 +369,13 @@
 								</div>
 								<div class="calContainer">
 									<div class="calDays">
-										<div class="day">MON</div>
-										<div class="day">TUE</div>
-										<div class="day">WED</div>
-										<div class="day">THU</div>
-										<div class="day">FRI</div>
-										<div class="day">SAT</div>
-										<div class="day">SUN</div>
+										<div class="weekDay">SUN</div>
+										<div class="weekDay">MON</div>
+										<div class="weekDay">TUE</div>
+										<div class="weekDay">WED</div>
+										<div class="weekDay">THU</div>
+										<div class="weekDay">FRI</div>
+										<div class="weekDay">SAT</div>
 									</div>
 									<input type="hidden" id="reOutDay" value="" /> <input
 										type="hidden" id="lnum" value="" />

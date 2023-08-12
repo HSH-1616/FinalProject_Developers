@@ -230,13 +230,13 @@
 						<div class="calWrapper">
 							<div class="calContainer">
 								<div class="calDays">
+									<div class="day">SUN</div>
 									<div class="day">MON</div>
 									<div class="day">TUE</div>
 									<div class="day">WED</div>
 									<div class="day">THU</div>
 									<div class="day">FRI</div>
 									<div class="day">SAT</div>
-									<div class="day">SUN</div>
 								</div>
 								<input type="hidden" id="reInDay" value="" /> <input
 									type="hidden" id="fnum" value="" />
@@ -244,13 +244,13 @@
 							</div>
 							<div class="calContainer">
 								<div class="calDays">
+									<div class="day">SUN</div>
 									<div class="day">MON</div>
 									<div class="day">TUE</div>
 									<div class="day">WED</div>
 									<div class="day">THU</div>
 									<div class="day">FRI</div>
 									<div class="day">SAT</div>
-									<div class="day">SUN</div>
 								</div>
 								<input type="hidden" id="reOutDay" value="" /> <input
 									type="hidden" id="lnum" value="" />
@@ -358,7 +358,9 @@
 						<h5>
 							편의 시설 추가 <span>*최대 6개 등록가능 *권장 사이즈(240px * 120px)</span>
 						</h5>
+						<c:if test="${not empty afa}">
 						<input type="hidden" name="afaId" value=${afa.afaId }>
+						</c:if>
 						<div id="insertFcCon">
 							<c:if test="${not empty afal }">
 								<c:forEach var="afal" items="${afal}" varStatus="i">
@@ -411,7 +413,8 @@
 			$("input[value=${ac.acType}]").prop("checked", true)
 			$("input[value=${ac.acType}]").nextAll(".blurRt").addClass("on");
 			$("input[value=${ac.acType}]").nextAll(".rtTitle").addClass("on");
-
+			
+		<c:if test="${not empty afa}">
 			<c:if test="${afa.afaCamera==1}">
 			$("input[name=afaCamera]").val(1)
 			$("input[name=afaCamera]").prev().addClass("on")
@@ -442,6 +445,7 @@
 			$("input[name=afaParking]").prev().addClass("on")
 			$("input[name=afaParking]").nextAll("p").addClass("on")
 			</c:if>
+		</c:if>
 			
 			<c:if test="${ac.acPeople>1}">
 				$(".hotelCountInput.people").prev().css("color","#b31312")

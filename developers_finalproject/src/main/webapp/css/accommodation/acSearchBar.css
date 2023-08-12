@@ -88,11 +88,11 @@ header .main-menu .item .item__name {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
 		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
 		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
-		margin: 0;
-	max-width: 900px;	
+	margin: 0;
+	max-width: 900px;
 }
 
-#hotelSubmit{
+#hotelSubmit {
 	position: absolute;
 	left: 90%;
 	width: 50px;
@@ -162,7 +162,7 @@ header .main-menu .item .item__name {
 	right: 10px;
 }
 
-.checkDay input{
+.checkDay input {
 	outline: none;
 	border: none;
 	background-color: transparent;
@@ -189,7 +189,7 @@ header .main-menu .item .item__name {
 	font-size: 1.3rem;
 }
 
-.checkDay:last-child>div>ion-icon{
+.checkDay:last-child>div>ion-icon {
 	left: 95px;
 }
 
@@ -205,7 +205,7 @@ header .main-menu .item .item__name {
 	display: block;
 }
 
-#checkPeople input{
+#checkPeople input {
 	width: 80px;
 	border: none;
 	outline: none;
@@ -316,7 +316,7 @@ header .main-menu .item .item__name {
 	color: #b31312;
 }
 
-.calBtnWrap{
+.calBtnWrap {
 	width: 26px;
 	height: 26px;
 }
@@ -333,9 +333,7 @@ header .main-menu .item .item__name {
 	height: 26px;
 }
 
-.calBtn.prev ion-icon {
-
-}
+.calBtn.prev ion-icon {}
 
 .calMonth {
 	position: relative;
@@ -363,7 +361,7 @@ header .main-menu .item .item__name {
 	display: flex;
 }
 
-.calDays .day {
+.calDays .weekDay {
 	color: black;
 	font-size: 0.8rem;
 	font-weight: bold;
@@ -375,7 +373,8 @@ header .main-menu .item .item__name {
 	height: 400px;
 }
 
-.day {
+.day,
+.weekDay {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -385,12 +384,26 @@ header .main-menu .item .item__name {
 	color: black;
 	font-size: 1rem;
 	text-align: center;
-	border-radius: 5px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	position: relative;
+	cursor: pointer;
 }
 
-.notday {
+
+
+.day:nth-child(7n),
+.weekDay:nth-child(7n) {
+	color: #5C4B99;
+}
+
+.day:nth-child(7n-6),
+.weekDay:nth-child(7n-6) {
+	color: #b31312;
+}
+
+.notday,
+.xDay {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -413,6 +426,39 @@ header .main-menu .item .item__name {
 	border-radius: 100%;
 }
 
+.day.first::after {
+	color: #b31312;
+	content: "체크인";
+	position: absolute;
+	font-size: 0.8rem;
+	bottom: -22px;
+}
+
+.day.last::after {
+	color: #b31312;
+	content: "체크아웃";
+	position: absolute;
+	font-size: 0.7rem;
+	bottom: -22px;
+}
+
+
+
+.day:hover {
+	border: 1px solid #b31312;
+	background-color: white;
+}
+
+.day.first,
+.day.last:hover {
+	background-color: #b31312;
+	border: none;
+}
+
+.xDay {
+	text-decoration: line-through #afafaf 2px;
+}
+
 .outDay {
 	text-decoration: line-through #b31312 2px;
 	color: #999;
@@ -429,12 +475,12 @@ header .main-menu .item .item__name {
 	position: relative;
 }
 
-.outDay::after{
-    color: #b31312;
-    content: "예약";
-    position: absolute;
-    font-size: 0.8rem;
-    bottom: -13px;
+.outDay::after {
+	color: #b31312;
+	content: "예약";
+	position: absolute;
+	font-size: 0.8rem;
+	bottom: -13px;
 }
 
 .holyDay {
@@ -453,13 +499,14 @@ header .main-menu .item .item__name {
 	position: relative;
 }
 
-.holyDay::after{
-    color: #afafaf;
-    content: "휴무";
-    position: absolute;
-    font-size: 0.8rem;
-    bottom: -13px;
+.holyDay::after {
+	color: #afafaf;
+	content: "휴무";
+	position: absolute;
+	font-size: 0.8rem;
+	bottom: -13px;
 }
+
 
 
 /* /달력 영역/ */

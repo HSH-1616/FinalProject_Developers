@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="${path }/css/accommodation/acSearchBar.css" />
 <link rel="stylesheet" href="${path }/css/accommodation/acRegist.css" />
 <section>
-	<div id="hotelRegistCon" action="${path}/ac/insertRegist"
-		method="post" enctype="multipart/form-data">
+	<div id="hotelRegistCon" action="${path}/ac/insertRegist" method="post"
+		enctype="multipart/form-data">
 		<div class="hotelRegist">
 			<div class="registHeader">
 				<button>
@@ -47,7 +47,7 @@
 						<h6>메인 이미지 설정</h6>
 						<hr>
 						<div class="preview" id="preview">
-<%-- 
+							<%-- 
 							 <div class="previewImgWrap">
 								<div class="blurPreview">
 									<img alt="" src="${path}/images/accommodation/checkImage.png">
@@ -212,13 +212,13 @@
 						<div class="calWrapper">
 							<div class="calContainer">
 								<div class="calDays">
+									<div class="day">SUN</div>
 									<div class="day">MON</div>
 									<div class="day">TUE</div>
 									<div class="day">WED</div>
 									<div class="day">THU</div>
 									<div class="day">FRI</div>
 									<div class="day">SAT</div>
-									<div class="day">SUN</div>
 								</div>
 								<input type="hidden" id="reInDay" value="" /> <input
 									type="hidden" id="fnum" value="" />
@@ -226,13 +226,13 @@
 							</div>
 							<div class="calContainer">
 								<div class="calDays">
+									<div class="day">SUN</div>
 									<div class="day">MON</div>
 									<div class="day">TUE</div>
 									<div class="day">WED</div>
 									<div class="day">THU</div>
 									<div class="day">FRI</div>
 									<div class="day">SAT</div>
-									<div class="day">SUN</div>
 								</div>
 								<input type="hidden" id="reOutDay" value="" /> <input
 									type="hidden" id="lnum" value="" />
@@ -350,12 +350,12 @@
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
-		<button id="deleteRegist">삭제하기</button>
+	<button id="deleteRegist">삭제하기</button>
 	<script>
 		var checkInOutDay = []
-		var checkHolyDay=[]
+		var checkHolyDay = []
 	</script>
 	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>

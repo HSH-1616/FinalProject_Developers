@@ -163,7 +163,6 @@ function payCheck() {
 	var checkIn = $("#detailHotelCheckIn").val()
 	var checkOut = $("#detailHotelCheckOut").val()
 	var payPeople = $("#payPeople").val()
-	console.log(checkIn)
 	if ((checkIn != "날짜추가" && checkIn != "") && (checkOut != "날짜추가" && checkOut != "") && payPeople != "인원추가") {
 		$(".detailHotelBtn").hide();
 		$(".detailHotelBtn.on").css("display", "flex");
@@ -180,23 +179,25 @@ $(".detailHotelCheckDay div> ion-icon").on("click", function() {
 		$(".day").removeClass("first").removeClass("last");
 		$("#inDayBtn,#outDayBtn").hide();
 		$("#detailHotelCheckIn,#detailHotelCheckOut").val("날짜추가");
-		$(".day").css("background-color", "white");
+		$(".day").css({"background-color":"white","border-radius":"0px"});
 		$("#fnum").val("");
 		$("#lnum").val("");
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
 		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",", ""))
+		$(".xDay").attr("class","day")
 	} else {
 		$(".day").removeClass("last");
 		$("#outDayBtn").hide();
 		$("#lnum").val("");
 		$("#detailHotelCheckOut").val("날짜추가");
-		$(".day").not(".first").css("background-color", "white");
+		$(".day").not(".first").css({"background-color":"white","border-radius":"0px"});
 		$("#exDay").text(1)
 		$("#resultPrice").text($("#exPrice1").text())
 		$("#realResultPrice").text($("#exPrice1").text())
 		$("input[name=resultPrice]").val($("#exPrice1").text().replace(",", ""))
+		$(".xDay").attr("class","day")
 	}
 	payCheck()
 });
@@ -295,6 +296,8 @@ setTimeout(function() {
 		}
 		payCheck()
 	})
-
+	
+	
+	
 }, 100)
 

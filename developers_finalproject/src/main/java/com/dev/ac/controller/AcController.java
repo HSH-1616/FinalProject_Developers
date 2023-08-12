@@ -285,7 +285,10 @@ public class AcController {
 		List<AcReservation> arv = service.updateRegistArv(acId);
 		AcFacilities afa = service.updateRegistAfa(acId);
 		List<AcFile> af = service.updateRegistAf(acId);
-		List<AfaList> afal = service.updateRegistAfal(afa.getAfaId());
+		List<AfaList> afal=null;
+		if (afa != null) {
+			afal = service.updateRegistAfal(afa.getAfaId());
+		}
 		m.addAttribute("ac", ac);
 		m.addAttribute("arv", arv);
 		m.addAttribute("afa", afa);
@@ -299,9 +302,9 @@ public class AcController {
 	@ResponseBody
 	public int updateAc(String acData, MultipartFile[] afImage, MultipartFile[] afalImage, HttpSession session,
 			String[] afalName, String[] afMain) {
-		Accommodation ac = null;		
+		Accommodation ac = null;
 		File file;
-	
+
 		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
 		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
 
@@ -311,8 +314,7 @@ public class AcController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(ac);
-		
+
 //		1. 기존파일 이름을 js배열에 집어넣는다.
 //		2. 삭제버튼을 누를시 배열에서 삭제
 //		3. db에서 해당 숙박업소에 파일리스트를 가져온다
@@ -379,7 +381,7 @@ public class AcController {
 
 		///////////////////////////////////////////////////////////////////////////////
 		log.info("js로 불러온 편의시설 : " + ac.getAfa().getAfal());
-		//System.out.println(afalImgSrc.get(0).getAfalImg());
+		// System.out.println(afalImgSrc.get(0).getAfalImg());
 		// db에서 가져온 list
 		List<AfaList> afalDb = service.updateRegistCheckAfal(ac.getAfa().getAfaId());
 		log.info("db에서 불러온 리스트 :" + afalDb);
@@ -388,7 +390,7 @@ public class AcController {
 				.toList();
 
 		log.info("db와 비교 결과 : " + resultAfalFile);
-		
+
 		// db값과 비교한 파일 삭제
 		for (AfaList afalImg : resultAfalFile) {
 			file = new File(afaPath + afalImg.getAfalImg());
@@ -397,12 +399,13 @@ public class AcController {
 
 		// 새로운 파일리스트와 객체를 만든다
 		List<AfaList> afal = new ArrayList();
-		
+
 		// js에서 가져온 리스트 새로운 리스트에 추가
 		if (ac.getAfa().getAfal() != null) {
 			for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
 				AfaList afa = AfaList.builder().afaId(ac.getAfa().getAfal().get(i).getAfaId())
-						.afalImg(ac.getAfa().getAfal().get(i).getAfalImg()).afalName(ac.getAfa().getAfal().get(i).getAfalName()).build();
+						.afalImg(ac.getAfa().getAfal().get(i).getAfalImg())
+						.afalName(ac.getAfa().getAfal().get(i).getAfalName()).build();
 				afal.add(afa);
 			}
 		}
@@ -430,7 +433,7 @@ public class AcController {
 		}
 		log.info("업로드 파일 추가 : " + afal);
 		// 편의시설 이름 배열을 순서대로 추가 후 accommodation에 세팅
-		if (afalName!=null) {
+		if (afalName != null) {
 			for (int i = 0; i < afalName.length; i++) {
 				afal.get(i).setAfaId(ac.getAfa().getAfaId());
 				afal.get(i).setAfalName(afalName[i]);
