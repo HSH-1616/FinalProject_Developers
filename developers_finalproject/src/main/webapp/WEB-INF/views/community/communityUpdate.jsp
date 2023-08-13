@@ -24,7 +24,7 @@
             			<c:forEach var="c" items="${ comuView.files}">
             				<li>
             					<img src="${path }/upload/community/${c.fileName}"  class="mt-2" style="height: 200px; max-width:500px;">
-            					<button class="s-btn  mt-2 file-del" data-name="${c.fileName }">delete</button>
+            					<button type="button" class="s-btn  mt-2 file-del" data-name="${c.fileName }">delete</button>
             				</li>
             			</c:forEach>
             		</ul>
@@ -143,6 +143,7 @@
                 let myDropzone = this; //closure
                 submitButton.addEventListener("click", function () {
                    	if(myDropzone.getQueuedFiles().length>0){
+                   		console.log("업로드");
                    		myDropzone.processQueue();
                    	}else{
                    		$.ajax({
@@ -152,7 +153,7 @@
                     			communityContent: $("#communityContent").val(), communityNo:communityNo },
                     		success:(data)=>{
                     			if(data>0){
-                    				location.replace("<c:out value='${path}'/>/community/communityView.do?no='${comuView.communityNo }'");
+                    				location.replace("/community/communityView.do?no="+communityNo);
                     			}else{
                     				alert("수정 실패");
                     			}
@@ -161,8 +162,9 @@
                    	}
                 });
                 this.on("successmultiple", function(files, response){
-         			
+         			console.log(files);
                 	let fileNames=files[0].xhr.responseText;
+                	
                  	$.ajax({
                 		url: "/community/communityUpdateEnd.do",
                 		type:"post",
@@ -170,12 +172,12 @@
                 			communityContent: $("#communityContent").val(), files:fileNames, communityNo:communityNo },
                 		success:(data)=>{
                 			if(data>0){
-                				location.replace("<c:out value='${path}'/>/community/communityView.do?no='${comuView.communityNo }'");
+                				location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo);
                 			}else{
                 				alert("수정 실패");
                 			}
                 		}
-                	});  
+                	});   
                 	
                 	
                 	
@@ -183,4 +185,26 @@
                 });
             },
         });
+        
+        $(".file-del").click(function(e){
+        	
+        	let target=$(this);
+        	const fileName= target.data("name");
+        	const targetLi = e.target.closest("li");
+        			$.ajax({
+        			url: "/ncCommon/removeCommunityFile.do",
+        			data: { fileName: fileName },
+        			type: "post",
+        			success: (data) => {
+        				if (data >0) {
+        					targetLi.remove();
+        					/* location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo); */
+        				}
+        				else {
+        					alert("삭제실패");
+        				}
+
+        			}
+        		});
+        })
   </script>

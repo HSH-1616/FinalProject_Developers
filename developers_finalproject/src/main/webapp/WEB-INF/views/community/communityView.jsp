@@ -93,19 +93,22 @@
 			<div class="like-content">
 
 				<img src="${path }/images/community/heart.svg"> <span>${comuView.likeCount }</span>
-				<button class="btn-secondary like-review" value="false">
-					<i class="fa fa-heart" aria-hidden="true"></i> Like
-				</button>
+				<c:if test="${loginMember!=null }">
+					<button class="btn-secondary like-review" value="false">
+						<i class="fa fa-heart" aria-hidden="true"></i> Like
+					</button>
+				</c:if>
 
 			</div>
 			<div class="card-body comment-body">
-			
+			<c:if test="${loginMember!=null }">
 				<a class="w-btn-outline w-btn-blue-outline" data-title="댓글달기"
 					data-bs-toggle="collapse" href="#inputComment" role="button"
 					aria-expanded="false" aria-controls="collapseComment"> 댓글쓰기 </a>
+			</c:if>
 			<c:if test="${loginMember.memberId == comuView.memberId.memberId}">
 				<button class="s-btn ms-2" onclick="location.href='${path}/community/updateCommunity.do?no=${comuView.communityNo }'">수정</button>
-				<button class="s-btn">삭제</button>
+				<button class="s-btn" onclick="deleteCommunity(${comuView.communityNo });">삭제</button>
 			</c:if>
 			
 			</div>

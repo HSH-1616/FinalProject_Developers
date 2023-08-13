@@ -124,6 +124,24 @@ public class CommunityDaoImpl implements CommunityDao {
 		return session.update("community.updateCommunity",c);
 	}
 
+	@Override
+	public int updateCommunityFile(SqlSession session, CommunityFile file) {
+		
+		return session.insert("community.updateCommunityFile",file);
+	}
+
+	@Override
+	public List<String> selectCommunityFileList(SqlSession session, int communityNo) {
+		
+		return session.selectList("community.selectCommunityFiles",communityNo);
+	}
+
+	@Override
+	public int deleteCommunity(SqlSession session, int communityNo) {
+	
+		return session.delete("community.deleteCommunity",communityNo);
+	}
+
 	
 
 }

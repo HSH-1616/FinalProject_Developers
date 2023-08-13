@@ -58,6 +58,14 @@ public class CommunityController {
 		return "/community/communityView";
 	}
 	
+	@GetMapping("/updateCommunity.do")
+	public String updateCommunity(Model m, int no) {
+		
+		Community co=service.communityView(no);
+		m.addAttribute("comuView",co);
+		return "/community/communityUpdate";
+	}
+	
 	@GetMapping("/communityWritePage.do")
 	public String communityWritePage() {
 		return "/community/communityWrite";
@@ -139,12 +147,7 @@ public class CommunityController {
 		return service.deleteReply(r);
 	}
 	
-	@GetMapping("/updateCommunity.do")
-	public String updateCommunity(Model m, int no) {
-		Community co=service.communityView(no);
-		m.addAttribute("comuView",co);
-		return "/community/communityUpdate";
-	}
+	
 	
 	@PostMapping("/communityUpdateEnd.do")
 	@ResponseBody
@@ -160,6 +163,12 @@ public class CommunityController {
 		}
 		
 		return service.updateCommunity(communityBoard);
+	}
+	
+	@PostMapping("/deleteCommunity.do")
+	@ResponseBody
+	public int deleteComuunity(int communityNo,HttpSession session) {
+		return service.deleteCommunity(communityNo, session);
 	}
 }
 

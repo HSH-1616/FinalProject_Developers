@@ -31,5 +31,5 @@ public interface CommunityService {
 	int updateReply(Reply r);
 	int deleteReply(Reply r);
 	int updateCommunity(Community c);
-	
+	int deleteCommunity(int communityNo,HttpSession hsession);
 }

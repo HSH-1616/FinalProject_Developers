@@ -182,8 +182,10 @@ const replyList=()=>{
 					if(memberId==i.memberId.memberId){
 						str+="<button class='reply-delete s-btn mx-2' onclick='deleteReply("+i.replyLevel+","+i.replyNo+")'>삭제</button>";
 					}
+					if(memberId!=""){
 					str+="<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies"+i.replyNo+"' role='button'"
 					+"aria-expanded='false' aria-controls='collapseComment'> 댓글쓰기 </a>";
+					}
 					str+="</div>";
 					str+="</div>";
 					str+="<div class='collapse mt-3' id='inputReplies"+i.replyNo+"'>";
@@ -234,16 +236,16 @@ $(".reply-list").on("click",".reply-update",function(e){
 	let target=$(this);
 	const no = target.data("name");
 	
-	let updateForm="<span><input type='text' id='editReply"+no+"' value='"+$("."+no+"").html()+"'>";
+	let updateForm="<span><input type='text' id='editReply"+no+"' value='"+$("."+no).html()+"'>";
 	updateForm+="<button class='s-btn m-2' onclick='updateReply("+no+");'>수정</button>"
 	updateForm+="<button class='s-btn m-2' onclick='replyList()'>취소</button>"
 	
-	$("."+no+"").parent().replaceWith(updateForm);
+	$("."+no).parent().replaceWith(updateForm);
 })
 
 
 const updateReply=(no)=>{
-	console.log(no);
+
 	const reContent=$("#editReply"+no+"").val();
 	
 	$.ajax({
@@ -264,7 +266,7 @@ const deleteReply=(level,no)=>{
 		url:"/community/deleteReply.do",
 		type:"post",
 		data:{replyNo:no,replyLevel:level},
-		success:(data)=>{
+		success:()=>{
 			replyList();
 		},error:()=>{
 			alert("댓글 삭제 실패");
@@ -272,25 +274,24 @@ const deleteReply=(level,no)=>{
 	})
 }
 
-$(".file-del").click(()=>{
-	let target=$(this);
-	const fileName= target.data("name");
-			$.ajax({
-			url: "/ncCommon/removeCommunityFile.do",
-			data: { fileName: fileName },
-			type: "post",
-			success: (data) => {
+deleteCommunity=(no)=>{
+	
+	
+	$.ajax({
+		url:"/community/deleteCommunity.do",
+		type:"post",
+		data:{communityNo:no},
+		success:()=>{
+			alert("삭제성공");
+			location.replace("/community/communityList.do");
+		},error:()=>{
+			alert("삭제실패");
+			location.replace("/community/communityList.do");
+		}
+	})
+}
 
-				if (data == "true") {
-					console.log("파일삭제");
-				}
-				else {
-					alert("삭제실패");
-				}
 
-			}
-		});
-})
 
 
 
