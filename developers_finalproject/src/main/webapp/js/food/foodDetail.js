@@ -24,10 +24,16 @@ function insertModal() {
 	$(".star_rating h5").text(0 + "/5");
 	// 값 변경하기
 	//$(".modalForm").attr("action","/food/insertFoodReview.do");
+	const insertContent = "작성내용은 매인페이지와 장소상세에 노출되며 매장주를 포함한 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.";
+	$("#FR_CONTENT").val(insertContent);
+	if($(".submitModal").hasClass("updateFoodReview") === true){
+		$(".submitModal").removeClass("updateFoodReview");
+	}
+	$(".submitModal").addClass("insertFoodReview");
 	$(".submitModal").text("리뷰 올리기");
 }
 
-function updateModal() {
+function updateModal(event) {
 	// 초기화
 	$('.review_File').val('');
 	$(".image_container").children().remove();
@@ -36,7 +42,20 @@ function updateModal() {
 	//DB에서 가져오기
 
 	// 값 변경하기
-	//$(".modalForm").attr("action","/food/updateFoodReview.do");
+	// 반복되는 부분을 찾고, 반복 전까지는 메소드로 접근, 그 이후는 클래스명으로 접근하기
+	const updateContent = $(event.target).parents(".detailFoodInfoCon").find(".detailReviewText").children(".default_food_review_height").text().trim();
+	console.log(updateContent);
+	$("#FR_CONTENT").text("");
+	$("#FR_CONTENT").text(updateContent);
+
+	const updateGrade = $(event.target).parents(".detailFoodInfoCon").find(".starContainer").find(".star_number").next().val();
+	console.log(updateGrade);
+	$(".review_rating").css("width", updateGrade);
+	$(".star_rating h5").text(updateGrade.replace('%','') / 20 + "/5");
+	if($(".submitModal").hasClass("insertFoodReview") === true){
+		$(".submitModal").removeClass("insertFoodReview");
+	}
+	$(".submitModal").addClass("updateFoodReview");
 	$(".submitModal").text("리뷰 수정하기");
 }
 

@@ -392,7 +392,7 @@ public class FoodController {
 			service.insertFoodReview(fr);
 		}catch(RuntimeException e) {
 			e.printStackTrace();
-			//실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이 필요하다.
+			//실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이 필요하다.		
 			for(FoodReviewPhoto p : fr.getFoodReviewPhoto()) {
 				File delFile=new File(path+p.getRpRename());
 				delFile.delete();
@@ -401,10 +401,26 @@ public class FoodController {
 		}
 	}
 	
+	
+	
 	@PostMapping("/deleteFoodReview.do")
 	@ResponseBody
-	public void deleteFoodReview(int frNo) {
-		service.deleteFoodReview(frNo);
+	public void deleteFoodReview(HttpSession session, int frNo) {
+		//db에서 값 지우면 upload파일도 삭제하는 로직
+		String path = session.getServletContext().getRealPath("/images/upload/food/");
+		List<FoodReviewPhoto> rp = service.selectFoodReviewPhotoByFoodNo(frNo);
+		System.out.println("rp : "+rp);
+		
+		if(!rp.isEmpty()) {
+			//upload삭제
+			for(FoodReviewPhoto p : rp) {
+				System.out.println("p : "+p.getRpName());
+				File delFile=new File(path+p.getRpRename());
+				delFile.delete();
+			}
+			//DB삭제
+			service.deleteFoodReview(frNo);			
+		}
 	}
 
 	//좋아요 기능

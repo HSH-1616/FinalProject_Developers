@@ -7,6 +7,7 @@ import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodService {
@@ -51,6 +52,8 @@ public interface FoodService {
 	
 	int deleteFoodReview(int frNo);
 	
-	List<FoodReview> selectFoodReviewByFoodNo(int foodNo);
+	//List<FoodReview> selectFoodReviewByFoodNo(int foodNo);
+	
+	List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(int frNo);
 	
 }

@@ -171,9 +171,14 @@ public class FoodServiceImpl implements FoodService{
 		return result;
 	}
 	
+//	@Override
+//	public List<FoodReview> selectFoodReviewByFoodNo(int foodNo) {
+//		return dao.selectFoodReviewByFoodNo(session,foodNo);
+//	}
+	
 	@Override
-	public List<FoodReview> selectFoodReviewByFoodNo(int foodNo) {
-		return dao.selectFoodReviewByFoodNo(session,foodNo);
+	public List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(int frNo) {
+		return dao.selectFoodReviewPhotoByFoodNo(session,frNo);
 	}
 	
 }

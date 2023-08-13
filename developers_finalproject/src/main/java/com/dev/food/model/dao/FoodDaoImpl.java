@@ -157,9 +157,14 @@ public class FoodDaoImpl implements FoodDao {
 		return session.delete("food.deleteFoodReviewPhoto",frNo);
 	}
 	
+//	@Override
+//	public List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo) {
+//		return session.selectList("food.selectFoodReviewByFoodNo",foodNo);
+//	}
+	
 	@Override
-	public List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo) {
-		return session.selectList("food.selectFoodReviewByFoodNo",foodNo);
+	public List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(SqlSession session, int frNo) {
+		return session.selectList("food.selectFoodReviewPhotoByFoodNo",frNo);
 	}
 
 	public FoodHeart getFoodById(SqlSession session, String memberId) {
