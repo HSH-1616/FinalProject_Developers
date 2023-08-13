@@ -69,8 +69,10 @@ public class AcController {
 
 	@GetMapping("/acDetail")
 	public String acDetail(int no, Model m) {
-		m.addAttribute("ad", service.acDetail(no));
+		Accommodation ad=service.acDetail(no);
+		m.addAttribute("ad", ad);
 		m.addAttribute("ah", service.acHeart(no));
+		m.addAttribute("afal",service.updateRegistAfal(ad.getAfa().getAfaId()));
 		return "/accommodation/acDetail";
 	}
 
@@ -81,7 +83,7 @@ public class AcController {
 
 		// 개발도구에서 가격변경 위조 방지
 		int checkPrice = ac.getAcPrice();
-
+		log.info("DB 가격 : "+checkPrice );
 		people = people.substring(0, people.length() - 1);
 		int maxPeople = Integer.parseInt(people);
 
@@ -107,7 +109,10 @@ public class AcController {
 				checkPrice += 20000;
 			}
 		}
-		System.out.println(resultPrice);
+		
+		log.info("인원수 측정 가격 : "+checkPrice );
+		log.info("숙박일 : "+diffDays );
+		log.info("총합 : "+resultPrice );
 		// db가격과 비교
 		if (checkPrice * diffDays == resultPrice) {
 			m.addAttribute("checkIn", checkIn);
@@ -118,7 +123,7 @@ public class AcController {
 			m.addAttribute("diff", diffDays);
 			return "/accommodation/acPay";
 		} else {
-			return "/accommodation/errorPage";
+			return "/accommodation/acError";
 		}
 
 	}
@@ -249,9 +254,12 @@ public class AcController {
 			}
 		}
 
-		int result = service.insertAc(ac);
-
-		return result;
+		Map m = service.insertAc(ac);
+		if((int)m.get("result")>1) {
+			return (int)m.get("acId");
+		}else {
+			return 0;
+		}		
 	}
 
 	@GetMapping("/deleteRegist")
@@ -381,7 +389,6 @@ public class AcController {
 
 		///////////////////////////////////////////////////////////////////////////////
 		log.info("js로 불러온 편의시설 : " + ac.getAfa().getAfal());
-		// System.out.println(afalImgSrc.get(0).getAfalImg());
 		// db에서 가져온 list
 		List<AfaList> afalDb = service.updateRegistCheckAfal(ac.getAfa().getAfaId());
 		log.info("db에서 불러온 리스트 :" + afalDb);
@@ -444,7 +451,7 @@ public class AcController {
 		log.info("////////////////////////////");
 
 		int result = service.updateAc(ac);
-		return 0;
+		return ac.getAcId();
 	}
 
 }

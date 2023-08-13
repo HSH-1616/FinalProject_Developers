@@ -21,6 +21,7 @@ public interface AcService {
 	
 	List<AcHeart> acHeart(int no);
 	
+	
 	Accommodation acPay(int no);
 	
 	AcPay checkPayRefund(int no);
@@ -35,7 +36,7 @@ public interface AcService {
 	
 	int deleteHeart(Map param);
 	
-	int insertAc(Accommodation ac);
+	Map insertAc(Accommodation ac);
 	
 	List<AcFile> deleteImage(int acId);
 	

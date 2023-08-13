@@ -2,20 +2,23 @@ $(document).ready(function() {
 	calender();
 	$(".calBtn.prev").hide()
 
-	/* console.log($("#input-right").val());
-	 console.log($("#input-right").attr("max"));
-	 var lval = $("#input-left").val();
-	 var rval = $("#input-right").val();
-	 var max = $("#input-right").attr("max");
-	 var rp = (1 - rval / max) * 100 + "%";
-	 console.log(rp);
-	 $(".thumb.right").css("right", rp);
-	 $("#minVal").val(lval);
-	 $("#maxVal").val(rval);
-	 var ad = $(".thumb").css("left");
-	 console.log(ad);*/
+	/*console.log(i)
+/* console.log($("#input-right").val());
+console.log($("#input-right").attr("max"));
+var lval = $("#input-left").val();
+var rval = $("#input-right").val();
+var max = $("#input-right").attr("max");
+var rp = (1 - rval / max) * 100 + "%";
+console.log(rp);
+$(".thumb.right").css("right", rp);
+$("#minVal").val(lval);
+$("#maxVal").val(rval);
+var ad = $(".thumb").css("left");
+console.log(ad);*/
 });
-	var checkSelectDay=[]
+var checkResultDay = []
+var sLLnum = 0;
+
 /*$(document).on("input", "#input-left", function (e) {
   var lval = $("#input-left").val();
   var rval = $("#input-right").val();
@@ -148,7 +151,7 @@ function calender() {
 	renderCalender(thisMonth);
 
 
-	function renderCalender(thisMonth, fnum, lnum,checkSelectDay) {
+	function renderCalender(thisMonth, fnum, lnum, sFnum, sLnum, sLLnum) {
 		//새로 들어오는 변수를 위한 데이터 정의
 		currentYear = thisMonth.getFullYear();
 		currentMonth = thisMonth.getMonth();
@@ -409,30 +412,34 @@ function calender() {
 				}
 			})
 		}
-		
-		if(checkSelectDay!=null){
-			console.log(checkSelectDay)
-			$(".day").each(function(i, l) {
-					$(checkSelectDay).each(function(i2, l2) {
-						if ($(".day").eq(i).children().val() != l2) {
-
-							$(".day").eq(i).attr("class", "xDay")
+		if (sFnum != "" && sLLnum != "") {
+			var listDate4 = []
+			if ($("#selectFnum").val() != "") {
+				getDateRange(sFnum, sLLnum, listDate4);
+				$(listDate4).each(function(index, item) {
+					$(".day").each(function(index2, item2) {
+						if ($(this).children().val() == item) {
+							$(this).attr("class", "selectDay")
 
 						}
-					})
-				})
-		}
+						if ($(this).children().val() == $("#selectFnum").val()) {
+							$(this).addClass("first")
+						}
+						if ($(this).children().val() == $("#selectLnum").val()) {
+							$(this).addClass("last")
+						}
+					});
 
+				});
+				$(".day").attr("class", "xDay")
+			}
+		}
 
 	}
 
 	//달력 기간 구하기
 	$(document).on("click", ".day", function() {
 		var num = $(this).children().val().replace("-", "").replace("-", "");
-
-
-
-
 
 		//달력을 클릭했을때 첫번째는 checkIn으로 표시하고 fnum이라는 변수에 입력하고 html에 input hidden fnum에 값 대입
 		//input type hidden을 만든 이유 : 이전달 다음달을 클릭하거나 form전송시 
@@ -454,9 +461,6 @@ function calender() {
 					$("#fnum,#checkIn").val($(".day.first").children().val());
 				}
 				else {
-					console.log(fnum)
-					console.log(num)
-					console.log(2)
 					$(".day").not(".first").css({ "background-color": "white", "border-radius": "0px" });
 					$(".day").removeClass("last");
 					$(this).addClass("last");
@@ -549,109 +553,29 @@ function calender() {
 
 
 
-
-		var checkResultDay = [
-			...checkInOutDay,
-			...checkHolyDay
-		]
-		console.log(checkResultDay)
-		if (checkResultDay.length) {
-			checkResultDay.sort(function(comp1, comp2) {
-				var compDay1 = comp1.checkIn.toUpperCase();
-				var compDay2 = comp2.checkIn.toUpperCase();
-				if (compDay1 < compDay2) {
-					return -1;
-				} else if (compDay1 > compDay2) {
-					return 1;
-				}
-				return 0;
-			});
-
-			var listDate2 = []
-			var selectDay = []
-			var day = []
-			$.each(checkResultDay, function(i, l) {
-				getDateRange(fnum, l.checkIn, listDate2)
-				if (fnum < checkResultDay[i].checkIn) {
-					console.log(i)
-					console.log(checkResultDay[i].checkIn)
-					$(listDate2).each(function(i2, l2) {
-						$(".day").each(function(i3, l3) {
-							if ($(this).children().val() == l2) {
-								selectDay.push($(this).children().val())
-							}
-						})
-
-					})
-					return false;
-				}
-
-			})
-
-			$(".day").each(function(i, l) {
-				day.push($(this).children().val())
-			})
-
-			console.log(selectDay)
-			console.log(day)
-			if (selectDay.length) {
-				function findUniqElem(day, selectDay) {
-					return day.concat(selectDay)
-						.filter(item => !day.includes(item) || !selectDay.includes(item));
-				}
-				console.log(findUniqElem(day, selectDay))
-				checkSelectDay = findUniqElem(day, selectDay)
-				$(".day").each(function(i, l) {
-					$(checkSelectDay).each(function(i2, l2) {
-						if ($(".day").eq(i).children().val() == l2) {
-
-							$(".day").eq(i).attr("class", "xDay")
-
-						}
-					})
-				})
-			/*	if ($(".last").length) {
-					$(".xDay").attr("class", "day")
-					var checkResultDay = []
-					var listDate2 = []
-					var selectDay = []
-					var day = []
-					var checkSelectDay = []
-
-
-					$(".day").click(function() {
-						if ($(".first").length && $(".last").length) {
-							$("#fnum").val("")
-							$("#lnum").val("")
-							$(".day").removeClass("first").removeClass("last")
-
-						}
-
-					})
-				}*/
-
-			}
-		}
 		//체크인과 체크아웃 사이에 에약날짜가 있으면 무효처리
 		if ($(".outDay").length) {
 			getDateRange(fnum, lnum, listDate);
 			$(listDate).each(function(index, item) {
-				$(".day input").each(function(index2, item2) {
-					$(".outday").each(function(index3, item3) {
-						if ($(this).children().val() == item) {
-							$(".day").removeClass("first last")
-							$(".day").css({ "background-color": "white", "border-radius": "0px" })
-							$("#fnum").val("")
-							$("#lnum").val("")
-							$("#detailHotelCheckIn").val("날짜추가")
-							$("#detailHotelCheckOut").val("날짜추가")
-							$("#inDayBtn").hide()
-							$("#outDayBtn").hide()
-							$("#exDay").text("1")
-							$("#resultPrice").text($("#exPrice1").text())
-							$("#realResultPrice").text($("#exPrice1").text())
-						}
-					});
+				$(".outday").each(function(index3, item3) {
+					if ($(this).children().val() == item) {
+						$(".day").removeClass("first last")
+						$(".day").css({ "background-color": "white", "border-radius": "0px" })
+						$(".xDay").css({ "background-color": "white", "border-radius": "0px" })
+						$("#fnum").val("")
+						$("#lnum").val("")
+						$(".selectDay").not(".first").css({ "background-color": "white", "border-radius": "0px" })
+						$("#detailHotelCheckIn").val("날짜추가")
+						$("#detailHotelCheckOut").val("날짜추가")
+						$("#inDayBtn").hide()
+						$("#outDayBtn").hide()
+						$("#exDay").text("1")
+						$("#resultPrice").text($("#exPrice1").text())
+						$("#realResultPrice").text($("#exPrice1").text())
+						$("#holyStart").val("")
+						$("#startBtn").hide()	
+					
+					}
 				});
 			})
 		}
@@ -662,33 +586,37 @@ function calender() {
 		if ($(".holyDay").length) {
 			getDateRange(fnum, lnum, listDate);
 			$(listDate).each(function(index, item) {
-				$(".day input").each(function(index2, item2) {
-					$(".holyDay").each(function(index3, item3) {
-						if ($(this).children().val() == item) {
-							$(".day").removeClass("first last")
-							$(".day").css({ "background-color": "white", "border-radius": "0px" })
-							$("#fnum").val("")
-							$("#lnum").val("")
-							$("#detailHotelCheckIn").val("날짜추가")
-							$("#detailHotelCheckOut").val("날짜추가")
-							$("#holyStart").val("")
-							$("#holyLast").val("")
-							$("#inDayBtn").hide()
-							$("#outDayBtn").hide()
-							$("#startBtn").hide()
-							$("#lastBtn").hide()
-							$("#exDay").text("1")
-							$("#resultPrice").text($("#exPrice1").text())
-							$("#realResultPrice").text($("#exPrice1").text())
-						}
-					});
+				$(".holyDay").each(function(index3, item3) {
+					if ($(this).children().val() == item) {
+						$(".day").removeClass("first last")
+						$(".day").css({ "background-color": "white", "border-radius": "0px" })
+						$(".xDay").css({ "background-color": "white", "border-radius": "0px" })
+						$("#fnum").val("")
+						$("#lnum").val("")
+						$(".selectDay").not(".first").css({ "background-color": "white", "border-radius": "0px" })
+						$("#detailHotelCheckIn").val("날짜추가")
+						$("#detailHotelCheckOut").val("날짜추가")
+						$("#holyStart").val("")
+						$("#holyLast").val("")
+						$("#inDayBtn").hide()
+						$("#outDayBtn").hide()
+						$("#startBtn").hide()
+						$("#lastBtn").hide()
+						$("#exDay").text("1")
+						$("#resultPrice").text($("#exPrice1").text())
+						$("#realResultPrice").text($("#exPrice1").text())
+						$("#holyStart").val("")
+						$("#startBtn").hide()	
+					}
 				});
 			})
 		}
 
 		//체크인 x표시 클릭시 전부 초기화		
 		$(".checkDay > div > ion-icon").on("click", function() {
+			console.log(2)
 			if ($(this).attr("id") == "inDayBtn") {
+				
 				$(".day").removeClass("first").removeClass("last");
 				$("#inDayBtn,#outDayBtn").hide();
 				$("#checkIn,#checkOut").val("");
@@ -712,9 +640,12 @@ function calender() {
 		//새로 렌더링 될때 기존에 선택한 값을 유지하기 위해 변수로 넘겨준다.
 		var fnum = $("#fnum").val();
 		var lnum = $("#lnum").val();
+		var sFnum = $("#selectFnum").val() == "" ? "" : $("#selectFnum").val();
+		var sLnum = $("#selectLnum").val();
+		sLLnum == "" ? "" : sLLnum
 		thisMonth = new Date(currentYear, currentMonth - 1, currentDate);
 
-		renderCalender(thisMonth, fnum, lnum,checkSelectDay);
+		renderCalender(thisMonth, fnum, lnum, sFnum, sLnum, sLLnum);
 		prevBtn();
 	});
 
@@ -723,8 +654,11 @@ function calender() {
 		//새로 렌더링 될때 기존에 선택한 값을 유지하기 위해 변수로 넘겨준다.
 		var fnum = $("#fnum").val();
 		var lnum = $("#lnum").val();
+		var sFnum = $("#selectFnum").val();
+		var sLnum = $("#selectLnum").val();
+		sLLnum == "" ? "" : sLLnum
 		thisMonth = new Date(currentYear, currentMonth + 1, currentDate);
-		renderCalender(thisMonth, fnum, lnum,checkSelectDay);
+		renderCalender(thisMonth, fnum, lnum, sFnum, sLnum, sLLnum);
 		prevBtn();
 	});
 

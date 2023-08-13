@@ -258,6 +258,7 @@ header .main-menu .item .item__name {
 
 .searchMap svg {
 	background-color: transparent;
+	margin-top: 30px;
 }
 
 .searchMap svg:hover {
@@ -374,7 +375,8 @@ header .main-menu .item .item__name {
 }
 
 .day,
-.weekDay {
+.weekDay,
+.selectDay {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -420,13 +422,16 @@ header .main-menu .item .item__name {
 }
 
 .day.first,
-.day.last {
+.day.last,
+.selectDay.first,
+.selectDay.last {
 	background-color: #b31312;
 	color: white;
 	border-radius: 100%;
 }
 
-.day.first::after {
+.day.first::after,
+.selectDay.first::after {
 	color: #b31312;
 	content: "체크인";
 	position: absolute;
@@ -434,7 +439,8 @@ header .main-menu .item .item__name {
 	bottom: -22px;
 }
 
-.day.last::after {
+.day.last::after,
+.selectDay.last::after {
 	color: #b31312;
 	content: "체크아웃";
 	position: absolute;

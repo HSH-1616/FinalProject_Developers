@@ -10,12 +10,12 @@ $(window).ready(function() {
 	var people = urlParams.get('people');
 	$("#searchLocInput").val(loc)
 	if (checkIn == "") {
-		$("#checkIn").val("날짜추가")
+		$("#checkIn").val("")
 	} else {
 		$("#checkIn").val(checkIn)
 	}
 	if (checkOut == "") {
-		$("#checkOut").val("날짜추가")
+		$("#checkOut").val("")
 	} else {
 		$("#checkOut").val(checkOut)
 	}
@@ -50,7 +50,7 @@ $(window).ready(function() {
 		if ($(this).attr("id") == "inDayBtn") {
 			$(".day").removeClass("first").removeClass("last");
 			$("#inDayBtn,#outDayBtn").hide();
-			$("#checkInDay,#checkOutDay").val("날짜 추가");
+			$("#checkIn,#checkOut").val("");
 			$(".day").css("background-color", "white");
 			$("#fnum").val("");
 			$("#lnum").val("");
@@ -58,7 +58,7 @@ $(window).ready(function() {
 			$(".day").removeClass("last");
 			$("#outDayBtn").hide();
 			$("#lnum").val("");
-			$("#checkOutDay").val("날짜 추가");
+			$("#checkOut").val("");
 			$(".day").not(".first").css("background-color", "white");
 		}
 	});

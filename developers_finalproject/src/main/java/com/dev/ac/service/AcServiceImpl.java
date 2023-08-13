@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.dev.ac.dao.AcDao;
 import com.dev.ac.dto.AcFacilities;
@@ -98,7 +99,7 @@ public class AcServiceImpl implements AcService {
 
 	@Transactional
 	@Override
-	public int insertAc(Accommodation ac) {
+	public Map insertAc(Accommodation ac) {
 		int result = dao.insertAc(session, ac);
 		if (result > 0) {
 			for (int i = 0; i < ac.getAcFiles().size(); i++) {
@@ -123,7 +124,11 @@ public class AcServiceImpl implements AcService {
 				}
 			}
 		}
-		return result;
+		;
+		Map<String, Object> m = new <String, Object>HashMap();
+		m.put("result", result);
+		m.put("acId", ac.getAcId());
+		return m;
 	}
 
 	@Override
@@ -191,52 +196,48 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public int updateAc(Accommodation ac) {
 		int result = dao.updateAc(session, ac);
-		log.info("acUpdate 결과 : " + result);
+		log.info("acUpdate 성공 result : " + result);
 
 		if (result > 0) {
 			result += dao.updateRegistDelAf(session, ac.getAcId());
 
-			log.info("파일delete 결과 : " + result);
+			log.info("파일delete 성공 result : " + result);
 
 			if (result > 1) {
 				for (int i = 0; i < ac.getAcFiles().size(); i++) {
 					result += dao.updateInAcFile(session, ac.getAcFiles().get(i));
 				}
+				log.info("파일insert 성공 result : " + result);
 			}
 
-			log.info("파일insert 결과 : " + result);
+			if (result > ac.getAcFiles().size() + 1) {
+				result += dao.updateAfa(session, ac.getAfa());
+				log.info("편의시설update 성공 result : " + result);
+			}
 
 			if (result > ac.getAcFiles().size() + 2) {
-				result += dao.updateAfa(session, ac.getAfa());
-			}
-
-			log.info("편의시설update 결과 : " + result);
-			
-			if (result > ac.getAcFiles().size() + 3) {
 				result += dao.updateRegistDelAfal(session, ac.getAfa().getAfaId());
+				log.info("편의시설 리스트 delete 성공 result : " + result);
 			}
 
-			log.info("편의시설delete 결과 : " + result);
-			
-			if (result > ac.getAcFiles().size() + 4) {
+			if (result > ac.getAcFiles().size() + 2) {
 				for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
 					result += dao.updateInAfal(session, ac.getAfa().getAfal().get(i));
 				}
+				log.info("편의시설 리스트 insert 성공 result : " + result);
 			}
 
-			log.info("편의시설insert 결과 : " + result);
-
-			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 4) {
+			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 2) {
 				result += dao.updateDelArv(session, ac.getAcId());
+				log.info("예약내역 삭제 성공 result : " + result);
 			}
 
-			log.info("예약내역 삭제 결과 : " + result);
-			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 5) {
+			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 3) {
 				for (int i = 0; i < ac.getArv().size(); i++) {
 					ac.getArv().get(i).setAcId(ac.getAcId());
 					result += dao.updateInArv(session, ac.getArv().get(i));
 				}
-				log.info("업데이트 성공");
+				log.info("예약내역 등록 성공 result : " + result);
 			}
 
 		}

@@ -65,7 +65,7 @@
 			<p>지역으로 검색하기</p>
 			<div class="searchMap">
 				<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-					width="800" height="730" viewBox="0 0 600 1060">
+					width="600" height="680" viewBox="0 0 600 1060">
               <defs>
                 <filter id="dropshadow">
                   <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -199,6 +199,7 @@
 						<div class="weekDay">SAT</div>
 					</div>
 					<input type="hidden" id="fnum" value="">
+					<input type="hidden" id="selectFnum" value="">
 					<div class="hotelDates now"></div>
 				</div>
 				<div class="calContainer">
@@ -212,6 +213,7 @@
 						<div class="weekDay">SAT</div>
 					</div>
 					<input type="hidden" id="lnum" value="">
+					<input type="hidden" id="selectLnum" value="">
 					<div class="hotelDates next"></div>
 				</div>
 			</div>

@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script
@@ -44,7 +47,7 @@
 							<p>-파일은 최대 10개까지 등록 가능합니다.</p>
 							<p>-권장 사이즈(500px * 500px)</p>
 						</div>
-						<h6>메인 이미지 설정</h6>
+						<h6>메인 이미지 설정  <span>* 최소 5개 이상 등록</span> </h6>
 						<hr>
 						<div class="preview" id="preview">
 							<%-- 
@@ -212,30 +215,30 @@
 						<div class="calWrapper">
 							<div class="calContainer">
 								<div class="calDays">
-									<div class="day">SUN</div>
-									<div class="day">MON</div>
-									<div class="day">TUE</div>
-									<div class="day">WED</div>
-									<div class="day">THU</div>
-									<div class="day">FRI</div>
-									<div class="day">SAT</div>
+									<div class="weekDay">SUN</div>
+									<div class="weekDay">MON</div>
+									<div class="weekDay">TUE</div>
+									<div class="weekDay">WED</div>
+									<div class="weekDay">THU</div>
+									<div class="weekDay">FRI</div>
+									<div class="weekDay">SAT</div>
 								</div>
-								<input type="hidden" id="reInDay" value="" /> <input
-									type="hidden" id="fnum" value="" />
+								<input type="hidden" id="fnum" value=""> <input
+									type="hidden" id="selectFnum" value="">
 								<div class="hotelDates now"></div>
 							</div>
 							<div class="calContainer">
 								<div class="calDays">
-									<div class="day">SUN</div>
-									<div class="day">MON</div>
-									<div class="day">TUE</div>
-									<div class="day">WED</div>
-									<div class="day">THU</div>
-									<div class="day">FRI</div>
-									<div class="day">SAT</div>
+									<div class="weekDay">SUN</div>
+									<div class="weekDay">MON</div>
+									<div class="weekDay">TUE</div>
+									<div class="weekDay">WED</div>
+									<div class="weekDay">THU</div>
+									<div class="weekDay">FRI</div>
+									<div class="weekDay">SAT</div>
 								</div>
-								<input type="hidden" id="reOutDay" value="" /> <input
-									type="hidden" id="lnum" value="" />
+								<input type="hidden" id="lnum" value=""> <input
+									type="hidden" id="selectLnum" value="">
 								<div class="hotelDates next"></div>
 							</div>
 						</div>
@@ -344,7 +347,7 @@
 				<div class="registBtnCon">
 					<hr />
 					<div class="registBtn">
-						<button type="button" id="registOkBtn">등록하기</button>
+						<button type="button" id="registOkBtn" onclick="checkRegist();">등록하기</button>
 						<button id="registCancelBtn">취소</button>
 					</div>
 				</div>

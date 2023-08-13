@@ -78,68 +78,10 @@
 	color: #b31312;
 }
 
-#dropPreview ul {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-#dropPreview li {
-	width: 30%;
-	margin: 1%;
-}
-
-#dropPreview>ul>li h6,
-#dropPreview>ul>li p {
-	font-size: 0.9rem;
-	width: 200px;
-}
-
-.flex-grow-1 {
-	position: relative;
-	height: 90px;
-}
-
-.pt-1 {
-	word-break: break-all;
-}
-
-.ms-3 {
-	position: absolute;
-	top: 60px;
-	left: 70px;
-
-}
-
-#dropDiv {
-	border: 3px solid #afafaf;
-	height: 400px;
-	background-image: url("../../images/common/logo.png");
-	background-position: center;
-	background-repeat: no-repeat;
-	border-radius: 20px;
-}
-
-.dropzonePreview {
-	/* width: 200px; */
-	height: 200px;
-	/* display: flex;
-  align-items: center; */
-}
-
-.dropzonePreview img {
-	width: 150px;
-	height: 150px;
-}
-
-.dropzonePreview h6 {
-	font-size: 0.8rem;
-}
-
-.shrink-0.ms-3 button {
-	background-color: #b31312;
-	top: unset;
-	width: 100px;
-	height: 40px;
+.acImgCon>h6>span {
+    font-size: 1rem;
+    color: #b31312;
+    margin-left: 10px;
 }
 
 /* /이미지 파일 업로드/ */
@@ -571,6 +513,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 100%;
 }
 
 .deleteFc {
@@ -623,7 +566,6 @@
 	width: 185px;
 	height: 100%;
 	border-radius: 20px;
-	bottom: 3px;
 	z-index: 2;
 }
 
@@ -634,7 +576,6 @@
 	z-index: 3;
 	width: 103%;
 	height: 100%;
-	bottom: 3px;
 	background: #000;
 	opacity: 0;
 	border-radius: 20px;

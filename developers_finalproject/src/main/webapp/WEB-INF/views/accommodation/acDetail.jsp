@@ -150,15 +150,6 @@
 							</c:if>
 						</c:forEach>
 					</div>
-					<div class="noneImage" style="display: none">
-						<img
-							src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-51950498/original/2c4cb8fa-f412-4a90-b68c-dd7b89ff37ac.jpeg?im_w=960"
-							alt="" /> <img
-							src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-51950498/original/5b248a50-093a-4b07-8925-04d38f9e4241.jpeg?im_w=720"
-							alt="" /> <img
-							src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-51950498/original/a6a5a5c1-07b4-4c66-8d1a-a4fa4ac42a7e.jpeg?im_w=720"
-							alt="" />
-					</div>
 					<div id="hotelImageBtn">
 						<button>사진 더보기</button>
 					</div>
@@ -166,36 +157,9 @@
 			</div>
 			<div class="detailHotelImage">
 				<div>
-					<div class="container2">
-						<div class="images">
-							<div class="imageFlex1">
-								<img
-									src="https://a0.muscache.com/im/pictures/33357308-3507-49e5-aaaf-0b5b9fe234fc.jpg?im_w=720" />
-								<img
-									src="https://a0.muscache.com/im/pictures/ff86ea07-d2f2-4f2d-a07a-ac7f7427f9b5.jpg?im_w=720" />
-								<img
-									src="https://a0.muscache.com/im/pictures/243cb4d5-aa38-4162-82a0-453018af3d90.jpg?im_w=720" />
-							</div>
-						</div>
-						<div class="images">
-							<div class="imageFlex2">
-								<img
-									src="https://a0.muscache.com/im/pictures/e9e304c6-c95b-46d1-87a5-c8a28066314d.jpg?im_w=720" />
-								<img
-									src="https://a0.muscache.com/im/pictures/4e4cba04-2ca3-43e3-9808-42976cecdac6.jpg?im_w=720" />
-							</div>
-						</div>
-						<div class="images">
-							<div class="imageFlex3">
-								<img
-									src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-51950498/original/5b248a50-093a-4b07-8925-04d38f9e4241.jpeg?im_w=720" />
-								<img
-									src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-51950498/original/a6a5a5c1-07b4-4c66-8d1a-a4fa4ac42a7e.jpeg?im_w=720" />
-								<img
-									src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-51950498/original/2c4cb8fa-f412-4a90-b68c-dd7b89ff37ac.jpeg?im_w=960" />
-							</div>
-						</div>
-					</div>
+				 <c:forEach var="af" items="${ad.acFiles }">
+					<img alt="" src="${path}/images/upload/accommodation/${af.afName}">
+				</c:forEach>
 				</div>
 			</div>
 
@@ -319,13 +283,16 @@
 											alt="" />
 									</div>
 								</c:if>
-								<c:forEach var="afal" items="${ad.afa.afal }">
-									<div>
-										<div class="blurFc"></div>
-										<span>${afal.afalName }</span> <img
-											src="${path}/images/upload/accommodation/afal/${afal.afalImg}"
-											alt="" />
-									</div>
+								<c:forEach var="afal" items="${afal }">
+									
+									<c:if test="${not empty afal }">
+										<div>
+											<div class="blurFc"></div>
+											<span>${afal.afalName }</span> <img
+												src="${path}/images/upload/accommodation/afal/${afal.afalImg}"
+												alt="" />
+										</div>
+									</c:if>
 								</c:forEach>
 							</div>
 						</c:if>
@@ -364,7 +331,8 @@
 										<div class="weekDay">SAT</div>
 									</div>
 									<input type="hidden" id="reInDay" value="" /> <input
-										type="hidden" id="fnum" value="" />
+										type="hidden" id="fnum" value="" /> <input type="hidden"
+										id="selectFnum" value="">
 									<div class="hotelDates now"></div>
 								</div>
 								<div class="calContainer">
@@ -377,8 +345,8 @@
 										<div class="weekDay">FRI</div>
 										<div class="weekDay">SAT</div>
 									</div>
-									<input type="hidden" id="reOutDay" value="" /> <input
-										type="hidden" id="lnum" value="" />
+									<input type="hidden" id="lnum" value="" /> <input
+										type="hidden" id="selectLnum" value="">
 									<div class="hotelDates next"></div>
 								</div>
 							</div>

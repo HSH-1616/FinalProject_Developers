@@ -97,7 +97,7 @@
 								<c:if test="${fn:length(al.acAddress)>16 }">
 									<div class="contentAddress">${fn:substring(al.acAddress, 0, 16)}...</div>
 								</c:if>
-								<c:if test="${fn:length(al.acAddress)<16 }">
+								<c:if test="${fn:length(al.acAddress)<=16 }">
 									<div class="contentAddress">${al.acAddress}</div>
 								</c:if>
 								<div class="priceStar">
