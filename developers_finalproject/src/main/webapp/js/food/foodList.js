@@ -1,3 +1,24 @@
+const sortFoodByTitle = (no,numPerpage)=> {
+
+    $.ajax({
+        url: path + "/food/sortByTitle.do", 
+        data: { sortType: sortType,
+        		cPage: no, numPerpage: numPerpage },
+        type: "GET",
+        success: function(data) {
+            // Update the food_main_list section with the sorted data
+            $(".food_main_list").html(data);
+        },
+        error: function(xhr, status, error) {
+            console.log("Error:", error);
+        }
+    });
+}
+
+
+
+
+
 //좋아요
 $(document).ready(function () {
     $(".con-like").click(function () {

@@ -154,6 +154,7 @@
 			memberId="${loginMember.memberId}"
 		}
 	})
+	
 </script>
 <script src="${path }/js/accommodation/acList.js"></script>
 <script src="${path }/js/accommodation/acSearchBar.js"></script>
