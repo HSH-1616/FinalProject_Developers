@@ -250,6 +250,7 @@ public class TourisDetailController {
 //	@GetMapping("/test")
 	public void insertTourisTemp() throws IOException {
 		System.out.println("주기적실행되니?");
+		service.deleteTourisTemp();
 //		12027
 //		서울, 인천, 대전,  대구, 광주,  부산,  울산, 세종특별자치시, 경기도, 강원특별자치도,충청북도, 충청남도,
 //		경상북도, 경상남도, 전라북도, 전라남도, 제주도,
@@ -257,7 +258,7 @@ public class TourisDetailController {
 //		먼저 콘텐트 ID api의 pk값을 가져오기 위한 처음 요청보낼 api주소
 //			int[] areaCode = {1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39};
 //			for (int i : areaCode) {
-			service.deleteTourisTemp();
+			
 			List<Map<String, String>> list = new ArrayList();
 			
 				StringBuilder result = new StringBuilder();
