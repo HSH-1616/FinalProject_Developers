@@ -1089,6 +1089,7 @@ $(document).on('click', '.select-delte', function() {
         $('.modaltdtel').empty();
         $('.modalimage').empty();
         $('.modalplacetitle').empty();
+        $('.modalhidden').empty();
         const tourisid = $(this).find('.tourisidhidden').text();
         
         const tourisdetailesurl ="http://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV%2B%2BobF%2FXFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId="+tourisid+"&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1";
@@ -1104,7 +1105,8 @@ $(document).on('click', '.select-delte', function() {
 				$('.modaltdhomepage').append(common.homepage);	
 				$('.modaltdaddress').append(common.addr1);
 				$('.modalplacetitle').append(common.title);
-				$('.modalimage').append(common.firstimage);
+				$('.modalimage').attr('src', common.firstimage);
+				$('.modalhidden').append(common.contentid);
 				
 				
 			}

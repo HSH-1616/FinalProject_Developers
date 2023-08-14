@@ -295,7 +295,7 @@
        </div>
          <div class="modalcontainer">
            <h3 class="modalplacetitle"></h3>
-           <!-- <div class="modalplacetitleeng">Merlion</div> -->
+           <div class="modalhidden"></div>
            <div class="modalplacetitlebar">-</div>
              <div class="modaltable">
                <div class="madaltr">
