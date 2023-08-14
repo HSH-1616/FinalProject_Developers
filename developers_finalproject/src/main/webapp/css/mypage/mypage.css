@@ -14,11 +14,11 @@
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
-padding: 2rem;
-height: 300px;
-padding-left: 3rem;
-
+	padding: 2rem;
+	height: 300px;
+	padding-left: 3rem;
 }
+
 .mypageprofile{
 	display: block;
     position: relative;
@@ -701,7 +701,7 @@ padding-left: 3rem;
   background: none;
   position: fixed;
   padding-bottom: 2em;
-  bottom: 450px;
+  bottom: 523px;
   left: 1504px;
 }
 
