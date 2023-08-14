@@ -14,11 +14,11 @@
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
-padding: 2rem;
-height: 300px;
-padding-left: 3rem;
-
+	padding: 2rem;
+	height: 300px;
+	padding-left: 3rem;
 }
+
 .mypageprofile{
 	display: block;
     position: relative;
@@ -237,6 +237,10 @@ padding-left: 3rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     bottom: 2%;	
+}
+.myschedualpagebar{
+	width: 100%;
+    height: 50px;
 }
 .myschedultext{
 	font-size: 1.5rem;
@@ -518,7 +522,7 @@ padding-left: 3rem;
 }
 .myreviewdeletearea{
 	width: 50px;
-	margin-left: 10px;
+	/*margin-left: 10px;*/
 }
 
 .myreviewupdatearea,  .myreviewdeletearea{
@@ -687,4 +691,167 @@ padding-left: 3rem;
   color: white;
   background-color: #b31312;
 }
+/*위로 올라가는 아이콘 */
+.backbtn {
+  width: 100px;
+  height: 56px;
+  overflow: hidden;
+  border: none;
+  color: #b31312;
+  background: none;
+  position: fixed;
+  padding-bottom: 2em;
+  bottom: 523px;
+  left: 1504px;
+}
 
+.backbtn > div, .backbtn > svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.backbtn:before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  background: currentColor;
+  transition: transform 0.25s ease-out;
+}
+
+.backbtn:hover:before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.backbtn .clone > *, .backbtn .text > * {
+  opacity: 1;
+  font-size: 1.3rem;
+  transition: 0.2s;
+  margin-left: 4px;
+  position: relative;
+  left: 15px;
+}
+
+.backbtn .clone > * {
+  transform: translateY(60px);
+}
+
+.backbtn:hover .clone > * {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+.backbtn:hover .text > * {
+  opacity: 1;
+  transform: translateY(-60px);
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+.backbtn:hover .clone > :nth-child(1) {
+  transition-delay: 0.15s;
+}
+
+.backbtn:hover .clone > :nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.backbtn:hover .clone > :nth-child(3) {
+  transition-delay: 0.25s;
+}
+
+.backbtn:hover .clone > :nth-child(4) {
+  transition-delay: 0.3s;
+}
+/* icon style and hover */
+.backbtn svg {
+  width: 20px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(-50deg);
+  transition: 0.2s ease-out;
+}
+
+.backbtn:hover svg {
+  transform: translateY(-50%) rotate(-90deg);
+}
+/**/
+/* Hide the default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* Create a custom checkbox */
+.checkmark {
+  position: relative;
+  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+  background-color: rgba(16, 16, 16, 0.5);
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: -1px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+  transform-origin: 0px 10px;
+  border-radius: 4px;
+  margin: -1px 10px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.container input:checked ~ .checkmark {
+  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+  background-color: rgba(245, 24, 24, 0.5);
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: -1px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+  transform-origin: 0px 10px;
+  border-radius: 4px;
+  margin: -1px 10px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+  transition: all 500ms ease-in-out;
+}

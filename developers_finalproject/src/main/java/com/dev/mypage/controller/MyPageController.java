@@ -13,6 +13,14 @@ public class MyPageController {
 	@RequestMapping("/mypage")
 	public String mypage() {
 		
+		
+		
+		
+		
+		
+		
+		
+		
 		return "mypage/mypage";
 	}
 	
@@ -21,4 +29,5 @@ public class MyPageController {
 		
 		return "mypage/mypageDetail";
 	}
+	
 }

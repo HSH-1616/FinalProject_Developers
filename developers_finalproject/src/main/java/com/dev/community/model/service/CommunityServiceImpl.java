@@ -80,8 +80,8 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public int communityCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return dao.communityCount(session);
 	}
 
 	@Override
@@ -192,6 +192,12 @@ public class CommunityServiceImpl implements CommunityService {
 		}
 		
 		return dao.deleteCommunity(session, communityNo);
+	}
+
+	@Override
+	public List<Community> mypageCommunity(int memberId, Map<String, Object> params) {
+		
+		return dao.mypageCommunity(session, memberId, params);
 	}
 	
 	

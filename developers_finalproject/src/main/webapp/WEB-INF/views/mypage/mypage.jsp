@@ -8,19 +8,24 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> -->
 <link rel="stylesheet" href="${path}/css/mypage/slick.css"/>
 <link rel="stylesheet" href="${path}/css/mypage/slick-theme.css"/>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<header>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</header>
+<script src="${path }/js/mypage/slick.min.js"></script> 
+<%-- <script src="${path }/css/mypage/slick.js"></script> --%>
 <section>
 	<div class="mypageheader">
 		<div class="mypageheaderarea">
 			<div class="mypageprofile">
 				<div class="profile">
 					<span class="boxsize"> <img alt=""
-						src="https://www.myro.co.kr/assets/images/user-avatar.png">
+						src="${loginMember.memberImage }">
 					</span>
 				</div>
-				<h2 class="nickname">user5168649250</h2>
+				<h2 class="nickname">${loginMember.memberId }</h2>
 				<div class="profilemangement">
-					<a class="profileatag" href="${path }/mypage/mypageDetail.do">프로필 관리</a>
+					<a class="profileatag"  id="preId" href="${path }/mypage/mypageDetail.do">프로필 관리</a>
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
 						viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
 						class="w-6 h-6">
@@ -37,7 +42,7 @@
 			<div class="selectbtnarea">
 				<div class="container">
   <div class="radio-tile-group">
-    <div class="input-container">
+    <div class="input-container" id="moveBtn">
       <input id="walk" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon walk-icon">
@@ -49,7 +54,7 @@
       </div>
     </div>
 
-    <div class="input-container">
+    <div class="input-container" id="moveBtn1">
       <input id="bike" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon bike-icon">
@@ -60,7 +65,7 @@
         <label for="bike" class="radio-tile-label">여행일정</label>
       </div>
     </div>
-    <div class="input-container">
+    <div class="input-container" id="moveBtn2">
       <input id="bike" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon bike-icon">
@@ -70,7 +75,7 @@
         <label for="bike" class="radio-tile-label">내가 쓴 글</label>
       </div>
     </div>
-<div class="input-container">
+<div class="input-container" id="moveBtn3">
       <input id="walk" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon walk-icon">
@@ -225,7 +230,7 @@
 								<div class="cardtextarea">
 									<div class="noneid"></div>
 									<h2 class="cardtexteng">SEOUL</h2>
-									<h2 class="cardtextkr">서울</h2>
+									<h2 class="cardtextkr" id="preId1">서울</h2>
 								</div>
 							</div>
 					</div>
@@ -269,7 +274,7 @@
 											<h2 class="daytext">2023-07-29~2023-08-07</h2>
 											<h2 class="ml-1 text-xs md:ml-0 md:text-sm font-Montserrat md:mt-1"></h2>
 										</div>
-										<h2 class="updateday">최근수정일 2023-08-10</h2>
+										<h2 class="updateday" id="preId2">최근수정일 2023-08-10</h2>
 									</div>
 								</div>
 							</div>
@@ -277,6 +282,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="myschedualpagebar"></div>
 		</div>
 		<!-- 나의 게시글 목록 -->
 		<div class="myreviwarea">
@@ -337,7 +343,7 @@
 			</div>
 			<!--  -->
 			
-			<div class="pagebararea"></div>
+			<div class="pagebararea" id="preId3"></div>
 		</div>
 		<!-- 숙박예약내역 -->
 		<div class="mypagehotelcontentarea">
@@ -388,12 +394,105 @@
 						</div>
 						<div class="mypagehotelpagbar"></div>
 					</div>
-					
 				</div>
 		</div>
 		
-		
+		<!-- 내 승인여부(맛집)-->
+		<div class="myreviwarea">
+			<h2 class="myschedultext">승인여부 (맛집)</h2>
+			<div class="myschedulcardarea">
+				<div class="myschedulcard">
+					<div class="myschedulcontent">
+						<div class="myschedulcontentarea">
+							<div class="myreviewiconarea">
+								<label class="container"> <input checked="checked"
+									type="checkbox">
+									<div class="checkmark"></div>
+								</label>
+							</div>
+							<div class="myreviewcontentarea">
+								<span class="myreviewcontent">게시글 제목
+									setsetsetsestsdagadsfadsfadsfadsf</span>
+							</div>
+							<div class="myreviewupdatearea">
+								<div class="circleday">
+									<p class="cirledaytext">수정</p>
+								</div>
+							</div>
+							<div class="myreviewdeletearea">
+								<div class="circleday">
+									<p class="cirledaytext">삭제</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			
+			<div class="pagebararea" style="
+    width: 100%;
+    height: 60px;
+"></div>
+		</div>
 	</div>
+	<button class="backbtn gotop">
+    <div class="text">
+        <!-- <span>Back</span>
+        <span>to</span> -->
+        <span>top</span>
+    </div>
+    <div class="clone">
+       <!--  <span>Back</span>
+        <span>to</span> -->
+        <span>top</span>
+    </div>
+    <svg width="20px" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+    </svg>
+</button>
 	<script src="${path }/js/mypage/mypage.js"></script>
 </section>
+<script type="text/javascript">
+      $(document).ready(function(){
+        $("#moveBtn").on("click",function(event){
+ 
+          var offset = $("#preId").offset();
+ 
+          $("html body").animate({scrollTop:offset.top},10);
+ 
+        });
+      }); 
+      
+      $(document).ready(function(){
+          $("#moveBtn1").on("click",function(event){
+   
+            var offset = $("#preId1").offset();
+   
+            $("html body").animate({scrollTop:offset.top},10);
+   
+          });
+        });
+      
+        $(document).ready(function(){
+            $("#moveBtn2").on("click",function(event){
+     
+              var offset = $("#preId2").offset();
+     
+              $("html body").animate({scrollTop:offset.top},10);
+     
+            });
+          }); 
+          
+        $(document).ready(function(){
+            $("#moveBtn3").on("click",function(event){
+     
+              var offset = $("#preId3").offset();
+     
+              $("html body").animate({scrollTop:offset.top},10);
+     
+            });
+          }); 
+        
+    </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
