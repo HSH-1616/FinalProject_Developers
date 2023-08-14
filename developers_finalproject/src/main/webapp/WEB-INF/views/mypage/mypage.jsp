@@ -277,6 +277,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="myschedualpagebar"></div>
 		</div>
 		<!-- 나의 게시글 목록 -->
 		<div class="myreviwarea">
