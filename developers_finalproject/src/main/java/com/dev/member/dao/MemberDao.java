@@ -6,6 +6,6 @@ import com.dev.member.model.dto.Member;
 
 public interface MemberDao {
 	
-	Member selectByEmail(SqlSession session,String email);
+	Member selectByMemberPk(SqlSession session,String memberPk);
 	void insertMember(SqlSession session, Member m);
 }

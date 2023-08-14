@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
+import com.dev.touris.model.vo.TourisTemp;
 
 @Repository
 public class TourisDetailDaoImpl implements TourisDetailDao {
@@ -40,6 +41,18 @@ public class TourisDetailDaoImpl implements TourisDetailDao {
 	public Member selectByIdforMember(SqlSession session, Map param) {
 		return session.selectOne("tourisDetail.selectByIdforMember",param);
 	}
+
+	@Override
+	public void insertTourisTemp(SqlSession session, TourisTemp touris) {
+		session.insert("tourisDetail.insertTourisTemp",touris);
+	}
+
+	@Override
+	public void deleteTourisTemp(SqlSession session) {
+		session.delete("tourisDetail.deleteTourisTemp");
+		
+	}
+	
 	
 	
 }

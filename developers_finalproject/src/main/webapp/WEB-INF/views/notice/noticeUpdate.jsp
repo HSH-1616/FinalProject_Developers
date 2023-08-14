@@ -156,7 +156,7 @@
 
   			str += "<div>";
   			str += "<img src='/upload/notice/" + fileName + "' style='width:400px'; height:400px' readonly>";
-  			str += "<button type='button' class='removeBtn' data-name='" + fileName + "'>Remove</button>";
+  			str += "<button type='button' class='removeBtn s-btn' data-name='" + fileName + "'>Remove</button>";
   			str += "</div>";
   			str += "<br><br>";
 

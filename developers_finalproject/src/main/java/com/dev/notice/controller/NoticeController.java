@@ -126,7 +126,7 @@ public class NoticeController {
 	
 	@GetMapping("/searchNotice.do")
 	@ResponseBody
-	public Map<String,Object> searchNotice(@RequestParam("type") String type, @RequestParam("keyword") String keyword,@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="5") int numPerpage ,Model m) {
+	public Map<String,Object> searchNotice(@RequestParam("type") String type, @RequestParam("keyword") String keyword,@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="5") int numPerpage) {
 		Map<String, Object> params=new HashMap<String, Object>();
 		Map<String, Object> paging=new HashMap<String, Object>();
 		Map<String,Object> result=new HashMap<>();
@@ -137,7 +137,6 @@ public class NoticeController {
 		List<Notice> noticeList= service.searchNotice(params,paging);
 		int totalData=service.noticeCount();
 		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData,"searchNotice");
-		//m.addAttribute("noticeList",noticeList);
 		result.put("noticeList", noticeList);
 		result.put("pageBar", pageBar);
 		return result;

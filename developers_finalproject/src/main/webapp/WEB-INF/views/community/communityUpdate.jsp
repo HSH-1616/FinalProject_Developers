@@ -18,6 +18,18 @@
       
         <div class="co-card-box">
             <div class="card" style="width:40rem;">
+            <c:if test="${comuView.files!=null }">
+            	<div>
+            		<ul>
+            			<c:forEach var="c" items="${ comuView.files}">
+            				<li>
+            					<img src="${path }/upload/community/${c.fileName}"  class="mt-2" style="height: 200px; max-width:500px;">
+            					<button type="button" class="s-btn  mt-2 file-del" data-name="${c.fileName }">delete</button>
+            				</li>
+            			</c:forEach>
+            		</ul>
+            	</div>
+            	</c:if>
                 <div class="registImgCon form-control">
                     <div class="registImg">
                       <div class="dropzone" id="dropDiv"></div>
@@ -81,11 +93,11 @@
                     
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">제목</label>
-                        <input type="text" class="form-control border border-danger" id="communityTitle">
+                        <input type="text" class="form-control border border-danger" id="communityTitle" value="${comuView.communityTitle }">
                       </div>
                       <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-                        <textarea class="form-control border border-danger" id="communityContent" rows="7"></textarea>
+                        <textarea class="form-control border border-danger" id="communityContent" rows="7" >${comuView.communityContent }</textarea>
                       </div>
                     
                       <div class="comu-buttons">
@@ -104,8 +116,8 @@
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
-		let memberId="<c:out value='${loginMember.memberId}' escapeXml="false"/>";
-		
+		const memberId="<c:out value='${loginMember.memberId}' escapeXml="false"/>";
+		const communityNo="<c:out value='${comuView.communityNo}' escapeXml="false"/>";                               
 		
         Dropzone.autoDiscover = false;
         var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
@@ -116,7 +128,7 @@
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
         
-        url: "/ncCommon/communityUploadFile.do", 
+        url: "/ncCommon/communityUploadFile.do?no="+communityNo, 
         method: "post", 
         uploadMultiple: true,
         maxFiles: 5,
@@ -130,26 +142,42 @@
                 let submitButton = document.querySelector("#btn-upload-file");
                 let myDropzone = this; //closure
                 submitButton.addEventListener("click", function () {
-                    console.log("업로드"); //tell Dropzone to process all queued files
-                    myDropzone.processQueue();
+                   	if(myDropzone.getQueuedFiles().length>0){
+                   		console.log("업로드");
+                   		myDropzone.processQueue();
+                   	}else{
+                   		$.ajax({
+                    		url: "/community/communityUpdateEnd.do",
+                    		type:"post",
+                    		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
+                    			communityContent: $("#communityContent").val(), communityNo:communityNo },
+                    		success:(data)=>{
+                    			if(data>0){
+                    				location.replace("/community/communityView.do?no="+communityNo);
+                    			}else{
+                    				alert("수정 실패");
+                    			}
+                    		}
+                    	});  
+                   	}
                 });
                 this.on("successmultiple", function(files, response){
-         
+         			console.log(files);
                 	let fileNames=files[0].xhr.responseText;
                 	
                  	$.ajax({
-                		url: "/community/communityWrite.do",
+                		url: "/community/communityUpdateEnd.do",
                 		type:"post",
                 		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
-                			communityContent: $("#communityContent").val(), files:fileNames },
+                			communityContent: $("#communityContent").val(), files:fileNames, communityNo:communityNo },
                 		success:(data)=>{
                 			if(data>0){
-                				location.replace("<c:out value='${path}'/>/community/communityList.do");
+                				location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo);
                 			}else{
-                				alert("글작성 실패");
+                				alert("수정 실패");
                 			}
                 		}
-                	});  
+                	});   
                 	
                 	
                 	
@@ -157,16 +185,6 @@
                 });
             },
         });
+        
+     
   </script>
-
-
-
-
-
-
-
-
-
-
-
-

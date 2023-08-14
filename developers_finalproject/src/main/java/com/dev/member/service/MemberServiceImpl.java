@@ -19,8 +19,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public Member selectByEmail(String email) {
-		return dao.selectByEmail(session,email);
+	public Member selectByMemberPk(String memberPk) {
+		return dao.selectByMemberPk(session,memberPk);
 	}
 
 	@Override

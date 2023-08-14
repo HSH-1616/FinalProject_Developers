@@ -9,8 +9,8 @@ import com.dev.member.model.dto.Member;
 public class MemberDaoImpl implements MemberDao {
 
 	@Override
-	public Member selectByEmail(SqlSession session, String email) {
-		return session.selectOne("member.selectByEmail", email);
+	public Member selectByMemberPk(SqlSession session, String memberPk) {
+		return session.selectOne("member.selectByMemberPk", memberPk);
 	}
 
 	@Override

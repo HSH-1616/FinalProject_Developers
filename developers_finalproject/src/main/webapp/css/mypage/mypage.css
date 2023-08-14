@@ -83,9 +83,7 @@ padding-left: 3rem;
 	margin-top: 1rem;
     margin-bottom: 1rem;
 }
-.profilemangement{
-	
-}
+
 .profileatag{
 	--tw-text-opacity: 1;
     color: rgb(19 107 240/var(--tw-text-opacity));
@@ -255,6 +253,38 @@ padding-left: 3rem;
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
+    margin-top: 20px;
+}
+.mypagehotelcard{
+	height: 400px;
+	width: 310px;
+	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
+    border-radius: 8px;
+    border: initial none!important;
+    border-color: initial!important;
+    border-image: initial!important;
+}
+.hotelcardimboxarea{
+	width: 100%;
+    height: 190px
+    
+}
+.hotelcardimboxarea img{
+	width: 100%;
+    height: 100%;
+	border-radius: 8px 8px 0 0;
+}
+.hotelcardcontent{
+	height: 150px;
+	
+}
+.hotelcardday{
+	margin-top: 7px;
+	width: 260px;
+	position: relative;
+	left: 20px;
+	height: 50px;
+	border-top: 1px solid #8080802b;
 }
 .myschedulcontent{
 	padding-top: 0.5rem;
@@ -266,9 +296,38 @@ padding-left: 3rem;
     cursor: pointer;
 }
 .myschedulcontentarea{
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 	display: flex;
+}
+.paytitle{
+	text-align: center;
+	margin-bottom: 0;
+	padding: 10px;
+	padding-top: 20px;
+	
+    padding-left: 20px;
+}
+.paynumber, .pay, .hotelday{
+	display: flex;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+.paynumber p, .pay p, .hotelday p{
+	margin-left: 8;
+	margin-bottom:0;
+}
+.cancelbtn{
+	background-color: white;
+    border: 1px solid;
+    color: #b31312;
+	position: relative;
+    width: 70px;
+    height: 25px;
+    top: 9px;
+    left: 73%;
+    border-radius: 10%;
+    font-size: 13px;
 }
 .imgbox{
 	width: auto;
@@ -475,17 +534,24 @@ padding-left: 3rem;
 	position: relative;
     width: 1150px;
     left: 17%;
-    height: 600px;
+    height: auto;
     padding-top: 4rem;
     padding-bottom: 5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
 	
 }
+.mypagehotelcontentarea .myschedulcard .myschedulcontent{
+	padding-top: 2.5rem;
+}
+.mypagehotelpagbar{
+	width: 100%;
+    height: 70px;
+}
 /*찜하기 고르는 버튼*/
   .input {
   display: flex;
-  width: 400px;
+  width: 450px;
   /*background-color: #0D1117;*/
   /*justify-content: center;*/
   border-radius: 5px

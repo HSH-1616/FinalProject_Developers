@@ -1,8 +1,3 @@
-
-
-
-
-
 const nList = (no, numPerpage) => {
 	$.ajax({
 		url: "/notice/noticeListEnd.do",
@@ -26,24 +21,26 @@ const nList = (no, numPerpage) => {
 
 					$(".nolist-table>tbody").append(tb);
 				};
-				$(".board-pasing").empty();
-				$(".board-pasing").append(data.pageBar);
+				
+				$(".board-pasing").html(data.pageBar);
 
 			} else {
 				tb = "<tr>";
 				tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
 				tb += "</tr>";
-				$(".nolist-table>tbody").append(tb);
+				$(".nolist-table>tbody").html(tb);
 
 			}
 		}
 
 	});
 };
-$(document).ready(nList());
+$(document).ready(()=>{
+	nList()
+	});
 
 const noticeWrite = () => {
-	console.log($("input[name=noticeTitle").val());
+	//console.log($("input[name=noticeTitle").val());
 	if ($("input[name=noticeTitle").val() == "") {
 		alert("제목을 입력해주세요");
 	} else {
@@ -146,14 +143,14 @@ const searchNotice = (no, numPerpage) => {
 
 					$(".nolist-table>tbody").append(tb);
 				};
-				$(".board-pasing").empty();
-				$(".board-pasing").append(data.pageBar);
+				
+				$(".board-pasing").html(data.pageBar);
 
 			} else {
 				tb = "<tr>";
 				tb += "<td colspan='5'>조회된 공지사항이 없습니다.</td>";
 				tb += "</tr>";
-				$(".nolist-table>tbody").append(tb);
+				$(".nolist-table>tbody").html(tb);
 
 			}
 		}
@@ -164,7 +161,10 @@ const searchNotice = (no, numPerpage) => {
 
 
 
-
+Kakao.Channel.createChatButton({
+  container: '#test-kakao-chanel-button',
+  channelPublicId: '_bMrEG'
+});
 
 
 

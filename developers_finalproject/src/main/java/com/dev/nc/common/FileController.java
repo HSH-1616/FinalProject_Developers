@@ -2,8 +2,7 @@ package com.dev.nc.common;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,10 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.dev.community.model.dto.CommunityFile;
 import com.dev.community.model.service.CommunityService;
 import com.dev.notice.model.service.NoticeService;
 
@@ -45,17 +46,25 @@ public class FileController {
 	
 	@PostMapping("/communityUploadFile.do")
 	@ResponseBody
-	public String communityUploadFile(MultipartHttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
-		  
+	public String communityUploadFile(@RequestParam(value = "no",defaultValue = "0") int communityNo, MultipartHttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
+		 
 		  Map<String, MultipartFile> fileMap = request.getFileMap();
+		  String fileName="";
 		  String fileNames="";
-			
+		  if(communityNo!=0) {
+			  for (MultipartFile mf : fileMap.values()) {
+					 fileName=communityService.communitySaveFile(mf, session);
+					 fileNames+=fileName+" ";
+					 CommunityFile file=CommunityFile.builder().fileName(fileName).communityNo(communityNo).build();
+					 communityService.communitySaveFileDB(file);
+				 };
+		  }else {
 			 for (MultipartFile mf : fileMap.values()) {
 				 fileNames+=communityService.communitySaveFile(mf, session)+" "; 
 			 };
-			 fileNames=fileNames.strip();
 			 
-        
+		  }
+        fileNames=fileNames.strip();
 		return fileNames;
 	}
 	
@@ -70,6 +79,16 @@ public class FileController {
 			return "true";
 		}
 		return "false";
+	}
+	
+	@PostMapping("/removeCommunityFile.do")
+	@ResponseBody
+	public int removeCommunityFile(String fileName,HttpSession session) {
+		
+			
+			
+		
+		return communityService.removeCommunityFile(fileName, session);
 	}
 }
 
