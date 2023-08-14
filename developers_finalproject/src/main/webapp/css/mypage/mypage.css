@@ -479,7 +479,7 @@ padding-left: 3rem;
   margin-top: 9px;
 }
 .container>div:first-child{
-	justify-content: space-around;
+	width: 100%;
 }
 .radio-tile-group {
   display: flex;
