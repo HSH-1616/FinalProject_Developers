@@ -131,4 +131,6 @@
 			</div>
 		</div>
 	</div>
+	<div id="test-kakao-chanel-button"></div>
 	<script src="${path }/js/login/login.js"></script>
+	<script src="${path }/js/notice/notice.js"></script>

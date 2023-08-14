@@ -13,7 +13,7 @@
 
 <div class="notice-container p-3">
 
-<div class="title text-align"><h3 class="text-center">공지사항</h3></div>
+<div class="title text-align"><h3 class="text-center mt-2 p-2">공지사항</h3></div>
         
 <div class="search-notice text-end mt-3">
 	<form  class="search-form" ><!-- action="/notice/searchNotice.do" -->
@@ -23,7 +23,7 @@
 		<option value="title_content">제목+내용</option>
 	</select>
 	<input type="text" name="keyword" placeholder="검색어를 입력해주세요">
-	<button type="button" class="" onclick="searchNotice();">검색</button>
+	<button type="button" class="s-btn" onclick="searchNotice();">검색</button>
 	</form>
 </div>  
 <div class="list-area mt-3">
@@ -48,9 +48,11 @@
 	
 			</tbody>
 		</table>
+		<c:if test="${loginAdmin!=null }">
 		<div class="text-end">
 			<button class="w-btn w-btn-red" onclick="location.href='${path }/notice/noticeWrite.do'">작성하기</button>
 		</div>
+		</c:if>
 	</div>
 	<%-- 	<div class="write-area text-end">
 				<a href="location.href='${path }/notice/noticeWrite.do'"
@@ -66,5 +68,5 @@
 </div>
 <script src="${path }/js/notice/notice.js"></script>
 </section>
-<
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 

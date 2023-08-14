@@ -40,7 +40,7 @@ public class CommunityController {
 	
 	@PostMapping("/communityListEnd.do")
 	@ResponseBody
-	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="3") int numPerpage) {
+	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="8") int numPerpage) {
 		Map<String, Object> pasing=new HashMap<String, Object>();
 		pasing.put("cPage", cPage);
 		pasing.put("numPerpage", numPerpage);
@@ -50,12 +50,20 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/communityView.do")
-	public String communityView(int no,Model m,HttpServletRequest req, HttpServletResponse res) {
-		Community comuView=service.communityView(no, req, res);
+	public String communityView(int no,Model m) {
+		Community comuView=service.communityView(no);
 		
 		m.addAttribute("comuView",comuView);
 		
 		return "/community/communityView";
+	}
+	
+	@GetMapping("/updateCommunity.do")
+	public String updateCommunity(Model m, int no) {
+		
+		Community co=service.communityView(no);
+		m.addAttribute("comuView",co);
+		return "/community/communityUpdate";
 	}
 	
 	@GetMapping("/communityWritePage.do")
@@ -139,6 +147,29 @@ public class CommunityController {
 		return service.deleteReply(r);
 	}
 	
+	
+	
+	@PostMapping("/communityUpdateEnd.do")
+	@ResponseBody
+	public int communityUpdateEnd(@RequestParam("memberId") int id ,@RequestParam("communityTitle") String title, @RequestParam("communityContent") String content, @RequestParam(value = "files",required = false) String files, int communityNo, HttpSession session) {
+		
+		Member m=Member.builder().memberId(id).build();
+		Community communityBoard=new Community();
+		if(files!=null) {
+			String[] file=files.split(" ");
+			communityBoard=Community.builder().communityNo(communityNo).memberId(m).communityTitle(title).communityContent(content).thumbnail(file[0]).build();
+		}else {
+			communityBoard=Community.builder().communityNo(communityNo).memberId(m).communityTitle(title).communityContent(content).build();
+		}
+		
+		return service.updateCommunity(communityBoard);
+	}
+	
+	@PostMapping("/deleteCommunity.do")
+	@ResponseBody
+	public int deleteComuunity(int communityNo,HttpSession session) {
+		return service.deleteCommunity(communityNo, session);
+	}
 }
 
 
