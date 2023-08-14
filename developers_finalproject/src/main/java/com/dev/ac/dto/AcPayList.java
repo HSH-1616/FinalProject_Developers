@@ -21,9 +21,11 @@ public class AcPayList {
 	private Date checkIn;
 	private Date checkOut;
 	private int apPeople;
+	private char apCheckCancel;
 	private char apCancel;
 	private String apOrderId;
 	private String apKeyId;
 	private Accommodation acDetail;
 	private Member member;
+	private AcReservation arv;
 }

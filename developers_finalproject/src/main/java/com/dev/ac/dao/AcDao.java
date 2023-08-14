@@ -9,6 +9,7 @@ import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
@@ -86,4 +87,6 @@ public interface AcDao {
 	int updateDelArv(SqlSessionTemplate session, int acId);
 	
 	int updateInArv(SqlSessionTemplate session, AcReservation arv);
+	
+	List<AcPayList> acMyPage(SqlSessionTemplate session,String memberId);
 }

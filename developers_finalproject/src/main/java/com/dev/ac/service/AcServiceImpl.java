@@ -8,13 +8,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.dev.ac.dao.AcDao;
 import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
@@ -242,6 +242,11 @@ public class AcServiceImpl implements AcService {
 
 		}
 		return result;
+	}
+
+	@Override
+	public List<AcPayList> acMyPage(String memberId) {
+		return dao.acMyPage(session,memberId);
 	}
 
 }

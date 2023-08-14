@@ -10,6 +10,7 @@ import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
@@ -196,6 +197,11 @@ public class AcDaoImpl implements AcDao {
 	@Override
 	public int updateInArv(SqlSessionTemplate session, AcReservation arv) {
 		return session.insert("accommodation.updateInArv",arv);
+	}
+
+	@Override
+	public List<AcPayList> acMyPage(SqlSessionTemplate session, String memberId) {
+		return session.selectList("accommodation.acMyPage",memberId);
 	}
 
 	

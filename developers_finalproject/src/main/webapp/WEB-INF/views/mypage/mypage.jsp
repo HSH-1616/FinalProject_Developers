@@ -369,7 +369,7 @@
 			<div class="myschedulcard">
 					<div class="myschedulcontent">
 						<div class="myschedulcontentarea">
-							<div class="mypagehotelcard">
+							<!-- <div class="mypagehotelcard">
 								<div class="hotelcardimboxarea">
 									<img alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C26H5J5MLk5XylBHGd6b5FZAdFZYdMH-EQ&usqp=CAU">
 								</div>
@@ -382,9 +382,7 @@
 								<div class="hotelcardday">
 									<button class="cancelbtn">결제취소</button>
 								</div>
-							</div>
-							<div class="mypagehotelcard"></div>
-							<div class="mypagehotelcard"></div>
+							</div> -->
 						</div>
 						<div class="mypagehotelpagbar"></div>
 					</div>

@@ -37,7 +37,6 @@
 						</c:when>
 					</c:choose>
 					<button style="display: block" class="reviewBtn">리뷰쓰기</button>
-
 				</div>
 			</c:forEach>
 		</div>

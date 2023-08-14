@@ -93,3 +93,5 @@ SELECT a.*,f.*,h.*,ar.*,
 		JOIN AC_HEART h ON a.AC_ID=h.AC_ID
 		WHERE
 		1=1;
+		
+SELECT * FROM AC_PAY ap ;

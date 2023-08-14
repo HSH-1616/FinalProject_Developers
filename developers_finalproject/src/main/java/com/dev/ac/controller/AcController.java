@@ -22,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 import com.dev.ac.service.AcService;
+import com.dev.member.model.dto.Member;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,9 +39,11 @@ import lombok.extern.slf4j.Slf4j;
 public class AcController {
 
 	private AcService service;
-
-	public AcController(AcService service) {
+	private HttpSession session;
+	
+	public AcController(AcService service,HttpSession session) {
 		this.service = service;
+		this.session = session;
 	}
 
 	@RequestMapping("/acList")
@@ -452,6 +456,18 @@ public class AcController {
 
 		int result = service.updateAc(ac);
 		return ac.getAcId();
+	}
+	
+	@GetMapping("/acMyPage")
+	@ResponseBody
+	public List<AcPayList> acMyPage() {
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+
+		List<AcPayList> am=service.acMyPage(memberId);
+		
+		log.info("결과 : "+am);
+		return am;
 	}
 
 }

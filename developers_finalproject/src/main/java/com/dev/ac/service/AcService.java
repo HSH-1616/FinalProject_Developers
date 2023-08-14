@@ -7,6 +7,7 @@ import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
@@ -63,4 +64,6 @@ public interface AcService {
 	int updateRegistDelAfal(int afaId);
 	
 	int updateAc(Accommodation ac);
+	
+	List<AcPayList> acMyPage(String memberId);
 }
