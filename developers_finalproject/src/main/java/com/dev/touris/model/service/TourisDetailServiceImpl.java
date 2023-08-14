@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.dao.TourisDetailDao;
 import com.dev.touris.model.vo.Touris;
+import com.dev.touris.model.vo.TourisTemp;
 
 @Service
 public class TourisDetailServiceImpl implements TourisDetailService {
@@ -51,6 +52,17 @@ public class TourisDetailServiceImpl implements TourisDetailService {
 	@Override
 	public Member selectByIdforMember(Map param) {
 		return dao.selectByIdforMember(session,param);
+	}
+
+	@Override
+	public void insertTourisTemp(TourisTemp touris) {
+		dao.insertTourisTemp(session, touris);
+	}
+
+	@Override
+	public void deleteTourisTemp() {
+		dao.deleteTourisTemp(session);
+		
 	}
 	
 	

@@ -1,4 +1,4 @@
-//const path="/member";
+const path="";
 const CLIENT_ID="TR_SQ2GAJzrrTPobWiSh";
 const redirectURI="http://localhost:8888/member/naver/callback";
 const state="1";
@@ -98,7 +98,7 @@ const googlelogin=()=>{
   Kakao.init("c0e169307572ef60ba8671f2af4eaff4");
 	const kakaologin=()=>{
 		  console.log(Kakao.isInitialized()); 
-			let email,nickname,image;
+			let email,nickname,image,memberPk;
 				Kakao.Auth.login({
 					scope:'profile_nickname,account_email,profile_image',
 					success:function(authObj){
@@ -106,23 +106,25 @@ const googlelogin=()=>{
 						Kakao.API.request({
 							url:'/v2/user/me',
 							success:function(res){
+								console.log(res);
 								const kakao_account=res.kakao_account;
 								console.log(kakao_account);
+								memberPk=res.id;
 								email=kakao_account.email;
 								nickname=kakao_account.profile.nickname;
 								image=kakao_account.profile.thumbnail_image_url;
 								console.log(email,nickname,image);
 									$.ajax({
 										type:"get",
-										url:path+"/member/KakaoLoginCheck",
+										url:path+"/member/KakaoLoginCheck?memberPk="+memberPk,
 										data:{"memberEmail":email,"memberNickname":nickname,"memberImage":image},
 										dataType:"text",
 										success: data=>{
 											console.log(data, typeof data);
 												if(data==''){
-											        location.assign(path+"/member/Kakaoenroll?memberEmail="+email+"&memberNickname="+nickname+"&memberImage="+image);
+											        location.assign(path+"/member/Kakaoenroll?memberEmail="+email+"&memberNickname="+nickname+"&memberImage="+image+"&memberPk="+memberPk);
 												}else{
-													location.assign(path+"/member/KakaoLogin?memberEmail="+email);
+													location.assign(path+"/member/KakaoLogin?memberPk="+memberPk);
 												}
 												},
 										error:(r,m,e)=>{
