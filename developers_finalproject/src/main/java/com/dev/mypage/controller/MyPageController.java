@@ -15,4 +15,10 @@ public class MyPageController {
 		
 		return "mypage/mypage";
 	}
+	
+	@RequestMapping("/mypageDetail.do")
+	public String mypageDeatil() {
+		
+		return "mypage/mypageDetail";
+	}
 }

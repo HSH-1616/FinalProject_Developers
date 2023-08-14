@@ -27,7 +27,9 @@
                 </svg>
 			</div>
 			<div class="makeroutesearchlistdetaile">
-				<span class="makeroutelisttextarea"> <h7>${t.tourisName }<br>
+				<span class="makeroutelisttextarea"> <h7 class="h7">
+				<span class="hidenidtext">${t.tourisId }</span>
+				<span class="nametext">${t.tourisName }</span><br>
 					<div class="smailspottext">
 						${t.tourisAddress }
 						<div class="makerouteplusbtnarea">
