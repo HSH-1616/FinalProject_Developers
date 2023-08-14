@@ -3,11 +3,11 @@ $(document).ready(function() {
 
 //절대경로 함수
 function getContextPath() {
-  var hostIndex = location.href.indexOf(location.host) + location.host.length;
-  return location.href.substring(
-    hostIndex,
-    location.href.indexOf("/", hostIndex + 1)
-  );
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(
+		hostIndex,
+		location.href.indexOf("/", hostIndex + 1)
+	);
 }
 
 // input 정규식
@@ -246,7 +246,7 @@ $(document).on("click", ".insertFcImage label", function() {
 		if (this.files && this.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				file.parents(".insertFcImageCon").css("border","none")
+				file.parents(".insertFcImageCon").css("border", "none")
 				file.prevAll("ion-icon").hide()
 				file.prev().hide()
 				file.next().css("display", "block");
@@ -458,7 +458,7 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 //등록 양식 체크
 function checkRegist() {
 	var content = ""
-	if (sel_files.length <6) {
+	if (sel_files.length < 5) {
 		content = "숙박업소 이미지를 등록해 주세요."
 		return warningAlert(content);
 	} else if ($("input[name=acTitle]").val() == "") {
@@ -480,7 +480,9 @@ function checkRegist() {
 
 function checkUpdate() {
 	var content = ""
-	if (sel_files.length+acFiles.length <6) {
+	if (sel_files.length + acFiles.length < 5) {
+		console.log(sel_files.length)
+		console.log(acFiles.length)
 		content = "숙박업소 이미지를 등록해 주세요."
 		return warningAlert(content);
 	} else if ($("input[name=acTitle]").val() == "") {
@@ -588,12 +590,12 @@ function registOk() {
 				confirmButtonColor: "#20c997",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.href = getContextPath() + "/acDetail?no=" + data;
+					location.replace(getContextPath() + "/acDetail?no=" + data);
 				}
 			})
 		},
 		error: function(data) {
-			location.href = "/ac/acError"
+			location.replace("/ac/acError")
 		}
 	});
 
@@ -679,12 +681,12 @@ function updateOk() {
 				confirmButtonColor: "#20c997",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.href = getContextPath() + "/acDetail?no=" + data;
+					location.replace(getContextPath() + "/acDetail?no=" + data);
 				}
 			})
 		},
 		error: function(data) {
-			location.href = "/ac/acError"
+			location.replace("/ac/acError")
 		}
 	});
 }

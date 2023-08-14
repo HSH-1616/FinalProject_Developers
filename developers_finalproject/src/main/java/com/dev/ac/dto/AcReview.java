@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AcReview {
 	private int arId;
+	private String memberId;
 	private String arContent;
 	private double arGrade;
 	private Date arDate;

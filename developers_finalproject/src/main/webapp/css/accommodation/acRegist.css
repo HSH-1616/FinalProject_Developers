@@ -335,6 +335,7 @@
 	/* margin-top: 20px; */
 	resize: none;
 	overflow: auto;
+	outline: none;
 }
 
 .registIntroduce div>span {
