@@ -261,13 +261,19 @@ section {
   width: 50%;
   height: 48px;
 }
+.mydict{
+	height:100%;
+}
 .mydict div {
+	height:100%;
   display: flex;
   flex-wrap: wrap;
   /* margin-top: 0.5rem; */
-  justify-content: center;
 }
-
+.selectlistdivarea{
+	align-items: center;
+    justify-content: center;
+}
 .mydict input[type="radio"] {
   clip: rect(0 0 0 0);
   clip-path: inset(100%);
@@ -455,11 +461,11 @@ section {
 .select-delte p {
   position: absolute;
   /* top: 0.4em; */
-  left: 4.4em;
+  left: 5.9em;
   margin: 0;
   padding: 0;
   transition: .5s;
-  color: #bc2a8d;
+  color: #b31212c4;
   bottom: 3px;
   font-size: 14px;
 }
@@ -467,8 +473,8 @@ section {
 .select-delte svg {
   position: absolute;
   /* top: 1em; */
-  bottom: 3.4px;
-  right: 3.6em;
+  bottom: 4.9px;
+  right: 5.3em;
   margin: 0;
   padding: 0;
   opacity: 0;
@@ -488,7 +494,7 @@ section {
 }
 
 .select-delte:hover {
-  background-color: #bc2a8d;
+  background-color: #b31212c4;
 }
 /* 여기까지 */
 .listarea{
@@ -903,7 +909,7 @@ width: 100%;
 height: 140px;
 }
 .modaltrarea{
-width: 171px;
+width: 100%;
 }
 .madaltr{
 width: 100%;
@@ -911,46 +917,58 @@ height: 23px;
 display: flex ;
 }
 .modalth, .modalthhomepage,.modalthtime, .modalthinfo, .modalthtel, .modalthusetime{
+	display: flex;
 font-size: 12.5px;
 color: #616161 !important;
 font-family: 'Montserrat';
 word-break: keep-all;
-margin: 7px 0;
+/*margin: 7px 0;*/
 text-align: left;
 font-weight: 500;
 vertical-align: top;
-min-width: 100px;
+/*min-width: 100px;*/
 }
 .modalthaddress{
+	display: flex;
 font-size: 12.5px;
 color: #616161 !important;
 font-family: 'Montserrat';
 word-break: keep-all;
-margin: 7px 0;
+/*margin: 7px 0;*/
 text-align: left;
 font-weight: 500;
 vertical-align: top;
-width: 37px;
+width: 100%;
 }
 .modaltr2{
 width: 100%
 }
+.modalthusetime{
+	padding-bottom: 10px;
+}
 .modaltd, .modaltdtime, .modaltdhomepage,.modaltdaddress, .modaltdinfo, .modaltdusetime, .modaltdtel {
+	padding-bottom: 10px;
+display: flex;
 font-size: 12.5px;
 color: #616161 !important;
 font-family: 'Montserrat';
 word-break: keep-all;
-margin: 7px 0;
+padding-left: 30px;
+/*margin: 7px 0;*/
 text-align: left;
 font-weight: 500;
 vertical-align: top;
-min-width: 100px;
+/*min-width: 100px;*/
 }
-
+.modaltdaddress{
+	padding-left: 54px;
+}
 .modalbtncontainer{
 display: flex;
 justify-content: flex-end;
 align-items: center;
+position: relative;
+top: 150px;
 }
 .modallabel{
 border: 1px solid beige;
@@ -1202,7 +1220,7 @@ border: 1px solid beige;
   background-color: transparent;
   border: none;
   padding: 10px;
-  color: white;
+  color: #b31312;
   display: flex;
   position: relative;
   gap: 5px;
@@ -2890,12 +2908,10 @@ border: 1px solid beige;
 	}
 #hiddenidtag{
 	display: none;
+}
+.hidenidtext{
+	display: none;
 }	
 /*드래그앤드롭*/
-.hide {
-    display: none;
-}
-.drag-over {
-    border: dashed 2px red;
-}
+
 /*ㅋㅋㅋㅋㅋ*/
