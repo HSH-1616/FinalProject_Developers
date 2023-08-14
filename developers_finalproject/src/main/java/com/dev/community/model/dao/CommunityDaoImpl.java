@@ -19,7 +19,6 @@ public class CommunityDaoImpl implements CommunityDao {
 	public List<Community> communityList(SqlSession session, Map<String, Object> paging) {
 		int cPage=(int)paging.get("cPage");
 		int numPerpage=(int)paging.get("numPerpage");
-		System.out.println(cPage);
 		return session.selectList("community.communityList",null,new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 
@@ -116,6 +115,30 @@ public class CommunityDaoImpl implements CommunityDao {
 	public int deleteReplies(SqlSession session, int replyNo) {
 		
 		return session.delete("community.deleteReplies",replyNo);
+	}
+
+	@Override
+	public int updateCommunity(SqlSession session, Community c) {
+		
+		return session.update("community.updateCommunity",c);
+	}
+
+	@Override
+	public int updateCommunityFile(SqlSession session, CommunityFile file) {
+		
+		return session.insert("community.updateCommunityFile",file);
+	}
+
+	@Override
+	public List<String> selectCommunityFileList(SqlSession session, int communityNo) {
+		
+		return session.selectList("community.selectCommunityFiles",communityNo);
+	}
+
+	@Override
+	public int deleteCommunity(SqlSession session, int communityNo) {
+	
+		return session.delete("community.deleteCommunity",communityNo);
 	}
 
 	

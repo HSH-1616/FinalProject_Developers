@@ -17,48 +17,17 @@
 </script>
 	<div class="container-fluid full-width row">
 	    <div class="col my-5">
-	        <h3 class="fs-4 mb-3">관광지 관리</h3>
+	        <h3 class="fs-4 mb-3">결제 관리</h3>
 	        <div>
-	        	<span>홈페이지 관광지 갯 수 : ${totalData}개 / API 호출 관광지 갯 수 :  <c:if test="${empty tourisTempCount}">${totalData}</c:if>${tourisTempCount}개</span>
-	        	<button class="btn btn-outline-secondary btn-sm" onclick="tourisUpdate();">업데이트 </button>
-	        </div>
-				<div id="search-container" class="d-flex w-30 h-10" style="float:right;">
-		        	검색타입 : &nbsp;
-		        	<select id="searchType" class="mb-3" style="width:100px; height:30px;">
-		        		<option value="tourisName" ${not empty tourisName ? "selected":""}>관광지명</option>
-		        		<option value="tourisAreaId" ${not empty tourisAreaId ? "selected":""}>지역</option>
-		        	</select>
-		        	<div id="search-tourisName">
-		        		<form action="${path}/admin/searchTouris" method="get">
-		        			<input type="hidden" name="" value="" >
-		        			<input type="text" name="tourisName" size="25" placeholder="검색할 관광지명을 입력하세요" 
-		        			value="${not empty tourisName ? tourisName:''}">
-		        			<button class="btn btn-outline-secondary btn-sm" type="submit">검색</button>
-		        		</form>
-		        	</div>
-		        	<div id="search-tourisAreaId">
-						<select class="mb-3" aria-label="Default select example" id="m-selectTouris" onchange="selectTouris();" style="width:100px; height:30px;">
-							  <option value="0">전체지역</option>
-							  <option value="1" ${tourisAreaId eq '1' ?"selected":""}>서울</option>
-							  <option value="2" ${tourisAreaId eq '2' ?"selected":""}>인천</option>
-							  <option value="3" ${tourisAreaId eq '3' ?"selected":""}>대전</option>
-							  <option value="4" ${tourisAreaId eq '4' ?"selected":""}>대구</option>
-							  <option value="5" ${tourisAreaId eq '5' ?"selected":""}>광주</option>
-							  <option value="6" ${tourisAreaId eq '6' ?"selected":""}>부산</option>
-							  <option value="7" ${tourisAreaId eq '7' ?"selected":""}>울산</option>
-							  <option value="8" ${tourisAreaId eq '8' ?"selected":""}>세종</option>
-							  <option value="31" ${tourisAreaId eq '31' ?"selected":""}>경기도</option>
-							  <option value="32" ${tourisAreaId eq '32' ?"selected":""}>강원도</option>
-							  <option value="33" ${tourisAreaId eq '33' ?"selected":""}>충청북도</option>
-							  <option value="34" ${tourisAreaId eq '34' ?"selected":""}>충청남도</option>
-							  <option value="35" ${tourisAreaId eq '35' ?"selected":""}>경상북도</option>
-							  <option value="36" ${tourisAreaId eq '36' ?"selected":""}>경상남도</option>
-							  <option value="37" ${tourisAreaId eq '37' ?"selected":""}>전라북도</option>
-							  <option value="38" ${tourisAreaId eq '38' ?"selected":""}>전라남도</option>
-							  <option value="39" ${tourisAreaId eq '39' ?"selected":""}>제주도</option>
-						</select>
-		        	</div>
-		        </div>	
+	        	<ul class="nav">
+				  <li class="nav-item">
+				    <a class="nav-link active" aria-current="page" href="#">환불대기</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" href="#">환불완료</a>
+				  </li>
+				</ul>
+	        </div>	
 	        <div class="col">
 	            <table class="table bg-white rounded shadow-sm table-hover text-center align-middle">
 	                <thead>
@@ -75,59 +44,6 @@
 	                <tbody>
 	                <c:forEach var="t" items="${tourises}" varStatus="no">
 	                    <tr>
-                    	<c:choose>
-	                    	<c:when test="${t.tourisAreaId eq '1'}">
-	                        	<th scope="row">서울</th>
-	                        </c:when>
-         			        <c:when test="${t.tourisAreaId eq '2'}">
-	                        	<th scope="row">인천</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '3'}">
-	                        	<th scope="row">대전</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '4'}">
-	                        	<th scope="row">대구</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '5'}">
-	                        	<th scope="row">광주</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '6'}">
-	                        	<th scope="row">부산</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '7'}">
-	                        	<th scope="row">울산</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '8'}">
-	                        	<th scope="row">세종</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '31'}">
-	                        	<th scope="row">경기도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '32'}">
-	                        	<th scope="row">강원도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '33'}">
-	                        	<th scope="row">충청북도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '34'}">
-	                        	<th scope="row">충청남도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '35'}">
-	                        	<th scope="row">경상북도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '36'}">
-	                        	<th scope="row">경상남도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '37'}">
-	                        	<th scope="row">전라북도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '38'}">
-	                        	<th scope="row">전라남도</th>
-	                        </c:when>
-	                        <c:when test="${t.tourisAreaId eq '39'}">
-	                        	<th scope="row">제주도</th>
-	                        </c:when>
-                        </c:choose>
 	                        <td>${t.tourisName}</td>
 	                        <td>${t.tourisAddress}</td>
 	                        <c:choose>

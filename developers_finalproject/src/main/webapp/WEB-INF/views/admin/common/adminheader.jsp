@@ -31,8 +31,14 @@
                     <i class="fas fa-hotel me-2"></i>숙박업소관리</a>
                 <a href="${path}/admin/selectTourisAll" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-compass me-2"></i>관광지관리</a>
+                <div id="m-hover">
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-stamp me-2"></i>승인관리</a>
+               		<i class="fas fa-stamp me-2"></i>승인관리</a>
+			    <ul class="list-group" id="m-drop" style="display:none;">
+				    <li><a class="list-group-item-action second-text fw-bold" href="#" style="margin-left:60px; text-decoration-line: none;">맛집관리</a></li>
+				    <li><a class="list-group-item-action second-text fw-bold" href="#" style="margin-left:60px; text-decoration-line: none;">결제관리</a></li>
+			    </ul>
+			    </div>
                 <a href="/" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fa-solid fa-house me-2"></i>HomePage</a>
                 <!-- <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
@@ -67,3 +73,14 @@
                     </ul>
                 </div>
             </nav>
+<script>
+	$("#m-hover").mouseover(function(){
+		$("#m-drop").css("display","inline");
+	})
+	$("#m-hover").mouseout(function(){
+		$("#m-drop").css("display","none");
+	})
+/* 	function mdrop(){
+		$("#m-drop").css("display","inline");
+	} */
+</script>            

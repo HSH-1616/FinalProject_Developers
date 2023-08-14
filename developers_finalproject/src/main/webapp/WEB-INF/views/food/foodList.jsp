@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+$$<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -50,7 +50,8 @@
 			<ul>
 			<%-- href="${path}/food/foodListTitle.do" --%>
 				<li class="bar">|</li>
-				<li class="menu_style" id="all"><span class="color_ch">제목순</span></li>
+				<!-- <li class="menu_style" id="all"><span class="color_ch">제목순</span></li> -->
+				<li class="menu_style" id="all"><span class="color_ch" onclick="sortFoodByTitle()">제목순</span></li>
 				<li class="bar">|</li>
 				<li class="menu_style" id="popular"><span class="color_ch">조회순</span></li>
 				<li class="bar">|</li>
@@ -78,6 +79,7 @@
 		<c:if test="${not empty foods }">
 			<c:forEach var="f" items="${foods }">
 				<div class="food_list">
+				<%-- <c:forEach var="fh" items="${fhHeart }"> --%>
 					<div class="con-like" style="position: relative; z-index: 2; ">
 						<input title="like" type="checkbox" class="like">
 						<div class="checkmark">
@@ -102,12 +104,11 @@
                 </svg>
 						</div>
 					</div>
-
+					
 					<c:forEach var="fp" items="${f.foodPhoto}">
 						<c:if test="${fp.fpMain == 1}">
 							<a class="pig" href="${path}/food/foodDetail.do?no=${f.foodNo}">
-								<img alt="대표이미지" src="${fp.fpName}"
-								style="width: 300px; height: 300px;"><br>
+								<img alt="대표이미지" src="${fp.fpName}" style="width: 300px; height: 300px;"><br>
 							</a>
 						</c:if>
 						<c:if test="${fp.fpMain != 1}"></c:if>
@@ -116,9 +117,9 @@
 					<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
 						<img class="heart" src="${path }/images/food/fillheart.svg">
-						<span class="heart_count">0</span> <img class="comment"
-							src="${path }/images/food/comment.png"> <span
-							class="comment_count">${f.foodReadCount}</span>
+						<span class="heart_count">0</span> 
+						<img class="comment" src="${path }/images/food/comment.png"> 
+						<span class="comment_count">${f.foodReadCount}</span>
 						<!-- <span class="star"> ★★★★★ <span>★★★★★</span> -->
 						<!-- <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10"></span> -->
 					</div>
