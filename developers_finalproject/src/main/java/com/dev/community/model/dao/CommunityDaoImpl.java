@@ -42,8 +42,8 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public int communityCount(SqlSession session) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return session.selectOne("community.communityCount");
 	}
 
 	@Override
@@ -139,6 +139,15 @@ public class CommunityDaoImpl implements CommunityDao {
 	public int deleteCommunity(SqlSession session, int communityNo) {
 	
 		return session.delete("community.deleteCommunity",communityNo);
+	}
+
+	
+
+	@Override
+	public List<Community> mypageCommunity(SqlSession session, int memberId, Map<String, Object> params) {
+		int cPage=(int)params.get("cPage");
+		int numPerpage=(int)params.get("numPerpage");
+		return session.selectList("community.mypageCommunity",memberId,new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 
 	

@@ -1,12 +1,11 @@
 package com.dev.community.controller;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -17,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.dev.community.model.dto.Community;
 import com.dev.community.model.dto.CommunityFile;
 import com.dev.community.model.dto.Reply;
 import com.dev.community.model.service.CommunityService;
 import com.dev.member.model.dto.Member;
+import com.dev.nc.common.PageFactory;
 
 @Controller
 @RequestMapping("/community")
@@ -169,6 +170,21 @@ public class CommunityController {
 	@ResponseBody
 	public int deleteComuunity(int communityNo,HttpSession session) {
 		return service.deleteCommunity(communityNo, session);
+	}
+	
+	@GetMapping("/mypageCommunity.do")
+	@ResponseBody
+	public Map<String,Object> mypageCommunity(int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){
+		Map<String, Object> params=new HashMap<>();
+		Map<String, Object> result=new HashMap<>();
+		params.put("cPage",cPage);
+		params.put("numPerpage", numPerpage);
+		int totalData=service.communityCount();
+		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "mypageCommunity");
+		List<Community> list=service.mypageCommunity(memberId, params);
+		result.put("mypageCommunity", list);
+		result.put("pageBar", pageBar);
+		return result;
 	}
 }
 
