@@ -87,12 +87,27 @@ public class AdminServiceImpl implements AdminService {
 	public int selectBytourisAreaIdCount(Map param) {
 		return dao.selectBytourisAreaIdCount(session,param);
 	}
-
 	@Override
-	public List<Food> searchFood(Map param) {
-		return dao.searchFood(session,param);
+	public int selectTourisTempAllCount() {
+		return dao.selectTourisTempAllCount(session);
+	}
+	@Override
+	public void tourisUpdate() {
+		dao.tourisUpdate(session);
+		
 	}
 	
+
+
+	
+	
+	
+	
+//	============지환============
+	@Override
+	public List<Food> searchFood(Map param) {
+	return dao.searchFood(session,param);
+}
 	@Override
 	public int selectFoodCount() {
 		return dao.selectFoodCount(session);

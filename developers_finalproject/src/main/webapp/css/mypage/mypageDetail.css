@@ -6,28 +6,26 @@
     height: 390px;
     top: 70px;
 }
-.mypageheaderarea{
-	display: flex;
-	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
+.mypageheaderarea {
+    box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
     border-radius: 8px;
     border: initial none!important;
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
-padding: 2rem;
-height: 300px;
-padding-left: 3rem;
-
+    padding: 2rem;
+    padding-left: 3rem;
+    width: 61%;
+    margin-left: 19%;
 }
-.mypageprofile{
-	display: block;
+.mypageprofile {
+    display: block;
     position: relative;
-    align-items: center;
-    align-items: center;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 200px;
+    margin-left: 32%;
 }
 .selectarea{
 	width: 800px;
@@ -83,7 +81,9 @@ padding-left: 3rem;
 	margin-top: 1rem;
     margin-bottom: 1rem;
 }
-
+.profilemangement{
+	
+}
 .profileatag{
 	--tw-text-opacity: 1;
     color: rgb(19 107 240/var(--tw-text-opacity));
@@ -98,7 +98,7 @@ padding-left: 3rem;
 .selectentire{
 	position: relative;
 	width: 100%;
-	height: auto;
+	height: 1000px;
 	/*width: 1150px;*/
     /*left: 17%;*/
 }
@@ -233,14 +233,10 @@ padding-left: 3rem;
     width: 1150px;
     left: 17%;
 	padding-top: 2rem;
-    padding-bottom: 5rem;
+    padding-bottom: 2rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     bottom: 2%;	
-}
-.myschedualpagebar{
-	width: 100%;
-    height: 50px;
 }
 .myschedultext{
 	font-size: 1.5rem;
@@ -257,38 +253,6 @@ padding-left: 3rem;
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
-    margin-top: 20px;
-}
-.mypagehotelcard{
-	height: 400px;
-	width: 310px;
-	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
-    border-radius: 8px;
-    border: initial none!important;
-    border-color: initial!important;
-    border-image: initial!important;
-}
-.hotelcardimboxarea{
-	width: 100%;
-    height: 190px
-    
-}
-.hotelcardimboxarea img{
-	width: 100%;
-    height: 100%;
-	border-radius: 8px 8px 0 0;
-}
-.hotelcardcontent{
-	height: 150px;
-	
-}
-.hotelcardday{
-	margin-top: 7px;
-	width: 260px;
-	position: relative;
-	left: 20px;
-	height: 50px;
-	border-top: 1px solid #8080802b;
 }
 .myschedulcontent{
 	padding-top: 0.5rem;
@@ -300,38 +264,9 @@ padding-left: 3rem;
     cursor: pointer;
 }
 .myschedulcontentarea{
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
 	display: flex;
-}
-.paytitle{
-	text-align: center;
-	margin-bottom: 0;
-	padding: 10px;
-	padding-top: 20px;
-	
-    padding-left: 20px;
-}
-.paynumber, .pay, .hotelday{
-	display: flex;
-    padding-left: 20px;
-    padding-bottom: 10px;
-}
-.paynumber p, .pay p, .hotelday p{
-	margin-left: 8;
-	margin-bottom:0;
-}
-.cancelbtn{
-	background-color: white;
-    border: 1px solid;
-    color: #b31312;
-	position: relative;
-    width: 70px;
-    height: 25px;
-    top: 9px;
-    left: 73%;
-    border-radius: 10%;
-    font-size: 13px;
 }
 .imgbox{
 	width: auto;
@@ -410,8 +345,7 @@ padding-left: 3rem;
     align-items: center;
     margin-right: 0.5rem;
     display: flex;
-	width: 60px;
-    height: 30px;
+
 }
 .cirledaytext{
 	--tw-text-opacity: 1;
@@ -419,8 +353,6 @@ padding-left: 3rem;
     font-size: .75rem;
     text-align: left;
     margin: 0;
-    position: relative;
-    left: 9px;
 }
 .cirletitle{
 	font-size: 1.125rem;
@@ -476,86 +408,10 @@ padding-left: 3rem;
     color: rgb(115 126 138/var(--tw-text-opacity));
     font-weight: 100;
 }
-/*내가 쓴 글 css*/
-.myreviwarea{
-	position: relative;
-    width: 1150px;
-    left: 17%;
-	padding-top: 2rem;
-    padding-bottom: 5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    bottom: 2%;	
-}
-.myreviewiconarea{
-	padding-right: 50px;
-	/*width: 50px;*/
-    height: 40px;
-    border-radius: 50%;
-    object-position: center;
-    position: relative;
-}
-.myreviewiconarea svg {
-	width: 100%;
-	height: 100%;
-	fill: rgb(255, 128, 64);
-}
-.myreviewcontentarea{
-	width: 800px;
-	position: relative;
-    top: 4px;
-    padding-left: 20px;
-}
-
-.cirledaytext {
-	left: 8.5px;
-	position: relative;
-}
-.myreviewupdatearea .circleday{
-	background-color : #b31312;
-}
-.myreviewdeletearea .circleday{
-	background-color : #b31312;
-}
-.myreviewupdatearea{
-	width: 50px;
-}
-.myreviewdeletearea{
-	width: 50px;
-	/*margin-left: 10px;*/
-}
-
-.myreviewupdatearea,  .myreviewdeletearea{
-	justify-content: center;
-    align-items: center;
-    display: flex;
-    width: 60px;
-    position: relative;
-    top: 1;	
-}
-/*호텔 내역 */
-.mypagehotelcontentarea{
-	position: relative;
-    width: 1150px;
-    left: 17%;
-    height: auto;
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-	
-}
-.mypagehotelcontentarea .myschedulcard .myschedulcontent{
-	padding-top: 2.5rem;
-}
-.mypagehotelpagbar{
-	width: 100%;
-    height: 70px;
-}
 /*찜하기 고르는 버튼*/
   .input {
   display: flex;
-  width: 450px;
+  width: 400px;
   /*background-color: #0D1117;*/
   /*justify-content: center;*/
   border-radius: 5px
@@ -691,167 +547,70 @@ padding-left: 3rem;
   color: white;
   background-color: #b31312;
 }
-/*위로 올라가는 아이콘 */
-.backbtn {
-  width: 100px;
-  height: 56px;
-  overflow: hidden;
-  border: none;
-  color: #b31312;
-  background: none;
-  position: fixed;
-  padding-bottom: 2em;
-  bottom: 450px;
-  left: 1504px;
+
+footer {
+    height: 370px;
+    background-color: #eeeeee;
+    margin-top: 20%;
 }
 
-.backbtn > div, .backbtn > svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
+input.flex-1.w-full.p-2.my-2.text-black.placeholder-gray-700.bg-gray-800.rounded-sm.focus\:outline-none.focus\:border-transparent {
+    width: 56%;
+    border-radius: 10px;
+    height: 32px;
+    margin-left: 11px;
 }
 
-.backbtn:before {
-  content: "";
-  position: absolute;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  transform: scaleX(0);
-  transform-origin: bottom right;
-  background: currentColor;
-  transition: transform 0.25s ease-out;
+label.block.text-xs {
+    font-size: 15px;
 }
 
-.backbtn:hover:before {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+.mt-6 {
+    margin-left: 17%;
 }
 
-.backbtn .clone > *, .backbtn .text > * {
-  opacity: 1;
-  font-size: 1.3rem;
-  transition: 0.2s;
-  margin-left: 4px;
-  position: relative;
-  left: 15px;
+button.text-gray-500.hover\:underline {
+    border: none;
+    background-color: white;
+    color: gray;
+    font-size: 15px;
 }
 
-.backbtn .clone > * {
-  transform: translateY(60px);
+button.flex.items-center.justify-center.w-full.p-2.ml-2.text-sm.text-white.rounded-md.disabled\:opacity-50.disabled\:bg-gray-500.bg-lightScheme-primary-focus {
+    width: 190px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #ABABAB
 }
 
-.backbtn:hover .clone > * {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+.flex.items-center.mt-4 {
+    text-align: center;
+    margin-right: 30%;
+    display: flex;
 }
 
-.backbtn:hover .text > * {
-  opacity: 1;
-  transform: translateY(-60px);
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+button.flex.items-center.justify-center.w-full.p-2.mr-2.text-sm.bg-\[\#fafafa\].rounded-md {
+    width: 190px;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 
-.backbtn:hover .clone > :nth-child(1) {
-  transition-delay: 0.15s;
+.flex.items-center.mt-4 {
+    text-align: center;
+    margin-right: 30%;
 }
 
-.backbtn:hover .clone > :nth-child(2) {
-  transition-delay: 0.2s;
+a.w-full.h-full {
+    text-decoration: none;
+    color: black;
 }
 
-.backbtn:hover .clone > :nth-child(3) {
-  transition-delay: 0.25s;
+button {
+    border: none;
 }
 
-.backbtn:hover .clone > :nth-child(4) {
-  transition-delay: 0.3s;
-}
-/* icon style and hover */
-.backbtn svg {
-  width: 20px;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(-50deg);
-  transition: 0.2s ease-out;
-}
-
-.backbtn:hover svg {
-  transform: translateY(-50%) rotate(-90deg);
-}
-/**/
-/* Hide the default checkbox */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.container {
-  display: flex;
-  gap: 10px;
-}
-
-
-/* Create a custom checkbox */
-.checkmark {
-  position: relative;
-  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
-  background-color: rgba(16, 16, 16, 0.5);
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
-  flex-shrink: 0;
-  margin-top: -1px;
-  transition: all 0.2s ease 0s;
-  cursor: pointer;
-  transform-origin: 0px 10px;
-  border-radius: 4px;
-  margin: -1px 10px 0px 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-.container input:checked ~ .checkmark {
-  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
-  background-color: rgba(245, 24, 24, 0.5);
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
-  flex-shrink: 0;
-  margin-top: -1px;
-  transition: all 0.2s ease 0s;
-  cursor: pointer;
-  transform-origin: 0px 10px;
-  border-radius: 4px;
-  margin: -1px 10px 0px 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  left: 0.45em;
-  top: 0.25em;
-  width: 0.25em;
-  height: 0.5em;
-  border: solid white;
-  border-width: 0 0.15em 0.15em 0;
-  transform: rotate(45deg);
-  transition: all 500ms ease-in-out;
+input[type="text"] {
+    position: relative;
+    right: 6.3px;
 }

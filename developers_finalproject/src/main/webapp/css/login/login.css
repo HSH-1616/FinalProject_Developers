@@ -272,3 +272,12 @@ form .signin__btn:hover {
 	margin-bottom: 15px;
 	cursor: pointer;
 }
+
+#test-kakao-chanel-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;
+}

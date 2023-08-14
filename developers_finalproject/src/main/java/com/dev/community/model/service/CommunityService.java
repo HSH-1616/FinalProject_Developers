@@ -18,7 +18,7 @@ import com.dev.community.model.dto.Reply;
 public interface CommunityService {
 
 	List<Community> communityList(Map<String, Object> paging);
-	Community communityView(int no,HttpServletRequest req, HttpServletResponse res);
+	Community communityView(int no);
 	int insertCommunity(Community m);
 	String communitySaveFile(MultipartFile file,HttpSession session);
 	int communityCount();
@@ -30,4 +30,8 @@ public interface CommunityService {
 	List<Reply> replyList(int communityNo);
 	int updateReply(Reply r);
 	int deleteReply(Reply r);
+	int updateCommunity(Community c);
+	int deleteCommunity(int communityNo,HttpSession hsession);
+	List<Community> mypageCommunity(int memberId, Map<String, Object> params);
+	
 }

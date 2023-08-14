@@ -31,4 +31,9 @@ public interface CommunityDao {
 	int updateReply(SqlSession session,Reply r);
 	int deleteReply(SqlSession session,int replyNo);
 	int deleteReplies(SqlSession session, int replyNo);
+	int updateCommunity(SqlSession session, Community c);
+	int updateCommunityFile(SqlSession session, CommunityFile file);
+	List<String> selectCommunityFileList(SqlSession session, int communityNo);
+	int deleteCommunity(SqlSession session, int communityNo);
+	List<Community> mypageCommunity(SqlSession session, int memberId,Map<String, Object> params);
 }

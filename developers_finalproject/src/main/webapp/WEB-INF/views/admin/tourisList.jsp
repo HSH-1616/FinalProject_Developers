@@ -19,7 +19,8 @@
 	    <div class="col my-5">
 	        <h3 class="fs-4 mb-3">관광지 관리</h3>
 	        <div>
-	        	<span>${totalData}개 / ?개</span>
+	        	<span>홈페이지 관광지 갯 수 : ${totalData}개 / API 호출 관광지 갯 수 :  <c:if test="${empty tourisTempCount}">${totalData}</c:if>${tourisTempCount}개</span>
+	        	<button class="btn btn-outline-secondary btn-sm" onclick="tourisUpdate();">업데이트 </button>
 	        </div>
 				<div id="search-container" class="d-flex w-30 h-10" style="float:right;">
 		        	검색타입 : &nbsp;
@@ -32,7 +33,7 @@
 		        			<input type="hidden" name="" value="" >
 		        			<input type="text" name="tourisName" size="25" placeholder="검색할 관광지명을 입력하세요" 
 		        			value="${not empty tourisName ? tourisName:''}">
-		        			<button type="submit">검색</button>
+		        			<button class="btn btn-outline-secondary btn-sm" type="submit">검색</button>
 		        		</form>
 		        	</div>
 		        	<div id="search-tourisAreaId">
@@ -168,6 +169,13 @@
 	    
 	</div>
 <script>
+function tourisUpdate(){
+	$.get('${path}/admin/tourisUpdate',data=>{
+		alert("데이터 업데이트 완료 됐습니다.");
+		location.reload();
+	})
+	
+}
 function pageDetail(tourisId){
 	location.assign('${path}/tourisDetail/selectById?tourisId='+tourisId);
 }

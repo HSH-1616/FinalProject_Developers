@@ -95,6 +95,17 @@ public class AdminDaoImpl implements AdminDao {
 	public int selectBytourisAreaIdCount(SqlSession session, Map param) {
 		return session.selectOne("admin.selectBytourisAreaIdCount", param);
 	}
+	
+	public int selectTourisTempAllCount(SqlSession session) {
+		return session.selectOne("admin.selectTourisTempAllCount");
+	}
+	@Override
+	public void tourisUpdate(SqlSession session) {
+		session.selectOne("admin.tourisUpdate");
+	}
+	
+	
+//	=========지환==========
 	@Override
 	public List<Food> searchFood(SqlSession session, Map param) {
 		int cPage=(int)param.get("cPage");
