@@ -26,4 +26,6 @@ public interface AdminService {
 	int searchTourisCount(Map param);
 	List<Touris> selectBytourisAreaId(Map param);
 	int selectBytourisAreaIdCount(Map parma);
+	int selectTourisTempAllCount();
+	void tourisUpdate();
 }
