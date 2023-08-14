@@ -2911,6 +2911,9 @@ border: 1px solid beige;
 }
 .hidenidtext{
 	display: none;
+}
+.modalhidden{
+	display: none;
 }	
 /*드래그앤드롭*/
 
