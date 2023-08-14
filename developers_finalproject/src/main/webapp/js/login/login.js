@@ -1,4 +1,4 @@
-//const path="/member";
+const path="";
 const CLIENT_ID="TR_SQ2GAJzrrTPobWiSh";
 const redirectURI="http://localhost:8888/member/naver/callback";
 const state="1";

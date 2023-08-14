@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.http.HttpRequest;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.tomcat.util.json.JSONParser;
 import org.apache.tomcat.util.json.ParseException;
@@ -64,24 +67,26 @@ public class MemberController {
 		return m;
 	}
 	@GetMapping("/Kakaoenroll")
-	public String Kakaoenroll(@RequestParam Map param,Model model) {
+	public String Kakaoenroll(@RequestParam Map param,Model model,HttpServletRequest request) {
 		String memberNickname=(String)param.get("memberNickname");
 		String memberImage=(String)param.get("memberImage");
 		String memberEmail=(String)param.get("memberEmail");
 		String memberPk=(String)param.get("memberPk");
+		String header=request.getHeader("Referer");
 		Member m = Member.builder().memberNickname(memberNickname)
 				.memberImage(memberImage)
 				.memberEmail(memberEmail.trim()).memberCategory("K").memberPk(memberPk).build();
 		service.insertMember(m);
 		Member member=service.selectByMemberPk(memberPk);
 		model.addAttribute("loginMember",member);
-		return "redirect:/";
+		return "redirect:"+header;
 	}
 	@GetMapping("KakaoLogin")
-	public String KakaoLogin(@RequestParam Map param,Model model) {
+	public String KakaoLogin(@RequestParam Map param,Model model,HttpServletRequest request) {
+		String header=request.getHeader("Referer");
 		Member member=service.selectByMemberPk((String)param.get("memberPk"));
 		model.addAttribute("loginMember",member);
-		return "redirect:/";
+		return "redirect:"+header;
 	}
 	
 //네이버로그인처리
@@ -130,9 +135,13 @@ public class MemberController {
 				}
 				Member member2 = service.selectByMemberPk(memberPk);
 				model.addAttribute("loginMember",member2);
+
 			}
 		} else {
 			model.addAttribute("res", "Login failed!");
+			model.addAttribute("msg","로그인실패하셨습니다.");
+			model.addAttribute("loc","/");
+			return "common/msg";
 		}
 		return "redirect:/";
 	}

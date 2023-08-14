@@ -28,4 +28,6 @@ public interface AdminDao {
 	int searchTourisCount(SqlSession session, Map param);
 	List<Touris> selectBytourisAreaId(SqlSession session, Map param);
 	int selectBytourisAreaIdCount(SqlSession session, Map param);
+	int selectTourisTempAllCount(SqlSession session);
+	void tourisUpdate(SqlSession session);
 }

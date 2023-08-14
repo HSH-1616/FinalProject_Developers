@@ -119,7 +119,7 @@
 					    </div>
 					</c:forEach>
 				  </c:if>
-  				  <c:if test="${empty touris.tourismainImge}">
+  				  <c:if test="${empty touris.tourismainImge && not empty touris.tourisImages[0].tourisImages}">
 					    <div class="carousel-item active">
 					      <img class="d-block w-100 h-100" src="${touris.tourisImages[0].tourisImages}" alt="" >
 					    </div>
@@ -128,6 +128,11 @@
 					      <img class="d-block w-100 h-100" src="${image.tourisImages}" alt="Next slide" >
 					    </div>
 					</c:forEach>
+				  </c:if>
+				  <c:if test="${empty touris.tourismainImge && empty touris.tourisImages[0].tourisImages }">
+  					    <div class="carousel-item active">
+					      <img class="d-block w-100 h-100" src="${path }/images/common/logo.png" alt="" >
+					    </div>
 				  </c:if>
 				  </div>
 					<button class="carousel-control-prev" type="button"
