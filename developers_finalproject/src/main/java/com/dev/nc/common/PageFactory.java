@@ -11,22 +11,22 @@ public class PageFactory {
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
-		pageBar.append("<ul class='pagination justify-content-center pagination-sm'>");
+		pageBar.append("<ul class='pagination justify-content-center'>");
 		
 		if(pageNo==1) {
 			pageBar.append("<li class='page-item disabled'>");
-			pageBar.append("<a class='page-link' href='#'>이전");
+			pageBar.append("<a class='page-link' href='#'>&laquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}else {
 			pageBar.append("<li class='page-item'>");
-			pageBar.append("<a class='page-link' href='javascript:"+js+"("+(pageNo-1)+")'>이전");
+			pageBar.append("<a class='page-link' href='javascript:"+js+"("+(pageNo-1)+")'>&laquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
-				pageBar.append("<li class='page-item disabled'>");
+				pageBar.append("<li class='page-item active'>");
 				pageBar.append("<a class='page-link' href='#'>"+pageNo);
 				pageBar.append("</a>");
 				pageBar.append("</li>");
@@ -41,12 +41,12 @@ public class PageFactory {
 
 		if(pageNo>totalPage){
 			pageBar.append("<li class='page-item disabled'>");
-			pageBar.append("<a class='page-link' href='#'>다음");
+			pageBar.append("<a class='page-link' href='#'>&raquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}else {
 			pageBar.append("<li class='page-item'>");
-			pageBar.append("<a class='page-link' href='javascript:"+js+"("+(pageNo)+")'>다음");
+			pageBar.append("<a class='page-link' href='javascript:"+js+"("+(pageNo)+")'>&raquo;");
 			pageBar.append("</a>");
 			pageBar.append("</li>");
 		}
