@@ -83,9 +83,7 @@ padding-left: 3rem;
 	margin-top: 1rem;
     margin-bottom: 1rem;
 }
-.profilemangement{
-	
-}
+
 .profileatag{
 	--tw-text-opacity: 1;
     color: rgb(19 107 240/var(--tw-text-opacity));
@@ -100,7 +98,7 @@ padding-left: 3rem;
 .selectentire{
 	position: relative;
 	width: 100%;
-	height: 1000px;
+	height: auto;
 	/*width: 1150px;*/
     /*left: 17%;*/
 }
@@ -235,7 +233,7 @@ padding-left: 3rem;
     width: 1150px;
     left: 17%;
 	padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     bottom: 2%;	
@@ -255,6 +253,38 @@ padding-left: 3rem;
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
+    margin-top: 20px;
+}
+.mypagehotelcard{
+	height: 400px;
+	width: 310px;
+	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
+    border-radius: 8px;
+    border: initial none!important;
+    border-color: initial!important;
+    border-image: initial!important;
+}
+.hotelcardimboxarea{
+	width: 100%;
+    height: 190px
+    
+}
+.hotelcardimboxarea img{
+	width: 100%;
+    height: 100%;
+	border-radius: 8px 8px 0 0;
+}
+.hotelcardcontent{
+	height: 150px;
+	
+}
+.hotelcardday{
+	margin-top: 7px;
+	width: 260px;
+	position: relative;
+	left: 20px;
+	height: 50px;
+	border-top: 1px solid #8080802b;
 }
 .myschedulcontent{
 	padding-top: 0.5rem;
@@ -266,9 +296,38 @@ padding-left: 3rem;
     cursor: pointer;
 }
 .myschedulcontentarea{
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 	display: flex;
+}
+.paytitle{
+	text-align: center;
+	margin-bottom: 0;
+	padding: 10px;
+	padding-top: 20px;
+	
+    padding-left: 20px;
+}
+.paynumber, .pay, .hotelday{
+	display: flex;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+.paynumber p, .pay p, .hotelday p{
+	margin-left: 8;
+	margin-bottom:0;
+}
+.cancelbtn{
+	background-color: white;
+    border: 1px solid;
+    color: #b31312;
+	position: relative;
+    width: 70px;
+    height: 25px;
+    top: 9px;
+    left: 73%;
+    border-radius: 10%;
+    font-size: 13px;
 }
 .imgbox{
 	width: auto;
@@ -347,7 +406,8 @@ padding-left: 3rem;
     align-items: center;
     margin-right: 0.5rem;
     display: flex;
-
+	width: 60px;
+    height: 30px;
 }
 .cirledaytext{
 	--tw-text-opacity: 1;
@@ -355,6 +415,8 @@ padding-left: 3rem;
     font-size: .75rem;
     text-align: left;
     margin: 0;
+    position: relative;
+    left: 9px;
 }
 .cirletitle{
 	font-size: 1.125rem;
@@ -410,10 +472,86 @@ padding-left: 3rem;
     color: rgb(115 126 138/var(--tw-text-opacity));
     font-weight: 100;
 }
+/*내가 쓴 글 css*/
+.myreviwarea{
+	position: relative;
+    width: 1150px;
+    left: 17%;
+	padding-top: 2rem;
+    padding-bottom: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    bottom: 2%;	
+}
+.myreviewiconarea{
+	padding-right: 50px;
+	/*width: 50px;*/
+    height: 40px;
+    border-radius: 50%;
+    object-position: center;
+    position: relative;
+}
+.myreviewiconarea svg {
+	width: 100%;
+	height: 100%;
+	fill: rgb(255, 128, 64);
+}
+.myreviewcontentarea{
+	width: 800px;
+	position: relative;
+    top: 4px;
+    padding-left: 20px;
+}
+
+.cirledaytext {
+	left: 8.5px;
+	position: relative;
+}
+.myreviewupdatearea .circleday{
+	background-color : #b31312;
+}
+.myreviewdeletearea .circleday{
+	background-color : #b31312;
+}
+.myreviewupdatearea{
+	width: 50px;
+}
+.myreviewdeletearea{
+	width: 50px;
+	margin-left: 10px;
+}
+
+.myreviewupdatearea,  .myreviewdeletearea{
+	justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 60px;
+    position: relative;
+    top: 1;	
+}
+/*호텔 내역 */
+.mypagehotelcontentarea{
+	position: relative;
+    width: 1150px;
+    left: 17%;
+    height: auto;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+	
+}
+.mypagehotelcontentarea .myschedulcard .myschedulcontent{
+	padding-top: 2.5rem;
+}
+.mypagehotelpagbar{
+	width: 100%;
+    height: 70px;
+}
 /*찜하기 고르는 버튼*/
   .input {
   display: flex;
-  width: 400px;
+  width: 450px;
   /*background-color: #0D1117;*/
   /*justify-content: center;*/
   border-radius: 5px
@@ -479,7 +617,7 @@ padding-left: 3rem;
   margin-top: 9px;
 }
 .container>div:first-child{
-	justify-content: space-around;
+	width: 100%;
 }
 .radio-tile-group {
   display: flex;
@@ -549,3 +687,4 @@ padding-left: 3rem;
   color: white;
   background-color: #b31312;
 }
+
