@@ -19,7 +19,7 @@
 						src="https://www.myro.co.kr/assets/images/user-avatar.png">
 					</span>
 				</div>
-				<h2 class="nickname">user5168649250</h2>
+				<h2 class="nickname"></h2>
 			</div>
 			<div class="flex flex-col w-full my-4 lg:max-w-md">
 				<div class="w-full my-4">
@@ -33,7 +33,7 @@
 							<div class="mt-2">
 								<label class="block text-xs">이메일</label><input type="email"
 									class="flex-1 w-full p-2 my-2 text-black placeholder-gray-700 bg-gray-800 rounded-sm focus:outline-none focus:border-transparent"
-									readonly="" value="jojh0930@gmail.com">
+									readonly="" value="">
 							</div>
 							<div class="mt-4">
 								<p class="text-xs font-light text-left text-gray-500">

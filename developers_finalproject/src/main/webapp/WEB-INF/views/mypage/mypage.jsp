@@ -21,7 +21,7 @@
 				</div>
 				<h2 class="nickname">${loginMember.memberId }</h2>
 				<div class="profilemangement">
-					<a class="profileatag" href="${path }/mypage/mypageDetail.do">프로필 관리</a>
+					<a class="profileatag"  id="preId" href="${path }/mypage/mypageDetail.do">프로필 관리</a>
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
 						viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
 						class="w-6 h-6">
@@ -38,7 +38,7 @@
 			<div class="selectbtnarea">
 				<div class="container">
   <div class="radio-tile-group">
-    <div class="input-container">
+    <div class="input-container" id="moveBtn">
       <input id="walk" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon walk-icon">
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="input-container">
+    <div class="input-container" id="moveBtn1">
       <input id="bike" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon bike-icon">
@@ -61,7 +61,7 @@
         <label for="bike" class="radio-tile-label">여행일정</label>
       </div>
     </div>
-    <div class="input-container">
+    <div class="input-container" id="moveBtn2">
       <input id="bike" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon bike-icon">
@@ -71,7 +71,7 @@
         <label for="bike" class="radio-tile-label">내가 쓴 글</label>
       </div>
     </div>
-<div class="input-container">
+<div class="input-container" id="moveBtn3">
       <input id="walk" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon walk-icon">
@@ -226,7 +226,7 @@
 								<div class="cardtextarea">
 									<div class="noneid"></div>
 									<h2 class="cardtexteng">SEOUL</h2>
-									<h2 class="cardtextkr">서울</h2>
+									<h2 class="cardtextkr" id="preId1">서울</h2>
 								</div>
 							</div>
 					</div>
@@ -270,7 +270,7 @@
 											<h2 class="daytext">2023-07-29~2023-08-07</h2>
 											<h2 class="ml-1 text-xs md:ml-0 md:text-sm font-Montserrat md:mt-1"></h2>
 										</div>
-										<h2 class="updateday">최근수정일 2023-08-10</h2>
+										<h2 class="updateday" id="preId2">최근수정일 2023-08-10</h2>
 									</div>
 								</div>
 							</div>
@@ -339,7 +339,7 @@
 			</div>
 			<!--  -->
 			
-			<div class="pagebararea"></div>
+			<div class="pagebararea" id="preId3"></div>
 		</div>
 		<!-- 숙박예약내역 -->
 		<div class="mypagehotelcontentarea">
@@ -449,4 +449,62 @@
 </button>
 	<script src="${path }/js/mypage/mypage.js"></script>
 </section>
+<script type="text/javascript">
+      $(document).ready(function(){
+        $("#moveBtn").on("click",function(event){
+          // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+ 
+          // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+          var offset = $("#preId").offset();
+ 
+          // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+          // position은 부모를 기준으로한 상대위치를 가져온다.
+          $("html body").animate({scrollTop:offset.top},100);
+ 
+        });
+      }); // end of ready()
+      
+      $(document).ready(function(){
+          $("#moveBtn1").on("click",function(event){
+            // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+   
+            // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+            var offset = $("#preId1").offset();
+   
+            // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+            // position은 부모를 기준으로한 상대위치를 가져온다.
+            $("html body").animate({scrollTop:offset.top},100);
+   
+          });
+        }); // end of ready()
+      
+        $(document).ready(function(){
+            $("#moveBtn2").on("click",function(event){
+              // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+     
+              // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+              var offset = $("#preId2").offset();
+     
+              // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+              // position은 부모를 기준으로한 상대위치를 가져온다.
+              $("html body").animate({scrollTop:offset.top},100);
+     
+            });
+          }); // end of ready()
+          
+        $(document).ready(function(){
+            $("#moveBtn3").on("click",function(event){
+              // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+     
+              // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+              var offset = $("#preId3").offset();
+     
+              // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+              // position은 부모를 기준으로한 상대위치를 가져온다.
+              $("html body").animate({scrollTop:offset.top},100);
+     
+            });
+          }); // end of ready()
+        
+    </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -3,6 +3,7 @@ $('.favorite').slick({
   slidesToShow: 3,
   slidesToScroll: 1
 });
+
 const mypageCommunity=(cPage,numPerpage)=>{
 	const memberId = $('.nickname').text();
 	
