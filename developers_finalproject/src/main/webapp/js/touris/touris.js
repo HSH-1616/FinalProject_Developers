@@ -149,326 +149,163 @@ var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배�
 
 //관광 경로클릭했을때 생기는 마커
 $(document).on('click','.plus-travel', function() {
-	
+	$('.center-wrapper').empty();
+	if ($('#calander').val() === '') {
+		var heartbeat = $("#calander");
+		heartbeat.addClass("heartbeat");
+		setTimeout(function() {
+			heartbeat.removeClass("heartbeat");
+		}, 1500);
+		
+		
+		
+		 const randomTag = $('<div class="random-tag">여행 가고싶은 날짜를 먼저 추가해주세요</div>');
+    $('.center-wrapper').append(randomTag);
+// 임의의 태그가 나타남
+    $('.center-wrapper').css('display', 'block');
+  // 6초 후에 사라짐 (fadeOut 애니메이션)
+  setTimeout(function() {
+    $('.center-wrapper').fadeOut(function() {
+      randomTag.remove();
+    });
+  }, 1500);
+    return; 
+  }
 	pulastravel();
-		
-			/*const immediateParent = $(this).parent();
-			const listbox = immediateParent.parent();
-			const listtextElement = listbox.find(".listtext");
-			const listtitleTextValue = listtextElement.find(".listtitle-text").text();
-			const listtitleaddr = listtextElement.find(".listtitleaddr");
-			const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
-			const srcValue = listbox.find(".listboximg img").attr("src");
-
-geocoder.addressSearch(textaddr, function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
-	
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker= new kakao.maps.Marker({
-            map: map,
-            position: markerPosition,
-            image: markerImage
-        });
-            marker.Fc = true; // 마커가 나중에 계산될수도 있어서 true인 것을 이렇게 찾아줘야 한다.
-
-        $(document).on('click', '.select-delte', function() {
-			marker.setMap(null);
-		});
-         addedMarkers.push(marker);
-         
-         var markerCountWithFc = 0;
-          // 마커 갯수
-        for (var i = 0; i < addedMarkers.length; i++) {
-            if (typeof addedMarkers[i].Fc !== 'undefined') {
-                markerCountWithFc++;
-            }
-        }
-
-           // 인포윈도우 내용을 설정
-         const markerNumber = markerCountWithFc;
-
-          var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent">'+markerNumber+'</div></div>';// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		 // 인포윈도우를 생성합니다
-		inforwindow = new kakao.maps.CustomOverlay({
-				content: iwContent,
-				map: map,
-				position: marker.getPosition()
-			});
-		  
-         linePath.push(markerPosition);
-       	 lastInfoWindow.push(inforwindow);
-		 // 지도에 표시할 선을 생성합니다
-		 var polyline = new kakao.maps.Polyline({
-			 path: linePath, // 선을 구성하는 좌표배열 입니다
-			 strokeWeight: 5, // 선의 두께 입니다
-			 strokeColor: '#FFAE00', // 선의 색깔입니다
-			 strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-			 strokeStyle: 'solid' // 선의 스타일입니다
-		 });
-		 // 지도에 선을 표시합니다 
-		 polyline.setMap(map2);  
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        kakao.maps.event.addListener(marker, 'click', function() {
-           var content = '<div class="wrap">' + 
-            '    <div class="info">' + 
-            '        <div class="title">' + 
-             			listtitleTextValue+ 
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-            '        </div>' + 
-            '        <div class="body">' + 
-            '            <div class="img">' +
-            '                <img src="'+srcValue+'" width="73" height="70">' +
-            '           </div>' + 
-            '            <div class="desc">' + 
-            			'<div class="ellipsis">'+textaddr+'</div>' + 
-            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-            '            </div>' + 
-            '        </div>' + 
-            '    </div>' +    
-            '</div>'
-			
-			//전에 있던 마커와 오버레이 제거
-			if (previousOverlay) {
-				previousOverlay.setMap(null);
-			}
-			// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
-			overlay = new kakao.maps.CustomOverlay({
-				content: content,
-				map: map,
-				position: marker.getPosition()
-			});
-			previousOverlay = overlay;
-		});
-		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		map.setCenter(markerPosition);
-	}
-	
-});*/
-
+	pulastravel2();	
 });
 
-var removemarkers;
-	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-    imageSize = new kakao.maps.Size(50, 57), // 마커이미지의 크기입니다
-    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+	imageSize = new kakao.maps.Size(50, 57), // 마커이미지의 크기입니다
+	imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 var addedMarkers = []; // 마커 
 var linePath = []; // 경로 선 
 let markerIndex = 0; // 클로저를 이용하여 클릭한 순서를 기억할 변수 선언
- // 숫자를 띄어주는 infowindow
+/*var inforwindow = []*/// 숫자를 띄어주는 infowindow
 var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배열
-function pulastravel(){
-	
-		$(".listarea .selectlist").each(function(index, e){
-			const listtitleTextValue = $(e).find(".listtitle-text").text();
-            const textaddr = $(e).find('.listtitle-textaddr').text();
-            const srcValue = $(e).find('.listboximg img').attr('src');
-			geocoder.addressSearch(textaddr, function(result, status) {
-				// 정상적으로 검색이 완료됐으면 
-				if (status === kakao.maps.services.Status.OK) {
+var polyline;
+var lines = [];
+function pulastravel() {
+	$(".listarea .selectlist").each(function(index, e) {
+		const listtitleTextValue = $(e).find(".listtitle-text").text();
+		const textaddr = $(e).find('.listtitle-textaddr').text();
+		const srcValue = $(e).find('.listboximg img').attr('src');
+		geocoder.addressSearch(textaddr, function(result, status) {
+			// 정상적으로 검색이 완료됐으면 
+			if (status === kakao.maps.services.Status.OK) {
 
-					var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+				var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
 
 
-					// 결과값으로 받은 위치를 마커로 표시합니다
-					var marker = new kakao.maps.Marker({
-						map: map,
-						position: markerPosition,
-						image: markerImage
-					});
-				
-					/*addmarkers.push(marker);*/
-					var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (index+1) + '</div></div>';
-					// 인포윈도우를 생성합니다
-					var inforwindow = new kakao.maps.CustomOverlay({
-						content: iwContent,
+				// 결과값으로 받은 위치를 마커로 표시합니다
+				var marker = new kakao.maps.Marker({
+					map: map,
+					position: markerPosition,
+					image: markerImage
+				});
+
+				/*addmarkers.push(marker);*/
+				var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (index + 1) + '</div></div>';
+				// 인포윈도우를 생성합니다
+				var inforwindow = new kakao.maps.CustomOverlay({
+					content: iwContent,
+					map: map,
+					position: marker.getPosition()
+				});
+
+				linePath[index] = markerPosition;
+				// 지도에 표시할 선을 생성합니다
+				polyline = new kakao.maps.Polyline({
+					path: linePath, // 선을 구성하는 좌표배열 입니다
+					strokeWeight: 5, // 선의 두께 입니다
+					strokeColor: '#FFAE00', // 선의 색깔입니다
+					strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					strokeStyle: 'solid' // 선의 스타일입니다
+				});
+
+				$(document).on('click', '.select-delte', function() {
+					marker.setMap(null);
+					polyline.setMap(null);
+					inforwindow.setMap(null);
+
+				});
+
+				lines.push(polyline);
+				lastInfoWindow.push(inforwindow);
+				addedMarkers.push(marker);
+				polyline.setMap(map);
+				// 인포윈도우로 장소에 대한 설명을 표시합니다
+				kakao.maps.event.addListener(marker, 'click', function() {
+					var content = '<div class="wrap">' +
+						'    <div class="info">' +
+						'        <div class="title">' +
+						listtitleTextValue +
+						'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+						'        </div>' +
+						'        <div class="body">' +
+						'            <div class="img">' +
+						'                <img src="' + srcValue + '" width="73" height="70">' +
+						'           </div>' +
+						'            <div class="desc">' +
+						'<div class="ellipsis">' + textaddr + '</div>' +
+						'                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
+						'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
+						'            </div>' +
+						'        </div>' +
+						'    </div>' +
+						'</div>'
+
+					//전에 있던 마커와 오버레이 제거
+					if (previousOverlay) {
+						previousOverlay.setMap(null);
+					}
+					// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
+					overlay = new kakao.maps.CustomOverlay({
+						content: content,
 						map: map,
 						position: marker.getPosition()
 					});
-					/*linePath[index] = markerPosition;
-       	 			lastInfoWindow[index] = inforwindow;*/
-					// 지도에 표시할 선을 생성합니다
-					var polyline = new kakao.maps.Polyline({
-						path: linePath, // 선을 구성하는 좌표배열 입니다
-						strokeWeight: 5, // 선의 두께 입니다
-						strokeColor: '#FFAE00', // 선의 색깔입니다
-						strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-						strokeStyle: 'solid' // 선의 스타일입니다
-					});
-					// 지도에 선을 표시합니다 
-					$(document).on('click', '.select-delte', function() {
-						marker.setMap(null);
-						polyline.setMap(null);
-						inforwindow.setMap(null);
-						
-					});
-					linePath[index] = markerPosition;
-       	 			lastInfoWindow[index] = inforwindow; 
-       	 			polyline.setMap(map);
-					addedMarkers.push(marker);
-					
-					// 인포윈도우로 장소에 대한 설명을 표시합니다
-					kakao.maps.event.addListener(marker, 'click', function() {
-						var content = '<div class="wrap">' +
-							'    <div class="info">' +
-							'        <div class="title">' +
-							listtitleTextValue +
-							'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-							'        </div>' +
-							'        <div class="body">' +
-							'            <div class="img">' +
-							'                <img src="' + srcValue + '" width="73" height="70">' +
-							'           </div>' +
-							'            <div class="desc">' +
-							'<div class="ellipsis">' + textaddr + '</div>' +
-							'                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-							'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
-							'            </div>' +
-							'        </div>' +
-							'    </div>' +
-							'</div>'
+					previousOverlay = overlay;
+				});
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				map.setCenter(markerPosition);
 
-						//전에 있던 마커와 오버레이 제거
-						if (previousOverlay) {
-							previousOverlay.setMap(null);
-						}
-						// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
-						overlay = new kakao.maps.CustomOverlay({
-							content: content,
-							map: map,
-							position: marker.getPosition()
-						});
-						previousOverlay = overlay;
-					});
-					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-					map.setCenter(markerPosition);
-       	 			
-       	 			
-				}
 
-			});
-				
+			}
+
 		});
+
+	});
 
 };
+
 $(document).on('click', '.delete-travel', function() {
-	
-	addedMarkers.setMap(null);
-	pulastravel();
-	/*$(".listarea .selectlist").each(function(index) {
-		var indexWithinList = $(this).index();
-		console.log(indexWithinList);
-	});*/
+// 기존의 마커, 경로, 인포윈도우 제거
+    addedMarkers.forEach(function(marker, index) {
+        marker.setMap(null);
+  });for(var i = 0; i < addmarkers.length; i++){
+		addmarkers[i].setMap(null);
+	}
+  lastInfoWindows.forEach(function(inforwindow, index){
+		inforwindow.setMap(null);
+	});
+   lastInfoWindow.forEach(function(inforwindow, index){
+		inforwindow.setMap(null);
+	});
+	for(var i = 0; i < lines.length; i++){
+		lines[i].setMap(null);
+	}
+	addmarkers = [];
+    lastInfoWindows = [];
+    addedMarkers = [];
+    lastInfoWindow = [];
+    linePath = [];
+    lines = [];
+    pulastravel();
+    pulastravel2();
 });
-
-
-
-
-function deletetravel(){
-	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-		imageSize = new kakao.maps.Size(50, 57), // 마커이미지의 크기입니다
-		imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-	var addedMarkers = []; // 마커 
-	var linePath = []; // 경로 선 
-	let markerIndex = 0; // 클로저를 이용하여 클릭한 순서를 기억할 변수 선언
-	var infowindow; // 숫자를 띄어주는 infowindow
-	var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배열
-		
-		$(".listarea .selectlist").each(function(index, e) {
-        	var indexWithinList = $(this).index();
-			const listtitleTextValue = $(e).find(".listtitle-text").text();
-            const textaddr = $(e).find('.listtitle-textaddr').text();
-            const srcValue = $(e).find('.listboximg img').attr('src');
-			geocoder.addressSearch(textaddr, function(result, status) {
-				// 정상적으로 검색이 완료됐으면 
-				if (status === kakao.maps.services.Status.OK) {
-
-					var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-
-					// 결과값으로 받은 위치를 마커로 표시합니다
-					var marker = new kakao.maps.Marker({
-						map: map,
-						position: markerPosition,
-						image: markerImage
-					});
-					
-					$(document).on('click', '.select-delte', function() {
-						marker.setMap(null);
-					});
-					addmarkers.push(marker);
-					var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (indexWithinList) + '</div></div>';// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-					// 인포윈도우를 생성합니다
-					inforwindow = new kakao.maps.CustomOverlay({
-						content: iwContent,
-						map: map,
-						position: marker.getPosition()
-					});
-					linePath[index] = markerPosition;
-       	 			lastInfoWindow[index] = inforwindow;
-					// 지도에 표시할 선을 생성합니다
-					var polyline = new kakao.maps.Polyline({
-						path: linePath, // 선을 구성하는 좌표배열 입니다
-						strokeWeight: 5, // 선의 두께 입니다
-						strokeColor: '#FFAE00', // 선의 색깔입니다
-						strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-						strokeStyle: 'solid' // 선의 스타일입니다
-					});
-					// 지도에 선을 표시합니다 
-					polyline.setMap(map); 
-					// 인포윈도우로 장소에 대한 설명을 표시합니다
-					kakao.maps.event.addListener(marker, 'click', function() {
-						var content = '<div class="wrap">' +
-							'    <div class="info">' +
-							'        <div class="title">' +
-							listtitleTextValue +
-							'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-							'        </div>' +
-							'        <div class="body">' +
-							'            <div class="img">' +
-							'                <img src="' + srcValue + '" width="73" height="70">' +
-							'           </div>' +
-							'            <div class="desc">' +
-							'<div class="ellipsis">' + textaddr + '</div>' +
-							'                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-							'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
-							'            </div>' +
-							'        </div>' +
-							'    </div>' +
-							'</div>'
-
-						//전에 있던 마커와 오버레이 제거
-						if (previousOverlay) {
-							previousOverlay.setMap(null);
-						}
-						// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
-						overlay = new kakao.maps.CustomOverlay({
-							content: content,
-							map: map,
-							position: marker.getPosition()
-						});
-						previousOverlay = overlay;
-					});
-					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-					map.setCenter(markerPosition);
-       	 			
-       	 			
-				}
-
-			});
-		});
-
-};	
-
 
 function closeOverlay() {
     overlay.setMap(null);     
@@ -499,107 +336,116 @@ var mapTypeControl2 = new kakao.maps.MapTypeControl();
 map2.addControl(mapTypeControl2, kakao.maps.ControlPosition.TOPRIGHT);
 
 
+var addmarkers= [];
+var lastInfoWindows = [];
+//관광 경로클릭했을때 생기는 마커
+function pulastravel2() {
+	$(".listarea .selectlist").each(function(index, e) {
+		const listtitleTextValue = $(e).find(".listtitle-text").text();
+		const textaddr = $(e).find('.listtitle-textaddr').text();
+		const srcValue = $(e).find('.listboximg img').attr('src');
+		geocoder.addressSearch(textaddr, function(result, status) {
+			// 정상적으로 검색이 완료됐으면 
+			if (status === kakao.maps.services.Status.OK) {
 
-const addmarkers= [];
-/*//관광 경로클릭했을때 생기는 마커
-$(document).on('click','.plus-travel', function() {
-			const immediateParent = $(this).parent();
-			const listbox = immediateParent.parent();
-			const listtextElement = listbox.find(".listtext");
-			const listtitleTextValue = listtextElement.find(".listtitle-text").text();
-			const listtitleaddr = listtextElement.find(".listtitleaddr");
-			const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
-			const srcValue = listbox.find(".listboximg img").attr("src");
-geocoder.addressSearch(textaddr, function(result, status) {
+				var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
 
-        var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
-	
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker= new kakao.maps.Marker({
-            map: map2,
-            position: markerPosition,
-            image: markerImage
-        });
-        marker.Fc = true; // 마커가 나중에 계산될수도 있어서 true인 것을 이렇게 찾아줘야 한다.
+				// 결과값으로 받은 위치를 마커로 표시합니다
+				var marker2 = new kakao.maps.Marker({
+					map: map2,
+					position: markerPosition,
+					image: markerImage
+				});
 
-         addmarkers.push(marker);
-		   console.log(typeof marker.Fc != undefined);
-          // 마커 갯수
-        var markerCountWithFc = 0;
-        for (var i = 0; i < addmarkers.length; i++) {
-            if (typeof addmarkers[i].Fc !== 'undefined') {
-                markerCountWithFc++;
-            }
-        }
-          
-           // 인포윈도우 내용을 설정
-          const markerNumber = markerCountWithFc;
-          var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent">'+markerNumber+'</div></div>';// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		 // 인포윈도우를 생성합니다
-		inforwindow = new kakao.maps.CustomOverlay({
-				content: iwContent,
-				map: map2,
-				position: marker.getPosition()
-			});
-		  
-         linePath.push(markerPosition);
-       	 lastInfoWindow.push(inforwindow);
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        kakao.maps.event.addListener(marker, 'click', function() {
-           var content = '<div class="wrap">' + 
-            '    <div class="info">' + 
-            '        <div class="title">' + 
-             			listtitleTextValue+ 
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-            '        </div>' + 
-            '        <div class="body">' + 
-            '            <div class="img">' +
-            '                <img src="'+srcValue+'" width="73" height="70">' +
-            '           </div>' + 
-            '            <div class="desc">' + 
-            			'<div class="ellipsis">'+textaddr+'</div>' + 
-            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-            '            </div>' + 
-            '        </div>' + 
-            '    </div>' +    
-            '</div>'
-			
-			//전에 있던 마커와 오버레이 제거
-			if (previousOverlay) {
-				previousOverlay.setMap(null);
+				/*addmarkers.push(marker);*/
+				var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (index + 1) + '</div></div>';
+				// 인포윈도우를 생성합니다
+				var inforwindow = new kakao.maps.CustomOverlay({
+					content: iwContent,
+					map: map2,
+					position: marker2.getPosition()
+				});
+
+				linePath[index] = markerPosition;
+				// 지도에 표시할 선을 생성합니다
+				polyline = new kakao.maps.Polyline({
+					path: linePath, // 선을 구성하는 좌표배열 입니다
+					strokeWeight: 5, // 선의 두께 입니다
+					strokeColor: '#FFAE00', // 선의 색깔입니다
+					strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					strokeStyle: 'solid' // 선의 스타일입니다
+				});
+
+
+				lines.push(polyline);
+				lastInfoWindows.push(inforwindow);
+				addmarkers.push(marker2);
+				polyline.setMap(map2);
+				// 인포윈도우로 장소에 대한 설명을 표시합니다
+				kakao.maps.event.addListener(marker2, 'click', function() {
+					var content = '<div class="wrap">' +
+						'    <div class="info">' +
+						'        <div class="title">' +
+						listtitleTextValue +
+						'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+						'        </div>' +
+						'        <div class="body">' +
+						'            <div class="img">' +
+						'                <img src="' + srcValue + '" width="73" height="70">' +
+						'           </div>' +
+						'            <div class="desc">' +
+						'<div class="ellipsis">' + textaddr + '</div>' +
+						'                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
+						'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
+						'            </div>' +
+						'        </div>' +
+						'    </div>' +
+						'</div>'
+
+					//전에 있던 마커와 오버레이 제거
+					if (previousOverlay) {
+						previousOverlay.setMap(null);
+					}
+					// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
+					overlay = new kakao.maps.CustomOverlay({
+						content: content,
+						map: map2,
+						position: marker2.getPosition()
+					});
+					previousOverlay = overlay;
+				});
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				map2.setCenter(markerPosition);
+
+
 			}
-			// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
-			overlay = new kakao.maps.CustomOverlay({
-				content: content,
-				map: map2,
-				position: marker.getPosition()
-			});
-			previousOverlay = overlay;
-		});
-		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		map2.setCenter(markerPosition);
-	}
-	
-});
 
-});*/
-/*$(document).on('click', '.delete-travel', function() {
-    if (addedMarkers.length > 0) {
-        var markerToRemove = addedMarkers.pop();
-        markerToRemove.setMap(null); 
-    }
-});*/
+		});
+
+	});
+
+};
+$(document).on('click', '.selectdetailsbtn3', function() {
+	$(this).parents('.selectroutedetailslist').remove();
+   // 기존의 마커, 경로, 인포윈도우 제거
+  for(var i = 0; i < addmarkers.length; i++){
+		addmarkers[i].setMap(null);
+	}
+  lastInfoWindows.forEach(function(inforwindow, index){
+		inforwindow.setMap(null);
+	});
+	for(var i = 0; i < lines.length; i++){
+		lines[i].setMap(null);
+	}
+ 	addmarkers = [];
+    lastInfoWindows = [];
+    lines = [];
+    updatemarker();
+});
 function closeOverlay() {
     overlay.setMap(null);     
 }
-
-
-
 
 // 지도 fullscreen하는 함수
 // * 전체 화면으로 표시
@@ -655,13 +501,9 @@ function exitHandler() {
 	}
 }
 // 모달창 지도 api
-
-
-// Function to generate dynamic content
-function generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid, indexnumber) {
+function generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid) {
   const newElement = document.createElement('div');
   newElement.classList.add('selectroutedetailslist');
-  const hiddencontentidClass = `hiddencontentid-${indexnumber}`;
  
   newElement.innerHTML = `
   <div class="test">
@@ -712,21 +554,39 @@ function generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid,
     </div>
     </div>`;
   
-  	     /* newElement.addEventListener('dragstart', dragStart);
-  		  newElement.addEventListener('dragend', dragEnd);*/
   			
   return newElement;
 }
-
+$(document).on('click', '.makerouteplusbtnarea', function(){
+	const textaddr = $(this).parent('.smailspottext').text();
+	const listtitleTextValue =  $(this).parent('.smailspottext').parent('.h7').find('.nametext').text();
+	const srcValue = ($(this).parents('.makeroutesearchlistli').find('.makeroutesearchlistliimges .makesearchimg').attr('src'));
+	const hidenid = $(this).parent('.smailspottext').parent('.h7').find('.hidenidtext').text();
+	const newDynamicContent = generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid);
+	
+	const parentElement = $(".routedatailslists");
+	const newElement = $(newDynamicContent)[0];
+	parentElement[0].appendChild(newElement);
+	const lengthindex = $(".routedatailslists .selectroutedetailslist").length;
+	const firstdailyindex = $('.dailytext1').eq(0);
+	firstdailyindex.empty();
+	firstdailyindex.append(lengthindex);
+	
+	updatemarker();
+	
+});
 
 // 달력 js
 $(function() {
+	$('#calander').datepicker({
+  dateFormat: 'yy-mm-dd',
+  maxDate: 0
+});
 	function updateSelectBox(startDate, endDate) {
     const selectBox = document.getElementById('dayselectbox');
     const currentDate = startDate.clone(); // Start from the selected start date
     let dayCount = 1;
 
-    // Clear existing options
     selectBox.innerHTML = '';
     
 	const alldaydetailscheduleDiv = document.querySelector('.alldaydetailschedule');
@@ -784,11 +644,13 @@ alldaydetailscheduleDiv.appendChild(newElement);
 		const startDate = moment(dateStrings[0], 'YYYY/MM/DD');
 		const endDate = moment(dateStrings[1], 'YYYY/MM/DD');
 		const duration = moment.duration(endDate.diff(startDate));
-		return duration.asDays() + 1; // Include both start and end dates, so add 1 to the difference.
+		return duration.asDays() + 1; 
 	}
 
-   // Add the click event handler for the ".plus-travel" elements inside "ul.listarea-right"
   $("ul.listarea-right").on("click", ".plus-travel", function () {
+	if ($('#calander').val() === '') {
+    return; // 입력 필드가 비어있을 때는 이벤트 핸들러 종료
+  }
     var parentLi = $(this).closest("li.selectlist2");
     const immediateParent = $(this).parent();
     const listbox = immediateParent.parent();
@@ -801,7 +663,7 @@ alldaydetailscheduleDiv.appendChild(newElement);
 	const hidenid = hidentourisid.find(".detail-travellist a .tourisidhidden").text();
 	const indexnumber = $(".listarea .selectlist").length;
 	
-    const newDynamicContent = generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid, indexnumber);
+    const newDynamicContent = generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid);
 	
 	const parentElement = $(".routedatailslists");
 	const newElement = $(newDynamicContent)[0];
@@ -822,7 +684,6 @@ alldaydetailscheduleDiv.appendChild(newElement);
 	parentElement[0].appendChild(newElement);
     
   });
-  
   $('input[name="datefilter"]').daterangepicker({
       autoUpdateInput: false,
       locale: {
@@ -839,10 +700,8 @@ alldaydetailscheduleDiv.appendChild(newElement);
   	  console.log('날짜 갯수:', dateRangeCount);
   	  $('.schedulecount').text(dateRangeCount);
   	  $('#travels-chedule').text(dateRangeCount +'일');
-  	  // Clear any existing content inside the 'schedultlisttext' div
   $('.schedultlisttext').empty();
 
-  // Generate and append the dynamic content
   for (let i = 1; i <= dateRangeCount; i++) {
     const smallSchedulListTextArea = $('<div class="smallschedullisttextarea"></div>');
     const smallSchedulListText = $('<div class="smallschedullisttext"></div>');
@@ -862,7 +721,6 @@ alldaydetailscheduleDiv.appendChild(newElement);
   $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
       /*$(this).val('');*/
       $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
-       // Clear the select options when canceled
     const selectBox = document.getElementById('dayselectbox');
     selectBox.innerHTML = '';
     
@@ -871,7 +729,7 @@ alldaydetailscheduleDiv.appendChild(newElement);
     alldaydetailscheduleDiv.innerHTML = '';
   });
   /**/
-  
+ 
 // 경로생성 모달창 js
 let isCenterWrapperVisible = false;
 let isProcessing = false;
@@ -959,7 +817,6 @@ if (isProcessing) {
 });
 $(document).ready(function(){
   $('input[name="datefilter"]').trigger('click');
- console.log($('input[name="datefilter"]').trigger('click'));
 });
  // 클릭한 인덱스에 대한 상태 저장 변수
 const clickedIndexes = [];
@@ -1043,6 +900,9 @@ $(document).on('click', '.smallschedullisttextarea', function() {
       });
       // 태그 생성 태그
         $("ul.listarea-right").on("click", ".plus-travel", function () {
+			if ($('#calander').val() === '') {
+    return; // 입력 필드가 비어있을 때는 이벤트 핸들러 종료
+  }
           	var parentLi = $(this).closest("li.selectlist2");
 			const immediateParent = $(this).parent();
 			const listbox = immediateParent.parent();
@@ -1102,6 +962,8 @@ $(document).on('click', '.smallschedullisttextarea', function() {
 			const listtitleaddr = listtextElement.find(".listtitleaddr");
 			const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
 			const srcValue = listbox.find(".listboximg img").attr("src");
+			const hidentourisid = parentLi.find(".listbtn");
+			const hidenid = hidentourisid.find(".detail-travellist a .tourisidhidden").text();
 		  var newLi = '<li class="selectlist2">' +
 			  '<div class="listbox">' +
 			  '<div class="listboximg"><img src="' + srcValue + '" alt=""></div>' +
@@ -1114,7 +976,9 @@ $(document).on('click', '.smallschedullisttextarea', function() {
 			  '<h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">'+ textaddr +'</h7></h7>'+
 			  '</div>' +
 			  '<div class="listbtn">' +
-			  '<div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">' +
+			  '<div class="detail-travellist"><a>' +
+			  '<div class="tourisidhidden" style="display: none">'+hidenid+'</div>'+
+			  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">' +
 			  '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />' +
 			  '</svg></a></div>' +
 			  '<div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">' +
@@ -1124,6 +988,44 @@ $(document).on('click', '.smallschedullisttextarea', function() {
 			  '</li>';
 			  test.remove();
           parentLi.remove();
+          
+		  const dataItems = [];
+
+		  $("ul.listarea .selectlist").each(function() {
+			  const listbox = $(this).find(".listbox");
+			  const listtextElement = $(this).find(".listtext");
+			  const listtitleTextValue = listtextElement.find(".listtitle-text").text();
+			  const listtitleaddr = listtextElement.find(".listtitleaddr");
+			  const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
+			  const srcValue = listbox.find(".listboximg img").attr("src");
+			  const hidentourisid = $(this).find(".hiddenid").text();
+
+			  dataItems.push({
+				  listtitleTextValue,
+				  textaddr,
+				  srcValue,
+				  hidentourisid
+			  });
+		  });
+
+		  // 데이터 배열의 각 항목을 순회하며 동적 요소 생성
+		  dataItems.forEach(dataItem => {
+			  const newDynamicContent = generateDynamicContent(
+				  dataItem.listtitleTextValue,
+				  dataItem.textaddr,
+				  dataItem.srcValue,
+				  dataItem.hidentourisid
+			  );
+			  const parentElement = $(".routedatailslists");
+		  	  const newElement = $(newDynamicContent)[0];
+		  	  parentElement[0].appendChild(newElement);
+		  	  const lengthindex = $(".routedatailslists .selectroutedetailslist").length;
+	const firstdailyindex = $('.dailytext1').eq(0);
+	firstdailyindex.empty();
+	firstdailyindex.append(lengthindex);
+		  });
+		  
+		   
           // 생성된거 없어지고 생겨지는 함수
           var selectListElements = $("ul.listarea li.selectlist");
     	  /*var newLiElement = $(newLi);*/
@@ -1133,7 +1035,6 @@ $(document).on('click', '.smallschedullisttextarea', function() {
             $(".list-text").show();
           }
          $("ul.listarea-right").append(newLi);
-          /*newLiElement.insertAfter("ul.listarea-right");*/
         });
         
         // 왼쪽 영역에 있는 태그들 전체 삭제후 오른쪽으로 추가 
@@ -1182,6 +1083,12 @@ $(document).on('click', '.select-delte', function() {
 
     //모달창 띄어주기
       $(document).on("click", ".detail-travellist a", function () {
+        $('.modaltdhomepage').empty();
+        $('.modaltdaddress').empty();
+        $('.modaltdinfo').empty();
+        $('.modaltdtel').empty();
+        $('.modalimage').empty();
+        $('.modalplacetitle').empty();
         const tourisid = $(this).find('.tourisidhidden').text();
         
         const tourisdetailesurl ="http://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV%2B%2BobF%2FXFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId="+tourisid+"&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1";
@@ -1196,6 +1103,8 @@ $(document).on('click', '.select-delte', function() {
 				console.log(common);
 				$('.modaltdhomepage').append(common.homepage);	
 				$('.modaltdaddress').append(common.addr1);
+				$('.modalplacetitle').append(common.title);
+				$('.modalimage').append(common.firstimage);
 				
 				
 			}
@@ -1229,9 +1138,6 @@ $(document).on('click', '.select-delte', function() {
 			
 			}
 		});
-		
-		
-        
         
         $(".totalmodaldiv").show();
         $(".modaldiv").show();
@@ -1300,7 +1206,7 @@ $(document).on("click", ".list-texticon", function(){
   setTimeout(function() {
     heartbeat.removeClass("heartbeat");
   }, 1500);
- 
+ $('.center-wrapper').empty();
     // 클릭 이벤트 발생 시, 임의의 태그 생성
     const randomTag = $('<div class="random-tag">관광지를 추가해주세요</div>');
     $('.center-wrapper').append(randomTag);
@@ -1428,7 +1334,7 @@ function searchTouris2() {
     },
     success: function(data) {
       console.log(data);
-      if (data.trim() === '') {
+      if (data.trim() === "") {
         $('.listarea-right').html('<li class="defaulttext"><span>검색한 관광지가 없습니다.</span>' +
           '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">' +
           '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />' +
@@ -1487,10 +1393,6 @@ function saveRoute() {
 			/*const day = entry.match(/(\d+)일차 (\d+)월 (\d+)일/);*/
 
 			return entry;
-			/* month: month,
-			 dayOfMonth: dayOfMonth,
-			 dayOfWeek: dayOfWeek*/
-
 		});
 
 		
@@ -1562,6 +1464,11 @@ $(function () {
     var targetChildCount = targetArea.find('.test').length;
     targetCountElement.text(targetChildCount);
     
+    for(var i = 0; i < lines.length; i++){
+		lines[i].setMap(null);
+	}
+    lines = [];
+    
     updatemarker();
   });
 
@@ -1574,143 +1481,11 @@ $(function () {
     }).disableSelection();
   });
 });
-/*function updatemarker(){
-	const textaddr = $(target).find('.selectdetailstextaddress').text();
-	console.log($(target).find('.selectdetailstext').text());
-	console.log($(target).find('.selectdetailstextaddress').text());
-	console.log($(target).find('.selectdetailsimage').attr('src'));
-	const checkcard = $('.selectroutedetailslist').find('.selectdetailstextaddress').text();
-	for(var i = 0; i < addmarkers.length; ++i ){
-		addmarkers[i].setMap(null);
-	}
-	addmarkers.length = 0;
-	
-	$('.selectroutedetailslist').each(function(index, element) {
-    const selectdetailstextaddress = $('.selectroutedetailslist').find('.selectdetailstextaddress');
-    const addr = selectdetailstextaddress.text();
-	
-	console.log("차례대로 생기니?"+addr);
-geocoder.addressSearch(addr, function(result, status) {
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
-	
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker= new kakao.maps.Marker({
-            map: map2,
-            position: markerPosition,
-            image: markerImage
-        });
-        marker.Fc = true; // 마커가 나중에 계산될수도 있어서 true인 것을 이렇게 찾아줘야 한다.
-
-         addmarkers.push(marker);
-		 marker.setMap(map2);
-		 map2.setCenter(markerPosition);
-}
-	
-});
-
-});
-}*/
-
-/*function updatemarker() {
-    
-    const addmarkers = []; // 생성된 마커를 추적하는 배열
-    const lastInfoWindow =[]; // 인포윈도우 추적하는 배열
-    const linePath = []; // 경로표시 추적하는 배열
-    const routeday = $(".alldaydetailschedule #detailroutetareaid");
-    $('.alldaydetailschedule .detailroutetour .dailyroutedetaillist .routedatailslists .selectroutedetailslist .test').each(function(index, element) {
-    $('.routedatailslists .selectroutedetailslist .test').each(function(index, element) {
-       const selectdetailstextaddress = $(element).find('.selectdetailstextaddress');
-       const listtitleTextValue = $(this).find('.selectdetailstext').text();
-       const srcValue = $(this).find('.selectdetailsimagesarea img').attr('src');
-       const textaddr = $(this).find('.selectdetailstextaddress').text();
-       const addr = selectdetailstextaddress.text();
-       console.log("for문안에서" +addr); // 각 요소의 텍스트 출력
-		
-        geocoder.addressSearch(addr, function(result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-                var existingMarker = addmarkers[index]; // 이미 생성된 마커 가져오기
-
-                if (existingMarker) {
-                    existingMarker.setPosition(markerPosition); // 이미 생성된 마커 업데이트
-                } else {
-                    var marker = new kakao.maps.Marker({
-                        map: map2,
-                        position: markerPosition,
-                        image: markerImage
-                        
-                    });
-                    addmarkers[index] = marker; // 새로운 마커를 배열에 추가
-                    // 인포윈도우 내용을 설정
-					var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent">' + (index+1) + '</div></div>';// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-					// 인포윈도우를 생성합니다
-					inforwindow = new kakao.maps.CustomOverlay({
-						content: iwContent,
-						map: map2,
-						position: marker.getPosition()
-					});
-
-					linePath[index] = markerPosition;
-					lastInfoWindow[index] = inforwindow;
-					// 지도에 표시할 선을 생성합니다
-					var polyline = new kakao.maps.Polyline({
-						path: linePath, // 선을 구성하는 좌표배열 입니다
-						strokeWeight: 5, // 선의 두께 입니다
-						strokeColor: '#d62124', // 선의 색깔입니다
-						strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-						strokeStyle: 'solid' // 선의 스타일입니다
-					});
-					// 지도에 선을 표시합니다 
-					polyline.setMap(map2);  
-					// 인포윈도우로 장소에 대한 설명을 표시합니다
-					kakao.maps.event.addListener(marker, 'click', function() {
-						var content = '<div class="wrap">' +
-							'    <div class="info">' +
-							'        <div class="title">' +
-							listtitleTextValue +
-							'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-							'        </div>' +
-							'        <div class="body">' +
-							'            <div class="img">' +
-							'                <img src="' + srcValue + '" width="73" height="70">' +
-							'           </div>' +
-							'            <div class="desc">' +
-							'<div class="ellipsis">' + textaddr + '</div>' +
-							'                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-							'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
-							'            </div>' +
-							'        </div>' +
-							'    </div>' +
-							'</div>'
-
-						//전에 있던 마커와 오버레이 제거
-						if (previousOverlay) {
-							previousOverlay.setMap(null);
-						}
-						// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
-						overlay = new kakao.maps.CustomOverlay({
-							content: content,
-							map: map2,
-							position: marker.getPosition()
-						});
-						previousOverlay = overlay;
-					});
-                }
-					
-                map2.setCenter(markerPosition);
-            }
-        });
-    });
-}*/
 
 function updatemarker() {
-    const addmarkers = []; // 생성된 마커를 추적하는 배열
-    const lastInfoWindow = []; // 인포윈도우 추적하는 배열
+   /*	var addmarkers = []; // 생성된 마커를 추적하는 배열
+    const lastInfoWindow = []; // 인포윈도우 추적하는 배열*/
     const lasthiddenlevle=[];
     const linePath = []; // 각 영역별 경로표시 추적하는 배열
  // 각 마커에 사용할 색상을 정의한 배열
@@ -1740,12 +1515,12 @@ function updatemarker() {
 					
 					
 					// 이전 경로 제거
-           if (linePath[routedayIndex] && linePath[routedayIndex][testIndex] && linePath[routedayIndex][testIndex].polyline && !linePath[routedayIndex][testIndex] && !linePath[routedayIndex][testIndex].polyline) {
-                        linePath[routedayIndex][testIndex].polyline.setMap(null);
-           }
+          if (linePath[routedayIndex] && linePath[routedayIndex][testIndex] && linePath[routedayIndex][testIndex].polyline) {
+                linePath[routedayIndex][testIndex].polyline.setMap(null);
+            }
             
             const bgColor = backgroundColors[routedayIndex % backgroundColors.length]; // 순환하여 색상 선택
-            const strokeColor = strokeColors[testIndex % strokeColors.length];
+            const strokeColor = strokeColors[routedayIndex % strokeColors.length];
                     // 나머지 마커 및 인포윈도우 관련 코드도 동일한 방식으로 처리
 					// 인포윈도우 내용을 설정
 					 $(element).find(".hiddenlevel").empty();
@@ -1759,23 +1534,23 @@ function updatemarker() {
 						map: map2,
 						position: marker.getPosition()
 					});
-					lastInfoWindow[testIndex] = inforwindow;
+					lastInfoWindows[testIndex] = inforwindow;
 					// 해당 영역의 경로 배열에 좌표 추가
-					// 해당 영역의 경로 배열에 좌표 추가
-            if (!linePath[routedayIndex]) {
-                    linePath[routedayIndex] = [];
-                    }
-          
+					if (!linePath[routedayIndex]) {
+						linePath[routedayIndex] = [];
+					}
+					linePath[routedayIndex].push(markerPosition);
                var polyline = new kakao.maps.Polyline({
-                    path: [markerPosition], // 처음 좌표 설정
+                    path: linePath[routedayIndex], // 처음 좌표 설정
                     strokeWeight: 5,
                     strokeColor: strokeColor,
                     strokeOpacity: 1,
                     strokeStyle: 'solid'
                 })
-           	linePath[routedayIndex][testIndex] = polyline;
-              polyline.setMap(map2);
-            lastInfoWindow[testIndex] = inforwindow;
+           /*	linePath[routedayIndex][testIndex] = polyline;*/
+           	  lines.push(polyline);
+            polyline.setMap(map2);
+            lastInfoWindows[testIndex] = inforwindow;
                     /*// 해당 영역의 경로 배열에 좌표 추가
                     if (!linePaths[routedayIndex]) {
                         linePaths[routedayIndex] = [];
@@ -1821,20 +1596,6 @@ function updatemarker() {
         });
     });
 
-    /*// 각 영역별 경로 표시
-    for (let i = 0; i < linePaths.length; i++) {
-        if (linePaths[i]) {
-			const strokeColores = strokeColors[i % strokeColors.length]; // 순환하여 색상 선택
-            const polyline = new kakao.maps.Polyline({
-                path: linePaths[i],
-                strokeWeight: 5,
-                strokeColor: strokeColores,
-                strokeOpacity: 1,
-                strokeStyle: 'solid'
-            });
-            polyline.setMap(map2);
-        }
-    }*/
 }
 
 
