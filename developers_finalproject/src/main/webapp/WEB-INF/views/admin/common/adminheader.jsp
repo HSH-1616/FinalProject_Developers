@@ -36,7 +36,7 @@
                		<i class="fas fa-stamp me-2"></i>승인관리</a>
 			    <ul class="list-group" id="m-drop" style="display:none;">
 				    <li><a class="list-group-item-action second-text fw-bold" href="#" style="margin-left:60px; text-decoration-line: none;">맛집관리</a></li>
-				    <li><a class="list-group-item-action second-text fw-bold" href="#" style="margin-left:60px; text-decoration-line: none;">결제관리</a></li>
+				    <li><a class="list-group-item-action second-text fw-bold" href="${path }/admin/paymentList" style="margin-left:60px; text-decoration-line: none;">결제관리</a></li>
 			    </ul>
 			    </div>
                 <a href="/" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
