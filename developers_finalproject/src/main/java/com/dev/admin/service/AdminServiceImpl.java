@@ -86,7 +86,16 @@ public class AdminServiceImpl implements AdminService {
 	public int selectBytourisAreaIdCount(Map param) {
 		return dao.selectBytourisAreaIdCount(session,param);
 	}
-
+	@Override
+	public int selectTourisTempAllCount() {
+		return dao.selectTourisTempAllCount(session);
+	}
+	@Override
+	public void tourisUpdate() {
+		dao.tourisUpdate(session);
+		
+	}
+	
 	
 	
 	

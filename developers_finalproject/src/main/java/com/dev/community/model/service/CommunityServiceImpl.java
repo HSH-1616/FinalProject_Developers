@@ -39,7 +39,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public Community communityView(int no, HttpServletRequest req, HttpServletResponse res) {
+	public Community communityView(int no) {
 		
 		return dao.communityView(session, no);
 	}
@@ -86,17 +86,20 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public int communitySaveFileDB(CommunityFile file) {
+		if(file.getCommunityNo()!=0) {
+			return dao.updateCommunityFile(session, file);
+		}
 		
 		return dao.communitySaveFile(session, file);
 	}
 
 	@Override
-	public int removeCommunityFile(String fileName, HttpSession session) {
-		String path=session.getServletContext().getRealPath("/upload/community/");
+	public int removeCommunityFile(String fileName, HttpSession hsession) {
+		String path=hsession.getServletContext().getRealPath("/upload/community/");
 		File file=new File(path+fileName);
 		if(file.exists()) {
 			file.delete();
-			
+			dao.deleteCommunityFile(session, fileName);
 			return 1;
 		}
 		return 0;
@@ -108,7 +111,6 @@ public class CommunityServiceImpl implements CommunityService {
 		like.put("memberId", id);
 		like.put("communityNo",no);
 		Map<String, Object>likeResult= dao.selectLike(session,like );
-		System.out.println(likeResult);
 		if(likeResult==null) {
 			dao.insertLike(session, like);
 			dao.likeCountUp(session, no);
@@ -142,21 +144,21 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public List<Reply> replyList(int communityNo) {
-		List<Reply>replyList= dao.replyList(session, communityNo);
-		List<Reply>resultList=new ArrayList<>();
-		for(Reply r:replyList) {
-			if(r.getReplyLevel()==0) {
-				int temp=r.getReplyNo();
-				resultList.add(r);
-				for(Reply p:replyList) {
-					if(temp==p.getReplyRef()) {
-						resultList.add(p);
-					}
-				}
-			}
-		}
+//		List<Reply>replyList= dao.replyList(session, communityNo);
+//		List<Reply>resultList=new ArrayList<>();
+//		for(Reply r:replyList) {
+//			if(r.getReplyLevel()==0) {
+//				int temp=r.getReplyNo();
+//				resultList.add(r);
+//				for(Reply p:replyList) {
+//					if(temp==p.getReplyRef()) {
+//						resultList.add(p);
+//					}
+//				}
+//			}
+//		}
 		
-		return resultList;
+		return dao.replyList(session, communityNo);
 	}
 
 	@Override
@@ -173,6 +175,23 @@ public class CommunityServiceImpl implements CommunityService {
 			return dao.deleteReply(session, replyNo);
 		}
 		return dao.deleteReplies(session, replyNo);
+	}
+
+	@Override
+	public int updateCommunity(Community c) {
+		
+		return dao.updateCommunity(session, c);
+	}
+
+	@Override
+	public int deleteCommunity(int communityNo, HttpSession hsession) {
+		
+		List<String> fileList=dao.selectCommunityFileList(session, communityNo);
+		for(String f:fileList) {
+			removeCommunityFile(f, hsession);
+		}
+		
+		return dao.deleteCommunity(session, communityNo);
 	}
 	
 	

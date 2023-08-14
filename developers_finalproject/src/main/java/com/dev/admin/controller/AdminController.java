@@ -113,8 +113,10 @@ public class AdminController {
 		Map<String,Object> type=new HashMap<>();
 		List<Touris> tourises=service.selectTourisAll(param);
 		int totalData=service.selectTourisAllCount();
+		int tourisTempCount=service.selectTourisTempAllCount();
 		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectTourisAll",type));
 		m.addAttribute("totalData",totalData);
+		m.addAttribute("tourisTempCount",tourisTempCount);
 		m.addAttribute("tourises",tourises);
 		return "admin/tourisList";
 	}
@@ -130,6 +132,7 @@ public class AdminController {
 		type.put("value", data.get("tourisName"));
 		List<Touris> tourises=service.searchTouris(param);
 		int totalData=service.searchTourisCount(param);
+		m.addAttribute("totalData",totalData);
 		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"searchTouris",type));
 		m.addAttribute("tourises",tourises);
 		m.addAttribute("tourisName",data.get("tourisName"));
@@ -153,4 +156,11 @@ public class AdminController {
 		m.addAttribute("tourisAreaId",data.get("tourisAreaId"));
 		return "admin/tourisList";
 	}
+	@GetMapping("/tourisUpdate")
+	@ResponseBody
+	public void tourisUpdate() {
+		service.tourisUpdate();
+	}
+	
+	
 }
