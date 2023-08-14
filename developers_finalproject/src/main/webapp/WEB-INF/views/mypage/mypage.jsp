@@ -8,17 +8,18 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> -->
 <link rel="stylesheet" href="${path}/css/mypage/slick.css"/>
 <link rel="stylesheet" href="${path}/css/mypage/slick-theme.css"/>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script src="${path }/js/mypage/slick.min.js"></script> 
+<%-- <script src="${path }/css/mypage/slick.js"></script> --%>
 <section>
 	<div class="mypageheader">
 		<div class="mypageheaderarea">
 			<div class="mypageprofile">
 				<div class="profile">
 					<span class="boxsize"> <img alt=""
-						src="https://www.myro.co.kr/assets/images/user-avatar.png">
+						src="${loginMember.memberImage }">
 					</span>
 				</div>
-				<h2 class="nickname">user5168649250</h2>
+				<h2 class="nickname">${loginMember.memberId }</h2>
 				<div class="profilemangement">
 					<a class="profileatag" href="${path }/mypage/mypageDetail.do">프로필 관리</a>
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -389,12 +390,63 @@
 						</div>
 						<div class="mypagehotelpagbar"></div>
 					</div>
-					
 				</div>
 		</div>
 		
-		
+		<!-- 내 승인여부(맛집)-->
+		<div class="myreviwarea">
+			<h2 class="myschedultext">승인여부 (맛집)</h2>
+			<div class="myschedulcardarea">
+				<div class="myschedulcard">
+					<div class="myschedulcontent">
+						<div class="myschedulcontentarea">
+							<div class="myreviewiconarea">
+								<label class="container"> <input checked="checked"
+									type="checkbox">
+									<div class="checkmark"></div>
+								</label>
+							</div>
+							<div class="myreviewcontentarea">
+								<span class="myreviewcontent">게시글 제목
+									setsetsetsestsdagadsfadsfadsfadsf</span>
+							</div>
+							<div class="myreviewupdatearea">
+								<div class="circleday">
+									<p class="cirledaytext">수정</p>
+								</div>
+							</div>
+							<div class="myreviewdeletearea">
+								<div class="circleday">
+									<p class="cirledaytext">삭제</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			
+			<div class="pagebararea" style="
+    width: 100%;
+    height: 60px;
+"></div>
+		</div>
 	</div>
+	<button class="backbtn">
+    <div class="text">
+        <!-- <span>Back</span>
+        <span>to</span> -->
+        <span>top</span>
+    </div>
+    <div class="clone">
+       <!--  <span>Back</span>
+        <span>to</span> -->
+        <span>top</span>
+    </div>
+    <svg width="20px" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+    </svg>
+</button>
 	<script src="${path }/js/mypage/mypage.js"></script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
