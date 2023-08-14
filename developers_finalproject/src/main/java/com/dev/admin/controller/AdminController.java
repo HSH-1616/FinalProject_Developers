@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
+import com.dev.food.model.dto.Food;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -31,6 +32,8 @@ public class AdminController {
 	public AdminController(AdminService service) {
 		this.service=service;
 	}
+	
+	
 	@GetMapping
 	public String adminPage() {
 		return "admin/loginadmin";
@@ -142,15 +145,40 @@ public class AdminController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		param.put("tourisAreaId", data.get("tourisAreaId"));
+		
 		Map<String,Object> type=new HashMap<>();
 		type.put("typeId", "tourisAreaId");
 		type.put("value", data.get("tourisAreaId"));
+		
 		List<Touris> tourises=service.selectBytourisAreaId(param);
 		int totalData=service.selectBytourisAreaIdCount(param);
+		
 		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectBytourisAreaId",type));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("tourises",tourises);
 		m.addAttribute("tourisAreaId",data.get("tourisAreaId"));
 		return "admin/tourisList";
+	}
+	
+//	===========================지환=========================
+	@GetMapping("/selectFoodList")
+	public String selectFoodList(@RequestParam(value="cPage",defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, Model m){
+		//페이지처리용 Map
+		Map<String,Object> param=new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		
+		//검색처리 Map
+		Map<String,Object> type=new HashMap<>();
+//		type.put("typeId", "tourisAreaId");
+//		type.put("value", data.get("tourisAreaId"));
+		
+		List<Food> foodList=service.searchFood(param);
+		int totalData=service.selectFoodCount();
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectFoodList",type));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("foods",foodList);
+		return "admin/foodList";
 	}
 }

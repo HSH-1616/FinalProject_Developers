@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.dev.admin.model.dto.Admin;
+import com.dev.food.model.dto.Food;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -93,6 +94,17 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int selectBytourisAreaIdCount(SqlSession session, Map param) {
 		return session.selectOne("admin.selectBytourisAreaIdCount", param);
+	}
+	@Override
+	public List<Food> searchFood(SqlSession session, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("admin.searchFood", null, rb);
+	}
+	@Override
+	public int selectFoodCount(SqlSession session) {
+		return session.selectOne("admin.selectFoodCount");
 	}
 	
 	

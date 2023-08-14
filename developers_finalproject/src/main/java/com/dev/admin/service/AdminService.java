@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dev.admin.model.dto.Admin;
+import com.dev.food.model.dto.Food;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -26,4 +27,6 @@ public interface AdminService {
 	int searchTourisCount(Map param);
 	List<Touris> selectBytourisAreaId(Map param);
 	int selectBytourisAreaIdCount(Map parma);
+	List<Food> searchFood(Map param);
+	int selectFoodCount();
 }

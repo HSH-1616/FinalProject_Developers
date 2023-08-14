@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dev.admin.model.dto.Admin;
+import com.dev.food.model.dto.Food;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -28,4 +29,6 @@ public interface AdminDao {
 	int searchTourisCount(SqlSession session, Map param);
 	List<Touris> selectBytourisAreaId(SqlSession session, Map param);
 	int selectBytourisAreaIdCount(SqlSession session, Map param);
+	List<Food> searchFood(SqlSession session, Map param);
+	int selectFoodCount(SqlSession session);
 }
