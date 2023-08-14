@@ -12,6 +12,7 @@ CREATE TABLE FOOD (
 SELECT * FROM FOOD LEFT JOIN MEMBER WHERE memberId=#{memberId};
 SELECT * FROM MEMBER;
 
+
 SELECT * FROM food LEFT JOIN MEMBER using(fh_no) 
 SELECT * FROM food LEFT JOIN MEMBER ON food.fh_no = MEMBER.fh_no WHERE MEMBER.member_id = #{member_id};
 
@@ -132,3 +133,4 @@ UPDATE FOOD_HEART SET FH_NO = FH_NO - 1 WHERE member_Id = 'member_id';
 UPDATE FOOD_HEART SET FH_NO = FH_NO + 1 WHERE member_Id = 'member_id';
 
 UPDATE FOOD_HEART SET FH_NO = CASE WHEN FH_NO > 0 THEN FH_NO - 1 ELSE 0 END WHERE member_Id = 'member_id';
+
