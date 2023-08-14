@@ -593,6 +593,7 @@ button.flex.items-center.justify-center.w-full.p-2.mr-2.text-sm.bg-\[\#fafafa\].
     width: 190px;
     height: 40px;
     border-radius: 10px;
+    margin-right: 10px;
 }
 
 .flex.items-center.mt-4 {
