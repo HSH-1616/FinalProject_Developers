@@ -19,7 +19,6 @@ public class CommunityDaoImpl implements CommunityDao {
 	public List<Community> communityList(SqlSession session, Map<String, Object> paging) {
 		int cPage=(int)paging.get("cPage");
 		int numPerpage=(int)paging.get("numPerpage");
-		System.out.println(cPage);
 		return session.selectList("community.communityList",null,new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 

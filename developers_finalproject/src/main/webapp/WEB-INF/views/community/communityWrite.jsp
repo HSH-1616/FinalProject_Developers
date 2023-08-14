@@ -90,7 +90,7 @@
                     
                       <div class="comu-buttons">
                         <button type="button" class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
-                        <button class="w-btn w-btn-gray-outline">취소</button>
+                        <button class="w-btn w-btn-gray-outline" onclick="community_cancel();">취소</button>
                       </div>
                     
              </div>

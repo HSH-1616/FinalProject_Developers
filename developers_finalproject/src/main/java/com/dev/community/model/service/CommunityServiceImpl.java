@@ -188,9 +188,7 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		List<String> fileList=dao.selectCommunityFileList(session, communityNo);
 		for(String f:fileList) {
-			System.out.println("삭제할 파일 이름: "+f);
-			int result=removeCommunityFile(f, hsession);
-			System.out.println("삭제파일 결과: "+result);
+			removeCommunityFile(f, hsession);
 		}
 		
 		return dao.deleteCommunity(session, communityNo);

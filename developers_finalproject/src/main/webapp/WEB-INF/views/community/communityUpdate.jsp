@@ -102,7 +102,7 @@
                     
                       <div class="comu-buttons">
                         <button type="button" class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
-                        <button class="w-btn w-btn-gray-outline">취소</button>
+                        <button class="w-btn w-btn-gray-outline" onclick="community_cancel();">취소</button>
                       </div>
                     
              </div>
@@ -186,25 +186,5 @@
             },
         });
         
-        $(".file-del").click(function(e){
-        	
-        	let target=$(this);
-        	const fileName= target.data("name");
-        	const targetLi = e.target.closest("li");
-        			$.ajax({
-        			url: "/ncCommon/removeCommunityFile.do",
-        			data: { fileName: fileName },
-        			type: "post",
-        			success: (data) => {
-        				if (data >0) {
-        					targetLi.remove();
-        					/* location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo); */
-        				}
-        				else {
-        					alert("삭제실패");
-        				}
-
-        			}
-        		});
-        })
+     
   </script>

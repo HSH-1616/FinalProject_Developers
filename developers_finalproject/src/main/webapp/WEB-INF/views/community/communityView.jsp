@@ -15,7 +15,7 @@
 				<c:choose>
 					<c:when test="${not empty comuView.memberId.memberImage }">
 						<a><img src="${comuView.memberId.memberImage}"
-							style="height: 30px;"></a>&nbsp;
+							style="height: 30px;border-radius:50%; margin:5px;"></a>&nbsp;
                  </c:when>
 					<c:otherwise>
 						<a><img
@@ -23,7 +23,7 @@
 							style="height: 30px;"></a>&nbsp;
                  </c:otherwise>
 				</c:choose>
-				<p>${comuView.memberId.memberNickname }</p>
+				<div style='margin-top:10px;'>${comuView.memberId.memberNickname }</div>
 			</div>
 			<div id="carouselExampleIndicators" class="carousel slide"
 				data-bs-ride="true">
@@ -84,6 +84,7 @@
 				<input type="hidden" value="${comuView.communityNo }" id="like_comuNo">
 				<input type="hidden" value="${loginMember.memberId }" id="like_memberId">
 				<input type="hidden" value="${likeCheck }" id="like_check">
+				<input type="hidden" value="${loginAdmin }" id="adminCheck"/>
 				
 				<h5 class="card-title">${comuView.communityTitle }</h5>
 				<p class="card-text">${comuView.communityContent }</p>
@@ -93,7 +94,7 @@
 			<div class="like-content">
 
 				<img src="${path }/images/community/heart.svg"> <span>${comuView.likeCount }</span>
-				<c:if test="${loginMember!=null }">
+				<c:if test="${loginMember!=null || loginAdmin!=null}">
 					<button class="btn-secondary like-review" value="false">
 						<i class="fa fa-heart" aria-hidden="true"></i> Like
 					</button>
@@ -101,15 +102,18 @@
 
 			</div>
 			<div class="card-body comment-body">
-			<c:if test="${loginMember!=null }">
+			<c:if test="${loginMember!=null || loginAdmin!=null}">
 				<a class="w-btn-outline w-btn-blue-outline" data-title="댓글달기"
 					data-bs-toggle="collapse" href="#inputComment" role="button"
 					aria-expanded="false" aria-controls="collapseComment"> 댓글쓰기 </a>
 			</c:if>
 			<c:if test="${loginMember.memberId == comuView.memberId.memberId}">
 				<button class="s-btn ms-2" onclick="location.href='${path}/community/updateCommunity.do?no=${comuView.communityNo }'">수정</button>
-				<button class="s-btn" onclick="deleteCommunity(${comuView.communityNo });">삭제</button>
-			</c:if>
+			</c:if>	
+				<c:if test="${loginMember.memberId == comuView.memberId.memberId||loginAdmin!=null }">
+				<button class="s-btn ms-2" onclick="deleteCommunity(${comuView.communityNo });">삭제</button>
+				</c:if>
+			
 			
 			</div>
 		</div>
@@ -119,28 +123,9 @@
 				<button class="w-btn w-btn-blue" onclick="insertReply();">등록</button>
 			</div>
 		</div>
-		
-	<!-- 	<div class="collapse" id="inputReplies">
-			<div class="card card-body">
-				<input type="text" id="comment_input">
-				<button class="w-btn w-btn-blue">등록</button>
-			</div>
-		</div> -->
+
 		<div class="p-2 reply-list"></div>
-	 	<!-- <div class="comments  p-2 border rounded"> -->
-			<!-- <div class="comment">
-				<div class="comment_detail">
-					<div class="comment_user">
-						<span>user01</span>
-					</div>
-					<div class="comment_body">
-						<span>좋아요</span>
-					</div>
-				</div>
-			</div> -->
-			
-			
-		<!-- </div>  -->
+
 		
 		
 	</div>
