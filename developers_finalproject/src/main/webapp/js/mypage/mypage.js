@@ -16,3 +16,10 @@ const mypageCommunity=(cPage,numPerpage)=>{
 		}
 	});
 }
+
+
+$(document).ready(function() {
+  $('.gotop').bind('click', function() {
+    $('html, body').animate({scrollTop: '0'}, 100);
+  });
+});
