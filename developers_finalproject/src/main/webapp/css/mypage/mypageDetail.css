@@ -6,28 +6,24 @@
     height: 390px;
     top: 70px;
 }
-.mypageheaderarea{
-	display: flex;
-	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
+.mypageheaderarea {
+    box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
     border-radius: 8px;
     border: initial none!important;
     border-color: initial!important;
     -o-border-image: initial!important;
     border-image: initial!important;
-padding: 2rem;
-height: 300px;
-padding-left: 3rem;
-
+    padding: 2rem;
+    padding-left: 3rem;
 }
-.mypageprofile{
-	display: block;
+.mypageprofile {
+    display: block;
     position: relative;
-    align-items: center;
-    align-items: center;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 200px;
+    margin-left: 40%;
 }
 .selectarea{
 	width: 800px;
@@ -550,3 +546,30 @@ padding-left: 3rem;
   background-color: #b31312;
 }
 
+footer {
+    height: 370px;
+    background-color: #eeeeee;
+    margin-top: 20%;
+}
+
+input.flex-1.w-full.p-2.my-2.text-black.placeholder-gray-700.bg-gray-800.rounded-sm.focus\:outline-none.focus\:border-transparent {
+    width: 56%;
+    border-radius: 10px;
+    height: 32px;
+    margin-left: 11px;
+}
+
+label.block.text-xs {
+    font-size: 15px;
+}
+
+.mt-6 {
+    margin-left: 17%;
+}
+
+button.text-gray-500.hover\:underline {
+    border: none;
+    background-color: white;
+    color: gray;
+    font-size: 15px;
+}
