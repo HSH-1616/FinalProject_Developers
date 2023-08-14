@@ -52,8 +52,16 @@ public interface FoodService {
 	
 	int deleteFoodReview(int frNo);
 	
+	int deleteFoodReviewPhoto(int frNo);
+	
 	//List<FoodReview> selectFoodReviewByFoodNo(int foodNo);
 	
 	List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(int frNo);
+	
+	int updateFoodReview(FoodReview fr);
+	
+	//int updateReviewPhoto(FoodReviewPhoto rp);
+	
+	//List searchByRpNo(int frNo);
 	
 }

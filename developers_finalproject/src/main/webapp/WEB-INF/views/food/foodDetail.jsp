@@ -144,8 +144,8 @@
 
       <!-- 맛집 리뷰 생성&수정 -->
       <div class="align-items-end" style="height: 75px;">
-         <button type="button" class="yoonbtn btnColorDefault m-3 float-end w-auto"
-            data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="insertModal();">리뷰쓰기</button>
+         <button type="button" class="insertReviewBtn yoonbtn btnColorDefault m-3 float-end w-auto"
+            data-bs-toggle="modal" onclick="insertModal('${loginMember}');">리뷰쓰기</button>
       </div>
 
       <div class="modal fade" id="reviewModal" tabindex="-1"
@@ -197,78 +197,84 @@
             </div>
          </div>
       </div>
-      <c:if test="${f.foodReview != null}">
-      <c:forEach var="fr" items="${f.foodReview}" varStatus="vs">
-         <div class="detailFoodInfoCon flex-column">
-            <div class="detailUserInfo justify-content-between">
-              <div class="float-start d-flex flex-row ms-0">
-                <img src="${fr.member.memberImage}" alt="프로필사진" />
-                <div>
-                  <span>${fr.member.memberNickname}</span>
-                  <span>${fr.frWriterDate}</span>
-                </div>
-              </div>
-              <div class="dropdown mx-3 h5">
-                <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                  :
-                </a>
-              
-                <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuLink" style="width: 100px;">
-                  <li><a class="dropdown-item" href="#" 
-                    data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal(event);">수정</a></li>
-                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
-                    data-bs-target="#removeFood" onclick="insertFrNo(${fr.frNo});">삭제</a></li>
-                </ul>
-              </div>
-            </div>
-   
-            <!-- 삭제 모달창 -->
-            <div class="modal fade" id="removeFood" tabindex="-1" aria-labelledby="removeFoodModalLabel" aria-hidden="true">
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <!-- <form action="${path}/food/deleteFoodReview.do" style="margin:0px;" > -->
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="removeFoodModalLabel">리뷰 삭제</h5>
-                           <input type="hidden" id="selected_food_no" name="frNo" value="">
-                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">정말 삭제하시겠습니까?</div>
-                        <div class="modal-footer">
-                           <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
-                           <button type="submit" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
-                        </div>
-                     <!-- </form> -->
+      <c:if test="${f.foodReview[0].frNo > 0}">
+         <c:forEach var="fr" items="${f.foodReview}" varStatus="vs">
+            <div class="detailFoodInfoCon flex-column">
+               <div class="detailUserInfo justify-content-between">
+                  <div class="float-start d-flex flex-row ms-0">
+                     <img src="${fr.member.memberImage}" alt="프로필사진" />
+                     <div>
+                        <span>${fr.member.memberNickname}</span>
+                        <span>${fr.frWriterDate}</span>
+                     </div>
+                  </div>
+                  <!-- 작성자||관리자 만 메뉴보이게 -->
+                  <c:if test="${loginMember.memberId==f.foodReview[0].memberId||loginAdmin!=null }">
+                  <div class="dropdown mx-3 h5">
+                     <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        :  
+                     </a>
+                  
+                     <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuLink" style="width: 100px;">
+                        <!-- 작성자만 보이게 -->
+                        <c:if test="${loginMember.memberId==f.foodReview[0].memberId}">
+	                        <li><a class="dropdown-item" href="#" 
+	                        data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal(event);">수정</a></li>
+                        </c:if>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
+                        data-bs-target="#removeFood" onclick="insertFrNo(${fr.frNo});">삭제</a></li>
+                     </ul>
+                  </div>
+                  </c:if>
+               </div>
+      
+               <!-- 삭제 모달창 -->
+               <div class="modal fade" id="removeFood" tabindex="-1" aria-labelledby="removeFoodModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <!-- <form action="${path}/food/deleteFoodReview.do" style="margin:0px;" > -->
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="removeFoodModalLabel">리뷰 삭제</h5>
+                              <input type="hidden" id="selected_food_no" name="frNo" value="${fr.frNo}">
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">정말 삭제하시겠습니까?</div>
+                           <div class="modal-footer">
+                              <button type="button" class="yoonBtn btnColorDefault" data-bs-dismiss="modal">취소</button>
+                              <button type="submit" class="yoonBtn btnColorRed" id="remove_food_btn">삭제하기</button>
+                           </div>
+                        <!-- </form> -->
+                     </div>
+                  </div>
+               </div>
+      
+               <div class="starContainer">
+                  <span class="star">
+                     ★★★★★
+                     <span class="star_number" style="width: ${fr.frGrade * 20}%">★★★★★</span> <!-- update data -->
+                     <input type="hidden" class="starGrade" value="${fr.frGrade * 20}%">
+                  </span>
+               </div>
+               <!-- 리뷰 이미지 -->
+               <div class="detailReviewImg">
+                  <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
+                  <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/> <!-- update data -->
+                  </c:forEach>
+               </div>
+               <div class="detailReviewText detailFoodInfo">
+                  <pre style="overflow-y: hidden" class="default_food_review_height"> <!-- update data -->
+                  ${fr.frContent}
+                  </pre>
+                  <div class="detailFoodInfoBtn d-flex justify-content-center">
+                     <button id="food_review_more" class="visually-hidden"></button>
+                     <label for="food_review_more"><i class="fa-solid fa-angles-down" style="color: #000000;"></i></label>
                   </div>
                </div>
             </div>
-   
-            <div class="starContainer">
-               <span class="star">
-                  ★★★★★
-                  <span class="star_number" style="width: ${fr.frGrade * 20}%">★★★★★</span> <!-- update data -->
-                  <input type="hidden" class="starGrade" value="${fr.frGrade * 20}%">
-               </span>
-            </div>
-            <!-- 리뷰 이미지 -->
-            <div class="detailReviewImg">
-               <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
-	              <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/> <!-- update data -->
-               </c:forEach>
-            </div>
-            <div class="detailReviewText detailFoodInfo">
-               <pre style="overflow-y: hidden" class="default_food_review_height"> <!-- update data -->
-                ${fr.frContent}
-               </pre>
-               <div class="detailFoodInfoBtn d-flex justify-content-center">
-                  <button id="food_review_more" class="visually-hidden"></button>
-                  <label for="food_review_more"><i class="fa-solid fa-angles-down" style="color: #000000;"></i></label>
-               </div>
-            </div>
-         </div>
-         <div style="height: 50px;"></div>
-      </c:forEach>
+            <div style="height: 50px;"></div>
+         </c:forEach>
       </c:if>
-      <c:if test="${f.foodReview == null}">
+      <c:if test="${f.foodReview[0].frNo < 1}">
       	<div>등록된 리뷰가 없습니다.</div>
       </c:if>
    </div>
@@ -403,6 +409,7 @@
             form.append("foodNo","${f.foodNo}");
             form.append("frGrade",$(".starcountnum").val()/2);
             form.append("frContent",$("#FR_CONTENT").val());
+            form.append("frNo",$("#selected_food_no").val());
    
             $.ajax({
                url:"${path}/food/updateFoodReview.do",
@@ -426,41 +433,6 @@
                }
             });
          }
-		});
-
-      //ajax 통신(수정)
-      $(".updateFoodReview").click(e=>{
-			const form=new FormData();
-			const fileInput=$("#upFile");
-			$.each(fileInput[0].files,(i,f)=>{
-            form.append("upFile",f);
-            console.log(form);
-			});
-			form.append("foodNo","${f.foodNo}");
-         form.append("frGrade",$(".starcountnum").val()/2);
-         form.append("frContent",$("#FR_CONTENT").val());
-
-			$.ajax({
-				url:"${path}/food/updateFoodReview.do",
-				data:form,
-				type:"post",
-            enctype: "multipart/form-data",
-				processData:false,
-				contentType:false,
-            cache: false,
-				success:data=>{
-               alert("수정이 완료되었습니다.");
-               location.reload();
-               $('window').scrollTop(0,300);
-				},
-				error:(r,s,e)=>{
-               console.log("수정 실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
-               alert("수정 실패");
-				},
-				complete:()=>{
-               $(".upFile").val('');
-				}
-			});
 		});
 
       //ajax 통신(삭제)

@@ -153,6 +153,27 @@ public class FoodServiceImpl implements FoodService{
 		return result;
 	}
 	
+//	@Override
+//	public List searchByRpNo(int frNo) {
+//		return dao.searchByRpNo(session,frNo);
+//	}
+	
+	@Override
+	public int updateFoodReview(FoodReview fr) {
+		int result = dao.updateFoodReview(session,fr);
+		if(result>0) {
+			if(fr.getFoodReviewPhoto().size()>0) {
+				for(FoodReviewPhoto rp:fr.getFoodReviewPhoto()) {
+					rp.setFrNo(fr.getFrNo());
+					result+=dao.updateFoodReviewPhoto(session,rp);
+				}
+			}
+		}
+		//트렌젝션 처리
+		if(result!=fr.getFoodReviewPhoto().size()+1)throw new RuntimeException("업로드의 문제가 발생했습니다.");
+		return result;
+	}
+	
 	@Override
 	public int deleteFoodReview(int frNo) {
 		int result = dao.deleteFoodReview(session,frNo);
@@ -168,6 +189,12 @@ public class FoodServiceImpl implements FoodService{
 		}
 		//트렌젝션 처리
 		if(result<0||result2<0)throw new RuntimeException("삭제의 문제가 발생했습니다.");
+		return result;
+	}
+	
+	@Override
+	public int deleteFoodReviewPhoto(int frNo) {
+		int result = dao.deleteFoodReviewPhoto(session,frNo);
 		return result;
 	}
 	

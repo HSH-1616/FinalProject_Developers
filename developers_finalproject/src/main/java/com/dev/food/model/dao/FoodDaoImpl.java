@@ -38,13 +38,13 @@ public class FoodDaoImpl implements FoodDao {
 	
 	@Override
 	public int mergeFood(SqlSession session) {
-		return session.insert("food.mergeFood");
+		return session.selectOne("food.mergeFood");
 		//merge한 이후엔 temp테이블 지우기
 	}
 	
 	@Override
 	public int mergeFoodPhoto(SqlSession session) {
-		return session.insert("food.mergeFoodPhoto");
+		return session.selectOne("food.mergeFoodPhoto");
 		//merge한 이후엔 temp테이블 지우기
 	}
 	
@@ -140,6 +140,21 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public int insertFoodReviewPhoto(SqlSession session, FoodReviewPhoto rp) {
 		return session.insert("food.insertFoodReviewPhoto",rp);
+	}
+	
+//	@Override
+//	public List searchByRpNo(SqlSession session, int frNo) {
+//		return session.selectList("food.searchByRpNo",frNo);
+//	}
+	
+	@Override
+	public int updateFoodReview(SqlSession session, FoodReview fr) {
+		return session.update("food.updateFoodReview",fr);
+	}
+	
+	@Override
+	public int updateFoodReviewPhoto(SqlSession session, FoodReviewPhoto rp) {
+		return session.insert("food.updateFoodReviewPhoto",rp);
 	}
 	
 	@Override

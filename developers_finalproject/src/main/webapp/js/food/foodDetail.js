@@ -16,22 +16,28 @@ $(document).on("click", "#detailHeart", function (e) {
 	}
   });
 
-function insertModal() {
-	// 초기화
-	$('.review_File').val('');
-	$(".image_container").children().remove();
-	$(".review_rating").css("width", 0 + "%");
-	$(".star_rating h5").text(0 + "/5");
-	// 값 변경하기
-	//$(".modalForm").attr("action","/food/insertFoodReview.do");
-	const insertContent = "작성내용은 매인페이지와 장소상세에 노출되며 매장주를 포함한 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.";
-	$("#FR_CONTENT").val(insertContent);
-	if($(".submitModal").hasClass("updateFoodReview") === true){
-		$(".submitModal").removeClass("updateFoodReview");
+	function insertModal(loginMember) {
+		if(loginMember.length==0){
+			alert("로그인 후 사용 가능한 기능 입니다.");
+		}
+		if(loginMember.length!=0){
+			// 초기화
+			$('.review_File').val('');
+			$(".image_container").children().remove();
+			$(".review_rating").css("width", 0 + "%");
+			$(".star_rating h5").text(0 + "/5");
+			// 값 변경하기
+			const insertContent = "작성내용은 매인페이지와 장소상세에 노출되며 매장주를 포함한 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.";
+			$("#FR_CONTENT").val(insertContent);
+			if($(".submitModal").hasClass("updateFoodReview") === true){
+				$(".submitModal").removeClass("updateFoodReview");
+			}
+			$(".submitModal").addClass("insertFoodReview");
+			$(".submitModal").text("리뷰 올리기");
+			$("#reviewModal").modal('show');
+		}
 	}
-	$(".submitModal").addClass("insertFoodReview");
-	$(".submitModal").text("리뷰 올리기");
-}
+
 
 function updateModal(event) {
 	// 초기화

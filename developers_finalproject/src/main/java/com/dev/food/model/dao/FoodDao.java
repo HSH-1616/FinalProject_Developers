@@ -52,6 +52,12 @@ public interface FoodDao {
 	
 	int insertFoodReviewPhoto(SqlSession session,FoodReviewPhoto rp);
 	
+	//List searchByRpNo(SqlSession session,int frNo);
+	
+	int updateFoodReview(SqlSession session,FoodReview fr);
+	
+	int updateFoodReviewPhoto(SqlSession session,FoodReviewPhoto rp);
+	
 	int deleteFoodReview(SqlSession session, int frNo);
 	
 	int searchFoodReivewPhoto(SqlSession session,int frNo);

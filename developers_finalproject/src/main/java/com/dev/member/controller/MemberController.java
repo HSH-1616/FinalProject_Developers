@@ -176,7 +176,7 @@ public class MemberController {
         String memberImage = userResourceNode.get("picture").asText();
         
 		Member member = service.selectByEmail(memberEmail);
-//		System.out.println(member);
+		System.out.println(member);
 		if(member==null) {
 		Member m = Member.builder().memberNickname(memberNickname)
 				.memberImage(memberImage)
