@@ -8,8 +8,16 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> -->
 <link rel="stylesheet" href="${path}/css/mypage/slick.css"/>
 <link rel="stylesheet" href="${path}/css/mypage/slick-theme.css"/>
+<<<<<<< HEAD
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <%-- <script src="${path }/js/mypage/slick.min.js"></script>  --%>
+=======
+<header>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</header>
+<script src="${path }/js/mypage/slick.min.js"></script> 
+>>>>>>> branch 'main' of https://github.com/HSH-1616/FinalProject_Developers.git
 <%-- <script src="${path }/css/mypage/slick.js"></script> --%>
 <section>
 	<div class="mypageheader">
@@ -396,7 +404,7 @@
 			<div class="pagerevie" style="width: 100%; height: 60px;"></div>
 		</div>
 	</div>
-	<button class="backbtn">
+	<button class="backbtn gotop">
     <div class="text">
         <!-- <span>Back</span>
         <span>to</span> -->
@@ -415,59 +423,43 @@
 <script type="text/javascript">
       $(document).ready(function(){
         $("#moveBtn").on("click",function(event){
-          // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
  
-          // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
           var offset = $("#preId").offset();
  
-          // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
-          // position은 부모를 기준으로한 상대위치를 가져온다.
           $("html body").animate({scrollTop:offset.top},10);
  
         });
-      }); // end of ready()
+      }); 
       
       $(document).ready(function(){
           $("#moveBtn1").on("click",function(event){
-            // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
    
-            // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
             var offset = $("#preId1").offset();
    
-            // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
-            // position은 부모를 기준으로한 상대위치를 가져온다.
             $("html body").animate({scrollTop:offset.top},10);
    
           });
-        }); // end of ready()
+        });
       
         $(document).ready(function(){
             $("#moveBtn2").on("click",function(event){
-              // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
      
-              // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
               var offset = $("#preId2").offset();
      
-              // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
-              // position은 부모를 기준으로한 상대위치를 가져온다.
               $("html body").animate({scrollTop:offset.top},10);
      
             });
-          }); // end of ready()
+          }); 
           
         $(document).ready(function(){
             $("#moveBtn3").on("click",function(event){
-              // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
      
-              // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
               var offset = $("#preId3").offset();
      
-              // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
-              // position은 부모를 기준으로한 상대위치를 가져온다.
               $("html body").animate({scrollTop:offset.top},10);
      
             });
-          }); // end of ready()
+          }); 
         
     </script>
     <script src="${path }/js/mypage/mypage.js"></script>

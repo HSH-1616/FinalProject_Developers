@@ -56,6 +56,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 }
 
 
+
 var today = new Date();
 
 var year = today.getFullYear();
@@ -64,3 +65,10 @@ var day = ('0' + today.getDate()).slice(-2);
 
 var dateString = '최근수정일 : '+year+'년' +' '+month+'월'+' '+day+'일';
 $(".updateday").append(dateString);
+
+$(document).ready(function() {
+  $('.gotop').bind('click', function() {
+    $('html, body').animate({scrollTop: '0'}, 100);
+  });
+});
+
