@@ -17,6 +17,7 @@ import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.service.FoodService;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -29,8 +30,11 @@ public class AdminController {
 	
 	private AdminService service;
 	
-	public AdminController(AdminService service) {
+	private FoodService foodService;
+	
+	public AdminController(AdminService service, FoodService foodService) {
 		this.service=service;
+		this.foodService=foodService;
 	}
 	
 	
@@ -189,6 +193,20 @@ public class AdminController {
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foodList);
 		return "admin/foodList";
+	}
+	
+	@GetMapping("/selectFoodByFoodNo")
+	public String selectFoodByFoodNo(int foodNo, Model m) {
+		//foodNo로 food,foodPhoto dto불러오고 출력(출력페이지에서 승인,미승인 여부 네비게이션으로) //리뷰는 어쩌지?
+		List<Food> foods = foodService.selectFoodByFoodNo(foodNo);
+		m.addAttribute("foods", foods);
+		return "admin/foodDetail";
+	}
+	
+	@GetMapping("/updateFoodByFoodNo")
+	public String updateFoodByFoodNo(Food f) {
+		System.out.println("flag");
+		return "/admin/adminMain";
 	}
 }
 

@@ -28,14 +28,14 @@
 		        		<option value="tourisAreaId" ${not empty tourisAreaId ? "selected":""}>메뉴</option>
 		        	</select>
 		        	<div id="search-tourisName">
-		        		<form action="${path}/admin/searchTouris" method="get">
+		        		<form action="${path}/admin/selectFoodList" method="get">
 		        			<input type="hidden" name="" value="" >
 		        			<input type="text" name="tourisName" size="25" placeholder="검색할 키워드를 입력하세요" 
 		        			value="${not empty tourisName ? tourisName:''}">
-		        			<button type="submit">검색</button>
+		        			<button type="submit" class="btn btn-outline-dark btn-sm">검색</button>
 		        		</form>
 		        	</div>
-		        	<div id="search-tourisAreaId">
+		        	<!-- <div id="search-tourisAreaId">
 						<select class="mb-3" aria-label="Default select example" id="m-selectTouris" onchange="selectTouris();" style="width:100px; height:30px;">
 							  <option value="0">전체지역</option>
 							  <option value="1" ${tourisAreaId eq '1' ?"selected":""}>서울</option>
@@ -56,7 +56,7 @@
 							  <option value="38" ${tourisAreaId eq '38' ?"selected":""}>전라남도</option>
 							  <option value="39" ${tourisAreaId eq '39' ?"selected":""}>제주도</option>
 						</select>
-		        	</div>
+		        	</div> -->
 		        </div>	
 	        <div class="col">
 	            <table class="table bg-white rounded shadow-sm table-hover text-center align-middle">
@@ -77,8 +77,8 @@
 	                        <td>${f.foodName}</td>
 	                        <td>${f.foodAddress}</td>
 	                        <td>${f.foodPhone}</td>
-							<td><button type="button" class="btn btn-outline-danger btn-sm" onclick="">상세보기</button></td>
-	                        <td><button type="button" class="btn btn-outline-dark btn-sm" onclick="">삭제하기</button></td>
+							<td><button type="button" class="btn btn-outline-danger btn-sm" onclick="fn_foodInfo(${f.foodNo});">상세보기</button></td>
+	                        <td><button type="button" class="btn btn-outline-dark btn-sm" onclick="fn_deleteFood(${f.foodNo});">삭제하기</button></td>
 	                    </tr>
 	                </c:forEach>
 	                </tbody>
@@ -160,5 +160,12 @@ $(()=>{
 			location.reload();
 		})
 	} */
+
+
+
+	// ======================= 지환 ====================
+	function fn_foodInfo(foodNo){
+		location.assign('${path}/admin/selectFoodByFoodNo?foodNo='+foodNo);
+	}
 </script>
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
