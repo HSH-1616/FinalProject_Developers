@@ -157,9 +157,9 @@
 			</div>
 			<div class="detailHotelImage">
 				<div>
-				 <c:forEach var="af" items="${ad.acFiles }">
-					<img alt="" src="${path}/images/upload/accommodation/${af.afName}">
-				</c:forEach>
+					<c:forEach var="af" items="${ad.acFiles }">
+						<img alt="" src="${path}/images/upload/accommodation/${af.afName}">
+					</c:forEach>
 				</div>
 			</div>
 
@@ -233,7 +233,6 @@
 						편의시설이 없습니다.
 						</c:if>
 						<c:if test="${not empty ad.afa }">
-
 							<div class="detailHotelFc">
 								<c:if test="${ad.afa.afaCamera==1 }">
 									<div>
@@ -284,7 +283,6 @@
 									</div>
 								</c:if>
 								<c:forEach var="afal" items="${afal }">
-									
 									<c:if test="${not empty afal }">
 										<div>
 											<div class="blurFc"></div>
@@ -357,14 +355,14 @@
 							<h2>후기</h2>
 							<hr />
 						</div>
-						<c:if test="${empty ad.acReviews }">
+						<c:if test="${empty ar}">
 							후기가 없습니다.
 						</c:if>
-						<c:if test="${not empty ad.acReviews }">
-							<c:forEach var="r" items="${ad.acReviews}">
+						<c:if test="${not empty ar }">
+							<c:forEach var="r" items="${ar}">
 								<div class="detailHotelReview">
 									<div class="detailUserInfo">
-										<img src="${path }/images/member/user.jpg" alt="" />
+										<img src="${r.member.memberImage}" alt="" />
 										<div>
 											<span>${r.member.memberNickname}</span><span>${r.arDate}</span>
 										</div>
@@ -376,11 +374,15 @@
 										</span>
 									</div>
 									<div class="detailReviewImg">
-										<c:forEach var="rf" items="${r.arFiles }">
-											<img
-												src="${path }/images/upload/accommodation/review/${rf.arfName}"
-												alt="" />
-										</c:forEach>
+										<c:if test="${not empty r.arFiles}">
+											<c:forEach var="rf" items="${r.arFiles }">
+
+												<img
+													src="${path }/images/upload/accommodation/review/${rf.arfName}"
+													alt="" />
+
+											</c:forEach>
+										</c:if>
 									</div>
 									<div class="detailReviewText">
 										<pre>

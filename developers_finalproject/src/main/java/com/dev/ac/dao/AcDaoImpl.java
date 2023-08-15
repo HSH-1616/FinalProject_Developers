@@ -3,6 +3,7 @@ package com.dev.ac.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +13,10 @@ import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
 import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
+import com.dev.ac.dto.AcReview;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
+import com.dev.ac.dto.ArFile;
 
 @Repository
 public class AcDaoImpl implements AcDao {
@@ -77,7 +80,20 @@ public class AcDaoImpl implements AcDao {
 	public int deleteHeart(SqlSessionTemplate session,Map param) {
 		return session.delete("accommodation.deleteHeart",param);
 	}
+	
+	@Override
+	public List<Accommodation> selectAcAll(SqlSessionTemplate session,Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("accommodation.selectAcAll",null,rb);
+	}
 
+	@Override
+	public int selectAcAllCount(SqlSessionTemplate session) {
+		return session.selectOne("accommodation.selectAcAllCount");
+	}
+	
 	@Override
 	public int insertAc(SqlSessionTemplate session, Accommodation ac) {
 		return session.insert("accommodation.insertAc",ac);
@@ -217,6 +233,31 @@ public class AcDaoImpl implements AcDao {
 	@Override
 	public int insertRefund(SqlSessionTemplate session, Map param) {
 		return session.insert("accommodation.insertRefund",param);
+	}
+
+	@Override
+	public int insertReview(SqlSessionTemplate session, AcReview ar) {
+		return session.insert("accommodation.insertReview",ar);
+	}
+
+	@Override
+	public int insertArf(SqlSessionTemplate session, ArFile arf) {
+		return session.insert("accommodation.insertArf",arf);
+	}
+
+	@Override
+	public List<AcReview> acReview(SqlSessionTemplate session, int no) {
+		return session.selectList("accommodation.acReview",no);
+	}
+
+	@Override
+	public List<ArFile> acArf(SqlSessionTemplate session, int arId) {
+		return session.selectList("accommodation.acArf",arId);
+	}
+
+	@Override
+	public List<AcReview> checkReview(SqlSessionTemplate session, String memberId) {
+		return session.selectList("accommodation.checkReview",memberId);
 	}
 
 	

@@ -429,9 +429,9 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	fileArray.splice(seq, 1);
 	fileArray.forEach(file => { dataTransfer.items.add(file); });
 	$('input[name=afImage]')[0].files = dataTransfer.files;
-
-
-
+	
+	
+	
 	if ($(this).parents(".previewImgWrap").children(".mainCheck").css("display") == "flex") {
 		$(this).parents(".previewImgWrap").remove()
 		$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
@@ -440,18 +440,25 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	} else {
 		$(this).parents(".previewImgWrap").remove()
 	}
-
-	for (var i = 0; i < acFiles.length; i++) {
-		if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
-			acFiles.splice(i, 1);
+	if (acFiles.length) {
+		for (var i = 0; i < acFiles.length; i++) {
+			if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
+				acFiles.splice(i, 1);
+			}
 		}
+		sel_files.splice(num-acFiles.length,1)
+	}else{
+		sel_files.splice(num,1)
 	}
 	for (var i = 0; i < sel_files.length; i++) {
 		if (sel_files[i].name === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
 			sel_files.splice(i, 1)
 		}
 	}
-
+	
+	console.log(num)
+	console.log(acFiles)
+	console.log(sel_files)
 
 });
 
@@ -467,7 +474,7 @@ function checkRegist() {
 	} else if ($("input[name=acAddress]").val() == "") {
 		content = "숙박업소 위치를 입력해 주세요."
 	} else if ($("textarea[name=acContent]").val() == "") {
-		content = "숙박업소명 설명을 입력해 주세요."		
+		content = "숙박업소명 설명을 입력해 주세요."
 	} else {
 		registOk()
 	}
@@ -485,7 +492,7 @@ function checkUpdate() {
 	} else if ($("input[name=acAddress]").val() == "") {
 		content = "숙박업소 위치를 입력해 주세요."
 	} else if ($("textarea[name=acContent]").val() == "") {
-		content = "숙박업소명 설명을 입력해 주세요."		
+		content = "숙박업소명 설명을 입력해 주세요."
 	} else {
 		return updateOk()
 	}
@@ -558,12 +565,6 @@ function registOk() {
 	$.each($("input[name=afalName]"), function(i, l) {
 		form.append("afalName", $(this).val())
 	})
-
-	for (let [key, value] of form) {
-		console.log(key, value);
-	}
-
-
 
 	$.ajax({
 		url: "/ac/insertRegist",
@@ -653,9 +654,6 @@ function updateOk() {
 		form.append("afalName", $(this).val())
 	})
 
-	for (let [key, value] of form) {
-		console.log(key, value);
-	}
 	$.ajax({
 		url: "/ac/updateAc",
 		type: "post",
@@ -681,19 +679,3 @@ function updateOk() {
 	});
 }
 
-$("#deleteRegist").on("click", function() {
-	$.ajax({
-		url: "/ac/deleteRegist",
-		type: "get",
-		data: { acId: 40 },
-		success: function(result) {
-			if (result > 0) {
-				alert("삭제완료")
-				location.href = "/"
-			}
-		},
-		error: function() {
-			location.href = "/ac/acError"
-		}
-	});
-})

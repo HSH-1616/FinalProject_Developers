@@ -16,8 +16,10 @@ import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
 import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
+import com.dev.ac.dto.AcReview;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
+import com.dev.ac.dto.ArFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -96,7 +98,17 @@ public class AcServiceImpl implements AcService {
 	public int deleteHeart(Map param) {
 		return dao.deleteHeart(session, param);
 	}
-
+	
+	@Override
+	public List<Accommodation> selectAcAll(Map param) {
+		return dao.selectAcAll(session,param);
+	}
+	
+	@Override
+	public int selectAcAllCount() {
+		return dao.selectAcAllCount(session);
+	}
+	
 	@Transactional
 	@Override
 	public Map insertAc(Accommodation ac) {
@@ -112,7 +124,6 @@ public class AcServiceImpl implements AcService {
 			}
 			if (result == ac.getAcFiles().size() + 2) {
 				for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
-					System.out.println(ac.getAfa().getAfaId());
 					ac.getAfa().getAfal().get(i).setAfaId(ac.getAfa().getAfaId());
 					result += dao.insertAfal(session, ac.getAfa().getAfal().get(i));
 				}
@@ -262,5 +273,38 @@ public class AcServiceImpl implements AcService {
 		}
 		return result;
 	}
+
+	@Override
+	public int insertReview(AcReview ar) {
+		int result=dao.insertReview(session,ar);
+		
+		if(result>0) {
+			for(ArFile arf:ar.getArFiles()) {			
+			arf.setArId(ar.getArId());
+			log.info("파일 : "+arf);
+			result+=dao.insertArf(session,arf);			
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<AcReview> acReview(int no) {
+		List<AcReview> ar=dao.acReview(session,no);
+		
+		for(int i=0;i<ar.size();i++) {
+			List<ArFile> arf=dao.acArf(session,ar.get(i).getArId());
+			ar.get(i).setArFiles(arf);
+		}
+		
+		return ar;
+		
+	}
+
+	@Override
+	public List<AcReview> checkReview(String memberId) {
+		return dao.checkReview(session, memberId);
+	}
+
 
 }

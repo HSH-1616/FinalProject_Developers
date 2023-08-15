@@ -399,14 +399,12 @@
 					<hr />
 					<div class="registBtn">
 						<button type="button" id="updateOkBtn" onclick="checkUpdate();">수정하기</button>
-						<button id="registCancelBtn">취소</button>
+						<button id="registCancelBtn" onclick="history.back()">취소</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-	<button id="deleteRegist">삭제하기</button>
 	<script>
 		$(document).ready(function() {
 			$("input[name=acType]").prop("checked", false)

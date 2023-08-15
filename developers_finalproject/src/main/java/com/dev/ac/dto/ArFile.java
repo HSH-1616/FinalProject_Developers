@@ -16,5 +16,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ArFile {
 	private int arfId;
+	private int arId;
 	private String arfName;
 }
