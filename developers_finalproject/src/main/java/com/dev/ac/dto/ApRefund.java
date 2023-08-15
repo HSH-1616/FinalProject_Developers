@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class ApRefund {
 	private int aprId;
 	private int apId;
+	private int aprPrice;
 	private String aprReason;
 	private String aprContent;
 	private String aprComment;

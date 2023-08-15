@@ -27,7 +27,7 @@
                     <i class="fas fa-user me-2"></i>회원관리</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-pizza-slice me-2"></i>맛집정보관리</a>
-                <a href="${path}/ac/selectAcAll" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <a href="${path}/admin/selectAcAll" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-hotel me-2"></i>숙박업소관리</a>
                 <a href="${path}/admin/selectTourisAll" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-compass me-2"></i>관광지관리</a>

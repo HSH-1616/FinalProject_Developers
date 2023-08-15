@@ -306,5 +306,15 @@ public class AcServiceImpl implements AcService {
 		return dao.checkReview(session, memberId);
 	}
 
+	@Override
+	public List<AcPayList> paymentList(Map param) {
+		return dao.paymentList(session,param);
+	}
+
+	@Override
+	public int paymentListCount() {
+		return dao.paymentListCount(session);
+	}
+
 
 }

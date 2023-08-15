@@ -260,9 +260,17 @@ public class AcDaoImpl implements AcDao {
 		return session.selectList("accommodation.checkReview",memberId);
 	}
 
-	
+	@Override
+	public List<AcPayList> paymentList(SqlSessionTemplate session, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("accommodation.paymentList",null,rb);
+	}
 
-	
-	
+	@Override
+	public int paymentListCount(SqlSessionTemplate session) {
+		return session.selectOne("accommodation.paymentListCount");
+	}
 	
 }

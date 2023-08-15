@@ -139,7 +139,7 @@ $(document).ready(function() {
 
 					var refundPrice = $('<h5>예약 취소 정보</h5><div class="refundPrice"><span>결제금액 : ₩' + String(l.apPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span><span>공제액 : ₩' + String(risk).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 						+ '</span></div><h6>환불 예정 금액 : ₩' + String(refundPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</h6>')
-					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason + '</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
+					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : '+l.apReDate+'</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
 					content.append(orderId).append(status).append(contentDiv)
 					listHead.append(img).append(content)
 					refundInfo.append(refundPrice)

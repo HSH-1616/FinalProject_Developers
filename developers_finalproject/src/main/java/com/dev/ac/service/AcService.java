@@ -80,4 +80,8 @@ public interface AcService {
 	List<AcReview> acReview(int no);
 	
 	List<AcReview> checkReview(String memberId);
+	
+	List<AcPayList> paymentList(Map param);
+	
+	int paymentListCount();
 }

@@ -36,7 +36,7 @@
 							<td class="acId">${ac.acId }</td>
 							<td>${ac.acTitle }</td>
 							<td>${ac.acAddress}</td>
-							<td>${ac.acPrice}</td>
+							<td><fmt:formatNumber value="${ac.acPrice}" type="currency" currencySymbol="₩"  /></td>
 							<td>${ac.acPeople}</td>
 							<td>${ac.acRoom}</td>
 							<td>${ac.acBed}</td>

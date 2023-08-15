@@ -35,6 +35,7 @@ function refundOk() {
 		data: {
 			apId: $("input[name=apId]").val(),
 			orderId: $("input[name=apOrderId]").val(),
+			refundPrice: $("input[name=refundPrice]").val(),
 			refundReason: $("input[name=refundReason]:checked").val(),
 			refundContent :$("textarea[name=refundContent]").val()
 		},

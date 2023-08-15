@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
-<script src="sweetalert2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
-<link rel="stylesheet"
-	href="${path }/css/accommodation/acRefundApply.css" />
+<c:set var="path" value="${pageContext.request.contextPath }" />
+<jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp" />
 <section>
 	<div class="hotelPayCon">
 		<div class="hotelPay">
@@ -19,8 +16,8 @@
 				<span>예약 취소 신청</span>
 			</div>
 			<div class="hotelPayDetailCon">
-				<input type="hidden" name="apId" value="${ra.apId }">
-				<input type="hidden" name="apOrderId" value="${ra.apOrderId }">
+				<input type="hidden" name="apId" value="${ra.apId }"> <input
+					type="hidden" name="apOrderId" value="${ra.apOrderId }">
 				<div class="hotelPayDetail">
 					<div>
 						<div id="hotelPayDetailTitle">
@@ -174,36 +171,43 @@
 							<hr />
 							<h3>
 								환불 가능 금액 :
-								<fmt:formatNumber value="${ra.apPrice}" type="currency" currencySymbol="₩" />
+								<fmt:formatNumber value="${ra.apPrice}" type="currency"
+									currencySymbol="₩" />
 								<input type="hidden" name=refundPrice value="${ra.apPrice}">
 							</h3>
 							</c:if>
 							<c:if test="${checkIn-nowRefund<=3 && nowRefund-checkIn>1}">
 								<h3>
 									공제액(B) :
-									<fmt:formatNumber value="${ra.apPrice*0.5}" type="currency" currencySymbol="₩" />
+									<fmt:formatNumber value="${ra.apPrice*0.5}" type="currency"
+										currencySymbol="₩" />
 								</h3>
 								<h3>환불 가능 금액 : (A) - (B)</h3>
 						</div>
 						<hr />
 						<h3>
 							환불 가능 금액 :
-							<fmt:formatNumber value="${ra.apPrice*0.5}" type="currency" currencySymbol="₩" />
-							<input type="hidden" name=refundPrice value="<fmt:formatNumber value="${ra.apPrice*0.5}" pattern="0"/>">
+							<fmt:formatNumber value="${ra.apPrice*0.5}" type="currency"
+								currencySymbol="₩" />
+							<input type="hidden" name=refundPrice
+								value="<fmt:formatNumber value="${ra.apPrice*0.5}" pattern="0"/>">
 						</h3>
 						</c:if>
 						<c:if test="${checkIn-nowRefund<=1 }">
 							<h3>
 								공제액(B) :
-								<fmt:formatNumber value="${ra.apPrice*0.8}" type="currency" currencySymbol="₩"  />
+								<fmt:formatNumber value="${ra.apPrice*0.8}" type="currency"
+									currencySymbol="₩" />
 							</h3>
 							<h3>환불 가능 금액 : (A) - (B)</h3>
 					</div>
 					<hr />
 					<h3>
 						환불 가능 금액 :
-						<fmt:formatNumber value="${ra.apPrice*0.2}" type="currency" currencySymbol="₩"  />						 
-						<input type="hidden" name=refundPrice value="<fmt:formatNumber value="${ra.apPrice*0.2}" pattern="0"/>"> 						
+						<fmt:formatNumber value="${ra.apPrice*0.2}" type="currency"
+							currencySymbol="₩" />
+						<input type="hidden" name=refundPrice
+							value="<fmt:formatNumber value="${ra.apPrice*0.2}" pattern="0"/>">
 					</h3>
 					</c:if>
 
@@ -221,5 +225,4 @@
 
 	<script src="${path }/js/accommodation/acRefundApply.js"></script>
 </section>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp" />

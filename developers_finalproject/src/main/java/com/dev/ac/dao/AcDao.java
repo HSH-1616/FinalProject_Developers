@@ -105,11 +105,15 @@ public interface AcDao {
 	int insertReview(SqlSessionTemplate session, AcReview ar);
 
 	int insertArf(SqlSessionTemplate session, ArFile arf);
-	
+
 	List<AcReview> acReview(SqlSessionTemplate session, int no);
-	
+
 	List<ArFile> acArf(SqlSessionTemplate session, int arId);
-	
+
 	List<AcReview> checkReview(SqlSessionTemplate session, String memberId);
-	
+
+	List<AcPayList> paymentList(SqlSessionTemplate session, Map param);
+
+	int paymentListCount(SqlSessionTemplate session);
+
 }

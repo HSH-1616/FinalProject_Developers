@@ -205,23 +205,6 @@ public class AcController {
 		return result;
 	}
 
-	@GetMapping("/selectAcAll")
-	public String selectAcAll(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
-			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
-		Map<String, Object> param = new HashMap<>();
-		Map<String, Object> type = new HashMap<>();
-
-		param.put("cPage", cPage);
-		param.put("numPerpage", numPerpage);
-		int totalData = service.selectAcAllCount();
-
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectAcAll", type));
-		m.addAttribute("totalData", totalData);
-		m.addAttribute("ac", service.selectAcAll(param));
-		return "/accommodation/acAdmin";
-
-	}
-
 	@GetMapping("/acRegist")
 	public String acRegist() {
 		return "/accommodation/acRegist";
@@ -500,10 +483,11 @@ public class AcController {
 
 	@PostMapping("/insertRefund")
 	@ResponseBody
-	public int insertRefund(String apId, String orderId, String refundReason, String refundContent) {
+	public int insertRefund(String apId, String orderId, String refundReason, String refundContent,String refundPrice) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("apId", apId);
 		param.put("orderId", orderId);
+		param.put("refundPrice", refundPrice);
 		param.put("refundReason", refundReason);
 		param.put("refundContent", refundContent);
 		int result = service.updateRefund(param);
