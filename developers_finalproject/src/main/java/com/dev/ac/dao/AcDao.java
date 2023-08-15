@@ -89,4 +89,10 @@ public interface AcDao {
 	int updateInArv(SqlSessionTemplate session, AcReservation arv);
 	
 	List<AcPayList> acMyPage(SqlSessionTemplate session,String memberId);
+	
+	AcPayList acRefundApply(SqlSessionTemplate session,String orderId);
+	
+	int updateRefund(SqlSessionTemplate session,Map param);
+	
+	int insertRefund(SqlSessionTemplate session,Map param);
 }

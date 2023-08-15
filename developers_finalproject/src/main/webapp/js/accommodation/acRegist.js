@@ -460,46 +460,36 @@ function checkRegist() {
 	var content = ""
 	if (sel_files.length < 5) {
 		content = "숙박업소 이미지를 등록해 주세요."
-		return warningAlert(content);
 	} else if ($("input[name=acTitle]").val() == "") {
 		content = "숙박업소명을 입력해 주세요."
-		return warningAlert(content);
 	} else if ($("input[name=acPrice]").val() == "") {
 		content = "숙박가격을 입력해 주세요."
-		return warningAlert(content);
 	} else if ($("input[name=acAddress]").val() == "") {
 		content = "숙박업소 위치를 입력해 주세요."
-		return warningAlert(content);
 	} else if ($("textarea[name=acContent]").val() == "") {
-		content = "숙박업소명 설명을 입력해 주세요."
-		return warningAlert(content);
+		content = "숙박업소명 설명을 입력해 주세요."		
 	} else {
 		registOk()
 	}
+	return warningAlert(content);
 }
 
 function checkUpdate() {
 	var content = ""
 	if (sel_files.length + acFiles.length < 5) {
-		console.log(sel_files.length)
-		console.log(acFiles.length)
 		content = "숙박업소 이미지를 등록해 주세요."
-		return warningAlert(content);
 	} else if ($("input[name=acTitle]").val() == "") {
 		content = "숙박업소명을 입력해 주세요."
-		return warningAlert(content);
 	} else if ($("input[name=acPrice]").val() == "") {
 		content = "숙박가격을 입력해 주세요."
-		return warningAlert(content);
 	} else if ($("input[name=acAddress]").val() == "") {
 		content = "숙박업소 위치를 입력해 주세요."
-		return warningAlert(content);
 	} else if ($("textarea[name=acContent]").val() == "") {
-		content = "숙박업소명 설명을 입력해 주세요."
-		return warningAlert(content);
+		content = "숙박업소명 설명을 입력해 주세요."		
 	} else {
-		updateOk()
+		return updateOk()
 	}
+	return warningAlert(content);
 }
 
 

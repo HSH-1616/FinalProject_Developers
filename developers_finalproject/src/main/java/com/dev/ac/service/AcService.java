@@ -66,4 +66,8 @@ public interface AcService {
 	int updateAc(Accommodation ac);
 	
 	List<AcPayList> acMyPage(String memberId);
+	
+	AcPayList acRefundApply(String orderId);
+	
+	int updateRefund(Map param);
 }

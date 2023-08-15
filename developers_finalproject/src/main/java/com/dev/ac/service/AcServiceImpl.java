@@ -249,4 +249,18 @@ public class AcServiceImpl implements AcService {
 		return dao.acMyPage(session,memberId);
 	}
 
+	@Override
+	public AcPayList acRefundApply(String orderId) {
+		return dao.acRefundApply(session,orderId);
+	}
+
+	@Override
+	public int updateRefund(Map param) {
+		int result=dao.updateRefund(session,param);
+		if(result>0) {
+			result+=dao.insertRefund(session,param);
+		}
+		return result;
+	}
+
 }

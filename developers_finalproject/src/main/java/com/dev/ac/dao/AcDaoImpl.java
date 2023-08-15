@@ -204,6 +204,21 @@ public class AcDaoImpl implements AcDao {
 		return session.selectList("accommodation.acMyPage",memberId);
 	}
 
+	@Override
+	public AcPayList acRefundApply(SqlSessionTemplate session, String orderId) {
+		return session.selectOne("accommodation.acRefundApply",orderId);
+	}
+	
+	@Override
+	public int updateRefund(SqlSessionTemplate session, Map param) {
+		return session.insert("accommodation.updateRefund",param);
+	}
+	
+	@Override
+	public int insertRefund(SqlSessionTemplate session, Map param) {
+		return session.insert("accommodation.insertRefund",param);
+	}
+
 	
 
 	

@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -465,9 +466,32 @@ public class AcController {
 		String memberId = String.valueOf(member.getMemberId());
 
 		List<AcPayList> am=service.acMyPage(memberId);
-		
-		log.info("결과 : "+am);
+				System.out.println(am);
 		return am;
 	}
-
+	
+	@PostMapping("/acRefundApply")
+	public String acRefundApply(String orderId, Model m) {		
+		AcPayList ra=service.acRefundApply(orderId);
+		System.out.println(ra);
+		m.addAttribute("ra",ra);
+		return "/accommodation/acRefundApply";
+	}
+	
+	@PostMapping("/insertRefund")
+	@ResponseBody
+	public int insertRefund(String apId,String orderId, String refundReason, String refundContent) {
+		Map<String,String> param=new HashMap<String,String>();
+		param.put("apId", apId);
+		param.put("orderId", orderId);
+		param.put("refundReason", refundReason);
+		param.put("refundContent", refundContent);
+		int result=service.updateRefund(param);
+		
+		System.out.println(orderId);
+		System.out.println(refundReason);
+		System.out.println(refundContent);
+		return 0;
+	}
+	
 }

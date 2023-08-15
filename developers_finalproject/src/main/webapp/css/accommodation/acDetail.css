@@ -315,14 +315,14 @@
 .detailHotelImage>div {
 	margin-top: 20px;
 	width: 100%;
-	
+
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
-	
+
 }
 
-.detailHotelImage img{
+.detailHotelImage img {
 	width: 45%;
 	height: 45%;
 	margin-bottom: 20px;
@@ -337,7 +337,7 @@
 	top: 145px;
 	z-index: 1620;
 	display: none;
-	
+
 }
 
 .overImg {
@@ -501,11 +501,13 @@
 	height: 550px;
 }
 
-.day,.selectDay {
+.day,
+.selectDay {
 	height: 42px;
 }
 
-.notday,.xDay {
+.notday,
+.xDay {
 	height: 42px;
 }
 
@@ -687,14 +689,20 @@
 }
 
 .detailHotelCheckDay {
-
 	display: flex;
 }
 
 .detailHotelCheckDay div {
 	border: 1px solid #999;
+	border-bottom: 0;
 	padding-top: 10px;
 	height: 70px;
+}
+
+.detailHotelCheckDay div:first-child {
+
+	border-right: 0;
+
 }
 
 .detailHotelCheckDay div>* {
@@ -806,7 +814,7 @@
 
 }
 
-#detailForm{
+#detailForm {
 	width: 100%;
 	max-width: unset;
 	margin: 0;
