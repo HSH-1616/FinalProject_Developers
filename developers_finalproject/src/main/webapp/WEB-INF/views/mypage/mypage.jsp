@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> -->
 <link rel="stylesheet" href="${path}/css/mypage/slick.css"/>
 <link rel="stylesheet" href="${path}/css/mypage/slick-theme.css"/>
-<script src="${path }/js/mypage/slick.min.js"></script> 
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<%-- <script src="${path }/js/mypage/slick.min.js"></script>  --%>
 <%-- <script src="${path }/css/mypage/slick.js"></script> --%>
 <section>
 	<div class="mypageheader">
@@ -270,7 +271,7 @@
 											<h2 class="daytext">2023-07-29~2023-08-07</h2>
 											<h2 class="ml-1 text-xs md:ml-0 md:text-sm font-Montserrat md:mt-1"></h2>
 										</div>
-										<h2 class="updateday" id="preId2">최근수정일 2023-08-10</h2>
+										<h2 class="updateday" id="preId2"></h2>
 									</div>
 								</div>
 							</div>
@@ -284,13 +285,6 @@
 		<div class="myreviwarea">
 			<h2 class="myschedultext">내가 쓴 글 목록</h2>
 			<div class="input">
-				<button class="value">
-					<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
-						data-name="Layer 2">
-						<path fill="#7D8590"
-							d="m1.5 13v1a.5.5 0 0 0 .3379.4731 18.9718 18.9718 0 0 0 6.1621 1.0269 18.9629 18.9629 0 0 0 6.1621-1.0269.5.5 0 0 0 .3379-.4731v-1a6.5083 6.5083 0 0 0 -4.461-6.1676 3.5 3.5 0 1 0 -4.078 0 6.5083 6.5083 0 0 0 -4.461 6.1676zm4-9a2.5 2.5 0 1 1 2.5 2.5 2.5026 2.5026 0 0 1 -2.5-2.5zm2.5 3.5a5.5066 5.5066 0 0 1 5.5 5.5v.6392a18.08 18.08 0 0 1 -11 0v-.6392a5.5066 5.5066 0 0 1 5.5-5.5z"></path></svg>
-					전체목록
-				</button>
 				<button class="value">
 					<svg id="Line" viewBox="0 0 32 32"
 						xmlns="http://www.w3.org/2000/svg">
@@ -307,35 +301,8 @@
 					커뮤니티 게시글
 				</button>
 			</div>
-			<div class="myschedulcardarea">
-				<div class="myschedulcard">
-					<div class="myschedulcontent">
-						<div class="myschedulcontentarea">
-							<div class="myreviewiconarea">
-								<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
-									viewBox="0 0 512 512">
-         							<path
-										d="M384 352H184.36l-41 35-41-35H16v24c0 30.59 21.13 55.51 47.26 56 2.43 15.12 8.31 28.78 17.16 39.47C93.51 487.28 112.54 496 134 496h132c21.46 0 40.49-8.72 53.58-24.55 8.85-10.69 14.73-24.35 17.16-39.47 13.88-.25 26.35-7.4 35-18.63A61.26 61.26 0 00384 376zM105 320l38.33 28.19L182 320h202v-8a40.07 40.07 0 00-32-39.2c-.82-29.69-13-54.54-35.51-72C295.67 184.56 267.85 176 236 176h-72c-68.22 0-114.43 38.77-116 96.8A40.07 40.07 0 0016 312v8h89z"></path>
-         							<path
-										d="M463.08 96h-74.59l8.92-35.66L442 45l-10-29-62 20-14.49 60H208v32h18.75l1.86 16H236c39 0 73.66 10.9 100.12 31.52A121.9 121.9 0 01371 218.07a124.16 124.16 0 0110.73 32.65 72 72 0 0127.89 90.9A96 96 0 01416 376c0 22.34-7.6 43.63-21.4 59.95a80 80 0 01-31.83 22.95 109.21 109.21 0 01-18.53 33c-1.18 1.42-2.39 2.81-3.63 4.15H416c16 0 23-8 25-23l36.4-345H496V96z"></path></svg>
-							</div>
-							<div class="myreviewcontentarea">
-								<span class="myreviewcontent">게시글 제목
-									setsetsetsestsdagadsfadsfadsfadsf</span>
-							</div>
-							<div class="myreviewupdatearea">
-								<div class="circleday">
-									<p class="cirledaytext">수정</p>
-								</div>
-							</div>
-							<div class="myreviewdeletearea">
-								<div class="circleday">
-									<p class="cirledaytext">삭제</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="mycommuity">
+			
 			</div>
 			<!--  -->
 			
@@ -425,11 +392,8 @@
 				</div>
 			</div>
 			<!--  -->
-			
-			<div class="pagebararea" style="
-    width: 100%;
-    height: 60px;
-"></div>
+
+			<div class="pagerevie" style="width: 100%; height: 60px;"></div>
 		</div>
 	</div>
 	<button class="backbtn">
@@ -447,7 +411,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
     </svg>
 </button>
-	<script src="${path }/js/mypage/mypage.js"></script>
 </section>
 <script type="text/javascript">
       $(document).ready(function(){
@@ -459,7 +422,7 @@
  
           // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
           // position은 부모를 기준으로한 상대위치를 가져온다.
-          $("html body").animate({scrollTop:offset.top},100);
+          $("html body").animate({scrollTop:offset.top},10);
  
         });
       }); // end of ready()
@@ -473,7 +436,7 @@
    
             // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
             // position은 부모를 기준으로한 상대위치를 가져온다.
-            $("html body").animate({scrollTop:offset.top},100);
+            $("html body").animate({scrollTop:offset.top},10);
    
           });
         }); // end of ready()
@@ -487,7 +450,7 @@
      
               // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
               // position은 부모를 기준으로한 상대위치를 가져온다.
-              $("html body").animate({scrollTop:offset.top},100);
+              $("html body").animate({scrollTop:offset.top},10);
      
             });
           }); // end of ready()
@@ -501,10 +464,11 @@
      
               // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
               // position은 부모를 기준으로한 상대위치를 가져온다.
-              $("html body").animate({scrollTop:offset.top},100);
+              $("html body").animate({scrollTop:offset.top},10);
      
             });
           }); // end of ready()
         
     </script>
+    <script src="${path }/js/mypage/mypage.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

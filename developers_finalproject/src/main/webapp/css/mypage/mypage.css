@@ -476,6 +476,13 @@ padding-left: 3rem;
     color: rgb(115 126 138/var(--tw-text-opacity));
     font-weight: 100;
 }
+.updateh2{
+	font-size: .75rem;
+	display: block;
+	--tw-text-opacity: 1;
+    color: rgb(115 126 138/var(--tw-text-opacity));
+    font-weight: 100;
+}
 /*내가 쓴 글 css*/
 .myreviwarea{
 	position: relative;
