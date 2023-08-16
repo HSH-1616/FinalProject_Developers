@@ -42,10 +42,6 @@
 							<span>카드 결제</span>
 						</button>
 
-						<button class="pcBtn" type="button" id="naverPay">
-							<img alt="" src="${path}/images/accommodation/naverPay.jpg">
-						</button>
-
 						<button class="pcBtn" type="button" id="kakaoPay">
 							<img alt="" src="${path}/images/accommodation/kakaoPay2.jpeg">
 						</button>
