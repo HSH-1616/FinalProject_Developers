@@ -1,0 +1,342 @@
+.hotelPayCon {
+	display: flex;
+	justify-content: center;
+}
+
+.hotelPay {
+	width: 1000px;
+	margin-bottom: 50px;
+	background-color: white;
+}
+
+.hotelPayInfoCon {
+	display: flex;
+	justify-content: center;
+}
+
+#payInfo h3 {
+	font-size: 1.3rem;
+}
+
+#payTitle {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	display: flex;
+	align-items: center;
+}
+
+#payTitle button {
+	border: none;
+	background-color: white;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#payTitle span {
+	margin-left: 10px;
+	font-size: 1.5rem;
+}
+
+#payTitle ion-icon {
+	margin-bottom: 7px;
+}
+
+.hotelPayInfo {
+	width: 90%;
+	height: 300px;
+}
+
+.payInfoTypeCon {}
+
+.payInfoType span {
+	display: block;
+	font-size: 1.1rem;
+	color: #999;
+}
+
+.payInfoType span:first-of-type {
+	color: black;
+}
+
+.modifyBtn {
+	border: none;
+	background-color: white;
+	color: #b31312;
+	font-size: 1.2rem;
+}
+
+.hotelPayInfoCon hr {
+	border: 0;
+	height: 0;
+	opacity: unset;
+	border-top: 2px solid #eeeeee;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#hotelPayBtnCon {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+#hotelPayBtnCon button {
+	margin-top: 30px;
+	width: 20%;
+	height: 60px;
+	font-size: 1.2rem;
+	border: none;
+	color: white;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+#hotelPayBtnCon button:nth-child(1){
+	background-color: #20c994;
+}
+
+#hotelPayBtnCon button:nth-child(2){
+	background-color: #b31312;
+}
+
+#hotelPayBtnCon button:nth-child(3){
+	background-color: #afafaf;
+}
+
+
+#registOkBtn {}
+
+#orderId {
+	color: #20c994;
+}
+
+.hotelPayDetailCon {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+}
+
+.hotelPayDetail {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.hotelPayDetail>div {
+	margin-top: 30px;
+	width: 90%;
+}
+
+#hotelPayDetailTitle {
+	display: flex;
+}
+
+#hotelPayDetailTitle img {
+	width: 25%;
+	height: 150px;
+	border-radius: 10px;
+}
+
+#hotelPayDetailTitle>div {
+	margin-left: 20px;
+	margin-top: 0px;
+}
+
+.payInfoType {
+	/*display: flex;*/
+	margin-right: 20px;
+}
+
+.payInfoType span {
+	font-size: 1.3rem;
+	margin-right: 10px;
+}
+
+#hotelPayDetailTitle>div pre {
+	font-family: "LINESeedKR-Bd" !important;
+	font-size: 1.1rem;
+	overflow: hidden;
+	white-space: pre-line;
+}
+
+.hotelPayDetailInfo h4 {
+	font-size: 1.3rem;
+}
+
+.starContainer {
+	position: unset;
+	display: flex;
+	align-items: center;
+}
+
+.starContainer>span:last-child {
+	margin-left: 20px;
+	color: gray;
+}
+
+.hrContainer {
+	display: flex;
+
+	justify-content: center;
+}
+
+.hrContainer hr {
+	border: 0;
+	height: 0;
+	opacity: unset;
+	border-top: 2px solid #eeeeee;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.payDetailInfo>div {
+	margin-top: 20px;
+	display: flex;
+}
+
+.payDetailInfo>div span {
+	font-size: 1.1rem;
+	color: gray;
+}
+
+.hotelPayRealInfo {
+	display: flex;
+	justify-content: space-between;
+}
+
+.hotelPayRealInfo span {
+	font-size: 1.2rem;
+}
+
+.payInfoTitle {}
+
+.payInfoTitle h4 {
+	margin-top: 50px;
+}
+
+.payDetailPrice>div {
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.payDetailPrice>div span {
+	font-size: 1.2rem;
+}
+
+.payDetailPrice>div h4 {
+	color: #20c994;
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	width: 180px;
+	background-color: white;
+	justify-content: center;
+	border-radius: 10px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border: 2px solid #eeeeee;
+
+}
+
+.value {
+	background-color: transparent;
+	border: none;
+	padding: 10px;
+	color: black;
+	display: flex;
+	position: relative;
+	gap: 5px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.value.active{
+	background-color: #eeeeee;
+	outline: none;
+}
+
+.value:not(:active):hover,
+.value:focus {
+	background-color: #eeeeee;
+}
+
+.value:focus {
+	background-color: #eeeeee;
+	outline: none;
+}
+
+.value.active::before {
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: -10px;
+	width: 5px;
+	height: 80%;
+	background-color: #b31312;
+	border-radius: 5px;
+	opacity: 1;
+}
+
+.value:focus::before {
+	opacity: 1;
+}
+
+.value svg {
+	width: 15px
+}
+
+.refundContent {
+	display: flex;
+	margin-top: 30px;
+}
+
+.refundContent>div:first-child {
+	/*display: flex;*/
+	width: 100%;
+}
+
+.refundContent textarea {
+	outline: none;
+	resize: none;
+	width: 100%;
+	height: 100%;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 15px;
+}
+
+.refundPayPrice p{
+	color: #b31312;
+}
+
+.refundPayPrice h3{
+	font-size: 1.3rem;	
+}
+
+.resultPrice{
+	margin-top:30px
+}
+
+.resultPrice>div{
+	display: flex;
+}
+.resultPrice>div>h3{
+	margin-right: 30px;
+	font-size: 1.1rem;
+}
+.resultPrice>h3{
+
+	font-size: 1.5rem;
+	margin-top: 30px;
+	text-align: end;
+	color: #b31312;
+	
+}

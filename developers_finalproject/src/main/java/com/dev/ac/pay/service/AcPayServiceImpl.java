@@ -117,13 +117,13 @@ public class AcPayServiceImpl {
 		return KaKaoPayApproval;
 	}
 
-	public KaKaoRefund kakaoRefund(String keyId, String acPrice) {
+	public KaKaoRefund kakaoRefund(String keyId, String refundPrice) {
 
 		// 카카오페이 요청
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("cid", cid);
 		params.add("tid", keyId);
-		params.add("cancel_amount", acPrice);
+		params.add("cancel_amount", refundPrice);
 		params.add("cancel_tax_free_amount", "0");
 		params.add("cancel_vat_amount", "0");
 

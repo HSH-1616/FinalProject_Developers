@@ -2704,3 +2704,429 @@
 	display: none;
 }	
 /**/
+
+/*숙박업소*/
+.acPayListCon {
+	width: 90%;
+	border: 2px solid #eeeeee;
+	border-radius: 20px;
+	margin-bottom: 30px;
+}
+
+.acPayListHead {
+	margin-top: 30px;
+	margin-left: 30px;
+	display: flex;
+	height: 130px;
+	position: relative;
+}
+
+.acPayListHead img {
+	border-radius: 10px;
+	width: 200px;
+	height: 130px;
+}
+
+.payListContent {
+	margin-top: 7px;
+}
+
+.payListContent>div {
+	display: flex;
+}
+
+.payListContent>div>div h6,
+.payListContent>h5 {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.acPayListCon hr {
+	border: 0;
+	height: 0;
+	opacity: unset;
+	border-top: 2px solid #eeeeee;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.acPayListDetail {
+	margin-left: 30px;
+	display: flex;
+	padding-bottom: 30px;
+	position: relative;
+}
+
+.payPrice {
+	position: relative;
+	left: 63px;
+}
+
+.payPrice>div {
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+}
+
+.payPrice h6 {
+	font-size: 1.2rem;
+}
+
+.payPrice>div>h6 {
+	margin-top: 15px;
+	margin-right: 30px;
+}
+
+.payInfo>div {
+	display: flex;
+}
+
+.payInfo ion-icon {
+	font-size: 1.5rem;
+	margin-right: 10px;
+	color: #b31312;
+}
+
+.payInfo span {
+	position: relative;
+	top: 2px;
+}
+
+.payInfo>div>div {
+	margin-right: 15px;
+	display: flex;
+	align-items: center;
+}
+
+.cancelPay {
+	position: absolute;
+	width: 90px;
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+
+	color: white;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	margin-bottom: 10px;
+	left: 88%;
+	top: 40px;
+}
+
+.cancelPay.on {
+	background-color: #b31312;
+}
+
+.cancelPay.off {
+	background-color: #afafaf;
+}
+
+.writeReview {
+	position: absolute;
+	width: 90px;
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+	color: white;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	margin-bottom: 10px;
+	left: 88%;
+	top: 40px;
+}
+
+.writeReview.on {
+	background-color: #b31312;
+}
+
+.writeReview.off {
+	background-color: #afafaf;
+}
+
+.payListArea {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.beforePayListArea {
+	display: none;
+}
+
+.refundListArea {
+	display: none;
+}
+
+.refundListArea h4 {
+	margin-left: 30px;
+	margin-bottom: 30px;
+	font-size: 1.3rem;
+
+}
+
+.acPayForm {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: unset;
+	margin: unset;
+}
+
+.refundStatus {
+	font-size: 1.5rem;
+	color: #b31312;
+	position: absolute;
+	left: 85%;
+	top: 0px;
+}
+
+.refundPrice {
+	margin-top: 20px;
+}
+
+.refundPrice span {
+	font-size: 1.1rem;
+	margin-right: 20px;
+
+}
+
+.refundInfo {
+	width: 45%;
+}
+
+.refundInfo h6 {
+	font-size: 1.2rem;
+	color: #b31312;
+	margin-top: 20px;
+}
+
+.refundReason {
+	width: 55%;
+}
+
+.refundReason h6 {
+	margin-top: 20px;
+	font-size: 1.1rem;
+}
+
+.refundReason pre {
+	margin-top: 20px;
+	font-size: 1.1rem;
+	white-space: pre-wrap;
+	word-break: break-all;
+	overflow: auto;
+}
+
+#blurReview {
+	display: none;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 50;
+	height: 100vh;
+	width: 100%;
+	background: #000;
+	opacity: 0.6;
+}
+
+.reviewWriteCon {
+	position: fixed;
+	width: 800px;
+	height: 710px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 160px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	border-radius: 20px;
+	z-index: 100;
+	background-color: white;
+	display: none;
+}
+
+.reviewBox {
+	width: 90%;
+	height: 90%;
+	position: relative;
+
+}
+
+.reviewBox>h4 {
+	color: #b31312;
+	text-align: center;
+	margin-bottom: 25px;
+	font-size: 1.8rem;
+	font-family: "LINESeedKR-Bd" !important;
+}
+
+.closeReview {
+	position: absolute;
+	font-size: 2.5rem;
+	left: 98%;
+}
+
+.reviewTitle {
+	display: flex;
+	align-items: center;
+}
+
+.reviewTitle img {
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+}
+
+.reviewTitle>div {
+	margin-left: 20px;
+	height: 150px;
+}
+
+.reviewAcTitle {
+	font-size: 1.3rem;
+	margin-top: 45px;
+}
+
+.star {
+	position: relative;
+	font-size: 2rem;
+	color: #ddd;
+	/*top: 40px;*/
+}
+
+.star input {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.star span {
+	width: 0;
+	position: absolute;
+	left: 0;
+	color: #b31312;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.reviewFile {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.reviewFile>span {
+	color: #b31312;
+}
+
+.fileBox {
+	margin-top: 10px;
+	height: 100px;
+	width: 100%;
+	display: flex;
+}
+
+.fileBox label {
+	border: 1px solid #afafaf;
+	color: #999;
+	border-radius: 10px;
+	width: 14%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+}
+
+.fileBox ion-icon {
+	font-size: 2rem;
+	margin-bottom: 10px;
+}
+
+.fileBox p {
+	font-size: 0.8rem;
+	margin-bottom: 0;
+}
+
+.previewImg {
+	width: 14%;
+	height: 100%;
+	margin-left: 15px;
+	border-radius: 10px;
+	border: 1px solid #afafaf;
+
+}
+
+.reviewContent {
+	margin-top: 20px;
+	width: 100%;
+	height: 30%;
+
+	position: relative;
+}
+
+.reviewBox textarea {
+	outline: none;
+	resize: none;
+	width: 100%;
+	height: 100%;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+#contentCheckNum {
+	position: absolute;
+	top: 165px;
+	right: 15px;
+}
+
+.insertReview {
+	border: none;
+	border-radius: 10px;
+	background-color: #b31312;
+	color: white;
+	margin-right: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	width: 120px;
+	height: 50px;
+}
+
+.btnCon {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.refundBtn {
+	box-shadow: 0 2px 30px 0 rgba(31, 38, 135, .08) !important;
+	background-color: white;
+	height: 40px;
+	width: 100px;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+}
+
+.refundBtn.check{
+	background-color: #b31312;
+	color: white;
+	
+}
+
+.refundListArea>div:first-child {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.refundComplete{
+	display: none;
+}

@@ -86,7 +86,7 @@
 									<h4>결제 금액</h4>
 									<div>
 										<span>₩ <span id="exPrice"> <fmt:formatNumber
-													value="${ap.acPrice }" pattern="#,###" />
+													value="${checkPrice}" pattern="#,###" />
 										</span>x <span id="exDay">${diff}</span>박
 										</span> <span> ₩ <span id="resultPrice"><fmt:formatNumber
 													value="${resultPrice }" pattern="#,###" /></span>
