@@ -126,9 +126,11 @@ const tourisroute = (cPage,numPerpage) => {
 
 }
 
+
+ const test =  () => {
 let areaLatitude;
 let areaLongitude;
- const test =  () => {
+let areaName;
 	   const loginmemberid = $('.nickname').text();
 	  $.ajax({
 		url: path+"/touris/mypagetourisroutelist",
@@ -137,34 +139,35 @@ let areaLongitude;
 		success:(data)=>{
 			console.log(data);
 			data.forEach(e =>{
+				
+				const endDate = new Date(e.tuendDate);
+				const startDate = new Date(e.tustartDate);
+					// 두 날짜 사이의 일 수 차이 계산
+					const dayDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+					
 				e.tourisArealist.forEach(e=>{
-					console.log("d안에"+e.areaLatitude)
 					areaLatitude = e.areaLatitude;
 					areaLongitude = e.areaLongitude;
-				});
-			})
-		}
-		
-	});	
-}
-console.log(areaLatitude);
-
-$(document).ready(function() {
-  $('.gotop').bind('click', function() {
-    $('html, body').animate({scrollTop: '0'}, 100);
-  });
-});
-
-
-
-
-
-/*--------------------------------------------------------------------------------------------------*/
-//모달창 지도 api
+					areaName = e.areaName;
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					$(".titlename").text(areaName);
+					$(".schedulecount").text(dayDifference+1);
+					//모달창 지도 api
 
 var mapContainer2 = document.getElementById('routemap'), // 지도를 표시할 div 
     mapOption2 = { 
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      center: new kakao.maps.LatLng(areaLatitude, areaLongitude), // 지도의 중심좌표
       level: 7 // 지도의 확대 레벨
     };
     
@@ -357,17 +360,6 @@ function exitHandler() {
 	}
 }
 
-// 경로생성 모달창 js
-  $(".myschedularea").on("click", function () {
-	 console.log(test());	
-    $(".routetotalmodal").show();
-    $(".routemainmodaldiv").show();
-    	map2.relayout();
-  });
-  $(".routespan").on("click", function () {
-    $(".routetotalmodal").hide();
-    $(".routemainmodaldiv").hide();
-  });  	
 
 var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
 	imageSize = new kakao.maps.Size(50, 57), // 마커이미지의 크기입니다
@@ -462,28 +454,12 @@ $(document).on('click', '.makerouteplusbtnarea', function(){
 });
 
 // 달력 js
-$(function() {
-	function updateSelectBox(startDate, endDate) {
-    const selectBox = document.getElementById('dayselectbox');
-    const currentDate = startDate.clone();
-    let dayCount = 1;
 
-    selectBox.innerHTML = '';
-    
-	const alldaydetailscheduleDiv = document.querySelector('.alldaydetailschedule');
-    alldaydetailscheduleDiv.innerHTML = '';
-    
-    while (currentDate <= endDate) {
-      const optionText = dayCount + '일차 ' + currentDate.format('M월 D일 ddd');
 
-      const newOption = document.createElement('option');
-      newOption.value = optionText;
-      newOption.textContent = optionText;
-      selectBox.appendChild(newOption);
       
       
       
-      const newElement = document.createElement('div');
+      /*const newElement = document.createElement('div');
       newElement.classList.add('detailroutetour-' + dayCount); // 
       newElement.id = 'detailroutetareaid';
       
@@ -515,9 +491,9 @@ alldaydetailscheduleDiv.appendChild(newElement);
 
 
       dayCount++;
-      currentDate.add(1, 'day');
-    }
-  }
+      currentDate.add(1, 'day');*/
+
+
 	//날짜 갯수 구하기
 	function getDateRangeCount(dateRangeString) {
 		const dateStrings = dateRangeString.split(' - ');
@@ -604,7 +580,7 @@ alldaydetailscheduleDiv.appendChild(newElement);
   });
   /**/
  
-});
+
 $(document).ready(function(){
   $('input[name="datefilter"]').trigger('click');
 });
@@ -1279,4 +1255,41 @@ function updatemarker() {
     });
 
 }
+					
+					
+					
+					
+					
+					
+				});
+			});
+		}
+		
+	});	
+}
+
+
+// 경로생성 모달창 js
+  $(".myschedularea").on("click", function () {
+	 console.log(test());	
+    $(".routetotalmodal").show();
+    $(".routemainmodaldiv").show();
+    	/*map2.relayout();*/
+  });
+  $(".routespan").on("click", function () {
+    $(".routetotalmodal").hide();
+    $(".routemainmodaldiv").hide();
+  });  	
+
+$(document).ready(function() {
+  $('.gotop').bind('click', function() {
+    $('html, body').animate({scrollTop: '0'}, 100);
+  });
+});
+
+
+
+
+
+
 
