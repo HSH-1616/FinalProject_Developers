@@ -11,21 +11,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
-import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
+import com.dev.member.model.dto.Member;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -335,17 +336,37 @@ public class FoodController {
 	}
 	
 	//좋아요 기능
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("/food/toggleHeart") public int toggleHeart(@RequestParam Map
+	 * params, int fhNo, String memberId, int foodNo) {
+	 * 
+	 * params.put("fhNo", fhNo); params.put("memberId", memberId);
+	 * params.put("foodNo", foodNo);
+	 * 
+	 * int updatedCount = service.toggleHeartAndGetCount(params); return
+	 * updatedCount; }
+	 */
+	
+	@GetMapping("/insertHeart")
 	@ResponseBody
-    @PostMapping("/food/toggleHeart")
-    public int toggleHeart(@RequestParam Map params, int fhNo, String memberId, int foodNo) {
-       
-		params.put("fhNo", fhNo);
-        params.put("memberId", memberId);
-        params.put("foodNo", foodNo);
+	public int insertHeart(@RequestParam Map param, HttpSession session) {
+		Member loginMember=(Member)session.getAttribute("loginMember");
+		param.put("memberId", loginMember.getMemberId());
+		int result = service.insertHeart(param);
+		return result;
+	}
 
-        int updatedCount = service.toggleHeartAndGetCount(params);
-        return updatedCount;
-    }
+	@GetMapping("/deleteHeart")
+	@ResponseBody
+	public int deleteHeart(@RequestParam Map param,HttpSession session) {
+		Member loingMember=(Member)session.getAttribute("loginMember");
+		param.put("memberId", loingMember.getMemberId());
+		int result = service.deleteHeart(param);
+		return result;
+	}
+	
 	
 	/*
 	 * //분류기능(제목)

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodHeart;
@@ -56,12 +57,20 @@ public interface FoodDao {
 	
 	List<Food> getFoodsSortedByTitle(SqlSession session, Map<String, Object> params, String sortType);
 
-	boolean checkHeart(SqlSession session, Map params);
-    
-	void insertHeart(SqlSession session, Map params);
-    
-	void deleteHeart(SqlSession session, Map params);
-    
-	int getHeartCount(SqlSession session, Map params);
+	int insertHeart(SqlSessionTemplate session, Map param);
+	
+	int deleteHeart(SqlSessionTemplate session, Map param);
+	
+	List<FoodHeart> fdHeart(SqlSessionTemplate session, int no);
+
+	/*
+	 * boolean checkHeart(SqlSession session, Map params);
+	 * 
+	 * void insertHeart(SqlSession session, Map params);
+	 * 
+	 * void deleteHeart(SqlSession session, Map params);
+	 * 
+	 * int getHeartCount(SqlSession session, Map params);
+	 */
 	
 }

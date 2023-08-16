@@ -3,7 +3,8 @@ package com.dev.food.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +17,18 @@ import com.dev.food.model.dto.FoodTemp;
 @Service
 public class FoodServiceImpl implements FoodService{
 
-	private FoodDao dao;
-	private SqlSession session;
+	/*
+	 * private FoodDao dao; private SqlSession session;
+	 * 
+	 * public FoodServiceImpl(FoodDao dao, SqlSession session) { this.dao = dao;
+	 * this.session = session; }
+	 */
 	
-	public FoodServiceImpl(FoodDao dao, SqlSession session) {
-		this.dao = dao;
-		this.session = session;
-	}
+	@Autowired
+	private FoodDao dao;
+
+	@Autowired
+	private SqlSessionTemplate session;
 
 	@Override
 	@Transactional(rollbackFor = {Exception.class})
@@ -114,18 +120,30 @@ public class FoodServiceImpl implements FoodService{
 
 		return dao.getFoodById(session, memberId);
 	}
+	
+	@Override
+	public int insertHeart(Map param) {
+		return dao.insertHeart(session, param);
+	}
 
 	@Override
-    public int toggleHeartAndGetCount(Map params) {
-        boolean isLiked = dao.checkHeart(session, params);
-        
-        if (isLiked) {
-        	dao.deleteHeart(session, params);
-        } else {
-        	dao.insertHeart(session, params);
-        }
-        return dao.getHeartCount(session, params);
-    }
+	public int deleteHeart(Map param) {
+		return dao.deleteHeart(session, param);
+	}
+
+	@Override
+	public List<FoodHeart> fdHeart(int no){
+		return dao.fdHeart(session, no);
+	}
+	
+	/*
+	 * @Override public int toggleHeartAndGetCount(Map params) { boolean isLiked =
+	 * dao.checkHeart(session, params);
+	 * 
+	 * if (isLiked) { dao.deleteHeart(session, params); } else {
+	 * dao.insertHeart(session, params); } return dao.getHeartCount(session,
+	 * params); }
+	 */
 
 	@Override
 	public List<Food> foodListTitle(Map<String, Object> param) {

@@ -235,7 +235,7 @@ const path='${path}';
 		</div>
 			<!-- 나의 일정 -->
 		<div class="myschedulearea">
-			<h2 class="myschedultext">나의 여행 일정</h2>
+			<h2 class="myschedultext" id="preId2">나의 여행 일정</h2>
 			<div class="myschedularea">
 			
 			</div>
