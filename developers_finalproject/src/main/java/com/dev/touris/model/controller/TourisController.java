@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import com.dev.nc.common.PageFactory;
+import com.dev.common.PageFactory;
 import com.dev.touris.model.service.TourisService;
+import com.dev.touris.model.vo.Touris;
 import com.dev.touris.model.vo.TourisMember;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -127,6 +128,7 @@ public class TourisController {
 		data.put("pageBar", pageBar);
 		return data;
 	}
+	
 	@GetMapping("/mypagetourisroutelist")
 	@ResponseBody
 	public List<TourisMember> myPageTourisRouteList(@RequestParam int loginmemberid){
@@ -134,5 +136,16 @@ public class TourisController {
 		return service.myPageTourisRouteList(loginmemberid);
 	}
 	
+	@RequestMapping("/tourislist")
+	public String tourisList(@RequestParam(value="cPage",defaultValue ="1") int cPage, 
+			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m){
+		List<Touris> tourislist = service.tourislist(Map.of("cPage",cPage,"numPerpage",numPerpage));
+		int totalData = service.tourisListCount();
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "tourislist"));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("tourislist", tourislist);
+		
+		return "touris/tourislist";
+	}
 }
 

@@ -126,21 +126,28 @@ const tourisroute = (cPage,numPerpage) => {
 
 }
 
- const test = () => {
+let areaLatitude;
+let areaLongitude;
+ const test =  () => {
 	   const loginmemberid = $('.nickname').text();
 	  $.ajax({
 		url: path+"/touris/mypagetourisroutelist",
 		type:"get",
 		data: {loginmemberid : loginmemberid},
 		success:(data)=>{
-			console.log(data);	
+			console.log(data);
+			data.forEach(e =>{
+				e.tourisArealist.forEach(e=>{
+					console.log("d안에"+e.areaLatitude)
+					areaLatitude = e.areaLatitude;
+					areaLongitude = e.areaLongitude;
+				});
+			})
 		}
 		
 	});	
 }
-
-
-
+console.log(areaLatitude);
 
 $(document).ready(function() {
   $('.gotop').bind('click', function() {
@@ -148,170 +155,17 @@ $(document).ready(function() {
   });
 });
 
-// 경로생성 모달창 js
-  $(document).on("click",".myschedulcontent", function () {
-	 test();	
 
-    $(".routetotalmodal").show();
-    $(".routemainmodaldiv").show();
-   /* map2.relayout();*/
-  });
-  $(".routespan").on("click", function () {
-    $(".routetotalmodal").hide();
-    $(".routemainmodaldiv").hide();
-  });  	
 
 
 
 /*--------------------------------------------------------------------------------------------------*/
-var overlay;
-var previousMarker = null;
-var previousOverlay = null;
-
-var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-	imageSize = new kakao.maps.Size(50, 57), // 마커이미지의 크기입니다
-	imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-var addedMarkers = []; // 마커 
-var linePath = []; // 경로 선 
-let markerIndex = 0; // 클로저를 이용하여 클릭한 순서를 기억할 변수 선언
-/*var inforwindow = []*/// 숫자를 띄어주는 infowindow
-var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배열
-var polyline;
-var lines = [];
-function pulastravel() {
-	$(".listarea .selectlist").each(function(index, e) {
-		const listtitleTextValue = $(e).find(".listtitle-text").text();
-		const textaddr = $(e).find('.listtitle-textaddr').text();
-		const srcValue = $(e).find('.listboximg img').attr('src');
-		geocoder.addressSearch(textaddr, function(result, status) {
-			// 정상적으로 검색이 완료됐으면 
-			if (status === kakao.maps.services.Status.OK) {
-
-				var markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-
-				// 결과값으로 받은 위치를 마커로 표시합니다
-				var marker = new kakao.maps.Marker({
-					map: map,
-					position: markerPosition,
-					image: markerImage
-				});
-
-				/*addmarkers.push(marker);*/
-				var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (index + 1) + '</div></div>';
-				// 인포윈도우를 생성합니다
-				var inforwindow = new kakao.maps.CustomOverlay({
-					content: iwContent,
-					map: map,
-					position: marker.getPosition()
-				});
-
-				linePath[index] = markerPosition;
-				// 지도에 표시할 선을 생성합니다
-				polyline = new kakao.maps.Polyline({
-					path: linePath, // 선을 구성하는 좌표배열 입니다
-					strokeWeight: 5, // 선의 두께 입니다
-					strokeColor: '#FFAE00', // 선의 색깔입니다
-					strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-					strokeStyle: 'solid' // 선의 스타일입니다
-				});
-
-				$(document).on('click', '.select-delte', function() {
-					marker.setMap(null);
-					polyline.setMap(null);
-					inforwindow.setMap(null);
-
-				});
-
-				lines.push(polyline);
-				lastInfoWindow.push(inforwindow);
-				addedMarkers.push(marker);
-				polyline.setMap(map);
-				// 인포윈도우로 장소에 대한 설명을 표시합니다
-				kakao.maps.event.addListener(marker, 'click', function() {
-					var content = '<div class="wrap">' +
-						'    <div class="info">' +
-						'        <div class="title">' +
-						listtitleTextValue +
-						'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-						'        </div>' +
-						'        <div class="body">' +
-						'            <div class="img">' +
-						'                <img src="' + srcValue + '" width="73" height="70">' +
-						'           </div>' +
-						'            <div class="desc">' +
-						'<div class="ellipsis">' + textaddr + '</div>' +
-						'                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-						'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
-						'            </div>' +
-						'        </div>' +
-						'    </div>' +
-						'</div>'
-
-					//전에 있던 마커와 오버레이 제거
-					if (previousOverlay) {
-						previousOverlay.setMap(null);
-					}
-					// 커스텀 오버레이를 새로 생성하여 마커 위에 표시합니다
-					overlay = new kakao.maps.CustomOverlay({
-						content: content,
-						map: map,
-						position: marker.getPosition()
-					});
-					previousOverlay = overlay;
-				});
-				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-				map.setCenter(markerPosition);
-
-
-			}
-
-		});
-
-	});
-
-};
-
-$(document).on('click', '.delete-travel', function() {
-// 기존의 마커, 경로, 인포윈도우 제거
-    addedMarkers.forEach(function(marker, index) {
-        marker.setMap(null);
-  });for(var i = 0; i < addmarkers.length; i++){
-		addmarkers[i].setMap(null);
-	}
-  lastInfoWindows.forEach(function(inforwindow, index){
-		inforwindow.setMap(null);
-	});
-   lastInfoWindow.forEach(function(inforwindow, index){
-		inforwindow.setMap(null);
-	});
-	for(var i = 0; i < lines.length; i++){
-		lines[i].setMap(null);
-	}
-	addmarkers = [];
-    lastInfoWindows = [];
-    addedMarkers = [];
-    lastInfoWindow = [];
-    linePath = [];
-    lines = [];
-    pulastravel();
-    pulastravel2();
-});
-
-function closeOverlay() {
-    overlay.setMap(null);     
-}
-
-//-------------------------------------------------------------------------- 여기까지 첫번재 지도 api
-
 //모달창 지도 api
 
 var mapContainer2 = document.getElementById('routemap'), // 지도를 표시할 div 
     mapOption2 = { 
-      center: new kakao.maps.LatLng(latitude, Longitude), // 지도의 중심좌표
-      level: 10 // 지도의 확대 레벨
+      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      level: 7 // 지도의 확대 레벨
     };
     
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -319,16 +173,25 @@ var mapContainer2 = document.getElementById('routemap'), // 지도를 표시할 
   // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
   // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 var map2 = new kakao.maps.Map(mapContainer2, mapOption2); 
-function relayout() {    
-}
-
+/*function resizeMap() {
+    mapContainer2.style.width = '100%';
+    mapContainer2.style.height = '91.5vh'; 
+}*/
+	function relayout() {
+		
+	}
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 var mapTypeControl2 = new kakao.maps.MapTypeControl();
+
 
 // 지도 타입 컨트롤을 지도에 표시합니다
 map2.addControl(mapTypeControl2, kakao.maps.ControlPosition.TOPRIGHT);
 
 
+
+var overlay;
+var previousMarker = null;
+var previousOverlay = null;
 var addmarkers= [];
 var lastInfoWindows = [];
 //관광 경로클릭했을때 생기는 마커
@@ -467,9 +330,9 @@ $(".fullscreen>a").click(function(){
 
 	openFullScreen('routemap');
 	// 이동할 위도 경도 위치를 생성합니다 
-	var moveLatLon = new kakao.maps.LatLng(latitude, Longitude);
+	var moveLatLon = new kakao.maps.LatLng(areaLatitude, areaLongitude);
 	// 지도 레벨 설정( 1~14 낮을 수록 확대)
-	map2.setLevel(10); // 현재 맵 보다 확대해서 표시	
+	map2.setLevel(11); // 현재 맵 보다 확대해서 표시	
 	map2.relayout();  // 지도의 레이 아웃을 재 정렬합니다.
 	map2.setCenter(moveLatLon); // 지도 중심을 이동 시킵니다
 });
@@ -486,13 +349,42 @@ function exitHandler() {
 		mapContainer.style.width = '100%'; // 원래 사이즈로 복귀
 		mapContainer.style.height = '91.5vh';
 		// 이동할 위도 경도 위치를 생성합니다 
-		var moveLatLon = new kakao.maps.LatLng(latitude, Longitude);
+		var moveLatLon = new kakao.maps.LatLng(areaLatitude, areaLongitude);
 		// 지도 레벨 설정( 1~14 낮을 수록 확대)
-		map.setLevel(10);
-		map.relayout(); // 지도의 레이아웃을 재 정렬합니다.
-		map.setCenter(moveLatLon); // 지도 중심을 이동 시킵니다
+		map2.setLevel(11);
+		map2.relayout(); // 지도의 레이아웃을 재 정렬합니다.
+		map2.setCenter(moveLatLon); // 지도 중심을 이동 시킵니다
 	}
 }
+
+// 경로생성 모달창 js
+  $(".myschedularea").on("click", function () {
+	 console.log(test());	
+    $(".routetotalmodal").show();
+    $(".routemainmodaldiv").show();
+    	map2.relayout();
+  });
+  $(".routespan").on("click", function () {
+    $(".routetotalmodal").hide();
+    $(".routemainmodaldiv").hide();
+  });  	
+
+var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+	imageSize = new kakao.maps.Size(50, 57), // 마커이미지의 크기입니다
+	imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+var addedMarkers = []; // 마커 
+var linePath = []; // 경로 선 
+let markerIndex = 0; // 클로저를 이용하여 클릭한 순서를 기억할 변수 선언
+/*var inforwindow = []*/// 숫자를 띄어주는 infowindow
+var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배열
+var polyline;
+var lines = [];
+
+//-------------------------------------------------------------------------- 여기까지 첫번재 지도 api
+
+
 // 모달창 지도 api
 function generateDynamicContent(listtitleTextValue, textaddr, srcValue, hidenid) {
   const newElement = document.createElement('div');
@@ -1270,14 +1162,6 @@ $(function () {
     updatemarker();
   });
 
-  // 동적으로 생성된 요소들에 드래그 앤 드롭 기능 적용
-  $(document).on("mouseover", ".routedatailslists", function () {
-    // 요소가 마우스 오버되었을 때, sortable 메서드를 호출하여 드래그 앤 드롭 기능 적용
-     $(this).sortable({
-      connectWith: ".routedatailslists", // 드롭 가능한 대상 영역 지정
-      // sortable 옵션 설정
-    }).disableSelection();
-  });
 });
 
 
