@@ -87,7 +87,8 @@
 					</thead>
 					<tbody>
 						<c:forEach var="ap" items="${ap}">
-							<c:if test="${fn:contains(ap.apCancel,'T') || fn:contains(ap.apCancel,'F')}">
+							<c:if
+								test="${fn:contains(ap.apCancel,'T') || fn:contains(ap.apCancel,'F')}">
 								<tr>
 									<td class="acId">${ap.apOrderId }</td>
 									<td>${ap.acDetail.acId}</td>
@@ -99,13 +100,13 @@
 									<td><fmt:formatNumber value="${ap.apr.aprPrice}"
 											type="currency" currencySymbol="₩" /></td>
 									<c:if test="${fn:contains(ap.apCancel,'T')}">
-									<td style="color:#20c997">승인</td>
+										<td style="color: #20c997">승인</td>
 									</c:if>
 									<c:if test="${fn:contains(ap.apCancel,'F')}">
-									<td style="color:#b31312">반려</td>
+										<td style="color: #b31312">반려</td>
 									</c:if>
 									<c:if test="${not empty ap.apr.aprComment}">
-									<td style="color:#b31312">${ap.apr.aprComment}</td>
+										<td style="color: #b31312">${ap.apr.aprComment}</td>
 									</c:if>
 								</tr>
 							</c:if>
@@ -116,11 +117,11 @@
 					<c:if test="${not empty pageBar }">
 	            	${pageBar}
 	           	</c:if>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<script>
+	<script>
 function tourisUpdate(){
 	$.get('${path}/admin/tourisUpdate',data=>{
 		alert("데이터 업데이트 완료 됐습니다.");
@@ -132,4 +133,4 @@ function pageDetail(tourisId){
 	location.assign('${path}/tourisDetail/selectById?tourisId='+tourisId);
 }
 </script>
-<jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp" />
+	<jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp" />
