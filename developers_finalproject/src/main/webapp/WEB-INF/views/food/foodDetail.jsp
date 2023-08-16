@@ -63,7 +63,7 @@
          <div class="foodInfosection d-flex flex-row justify-content-center align-items-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 550px;">
                <div class="carousel-indicators">
-                  <button type="button"
+                  <%-- <button type="button"
                      data-bs-target="#carouselExampleIndicators"
                      data-bs-slide-to="0" class="active" aria-current="true"
                      aria-label="Slide 1">
@@ -74,7 +74,7 @@
                      data-bs-slide-to="${i}" aria-current="true"
                      aria-label="Slide ${i+1}">
                      </button>
-                  </c:forEach>
+                  </c:forEach> --%>
                </div>
                <div class="carousel-inner">               
                   <c:forEach var="fp" items="${f.foodPhoto}">
