@@ -48,7 +48,13 @@ public interface FoodService {
 	
 	FoodHeart getFoodById(String memberId);
 	
-	int toggleHeartAndGetCount(Map params);
+	int insertHeart(Map param);
+	
+	int deleteHeart(Map param);
+	
+	List<FoodHeart> fdHeart(int no);
+	
+	/* int toggleHeartAndGetCount(Map params); */
 
 	/* list<food> getsortedfoods(string sortfilter,int cpage, int numperpage); */
 	
