@@ -3,12 +3,14 @@ package com.dev.touris.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.dev.touris.common.mapper.TourisMapper;
 import com.dev.touris.model.vo.Touris;
 import com.dev.touris.model.vo.TourisArea;
+import com.dev.touris.model.vo.TourisMember;
 
 @Repository
 public class TourisDaoImpl implements TourisDao {
@@ -47,6 +49,20 @@ public class TourisDaoImpl implements TourisDao {
 	@Override
 	public int inserttourisroute(SqlSessionTemplate session, Map routedata) {
 		return session.insert("touris.inserttourisroute", routedata);
+	}
+	@Override
+	public int myPageTourisRouteCount(SqlSessionTemplate session) {
+		return session.selectOne("touris.myPageTourisRouteCount");
+	}
+	@Override
+	public List<TourisMember> myPageTourisRoute(SqlSessionTemplate session, int loginmemberid, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		return session.selectList("touris.myPageTourisRoute", loginmemberid, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+	@Override
+	public List<TourisMember> myPageTourisRouteList(SqlSessionTemplate session, int loginmemberid) {
+		return session.selectList("touris.myPageTourisRouteList", loginmemberid);
 	}
 	
 

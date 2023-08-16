@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.dev.touris.model.vo.Touris;
 import com.dev.touris.model.vo.TourisArea;
+import com.dev.touris.model.vo.TourisMember;
+import com.dev.touris.model.vo.TourisRoute;
 
 public interface TourisService {
 	List<TourisArea> tourisMainSelectMapPage();
@@ -12,5 +14,10 @@ public interface TourisService {
 	TourisArea selecttourisarealist(String areaEng);
 	List<Touris> selecttourislist(String areaEng);
 	List<Touris> searchtouris(Map<String, Object> param);
-	int inserttourismember(int loginmemberid, String tustartDate, String tuendDate, List<Map> tourismemberdata);
+	int inserttourismember(int loginmemberid, String tustartDate, String tuendDate, String registrationDate, List<Map> tourismemberdata);
+	int myPageTourisRouteCount();
+	List<TourisMember> myPageTourisRoute(int loginmemberid, Map params);
+	List<TourisMember> myPageTourisRouteList(int loginmemberid);
+	
+	
 }
