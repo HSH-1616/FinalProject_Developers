@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.dev.touris.model.vo.Touris;
 import com.dev.touris.model.vo.TourisArea;
+import com.dev.touris.model.vo.TourisMember;
 
 public interface TourisDao {
 	//메인페이지에서 전국지역선택하는 페이지
@@ -22,4 +23,7 @@ public interface TourisDao {
 	List<Touris> searchtouris(SqlSessionTemplate session, Map<String, Object> param);
 	int inserttourisroute(SqlSessionTemplate session, Map routedata);
 	int inserttourismember(SqlSessionTemplate session, Map tourismemberdata);
+	int myPageTourisRouteCount(SqlSessionTemplate session);
+	List<TourisMember> myPageTourisRoute(SqlSessionTemplate session, int loginmemberid, Map param);
+	List<TourisMember> myPageTourisRouteList(SqlSessionTemplate session, int loginmemberid);
 }

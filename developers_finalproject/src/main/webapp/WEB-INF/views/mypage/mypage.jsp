@@ -4,21 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" href="${path }/css/mypage/mypage.css" />
-<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> -->
-<script src="sweetalert2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
 <link rel="stylesheet" href="${path}/css/mypage/slick.css" />
 <link rel="stylesheet" href="${path}/css/mypage/slick-theme.css" />
-<header>
-	<script type="text/javascript"
-		src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript"
-		src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-</header>
 <script src="${path }/js/mypage/slick.min.js"></script>
-<%-- <script src="${path }/css/mypage/slick.js"></script> --%>
+<script>
+	const path = '${path}';
+</script>
 <section>
 	<div class="mypageheader">
 		<div class="mypageheaderarea">
@@ -266,62 +257,13 @@
 		<!-- 나의 일정 -->
 		<div class="myschedulearea">
 			<h2 class="myschedultext">나의 여행 일정</h2>
-			<div class="myschedulcardarea">
-				<div class="myschedulcard">
-					<div class="myschedulcontent">
-						<div class="myschedulcontentarea">
-							<div class="imgbox">
-								<div class="imgwidth">
-									<span> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Jeju.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="titlecontentarea">
-								<div class="titlecontentstyle">
-									<div class="contenttitle">
-										<div class="selecttitle">
-											<div class="circleday">
-												<p class="cirledaytext">D+12</p>
-											</div>
-											<div class="cirletitle">제주</div>
-										</div>
-									</div>
-									<div class="inputarea">
-										<h1 class="inputh1"></h1>
-										<div class="inputjustify-center ">
-											<button class="inputbtn">
-												<div class="inputtext">여행 이름 입력</div>
-											</button>
-										</div>
-									</div>
-									<div class="daycontentarea">
-										<div class="daycontenth2area">
-											<h2 class="daytext">2023-07-29~2023-08-07</h2>
-											<h2
-												class="ml-1 text-xs md:ml-0 md:text-sm font-Montserrat md:mt-1"></h2>
-										</div>
-										<h2 class="updateday" id="preId2">최근수정일 2023-08-10</h2>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="myschedularea"></div>
 			<div class="myschedualpagebar"></div>
 		</div>
 		<!-- 나의 게시글 목록 -->
 		<div class="myreviwarea">
 			<h2 class="myschedultext">내가 쓴 글 목록</h2>
 			<div class="input">
-				<button class="value">
-					<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
-						data-name="Layer 2">
-						<path fill="#7D8590"
-							d="m1.5 13v1a.5.5 0 0 0 .3379.4731 18.9718 18.9718 0 0 0 6.1621 1.0269 18.9629 18.9629 0 0 0 6.1621-1.0269.5.5 0 0 0 .3379-.4731v-1a6.5083 6.5083 0 0 0 -4.461-6.1676 3.5 3.5 0 1 0 -4.078 0 6.5083 6.5083 0 0 0 -4.461 6.1676zm4-9a2.5 2.5 0 1 1 2.5 2.5 2.5026 2.5026 0 0 1 -2.5-2.5zm2.5 3.5a5.5066 5.5066 0 0 1 5.5 5.5v.6392a18.08 18.08 0 0 1 -11 0v-.6392a5.5066 5.5066 0 0 1 5.5-5.5z"></path></svg>
-					전체목록
-				</button>
 				<button class="value">
 					<svg id="Line" viewBox="0 0 32 32"
 						xmlns="http://www.w3.org/2000/svg">
@@ -338,36 +280,7 @@
 					커뮤니티 게시글
 				</button>
 			</div>
-			<div class="myschedulcardarea">
-				<div class="myschedulcard">
-					<div class="myschedulcontent">
-						<div class="myschedulcontentarea">
-							<div class="myreviewiconarea">
-								<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
-									viewBox="0 0 512 512">
-         							<path
-										d="M384 352H184.36l-41 35-41-35H16v24c0 30.59 21.13 55.51 47.26 56 2.43 15.12 8.31 28.78 17.16 39.47C93.51 487.28 112.54 496 134 496h132c21.46 0 40.49-8.72 53.58-24.55 8.85-10.69 14.73-24.35 17.16-39.47 13.88-.25 26.35-7.4 35-18.63A61.26 61.26 0 00384 376zM105 320l38.33 28.19L182 320h202v-8a40.07 40.07 0 00-32-39.2c-.82-29.69-13-54.54-35.51-72C295.67 184.56 267.85 176 236 176h-72c-68.22 0-114.43 38.77-116 96.8A40.07 40.07 0 0016 312v8h89z"></path>
-         							<path
-										d="M463.08 96h-74.59l8.92-35.66L442 45l-10-29-62 20-14.49 60H208v32h18.75l1.86 16H236c39 0 73.66 10.9 100.12 31.52A121.9 121.9 0 01371 218.07a124.16 124.16 0 0110.73 32.65 72 72 0 0127.89 90.9A96 96 0 01416 376c0 22.34-7.6 43.63-21.4 59.95a80 80 0 01-31.83 22.95 109.21 109.21 0 01-18.53 33c-1.18 1.42-2.39 2.81-3.63 4.15H416c16 0 23-8 25-23l36.4-345H496V96z"></path></svg>
-							</div>
-							<div class="myreviewcontentarea">
-								<span class="myreviewcontent">게시글 제목
-									setsetsetsestsdagadsfadsfadsfadsf</span>
-							</div>
-							<div class="myreviewupdatearea">
-								<div class="circleday">
-									<p class="cirledaytext">수정</p>
-								</div>
-							</div>
-							<div class="myreviewdeletearea">
-								<div class="circleday">
-									<p class="cirledaytext">삭제</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="mycommuity"></div>
 			<!--  -->
 
 			<div class="pagebararea" id="preId3"></div>
@@ -420,45 +333,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="blurReview"></div>
-		<div class="reviewWriteCon">
-			<div class="reviewBox">
-				<input type="hidden" id="acId" value=""> <input
-					type="hidden" id="apId" value="">
-				<ion-icon class="closeReview" name="close"></ion-icon>
-				<h4>"소중한 리뷰를 남겨주세요!"</h4>
-				<div class="reviewTitle">
-					<img alt="" src="">
-					<div>
-						<h6 class="reviewAcTitle"></h6>
-						<span class="star"> ★★★★★ <span>★★★★★</span> <input
-							type="range" oninput="drawStar(this)" value="0" step="0.1"
-							min="0" max="5">
-						</span>
-					</div>
-				</div>
-				<div class="reviewFile">
-					<span>* 이미지 최대 5장 등록가능</span>
-					<div class="fileBox">
-						<label>
-							<div>
-								<ion-icon name='images-sharp'></ion-icon>
-								<p>이미지 추가</p>
-							</div> <input id="arfName" type="file" name="arfName" hidden="true"
-							accept="image/*" multiple="true">
-						</label>
 
-					</div>
-				</div>
-				<div class="reviewContent">
-					<textarea rows="" cols=""></textarea>
-					<span id="contentCheckNum"><span>0</span>/200</span>
-				</div>
-				<div class="btnCon">
-					<button class="insertReview" onclick="checkRegist()">등록하기</button>
-				</div>
-			</div>
-		</div>
+
 		<!-- 내 승인여부(맛집)-->
 		<div class="myreviwarea">
 			<h2 class="myschedultext">승인여부 (맛집)</h2>
@@ -492,18 +368,14 @@
 			</div>
 			<!--  -->
 
-			<div class="pagebararea" style="width: 100%; height: 60px;"></div>
+			<div class="pagerevie" style="width: 100%; height: 60px;"></div>
 		</div>
 	</div>
 	<button class="backbtn gotop">
 		<div class="text">
-			<!-- <span>Back</span>
-        <span>to</span> -->
 			<span>top</span>
 		</div>
 		<div class="clone">
-			<!--  <span>Back</span>
-        <span>to</span> -->
 			<span>top</span>
 		</div>
 		<svg width="20px" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
@@ -513,7 +385,955 @@
 				d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
     </svg>
 	</button>
-	<script src="${path }/js/mypage/mypage.js"></script>
+	<!-- 여행경로 모달창 -->
+	<div class="routetotalmodal" style="display: none;">
+
+		<div class="routemainmodaldiv" style="display: none;">
+			<div class="routecenterbar">
+				<div class="routepostioncenterbar">
+					<h7>
+					<b>developers</b></h7>
+					<span class="routespan">x</span>
+				</div>
+			</div>
+			<!-- 여기서 부터 메인body -->
+			<div class="routetotalbody">
+				<!-- 일반비워두기 -->
+				<div id="home">
+					<div id="routemaparea">
+						<div id="routemap"
+							style="overflow: hidden; background: url(&quot;http://t1.daumcdn.net/mapjsapi/images/2x/bg_tile.png&quot;);">
+							<div
+								style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none; cursor: url(&quot;http://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;) 7 5, url(&quot;http://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;), default;">
+								<div style="position: absolute; left: 994px; top: 347px;">
+									<div style="position: absolute; z-index: 0; display: none;"></div>
+									<div
+										style="position: absolute; z-index: 1; left: 0px; top: 0px;">
+										<img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/7.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 11px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/7.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 11px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/8.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 267px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/9.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 523px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/10.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 779px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/8.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 267px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/9.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 523px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/10.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 779px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/6.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -245px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/6.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -245px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/6.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -245px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/7.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 11px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/8.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 267px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/9.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 523px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/10.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 779px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/5.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -501px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/5.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -501px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/5.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -501px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/4.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -757px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/4.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -757px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/4.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -757px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/14/3.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1013px; top: 158px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/15/3.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1013px; top: -98px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/16/3.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1013px; top: -354px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/3.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1013px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/4.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -757px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/5.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -501px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/6.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -245px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/7.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 11px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/8.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 267px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/9.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 523px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+											src="http://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v20_ppxmp/10/17/10.png"
+											alt="" role="presentation" draggable="false"
+											style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 779px; top: -610px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;">
+									</div>
+									<div style="position: absolute; z-index: 1;"></div>
+									<div
+										style="position: absolute; z-index: 1; width: 1673px; height: 719px;"></div>
+									<div style="position: absolute; z-index: 1;">
+										<svg version="1.1"
+											style="stroke: none; stroke-dashoffset: 0.5; stroke-linejoin: round; fill: none; transform: translateZ(0px); position: absolute; left: -4340px; top: -1785px; width: 8365px; height: 3595px;"
+											viewBox="0 0 8365 3595">
+											<defs></defs>
+											<path id="daum-maps-shape-1"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4319 1723" transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-4"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842" transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-5"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842" transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-9"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-10"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-11"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-16"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-17"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-18"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-19"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-25"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832 4384 1804"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-26"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832 4384 1804"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-27"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832 4384 1804"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-28"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832 4384 1804"
+												transform="translate(0,0)"></path>
+											<path id="daum-maps-shape-29"
+												style="stroke: rgb(255, 174, 0); stroke-opacity: 1; stroke-width: 5px; color: rgb(255, 174, 0); stroke-linecap: round; display: block;"
+												d=" M4319 1723 L4340 1842 4392 1824 4330 1832 4384 1804"
+												transform="translate(0,0)"></path></svg>
+									</div>
+									<div
+										style="position: absolute; z-index: 1; width: 100%; height: 0px; transform: translateZ(0px);">
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -22px; top: -62px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -22px; top: -62px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 0px; top: 57px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -22px; top: -62px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 53px; top: 39px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 0px; top: 57px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -22px; top: -62px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 0px; top: 57px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 53px; top: 39px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -10px; top: 48px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -22px; top: -62px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 0px; top: 57px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 53px; top: 39px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: -10px; top: 48px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; margin: -69px 0px 0px -27px; z-index: 0; left: 44px; top: 20px; display: block;">
+											<img draggable="false"
+												src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"
+												alt="" role="presentation" title=""
+												style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 50px, 57px, 0px); top: 0px; left: 0px; width: 50px; height: 57px;">
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 53px; top: 39px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">3</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 53px; top: 39px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">3</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 53px; top: 39px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">3</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 44px; top: 20px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">5</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -22px; top: -62px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">1</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -22px; top: -62px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">1</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 0px; top: 57px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">2</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -22px; top: -62px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">1</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 0px; top: 57px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">2</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -22px; top: -62px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">1</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 0px; top: 57px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">2</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -10px; top: 48px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">4</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -22px; top: -62px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">1</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: 0px; top: 57px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">2</div>
+											</div>
+										</div>
+										<div
+											style="position: absolute; z-index: 0; white-space: nowrap; margin: 0px; left: -10px; top: 48px;">
+											<div class="iwcontentarea" style="padding: 5px;">
+												<div class="iwcontent" style="color: black;">4</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div
+								style="position: absolute; cursor: default; z-index: 1; margin: 0px 6px; height: 19px; line-height: 14px; left: 0px; bottom: 0px; color: rgb(0, 0, 0);">
+								<div
+									style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;">
+									<div
+										style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s ease 0s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 58px;"></div>
+									<div
+										style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">8km</div>
+								</div>
+								<div style="margin: 0px 4px; float: left;">
+									<a target="_blank" href="http://map.kakao.com/"
+										title="Kakao 지도로 보시려면 클릭하세요."
+										style="float: left; width: 32px; height: 10px;"><img
+										src="http://t1.daumcdn.net/mapjsapi/images/2x/m_bi_b.png"
+										alt="Kakao 지도로 이동"
+										style="float: left; width: 32px; height: 10px; border: none;"></a>
+									<div
+										style="font: 11px/11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div>
+								</div>
+							</div>
+							<div
+								style="cursor: auto; position: absolute; z-index: 2; left: 0px; top: 0px;">
+								<div
+									style="width: 106px; height: 32px; box-sizing: content-box; background-color: rgb(255, 255, 255); padding: 2px; border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px; position: absolute; left: 1560px; top: 3px;">
+									<button draggable="false" title="지도" type="button"
+										style="float: left; cursor: default; width: 43px; height: 32px; user-select: none; -webkit-user-drag: none; border: none; background: url(&amp;quot;http://t1.daumcdn.net/mapjsapi/images/2x/control.png&amp;quot;) -5px -183px/116px 264px no-repeat; color: rgb(255, 255, 255); font-weight: bold;"></button>
+									<button draggable="false" title="스카이뷰" type="button"
+										style="float: left; cursor: pointer; width: 63px; height: 32px; user-select: none; -webkit-user-drag: none; border: none; background: url(&amp;quot;http://t1.daumcdn.net/mapjsapi/images/2x/control.png&amp;quot;) -48px -183px/116px 264px no-repeat; color: rgb(0, 0, 0); font-weight: normal;"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 왼쪽의 작은 사이드바 -->
+			<div class="routesmallsidebar">
+				<div class="routesmallsidebartimearea">
+					<div class="routesamllsiderbarschedule">
+						<h7>일정</h7>
+					</div>
+					<div class="routesamllsiderbartotalschedule">
+						<div class="totalscheduletext">
+							<h8>전체일정</h8>
+						</div>
+						<!-- 일자별리스트버튼 -->
+						<div class="schedultlisttext">
+							<div class="smallschedullisttextarea">
+								<div class="smallschedullisttext">
+									<h7>1일차</h7>
+								</div>
+							</div>
+							<div class="smallschedullisttextarea">
+								<div class="smallschedullisttext">
+									<h7>2일차</h7>
+								</div>
+							</div>
+							<div class="smallschedullisttextarea">
+								<div class="smallschedullisttext">
+									<h7>3일차</h7>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- 왼쪽 큰 사이드바 -->
+			<div class="routebigsidebar">
+				<div class="bigsidebararea">
+					<div class="bigsidbararea2">
+						<!-- 우측확대버튼 -->
+						<div class="sidebarexpansion">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+								viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+								class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+									d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"></path>
+          </svg>
+						</div>
+						<h7 class="bigsidebarcentertitle">
+						<b><span>서울</span> " : " <span class="schedulecount">3</span><span>일
+								여행</span></b></h7>
+					</div>
+				</div>
+				<div calss="bigsidebartitleimgesarea">
+					<div class="bigsidbarimgessize">
+						<div class="bigsidebarimagesarea">
+							<img
+								src="https://png.pngtree.com/png-clipart/20210610/ourmid/pngtree-travel-with-suitcases-png-image_3428889.jpg"
+								alt="" width="118" height="46">
+						</div>
+					</div>
+				</div>
+				<!-- 전체일정리스트 -->
+				<div class="alldaydetailschedule">
+					<div class="detailroutetour-1" id="detailroutetareaid">
+						<div class="alldayinputfield">
+							<div id="dayselectbox" class="dayselecttag">1일차 8월 15일 Tue
+							</div>
+						</div>
+						<div class="detailroutetext">
+							<hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs>
+						</div>
+						<div class="dailyroutedetaillist">
+							<div class="dailyroutecountarea">
+								<div class="dailyroutetext">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+										viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+										class="w-6 h-6">        <path stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25"></path>      </svg>
+									<div class="dailytext1">5</div>
+									<div class="dailytext2">장소</div>
+								</div>
+							</div>
+							<hr class="hr2">
+							<div class="routedatailslists ui-sortable" id="routedatails">
+								<div class="selectroutedetailslist ui-sortable-handle">
+									<div class="test">
+										<div class="hiddenlevel"></div>
+										<div class="arrowarea">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+												fill="currentColor" class="w-5 h-5">
+        <path fill-rule="evenodd"
+													d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
+													clip-rule="evenodd"></path>
+      </svg>
+										</div>
+										<div class="selectdetailsroutelist"
+											id="selectdetailsroutelist" draggable="true">
+											<div class="selectdetailscardarea">
+												<div class="hiddencontentid" id="hiddenidtag">827515</div>
+												<div class="selectdetailsimagesarea">
+													<div class="selectdetailsicon">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+															viewBox="0 0 24 24" stroke-width="1.5"
+															stroke="currentColor" class="w-6 h-6" width="10"
+															color="white">
+              <path stroke-linecap="round" stroke-linejoin="round"
+																d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
+            </svg>
+													</div>
+													<img class="selectdetailsimage"
+														src="http://tong.visitkorea.or.kr/cms/resource/00/1860200_image2_1.jpg"
+														alt="Image" loading="lazy">
+												</div>
+												<div class="selectrighttextarea">
+													<div class="selectdetailslisttitletextarea">
+														<div class="selectdetailslisttitletext">
+															<div class="selectdetailsmaxarea"></div>
+															<span class="selectdetailstext">진관사계곡</span> <span
+																class="selectdetailstextaddress">서울특별시 은평구 진관길 73</span>
+														</div>
+														<div class="selectdetailstitleicon">
+															<label class="ui-bookmark"> <input
+																type="checkbox">
+																<div class="bookmark">
+																	<svg viewBox="0 0 32 32">
+                    <g>
+                      <path
+																			d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                    </g>
+                  </svg>
+																</div>
+															</label>
+														</div>
+													</div>
+													<div class="selectdetailsdeletearea">
+														<div class="selectdetailsbtn">시간표</div>
+														<div class="selectdetailsbtn2">상세설명</div>
+														<div class="selectdetailsbtn3">삭제</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="selectroutedetailslist ui-sortable-handle">
+									<div class="test">
+										<div class="hiddenlevel"></div>
+										<div class="arrowarea">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+												fill="currentColor" class="w-5 h-5">
+        <path fill-rule="evenodd"
+													d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
+													clip-rule="evenodd"></path>
+      </svg>
+										</div>
+										<div class="selectdetailsroutelist"
+											id="selectdetailsroutelist" draggable="true">
+											<div class="selectdetailscardarea">
+												<div class="hiddencontentid" id="hiddenidtag">486625</div>
+												<div class="selectdetailsimagesarea">
+													<div class="selectdetailsicon">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+															viewBox="0 0 24 24" stroke-width="1.5"
+															stroke="currentColor" class="w-6 h-6" width="10"
+															color="white">
+              <path stroke-linecap="round" stroke-linejoin="round"
+																d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
+            </svg>
+													</div>
+													<img class="selectdetailsimage"
+														src="http://tong.visitkorea.or.kr/cms/resource/00/2016200_image2_1.jpg"
+														alt="Image" loading="lazy">
+												</div>
+												<div class="selectrighttextarea">
+													<div class="selectdetailslisttitletextarea">
+														<div class="selectdetailslisttitletext">
+															<div class="selectdetailsmaxarea"></div>
+															<span class="selectdetailstext">호국지장사(서울)</span> <span
+																class="selectdetailstextaddress">서울특별시 동작구 현충로
+																210</span>
+														</div>
+														<div class="selectdetailstitleicon">
+															<label class="ui-bookmark"> <input
+																type="checkbox">
+																<div class="bookmark">
+																	<svg viewBox="0 0 32 32">
+                    <g>
+                      <path
+																			d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                    </g>
+                  </svg>
+																</div>
+															</label>
+														</div>
+													</div>
+													<div class="selectdetailsdeletearea">
+														<div class="selectdetailsbtn">시간표</div>
+														<div class="selectdetailsbtn2">상세설명</div>
+														<div class="selectdetailsbtn3">삭제</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="selectroutedetailslist ui-sortable-handle">
+									<div class="test">
+										<div class="hiddenlevel"></div>
+										<div class="arrowarea">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+												fill="currentColor" class="w-5 h-5">
+        <path fill-rule="evenodd"
+													d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
+													clip-rule="evenodd"></path>
+      </svg>
+										</div>
+										<div class="selectdetailsroutelist"
+											id="selectdetailsroutelist" draggable="true">
+											<div class="selectdetailscardarea">
+												<div class="hiddencontentid" id="hiddenidtag">127269</div>
+												<div class="selectdetailsimagesarea">
+													<div class="selectdetailsicon">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+															viewBox="0 0 24 24" stroke-width="1.5"
+															stroke="currentColor" class="w-6 h-6" width="10"
+															color="white">
+              <path stroke-linecap="round" stroke-linejoin="round"
+																d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
+            </svg>
+													</div>
+													<img class="selectdetailsimage"
+														src="http://tong.visitkorea.or.kr/cms/resource/00/204200_image2_1.jpg"
+														alt="Image" loading="lazy">
+												</div>
+												<div class="selectrighttextarea">
+													<div class="selectdetailslisttitletextarea">
+														<div class="selectdetailslisttitletext">
+															<div class="selectdetailsmaxarea"></div>
+															<span class="selectdetailstext">청담공원</span> <span
+																class="selectdetailstextaddress">서울특별시 강남구
+																영동대로131길 26</span>
+														</div>
+														<div class="selectdetailstitleicon">
+															<label class="ui-bookmark"> <input
+																type="checkbox">
+																<div class="bookmark">
+																	<svg viewBox="0 0 32 32">
+                    <g>
+                      <path
+																			d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                    </g>
+                  </svg>
+																</div>
+															</label>
+														</div>
+													</div>
+													<div class="selectdetailsdeletearea">
+														<div class="selectdetailsbtn">시간표</div>
+														<div class="selectdetailsbtn2">상세설명</div>
+														<div class="selectdetailsbtn3">삭제</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="selectroutedetailslist ui-sortable-handle">
+									<div class="test">
+										<div class="hiddenlevel"></div>
+										<div class="arrowarea">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+												fill="currentColor" class="w-5 h-5">
+        <path fill-rule="evenodd"
+													d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
+													clip-rule="evenodd"></path>
+      </svg>
+										</div>
+										<div class="selectdetailsroutelist"
+											id="selectdetailsroutelist" draggable="true">
+											<div class="selectdetailscardarea">
+												<div class="hiddencontentid" id="hiddenidtag">736737</div>
+												<div class="selectdetailsimagesarea">
+													<div class="selectdetailsicon">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+															viewBox="0 0 24 24" stroke-width="1.5"
+															stroke="currentColor" class="w-6 h-6" width="10"
+															color="white">
+              <path stroke-linecap="round" stroke-linejoin="round"
+																d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
+            </svg>
+													</div>
+													<img class="selectdetailsimage"
+														src="http://tong.visitkorea.or.kr/cms/resource/00/2531100_image2_1.jpg"
+														alt="Image" loading="lazy">
+												</div>
+												<div class="selectrighttextarea">
+													<div class="selectdetailslisttitletextarea">
+														<div class="selectdetailslisttitletext">
+															<div class="selectdetailsmaxarea"></div>
+															<span class="selectdetailstext">효사정</span> <span
+																class="selectdetailstextaddress">서울특별시 동작구 현충로 55</span>
+														</div>
+														<div class="selectdetailstitleicon">
+															<label class="ui-bookmark"> <input
+																type="checkbox">
+																<div class="bookmark">
+																	<svg viewBox="0 0 32 32">
+                    <g>
+                      <path
+																			d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                    </g>
+                  </svg>
+																</div>
+															</label>
+														</div>
+													</div>
+													<div class="selectdetailsdeletearea">
+														<div class="selectdetailsbtn">시간표</div>
+														<div class="selectdetailsbtn2">상세설명</div>
+														<div class="selectdetailsbtn3">삭제</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="selectroutedetailslist ui-sortable-handle">
+									<div class="test">
+										<div class="hiddenlevel"></div>
+										<div class="arrowarea">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+												fill="currentColor" class="w-5 h-5">
+        <path fill-rule="evenodd"
+													d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
+													clip-rule="evenodd"></path>
+      </svg>
+										</div>
+										<div class="selectdetailsroutelist"
+											id="selectdetailsroutelist" draggable="true">
+											<div class="selectdetailscardarea">
+												<div class="hiddencontentid" id="hiddenidtag">128611</div>
+												<div class="selectdetailsimagesarea">
+													<div class="selectdetailsicon">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+															viewBox="0 0 24 24" stroke-width="1.5"
+															stroke="currentColor" class="w-6 h-6" width="10"
+															color="white">
+              <path stroke-linecap="round" stroke-linejoin="round"
+																d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"></path>
+            </svg>
+													</div>
+													<img class="selectdetailsimage"
+														src="http://tong.visitkorea.or.kr/cms/resource/00/2611300_image2_1.bmp"
+														alt="Image" loading="lazy">
+												</div>
+												<div class="selectrighttextarea">
+													<div class="selectdetailslisttitletextarea">
+														<div class="selectdetailslisttitletext">
+															<div class="selectdetailsmaxarea"></div>
+															<span class="selectdetailstext">서울숲</span> <span
+																class="selectdetailstextaddress">서울특별시 성동구 뚝섬로
+																273</span>
+														</div>
+														<div class="selectdetailstitleicon">
+															<label class="ui-bookmark"> <input
+																type="checkbox">
+																<div class="bookmark">
+																	<svg viewBox="0 0 32 32">
+                    <g>
+                      <path
+																			d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                    </g>
+                  </svg>
+																</div>
+															</label>
+														</div>
+													</div>
+													<div class="selectdetailsdeletearea">
+														<div class="selectdetailsbtn">시간표</div>
+														<div class="selectdetailsbtn2">상세설명</div>
+														<div class="selectdetailsbtn3">삭제</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="detailroutetour-2" id="detailroutetareaid">
+						<div class="alldayinputfield">
+							<div id="dayselectbox" class="dayselecttag">2일차 8월 16일 Wed
+							</div>
+						</div>
+						<div class="detailroutetext">
+							<hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs>
+						</div>
+						<div class="dailyroutedetaillist">
+							<div class="dailyroutecountarea">
+								<div class="dailyroutetext">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+										viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+										class="w-6 h-6">        <path stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25"></path>      </svg>
+									<div class="dailytext1">0</div>
+									<div class="dailytext2">장소</div>
+								</div>
+							</div>
+							<hr class="hr2">
+							<div class="routedatailslists" id="routedatails"></div>
+						</div>
+					</div>
+					<div class="detailroutetour-3" id="detailroutetareaid">
+						<div class="alldayinputfield">
+							<div id="dayselectbox" class="dayselecttag">3일차 8월 17일 Thu
+							</div>
+						</div>
+						<div class="detailroutetext">
+							<hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs>
+						</div>
+						<div class="dailyroutedetaillist">
+							<div class="dailyroutecountarea">
+								<div class="dailyroutetext">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+										viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+										class="w-6 h-6">        <path stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25"></path>      </svg>
+									<div class="dailytext1">0</div>
+									<div class="dailytext2">장소</div>
+								</div>
+							</div>
+							<hr class="hr2">
+							<div class="routedatailslists" id="routedatails"></div>
+						</div>
+					</div>
+				</div>
+				<div class="dailyroutearea"></div>
+			</div>
+			<div class="routesearcharea">
+				<a href="#" class="routesearchmodalbtn" title="장소를 검색하여 일정에 추가">
+					<span> <svg viewBox="0 0 24 24" height="17" width="17"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"></path></svg>
+				</span>
+				</a> <a href="#" class="routesearchmodalbtn" title="장소를 검색하여 일정에 추가">
+					<span> <svg xmlns="http://www.w3.org/2000/svg" width="20"
+							height="20" class="ionicon" viewBox="0 0 512 512">
+							<circle cx="256" cy="192" r="32"></circle>
+							<path
+								d="M256 32c-88.22 0-160 68.65-160 153 0 40.17 18.31 93.59 54.42 158.78 29 52.34 62.55 99.67 80 123.22a31.75 31.75 0 0051.22 0c17.42-23.55 51-70.88 80-123.22C397.69 278.61 416 225.19 416 185c0-84.35-71.78-153-160-153zm0 224a64 64 0 1164-64 64.07 64.07 0 01-64 64z"></path></svg>
+				</span>
+				</a>
+			</div>
+			<div class="dailyrightarea">
+				<span class="dailyrightspan"></span>일차<br> <span><svg
+						xmlns="http://www.w3.org/2000/svg" width="14" class="ionicon"
+						viewBox="0 0 512 512">
+						<path
+							d="M256 32C167.67 32 96 96.51 96 176c0 128 160 304 160 304s160-176 160-304c0-79.49-71.67-144-160-144zm0 224a64 64 0 1164-64 64.07 64.07 0 01-64 64z"></path></svg></span>
+				<span class="dailyrightnumber"></span> <span data-langnum="57">개의
+					장소</span>
+			</div>
+			<div class="routesearchmodalarea">
+				<div class="routesearchareastyle">
+					<div class="routesearchareadeletestyle">x</div>
+					<div class="routesearchinputarea">
+						<div class="routesearchinput">
+							<div class="input-container">
+								<input class="searchinputtag2" required=""
+									placeholder="장소를 입력해주세요" type="email">
+								<button class="invite-btn" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+										fill="currentColor" class="w-6 h-6">
+                  <path fill-rule="evenodd"
+											d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+											clip-rule="evenodd"></path>
+                </svg>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="makeroutesearcharea">
+						<div class="makeroutesearchtext">
+							<div class="makeroutesearchtextstyle">
+								<hs style="color: #aaa" data-langnum="61">+ 버튼을 누르면 포함되지 않은
+								장소에 추가됩니다.</hs>
+							</div>
+						</div>
+						<div class="makeroutesearchlistarea">
+							<ul class="makeroutesearchlistul">
+								<li class="defaulttext"><span>검색한 관광지가 없습니다.</span> <svg
+										xmlns="http://www.w3.org/2000/svg" fill="none"
+										viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+										class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round"
+											d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+</svg></li>
+							</ul>
+							<!--  -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="userguidemenuarea">
+				<a class="userguidemenu" href="#"><h7>이용방법</h7></a> <a
+					class="userguidemenu" href="#"><h7>수정저장</h7></a> <a
+					class="userguidemenu" href="#"><h7>수정삭제</h7></a> <a
+					class="userguidemenu" href="#" onclick="saveRoute()"><h7>경로저장</h7></a>
+			</div>
+			<div class="fullscreen">
+				<a href="#" class="routesearchmodalbtn2" title="전체화면"> <span>
+						<svg xmlns="http://www.w3.org/2000/svg" height="17" width="17"
+							class="ionicon" viewBox="0 0 512 512">
+							<path
+								d="M336 448h56a56 56 0 0056-56v-56M448 176v-56a56 56 0 00-56-56h-56M176 448h-56a56 56 0 01-56-56v-56M64 176v-56a56 56 0 0156-56h56"
+								fill="none" stroke="currentColor" stroke-linecap="round"
+								stroke-linejoin="round" stroke-width="32"></path></svg>
+				</span>
+				</a>
+			</div>
+			<!--  -->
+		</div>
+	</div>
 </section>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -564,4 +1384,5 @@
 		});
 	});
 </script>
+<script src="${path }/js/mypage/mypage.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

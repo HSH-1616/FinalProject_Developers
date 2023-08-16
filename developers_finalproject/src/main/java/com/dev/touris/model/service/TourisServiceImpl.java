@@ -49,12 +49,13 @@ public class TourisServiceImpl implements TourisService {
 	}
 
 	@Override
-	public int inserttourismember(int loginmemberid, String tustartDate, String tuendDate, List<Map> routedata) {
+	public int inserttourismember(int loginmemberid, String tustartDate, String tuendDate, String registrationDate, List<Map> routedata) {
 		int insertedCount = 0;
 		Map tourismember = new HashMap<>();
 		tourismember.put("loginmemberid", loginmemberid);
 		tourismember.put("tustartDate", tustartDate);
 		tourismember.put("tuendDate", tuendDate);
+		tourismember.put("registrationDate", registrationDate);
 		int result = dao.inserttourismember(session, tourismember);
 		
 		if (result > 0) {
@@ -77,6 +78,18 @@ public class TourisServiceImpl implements TourisService {
 		}
 		
 		return insertedCount;
+	}
+	@Override
+	public int myPageTourisRouteCount() {
+		return dao.myPageTourisRouteCount(session);
+	}
+	@Override
+	public List<TourisMember> myPageTourisRoute(int loginmemberid, Map params) {
+		return dao.myPageTourisRoute(session, loginmemberid, params);
+	}
+	@Override
+	public List<TourisMember> myPageTourisRouteList(int loginmemberid) {
+		return dao.myPageTourisRouteList(session, loginmemberid);
 	}
 	
 //	@Override

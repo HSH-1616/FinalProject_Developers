@@ -150,6 +150,4 @@ public class CommunityDaoImpl implements CommunityDao {
 		return session.selectList("community.mypageCommunity",memberId,new RowBounds((cPage-1)*numPerpage, numPerpage));
 	}
 
-	
-
 }
