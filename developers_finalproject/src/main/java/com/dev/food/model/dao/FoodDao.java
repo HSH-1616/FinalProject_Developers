@@ -24,6 +24,10 @@ public interface FoodDao {
 	
 	int updateFood(SqlSession session, FoodTemp f);
 	
+	int updateFoodOnAdmin(SqlSession session, Food food);
+	
+	int deleteFoodOnAdmin(SqlSession session, int foodNo);
+	
 	int mergeFood(SqlSession session);
 	
 	int mergeFoodPhoto(SqlSession session);

@@ -167,5 +167,19 @@ $(()=>{
 	function fn_foodInfo(foodNo){
 		location.assign('${path}/admin/selectFoodByFoodNo?foodNo='+foodNo);
 	}
+	function fn_deleteFood(foodNo){
+		const result = confirm("정말 삭제하시겠습니까?");
+		if(result == true){
+			location.assign('${path}/admin/deleteFoodByFoodNo?foodNo='+foodNo);
+		}
+	}
+	// const result = "${result}";
+	// console.log(result);
+	// if(result == true){
+	// 	alert("삭제 완료 되었습니다.");
+	// }else if(result == false){
+	// 	alert("삭제 실패했습니다.");
+	// }
+
 </script>
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>

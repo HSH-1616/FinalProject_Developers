@@ -37,6 +37,16 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
+	public int updateFoodOnAdmin(SqlSession session, Food food) {
+		return session.update("food.updateFoodOnAdmin",food);
+	}
+	
+	@Override
+	public int deleteFoodOnAdmin(SqlSession session, int foodNo) {
+		return session.delete("food.deleteFoodOnAdmin",foodNo);
+	}
+	
+	@Override
 	public int mergeFood(SqlSession session) {
 		return session.selectOne("food.mergeFood");
 		//merge한 이후엔 temp테이블 지우기

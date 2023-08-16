@@ -40,6 +40,16 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
+	public int updateFoodOnAdmin(Food food) {
+		return dao.updateFoodOnAdmin(session, food);
+	}
+	
+	@Override
+	public int deleteFoodOnAdmin(int foodNo) {
+		return dao.deleteFoodOnAdmin(session,foodNo);
+	}
+	
+	@Override
 	@Transactional(rollbackFor = {Exception.class})
 	public void insertFoodPhoto(FoodPhotoTemp fp) throws Exception {
 		dao.insertFoodPhoto(session, fp);

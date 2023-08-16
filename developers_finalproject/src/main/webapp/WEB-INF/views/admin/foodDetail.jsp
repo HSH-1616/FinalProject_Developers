@@ -63,8 +63,8 @@
                   <td>
                      <%-- <% pageContext.setAttribute("enter", "\n"); %> --%>
                      <%-- <div class="food_runtime">${fn:replace(f.foodOpenTime,enter,'<br>')}</div> --%>
-                     <textarea rows="4" cols="30" name="foodOpenTime" 
-                     style="border: none;resize: none;">${f.foodOpenTime}</textarea>
+                     <textarea rows="4" cols="30" name="foodAddress" class="adminFoodAddress"
+                     style="border: none;resize: none;">${f.foodAddress}</textarea>
                   </td>
                </tr>
                <tr>
@@ -72,7 +72,7 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top">메뉴</th>
                   <td>
-                     <textarea rows="3" cols="40" name="foodMenu" 
+                     <textarea rows="3" cols="40" name="foodMenu"  class="adminFoodMenu"
                      style="border: none;resize: none;">${f.foodMenu}</textarea>
                   </td>
                </tr>
@@ -81,7 +81,7 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top">연락처</th>
                   <td>
-                     <input type="text" name="foodPhone" style="border: none;" value="${f.foodPhone }">
+                     <input type="text" name="foodPhone" class="adminPhone" style="border: none;" value="${f.foodPhone }">
                   </td>
                </tr>
             </table>
@@ -91,7 +91,7 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top" style="width: 95px;">영업시간</th>
                   <td>
-                     <textarea rows="4" cols="40" name="foodOpenTime" 
+                     <textarea rows="4" cols="40" name="foodOpenTime" class="adminOpenTime"
                      style="border: none;resize: none;">${f.foodOpenTime}</textarea>
                   </td>
                </tr>
@@ -102,8 +102,9 @@
                   <td>
                      <div class="form-check form-switch">
                         <!-- 이대로 사용하면 자료형이 문자열과 숫자로 달라서 오류가 발생한다. -->
-                        <!-- <input class="form-check-input" type="checkbox" name="allow" role="switch" id="flexSwitchCheckChecked" ${f.allow == 1?'checked':''}>
-                        <label class="form-check-label" for="flexSwitchCheckChecked"></label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" 
+                           name="allow" id="flexSwitchCheckChecked" ${f.allow == 1?'checked':''} value="${f.allow}">
+                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                       </div>
                   </td>
                </tr>
@@ -117,22 +118,32 @@
             </table>
          </div>
          <!-- 승인여부가 1이 아닌 경우에만 승인하기 버튼 활성화 -->
-         <button type="submit" class="yoonBtn btnColorRed" style="width: 160px;">수정하기</button>
+         <button type="button" class="yoonBtn btnColorRed" style="width: 160px;" onclick="fn_updateCheck(event);">수정하기</button>
       </form>
       </div>
    </div>
 
    <script>
-      var foodName = '${f.foodName}';
-      var foodAddr = '${f.foodAddress}';
-      var mapx;
-      var mapy;
-      var foodImg = '${f.foodPhoto[0].fpName}';
-
-      //별점 확인
-      $(".starcountnum").click(e=>{
-         console.log($(".starcountnum").val()/2);
+      //체크박스 로직
+      $("#flexSwitchCheckChecked").click(e=>{
+         if($("#flexSwitchCheckChecked").is(":checked")){
+            $(".adminAllow").val(1);
+            console.log(typeof $(".adminAllow").val());
+         }
+         else{
+            $(".adminAllow").val(0);
+            console.log(typeof $(".adminAllow").val());
+         }
       })
+
+      function fn_updateCheck(event){
+         const result = confirm("맛집 수정을 완료 하시겠습니까?");
+         if(result == true){
+            $(event.target).attr("type","submit");
+         }else{
+
+         }
+      }
 
       $(".submitModal").click(e=>{
          //ajax 통신(등록)

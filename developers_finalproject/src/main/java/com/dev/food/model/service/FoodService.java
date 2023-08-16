@@ -16,6 +16,10 @@ public interface FoodService {
 	
 	void updateFood(FoodTemp food) throws Exception;
 	
+	int updateFoodOnAdmin(Food food);
+	
+	int deleteFoodOnAdmin(int foodNo);
+	
 	void insertFoodPhoto(FoodPhotoTemp fp) throws Exception;
 	
 	void mergeFood();
