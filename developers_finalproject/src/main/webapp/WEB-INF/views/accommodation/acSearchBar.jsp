@@ -21,8 +21,8 @@
 			<label class="searchLabel">
 				<div id="searchLoc">
 					<div id="searchForm">
-						<span>여행지</span> 
-						<input type="text" id="searchLocInput" name="loc" placeholder="여행지 검색" />
+						<span>여행지</span> <input type="text" id="searchLocInput" name="loc"
+							placeholder="여행지 검색" />
 					</div>
 				</div>
 			</label> <label class="searchLabel">
@@ -30,16 +30,18 @@
 					<div class="checkDay">
 						<span>체크인</span>
 						<div>
-							<input type="hidden" id="checkIn" name="checkIn">
-							<input id="checkInDay" value="날짜추가" readonly>
+							<input type="text" id="checkIn" name="checkIn" placeholder="날짜추가"
+								readonly>
+							<!-- <input id="checkInDay" value="날짜추가" readonly> -->
 							<ion-icon id="inDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
 					</div>
 					<div class="checkDay">
 						<span>체크아웃</span>
 						<div>
-							<input type="hidden" id="checkOut" name="checkOut">
-							<input id="checkOutDay" value="날짜추가" readonly>
+							<input type="text" id="checkOut" name="checkOut"
+								placeholder="날짜추가" readonly>
+							<!-- <input id="checkOutDay" value="날짜추가" readonly> -->
 							<ion-icon id="outDayBtn" name="close-circle-outline"></ion-icon>
 						</div>
 					</div>
@@ -47,8 +49,8 @@
 			</label> <label class="searchLabel">
 				<div id="searchPeople">
 					<div id="checkPeople">
-						<span>인원</span>  
-						<input id="people" name="people" type="text" value="인원추가" readonly>
+						<span>인원</span> <input id="people" name="people" type="text"
+							value="인원추가" readonly>
 					</div>
 
 				</div>
@@ -63,7 +65,7 @@
 			<p>지역으로 검색하기</p>
 			<div class="searchMap">
 				<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-					width="800" height="730" viewBox="0 0 600 1060">
+					width="600" height="680" viewBox="0 0 600 1060">
               <defs>
                 <filter id="dropshadow">
                   <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -188,28 +190,30 @@
 			<div class="calWrapper">
 				<div class="calContainer">
 					<div class="calDays">
-						<div class="day">MON</div>
-						<div class="day">TUE</div>
-						<div class="day">WED</div>
-						<div class="day">THU</div>
-						<div class="day">FRI</div>
-						<div class="day">SAT</div>
-						<div class="day">SUN</div>
+						<div class="weekDay">SUN</div>
+						<div class="weekDay">MON</div>
+						<div class="weekDay">TUE</div>
+						<div class="weekDay">WED</div>
+						<div class="weekDay">THU</div>
+						<div class="weekDay">FRI</div>
+						<div class="weekDay">SAT</div>
 					</div>
 					<input type="hidden" id="fnum" value="">
+					<input type="hidden" id="selectFnum" value="">
 					<div class="hotelDates now"></div>
 				</div>
 				<div class="calContainer">
 					<div class="calDays">
-						<div class="day">MON</div>
-						<div class="day">TUE</div>
-						<div class="day">WED</div>
-						<div class="day">THU</div>
-						<div class="day">FRI</div>
-						<div class="day">SAT</div>
-						<div class="day">SUN</div>
-					</div>					
+						<div class="weekDay">SUN</div>
+						<div class="weekDay">MON</div>
+						<div class="weekDay">TUE</div>
+						<div class="weekDay">WED</div>
+						<div class="weekDay">THU</div>
+						<div class="weekDay">FRI</div>
+						<div class="weekDay">SAT</div>
+					</div>
 					<input type="hidden" id="lnum" value="">
+					<input type="hidden" id="selectLnum" value="">
 					<div class="hotelDates next"></div>
 				</div>
 			</div>

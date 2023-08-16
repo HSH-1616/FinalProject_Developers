@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script
@@ -230,30 +233,30 @@
 						<div class="calWrapper">
 							<div class="calContainer">
 								<div class="calDays">
-									<div class="day">MON</div>
-									<div class="day">TUE</div>
-									<div class="day">WED</div>
-									<div class="day">THU</div>
-									<div class="day">FRI</div>
-									<div class="day">SAT</div>
-									<div class="day">SUN</div>
+									<div class="weekDay">SUN</div>
+									<div class="weekDay">MON</div>
+									<div class="weekDay">TUE</div>
+									<div class="weekDay">WED</div>
+									<div class="weekDay">THU</div>
+									<div class="weekDay">FRI</div>
+									<div class="weekDay">SAT</div>
 								</div>
-								<input type="hidden" id="reInDay" value="" /> <input
-									type="hidden" id="fnum" value="" />
+								<input type="hidden" id="fnum" value=""> <input
+									type="hidden" id="selectFnum" value="">
 								<div class="hotelDates now"></div>
 							</div>
 							<div class="calContainer">
 								<div class="calDays">
-									<div class="day">MON</div>
-									<div class="day">TUE</div>
-									<div class="day">WED</div>
-									<div class="day">THU</div>
-									<div class="day">FRI</div>
-									<div class="day">SAT</div>
-									<div class="day">SUN</div>
+									<div class="weekDay">SUN</div>
+									<div class="weekDay">MON</div>
+									<div class="weekDay">TUE</div>
+									<div class="weekDay">WED</div>
+									<div class="weekDay">THU</div>
+									<div class="weekDay">FRI</div>
+									<div class="weekDay">SAT</div>
 								</div>
-								<input type="hidden" id="reOutDay" value="" /> <input
-									type="hidden" id="lnum" value="" />
+								<input type="hidden" id="lnum" value=""> <input
+									type="hidden" id="selectLnum" value="">
 								<div class="hotelDates next"></div>
 							</div>
 						</div>
@@ -358,23 +361,22 @@
 						<h5>
 							편의 시설 추가 <span>*최대 6개 등록가능 *권장 사이즈(240px * 120px)</span>
 						</h5>
-						<input type="hidden" name="afaId" value=${afa.afaId }>
+						<c:if test="${not empty afa}">
+							<input type="hidden" name="afaId" value=${afa.afaId }>
+						</c:if>
 						<div id="insertFcCon">
 							<c:if test="${not empty afal }">
 								<c:forEach var="afal" items="${afal}" varStatus="i">
 
-									<div class='insertFcImageCon'>
+									<div class='insertFcImageCon' style="border: none">
 										<div class='insertFcImage'>
-											<ion-icon class='deleteFc' name='close-circle-outline'></ion-icon>
-											<label for='inputFileindex${i.index}'> <ion-icon
-													name='images-sharp'></ion-icon>
-												<p>이미지 추가</p> <%-- <input type='file' name='afalImage' id="inputFileindex${i.index}" required /> --%>
-												<img class='insertFcImg'
+											<label for='inputFileindex${i.index}'> </label> <img
+												class='insertFcImg'
 												src='${path}/images/upload/accommodation/afal/${afal.afalImg}'
 												alt='' style="display: block" />
-												<div class='blurInsertFc' style="display: block">
-													<button type='button' class='insertFcDelete'>삭제하기</button>
-												</div>
+											<div class='blurInsertFc' style="display: block">
+												<button type='button' class='insertFcDelete'>삭제하기</button>
+											</div>
 										</div>
 										<input type='text' id='insertFcName' name='afalName'
 											placeholder='편의시설 이름' value="${afal.afalName }" required />
@@ -396,22 +398,21 @@
 				<div class="registBtnCon">
 					<hr />
 					<div class="registBtn">
-						<button type="button" id="updateOkBtn">수정하기</button>
-						<button id="registCancelBtn">취소</button>
+						<button type="button" id="updateOkBtn" onclick="checkUpdate();">수정하기</button>
+						<button id="registCancelBtn" onclick="history.back()">취소</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-	<button id="deleteRegist">삭제하기</button>
 	<script>
 		$(document).ready(function() {
 			$("input[name=acType]").prop("checked", false)
 			$("input[value=${ac.acType}]").prop("checked", true)
 			$("input[value=${ac.acType}]").nextAll(".blurRt").addClass("on");
 			$("input[value=${ac.acType}]").nextAll(".rtTitle").addClass("on");
-
+			
+		<c:if test="${not empty afa}">
 			<c:if test="${afa.afaCamera==1}">
 			$("input[name=afaCamera]").val(1)
 			$("input[name=afaCamera]").prev().addClass("on")
@@ -442,6 +443,7 @@
 			$("input[name=afaParking]").prev().addClass("on")
 			$("input[name=afaParking]").nextAll("p").addClass("on")
 			</c:if>
+		</c:if>
 			
 			<c:if test="${ac.acPeople>1}">
 				$(".hotelCountInput.people").prev().css("color","#b31312")
@@ -540,7 +542,7 @@
 		})
 		</c:forEach> 
 	</script>
-	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 	<script src="${path }/js/accommodation/acRegist.js"></script>
+	<script src="${path }/js/accommodation/acSearchBar.js"></script>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

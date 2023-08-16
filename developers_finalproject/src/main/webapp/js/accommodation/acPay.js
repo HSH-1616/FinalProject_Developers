@@ -74,10 +74,10 @@ $("#hotelPayBtn").on("click", function() {
 						data: JSON.stringify(data),
 						dataType: "json",
 						success: function(result) {
-							location.href = "/ac/acPayResult"
+							location.replace("/ac/acPayResult")
 						},
 						error: function(result) {
-							location.href = "/ac/acError"
+							location.replace("/ac/acError")
 						}
 					})
 				}
@@ -108,7 +108,7 @@ $("#hotelPayBtn").on("click", function() {
 				location.href = data.next_redirect_pc_url
 			},
 			error: function(data) {
-				location.href = "/ac/acError"
+					location.replace("/ac/acError")
 			}
 		})
 	}

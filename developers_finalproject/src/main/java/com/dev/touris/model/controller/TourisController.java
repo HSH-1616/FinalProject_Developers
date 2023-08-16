@@ -1,5 +1,6 @@
 package com.dev.touris.model.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,18 +8,21 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.dev.nc.common.PageFactory;
 import com.dev.touris.model.service.TourisService;
+import com.dev.touris.model.vo.TourisMember;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -103,11 +107,32 @@ public class TourisController {
 		Integer loginmemberid = Integer.parseInt(String.valueOf(data.get("loginmemberid")));
 		String tustartDate = (String) data.get("tustartDate");
 		String tuendDate = (String) data.get("tuendDate");
+		String registrationDate = (String) data.get("registrationDate");
 //		System.out.println(routedata);
-		service.inserttourismember(loginmemberid, tustartDate, tuendDate, routedata);
+		service.inserttourismember(loginmemberid, tustartDate, tuendDate, registrationDate, routedata);
 		return "redirect:/";
 	}
 	
+	@GetMapping("/mypagetourisroute")
+	@ResponseBody
+	public Map mypageTourisRoute(int loginmemberid, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "1") int numPerpage) {
+		Map param = new HashMap<>();
+		Map data = new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		int totalData = service.myPageTourisRouteCount();
+		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "mypageTourisRoute");
+		List<TourisMember> tourisroutelist = service.myPageTourisRoute(loginmemberid, param);
+		data.put("mypageTourisRoute", tourisroutelist);
+		data.put("pageBar", pageBar);
+		return data;
+	}
+	@GetMapping("/mypagetourisroutelist")
+	@ResponseBody
+	public List<TourisMember> myPageTourisRouteList(@RequestParam int loginmemberid){
+		
+		return service.myPageTourisRouteList(loginmemberid);
+	}
 	
 }
 

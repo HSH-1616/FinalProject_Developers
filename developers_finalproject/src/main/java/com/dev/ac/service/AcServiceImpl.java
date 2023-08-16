@@ -14,9 +14,12 @@ import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
+import com.dev.ac.dto.AcReview;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
+import com.dev.ac.dto.ArFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -95,10 +98,20 @@ public class AcServiceImpl implements AcService {
 	public int deleteHeart(Map param) {
 		return dao.deleteHeart(session, param);
 	}
-
+	
+	@Override
+	public List<Accommodation> selectAcAll(Map param) {
+		return dao.selectAcAll(session,param);
+	}
+	
+	@Override
+	public int selectAcAllCount() {
+		return dao.selectAcAllCount(session);
+	}
+	
 	@Transactional
 	@Override
-	public int insertAc(Accommodation ac) {
+	public Map insertAc(Accommodation ac) {
 		int result = dao.insertAc(session, ac);
 		if (result > 0) {
 			for (int i = 0; i < ac.getAcFiles().size(); i++) {
@@ -111,7 +124,6 @@ public class AcServiceImpl implements AcService {
 			}
 			if (result == ac.getAcFiles().size() + 2) {
 				for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
-					System.out.println(ac.getAfa().getAfaId());
 					ac.getAfa().getAfal().get(i).setAfaId(ac.getAfa().getAfaId());
 					result += dao.insertAfal(session, ac.getAfa().getAfal().get(i));
 				}
@@ -123,7 +135,11 @@ public class AcServiceImpl implements AcService {
 				}
 			}
 		}
-		return result;
+		;
+		Map<String, Object> m = new <String, Object>HashMap();
+		m.put("result", result);
+		m.put("acId", ac.getAcId());
+		return m;
 	}
 
 	@Override
@@ -191,56 +207,124 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public int updateAc(Accommodation ac) {
 		int result = dao.updateAc(session, ac);
-		log.info("acUpdate 결과 : " + result);
+		log.info("acUpdate 성공 result : " + result);
 
 		if (result > 0) {
 			result += dao.updateRegistDelAf(session, ac.getAcId());
 
-			log.info("파일delete 결과 : " + result);
+			log.info("파일delete 성공 result : " + result);
 
 			if (result > 1) {
 				for (int i = 0; i < ac.getAcFiles().size(); i++) {
 					result += dao.updateInAcFile(session, ac.getAcFiles().get(i));
 				}
+				log.info("파일insert 성공 result : " + result);
 			}
 
-			log.info("파일insert 결과 : " + result);
+			if (result > ac.getAcFiles().size() + 1) {
+				result += dao.updateAfa(session, ac.getAfa());
+				log.info("편의시설update 성공 result : " + result);
+			}
 
 			if (result > ac.getAcFiles().size() + 2) {
-				result += dao.updateAfa(session, ac.getAfa());
-			}
-
-			log.info("편의시설update 결과 : " + result);
-			
-			if (result > ac.getAcFiles().size() + 3) {
 				result += dao.updateRegistDelAfal(session, ac.getAfa().getAfaId());
+				log.info("편의시설 리스트 delete 성공 result : " + result);
 			}
 
-			log.info("편의시설delete 결과 : " + result);
-			
-			if (result > ac.getAcFiles().size() + 4) {
+			if (result > ac.getAcFiles().size() + 2) {
 				for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
 					result += dao.updateInAfal(session, ac.getAfa().getAfal().get(i));
 				}
+				log.info("편의시설 리스트 insert 성공 result : " + result);
 			}
 
-			log.info("편의시설insert 결과 : " + result);
-
-			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 4) {
+			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 2) {
 				result += dao.updateDelArv(session, ac.getAcId());
+				log.info("예약내역 삭제 성공 result : " + result);
 			}
 
-			log.info("예약내역 삭제 결과 : " + result);
-			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 5) {
+			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 3) {
 				for (int i = 0; i < ac.getArv().size(); i++) {
 					ac.getArv().get(i).setAcId(ac.getAcId());
 					result += dao.updateInArv(session, ac.getArv().get(i));
 				}
-				log.info("업데이트 성공");
+				log.info("예약내역 등록 성공 result : " + result);
 			}
 
 		}
 		return result;
 	}
+
+	@Override
+	public List<AcPayList> acMyPage(String memberId) {
+		return dao.acMyPage(session,memberId);
+	}
+
+	@Override
+	public AcPayList acRefundApply(String orderId) {
+		return dao.acRefundApply(session,orderId);
+	}
+
+	@Override
+	public int updateRefund(Map param) {
+		int result=dao.updateRefund(session,param);
+		if(result>0) {
+			result+=dao.insertRefund(session,param);
+		}
+		return result;
+	}
+
+	@Override
+	public int insertReview(AcReview ar) {
+		int result=dao.insertReview(session,ar);
+		
+		if(result>0) {
+			for(ArFile arf:ar.getArFiles()) {			
+			arf.setArId(ar.getArId());
+			log.info("파일 : "+arf);
+			result+=dao.insertArf(session,arf);			
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<AcReview> acReview(int no) {
+		List<AcReview> ar=dao.acReview(session,no);
+		
+		for(int i=0;i<ar.size();i++) {
+			List<ArFile> arf=dao.acArf(session,ar.get(i).getArId());
+			ar.get(i).setArFiles(arf);
+		}
+		
+		return ar;
+		
+	}
+
+	@Override
+	public List<AcReview> checkReview(String memberId) {
+		return dao.checkReview(session, memberId);
+	}
+
+	@Override
+	public List<AcPayList> paymentList(Map param) {
+		return dao.paymentList(session,param);
+	}
+
+	@Override
+	public int paymentListCount() {
+		return dao.paymentListCount(session);
+	}
+
+	@Override
+	public int rejectRefund(Map param) {
+		int result=dao.rejectRefund(session,param);
+		if(result>0) {
+			dao.rejectComment(session,param);
+		}
+		
+		return result;
+	}
+
 
 }

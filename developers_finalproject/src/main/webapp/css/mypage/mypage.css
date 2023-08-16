@@ -46,7 +46,11 @@
     height: 150px;
 	border-radius: 9999px;
 	position: relative;
-	left: 21px
+	left: 28px
+}
+.profilemangement{
+	position: relative;
+    left: 7px;
 }
 .boxsize{
 	box-sizing: border-box;
@@ -61,6 +65,8 @@
     padding: 0px;
     position: absolute;
     inset: 0px;
+    border-radius: 50%;
+
 }
 .boxsize img {
 	position: absolute;
@@ -476,6 +482,13 @@
     color: rgb(115 126 138/var(--tw-text-opacity));
     font-weight: 100;
 }
+.updateh2{
+	font-size: .75rem;
+	display: block;
+	--tw-text-opacity: 1;
+    color: rgb(115 126 138/var(--tw-text-opacity));
+    font-weight: 100;
+}
 /*내가 쓴 글 css*/
 .myreviwarea{
 	position: relative;
@@ -854,4 +867,2266 @@
   border-width: 0 0.15em 0.15em 0;
   transform: rotate(45deg);
   transition: all 500ms ease-in-out;
+}
+
+
+
+/*모달*/
+/* 경로생성모달 css*/
+ .routetotalmodal{
+  z-index: 9999;
+  display: none;
+  padding-top: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* overflow: auto; */
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.routemainmodaldiv{
+  margin: auto;
+  background-color: #fff;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  width: 98%;
+  border-radius: 2px;
+  height: 94.5vh;
+  overflow: unset;
+}
+.routecenterbar{
+  text-align: center !important;
+  font: inherit;
+  vertical-align: baseline;
+}
+.routepostioncenterbar{
+    position: relative;
+    /* margin: 0.5rem 0 1rem 0; */
+    /* background-color: #fff; */
+    background-color: #c02221;
+    /* -webkit-transition: -webkit-box-shadow 0.25s; */
+    /* transition: -webkit-box-shadow 0.25s;
+    transition: box-shadow 0.25s; */
+    box-shadow: 0 2px 2px 0 #b313123b, 0 3px 1px -2px #b313125e, 0 1px 5px 0 #b3131200;
+    transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+    /* border-radius: 2px; */
+    z-index: 1;
+    margin: 0 !important;
+    /* box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2); */
+}
+.routespan{
+    position: absolute;
+    font-size: 15px;
+    font-weight: 900;
+    right: 8px;
+    top: 0;
+    cursor: pointer;
+}
+.routetotalbody{
+    clear: both;
+    width: 100%;
+    height: 91.5vh;
+    float: left;
+    position: absolute;
+    z-index: 0;
+}
+#routemaparea{
+  max-width: 100%;
+}
+#routemap{
+    margin-left: 0px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 91.5vh
+}
+
+.routesmallsidebar{
+    width: 50px !important;
+    height: 91.5vh;
+    background-color: #fafafa;
+    float: left;
+    z-index: 0;
+    overflow: auto !important;
+    /* overflow-x: hidden; */
+    position: relative;
+}
+.routesamllsiderbarschedule{
+  background-color: #fff !important;
+  text-align: center;
+  margin: 8px;
+}
+.routesamllsiderbarschedule>h7 {
+  font-size: 13px;
+  color: #000;
+  font-weight: 1000;
+}
+.routesamllsiderbartotalschedule{
+  text-align: center;
+
+}
+.totalscheduletext{
+    border-radius: unset;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 36px !important;
+    margin: 4px;
+    backdrop-filter: blur(4px);
+    box-shadow: rgb(31 38 135 / 10%) 0px 8px 32px 0px !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat';
+    background-color: #fff;
+}
+.totalscheduletext>h8{
+  font-size: 10px !important;
+}
+.schedultlisttext{
+    text-align: center;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-bottom: 20px;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.smallschedullisttext{
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 36px !important;
+    color: #000;
+    margin: 4px;
+    border-radius: 0px;
+    backdrop-filter: blur(4px);
+    box-shadow: rgb(31 38 135 / 10%) 0px 8px 32px 0px !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat';
+    background-color: #fff;
+}
+.smallschedullisttext::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: inherit;
+    border-radius: inherit;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
+    -webkit-animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    z-index: -1;
+}
+@-webkit-keyframes pulse-animation {
+  0% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+  }
+  50% {
+      opacity: 0;
+      -webkit-transform: scale(1.5);
+      transform: scale(1.5);
+  }
+  100% {
+      opacity: 0;
+      -webkit-transform: scale(1.5);
+      transform: scale(1.5);
+  }
+}
+
+@keyframes pulse-animation {
+  0% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+  }
+  50% {
+      opacity: 0;
+      -webkit-transform: scale(1.5);
+      transform: scale(1.5);
+  }
+  100% {
+      opacity: 0;
+      -webkit-transform: scale(1.5);
+      transform: scale(1.5);
+  }
+}
+
+
+.heartbeat {
+  -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+  animation: heartbeat 1.5s ease-in-out infinite both;
+}
+
+@-webkit-keyframes heartbeat {
+  from {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+
+  10% {
+      -webkit-transform: scale(0.91);
+      transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+  }
+
+  17% {
+      -webkit-transform: scale(0.98);
+      transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+
+  33% {
+      -webkit-transform: scale(0.87);
+      transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+  }
+
+  45% {
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+}
+
+@keyframes heartbeat {
+  from {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+
+  10% {
+      -webkit-transform: scale(0.91);
+      transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+  }
+
+  17% {
+      -webkit-transform: scale(0.98);
+      transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+
+  33% {
+      -webkit-transform: scale(0.87);
+      transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+  }
+
+  45% {
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+}
+
+
+
+.smallschedullisttext>h7{
+  font-size: 10px !important;
+  color: #000;
+}
+.routebigsidebar{
+    height: 91.5vh;
+    background-color: #ffffff;
+    float: left;
+    z-index: 0;
+    min-width: inherit;
+    max-width: inherit;
+    margin-left: 0px;
+    position: relative;
+    width: auto;
+    max-width: 1400px;
+}
+
+/* 큰 모달창 검색버튼 css */
+.routesearcharea{
+  display: flex;
+  right: 10px !important;
+  position: absolute;
+  top: 70px;
+  height: auto;
+  /* opacity: 0.8; */
+  flex-direction: column;
+}
+/* 큰 모달창 검색버튼 css */
+.routesearchmodalbtn{
+  position: relative;
+  border: none;
+  background-color: #ffffffb0;
+  color: #212121;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  gap: 10px;
+  border-radius: 10px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.routesearchmodalbtn span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.routesearchmodalbtn::before {
+  content: "";
+  position: absolute;
+  background-color:#b31312;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  bottom: 0%;
+  transform: translate(-100%, 100%);
+  border-radius: inherit;
+}
+
+.routesearchmodalbtn svg {
+  fill:  #b31312;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.routesearchmodalbtn:hover::before {
+  animation: shakeBack 0.6s forwards;
+}
+
+.routesearchmodalbtn:hover svg {
+  fill: white;
+  scale: 1.3;
+}
+
+.routesearchmodalbtn:active {
+  box-shadow: none;
+}
+
+@keyframes shakeBack {
+  0% {
+    transform: translate(-100%, 100%);
+  }
+
+  50% {
+    transform: translate(20%, -20%);
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+.routesearchmodalbtn2{
+  position: relative;
+  border: none;
+  background-color: #ffffffb0;
+  color: #212121;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  gap: 10px;
+  border-radius: 10px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.routesearchmodalbtn2 span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.routesearchmodalbtn2::before {
+  content: "";
+  position: absolute;
+  background-color:#b31312;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  bottom: 0%;
+  transform: translate(-100%, 100%);
+  border-radius: inherit;
+}
+
+.routesearchmodalbtn2 svg {
+  fill:  #b31312;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.routesearchmodalbtn2:hover::before {
+  animation: shakeBack 0.6s forwards;
+}
+
+.routesearchmodalbtn2:hover svg {
+  fill: white;
+  scale: 1.3;
+}
+
+.routesearchmodalbtn2:active {
+  box-shadow: none;
+}
+/* 큰 모달창 검색버튼 */
+.routesearchmodalarea{
+  display: none;
+  width: auto !important;
+  right: 0;
+  left: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+.routesearchareastyle{
+  background-color: #fafafa !important;
+  padding: 40px 8px !important;
+  width: 300px !important;
+  overflow-y: hidden !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 0;
+  transition-property: right;
+  color: rgba(255, 255, 255, 0.7);
+  transition: left 0.3s ease-out;
+}
+.routesearchareadeletestyle{
+  position: absolute;
+  z-index: 1010;
+  color: #000;
+  cursor: pointer;
+  font-size: 2.1rem;
+  top: -7px;
+  right: 10px;
+  padding: 0;
+}
+.routesearchinput{
+  margin: 16px 8px;
+}
+/* 경로모달창 검색 input 태그 css */
+.input-container {
+  position: relative;
+  display: flex;
+  height: 2.8rem;
+  width: 100%;
+  /* min-width: 200px;
+  max-width: 250px; */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+}
+
+.input-container input {
+  /* height: 100%; */
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid  rgb(176 190 197);
+  background-color: transparent;
+  padding: 0.625rem 70px 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: rgb(69 90 100);
+  outline: none;
+  transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-container input:focus {
+  border: 0.1px solid #b31312
+}
+
+.invite-btn {
+  position: absolute;
+  display: flex;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  z-index: 10;
+   border-radius: 4px;
+  background-color: white;
+   padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem; 
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  transition: .6s ease;
+  cursor: pointer;
+}
+.invite-btn svg{
+  width: 20px;
+}
+.invite-btn1 svg{
+  width: 20px;
+}
+/*여기까지 경로모달창 검색 input 태그 css */
+.makeroutesearcharea{
+  margin: 0;
+}
+.makeroutesearchtextstyle>hs{
+  color: #aaa;
+  font-size: 9px;
+  font-weight: 700;
+}
+.makeroutesearchlistarea{
+  height: 75vh;
+  overflow-y: auto;
+}
+.makeroutesearchlistul{
+  padding-left: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.defaulttext{
+	display: grid;
+    justify-items: center;
+    position: relative;
+    text-align: center;
+    top: 20px;
+    color: #aaa !important;
+}
+.defaulttext span{
+}
+.defaulttext svg{
+	width: 30px;
+	height: 30px;
+	position: relative;
+    top: 10px;
+}
+.makeroutesearchlistli{
+  display: flex;
+  position: relative;
+  margin: 16px 8px !important;
+  padding: 0;
+  border: none !important;
+  list-style-type: none;
+  box-shadow: rgba(31, 38, 135, 0.1) 0px 8px 32px 0px;
+  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+.makesearchimg{
+  width: 60px;
+  height: 60px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  border-radius: 2px;
+  
+}
+.makeroutesearchlistliimges{
+	padding-top: 5px;
+    padding-bottom: 5px;
+    /* padding: 5px; */
+    padding-left: 5px;
+}
+.makeroutesearchlistliimgesicon{
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  background-color: #98dde3;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.makeroutesearchlistdetaile{
+  width: calc(100% - 65px);
+  padding: 8px !important;
+}
+.makeroutelisttextarea{
+  color: #000;
+  text-align: start;
+  line-height: 1 !important;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 150px;
+}
+.makeroutelisttextarea>h7{
+  font-size: 11px !important;
+}
+.smailspottext{
+    font-size: 9px;
+    color: #999;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /* margin-top: 4px; */
+    line-height: 1.5;
+}
+.makerouteplusbtnarea{
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+.makerouteplusicon{
+    width: 40px !important;
+    padding: 0 !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+.makerouteplusicon svg{
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  color: black;
+}
+.bigsidebararea{
+  text-align: center;
+}
+.bigsidbararea2{
+  background-color: white;
+}
+.sidebarexpansion{
+  background-color: #ffffff !important;
+  border-radius: 10px;
+  height: 16px;
+  float: right !important;
+}
+.sidebarexpansion>svg{
+    color: #000000;
+    width: 12.9px;
+    cursor: pointer;
+    line-height: 1;
+}
+.bigsidebarcentertitle{
+  margin: 8px;
+  display: block;
+  font-size: 13px;
+  font-weight: 1000;
+}
+.schedulecount{
+    color: #f44336;
+    font-size: 15px;
+}
+.bigsidbarimgessize{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bigsidebarimagesarea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alldaydetailschedule{
+  display: block;
+  height: 79.2vh;
+  overflow: auto;
+}
+.detailroutetour{
+    clear: both;
+    padding: 3px;
+    margin: 5px;
+    /*width: auto;*/
+    width: 264px;
+    display: table;
+    background-color: #fafafa !important;
+    border-radius: 3px;
+}
+#detailroutetareaid{
+	clear: both;
+    padding: 3px;
+    margin: 5px;
+    /*width: auto;*/
+    width: 264px;
+    display: table;
+    background-color: #fafafa !important;
+    border-radius: 3px;
+}
+.alldayinputfield{
+  /* margin: 5px;
+  min-width: 248px;
+  position: relative; */
+    display: flex;
+    justify-content: center;
+}
+#dayselectbox{
+    height: auto;
+    display: inline-block;
+    width: auto;
+    border: none !important;
+    background-color: #fafafa !important;
+    font-family: 'Montserrat';
+}
+.detailroutetext{
+    color: #aaa;
+    /* margin-top: -10px; */
+    text-align: center;
+}
+.detailroutetext>hs{
+  position: relative;
+  left: 6px;
+  font-size: 9px;
+  color: #aaa;
+}
+.dailyroutedetaillist{
+  font-size: 12px !important;
+  padding-bottom: 5px !important;
+}
+.dailyroutecountarea{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+}
+.dailyroutetext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dailyroutetext>svg{
+  color: green;
+  width: 15px;
+  height: 15px
+}
+.dailytext1{
+  font: inherit;
+  padding: 5px;
+  font-size: 1.2rem;
+}
+.dailytext2{
+  font: inherit;
+  font-size: 1rem;
+}
+.hr2{
+  margin: -5px 0 0 0 !important;
+  border-color: #ccc !important;
+  overflow: visible;
+  text-align: inherit;
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+}
+.routedatailslists{
+    text-align: left;
+    min-height: 600px;
+}
+.arrowarea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 27px;
+    text-align: center;
+}
+.arrowarea>svg{
+  width: 17px;
+  height: 17px;
+}
+.selectdetailsroutelist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selectdetailscardarea{
+    box-shadow: rgb(31 38 135 / 15%) 0px 8px 32px 0px !important;
+    background: rgba(255, 255, 255, 1) !important;
+    border-radius: 4px !important;
+    border-width: initial !important;
+    border-style: none !important;
+    border-color: initial !important;
+    border-image: initial !important;
+    margin: 4px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 8px;
+    width: 250px;
+    position: relative;
+    touch-action: none;
+    user-select: none;
+}
+.selectdetailsimagesarea{
+  position: relative;
+}
+.selectdetailsicon{
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    /* left: 2px;
+    top: 2px; */
+    background-color: #98dde3;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selectdetailsimage{
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 2px;
+    min-width: 65px;
+    vertical-align: middle;
+}
+.selectrighttextarea{
+    padding: 0 8px;
+    /* flex: 2; */
+    flex-grow: 1;
+    height: 100%;
+}
+.selectdetailslisttitletextarea{
+  display: flex;
+  justify-content: space-between;
+}
+.selectdetailstitleicon{
+  width: 15px;
+  height: 15px;
+}
+.selectdetailstitleicon>.ui-bookmark{
+  position: sticky;
+  --icon-size: 15px;
+}
+.selectdetailslisttitletext{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: space-around;
+}
+.selectdetailsmaxarea{
+    position: absolute;
+    width: 137px;
+    height: 40px;
+    background-color: #b31312;
+    opacity: 0;
+}
+.selectdetailstext{
+    font-size: 11px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 110px;
+}
+.selectdetailstextaddress{
+    font-size: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 110px;
+}
+.selectdetailsdeletearea{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    /* justify-content: space-between; */
+    margin-top: 4px;
+}
+.selectdetailsbtn{
+  cursor: pointer;
+  padding-right: 17px;
+  font-size: 10px;
+}
+.selectdetailsbtn2{
+  cursor: pointer;
+  padding-right: 17px;
+  font-size: 10px;
+}
+.selectdetailsbtn3{
+  cursor: pointer;
+  font-size: 10px;
+}
+.userguidemenuarea{
+    position: absolute;
+    right: auto;
+    left: 360px;
+    top: 40px;
+    /* top: 40px; */
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    color: #000 !important;
+}
+.userguidemenu{
+    width: 80px;
+    height: 48px;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000 !important;
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 20%) !important;
+    backdrop-filter: blur(4px);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px !important;
+    text-decoration: unset !important;
+}
+.userguidemenu>h7{
+  font-size: 10px !important;
+}
+.fullscreen{
+    display: flex;
+    right: 10px !important;
+    position: absolute;
+    /* top: 100px; */
+    height: auto;
+    opacity: 0.8;
+    flex-direction: column;
+    bottom: 10px;
+}
+/* 경로생성모달 css*/
+
+/* 장소등록 모달창 css */
+.regspot{
+    display: flex;
+    z-index: 99999 !important;
+    display: none;
+    /* padding-top: 50px; */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.smallmodal{
+  top: 25%;
+  left: 25%;
+  margin: auto;
+  position: relative;
+  padding: 16px;
+  outline: 0;
+  width: 50% !important;
+  text-align: center;
+  color: #000 !important;
+  margin: 0.5rem 0 1rem 0;
+  background-color: #fff;
+  -webkit-transition: -webkit-box-shadow 0.25s;
+  transition: -webkit-box-shadow 0.25s;
+  transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+  border-radius: 2px;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+  -webkit-animation: animatezoom 0.6s;
+  
+}
+.header-text{
+  color: #000 !important;
+  display: block;
+}
+.header-delete{
+    position: absolute;
+    right: 0;
+    top: 0;
+    right: 8px !important;
+    cursor: pointer;
+    color: #000 !important;
+}
+.header-title{
+  margin-top: 16px;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: 400;
+  color: #333;
+  text-transform: none;
+}
+.header-titlep{
+  margin: 0 0 8px 0;
+  color: #000 !important;
+}
+.header-h7{
+  font-size: 13px;
+}
+.body-text{
+  margin: 16px 0;
+  margin-bottom: 65px;
+  color: #000 !important;
+}
+.body-p{
+  margin: 16px 0;
+  color: #000 !important;
+}
+.body-p>p{
+  margin: 8px;
+}
+.body-p>p>h7{
+  font-size: 13px;
+}
+.body-select{
+  margin: 0 0 20px 0;
+  display: flex;
+}
+.body-select>label{
+    flex: 1;
+    font-size: 0.8rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.body-select>label>svg{
+    width: 16px;
+    vertical-align: -3px;
+}
+.body-input{
+  margin: 10px 0 0 0 !important;
+}
+.bodyinput-container {
+  position: relative;
+  margin: 30px auto;
+  width: 100%;
+  /* width: 200px; */
+}
+
+.bodyinput-container input[type="text"] {
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  /* border-bottom: 2px solid #ccc; */
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+.bodyinputarea{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    border-radius: 5px
+}
+
+.bodyinputlabel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.bodyinput-container input[type="text"]:focus ~ .label,
+.bodyinput-container input[type="text"]:valid ~ .label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.bodyinput-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #333;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.bodyinput-container input[type="text"]:focus ~ .underline,
+.bodyinput-container input[type="text"]:valid ~ .underline {
+  transform: scaleX(1);
+}
+.footera{
+    display: block;
+    width: 30%;
+    height: 37px;
+    left: 33%;
+    background-color: #000000;
+    margin-bottom: 5px;
+    text-decoration: unset;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    color: #fff;
+}
+/* 여기까지 장소등록 모달창 css */
+/* 장소등록 검색list 모달창 css */
+.reqsearchlist{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99999 !important;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  background-color: rgb(0 0 0 / 13%);
+}
+.reqsearchlistmodalarea{
+  position: relative;
+  width: 60% !important;
+  top: 35%;
+  margin: auto !important;
+  text-align: center;
+  padding: 16px;
+  outline: 0;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+  -webkit-animation: animatezoom 0.6s;
+  
+}
+.black-text{
+  color: #000 !important;
+  display: block;
+}
+.black-delteicon{
+  position: absolute;
+  right: 8px !important;
+  cursor: pointer;
+  color: #000 !important;
+  /* right: 0; */
+  top: 0;
+}
+.black-texth7{
+  font-size: 13px;
+  color: #000 !important;
+}
+.black-smalltextarea{
+  text-align: center;
+  color: #000;
+}
+.black-smalltextul{
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0.5rem 0 1rem 0;
+  margin-top: 0;
+  border-radius: 2px;
+  text-align: center;
+  overflow: hidden;
+  position: relative
+}
+.black-smalltextli{
+  background-color: #fff;
+  padding: 10px 20px;
+  list-style-type: none;
+}
+.black-samlltexth5{
+  margin-top: 0.6rem !important;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: 400;
+  color: #333;
+  text-transform: none;
+}
+.black-samlltexth5 span{
+  color: #333;
+  text-transform: none;
+}
+.reqsearchlistresult{
+  list-style-type: none;
+  text-align: center;
+}
+.reqsearchlistresultli{
+  text-align: left !important;
+  padding: 0 !important;
+  padding-left: 30px !important;
+  border-bottom: none;
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  color: #000 !important;
+}
+.listresultstly{
+  width: 80%;
+  padding: 5px
+}
+.listresultstly h7{
+  font-size: 13px;
+  color: #000 !important;
+}
+.listresultstly hs{
+  font-size: 9px;
+  color: #000 !important;
+}
+.reqspotbtnarea{
+  width: 20%;
+  display: flex;
+  color: #000 !important;
+}
+.reqspotbtn{
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    -webkit-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+    text-decoration: none;
+    color: #fff;
+    background-color: white;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    outline: 0;
+    line-height: 36px;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 50%;
+    border-radius: unset !important;
+    box-shadow: none !important;
+    color: #000 !important;
+}
+.reqspotbtn2{
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    -webkit-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+    text-decoration: none;
+    color: #fff;
+    background-color: white;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    outline: 0;
+    line-height: 36px;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 50%;
+    border-radius: unset !important;
+    box-shadow: none !important;
+    color: #000 !important;
+}
+.reqspotbtn svg {
+  width: 1.5rem;
+  padding-top: 17px !important;
+}
+.reqspotbtn2 svg{
+  width: 1.1rem;
+  padding-top: 21px !important;
+}
+/* .reqspotbtn:hover {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  z-index: 1;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out; */
+
+.reqspotbtn:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.reqspotbtn2:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.reqsearchdeltebtn{
+  width: 100%;
+  height: 37px;
+  background-color:#b31312;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+.dailyroutearea{
+  display: none;
+  font-size: 12px;
+  overflow: auto;
+  max-height: 87vh;
+  width: 280px;
+  text-align: center;
+  color: #000 !important;
+}
+.dailyroutelists{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.dailyrouteliststyle{
+    box-shadow: rgb(31 38 135 / 8%) 0px 8px 16px 0px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 4px !important;
+    border-width: initial !important;
+    border-style: none !important;
+    border-color: initial !important;
+    border-image: initial !important;
+    margin: 8px;
+    background-color: transparent !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 8px;
+    position: relative;
+    text-align: center;
+}
+.dailyroutecard{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.dailyroutecardtitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000 !important;
+}
+.dailyroutecardtitletext{
+    font-size: 11px;
+    font-family: 'Montserrat';
+    line-height: 1;
+    font-weight: 700;
+    color: #ffa500;
+}
+.dailyroutecardcontentarea{
+    padding: 0 8px;
+    flex: 2;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: #000 !important;
+    background-color: #fff !important;
+}
+.dailyroutecardcontent-L{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: space-around;
+    color: #000 !important;
+}
+.dailyroutecardspan{
+    font-size: 10px;
+    font-family: 'Montserrat';
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 140px;
+    overflow: hidden;
+    text-align: left;
+    color: #000 !important;
+}
+.dailyroutecardspan span{
+  line-height: 1;
+}
+.dailyroutecardcontent-R{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:  #b31312;
+    padding: 2px;
+    border-radius: 2px;
+    width: 29px;
+    cursor: pointer;
+    text-align: center;
+}
+.dailyroutecardcontent-Rtext{
+    font-size: 10px;
+    font-family: 'Montserrat';
+    line-height: 1;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+.dailyrightarea{
+    display: none;
+    /* z-index: 2; */
+    /* background-color: transparent; */
+    text-align: center;
+    font-size: 12px;
+    /* margin: 8px; */
+    color: #000 !important;
+    /*  */
+    position: absolute;
+    right: 20px;
+    top: 74px;
+    width: 200px;
+    z-index: 1;
+    height: 80px;
+    box-shadow: rgb(31 38 135 / 10%) 0px 8px 16px 0px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 4px !important;
+    border-width: initial !important;
+    border-style: none !important;
+    border-color: initial !important;
+    border-image: initial !important;
+    margin: 8px;
+}
+.dailyrightspan{
+    color: #000;
+    font-size: 30px;
+    font-family: 'Montserrat';
+    text-align: center;
+}
+.dailyrightnumber{
+    color: #ffa500;
+    font-size: 20px;
+    font-family: 'Montserrat';
+}
+.blink-1 {
+  -webkit-animation: blink-1 0.7s 1 both;
+  animation: blink-1 0.7s 1 both;
+}
+
+@-webkit-keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+      opacity: 1;
+  }
+
+  25%,
+  75% {
+      opacity: 0;
+  }
+}
+
+@keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+      opacity: 1;
+  }
+
+  25%,
+  75% {
+      opacity: 0;
+  }
+}
+/*지도 오버레이 */
+.wrap {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	width: 288px;
+	height: 132px;
+	margin-left: -144px;
+	text-align: left;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap .info {
+	width: 286px;
+	height: 120px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+	padding: 5px 0 0 10px;
+	height: 30px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.info .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #888;
+	width: 17px;
+	height: 17px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	overflow: hidden;
+}
+
+.info .desc {
+	position: relative;
+	margin: 13px 0 0 90px;
+	height: 75px;
+}
+
+.desc .ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.desc .jibun {
+	font-size: 11px;
+	color: #888;
+	margin-top: -2px;
+}
+
+.info .img {
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 73px;
+	height: 71px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+}
+
+.info:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: 0;
+	width: 22px;
+	height: 12px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.info .link {
+	color: #5085BB;
+}
+.iwcontentarea{
+	position: absolute;
+	background-color: white;
+	width: 26px;
+	height: 26px;
+	border-radius:50%;
+	padding: 2px;
+	right:-6.7px;
+	bottom: 36px;
+	align-items: center;
+	text-align: center;
+}
+.iwcontent{
+	z-index: 5;
+	/*color: white;*/
+	font-weight: 700;
+	padding-bottom: 2px;
+}
+/* 찜하기css */
+.ui-bookmark {
+  position: absolute;
+  top: 1%;
+  /* right: 63%; */
+  left: 0.5%;
+  --icon-size: 24px;
+  --icon-secondary-color: rgb(77, 77, 77);
+  --icon-hover-color: rgb(97, 97, 97);
+  --icon-primary-color: gold;
+  --icon-circle-border: 1px solid var(--icon-primary-color);
+  --icon-circle-size: 35px;
+  --icon-anmt-duration: 0.3s;
+}
+
+.ui-bookmark input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.ui-bookmark .bookmark {
+  width: var(--icon-size);
+  height: auto;
+  fill: var(--icon-secondary-color);
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -webkit-transform-origin: top;
+  -ms-transform-origin: top;
+  transform-origin: top;
+}
+
+.bookmark::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  -webkit-box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+    30px 0 0 -4px var(--icon-primary-color),
+    0 -30px 0 -4px var(--icon-primary-color),
+    -30px 0 0 -4px var(--icon-primary-color),
+    -22px 22px 0 -4px var(--icon-primary-color),
+    -22px -22px 0 -4px var(--icon-primary-color),
+    22px -22px 0 -4px var(--icon-primary-color),
+    22px 22px 0 -4px var(--icon-primary-color);
+  box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+    30px 0 0 -4px var(--icon-primary-color),
+    0 -30px 0 -4px var(--icon-primary-color),
+    -30px 0 0 -4px var(--icon-primary-color),
+    -22px 22px 0 -4px var(--icon-primary-color),
+    -22px -22px 0 -4px var(--icon-primary-color),
+    22px -22px 0 -4px var(--icon-primary-color),
+    22px 22px 0 -4px var(--icon-primary-color);
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.bookmark::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: var(--icon-circle-border);
+  opacity: 0;
+}
+
+/* actions */
+
+.ui-bookmark:hover .bookmark {
+  fill: var(--icon-hover-color);
+}
+
+.ui-bookmark input:checked + .bookmark::after {
+  -webkit-animation: circles var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: circles var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  -webkit-animation-delay: var(--icon-anmt-duration);
+  animation-delay: var(--icon-anmt-duration);
+}
+
+.ui-bookmark input:checked + .bookmark {
+  fill: var(--icon-primary-color);
+  -webkit-animation: bookmark var(--icon-anmt-duration) forwards;
+  animation: bookmark var(--icon-anmt-duration) forwards;
+  -webkit-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+
+.ui-bookmark input:checked + .bookmark::before {
+  -webkit-animation: circle var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: circle var(--icon-anmt-duration)
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  -webkit-animation-delay: var(--icon-anmt-duration);
+  animation-delay: var(--icon-anmt-duration);
+}
+
+@-webkit-keyframes bookmark {
+  50% {
+    -webkit-transform: scaleY(0.6);
+    transform: scaleY(0.6);
+  }
+
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@keyframes bookmark {
+  50% {
+    -webkit-transform: scaleY(0.6);
+    transform: scaleY(0.6);
+  }
+
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@-webkit-keyframes circle {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  90% {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes circle {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  90% {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes circles {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes circles {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+.hiddenid{
+	display: none;
+}
+.hiddencontentid{
+	display: none;
+	}
+#hiddenidtag{
+	display: none;
+}
+.hidenidtext{
+	display: none;
+}
+.modalhidden{
+	display: none;
+}	
+/**/
+
+/*숙박업소*/
+.acPayListCon {
+	width: 90%;
+	border: 2px solid #eeeeee;
+	border-radius: 20px;
+	margin-bottom: 30px;
+}
+
+.acPayListHead {
+	margin-top: 30px;
+	margin-left: 30px;
+	display: flex;
+	height: 130px;
+	position: relative;
+}
+
+.acPayListHead img {
+	border-radius: 10px;
+	width: 200px;
+	height: 130px;
+}
+
+.payListContent {
+	margin-top: 7px;
+}
+
+.payListContent>div {
+	display: flex;
+}
+
+.payListContent>div>div h6,
+.payListContent>h5 {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.acPayListCon hr {
+	border: 0;
+	height: 0;
+	opacity: unset;
+	border-top: 2px solid #eeeeee;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.acPayListDetail {
+	margin-left: 30px;
+	display: flex;
+	padding-bottom: 30px;
+	position: relative;
+}
+
+.payPrice {
+	position: relative;
+	left: 63px;
+}
+
+.payPrice>div {
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+}
+
+.payPrice h6 {
+	font-size: 1.2rem;
+}
+
+.payPrice>div>h6 {
+	margin-top: 15px;
+	margin-right: 30px;
+}
+
+.payInfo>div {
+	display: flex;
+}
+
+.payInfo ion-icon {
+	font-size: 1.5rem;
+	margin-right: 10px;
+	color: #b31312;
+}
+
+.payInfo span {
+	position: relative;
+	top: 2px;
+}
+
+.payInfo>div>div {
+	margin-right: 15px;
+	display: flex;
+	align-items: center;
+}
+
+.cancelPay {
+	position: absolute;
+	width: 90px;
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+
+	color: white;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	margin-bottom: 10px;
+	left: 88%;
+	top: 40px;
+}
+
+.cancelPay.on {
+	background-color: #b31312;
+}
+
+.cancelPay.off {
+	background-color: #afafaf;
+}
+
+.writeReview {
+	position: absolute;
+	width: 90px;
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+	color: white;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	margin-bottom: 10px;
+	left: 88%;
+	top: 40px;
+}
+
+.writeReview.on {
+	background-color: #b31312;
+}
+
+.writeReview.off {
+	background-color: #afafaf;
+}
+
+.payListArea {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.beforePayListArea {
+	display: none;
+}
+
+.refundListArea {
+	display: none;
+}
+
+.refundListArea h4 {
+	margin-left: 30px;
+	margin-bottom: 30px;
+	font-size: 1.3rem;
+
+}
+
+.acPayForm {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: unset;
+	margin: unset;
+}
+
+.refundStatus {
+	font-size: 1.5rem;
+	color: #b31312;
+	position: absolute;
+	left: 85%;
+	top: 0px;
+}
+
+.refundPrice {
+	margin-top: 20px;
+}
+
+.refundPrice span {
+	font-size: 1.1rem;
+	margin-right: 20px;
+
+}
+
+.refundInfo {
+	width: 45%;
+}
+
+.refundInfo h6 {
+	font-size: 1.2rem;
+	color: #b31312;
+	margin-top: 20px;
+}
+
+.refundReason {
+	width: 55%;
+}
+
+.refundReason h6 {
+	margin-top: 20px;
+	font-size: 1.1rem;
+}
+
+.refundReason pre {
+	margin-top: 20px;
+	font-size: 1.1rem;
+	white-space: pre-wrap;
+	word-break: break-all;
+	overflow: auto;
+}
+
+#blurReview {
+	display: none;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 50;
+	height: 100vh;
+	width: 100%;
+	background: #000;
+	opacity: 0.6;
+}
+
+.reviewWriteCon {
+	position: fixed;
+	width: 800px;
+	height: 710px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 160px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	border-radius: 20px;
+	z-index: 100;
+	background-color: white;
+	display: none;
+}
+
+.reviewBox {
+	width: 90%;
+	height: 90%;
+	position: relative;
+
+}
+
+.reviewBox>h4 {
+	color: #b31312;
+	text-align: center;
+	margin-bottom: 25px;
+	font-size: 1.8rem;
+	font-family: "LINESeedKR-Bd" !important;
+}
+
+.closeReview {
+	position: absolute;
+	font-size: 2.5rem;
+	left: 98%;
+}
+
+.reviewTitle {
+	display: flex;
+	align-items: center;
+}
+
+.reviewTitle img {
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+}
+
+.reviewTitle>div {
+	margin-left: 20px;
+	height: 150px;
+}
+
+.reviewAcTitle {
+	font-size: 1.3rem;
+	margin-top: 45px;
+}
+
+.star {
+	position: relative;
+	font-size: 2rem;
+	color: #ddd;
+	/*top: 40px;*/
+}
+
+.star input {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.star span {
+	width: 0;
+	position: absolute;
+	left: 0;
+	color: #b31312;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.reviewFile {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.reviewFile>span {
+	color: #b31312;
+}
+
+.fileBox {
+	margin-top: 10px;
+	height: 100px;
+	width: 100%;
+	display: flex;
+}
+
+.fileBox label {
+	border: 1px solid #afafaf;
+	color: #999;
+	border-radius: 10px;
+	width: 14%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+}
+
+.fileBox ion-icon {
+	font-size: 2rem;
+	margin-bottom: 10px;
+}
+
+.fileBox p {
+	font-size: 0.8rem;
+	margin-bottom: 0;
+}
+
+.previewImg {
+	width: 14%;
+	height: 100%;
+	margin-left: 15px;
+	border-radius: 10px;
+	border: 1px solid #afafaf;
+
+}
+
+.reviewContent {
+	margin-top: 20px;
+	width: 100%;
+	height: 30%;
+
+	position: relative;
+}
+
+.reviewBox textarea {
+	outline: none;
+	resize: none;
+	width: 100%;
+	height: 100%;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+#contentCheckNum {
+	position: absolute;
+	top: 165px;
+	right: 15px;
+}
+
+.insertReview {
+	border: none;
+	border-radius: 10px;
+	background-color: #b31312;
+	color: white;
+	margin-right: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	width: 120px;
+	height: 50px;
+}
+
+.btnCon {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.refundBtn {
+	box-shadow: 0 2px 30px 0 rgba(31, 38, 135, .08) !important;
+	background-color: white;
+	height: 40px;
+	width: 100px;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+}
+
+.refundBtn.check{
+	background-color: #b31312;
+	color: white;
+	
+}
+
+.refundListArea>div:first-child {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.refundComplete{
+	display: none;
 }

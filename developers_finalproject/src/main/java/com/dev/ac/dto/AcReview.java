@@ -1,6 +1,7 @@
 package com.dev.ac.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dev.member.model.dto.Member;
@@ -16,9 +17,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AcReview {
 	private int arId;
+	private int acId;
+	private int apId;
+	private String memberId;
 	private String arContent;
 	private double arGrade;
 	private Date arDate;
 	private Member member;
-	private List<ArFile> arFiles;
+	private List<ArFile> arFiles=new ArrayList();;
 }
