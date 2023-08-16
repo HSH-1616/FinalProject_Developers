@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="${path }/css/mypage/mypage.css" />
 <link rel="stylesheet" href="${path}/css/mypage/slick.css" />
 <link rel="stylesheet" href="${path}/css/mypage/slick-theme.css" />
+<script src="sweetalert2.min.js"></script>
+<!-- 지도api -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab598319bacded85b90db7133a8bfffa&libraries=services,clusterer,drawing"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 <script src="${path }/js/mypage/slick.min.js"></script>
 <script>
 	const path = '${path}';
@@ -1384,5 +1390,6 @@
 		});
 	});
 </script>
+<script src="${path }/js/accommodation/mypageHSH.js"></script>
 <script src="${path }/js/mypage/mypage.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
