@@ -7,7 +7,9 @@ import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
 import com.dev.ac.dto.AcHeart;
 import com.dev.ac.dto.AcPay;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
+import com.dev.ac.dto.AcReview;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
 
@@ -18,9 +20,9 @@ public interface AcService {
 	List<Accommodation> searchListAll(Map param);
 	
 	Accommodation acDetail(int no);
-	
+			
 	List<AcHeart> acHeart(int no);
-	
+		
 	Accommodation acPay(int no);
 	
 	AcPay checkPayRefund(int no);
@@ -35,7 +37,11 @@ public interface AcService {
 	
 	int deleteHeart(Map param);
 	
-	int insertAc(Accommodation ac);
+	List<Accommodation> selectAcAll(Map param);
+	
+	int selectAcAllCount();
+	
+	Map insertAc(Accommodation ac);
 	
 	List<AcFile> deleteImage(int acId);
 	
@@ -62,4 +68,22 @@ public interface AcService {
 	int updateRegistDelAfal(int afaId);
 	
 	int updateAc(Accommodation ac);
+	
+	List<AcPayList> acMyPage(String memberId);
+	
+	AcPayList acRefundApply(String orderId);
+		
+	int updateRefund(Map param);
+	
+	int insertReview(AcReview ar);
+	
+	List<AcReview> acReview(int no);
+	
+	List<AcReview> checkReview(String memberId);
+	
+	List<AcPayList> paymentList(Map param);
+	
+	int paymentListCount();
+	
+	int rejectRefund(Map param);
 }

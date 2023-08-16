@@ -1,9 +1,16 @@
 $(document).ready(function() {
-	console.log(checkInOutDay)
 });
 
-// input 정규식
+//절대경로 함수
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(
+		hostIndex,
+		location.href.indexOf("/", hostIndex + 1)
+	);
+}
 
+// input 정규식
 $(document).on("input", "#acTitle", function() {
 	const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 	const val = $(this).val();
@@ -220,7 +227,6 @@ $(document).on("click", ".insertFc", function() {
 		}
 	} else {
 		if (($(this).prev()).children("div").children("img").attr("src") == "" || ($(this).prev()).children("input").val() == "") {
-			console.log(2)
 			$("#insertFcWarn").show()
 		} else {
 			$("#insertFcCon").append(insertFcImageCon);
@@ -240,6 +246,9 @@ $(document).on("click", ".insertFcImage label", function() {
 		if (this.files && this.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
+				file.parents(".insertFcImageCon").css("border", "none")
+				file.prevAll("ion-icon").hide()
+				file.prev().hide()
 				file.next().css("display", "block");
 				file.next().prop("src", e.target.result);
 				file.nextAll(".blurInsertFc").css("display", "block");
@@ -420,9 +429,9 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	fileArray.splice(seq, 1);
 	fileArray.forEach(file => { dataTransfer.items.add(file); });
 	$('input[name=afImage]')[0].files = dataTransfer.files;
-
-
-
+	
+	
+	
 	if ($(this).parents(".previewImgWrap").children(".mainCheck").css("display") == "flex") {
 		$(this).parents(".previewImgWrap").remove()
 		$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
@@ -431,22 +440,78 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	} else {
 		$(this).parents(".previewImgWrap").remove()
 	}
-
-	for (var i = 0; i < acFiles.length; i++) {
-		if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
-			acFiles.splice(i, 1);
+	if (acFiles.length) {
+		for (var i = 0; i < acFiles.length; i++) {
+			if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
+				acFiles.splice(i, 1);
+			}
 		}
+		sel_files.splice(num-acFiles.length,1)
+	}else{
+		sel_files.splice(num,1)
 	}
 	for (var i = 0; i < sel_files.length; i++) {
 		if (sel_files[i].name === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
 			sel_files.splice(i, 1)
 		}
 	}
-
+	
+	console.log(num)
+	console.log(acFiles)
+	console.log(sel_files)
 
 });
 
-$("#registOkBtn").on("click", function() {
+//등록 양식 체크
+function checkRegist() {
+	var content = ""
+	if (sel_files.length < 5) {
+		content = "숙박업소 이미지를 등록해 주세요."
+	} else if ($("input[name=acTitle]").val() == "") {
+		content = "숙박업소명을 입력해 주세요."
+	} else if ($("input[name=acPrice]").val() == "") {
+		content = "숙박가격을 입력해 주세요."
+	} else if ($("input[name=acAddress]").val() == "") {
+		content = "숙박업소 위치를 입력해 주세요."
+	} else if ($("textarea[name=acContent]").val() == "") {
+		content = "숙박업소명 설명을 입력해 주세요."
+	} else {
+		registOk()
+	}
+	return warningAlert(content);
+}
+
+function checkUpdate() {
+	var content = ""
+	if (sel_files.length + acFiles.length < 5) {
+		content = "숙박업소 이미지를 등록해 주세요."
+	} else if ($("input[name=acTitle]").val() == "") {
+		content = "숙박업소명을 입력해 주세요."
+	} else if ($("input[name=acPrice]").val() == "") {
+		content = "숙박가격을 입력해 주세요."
+	} else if ($("input[name=acAddress]").val() == "") {
+		content = "숙박업소 위치를 입력해 주세요."
+	} else if ($("textarea[name=acContent]").val() == "") {
+		content = "숙박업소명 설명을 입력해 주세요."
+	} else {
+		return updateOk()
+	}
+	return warningAlert(content);
+}
+
+
+function warningAlert(content) {
+	Swal.fire({
+		icon: 'warning',
+		iconColor: '#b31312',
+		title: content,
+		confirmButtonText: "확인",
+		confirmButtonColor: "#b31312",
+	});
+}
+
+
+function registOk() {
 
 	acData = {
 		acTitle: $("input[name=acTitle]").val(),
@@ -501,33 +566,35 @@ $("#registOkBtn").on("click", function() {
 		form.append("afalName", $(this).val())
 	})
 
-	for (let [key, value] of form) {
-		console.log(key, value);
-	}
-
-
-
 	$.ajax({
 		url: "/ac/insertRegist",
 		type: "post",
 		data: form,
 		processData: false,
 		contentType: false,
-		success: function(result) {
-			alert("등록완료")
-			location.href = "/"
+		success: function(data) {
+			Swal.fire({
+				icon: 'success',
+				iconColor: '#20c997',
+				title: "등록완료",
+				confirmButtonText: "확인",
+				confirmButtonColor: "#20c997",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					location.replace(getContextPath() + "/acDetail?no=" + data);
+				}
+			})
 		},
-		error: function(result) {
-			location.href = "/ac/acError"
+		error: function(data) {
+			location.replace("/ac/acError")
 		}
 	});
 
 
-})
+}
 
-$("#updateOkBtn").on("click", function() {
+function updateOk() {
 
-	console.log(acFiles)
 	acData = {
 		acId: $("input[name=acId]").val(),
 		acTitle: $("input[name=acTitle]").val(),//update
@@ -587,41 +654,28 @@ $("#updateOkBtn").on("click", function() {
 		form.append("afalName", $(this).val())
 	})
 
-	for (let [key, value] of form) {
-		console.log(key, value);
-	}
-
-
-
 	$.ajax({
 		url: "/ac/updateAc",
 		type: "post",
 		data: form,
 		processData: false,
 		contentType: false,
-		success: function(result) {
-			/*alert("수정완료")
-			location.href = "/"*/
+		success: function(data) {
+			Swal.fire({
+				icon: 'success',
+				iconColor: '#20c997',
+				title: "수정완료",
+				confirmButtonText: "확인",
+				confirmButtonColor: "#20c997",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					location.replace(getContextPath() + "/acDetail?no=" + data);
+				}
+			})
 		},
-		/*error: function(result) {
-			location.href = "/ac/acError"
-		}*/
-	});
-})
-
-$("#deleteRegist").on("click", function() {
-	$.ajax({
-		url: "/ac/deleteRegist",
-		type: "get",
-		data: { acId: 40 },
-		success: function(result) {
-			if (result > 0) {
-				alert("삭제완료")
-				location.href = "/"
-			}
-		},
-		error: function() {
-			location.href = "/ac/acError"
+		error: function(data) {
+			location.replace("/ac/acError")
 		}
 	});
-})
+}
+

@@ -97,11 +97,11 @@ public class AcPayController {
 
 	@PostMapping("/kakaoRefund")
 	@ResponseBody
-	public KaKaoRefund kakaoRefund(String acPrice, int apId) {
+	public KaKaoRefund kakaoRefund(String refundPrice, int apId) {
 
 		AcPay ap = service.checkPayRefund(apId);
 		String keyId = ap.getApKeyId();
-		KaKaoRefund kakaoRefund = serviceImpl.kakaoRefund(keyId, acPrice);
+		KaKaoRefund kakaoRefund = serviceImpl.kakaoRefund(keyId, refundPrice);
 		if (kakaoRefund != null) {
 			int result = service.deletePay(apId);
 		}
@@ -139,14 +139,14 @@ public class AcPayController {
 
 	@ResponseBody
 	@PostMapping("refundIamport")
-	public IamportResponse<Payment> refundIamport(String acPrice, int apId)
+	public IamportResponse<Payment> refundIamport(String refundPrice, int apId)
 			throws IamportResponseException, IOException {
 
 		AcPay ap = service.checkPayRefund(apId);
 		String keyId = ap.getApKeyId();
 
 		CancelData data = new CancelData(keyId, true);
-		data.setChecksum(new BigDecimal(acPrice));
+		data.setChecksum(new BigDecimal(refundPrice));
 		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(data);// 취소
 		if (cancel != null) {
 			int result = service.deletePay(apId);

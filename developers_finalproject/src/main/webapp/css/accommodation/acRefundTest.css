@@ -1,0 +1,188 @@
+section {
+	height: 2000px;
+}
+
+#blurReview {
+	display: none;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 50;
+	height: 100vh;
+	width: 100%;
+	background: #000;
+	opacity: 0.6;
+}
+
+.reviewWriteCon {
+	position: fixed;
+	width: 800px;
+	height: 800px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	border-radius: 20px;
+	z-index: 100;
+	background-color: white;
+	display: none;
+}
+
+.reviewBox {
+	width: 90%;
+	height: 90%;
+	position: relative;
+
+}
+
+.reviewBox>h4 {
+	color: #b31312;
+	text-align: center;
+	margin-bottom: 25px;
+	font-size: 1.8rem;
+		font-family: "LINESeedKR-Bd" !important;
+}
+
+.closeReview {
+	position: absolute;
+	font-size: 2.5rem;
+	left: 98%;
+}
+
+.reviewTitle {
+	display: flex;
+	align-items: center;
+}
+
+.reviewTitle img {
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+}
+
+.reviewTitle>div {
+	margin-left: 20px;
+}
+
+.reviewAcTitle {
+	font-size: 1.5rem;
+}
+
+.star {
+	position: relative;
+	font-size: 2rem;
+	color: #ddd;
+}
+
+.star input {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.star span {
+	width: 0;
+	position: absolute;
+	left: 0;
+	color: #b31312;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.reviewFile {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.reviewFile >span {
+	color: #b31312;
+}
+
+.fileBox {
+	margin-top: 10px;
+	height: 100px;
+	width: 100%;
+	display: flex;
+}
+
+.fileBox label {
+	border: 1px solid #afafaf;
+	color: #999;
+	border-radius: 10px;
+	width: 14%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+}
+
+.fileBox ion-icon {
+	font-size: 2rem;
+	margin-bottom: 10px;
+}
+
+.fileBox p {
+	font-size: 0.8rem;
+	margin-bottom: 0;
+}
+
+.previewImg {
+	width: 14%;
+	height: 100%;
+	margin-left: 15px;
+	border-radius: 10px;
+	border:1px solid #afafaf;
+
+}
+
+.reviewContent {
+	margin-top: 20px;
+	width: 100%;
+	height: 30%;
+
+	position: relative;
+}
+
+.reviewBox textarea {
+	outline: none;
+	resize: none;
+	width: 100%;
+	height: 100%;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+#contentCheckNum {
+	position: absolute;
+	top: 185px;
+	right: 15px;
+}
+
+.insertReview{
+	border: none;
+	border-radius: 10px;
+    background-color: #b31312;
+    color: white;
+    margin-right: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+    width: 120px;
+    height: 50px;
+}
+
+.btnCon{
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}

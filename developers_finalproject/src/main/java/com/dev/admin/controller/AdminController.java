@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dev.ac.dto.AcPayList;
+import com.dev.ac.service.AcService;
 import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
@@ -28,8 +30,11 @@ public class AdminController {
 	
 	private AdminService service;
 	
-	public AdminController(AdminService service) {
+	private AcService acService;
+	
+	public AdminController(AdminService service,AcService acService) {
 		this.service=service;
+		this.acService=acService;
 	}
 	@GetMapping
 	public String adminPage() {
@@ -162,8 +167,48 @@ public class AdminController {
 		service.tourisUpdate();
 	}
 	@GetMapping("/paymentList")
-	public String paymentList() {
-		return "admin//paymentList";
+	public String paymentList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
+			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
+		
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> type = new HashMap<>();
+		
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		int totalData = acService.paymentListCount();
+		
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectAcAll", type));
+		m.addAttribute("totalData", totalData);
+		m.addAttribute("ap", acService.paymentList(param));
+		
+		return "admin/paymentList";
 	}
+	
+	@GetMapping("/selectAcAll")
+	public String selectAcAll(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
+			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> type = new HashMap<>();
+
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		int totalData = acService.selectAcAllCount();
+
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectAcAll", type));
+		m.addAttribute("totalData", totalData);
+		m.addAttribute("ac", acService.selectAcAll(param));
+		return "/accommodation/acAdmin";
+	}
+	
+	@GetMapping("/paymentDetail")
+	public String paymentDetail(String orderId,Model m) {
+		AcPayList ra = acService.acRefundApply(orderId);
+		m.addAttribute("ra", ra);
+		System.out.println(ra);
+		return "/admin/paymentDetail";
+	}
+	
+	
+	
 	
 }
