@@ -9,6 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodDao {
@@ -23,19 +25,23 @@ public interface FoodDao {
 	
 	int updateFood(SqlSession session, FoodTemp f);
 	
+	int updateFoodOnAdmin(SqlSession session, Food food);
+	
+	int deleteFoodOnAdmin(SqlSession session, int foodNo);
+	
 	int mergeFood(SqlSession session);
 	
 	int mergeFoodPhoto(SqlSession session);
 	
-	void deleteFoodTemp(SqlSession session);
-	
-	void deleteFoodPhotoTemp(SqlSession session);
+	void deleteFoodTemp(SqlSession session,int foodNo);
+	void deleteFoodPhotoTemp(SqlSession session,int foodNo);
 	
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
 	
 	List<Food> foodListTitle(SqlSession session, Map<String,Object> param);
 	
-	List<Food> selectFoodAllTest(SqlSession session);
+
+	List<Food> selectFoodAllTest(SqlSession session,int count);
 	
 	List<Food> selectFoodByFoodNo(SqlSession session,int foodNo);
 	
@@ -47,6 +53,26 @@ public interface FoodDao {
 
 	String searchByFoodNo(SqlSession session,int foodNo);
 	
+	int insertFoodReview(SqlSession session,FoodReview fr);
+	
+	int insertFoodReviewPhoto(SqlSession session,FoodReviewPhoto rp);
+	
+	//List searchByRpNo(SqlSession session,int frNo);
+	
+	int updateFoodReview(SqlSession session,FoodReview fr);
+	
+	int updateFoodReviewPhoto(SqlSession session,FoodReviewPhoto rp);
+	
+	int deleteFoodReview(SqlSession session, int frNo);
+	
+	int searchFoodReivewPhoto(SqlSession session,int frNo);
+	
+	int deleteFoodReviewPhoto(SqlSession session, int frNo);
+	
+	//List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo);
+	
+	List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(SqlSession session, int frNo);
+
 	FoodHeart getFoodById(SqlSession session, String memberId);
 	
 	/*
@@ -72,5 +98,4 @@ public interface FoodDao {
 	 * 
 	 * int getHeartCount(SqlSession session, Map params);
 	 */
-	
 }

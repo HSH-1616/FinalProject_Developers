@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dev.admin.dao.AdminDao;
 import com.dev.admin.model.dto.Admin;
+import com.dev.food.model.dto.Food;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -96,7 +97,21 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
+
+
 	
+	
+	
+	
+//	============지환============
+	@Override
+	public List<Food> searchFood(Map param) {
+	return dao.searchFood(session,param);
+}
+	@Override
+	public int selectFoodCount() {
+		return dao.selectFoodCount(session);
+	}
 	
 	
 	

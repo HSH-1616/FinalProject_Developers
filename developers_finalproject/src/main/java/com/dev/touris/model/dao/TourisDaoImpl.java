@@ -64,6 +64,17 @@ public class TourisDaoImpl implements TourisDao {
 	public List<TourisMember> myPageTourisRouteList(SqlSessionTemplate session, int loginmemberid) {
 		return session.selectList("touris.myPageTourisRouteList", loginmemberid);
 	}
+	@Override
+	public List<Touris> tourislist(SqlSessionTemplate session, Map<String,Object> param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("touris.tourisList", null, rb);
+	}
+	@Override
+	public int tourisListCount(SqlSessionTemplate session) {
+		return session.selectOne("touris.tourisListCount");
+	}
 	
 
 	

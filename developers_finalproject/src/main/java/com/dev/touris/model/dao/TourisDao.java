@@ -26,4 +26,6 @@ public interface TourisDao {
 	int myPageTourisRouteCount(SqlSessionTemplate session);
 	List<TourisMember> myPageTourisRoute(SqlSessionTemplate session, int loginmemberid, Map param);
 	List<TourisMember> myPageTourisRouteList(SqlSessionTemplate session, int loginmemberid);
+	int tourisListCount(SqlSessionTemplate session);
+	List<Touris> tourislist(SqlSessionTemplate session, Map<String,Object> param);
 }

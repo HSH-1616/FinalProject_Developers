@@ -1,6 +1,10 @@
 package com.dev.food.model.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dev.member.model.dto.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +18,11 @@ import lombok.NoArgsConstructor;
 public class FoodReview {
 	
 	private int frNo;
-	private String foodNo;
-	private String userId;
+	private int foodNo;
+	private int memberId;  //insert용
+	private Member member;  //select용
 	private String frContent;
-	private int frGrade;
+	private double frGrade;
 	private Date frWriterDate;
-
+	private List<FoodReviewPhoto> foodReviewPhoto = new ArrayList<FoodReviewPhoto>();
 }

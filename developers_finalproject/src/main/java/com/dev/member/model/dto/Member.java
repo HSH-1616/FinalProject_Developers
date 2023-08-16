@@ -3,6 +3,7 @@ package com.dev.member.model.dto;
 import java.sql.Date;
 import java.util.List;
 
+import com.dev.food.model.dto.FoodReview;
 import com.dev.touris.model.vo.TourisHeart;
 
 import lombok.AllArgsConstructor;
@@ -25,4 +26,5 @@ public class Member {
 	private String memberStatus;
 	private String memberPk;
 	private List<TourisHeart> tourisHeartlist;
+	private List<FoodReview> FoodReview;
 }
