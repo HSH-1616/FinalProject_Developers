@@ -31,8 +31,7 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
 <link rel="stylesheet" href="css/header.css" />
-<link rel="stylesheet" href="css/foodList.css" />
-<script src="${path }/js/food/foodList.js" />
+
 </head>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -113,6 +112,6 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
 	<!-- /페이지바 -->
 
 </section>
-
+<script src="${path }/js/touris/tourislist.js" />
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
