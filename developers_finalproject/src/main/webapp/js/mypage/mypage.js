@@ -805,60 +805,6 @@ $(document).on('click', '.smallschedullisttextarea', function() {
 		  });
 		  
 		   
-          // 생성된거 없어지고 생겨지는 함수
-          var selectListElements = $("ul.listarea li.selectlist");
-    	  /*var newLiElement = $(newLi);*/
-          if (selectListElements.length) {
-            $(".list-text").hide();
-          } else {
-            $(".list-text").show();
-          }
-         $("ul.listarea-right").append(newLi);
-        });
-        
-        // 왼쪽 영역에 있는 태그들 전체 삭제후 오른쪽으로 추가 
-$(document).on('click', '.select-delte', function() {
-	var parentLi = $(".listarea").find(".selectlist");
-	var newLiElements = [];
-	
-	parentLi.each(function(i,e) {
-		var srcValue = $(e).find(".listbox").find(".listboximg img").attr("src");
-		var listtitleTextValue = $(e).find(".listtext").find(".listtitle-text").text();
-		var textaddr = $(e).find(".listtext").find(".listtitleaddr").find(".listtitle-textaddr").text();
-		console.log($(e).find(".listbtn").find(".hiddenid").text());		
-		var newLi = '<li class="selectlist2">' +
-			  '<div class="listbox">' +
-			  '<div class="listboximg"><img src="' + srcValue + '" alt=""></div>' +
-			  '<div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">' +
-			  '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />' +
-			  '</svg></div>' +
-			  '</div>' +
-			  '<div class="listtext">' +
-			  '<h7 class="listtitle-text">'+listtitleTextValue+'</h7>' +
-			  '<h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">'+ textaddr +'</h7></h7>'+
-			  '</div>' +
-			  '<div class="listbtn">' +
-			  '<div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">' +
-			  '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />' +
-			  '</svg></a></div>' +
-			  '<div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">' +
-			  '<path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />' +
-			  '</svg></a></div>' +
-			  '</div>' +
-			  '</li>';
-	 	newLiElements.push(newLi);
-    });
-    	 parentLi.remove();
-	var selectListElements = $("ul.listarea li.selectlist");
-    	  /*var newLiElement = $(newLi);*/
-          if (selectListElements.length) {
-            $(".list-text").hide();
-          } else {
-            $(".list-text").show();
-          }
-	 $("ul.listarea-right").append(newLiElements.join(""));
-
-});
 
    
     // 맵에 있는 토글 이벤트
