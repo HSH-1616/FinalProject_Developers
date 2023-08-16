@@ -18,6 +18,8 @@ public interface TourisService {
 	int myPageTourisRouteCount();
 	List<TourisMember> myPageTourisRoute(int loginmemberid, Map params);
 	List<TourisMember> myPageTourisRouteList(int loginmemberid);
+	int tourisListCount();
+	List<Touris> tourislist(Map<String,Object> param);
 	
 	
 }
