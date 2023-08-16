@@ -44,11 +44,11 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
 		<div id="food_main_theme">
 			<p>맛집 목록</p>
 		</div>
-		<div class="container">
+		<%-- <div class="container">
 		<nav id="food_menu">
 		<input type="hidden" id="sortFilter" value="sortFilter">
 			<ul>
-			<%-- href="${path}/food/foodListTitle.do" --%>
+			href="${path}/food/foodListTitle.do"
 				<li class="bar">|</li>
 				<!-- <li class="menu_style" id="all"><span class="color_ch">제목순</span></li> -->
 				<li class="menu_style" id="all"><span class="color_ch" onclick="sortFoodByTitle()">제목순</span></li>
@@ -59,7 +59,7 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
 				<li class="bar">|</li>
 			</ul>
 		</nav>
-		</div>
+		</div> --%>
 		
 		<div class="search-notice text-end mt-3">
 			<form action="${path }/food/searchFood.do" class="searchForm" method="GET">
