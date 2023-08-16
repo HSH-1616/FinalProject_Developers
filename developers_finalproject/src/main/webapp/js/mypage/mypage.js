@@ -117,7 +117,7 @@ $(document).ready(function() {
 
 				} else if (l.apCancel == 'R') {
 
-					var status = $('<h5 class="refundStatus">검토중</h5>')
+					var status = $('<h5 class="refundStatus" style="color:#afafaf">검토중</h5>')
 					var refundInfo = $('<div class="refundInfo">')
 
 					oldDate = new Date();
@@ -139,7 +139,7 @@ $(document).ready(function() {
 
 					var refundPrice = $('<h5>예약 취소 정보</h5><div class="refundPrice"><span>결제금액 : ₩' + String(l.apPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span><span>공제액 : ₩' + String(risk).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 						+ '</span></div><h6>환불 예정 금액 : ₩' + String(refundPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</h6>')
-					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : '+l.apReDate+'</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
+					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : ' + l.apReDate + '</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
 					content.append(orderId).append(status).append(contentDiv)
 					listHead.append(img).append(content)
 					refundInfo.append(refundPrice)
@@ -147,6 +147,46 @@ $(document).ready(function() {
 					listCon.append(listHead).append(hr).append(listDetail)
 					acPay.append(hidden).append(id).append(apId).append(listCon)
 					$(".refundCheck").append(acPay)
+				} else if (l.apCancel == 'T' || l.apCancel == 'F') {
+					
+					var status=""
+					var comment=""
+					if (l.apCancel == 'T') {
+						status = $('<h5 class="refundStatus" style="color:#20c997">승인</h5>')
+					}else{
+						status = $('<h5 class="refundStatus" style="color:#b31312">반려</h5>')
+						comment =$('<h6 style="color:#b31312">반려 사유 : '+l.apr.aprComment+'</h6>')
+					}
+					var refundInfo = $('<div class="refundInfo">')
+
+					oldDate = new Date();
+					newDate = new Date(l.arv.checkIn);
+					diff = Math.abs(newDate.getTime() - oldDate.getTime());
+					diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+					if (diff <= 3 && diff > 1) {
+						risk = Math.round(l.apPrice * 0.5)
+						refundPrice = Math.round(l.apPrice * 0.5)
+					} else if (diff <= 1) {
+						risk = Math.round(l.apPrice * 0.8)
+						refundPrice = Math.round(l.apPrice * 0.2)
+					} else {
+						risk = 0
+						refundPrice = l.apPrice
+					}
+					console.log(risk)
+
+					var refundPrice = $('<h5>예약 취소 정보</h5><div class="refundPrice"><span>결제금액 : ₩' + String(l.apPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span><span>공제액 : ₩' + String(risk).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+						+ '</span></div><h6>환불 예정 금액 : ₩' + String(refundPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</h6>')
+					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : ' + l.apReDate + '</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
+					content.append(orderId).append(status).append(contentDiv)
+					listHead.append(img).append(content)
+					refundInfo.append(refundPrice)
+					refundReason.append(comment)
+					listDetail.append(refundInfo).append(refundReason)
+					listCon.append(listHead).append(hr).append(listDetail)
+					acPay.append(hidden).append(id).append(apId).append(listCon)
+					$(".refundComplete").append(acPay)
 				}
 			})
 		},
@@ -350,3 +390,17 @@ function reviewOk() {
 
 	})
 }
+
+$(document).on("click",".refundBtn",function(){
+	if($(this).hasClass("check")){
+		$(".refundBtn").css({"background-color":"white","color":"black"})
+		$(this).css({"background-color":"#b31312","color":"white"})
+		$(".refundComplete").hide()
+		$(".refundCheck").show()
+	}else{
+		$(".refundBtn").css({"background-color":"white","color":"black"})
+		$(this).css({"background-color":"#b31312","color":"white"})
+		$(".refundComplete").show()
+		$(".refundCheck").hide()
+	}
+})

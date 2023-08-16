@@ -49,29 +49,73 @@
 									<td>${ap.member.memberId}</td>
 									<td>${ap.member.memberNickname}</td>
 									<td>${ap.apReDate}</td>
-									<td><fmt:formatNumber value="${ap.apPrice}" type="currency" currencySymbol="₩"  /></td>
-									<td><fmt:formatNumber value="${ap.apr.aprPrice}" type="currency" currencySymbol="₩"  /></td>
+									<td><fmt:formatNumber value="${ap.apPrice}"
+											type="currency" currencySymbol="₩" /></td>
+									<td><fmt:formatNumber value="${ap.apr.aprPrice}"
+											type="currency" currencySymbol="₩" /></td>
 									<td>${ap.apr.aprReason}</td>
 									<td><button type="button"
 											class="btn btn-outline-dark btn-sm"
-											onclick="location.href='${path}/ac/acDetail?no=${ac.acId}'">상세보기</button></td>
+											onclick="location.href='${path}/admin/paymentDetail?orderId=${ap.apOrderId}'">상세보기</button></td>
 								</tr>
 							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
 				<div class="pageBar">
-				<c:if test="${not empty pageBar }">
+					<c:if test="${not empty pageBar }">
 	            	${pageBar}
 	           	</c:if>
-			</div>
+				</div>
 			</div>
 			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
 				aria-labelledby="profile-tab" tabindex="0">
-				<table>
-					<tr>2
-					</tr>
+				<table
+					class="table bg-white rounded shadow-sm table-hover text-center align-middle">
+					<thead>
+						<tr>
+							<th scope="col">결제번호</th>
+							<th scope="col">숙박업소 ID</th>
+							<th scope="col">결제자 ID</th>
+							<th scope="col">결제자 이름</th>
+							<th scope="col">취소 일자</th>
+							<th scope="col">결제 금액</th>
+							<th scope="col">환불 금액</th>
+							<th scope="col">환불 상태</th>
+							<th scope="col">환불 코멘트</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="ap" items="${ap}">
+							<c:if test="${fn:contains(ap.apCancel,'T') || fn:contains(ap.apCancel,'F')}">
+								<tr>
+									<td class="acId">${ap.apOrderId }</td>
+									<td>${ap.acDetail.acId}</td>
+									<td>${ap.member.memberId}</td>
+									<td>${ap.member.memberNickname}</td>
+									<td>${ap.apReDate}</td>
+									<td><fmt:formatNumber value="${ap.apPrice}"
+											type="currency" currencySymbol="₩" /></td>
+									<td><fmt:formatNumber value="${ap.apr.aprPrice}"
+											type="currency" currencySymbol="₩" /></td>
+									<c:if test="${fn:contains(ap.apCancel,'T')}">
+									<td style="color:#20c997">승인</td>
+									</c:if>
+									<c:if test="${fn:contains(ap.apCancel,'F')}">
+									<td style="color:#b31312">반려</td>
+									</c:if>
+									<c:if test="${not empty ap.apr.aprComment}">
+									<td style="color:#b31312">${ap.apr.aprComment}</td>
+									</c:if>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>
 				</table>
+				<div class="pageBar">
+					<c:if test="${not empty pageBar }">
+	            	${pageBar}
+	           	</c:if>
 			</div>
 		</div>
 	</div>

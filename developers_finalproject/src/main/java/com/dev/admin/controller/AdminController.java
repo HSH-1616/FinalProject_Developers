@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.service.AcService;
 import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
@@ -198,5 +199,16 @@ public class AdminController {
 		m.addAttribute("ac", acService.selectAcAll(param));
 		return "/accommodation/acAdmin";
 	}
+	
+	@GetMapping("/paymentDetail")
+	public String paymentDetail(String orderId,Model m) {
+		AcPayList ra = acService.acRefundApply(orderId);
+		m.addAttribute("ra", ra);
+		System.out.println(ra);
+		return "/admin/paymentDetail";
+	}
+	
+	
+	
 	
 }

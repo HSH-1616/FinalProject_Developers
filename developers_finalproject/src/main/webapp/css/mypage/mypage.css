@@ -1197,7 +1197,7 @@
 	text-align: center;
 	margin-bottom: 25px;
 	font-size: 1.8rem;
-		font-family: "LINESeedKR-Bd" !important;
+	font-family: "LINESeedKR-Bd" !important;
 }
 
 .closeReview {
@@ -1257,7 +1257,7 @@
 	margin-top: 20px;
 }
 
-.reviewFile >span {
+.reviewFile>span {
 	color: #b31312;
 }
 
@@ -1296,7 +1296,7 @@
 	height: 100%;
 	margin-left: 15px;
 	border-radius: 10px;
-	border:1px solid #afafaf;
+	border: 1px solid #afafaf;
 
 }
 
@@ -1324,20 +1324,44 @@
 	right: 15px;
 }
 
-.insertReview{
+.insertReview {
 	border: none;
 	border-radius: 10px;
-    background-color: #b31312;
-    color: white;
-    margin-right: 20px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
-    width: 120px;
-    height: 50px;
+	background-color: #b31312;
+	color: white;
+	margin-right: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	width: 120px;
+	height: 50px;
 }
 
-.btnCon{
+.btnCon {
 	margin-top: 20px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
+}
+
+.refundBtn {
+	box-shadow: 0 2px 30px 0 rgba(31, 38, 135, .08) !important;
+	background-color: white;
+	height: 40px;
+	width: 100px;
+	border: 2px solid #eeeeee;
+	border-radius: 10px;
+}
+
+.refundBtn.check{
+	background-color: #b31312;
+	color: white;
+	
+}
+
+.refundListArea>div:first-child {
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.refundComplete{
+	display: none;
 }

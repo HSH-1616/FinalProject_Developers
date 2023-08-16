@@ -316,5 +316,15 @@ public class AcServiceImpl implements AcService {
 		return dao.paymentListCount(session);
 	}
 
+	@Override
+	public int rejectRefund(Map param) {
+		int result=dao.rejectRefund(session,param);
+		if(result>0) {
+			dao.rejectComment(session,param);
+		}
+		
+		return result;
+	}
+
 
 }

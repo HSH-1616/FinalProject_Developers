@@ -528,9 +528,9 @@
 			Kakao.Link.sendCustom({	
 					    templateId: 96691, // 메시지템플릿 번호
 					    templateArgs: {	
-					      IMG1 : "https://a0.muscache.com/im/pictures/miso/Hosting-706856413814921022/original/0f516c0a-18fc-4d49-b997-112bd1ea2a41.jpeg?im_w=720",
-					      IMG2 : "https://a0.muscache.com/im/pictures/miso/Hosting-706856413814921022/original/0f516c0a-18fc-4d49-b997-112bd1ea2a41.jpeg?im_w=720",
-					      IMG3 : "https://a0.muscache.com/im/pictures/miso/Hosting-631240857659293608/original/4da70ab8-116b-40cc-be9d-1381b69b2b75.jpeg?im_w=720",
+					      IMG1 : "${path}/images/upload/accommodation/"+img1,
+					      IMG2 :  "${path}/images/upload/accommodation/"+img2,
+					      IMG3 :  "${path}/images/upload/accommodation/"+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
 					      THU : "${path}/images/common/logo.png",
 					      PATH : "ac/acDetail?no="+${ad.acId}

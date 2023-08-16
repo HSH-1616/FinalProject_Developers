@@ -63,7 +63,7 @@ public class AcDaoImpl implements AcDao {
 
 	@Override
 	public int deletePay(SqlSessionTemplate session, int acId) {
-		return session.delete("accommodation.deletePay",acId);
+		return session.update("accommodation.deletePay",acId);
 	}
 	
 	@Override
@@ -271,6 +271,16 @@ public class AcDaoImpl implements AcDao {
 	@Override
 	public int paymentListCount(SqlSessionTemplate session) {
 		return session.selectOne("accommodation.paymentListCount");
+	}
+
+	@Override
+	public int rejectRefund(SqlSessionTemplate session, Map param) {
+		return session.update("accommodation.rejectRefund",param);
+	}
+
+	@Override
+	public int rejectComment(SqlSessionTemplate session, Map param) {
+		return session.update("accommodation.rejectComment",param);
 	}
 	
 }

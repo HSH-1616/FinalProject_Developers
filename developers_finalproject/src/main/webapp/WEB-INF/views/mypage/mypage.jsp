@@ -404,10 +404,18 @@
 					<div class="payListArea"></div>
 					<div class="beforePayListArea"></div>
 					<div class="refundListArea">
-						<h4>예약 취소 검토중</h4>
-						<div class="refundCheck"></div>
+						<div>
+							<button class="refundBtn check">진행중</button>
+							<button class="refundBtn complete">취소 완료</button>
+						</div>
+						
+						<div class="refundCheck">
+						<h4>예약 취소 진행중</h4>
+						</div>
+						
+						<div class="refundComplete">
 						<h4>예약 취소 완료</h4>
-						<div class="refunComplete"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -415,8 +423,8 @@
 		<div id="blurReview"></div>
 		<div class="reviewWriteCon">
 			<div class="reviewBox">
-				<input type="hidden" id="acId" value="">
-				<input type="hidden" id="apId" value="">
+				<input type="hidden" id="acId" value=""> <input
+					type="hidden" id="apId" value="">
 				<ion-icon class="closeReview" name="close"></ion-icon>
 				<h4>"소중한 리뷰를 남겨주세요!"</h4>
 				<div class="reviewTitle">

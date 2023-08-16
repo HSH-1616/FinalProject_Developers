@@ -544,4 +544,12 @@ public class AcController {
 		
 		return service.checkReview(memberId);
 	}
+	
+	@PostMapping("/rejectRefund")
+	@ResponseBody
+	public int rejectRefund(int apId, String comment, Map param) {
+		param.put("apId", apId);
+		param.put("comment", comment);
+		return service.rejectRefund(param);
+	}
 }
