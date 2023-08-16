@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,10 +23,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.ac.dto.AcFacilities;
 import com.dev.ac.dto.AcFile;
+import com.dev.ac.dto.AcPayList;
 import com.dev.ac.dto.AcReservation;
+import com.dev.ac.dto.AcReview;
 import com.dev.ac.dto.Accommodation;
 import com.dev.ac.dto.AfaList;
+import com.dev.ac.dto.ArFile;
 import com.dev.ac.service.AcService;
+import com.dev.admin.common.PageFactory;
+import com.dev.member.model.dto.Member;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,9 +43,11 @@ import lombok.extern.slf4j.Slf4j;
 public class AcController {
 
 	private AcService service;
+	private HttpSession session;
 
-	public AcController(AcService service) {
+	public AcController(AcService service, HttpSession session) {
 		this.service = service;
+		this.session = session;
 	}
 
 	@RequestMapping("/acList")
@@ -69,8 +77,12 @@ public class AcController {
 
 	@GetMapping("/acDetail")
 	public String acDetail(int no, Model m) {
-		m.addAttribute("ad", service.acDetail(no));
+		Accommodation ad = service.acDetail(no);
+		m.addAttribute("ad", ad);
 		m.addAttribute("ah", service.acHeart(no));
+		m.addAttribute("afal", service.updateRegistAfal(ad.getAfa().getAfaId()));
+		m.addAttribute("ar", service.acReview(no));
+		System.out.println(service.acReview(no));
 		return "/accommodation/acDetail";
 	}
 
@@ -81,7 +93,7 @@ public class AcController {
 
 		// 개발도구에서 가격변경 위조 방지
 		int checkPrice = ac.getAcPrice();
-
+		log.info("DB 가격 : " + checkPrice);
 		people = people.substring(0, people.length() - 1);
 		int maxPeople = Integer.parseInt(people);
 
@@ -107,18 +119,22 @@ public class AcController {
 				checkPrice += 20000;
 			}
 		}
-		System.out.println(resultPrice);
+
+		log.info("인원수 측정 가격 : " + checkPrice);
+		log.info("숙박일 : " + diffDays);
+		log.info("총합 : " + resultPrice);
 		// db가격과 비교
 		if (checkPrice * diffDays == resultPrice) {
 			m.addAttribute("checkIn", checkIn);
 			m.addAttribute("checkOut", checkOut);
 			m.addAttribute("people", people);
+			m.addAttribute("checkPrice", checkPrice);
 			m.addAttribute("ap", ac);
 			m.addAttribute("resultPrice", resultPrice);
 			m.addAttribute("diff", diffDays);
 			return "/accommodation/acPay";
 		} else {
-			return "/accommodation/errorPage";
+			return "/accommodation/acError";
 		}
 
 	}
@@ -249,16 +265,18 @@ public class AcController {
 			}
 		}
 
-		int result = service.insertAc(ac);
-
-		return result;
+		Map m = service.insertAc(ac);
+		if ((int) m.get("result") > 1) {
+			return (int) m.get("acId");
+		} else {
+			return 0;
+		}
 	}
 
 	@GetMapping("/deleteRegist")
 	@ResponseBody
 	public int deleteRegist(int acId, HttpSession session) {
 
-		acId = 27;
 		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
 		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
 		List<AcFile> af = service.deleteImage(acId);
@@ -285,7 +303,10 @@ public class AcController {
 		List<AcReservation> arv = service.updateRegistArv(acId);
 		AcFacilities afa = service.updateRegistAfa(acId);
 		List<AcFile> af = service.updateRegistAf(acId);
-		List<AfaList> afal = service.updateRegistAfal(afa.getAfaId());
+		List<AfaList> afal = null;
+		if (afa != null) {
+			afal = service.updateRegistAfal(afa.getAfaId());
+		}
 		m.addAttribute("ac", ac);
 		m.addAttribute("arv", arv);
 		m.addAttribute("afa", afa);
@@ -299,9 +320,9 @@ public class AcController {
 	@ResponseBody
 	public int updateAc(String acData, MultipartFile[] afImage, MultipartFile[] afalImage, HttpSession session,
 			String[] afalName, String[] afMain) {
-		Accommodation ac = null;		
+		Accommodation ac = null;
 		File file;
-	
+
 		String acPath = session.getServletContext().getRealPath("/images/upload/accommodation/");
 		String afaPath = session.getServletContext().getRealPath("/images/upload/accommodation/afal/");
 
@@ -311,8 +332,7 @@ public class AcController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(ac);
-		
+
 //		1. 기존파일 이름을 js배열에 집어넣는다.
 //		2. 삭제버튼을 누를시 배열에서 삭제
 //		3. db에서 해당 숙박업소에 파일리스트를 가져온다
@@ -379,7 +399,6 @@ public class AcController {
 
 		///////////////////////////////////////////////////////////////////////////////
 		log.info("js로 불러온 편의시설 : " + ac.getAfa().getAfal());
-		//System.out.println(afalImgSrc.get(0).getAfalImg());
 		// db에서 가져온 list
 		List<AfaList> afalDb = service.updateRegistCheckAfal(ac.getAfa().getAfaId());
 		log.info("db에서 불러온 리스트 :" + afalDb);
@@ -388,7 +407,7 @@ public class AcController {
 				.toList();
 
 		log.info("db와 비교 결과 : " + resultAfalFile);
-		
+
 		// db값과 비교한 파일 삭제
 		for (AfaList afalImg : resultAfalFile) {
 			file = new File(afaPath + afalImg.getAfalImg());
@@ -397,12 +416,13 @@ public class AcController {
 
 		// 새로운 파일리스트와 객체를 만든다
 		List<AfaList> afal = new ArrayList();
-		
+
 		// js에서 가져온 리스트 새로운 리스트에 추가
 		if (ac.getAfa().getAfal() != null) {
 			for (int i = 0; i < ac.getAfa().getAfal().size(); i++) {
 				AfaList afa = AfaList.builder().afaId(ac.getAfa().getAfal().get(i).getAfaId())
-						.afalImg(ac.getAfa().getAfal().get(i).getAfalImg()).afalName(ac.getAfa().getAfal().get(i).getAfalName()).build();
+						.afalImg(ac.getAfa().getAfal().get(i).getAfalImg())
+						.afalName(ac.getAfa().getAfal().get(i).getAfalName()).build();
 				afal.add(afa);
 			}
 		}
@@ -430,7 +450,7 @@ public class AcController {
 		}
 		log.info("업로드 파일 추가 : " + afal);
 		// 편의시설 이름 배열을 순서대로 추가 후 accommodation에 세팅
-		if (afalName!=null) {
+		if (afalName != null) {
 			for (int i = 0; i < afalName.length; i++) {
 				afal.get(i).setAfaId(ac.getAfa().getAfaId());
 				afal.get(i).setAfalName(afalName[i]);
@@ -441,7 +461,95 @@ public class AcController {
 		log.info("////////////////////////////");
 
 		int result = service.updateAc(ac);
+		return ac.getAcId();
+	}
+
+	@GetMapping("/acMyPage")
+	@ResponseBody
+	public List<AcPayList> acMyPage() {
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+
+		List<AcPayList> am = service.acMyPage(memberId);
+		return am;
+	}
+
+	@PostMapping("/acRefundApply")
+	public String acRefundApply(String orderId, Model m) {
+		AcPayList ra = service.acRefundApply(orderId);
+		m.addAttribute("ra", ra);
+		return "/accommodation/acRefundApply";
+	}
+
+	@PostMapping("/insertRefund")
+	@ResponseBody
+	public int insertRefund(String apId, String orderId, String refundReason, String refundContent,String refundPrice) {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("apId", apId);
+		param.put("orderId", orderId);
+		param.put("refundPrice", refundPrice);
+		param.put("refundReason", refundReason);
+		param.put("refundContent", refundContent);
+		int result = service.updateRefund(param);
 		return 0;
 	}
 
+	@PostMapping("/insertReview")
+	@ResponseBody
+	public int insertReview(String reviewData, MultipartFile[] arfName) {		
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+		
+		AcReview ar = new AcReview();
+
+		String arPath = session.getServletContext().getRealPath("/images/upload/accommodation/review/");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			ar = mapper.readValue(reviewData, AcReview.class);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		ar.setMemberId(memberId);
+		
+		if (arfName != null) {
+			for(MultipartFile mf:arfName) {
+				String oriName = mf.getOriginalFilename();
+				String ext = oriName.substring(oriName.lastIndexOf("."));
+				Date today = new Date(System.currentTimeMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rdn = (int) (Math.random() * 10000) + 1;
+				String rename = "ar" + sdf.format(today) + "_" + rdn + ext;
+
+				try {
+					mf.transferTo(new File(arPath + rename));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				ArFile file = ArFile.builder().arfName(rename).build();
+				ar.getArFiles().add(file);
+			}
+		}
+		
+		log.info("리뷰 : "+ar);				
+						
+		return service.insertReview(ar);
+	}
+	
+	@GetMapping("/acCheckReview")
+	@ResponseBody
+	public List<AcReview> checkReview(){
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+		
+		return service.checkReview(memberId);
+	}
+	
+	@PostMapping("/rejectRefund")
+	@ResponseBody
+	public int rejectRefund(int apId, String comment, Map param) {
+		param.put("apId", apId);
+		param.put("comment", comment);
+		return service.rejectRefund(param);
+	}
 }

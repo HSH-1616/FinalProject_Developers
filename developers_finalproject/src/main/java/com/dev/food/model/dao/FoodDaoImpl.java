@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -136,25 +137,30 @@ public class FoodDaoImpl implements FoodDao {
 		return session.selectOne("food.getFoodById", memberId);
 	}
 	
+	/*
+	 * @Override public boolean checkHeart(SqlSession session, Map params) { return
+	 * session.selectOne("food.checkHeart", params); }
+	 */
+
 	@Override
-    public boolean checkHeart(SqlSession session, Map params) {
-        return session.selectOne("food.checkHeart", params);
-    }
+	public int insertHeart(SqlSessionTemplate session,Map param) {
+		return session.insert("food.insertHeart",param);
+	}
+	
+	@Override
+	public int deleteHeart(SqlSessionTemplate session,Map param) {
+		return session.delete("food.deleteHeart",param);
+	}
+	
+	@Override
+	public List<FoodHeart> fdHeart(SqlSessionTemplate session, int no){
+		return session.selectList("food.fdHeart",no);
+	}
 
-    @Override
-    public void insertHeart(SqlSession session, Map params) {
-    	session.insert("food.insertHeart", params);
-    }
-
-    @Override
-    public void deleteHeart(SqlSession session, Map params) {
-    	session.delete("food.deleteHeart", params);
-    }
-
-    @Override
-    public int getHeartCount(SqlSession session, Map params) {
-        return session.selectOne("food.getHeartCount", params);
-    }
+	/*
+	 * @Override public int getHeartCount(SqlSession session, Map params) { return
+	 * session.selectOne("food.getHeartCount", params); }
+	 */
 	
 	@Override
 	public List<Food> getFoodsSortedByTitle(SqlSession session, Map<String, Object> params, String sortType) {

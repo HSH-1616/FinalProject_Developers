@@ -18,12 +18,13 @@ public class AcPayList {
 	private int apPrice;
 	private Date apDate;
 	private Date apReDate;
-	private Date checkIn;
-	private Date checkOut;
 	private int apPeople;
+	private char apCheckCancel;
 	private char apCancel;
 	private String apOrderId;
 	private String apKeyId;
 	private Accommodation acDetail;
 	private Member member;
+	private AcReservation arv;
+	private ApRefund apr;	
 }

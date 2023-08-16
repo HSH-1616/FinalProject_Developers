@@ -1,9 +1,6 @@
 package com.dev.ac.dto;
 
 import java.sql.Date;
-import java.util.List;
-
-import com.dev.member.model.dto.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArFile {
-	private int arfId;
-	private int arId;
-	private String arfName;
+public class ApRefund {
+	private int aprId;
+	private int apId;
+	private int aprPrice;
+	private String aprReason;
+	private String aprContent;
+	private String aprComment;
 }
