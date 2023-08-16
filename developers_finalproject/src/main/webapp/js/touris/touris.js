@@ -1348,6 +1348,13 @@ function searchTouris2() {
     }
   });
 }
+var today = new Date();
+
+var year = today.getFullYear();
+var month = ('0' + (today.getMonth() + 1)).slice(-2);
+var day = ('0' + today.getDate()).slice(-2);
+
+var registrationDate = year+'년' +' '+month+'월'+' '+day+'일';
 // 경로 저장 ajax
 function saveRoute() {
 	const routeurl = path + "/touris/inserttourisroute";
@@ -1428,7 +1435,8 @@ console.log("시작 날짜:", tustartDate);
 			data: JSON.stringify({routedata : routedata, 
 			loginmemberid: loginmemberid,
 			tustartDate: tustartDate, 
-			tuendDate: tuendDate
+			tuendDate: tuendDate,
+			registrationDate: registrationDate
 			}),
 			success: function(response) {
 				alert("경로가 저장되었습니다.");

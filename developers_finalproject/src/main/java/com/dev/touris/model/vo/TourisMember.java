@@ -19,5 +19,8 @@ public class TourisMember {
 	private int loginmemberid;
 	private Date tustartDate;
 	private Date tuendDate;
+	private String registrationDate; 
 	List<TourisRoute> tourisroutes;
+	List<Touris> tourisList;
+	List<TourisArea> tourisArealist;
 }
