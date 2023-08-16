@@ -161,6 +161,9 @@ public class AdminController {
 	public void tourisUpdate() {
 		service.tourisUpdate();
 	}
-	
+	@GetMapping("/paymentList")
+	public String paymentList() {
+		return "admin//paymentList";
+	}
 	
 }
