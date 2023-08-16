@@ -114,7 +114,7 @@
 				<button class="s-btn ms-2" onclick="deleteCommunity(${comuView.communityNo });">삭제</button>
 				</c:if>
 			
-			
+				<button class="s-btn ms-2" onclick="location.href='${path}/community/communityList.do'" >목록</button>
 			</div>
 		</div>
 		<div class="collapse" id="inputComment">

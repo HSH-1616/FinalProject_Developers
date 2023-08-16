@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/> 
 <head>
-	<script> const jspath = '${path}'; </script>
+   <script> const jspath = '${path}'; </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -20,7 +20,7 @@
 
 
     
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"/>
     <link rel="stylesheet" href="${path }/css/food/foodDetail.css"/>
@@ -63,7 +63,7 @@
          <div class="foodInfosection d-flex flex-row justify-content-center align-items-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 550px;">
                <div class="carousel-indicators">
-                  <button type="button"
+                  <%-- <button type="button"
                      data-bs-target="#carouselExampleIndicators"
                      data-bs-slide-to="0" class="active" aria-current="true"
                      aria-label="Slide 1">
@@ -74,7 +74,7 @@
                      data-bs-slide-to="${i}" aria-current="true"
                      aria-label="Slide ${i+1}">
                      </button>
-                  </c:forEach>
+                  </c:forEach> --%>
                </div>
                <div class="carousel-inner">               
                   <c:forEach var="fp" items="${f.foodPhoto}">
@@ -218,8 +218,8 @@
                      <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuLink" style="width: 100px;">
                         <!-- 작성자만 보이게 -->
                         <c:if test="${loginMember.memberId==f.foodReview[0].memberId}">
-	                        <li><a class="dropdown-item" href="#" 
-	                        data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal(event);">수정</a></li>
+                           <li><a class="dropdown-item" href="#" 
+                           data-bs-toggle="modal" data-bs-target="#reviewModal" onclick="updateModal(event);">수정</a></li>
                         </c:if>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
                         data-bs-target="#removeFood" onclick="insertFrNo(${fr.frNo});">삭제</a></li>
@@ -275,7 +275,7 @@
          </c:forEach>
       </c:if>
       <c:if test="${f.foodReview[0].frNo < 1}">
-      	<div>등록된 리뷰가 없습니다.</div>
+         <div>등록된 리뷰가 없습니다.</div>
       </c:if>
    </div>
 
@@ -433,31 +433,31 @@
                }
             });
          }
-		});
+      });
 
       //ajax 통신(삭제)
       $("#remove_food_btn").click(e=>{
          const data = {frNo:$("#selected_food_no").val()};
 
-			$.ajax({
-				url:"${path}/food/deleteFoodReview.do",
-				type:"post",
+         $.ajax({
+            url:"${path}/food/deleteFoodReview.do",
+            type:"post",
             data:data,
-				success:data=>{
+            success:data=>{
                alert("삭제가 완료되었습니다.");
                // location.reload();
                $('window').scrollTop(0,300);
-				},
-				error:(r,s,e)=>{
+            },
+            error:(r,s,e)=>{
                console.log("삭제실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
                alert("삭제 실패");
-				},
-				complete:()=>{
+            },
+            complete:()=>{
                // $(".upFile").val('');
                location.reload();
-				}
-			});
-		});
+            }
+         });
+      });
    </script>
 
 </section>
