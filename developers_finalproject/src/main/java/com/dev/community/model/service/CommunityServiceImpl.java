@@ -79,9 +79,9 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int communityCount() {
+	public int communityCount(int memberId) {
 		
-		return dao.communityCount(session);
+		return dao.communityCount(session, memberId);
 	}
 
 	@Override
