@@ -11,7 +11,7 @@
       href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
       type="text/css"
     />
-    <script>document.execCommand('defaultParagraphSeparator', false, 'p');</script>
+    <!-- <script>document.execCommand('defaultParagraphSeparator', false, 'p');</script> -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 
@@ -112,7 +112,7 @@
                 </tr>
             </table>
             <div class="d-flex justify-content-center mt-4">
-           <button type="button" class="w-btn" onclick="noticeWrite();">등록하기</button>&nbsp;
+           <button type="button" class="w-btn" onclick="noticeWrite();">등록하기</button>&nbsp;&nbsp;
            <button type="reset" class="w-btn" onclick="cancelNotice();">취소</button>
                 </div>
         </form>

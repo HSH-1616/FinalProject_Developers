@@ -19,7 +19,7 @@ const communityList = (cPage, numPerpage) => {
 				str += "<div class='card-body'>";
 				str += "<h5 class='card-title'>" + c.communityTitle + "</h5>";
 				str += "<div class='text-end '>";
-				str += "<div><img src='/images/community/heart.svg' style='height: 20px; width:auto'>" + c.likeCount + "</div>";
+				str += "<div><img src='/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
 				str += "</div>";
 				/*str += "<p class='card-text'>" + c.communityContent + "</p>";*/
 				str += "</div>";
@@ -309,7 +309,7 @@ $(".file-del").click(function(e) {
 		success: (data) => {
 			if (data > 0) {
 				targetLi.remove();
-				/* location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo); */
+				
 			}
 			else {
 				alert("삭제실패");
