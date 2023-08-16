@@ -12,15 +12,15 @@ import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodService {
 
-	void insertFood(FoodTemp food,FoodPhotoTemp fp) throws Exception;
+	int insertFood(FoodTemp food,FoodPhotoTemp fp);
 	
-	void updateFood(FoodTemp food) throws Exception;
+	int updateFood(FoodTemp food);
 	
 	int updateFoodOnAdmin(Food food);
 	
 	int deleteFoodOnAdmin(int foodNo);
 	
-	void insertFoodPhoto(FoodPhotoTemp fp) throws Exception;
+	int insertFoodPhoto(FoodPhotoTemp fp);
 	
 	void mergeFood();
 	

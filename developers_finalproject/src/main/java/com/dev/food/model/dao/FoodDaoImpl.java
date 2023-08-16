@@ -49,14 +49,12 @@ public class FoodDaoImpl implements FoodDao {
 	
 	@Override
 	public int mergeFood(SqlSession session) {
-		return session.selectOne("food.mergeFood");
-		//merge한 이후엔 temp테이블 지우기
+		return session.update("food.mergeFood");
 	}
 	
 	@Override
 	public int mergeFoodPhoto(SqlSession session) {
-		return session.selectOne("food.mergeFoodPhoto");
-		//merge한 이후엔 temp테이블 지우기
+		return session.update("food.mergeFoodPhoto");
 	}
 	
 	@Override

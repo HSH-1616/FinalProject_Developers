@@ -33,16 +33,19 @@ public class FoodServiceImpl implements FoodService{
 	private SqlSessionTemplate session;
 
 	@Override
-	@Transactional(rollbackFor = {Exception.class})
-	public void insertFood(FoodTemp f,FoodPhotoTemp fp) throws Exception {
-		dao.insertFood(session, f);
-		dao.insertFoodPhoto(session, fp);
+	//@Transactional(rollbackFor = {Exception.class})
+	public int insertFood(FoodTemp f,FoodPhotoTemp fp){
+		int result = dao.insertFood(session, f);
+		if(result>0) {
+			result+=dao.insertFoodPhoto(session, fp);			
+		}
+		return result;
 	}
 	
 	@Override
-	@Transactional(rollbackFor = {Exception.class})
-	public void updateFood(FoodTemp f) throws Exception {
-		dao.updateFood(session,f);
+	//@Transactional(rollbackFor = {Exception.class})
+	public int updateFood(FoodTemp f){
+		return dao.updateFood(session,f);
 	}
 	
 	@Override
@@ -56,9 +59,9 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
-	@Transactional(rollbackFor = {Exception.class})
-	public void insertFoodPhoto(FoodPhotoTemp fp) throws Exception {
-		dao.insertFoodPhoto(session, fp);
+	//@Transactional(rollbackFor = {Exception.class})
+	public int insertFoodPhoto(FoodPhotoTemp fp){
+		return dao.insertFoodPhoto(session, fp);
 	}
 
 	@Override

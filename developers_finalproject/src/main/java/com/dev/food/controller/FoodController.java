@@ -53,9 +53,17 @@ public class FoodController {
 	}
 	
 	@GetMapping("/foodList.do")
+	public String startFoodApi()throws IOException{
+		//api 불러오기
+		callApi();
+		return "redirect:/food/foodList2.do";
+	}
+	
+	@GetMapping("/foodList2.do")
 	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
-			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m) {
+			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m)throws IOException {
 		
+		//DB값 불러오기
 		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
@@ -103,12 +111,62 @@ public class FoodController {
 		return "food/foodListTitle";
 	}
 	
-	@GetMapping("/foodApi")
-	public String callApi(Model m) throws Exception {
+	
+	//메소드
+	//@GetMapping("/foodApi")
+	public void callApi()throws IOException{
+		
+		//api개수 불러오기 로직
+		StringBuilder result0 = new StringBuilder();
+		String urlStr0 = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
+				+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
+				+ "&" + "MobileOS"+"="+"ETC"
+				+ "&" + "MobileApp"+"="+"foodTest"
+				+ "&" + "numOfRows"+"="+ "10" //"17055"
+				+ "&" + "pageNo"+"="+"1"
+				+ "&" + "contentTypeId"+"="+"39"
+				+ "&" + "_type"+"="+"json"
+				+ "&" + "listYN"+"="+"N"
+				+ "&" + "arrange"+"="+"O";
+		
+		//URL로 서버와 통신하기
+		
+		//1. URL객체만들기
+		URL url0 = new URL(urlStr0);
+		//2. URL에서 URLConnection객체얻기(http://로 접근하면 HttpURLConnection)
+		HttpURLConnection urlConnection0 = (HttpURLConnection) url0.openConnection();
+		//3. URLConnection구성(setRequestMethod:URL요청을 받을 방식)
+		urlConnection0.setRequestMethod("GET");
+		//4. 입력스트림 가져오기 및 데이터 읽기(BufferedReader:데이터를 문자열로 읽기 가능,
+		//		getInputStream():외부에서 데이터를 읽을 수 있게 된다, Charset.forName("UTF-8"):"UTF-8"설정)
+		BufferedReader br0 = new BufferedReader(
+				new InputStreamReader(urlConnection0.getInputStream(), Charset.forName("UTF-8")));
+
+		String returnLine0;
+		//readLine():받은 내용을 한줄씩 읽어들이기
+		while ((returnLine0 = br0.readLine()) != null) {
+			result0.append(returnLine0 + "\n\r");
+		}
+		urlConnection0.disconnect();
+		
+		//여기서 부터 파싱 코드
+
+		//파싱할 객체 생성
+		JsonObject obj0 = JsonParser.parseString(result0.toString()).getAsJsonObject();
+		JsonArray arr0 = obj0.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
+				.getAsJsonObject().get("item").getAsJsonArray();
+		int apiCount = 0;
+		for (JsonElement jsonElement : arr0) {
+			JsonObject item0 = jsonElement.getAsJsonObject();
+			apiCount = Integer.parseInt(item0.get("totalCnt").toString().replaceAll("\"", ""));
+			System.out.println("apiCount : "+apiCount);
+		}
 		
 		int result = service.selectFoodCount();
 		System.out.println("음식점 수 : "+result);
-		if(result == 0) {
+		
+		//api와 DB가 동일한 숫자이면 업데이트 x
+		if(result != apiCount) {
 			//api -> DB
 			System.out.println("api -> DB");
 
@@ -117,10 +175,11 @@ public class FoodController {
 					+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 					+ "&" + "MobileOS"+"="+"ETC"
 					+ "&" + "MobileApp"+"="+"foodTest"
-					+ "&" + "numOfRows"+"="+ "10000" //"17055"
+					//+ "&" + "numOfRows"+"="+ "10000" //"17055"
 					+ "&" + "pageNo"+"="+"1"
 					+ "&" + "contentTypeId"+"="+"39"
-					+ "&" + "_type"+"="+"json";
+					+ "&" + "_type"+"="+"json"
+					+ "&" + "arrange"+"="+"O";
 			
 			//URL로 서버와 통신하기
 			
@@ -151,20 +210,10 @@ public class FoodController {
 			
 			for (JsonElement jsonElement : arr) {
 				JsonObject item = jsonElement.getAsJsonObject();
-				//System.out.println(!item.get("firstimage").toString().replaceAll("\"", "").isEmpty());
 				if(!item.get("firstimage").toString().replaceAll("\"", "").isEmpty()) {
-					//System.out.println("음식Id : "+item.get("contentid"));
-					//System.out.println("대표 이미지 : "+item.get("firstimage").toString().replaceAll("\"", ""));
-					//System.out.println("이름 : "+item.get("title"));
-					//System.out.println("주소 : "+item.get("addr1"));
-					//System.out.println("우편번호 : "+item.get("zipcode"));
-					//System.out.println(item.get("areaCode")); //잘 안나옴
-					//System.out.println(item.get("sigungucode"));
-					//System.out.println("x좌표 : "+item.get("mapx"));
-					//System.out.println("y좌표 : "+item.get("mapy"));
-					//System.out.println("===============================================================");
 					
 					String StringType = item.get("contentid").toString().replaceAll("\"", "");
+					
 					FoodTemp food = FoodTemp.builder()
 							.foodNo(Integer.parseInt(StringType))
 							.foodName(item.get("title").toString().replaceAll("\"", ""))
@@ -176,28 +225,31 @@ public class FoodController {
 							.fpMain(1)
 							.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
 							.build();
+					
 					service.insertFood(food,fp);
 					service.mergeFood();
 					service.mergeFoodPhoto();
 				}
 			}
 		}
-		//DB 불러오는 과정
-		int count = 50;
-		List<Food> foods = service.selectFoodAllTest(count); //FOOD + FOODPHOTO
-		System.out.println("flag : "+foods);
-		m.addAttribute("foods", foods);
-		return "food/foodList2";
+//		//DB 불러오는 과정
+//		int count = 50;
+//		List<Food> foods = service.selectFoodAllTest(count); //FOOD + FOODPHOTO
+//		System.out.println("flag : "+foods);
+//		m.addAttribute("foods", foods);
+//		return "food/foodList2";
 	}
 	
 	@RequestMapping("/foodDetail.do")
-	public String selectFoodByNo(Model m, int no) {
+	public String selectFoodByNo(Model m, int no) throws IOException {
 //		m.addAttribute("food",service.selectFoodById(no));
+		foodInfoApi(no,m);
+		System.out.println("flag");
 		return "food/foodDetail";
 	}
 
-	@GetMapping("/foodInfoApi")
-	public String foodInfoApi(int foodNo, Model m) throws IOException,Exception {
+	//@GetMapping("/foodInfoApi")
+	public void foodInfoApi(int foodNo, Model m) throws IOException{
 		
 		String result = service.searchByFoodNo(foodNo);
 		System.out.println("상세정보 유무 : "+result);
@@ -246,10 +298,10 @@ public class FoodController {
 			JsonObject item2 = jsonElement2.getAsJsonObject();
 			System.out.println("===========================가게정보===========================");
 			System.out.println("음식점Id : "+foodNo);
-			System.out.println("오픈시간 : "+item2.get("opentimefood"));	
-			System.out.println("휴무일 : "+item2.get("restdatefood"));
-			System.out.println("메뉴 : "+item2.get("treatmenu"));
-			System.out.println("연락처 : "+item2.get("infocenterfood"));
+			System.out.println("오픈시간 : "+item2.get("opentimefood").toString().replaceAll("\"", ""));	
+			System.out.println("휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""));
+			System.out.println("메뉴 : "+item2.get("treatmenu").toString().replaceAll("\"", ""));
+			System.out.println("연락처 : "+item2.get("infocenterfood").toString().replaceAll("\"", ""));
 			System.out.println("===============================================================");
 			
 			String StringType = item2.get("contentid").toString().replaceAll("\"", "");
@@ -268,24 +320,24 @@ public class FoodController {
 			service.deleteFoodTemp(Integer.parseInt(StringType));
 			service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
 		}
-//		//음식점의 리뷰 불러오기
-//		System.out.println(foodNo);
-//		List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
-//		System.out.println("reviews : "+reviews);
-//		m.addAttribute("reviews", reviews);
+		//음식점의 리뷰 불러오기
+		//System.out.println(foodNo);
+		//List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
+		//System.out.println("reviews : "+reviews);
+		//m.addAttribute("reviews", reviews);
 		
 		//DB에서 불러오는 과정(리뷰)
 		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO + FOODREVIEW
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
-		return "/food/foodDetail";
+//		return "/food/foodDetail";
 	}
 	
 //	@GetMapping("/foodImgApi")
-	public void foodImgApi(int foodNo) throws IOException,Exception {
+	public void foodImgApi(int foodNo) throws IOException{
 
 		StringBuilder result3 = new StringBuilder();
-		System.out.println(foodNo);
+		//System.out.println(foodNo);
 		String urlStr3 = "https://apis.data.go.kr/B551011/KorService1/detailImage1?"
 				+ "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 				+ "&" + "MobileOS"+"="+"ETC"
@@ -312,7 +364,6 @@ public class FoodController {
 		urlConnection3.disconnect();
 		
 		//여기서 부터 파싱 코드
-		System.out.println("====================flag========================");
 //		JsonObject obj3 = JsonParser.parseString(result3.toString()).getAsJsonObject();
 		
 //		JsonObject obj3 = JsonParser.parseString(result3.toString()).getAsJsonObject();
@@ -321,7 +372,7 @@ public class FoodController {
 		
 		Gson gson = new Gson();
 		JsonObject objo = gson.fromJson(result3.toString(), JsonObject.class);
-		System.out.println(objo);
+		//System.out.println(objo);
 		JsonObject obj3 = objo.getAsJsonObject("response").getAsJsonObject("body")
 				.getAsJsonObject("items");
 		JsonArray arr3 = obj3.getAsJsonArray("item");
