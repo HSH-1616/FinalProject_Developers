@@ -146,7 +146,7 @@ const dropzone = new Dropzone(".dropzone", {
 		var submitButton = document.querySelector("#file-submit");
 		var myDropzone = this; //closure
 		submitButton.addEventListener("click", function() {
-			console.log("업로드"); //tell Dropzone to process all queued files
+			console.log("업로드");
 			
 			myDropzone.processQueue();
 			

@@ -13,7 +13,7 @@ const communityList = (cPage, numPerpage) => {
 				str += "<div class='card community-cardList' onclick='communityView(" + c.communityNo + ")'>";
 				str += "<div class='d-flex'>";
 				str += "<a><img src='" + c.memberId.memberImage + "' style='height: 30px; border-radius:50%; margin:5px;'></a>&nbsp";
-				str += "<div style='margin-top:10px;'>"+c.memberId.memberNickname+"</div>";
+				str += "<div style='margin-top:10px;'>" + c.memberId.memberNickname + "</div>";
 				str += "</div>";
 				str += "<img src='/upload/community/" + c.thumbnail + "' class='card-img-top' >";
 				str += "<div class='card-body'>";
@@ -115,8 +115,8 @@ const fn_like = () => {
 		url: "/community/communityLike.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: no },
-		success: (data) => {
-			console.log(data);
+		success: () => {
+			
 		}
 	});
 
@@ -134,13 +134,13 @@ const insertReply = (ref, con) => {
 	}
 	const communityNo = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
-	
+
 	$.ajax({
 		url: "/community/insertReply.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: communityNo, replyContent: content, replyRef: ref },
 		success: () => {
-			$("#comment_input")==null;
+			$("#comment_input") == null;
 			replyList();
 		}
 	});
@@ -155,7 +155,7 @@ $(document).ready(() => {
 const replyList = () => {
 	const communityNo = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
-	const loginAdmin=$("#adminCheck").val();
+	const loginAdmin = $("#adminCheck").val();
 	$.ajax({
 		url: "/community/replyList.do",
 		type: "get",
@@ -180,8 +180,8 @@ const replyList = () => {
 					if (memberId == i.memberId.memberId) {
 						str += "<button class='reply-update s-btn m-2' data-name='" + i.replyNo + "' >수정</button>";
 					}
-					if (memberId == i.memberId.memberId || loginAdmin!="") {
-						str += "<button class='reply-delete s-btn mx-2' onclick='deleteReply(" + i.replyLevel + "," + i.replyNo + ")'>삭제</button>";
+					if (memberId == i.memberId.memberId || loginAdmin != "") {
+						str += "<button class='reply-delete s-btn mx-1' onclick='deleteReply(" + i.replyLevel + "," + i.replyNo + ")'>삭제</button>";
 					}
 					if (memberId != "") {
 						str += "<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies" + i.replyNo + "' role='button'"
@@ -217,7 +217,7 @@ const replyList = () => {
 					if (memberId == i.memberId.memberId) {
 						str += "<button class='reply-update s-btn m-2' data-name='" + i.replyNo + "'>수정</button>";
 					}
-					if (memberId == i.memberId.memberId || loginAdmin!="") {
+					if (memberId == i.memberId.memberId || loginAdmin != "") {
 						str += "<button class='reply-delete s-btn' onclick='deleteReply(" + i.replyLevel + "," + i.replyNo + ")'>삭제</button>";
 					}
 					str += "</div>";
@@ -233,13 +233,13 @@ const replyList = () => {
 	});
 }
 
-$(".reply-list").on("click", ".reply-update", function(e) {
+$(".reply-list").on("click", ".reply-update", function() {
 	let target = $(this);
 	const no = target.data("name");
 
-	let updateForm = "<span><input type='text' id='editReply" + no + "' value='" + $("." + no).html() + "'>";
-	updateForm += "<button class='s-btn m-2' onclick='updateReply(" + no + ");'>수정</button>"
-	updateForm += "<button class='s-btn m-2' onclick='replyList()'>취소</button>"
+	let updateForm = "<span><input type='text' id='editReply" + no + "' value='" + $("." + no).html() + "'></span>";
+	updateForm += "<button class='s-btn m-1' onclick='updateReply(" + no + ");'>수정</button>"
+	updateForm += "<button class='s-btn m-1' onclick='replyList()'>취소</button>"
 
 	$("." + no).parent().replaceWith(updateForm);
 })
@@ -263,38 +263,40 @@ const updateReply = (no) => {
 }
 
 const deleteReply = (level, no) => {
-	$.ajax({
-		url: "/community/deleteReply.do",
-		type: "post",
-		data: { replyNo: no, replyLevel: level },
-		success: () => {
-			replyList();
-		}, error: () => {
-			alert("댓글 삭제 실패");
-		}
-	})
+	if (confirm("댓글을 삭제하시겠습니까?") == true) {
+		$.ajax({
+			url: "/community/deleteReply.do",
+			type: "post",
+			data: { replyNo: no, replyLevel: level },
+			success: () => {
+				replyList();
+			}, error: () => {
+				alert("댓글 삭제 실패");
+			}
+		})
+	}
 }
 
 deleteCommunity = (no) => {
 
-	if(confirm("게시글을 삭제하시겠습니까?")==true){
+	if (confirm("게시글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-		url: "/community/deleteCommunity.do",
-		type: "post",
-		data: { communityNo: no },
-		success: () => {
-			alert("삭제성공");
-			location.replace("/community/communityList.do");
-		}, error: () => {
-			alert("삭제실패");
-			location.replace("/community/communityList.do");
-		}
-	})
-	}else{
+			url: "/community/deleteCommunity.do",
+			type: "post",
+			data: { communityNo: no },
+			success: () => {
+				alert("삭제성공");
+				location.replace("/community/communityList.do");
+			}, error: () => {
+				alert("삭제실패");
+				location.replace("/community/communityList.do");
+			}
+		})
+	} else {
 		return false;
 	}
 
-	
+
 }
 
 $(".file-del").click(function(e) {
@@ -309,7 +311,7 @@ $(".file-del").click(function(e) {
 		success: (data) => {
 			if (data > 0) {
 				targetLi.remove();
-				
+
 			}
 			else {
 				alert("삭제실패");
@@ -320,7 +322,7 @@ $(".file-del").click(function(e) {
 })
 
 
-const community_cancel=()=>{
+const community_cancel = () => {
 	window.history.back();
 }
 

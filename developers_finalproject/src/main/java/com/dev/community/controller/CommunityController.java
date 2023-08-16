@@ -41,7 +41,7 @@ public class CommunityController {
 	
 	@PostMapping("/communityListEnd.do")
 	@ResponseBody
-	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="8") int numPerpage) {
+	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="6") int numPerpage) {
 		Map<String, Object> pasing=new HashMap<String, Object>();
 		pasing.put("cPage", cPage);
 		pasing.put("numPerpage", numPerpage);
