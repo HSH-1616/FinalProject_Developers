@@ -1,15 +1,20 @@
 package com.dev.food.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +24,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
-import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 import com.dev.food.model.service.FoodService;
+import com.dev.member.model.dto.Member;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -168,21 +176,17 @@ public class FoodController {
 							.fpMain(1)
 							.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
 							.build();
-//					System.out.println(food);
-//					System.out.println(fp);
 					service.insertFood(food,fp);
 					service.mergeFood();
 					service.mergeFoodPhoto();
-					service.deleteFoodTemp();
-					service.deleteFoodPhotoTemp();
 				}
 			}
 		}
-		
 		//DB 불러오는 과정
-		List<Food> foods = service.selectFoodAllTest(); //FOOD + FOODPHOTO
+		int count = 50;
+		List<Food> foods = service.selectFoodAllTest(count); //FOOD + FOODPHOTO
 		System.out.println("flag : "+foods);
-		m.addAttribute("foods", foods);			
+		m.addAttribute("foods", foods);
 		return "food/foodList2";
 	}
 	
@@ -251,23 +255,30 @@ public class FoodController {
 			String StringType = item2.get("contentid").toString().replaceAll("\"", "");
 			FoodTemp food = FoodTemp.builder()
 					.foodNo(Integer.parseInt(StringType))
-					.foodOpenTime("오픈시간 : "+item2.get("opentimefood")+"\n\r"+"휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""))
+					.foodOpenTime("오픈시간 : "+item2.get("opentimefood").toString().replaceAll("\"", "")+"\n\r"+"휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""))
 					.foodMenu(item2.get("treatmenu").toString().replaceAll("\"", ""))
 					.foodPhone(item2.get("infocenterfood").toString().replaceAll("\"", ""))
 					.build();
 			service.updateFood(food); //TEMP에 UPDATE
+			System.out.println("updateflag : "+service.selectFoodByFoodNo(foodNo));
 			service.mergeFood(); //FOOD에 없으면 MERGE
-			//다하면 TEMP는 지워야할까?
+			System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
 			foodImgApi(foodNo);
-			service.deleteFoodTemp();
-			service.deleteFoodPhotoTemp();
+			//사용할 일 없으니 삭제
+			service.deleteFoodTemp(Integer.parseInt(StringType));
+			service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
 		}
+//		//음식점의 리뷰 불러오기
+//		System.out.println(foodNo);
+//		List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
+//		System.out.println("reviews : "+reviews);
+//		m.addAttribute("reviews", reviews);
 		
-		//DB에서 불러오는 과정
-		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO
+		//DB에서 불러오는 과정(리뷰)
+		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO + FOODREVIEW
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
-		return "/food/foodView";
+		return "/food/foodDetail";
 	}
 	
 //	@GetMapping("/foodImgApi")
@@ -334,18 +345,187 @@ public class FoodController {
 		}
 	}
 	
-	//좋아요 기능
+	@PostMapping("/insertFoodReview.do")
 	@ResponseBody
-    @PostMapping("/food/toggleHeart")
-    public int toggleHeart(@RequestParam Map params, int fhNo, String memberId, int foodNo) {
-       
-		params.put("fhNo", fhNo);
-        params.put("memberId", memberId);
-        params.put("foodNo", foodNo);
+	public void insertFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
+		
+		//session에서 직접 받아오기
+		Member member = (Member)session.getAttribute("loginMember");
+		//member에서 객체를 생성해서 int 주입
+		fr.setMember(Member.builder().memberId(member.getMemberId()).build());
+		fr.setMemberId(member.getMemberId());
+		System.out.println("dto : "+fr);
+		System.out.println("FRGRADE CHECK : "+fr.getFrGrade());
+		
+		//파일을 저장할경로 가져오기
+		String path = session.getServletContext().getRealPath("/images/upload/food/");
+		System.out.println("path : "+path);
+		System.out.println("upFile : "+upFile);
+		//파일 업로드+dto에 추가
+		if(upFile!=null) {
+			for(MultipartFile mf:upFile) {
+				if(!mf.isEmpty()) {
+					//원래이름 + 개명된 이름 설정
+					String rpName = mf.getOriginalFilename();
+					String ext = rpName.substring(rpName.lastIndexOf("."));
+					Date today = new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn = (int)(Math.random()*10000)+1;
+					String rename = sdf.format(today)+"_"+rdn+ext;
+					
+					try {
+						mf.transferTo(new File(path+rename));				
+					}catch(IOException e) {
+						e.printStackTrace();
+					}
+	
+					FoodReviewPhoto rp = FoodReviewPhoto.builder()
+							.rpName(rpName)
+							.rpRename(rename)
+							.build();
+					System.out.println("photo : "+rp);
+					fr.getFoodReviewPhoto().add(rp);
+				}
+			}
+		}
+		try {
+			service.insertFoodReview(fr);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			//실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이 필요하다.		
+			for(FoodReviewPhoto p : fr.getFoodReviewPhoto()) {
+				File delFile=new File(path+p.getRpRename());
+				delFile.delete();
+			}
+			
+		}
+	}
+	
+	@PostMapping("/updateFoodReview.do")
+	@ResponseBody
+	public void updateFoodReview(HttpSession session, MultipartFile[] upFile, FoodReview fr) {
+		
+		//session에서 직접 받아오기
+		Member member = (Member)session.getAttribute("loginMember");
+		//member에서 객체를 생성해서 int 주입
+		fr.setMember(Member.builder().memberId(member.getMemberId()).build());
+		fr.setMemberId(member.getMemberId());
+		System.out.println("dto : "+fr);
+		System.out.println("FRGRADE CHECK : "+fr.getFrGrade());
+		
+		//파일을 저장할경로 가져오기
+		String path = session.getServletContext().getRealPath("/images/upload/food/");
+		System.out.println("path : "+path);
+		System.out.println("upFile : "+upFile);
+		
+		//upload파일 삭제하는 로직 
+		List<FoodReviewPhoto> photoList = service.selectFoodReviewPhotoByFoodNo(fr.getFrNo());
+		System.out.println("photoList : "+photoList);
+		
+		if(!photoList.isEmpty()) {
+			//upload삭제
+			for(FoodReviewPhoto p : photoList) {
+				System.out.println("p : "+p.getRpName());
+				File delFile=new File(path+p.getRpRename());
+				delFile.delete();
+			}
+			//DB삭제
+			service.deleteFoodReviewPhoto(fr.getFrNo());
+		}
+		
+		//파일 업로드+dto에 추가
+		if(upFile!=null) {
+			for(MultipartFile mf:upFile) {
+				if(!mf.isEmpty()) {
+					//원래이름 + 개명된 이름 설정
+					String rpName = mf.getOriginalFilename();
+					String ext = rpName.substring(rpName.lastIndexOf("."));
+					Date today = new Date(System.currentTimeMillis());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+					int rdn = (int)(Math.random()*10000)+1;
+					String rename = sdf.format(today)+"_"+rdn+ext;
+					
+					try {
+						mf.transferTo(new File(path+rename));				
+					}catch(IOException e) {
+						e.printStackTrace();
+					}
+					FoodReviewPhoto rp = FoodReviewPhoto.builder()
+						.rpName(rpName)
+						.rpRename(rename)
+						.build();
+					System.out.println("photo : "+rp);
+					fr.getFoodReviewPhoto().add(rp);
+					//service.updateFoodReviewPhoto(rp);
+				}
+			}
+		}
+		try {
+			//update구문
+			service.updateFoodReview(fr);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			//실패시 DB에는 값이 없지만 upload파일은 남는 문제가 생겨 같이 제거해주는 과정이 필요하다.		
+			for(FoodReviewPhoto p : fr.getFoodReviewPhoto()) {
+				File delFile=new File(path+p.getRpRename());
+				delFile.delete();
+			}
+			
+		}
+	}
+	
+	@PostMapping("/deleteFoodReview.do")
+	@ResponseBody
+	public void deleteFoodReview(HttpSession session, int frNo) {
+		//db에서 값 지우면 upload파일도 삭제하는 로직
+		String path = session.getServletContext().getRealPath("/images/upload/food/");
+		List<FoodReviewPhoto> rp = service.selectFoodReviewPhotoByFoodNo(frNo);
+		System.out.println("rp : "+rp);
+		
+		if(!rp.isEmpty()) {
+			//upload삭제
+			for(FoodReviewPhoto p : rp) {
+				System.out.println("p : "+p.getRpName());
+				File delFile=new File(path+p.getRpRename());
+				delFile.delete();
+			}
+			//DB삭제
+			service.deleteFoodReview(frNo);			
+		}
+	}
 
-        int updatedCount = service.toggleHeartAndGetCount(params);
-        return updatedCount;
-    }
+	//좋아요 기능
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("/food/toggleHeart") public int toggleHeart(@RequestParam Map
+	 * params, int fhNo, String memberId, int foodNo) {
+	 * 
+	 * params.put("fhNo", fhNo); params.put("memberId", memberId);
+	 * params.put("foodNo", foodNo);
+	 * 
+	 * int updatedCount = service.toggleHeartAndGetCount(params); return
+	 * updatedCount; }
+	 */
+	
+	@GetMapping("/insertHeart")
+	@ResponseBody
+	public int insertHeart(@RequestParam Map param, HttpSession session) {
+		Member loginMember=(Member)session.getAttribute("loginMember");
+		param.put("memberId", loginMember.getMemberId());
+		int result = service.insertHeart(param);
+		return result;
+	}
+
+	@GetMapping("/deleteHeart")
+	@ResponseBody
+	public int deleteHeart(@RequestParam Map param,HttpSession session) {
+		Member loingMember=(Member)session.getAttribute("loginMember");
+		param.put("memberId", loingMember.getMemberId());
+		int result = service.deleteHeart(param);
+		return result;
+	}
+	
 	
 	/*
 	 * //분류기능(제목)
@@ -358,7 +538,5 @@ public class FoodController {
 	 * 
 	 * return "foodList	"; }
 	 */
-	
-	
 	
 }

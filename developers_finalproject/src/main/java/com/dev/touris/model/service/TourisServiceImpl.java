@@ -91,6 +91,14 @@ public class TourisServiceImpl implements TourisService {
 	public List<TourisMember> myPageTourisRouteList(int loginmemberid) {
 		return dao.myPageTourisRouteList(session, loginmemberid);
 	}
+	@Override
+	public List<Touris> tourislist(Map<String,Object> param) {
+		return dao.tourislist(session, param);
+	}
+	@Override
+	public int tourisListCount() {
+		return dao.tourisListCount(session);
+	}
 	
 //	@Override
 //	public int inserttourisroute(List<Map> routedata) {

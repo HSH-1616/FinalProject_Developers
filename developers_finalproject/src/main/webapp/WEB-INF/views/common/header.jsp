@@ -84,7 +84,7 @@
 				<ul class="main-menu">
 					<li class="item">
 						<button class="item__name"
-							onclick="location.href='${path }'">TOURIS</button>
+							onclick="location.href='${path }/touris/tourislist'">TOURIS</button>
 					</li>
 					<li class="item">
 						<button class="item__name"

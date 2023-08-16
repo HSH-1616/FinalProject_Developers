@@ -5,12 +5,15 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 @Repository
@@ -35,25 +38,35 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
+	public int updateFoodOnAdmin(SqlSession session, Food food) {
+		return session.update("food.updateFoodOnAdmin",food);
+	}
+	
+	@Override
+	public int deleteFoodOnAdmin(SqlSession session, int foodNo) {
+		return session.delete("food.deleteFoodOnAdmin",foodNo);
+	}
+	
+	@Override
 	public int mergeFood(SqlSession session) {
-		return session.insert("food.mergeFood");
+		return session.selectOne("food.mergeFood");
 		//merge한 이후엔 temp테이블 지우기
 	}
 	
 	@Override
 	public int mergeFoodPhoto(SqlSession session) {
-		return session.insert("food.mergeFoodPhoto");
+		return session.selectOne("food.mergeFoodPhoto");
 		//merge한 이후엔 temp테이블 지우기
 	}
 	
 	@Override
-	public void deleteFoodTemp(SqlSession session) {
-		session.delete("food.deleteFoodTemp");
+	public void deleteFoodTemp(SqlSession session,int foodNo) {
+		session.delete("food.deleteFoodTemp",foodNo);
 	}
 	
 	@Override
-	public void deleteFoodPhotoTemp(SqlSession session) {
-		session.delete("food.deleteFoodPhotoTemp");
+	public void deleteFoodPhotoTemp(SqlSession session,int foodNo) {
+		session.delete("food.deleteFoodPhotoTemp",foodNo);
 	}
 
 	@Override
@@ -77,8 +90,8 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public List<Food> selectFoodAllTest(SqlSession session) {
-		return session.selectList("food.selectFoodAllTest");
+	public List<Food> selectFoodAllTest(SqlSession session,int count) {
+		return session.selectList("food.selectFoodAllTest",count);
 	}
 	
 	@Override
@@ -131,36 +144,89 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
+	public int insertFoodReview(SqlSession session, FoodReview fr) {
+		return session.insert("food.insertFoodReview",fr);
+	}
+	
+	@Override
+	public int insertFoodReviewPhoto(SqlSession session, FoodReviewPhoto rp) {
+		return session.insert("food.insertFoodReviewPhoto",rp);
+	}
+	
+//	@Override
+//	public List searchByRpNo(SqlSession session, int frNo) {
+//		return session.selectList("food.searchByRpNo",frNo);
+//	}
+	
+	@Override
+	public int updateFoodReview(SqlSession session, FoodReview fr) {
+		return session.update("food.updateFoodReview",fr);
+	}
+	
+	@Override
+	public int updateFoodReviewPhoto(SqlSession session, FoodReviewPhoto rp) {
+		return session.insert("food.updateFoodReviewPhoto",rp);
+	}
+	
+	@Override
+	public int deleteFoodReview(SqlSession session, int frNo) {
+		return session.delete("food.deleteFoodReview",frNo);
+	}
+	
+	@Override
+	public int searchFoodReivewPhoto(SqlSession session, int frNo) {
+		return session.insert("food.searchFoodReivewPhoto",frNo);
+	}
+	
+	@Override
+	public int deleteFoodReviewPhoto(SqlSession session, int frNo) {
+		return session.delete("food.deleteFoodReviewPhoto",frNo);
+	}
+	
+//	@Override
+//	public List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo) {
+//		return session.selectList("food.selectFoodReviewByFoodNo",foodNo);
+//	}
+	
+	@Override
+	public List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(SqlSession session, int frNo) {
+		return session.selectList("food.selectFoodReviewPhotoByFoodNo",frNo);
+	}
+
 	public FoodHeart getFoodById(SqlSession session, String memberId) {
 		
 		return session.selectOne("food.getFoodById", memberId);
 	}
 	
+	/*
+	 * @Override public boolean checkHeart(SqlSession session, Map params) { return
+	 * session.selectOne("food.checkHeart", params); }
+	 */
+
 	@Override
-    public boolean checkHeart(SqlSession session, Map params) {
-        return session.selectOne("food.checkHeart", params);
-    }
+	public int insertHeart(SqlSessionTemplate session,Map param) {
+		return session.insert("food.insertHeart",param);
+	}
+	
+	@Override
+	public int deleteHeart(SqlSessionTemplate session,Map param) {
+		return session.delete("food.deleteHeart",param);
+	}
+	
+	@Override
+	public List<FoodHeart> fdHeart(SqlSessionTemplate session, int no){
+		return session.selectList("food.fdHeart",no);
+	}
 
-    @Override
-    public void insertHeart(SqlSession session, Map params) {
-    	session.insert("food.insertHeart", params);
-    }
-
-    @Override
-    public void deleteHeart(SqlSession session, Map params) {
-    	session.delete("food.deleteHeart", params);
-    }
-
-    @Override
-    public int getHeartCount(SqlSession session, Map params) {
-        return session.selectOne("food.getHeartCount", params);
-    }
+	/*
+	 * @Override public int getHeartCount(SqlSession session, Map params) { return
+	 * session.selectOne("food.getHeartCount", params); }
+	 */
 	
 	@Override
 	public List<Food> getFoodsSortedByTitle(SqlSession session, Map<String, Object> params, String sortType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 	
 }

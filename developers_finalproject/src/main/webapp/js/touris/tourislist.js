@@ -256,34 +256,6 @@ $(document).ready(function() {
 });
 
 
-// 제목순 메뉴 클릭 시 처리
-document.getElementById("all").addEventListener("click", function() {
-	resetActiveMenu(); // 모든 메뉴 스타일 초기화
-	this.querySelector(".title").classList.add("active"); // 현재 메뉴에 active 클래스 추가
-	// 추가적으로 제목순에 해당하는 동작 처리 (원하는 동작이 있을 경우 여기에 추가)
-});
-
-// 조회순 메뉴 클릭 시 처리
-document.getElementById("popular").addEventListener("click", function() {
-	resetActiveMenu(); // 모든 메뉴 스타일 초기화
-	this.querySelector(".title").classList.add("active"); // 현재 메뉴에 active 클래스 추가
-	// 추가적으로 조회순에 해당하는 동작 처리 (원하는 동작이 있을 경우 여기에 추가)
-});
-
-// 리뷰순 메뉴 클릭 시 처리
-document.getElementById("review").addEventListener("click", function() {
-	resetActiveMenu(); // 모든 메뉴 스타일 초기화
-	this.querySelector(".title").classList.add("active"); // 현재 메뉴에 active 클래스 추가
-	// 추가적으로 리뷰순에 해당하는 동작 처리 (원하는 동작이 있을 경우 여기에 추가)
-});
-
-// 모든 메뉴 스타일을 초기화하는 함수
-function resetActiveMenu() {
-	const menuItems = document.querySelectorAll(".menu_style .title");
-	menuItems.forEach((item) => {
-		item.classList.remove("active");
-	});
-}
 
 
 

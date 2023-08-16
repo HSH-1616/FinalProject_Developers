@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +22,8 @@ import com.dev.ac.service.AcService;
 import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
+import com.dev.food.model.dto.Food;
+import com.dev.food.model.service.FoodService;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
@@ -28,14 +34,17 @@ import com.dev.touris.model.vo.Touris;
 @RequestMapping("/admin")
 public class AdminController {
 	
-	private AdminService service;
-	
 	private AcService acService;
+	private AdminService service;
+	private FoodService foodService;
 	
-	public AdminController(AdminService service,AcService acService) {
+	public AdminController(AdminService service, AcService acService, FoodService foodService) {
 		this.service=service;
 		this.acService=acService;
+		this.foodService=foodService;
 	}
+	
+	
 	@GetMapping
 	public String adminPage() {
 		return "admin/loginadmin";
@@ -150,21 +159,47 @@ public class AdminController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		param.put("tourisAreaId", data.get("tourisAreaId"));
+		
 		Map<String,Object> type=new HashMap<>();
 		type.put("typeId", "tourisAreaId");
 		type.put("value", data.get("tourisAreaId"));
+		
 		List<Touris> tourises=service.selectBytourisAreaId(param);
 		int totalData=service.selectBytourisAreaIdCount(param);
+		
 		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectBytourisAreaId",type));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("tourises",tourises);
 		m.addAttribute("tourisAreaId",data.get("tourisAreaId"));
 		return "admin/tourisList";
 	}
+	
 	@GetMapping("/tourisUpdate")
 	@ResponseBody
 	public void tourisUpdate() {
 		service.tourisUpdate();
+	}
+	
+//	===========================지환=========================
+	@GetMapping("/selectFoodList")
+	public String selectFoodList(@RequestParam(value="cPage",defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, Model m){
+		//페이지처리용 Map
+		Map<String,Object> param=new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		
+		//검색처리 Map
+		Map<String,Object> type=new HashMap<>();
+//		type.put("typeId", "tourisAreaId");
+//		type.put("value", data.get("tourisAreaId"));
+		
+		List<Food> foodList=service.searchFood(param);
+		int totalData=service.selectFoodCount();
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectFoodList",type));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("foods",foodList);
+		return "admin/foodList";
 	}
 	@GetMapping("/paymentList")
 	public String paymentList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
@@ -210,5 +245,39 @@ public class AdminController {
 	
 	
 	
+	@GetMapping("/selectFoodByFoodNo")
+	public String selectFoodByFoodNo(int foodNo, Model m) {
+		//foodNo로 food,foodPhoto dto불러오고 출력(출력페이지에서 승인,미승인 여부 네비게이션으로) //리뷰는 어쩌지?
+		List<Food> foods = foodService.selectFoodByFoodNo(foodNo);
+		m.addAttribute("foods", foods);
+		return "admin/foodDetail";
+	}
 	
+	@GetMapping("/updateFoodByFoodNo")
+	public String updateFoodByFoodNo(Food f,Model m) {
+		System.out.println(f);
+		int result = foodService.updateFoodOnAdmin(f);
+		if(result > 0) {
+			m.addAttribute("result", "true");
+		}else {
+			m.addAttribute("result", "false");
+		}
+		return "/admin/adminMain";
+	}
+	
+	@GetMapping("/deleteFoodByFoodNo")
+	public String deleteFoodByFoodNo(int foodNo, HttpServletRequest request) {
+		System.out.println(foodNo);
+		int flag = foodService.deleteFoodOnAdmin(foodNo);
+		String result;
+		if(flag > 0) {
+			result = "true";
+		}else {
+			result = "false";
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute("result", result);
+		return "redirect:/admin/selectFoodList";
+	}
 }
+
