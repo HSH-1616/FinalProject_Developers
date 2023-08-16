@@ -6,6 +6,8 @@ import java.util.Map;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhotoTemp;
+import com.dev.food.model.dto.FoodReview;
+import com.dev.food.model.dto.FoodReviewPhoto;
 import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodService {
@@ -14,21 +16,25 @@ public interface FoodService {
 	
 	void updateFood(FoodTemp food) throws Exception;
 	
+	int updateFoodOnAdmin(Food food);
+	
+	int deleteFoodOnAdmin(int foodNo);
+	
 	void insertFoodPhoto(FoodPhotoTemp fp) throws Exception;
 	
 	void mergeFood();
 	
 	void mergeFoodPhoto();
 	
-	void deleteFoodTemp();
+	void deleteFoodTemp(int foodNo);
 	
-	void deleteFoodPhotoTemp();
+	void deleteFoodPhotoTemp(int foodNo);
 	
 	List<Food> selectFoodAll (Map<String,Object> param);
 	
 	List<Food> foodListTitle(Map<String,Object> param);
 	
-	List<Food> selectFoodAllTest ();
+	List<Food> selectFoodAllTest (int count);
 	
 	List<Food> selectFoodByFoodNo (int foodNo);
 	
@@ -51,5 +57,21 @@ public interface FoodService {
 	/* int toggleHeartAndGetCount(Map params); */
 
 	/* list<food> getsortedfoods(string sortfilter,int cpage, int numperpage); */
+	
+	int insertFoodReview(FoodReview fr);
+	
+	int deleteFoodReview(int frNo);
+	
+	int deleteFoodReviewPhoto(int frNo);
+	
+	//List<FoodReview> selectFoodReviewByFoodNo(int foodNo);
+	
+	List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(int frNo);
+	
+	int updateFoodReview(FoodReview fr);
+	
+	//int updateReviewPhoto(FoodReviewPhoto rp);
+	
+	//List searchByRpNo(int frNo);
 	
 }
