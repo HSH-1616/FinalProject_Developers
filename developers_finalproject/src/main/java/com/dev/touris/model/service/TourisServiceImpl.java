@@ -80,8 +80,8 @@ public class TourisServiceImpl implements TourisService {
 		return insertedCount;
 	}
 	@Override
-	public int myPageTourisRouteCount() {
-		return dao.myPageTourisRouteCount(session);
+	public int myPageTourisRouteCount(int loginmemberid) {
+		return dao.myPageTourisRouteCount(session, loginmemberid);
 	}
 	@Override
 	public List<TourisMember> myPageTourisRoute(int loginmemberid, Map params) {

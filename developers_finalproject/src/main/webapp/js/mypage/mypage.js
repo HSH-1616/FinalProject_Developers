@@ -138,18 +138,59 @@ let areaName;
 		data: {loginmemberid : loginmemberid},
 		success:(data)=>{
 			console.log(data);
-			data.forEach(e =>{
+			const alldaydetailscheduleDiv = document.querySelector('.alldaydetailschedule');
+    				alldaydetailscheduleDiv.innerHTML = '';
+			data.forEach((e) =>{
 				
 				const endDate = new Date(e.tuendDate);
 				const startDate = new Date(e.tustartDate);
+				
 					// 두 날짜 사이의 일 수 차이 계산
 					const dayDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+					let daycount = (dayDifference+1);
 					
 				e.tourisArealist.forEach(e=>{
 					areaLatitude = e.areaLatitude;
 					areaLongitude = e.areaLongitude;
 					areaName = e.areaName;
 					
+					for(let i = 0; i <= dayDifference; i++) {
+						const currentDate = new Date(startDate);
+						currentDate.setDate(startDate.getDate() + i);
+
+						const dayNumber = i + 1;
+						const dayName = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
+						const month = currentDate.toLocaleDateString('kr-KR', { month: 'short' });
+						const day = currentDate.getDate();
+						
+						
+					const newElement = document.createElement('div');
+					newElement.classList.add('detailroutetour-' + dayNumber); // 
+					newElement.id = 'detailroutetareaid';
+
+					newElement.innerHTML = '<div class="alldayinputfield">' +
+						'  <div id="dayselectbox" class="dayselecttag">' +
+						 	 + dayNumber + '일차 ' + month + ' ' + day + '일 ' + dayName +
+						'  </div>' +
+						'</div>' +
+						'<div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>' +
+						'<div class="dailyroutedetaillist">' +
+						'  <div class="dailyroutecountarea">' +
+						'    <div class="dailyroutetext">' +
+						'      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">' +
+						'        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />' +
+						'      </svg>' +
+						'      <div class="dailytext1"></div>' +
+						'      <div class="dailytext2">장소</div>' +
+						'    </div>' +
+						'  </div>' +
+						'  <hr class="hr2"></hr>' +
+						'  <div class="routedatailslists" id="routedatails">' +
+						'    </div>' +
+						'  </div>' +
+						'</div>';
+
+					alldaydetailscheduleDiv.appendChild(newElement);
 					
 					
 					
@@ -157,6 +198,8 @@ let areaName;
 					
 					
 					
+					
+				}
 					
 					
 					
@@ -633,190 +676,6 @@ $(document).on('click', '.smallschedullisttextarea', function() {
 		/*});*/
 	/*}*/
 });
- 
-      // 태그 생성 태그
-        $("ul.listarea-right").on("click", ".plus-travel", function () {
-			if ($('#calander').val() === '') {
-    return; // 입력 필드가 비어있을 때는 이벤트 핸들러 종료
-  }
-          	var parentLi = $(this).closest("li.selectlist2");
-			const immediateParent = $(this).parent();
-			const listbox = immediateParent.parent();
-			const listtextElement = listbox.find(".listtext");
-			const listtitleTextValue = listtextElement.find(".listtitle-text").text();
-			const listtitleaddr = listtextElement.find(".listtitleaddr");
-			const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
-			const srcValue = listbox.find(".listboximg img").attr("src");
-			const hidentourisid = parentLi.find(".listbtn");
-			const hidenid = hidentourisid.find(".detail-travellist a .tourisidhidden").text();
-			
-			var newLi = '<li class="selectlist">' +
-				'<div class="listbox">' +
-				'<div class="listboximg"><img src="' + srcValue + '" alt=""></div>' +
-				'<div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">' +
-				'<path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />' +
-				'</svg>' +
-				'</div>' +
-				'</div>' +
-				'<div class="listtext">' +
-				'<h7 class="listtitle-text">'+listtitleTextValue+'</h7>' +
-				'<h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">'+ textaddr +'</h7></h7>'+
-				'</div>' +
-				'<div class="listbtn">' +
-				'<div class="hiddenid">'+hidenid+'</div>'+
-				'<div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">' +
-				'<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />' +
-				'</svg></a>' +
-				'</div>' +
-				'<div class="delete-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#b31312">' +
-				'<path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />' +
-				'</svg></a>' +
-				'</div>' +
-				'</div>' +
-				'</li>';
-          parentLi.remove();
-         // 생성된거 없어지고 생겨지는 함수
-          $("ul.listarea").append(newLi);
-          var selectListElements = $("ul.listarea li.selectlist");
-    
-          /*console.log("카운터갯수:", selectListElements.length);*/
-          if (selectListElements.length) {
-            $(".list-text").hide();
-          } else {
-            $(".list-text").show();
-          }
-        });
-     
-      //태그 삭제 태그
-      $("ul.listarea").on("click", ".delete-travel", function () {
-          var parentLi = $(this).closest("li.selectlist");
-          const test =  $(".routedatailslists .selectroutedetailslist");
-          	const immediateParent = $(this).parent();
-			const listbox = immediateParent.parent();
-			const listtextElement = listbox.find(".listtext");
-			const listtitleTextValue = listtextElement.find(".listtitle-text").text();
-			const listtitleaddr = listtextElement.find(".listtitleaddr");
-			const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
-			const srcValue = listbox.find(".listboximg img").attr("src");
-			const hidentourisid = parentLi.find(".listbtn");
-			const hidenid = hidentourisid.find(".detail-travellist a .tourisidhidden").text();
-		  var newLi = '<li class="selectlist2">' +
-			  '<div class="listbox">' +
-			  '<div class="listboximg"><img src="' + srcValue + '" alt=""></div>' +
-			  '<div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">' +
-			  '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />' +
-			  '</svg></div>' +
-			  '</div>' +
-			  '<div class="listtext">' +
-			  '<h7 class="listtitle-text">'+listtitleTextValue+'</h7>' +
-			  '<h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">'+ textaddr +'</h7></h7>'+
-			  '</div>' +
-			  '<div class="listbtn">' +
-			  '<div class="detail-travellist"><a>' +
-			  '<div class="tourisidhidden" style="display: none">'+hidenid+'</div>'+
-			  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">' +
-			  '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />' +
-			  '</svg></a></div>' +
-			  '<div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">' +
-			  '<path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />' +
-			  '</svg></a></div>' +
-			  '</div>' +
-			  '</li>';
-			  test.remove();
-          parentLi.remove();
-          
-		  const dataItems = [];
-
-		  $("ul.listarea .selectlist").each(function() {
-			  const listbox = $(this).find(".listbox");
-			  const listtextElement = $(this).find(".listtext");
-			  const listtitleTextValue = listtextElement.find(".listtitle-text").text();
-			  const listtitleaddr = listtextElement.find(".listtitleaddr");
-			  const textaddr = listtitleaddr.find(".listtitle-textaddr").text();
-			  const srcValue = listbox.find(".listboximg img").attr("src");
-			  const hidentourisid = $(this).find(".hiddenid").text();
-
-			  dataItems.push({
-				  listtitleTextValue,
-				  textaddr,
-				  srcValue,
-				  hidentourisid
-			  });
-		  });
-
-		  // 데이터 배열의 각 항목을 순회하며 동적 요소 생성
-		  dataItems.forEach(dataItem => {
-			  const newDynamicContent = generateDynamicContent(
-				  dataItem.listtitleTextValue,
-				  dataItem.textaddr,
-				  dataItem.srcValue,
-				  dataItem.hidentourisid
-			  );
-			  const parentElement = $(".routedatailslists");
-		  	  const newElement = $(newDynamicContent)[0];
-		  	  parentElement[0].appendChild(newElement);
-		  	  const lengthindex = $(".routedatailslists .selectroutedetailslist").length;
-	const firstdailyindex = $('.dailytext1').eq(0);
-	firstdailyindex.empty();
-	firstdailyindex.append(lengthindex);
-		  });
-		  
-		   
-          // 생성된거 없어지고 생겨지는 함수
-          var selectListElements = $("ul.listarea li.selectlist");
-    	  /*var newLiElement = $(newLi);*/
-          if (selectListElements.length) {
-            $(".list-text").hide();
-          } else {
-            $(".list-text").show();
-          }
-         $("ul.listarea-right").append(newLi);
-        });
-        
-        // 왼쪽 영역에 있는 태그들 전체 삭제후 오른쪽으로 추가 
-$(document).on('click', '.select-delte', function() {
-	var parentLi = $(".listarea").find(".selectlist");
-	var newLiElements = [];
-	
-	parentLi.each(function(i,e) {
-		var srcValue = $(e).find(".listbox").find(".listboximg img").attr("src");
-		var listtitleTextValue = $(e).find(".listtext").find(".listtitle-text").text();
-		var textaddr = $(e).find(".listtext").find(".listtitleaddr").find(".listtitle-textaddr").text();
-		console.log($(e).find(".listbtn").find(".hiddenid").text());		
-		var newLi = '<li class="selectlist2">' +
-			  '<div class="listbox">' +
-			  '<div class="listboximg"><img src="' + srcValue + '" alt=""></div>' +
-			  '<div class="listicon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="10" color="white">' +
-			  '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />' +
-			  '</svg></div>' +
-			  '</div>' +
-			  '<div class="listtext">' +
-			  '<h7 class="listtitle-text">'+listtitleTextValue+'</h7>' +
-			  '<h7 class="listtitleaddr">주소 : <h7 class="listtitle-textaddr">'+ textaddr +'</h7></h7>'+
-			  '</div>' +
-			  '<div class="listbtn">' +
-			  '<div class="detail-travellist"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="#e0e0e0">' +
-			  '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />' +
-			  '</svg></a></div>' +
-			  '<div class="plus-travel"><a><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" width="20" height="20" color="black">' +
-			  '<path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />' +
-			  '</svg></a></div>' +
-			  '</div>' +
-			  '</li>';
-	 	newLiElements.push(newLi);
-    });
-    	 parentLi.remove();
-	var selectListElements = $("ul.listarea li.selectlist");
-    	  /*var newLiElement = $(newLi);*/
-          if (selectListElements.length) {
-            $(".list-text").hide();
-          } else {
-            $(".list-text").show();
-          }
-	 $("ul.listarea-right").append(newLiElements.join(""));
-
-});
-
    
     // 맵에 있는 토글 이벤트
         $(".toggle-header").click(function() {
@@ -1255,7 +1114,6 @@ function updatemarker() {
     });
 
 }
-					
 					
 					
 					

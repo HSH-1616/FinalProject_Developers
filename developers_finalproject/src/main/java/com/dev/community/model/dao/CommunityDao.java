@@ -18,7 +18,7 @@ public interface CommunityDao {
 	Community communityView(SqlSession session,int no);
 	int insertCommunity(SqlSession session,Community m);
 	int communitySaveFile(SqlSession session,CommunityFile file);
-	int communityCount(SqlSession session);
+	int communityCount(SqlSession session, int memberId);
 	int deleteCommunityFile(SqlSession session,String fileName);
 	int insertLike(SqlSession session, Map<String, Object> like);
 	int deleteLike(SqlSession session, Map<String, Object> like);
