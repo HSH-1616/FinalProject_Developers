@@ -68,13 +68,13 @@
                      data-bs-slide-to="0" class="active" aria-current="true"
                      aria-label="Slide 1">
                   </button>
-                  <%-- <c:forEach var="i" begin="1" end="${fn:length(f.foodPhoto)-1}" step="1">
+                  <c:forEach var="i" begin="1" end="${fn:length(f.foodPhoto)-1}" step="1">
                      <button type="button"
                      data-bs-target="#carouselExampleIndicators"
                      data-bs-slide-to="${i}" aria-current="true"
                      aria-label="Slide ${i+1}">
                      </button>
-                  </c:forEach> --%>
+                  </c:forEach>
                </div>
                <div class="carousel-inner">               
                   <c:forEach var="fp" items="${f.foodPhoto}">

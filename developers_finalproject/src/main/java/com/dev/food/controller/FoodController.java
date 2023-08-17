@@ -168,13 +168,13 @@ public class FoodController {
 		
 		int result = service.selectFoodCount();
 		int blackList = service.selectFoodBlackListCount();
-		System.out.println("음식점 수 : "+result);
+		//System.out.println("음식점 수 : "+result);
 		
 		//api와 DB가 동일한 숫자이면 업데이트 x
 		//if(result+blackList != apiCount) {
 		if(true) {
 			//api -> DB
-			System.out.println("api -> DB");
+			//System.out.println("api -> DB");
 
 			StringBuilder result1 = new StringBuilder();
 			String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
