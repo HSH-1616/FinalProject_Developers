@@ -54,6 +54,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 $(document).ready(()=> {
 	tourisroute();
 });
+
 const tourisroute = (cPage,numPerpage) => {
     const loginmemberid = $('.nickname').text();
     console.log(loginmemberid);
@@ -62,6 +63,7 @@ const tourisroute = (cPage,numPerpage) => {
 		type:"get",
 		data:{loginmemberid:loginmemberid,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
+			console.log(data)
 			for(let m of data.mypageTourisRoute){
 				const endDate = new Date(m.tuendDate);
 				const startDate = new Date(m.tustartDate);
@@ -69,7 +71,7 @@ const tourisroute = (cPage,numPerpage) => {
 				// 두 날짜 사이의 일 수 차이 계산
 				const dayDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
 
-				/*console.log(`날짜 사이의 일 수 차이: ${dayDifference +1}일`);*/
+				console.log(`날짜 사이의 일 수 차이: ${dayDifference +1}일`);
 				var areaName;
 				var areaimg;
 				console.log(m.tourisArealist.forEach(e =>{
@@ -95,13 +97,16 @@ const tourisroute = (cPage,numPerpage) => {
 												<p class="cirledaytext">D + ${dayDifference +1}</p>
 											</div>
 											<div class="cirletitle">${areaName}</div>
+											<div class="routedeltebtnarea"><button class="routedeltebtn">삭제
+												<div class="nonetuId">${m.tuId}</div>
+											</button></div>
 										</div>
 									</div>
 									<div class="inputarea">
 										<h1 class="inputh1"></h1>
 										<div class="inputjustify-center ">
 											<button class="inputbtn">
-												<div class="inputtext">여행 이름 입력</div>
+												<div class="inputtext"></div>
 											</button>
 										</div>
 									</div>
@@ -126,35 +131,52 @@ const tourisroute = (cPage,numPerpage) => {
 
 }
 
+$(document).on('click', '.routedeltebtn', function(){
+	const tuId = $(this).find(".nonetuId").text();
+	alert('여행 경로를 삭제하겠습니까?');
+	$.ajax({
+		url: path+"touris/deleteroute",
+		type:"get",
+		data:{tuId : tuId},
+		success:(data)=>{
+			alert("삭제되었니?");
+		}
+	})
+});
 
- const test =  () => {
+			
+
+
+
+/*const test =  () => {
 let areaLatitude;
 let areaLongitude;
 let areaName;
 	   const loginmemberid = $('.nickname').text();
 	  $.ajax({
 		url: path+"/touris/mypagetourisroutelist",
+		dataType: 'json',
 		type:"get",
 		data: {loginmemberid : loginmemberid},
 		success:(data)=>{
-			console.log(data);
+			console.dir("durl"+ data);
 			const alldaydetailscheduleDiv = document.querySelector('.alldaydetailschedule');
-    				alldaydetailscheduleDiv.innerHTML = '';
-			data.forEach((e) =>{
-				
+			alldaydetailscheduleDiv.innerHTML = '';
+			data.forEach((e) => {
+
 				const endDate = new Date(e.tuendDate);
 				const startDate = new Date(e.tustartDate);
-				
-					// 두 날짜 사이의 일 수 차이 계산
-					const dayDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
-					let daycount = (dayDifference+1);
-					
-				e.tourisArealist.forEach(e=>{
+
+				// 두 날짜 사이의 일 수 차이 계산
+				const dayDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+				let daycount = (dayDifference + 1);
+
+				e.tourisArealist.forEach(e => {
 					areaLatitude = e.areaLatitude;
 					areaLongitude = e.areaLongitude;
 					areaName = e.areaName;
-					
-					for(let i = 0; i <= dayDifference; i++) {
+
+					for (let i = 0; i <= dayDifference; i++) {
 						const currentDate = new Date(startDate);
 						currentDate.setDate(startDate.getDate() + i);
 
@@ -162,44 +184,44 @@ let areaName;
 						const dayName = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
 						const month = currentDate.toLocaleDateString('kr-KR', { month: 'short' });
 						const day = currentDate.getDate();
-						
-						
-					const newElement = document.createElement('div');
-					newElement.classList.add('detailroutetour-' + dayNumber); // 
-					newElement.id = 'detailroutetareaid';
 
-					newElement.innerHTML = '<div class="alldayinputfield">' +
-						'  <div id="dayselectbox" class="dayselecttag">' +
-						 	 + dayNumber + '일차 ' + month + ' ' + day + '일 ' + dayName +
-						'  </div>' +
-						'</div>' +
-						'<div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>' +
-						'<div class="dailyroutedetaillist">' +
-						'  <div class="dailyroutecountarea">' +
-						'    <div class="dailyroutetext">' +
-						'      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">' +
-						'        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />' +
-						'      </svg>' +
-						'      <div class="dailytext1"></div>' +
-						'      <div class="dailytext2">장소</div>' +
-						'    </div>' +
-						'  </div>' +
-						'  <hr class="hr2"></hr>' +
-						'  <div class="routedatailslists" id="routedatails">' +
-						'    </div>' +
-						'  </div>' +
-						'</div>';
 
-					alldaydetailscheduleDiv.appendChild(newElement);
-					
-					
-					
-					
-					
-					
-					
-					
-				}
+						const newElement = document.createElement('div');
+						newElement.classList.add('detailroutetour-' + dayNumber); // 
+						newElement.id = 'detailroutetareaid';
+
+						newElement.innerHTML = '<div class="alldayinputfield">' +
+							'  <div id="dayselectbox" class="dayselecttag">' +
+							+ dayNumber + '일차 ' + month + ' ' + day + '일 ' + dayName +
+							'  </div>' +
+							'</div>' +
+							'<div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>' +
+							'<div class="dailyroutedetaillist">' +
+							'  <div class="dailyroutecountarea">' +
+							'    <div class="dailyroutetext">' +
+							'      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">' +
+							'        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />' +
+							'      </svg>' +
+							'      <div class="dailytext1"></div>' +
+							'      <div class="dailytext2">장소</div>' +
+							'    </div>' +
+							'  </div>' +
+							'  <hr class="hr2"></hr>' +
+							'  <div class="routedatailslists" id="routedatails">' +
+							'    </div>' +
+							'  </div>' +
+							'</div>';
+
+						alldaydetailscheduleDiv.appendChild(newElement);
+
+
+
+
+
+
+
+
+					}
 					
 					
 					
@@ -219,10 +241,10 @@ var mapContainer2 = document.getElementById('routemap'), // 지도를 표시할 
   // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
   // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 var map2 = new kakao.maps.Map(mapContainer2, mapOption2); 
-/*function resizeMap() {
+function resizeMap() {
     mapContainer2.style.width = '100%';
     mapContainer2.style.height = '91.5vh'; 
-}*/
+}
 	function relayout() {
 		
 	}
@@ -260,7 +282,7 @@ function pulastravel2() {
 					image: markerImage
 				});
 
-				/*addmarkers.push(marker);*/
+				addmarkers.push(marker);
 				var iwContent = '<div class="iwcontentarea" style="padding:5px;"><div class="iwcontent" style="color:black;">' + (index + 1) + '</div></div>';
 				// 인포윈도우를 생성합니다
 				var inforwindow = new kakao.maps.CustomOverlay({
@@ -353,17 +375,17 @@ function closeOverlay() {
 // * 전체 화면으로 표시
 // * elem: 전체 화면으로 표시할 엘리먼트
 // * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_fullscreen
-// */
+// 
 var elem = document.getElementById('routemap');
 function openFullScreen() {
 	if(!elem) alert("specify element for full screen.")
 	if (elem.requestFullscreen) {
 		elem.requestFullscreen();
-	} else if (elem.mozRequestFullScreen) { /* Firefox */
+	} else if (elem.mozRequestFullScreen) {  Firefox 
 		elem.mozRequestFullScreen();
-	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+	} else if (elem.webkitRequestFullscreen) {  Chrome, Safari & Opera 
 		elem.webkitRequestFullscreen();
-	} else if (elem.msRequestFullscreen) { /* IE/Edge */
+	} else if (elem.msRequestFullscreen) {  IE/Edge 
 		elem.msRequestFullscreen();
 	}
 }; 
@@ -412,7 +434,7 @@ var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 var addedMarkers = []; // 마커 
 var linePath = []; // 경로 선 
 let markerIndex = 0; // 클로저를 이용하여 클릭한 순서를 기억할 변수 선언
-/*var inforwindow = []*/// 숫자를 띄어주는 infowindow
+var inforwindow = []// 숫자를 띄어주는 infowindow
 var lastInfoWindow = []; // 숫자를 띄어주는 infowwindow를 넣어줄 배열
 var polyline;
 var lines = [];
@@ -499,52 +521,6 @@ $(document).on('click', '.makerouteplusbtnarea', function(){
 // 달력 js
 
 
-      
-      
-      
-      /*const newElement = document.createElement('div');
-      newElement.classList.add('detailroutetour-' + dayCount); // 
-      newElement.id = 'detailroutetareaid';
-      
-      newElement.innerHTML = '<div class="alldayinputfield">' +
-  '  <div id="dayselectbox" class="dayselecttag">' +
-  		optionText+
-  '  </div>' +
-  '</div>' +
-  '<div class="detailroutetext"><hs>일차를 누르면 일정 전체 변경이 가능합니다.</hs></div>' +
-  '<div class="dailyroutedetaillist">' +
-  '  <div class="dailyroutecountarea">' +
-  '    <div class="dailyroutetext">' +
-  '      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">' +
-  '        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />' +
-  '      </svg>' +
-  '      <div class="dailytext1"></div>' +
-  '      <div class="dailytext2">장소</div>' +
-  '    </div>' +
-  '  </div>' +
-  '  <hr class="hr2"></hr>' +
-  '  <div class="routedatailslists" id="routedatails">' +
-  '    </div>' +
-  '  </div>' +
-  '</div>';
-      
-alldaydetailscheduleDiv.appendChild(newElement);
-
-
-
-
-      dayCount++;
-      currentDate.add(1, 'day');*/
-
-
-	//날짜 갯수 구하기
-	function getDateRangeCount(dateRangeString) {
-		const dateStrings = dateRangeString.split(' - ');
-		const startDate = moment(dateStrings[0], 'YYYY/MM/DD');
-		const endDate = moment(dateStrings[1], 'YYYY/MM/DD');
-		const duration = moment.duration(endDate.diff(startDate));
-		return duration.asDays() + 1; 
-	}
 
   $("ul.listarea-right").on("click", ".plus-travel", function () {
 	if ($('#calander').val() === '') {
@@ -611,22 +587,7 @@ alldaydetailscheduleDiv.appendChild(newElement);
   
   });
 
-  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-      /*$(this).val('');*/
-      $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
-    const selectBox = document.getElementById('dayselectbox');
-    selectBox.innerHTML = '';
-    
-    // Clear the content of the alldaydetailschedule div
-    const alldaydetailscheduleDiv = document.querySelector('.alldaydetailschedule');
-    alldaydetailscheduleDiv.innerHTML = '';
-  });
-  /**/
- 
 
-$(document).ready(function(){
-  $('input[name="datefilter"]').trigger('click');
-});
  // 클릭한 인덱스에 대한 상태 저장 변수
 const clickedIndexes = [];
 $(document).on('click', '.smallschedullisttextarea', function() {
@@ -672,9 +633,9 @@ $(document).on('click', '.smallschedullisttextarea', function() {
 				}
 				// 이미 생성된 리스트로 기억
 				clickedIndexes.push(clickedIndex);
-		/*	}*/
-		/*});*/
-	/*}*/
+			}
+		});
+	}
 });
    
     // 맵에 있는 토글 이벤트
@@ -814,8 +775,8 @@ $(document).on('click', '.invite-btn svg', function(){
 
 function searchTouris() {
   const inputval = $("#searchtouirsinput").val().trim();
-  /*console.log(inputval);
-  console.log(tourisAreaid);*/
+  console.log(inputval);
+  console.log(tourisAreaid);
   $.ajax({
     url: path+"/touris/searchtouris",
     method: "get",
@@ -840,8 +801,8 @@ function searchTouris() {
 // 두번째 검색 input 태그
 function searchTouris2() {
   const inputval = $(".searchinputtag2").val().trim();
-  /*console.log(inputval);
-  console.log(tourisAreaid);*/
+  console.log(inputval);
+  console.log(tourisAreaid);
   $.ajax({
     url: path+"/touris/searchtouris2",
     method: "get",
@@ -892,19 +853,19 @@ function saveRoute() {
 		const startDate = new Date(startDateString); // 날짜 문자열을 날짜 객체로 변환
 		const endDate = new Date(endDateString);
 
-		/*// 날짜 형식 변경 (예: 2023년 8월 9일)
+		// 날짜 형식 변경 (예: 2023년 8월 9일)
 		const options = { year: 'numeric', month: 'long', day: 'numeric' };
 		const formattedStartDate = startDate.toLocaleDateString('ko-KR', options);
-		const formattedEndDate = endDate.toLocaleDateString('ko-KR', options);*/
+		const formattedEndDate = endDate.toLocaleDateString('ko-KR', options);
 		tustartDate = `${startDate.getFullYear()}/${(startDate.getMonth() + 1).toString().padStart(2, '0')}/${startDate.getDate().toString().padStart(2, '0')}`;
         tuendDate = `${endDate.getFullYear()}/${(endDate.getMonth() + 1).toString().padStart(2, '0')}/${endDate.getDate().toString().padStart(2, '0')}`;
 		
-		/*console.log("시작 날짜:", tustartDate);
-		console.log("끝 날짜:", tuendDate);*/
+		console.log("시작 날짜:", tustartDate);
+		console.log("끝 날짜:", tuendDate);
 
-		/*tourismemberdata.push({
+		tourismemberdata.push({
 			tustartDate, tuendDate, loginmemberid
-		});*/
+		});
 		
 	} else {
 		console.log("올바른 날짜 범위가 아닙니다.");
@@ -913,8 +874,8 @@ function saveRoute() {
 	if (dateEntries) {
 		const dates = dateEntries.map(entry => {
 			console.log(entry);
-			/*const [day, month, dayOfMonth, dayOfWeek] = entry.match(/(\d+)일차 (\d+)월 (\d+)일 ([A-Za-z]+)/);*/
-			/*const day = entry.match(/(\d+)일차 (\d+)월 (\d+)일/);*/
+			const [day, month, dayOfMonth, dayOfWeek] = entry.match(/(\d+)일차 (\d+)월 (\d+)일 ([A-Za-z]+)/);
+			const day = entry.match(/(\d+)일차 (\d+)월 (\d+)일/);
 
 			return entry;
 		});
@@ -941,7 +902,7 @@ function saveRoute() {
 	}
 console.log("시작 날짜:", tustartDate);
 		console.log("끝 날짜:", tuendDate);
-		/*console.log(tourismemberdata);*/
+		console.log(tourismemberdata);
 	
 		$.ajax({
 			url: routeurl,
@@ -982,7 +943,7 @@ $(function () {
     // 정렬이 끝날 때 호출되는 콜백 함수
     // 필요한 작업 수행
      var childElementCount = $(this).find('.test').length;
-    /*console.log(".routedatailslists 영역의 자식 요소 개수: " + childElementCount);*/
+    console.log(".routedatailslists 영역의 자식 요소 개수: " + childElementCount);
      $(this).parents('.dailyroutedetaillist').find('.dailyroutecountarea').find('.dailyroutetext').find('.dailytext1').text(childElementCount);
     var targetArea = ui.item.parents('.dailyroutedetaillist');
     var targetCountElement = targetArea.find('.dailyroutecountarea').find('.dailyroutetext').find('.dailytext1');
@@ -1001,8 +962,8 @@ $(function () {
 
 
 function updatemarker() {
-   /*	var addmarkers = []; // 생성된 마커를 추적하는 배열
-    const lastInfoWindow = []; // 인포윈도우 추적하는 배열*/
+   	var addmarkers = []; // 생성된 마커를 추적하는 배열
+    const lastInfoWindow = []; // 인포윈도우 추적하는 배열
     const lasthiddenlevle=[];
     const linePath = []; // 각 영역별 경로표시 추적하는 배열
  // 각 마커에 사용할 색상을 정의한 배열
@@ -1064,15 +1025,15 @@ function updatemarker() {
                     strokeOpacity: 1,
                     strokeStyle: 'solid'
                 })
-           /*	linePath[routedayIndex][testIndex] = polyline;*/
+           	linePath[routedayIndex][testIndex] = polyline;
            	  lines.push(polyline);
             polyline.setMap(map2);
             lastInfoWindows[testIndex] = inforwindow;
-                    /*// 해당 영역의 경로 배열에 좌표 추가
+                    // 해당 영역의 경로 배열에 좌표 추가
                     if (!linePaths[routedayIndex]) {
                         linePaths[routedayIndex] = [];
                     }
-                    linePaths[routedayIndex].push(markerPosition);*/
+                    linePaths[routedayIndex].push(markerPosition);
                     	// 인포윈도우로 장소에 대한 설명을 표시합니다
 					kakao.maps.event.addListener(marker, 'click', function() {
 						var content = '<div class="wrap">' +
@@ -1132,12 +1093,12 @@ function updatemarker() {
 	 console.log(test());	
     $(".routetotalmodal").show();
     $(".routemainmodaldiv").show();
-    	/*map2.relayout();*/
+    	map2.relayout();
   });
   $(".routespan").on("click", function () {
     $(".routetotalmodal").hide();
     $(".routemainmodaldiv").hide();
-  });  	
+  });  	*/
 
 $(document).ready(function() {
   $('.gotop').bind('click', function() {

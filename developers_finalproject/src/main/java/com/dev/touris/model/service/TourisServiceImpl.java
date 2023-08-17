@@ -99,6 +99,10 @@ public class TourisServiceImpl implements TourisService {
 	public int tourisListCount() {
 		return dao.tourisListCount(session);
 	}
+	@Override
+	public int deleteroute(int tuId) {
+		return dao.deleteroute(session, tuId);
+	}
 	
 //	@Override
 //	public int inserttourisroute(List<Map> routedata) {

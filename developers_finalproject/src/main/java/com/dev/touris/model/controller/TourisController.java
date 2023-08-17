@@ -1,6 +1,7 @@
 package com.dev.touris.model.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -122,7 +123,7 @@ public class TourisController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		int totalData = service.myPageTourisRouteCount(loginmemberid);
-		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "mypageTourisRoute");
+		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "mypageTourisRoute");
 		List<TourisMember> tourisroutelist = service.myPageTourisRoute(loginmemberid, param);
 		data.put("mypageTourisRoute", tourisroutelist);
 		data.put("pageBar", pageBar);
@@ -131,9 +132,10 @@ public class TourisController {
 	
 	@GetMapping("/mypagetourisroutelist")
 	@ResponseBody
-	public List<TourisMember> myPageTourisRouteList(@RequestParam int loginmemberid){
-		
-		return service.myPageTourisRouteList(loginmemberid);
+	public List<TourisMember> myPageTourisRouteList(int loginmemberid){
+		List<TourisMember> result=service.myPageTourisRouteList(loginmemberid);
+		System.out.println(result);
+		return result;
 	}
 	
 	@RequestMapping("/tourislist")
@@ -141,11 +143,17 @@ public class TourisController {
 			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m){
 		List<Touris> tourislist = service.tourislist(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData = service.tourisListCount();
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "tourislist"));
+		m.addAttribute("pageBar", com.dev.common.PageFactory.getPage(cPage, numPerpage, totalData, "tourislist"));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("tourislist", tourislist);
 		
 		return "touris/tourislist";
+	}
+	@GetMapping("/deleteroute")
+	@ResponseBody
+	public String deleteroute(@RequestParam int tuId) {
+		service.deleteroute(tuId);
+		return "mypage/mypage";
 	}
 }
 

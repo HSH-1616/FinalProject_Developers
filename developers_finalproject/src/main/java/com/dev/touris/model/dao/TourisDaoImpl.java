@@ -75,6 +75,10 @@ public class TourisDaoImpl implements TourisDao {
 	public int tourisListCount(SqlSessionTemplate session) {
 		return session.selectOne("touris.tourisListCount");
 	}
+	@Override
+	public int deleteroute(SqlSessionTemplate session, int tuId) {
+		return session.delete("touris.deleteroute", tuId);
+	}
 	
 
 	
