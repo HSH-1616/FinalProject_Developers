@@ -534,7 +534,7 @@
 					      IMG3 :  "${path}/images/upload/accommodation/"+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
 					      THU : "${path}/images/common/logo.png",
-					      PATH : "ac/acDetail?no="+${ad.acId}
+					      PATH : "${path}/ac/acDetail?no="+${ad.acId}
 					    },
 					});
 		}
