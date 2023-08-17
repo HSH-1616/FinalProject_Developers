@@ -17,45 +17,6 @@ const sortFoodByTitle = (no, numPerpage) => {
 	});
 }
 
-
-
-
-
-/*//좋아요
-$(document).ready(function () {
-	$(".con-like").click(function () {
-		var heartCountElement = $(this).siblings(".countDiv").find(".heart_count");
-		var currentHeartCount = parseInt(heartCountElement.text(), 10);
-	    
-		console.log(heartCountElement);
-		console.log(currentHeartCount);
-		$.ajax({
-				url:"/food/toggleHeart",
-				type:"post",
-				data:{heartCountElement : heartCountElement, currentHeartCount : currentHeartCount},
-				success:(data)=>{
-					console.log(data);
-				}
-				
-			});
-		if ($(this).prop("checked")) {
-			heartCountElement.text(currentHeartCount + 1);
-		    
-		} else {
-			
-			if (currentHeartCount > 0) {
-				heartCountElement.text(currentHeartCount - 1);
-			}
-		}
-	});
-});*/
-
-
-//좋아요
-$(document).ready(function() {
-
-})
-
 //로그인 시 좋아요 이용가능
 $(document).ready(function() {
 	$(".like").on("click", function() {
@@ -78,7 +39,8 @@ $(document).ready(function() {
 if($("#memberL").val()!=""){
 	$(".like").on("click", function() {
 		var foodNo = $(this).val();
-
+		console.log(foodNo);
+		
 		if ($(this).is(":checked")) {
 			$.ajax({
 				url: "/food/insertHeart",

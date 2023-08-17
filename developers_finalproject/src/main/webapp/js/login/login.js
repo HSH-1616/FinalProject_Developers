@@ -1,6 +1,11 @@
-const path="";
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
+};
+
 const CLIENT_ID="TR_SQ2GAJzrrTPobWiSh";
-const redirectURI="http://localhost:8888/member/naver/callback";
+const redirectURI=window.location.origin+"member/naver/callback";
+
 const state="1";
 
 $(document).ready(function(){
@@ -91,7 +96,7 @@ const naverlogin=()=>{
 }
 //구글 로그인
 const googlelogin=()=>{
-	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri=http://localhost:8888/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
+	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri="+window.location.origin+"/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
 }
 
 /*카카오 로그인 서비스  */
@@ -116,15 +121,15 @@ const googlelogin=()=>{
 								console.log(email,nickname,image);
 									$.ajax({
 										type:"get",
-										url:path+"/member/KakaoLoginCheck?memberPk="+memberPk,
+										url:window.location.origin+"/member/KakaoLoginCheck?memberPk="+memberPk,
 										data:{"memberEmail":email,"memberNickname":nickname,"memberImage":image},
 										dataType:"text",
 										success: data=>{
 											console.log(data, typeof data);
 												if(data==''){
-											        location.assign(path+"/member/Kakaoenroll?memberEmail="+email+"&memberNickname="+nickname+"&memberImage="+image+"&memberPk="+memberPk);
+											        location.assign(window.location.origin+"/member/Kakaoenroll?memberEmail="+email+"&memberNickname="+nickname+"&memberImage="+image+"&memberPk="+memberPk);
 												}else{
-													location.assign(path+"/member/KakaoLogin?memberPk="+memberPk);
+													location.assign(window.location.origin+"/member/KakaoLogin?memberPk="+memberPk);
 												}
 												},
 										error:(r,m,e)=>{
