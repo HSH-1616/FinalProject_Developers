@@ -15,8 +15,8 @@
 		<div class="mypageheaderarea">
 			<div class="mypageprofile">
 				<div class="profile">
-					<span class="boxsize"> <img alt=""
-						src="https://www.myro.co.kr/assets/images/user-avatar.png">
+					<span class="boxsize"> 
+					<img alt="" src="https://www.myro.co.kr/assets/images/user-avatar.png">
 					</span>
 				</div>
 				<h2 class="nickname"></h2>
