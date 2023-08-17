@@ -11,7 +11,6 @@
 <script>
  	const latitude = '${titletouris.areaLatitude}';
 	const Longitude = '${titletouris.areaLongitude}';
-	const path='${path}';
 	const tourisAreaid = '${titletouris.areaId }';
 	const loginmemberid = '${loginMember.memberId}';
 </script>

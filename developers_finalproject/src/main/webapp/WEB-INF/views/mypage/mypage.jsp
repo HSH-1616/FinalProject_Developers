@@ -13,9 +13,6 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab598319bacded85b90db7133a8bfffa&libraries=services,clusterer,drawing"></script>
 <script src="${path }/js/mypage/slick.min.js"></script>
-<script>
-	const path = '${path}';
-</script>
 <section>
 	<div class="mypageheader">
 		<div class="mypageheaderarea">

@@ -243,8 +243,6 @@ public class AdminController {
 		return "/admin/paymentDetail";
 	}
 	
-	
-	
 	@GetMapping("/selectFoodByFoodNo")
 	public String selectFoodByFoodNo(int foodNo, Model m) {
 		//foodNo로 food,foodPhoto dto불러오고 출력(출력페이지에서 승인,미승인 여부 네비게이션으로) //리뷰는 어쩌지?
@@ -278,6 +276,25 @@ public class AdminController {
 		HttpSession session = request.getSession();
 		session.setAttribute("result", result);
 		return "redirect:/admin/selectFoodList";
+	}
+	
+//	===========================장흠=========================
+	
+	@GetMapping("/foodRecommend")
+	public String foodRecommend(@RequestParam(value="cPage",defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, Model m){
+		Map<String,Object> param=new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		
+		Map<String,Object> type=new HashMap<>();
+		
+		List<Food> foodList=service.searchFood(param);
+		int totalData=service.selectFoodCount();
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectFoodList",type));
+		m.addAttribute("totalData",totalData);
+		m.addAttribute("foods",foodList);
+		return "admin/foodRecommend";
 	}
 }
 

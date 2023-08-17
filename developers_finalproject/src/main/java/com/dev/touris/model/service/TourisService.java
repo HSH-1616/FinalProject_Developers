@@ -20,6 +20,6 @@ public interface TourisService {
 	List<TourisMember> myPageTourisRouteList(int loginmemberid);
 	int tourisListCount();
 	List<Touris> tourislist(Map<String,Object> param);
-	
+	int deleteroute(int tuId);
 	
 }

@@ -398,12 +398,15 @@
 	align-items: center;
 	width: 100%;
 	display: flex;
+	position: relative;
+    top: 7px;
 
 }
 .selecttitle{
 	justify-content: center;
 	align-items: center;
     display: flex;
+    width: 100%;
 }
 .circleday{
 	line-height: 1;
@@ -418,6 +421,8 @@
     display: flex;
 	width: 60px;
     height: 30px;
+    position: relative;
+    right: 40%;
 }
 .cirledaytext{
 	--tw-text-opacity: 1;
@@ -431,6 +436,8 @@
 .cirletitle{
 	font-size: 1.125rem;
 	font-weight: 500;
+	position: relative;
+    right: 40%;
 }
 .inputarea{
 	align-items: center;
@@ -471,12 +478,12 @@
 	display: flex;
 }
 .daytext{
-	font-size: .875rem;
+	font-size: .975rem;
 	font-family: Montserrat,Noto Sans KR,sans-serif;
 	font-weight: inherit;
 }
 .updateday{
-	font-size: .75rem;
+	font-size: .95rem;
 	display: block;
 	--tw-text-opacity: 1;
     color: rgb(115 126 138/var(--tw-text-opacity));
@@ -3130,3 +3137,21 @@
 .refundComplete{
 	display: none;
 }
+.routedeltebtnarea{
+position: relative;
+    left: 37%;
+}
+.routedeltebtn{
+	width: 70px;
+    height: 30px;
+    border-radius: 11%;
+    background-color: #b31312;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+.nonetuId{
+	display: none;
+	}
