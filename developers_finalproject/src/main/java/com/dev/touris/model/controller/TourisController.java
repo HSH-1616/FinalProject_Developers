@@ -153,7 +153,7 @@ public class TourisController {
 	@ResponseBody
 	public String deleteroute(@RequestParam int tuId) {
 		service.deleteroute(tuId);
-		return "mypage/mypage";
+		return "redirect:/";
 	}
 }
 

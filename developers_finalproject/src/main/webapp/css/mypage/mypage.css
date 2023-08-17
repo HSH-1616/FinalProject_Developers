@@ -406,6 +406,7 @@
 	justify-content: center;
 	align-items: center;
     display: flex;
+    width: 100%;
 }
 .circleday{
 	line-height: 1;
@@ -420,6 +421,8 @@
     display: flex;
 	width: 60px;
     height: 30px;
+    position: relative;
+    right: 40%;
 }
 .cirledaytext{
 	--tw-text-opacity: 1;
@@ -433,6 +436,8 @@
 .cirletitle{
 	font-size: 1.125rem;
 	font-weight: 500;
+	position: relative;
+    right: 40%;
 }
 .inputarea{
 	align-items: center;
@@ -3133,8 +3138,8 @@
 	display: none;
 }
 .routedeltebtnarea{
-	position: relative;
-    left: 390%;
+position: relative;
+    left: 37%;
 }
 .routedeltebtn{
 	width: 70px;

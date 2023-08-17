@@ -3,7 +3,10 @@ $('.favorite').slick({
   slidesToShow: 3,
   slidesToScroll: 1
 });
-
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
+};
 $(document).ready(()=> {
 	mypageCommunity();
 });
@@ -11,10 +14,11 @@ const mypageCommunity=(cPage,numPerpage)=>{
 	const memberId = $('.nickname').text();
 	
 	$.ajax({
-		url: path+"/community/mypageCommunity.do",
+		url: getContextPath()+"/community/mypageCommunity.do",
 		type:"get",
 		data:{memberId:memberId,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
+			$(".mycommuity").html("");
 			for(let m of data.mypageCommunity){
 			let test = `<div class="myschedulcardarea">
 				<div class="myschedulcard">
@@ -59,11 +63,12 @@ const tourisroute = (cPage,numPerpage) => {
     const loginmemberid = $('.nickname').text();
     console.log(loginmemberid);
 	$.ajax({
-		url: path+"/touris/mypagetourisroute",
+		url: getContextPath()+"/touris/mypagetourisroute",
 		type:"get",
 		data:{loginmemberid:loginmemberid,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			console.log(data)
+			$('.myschedularea').html("");
 			for(let m of data.mypageTourisRoute){
 				const endDate = new Date(m.tuendDate);
 				const startDate = new Date(m.tustartDate);
@@ -74,10 +79,11 @@ const tourisroute = (cPage,numPerpage) => {
 				console.log(`날짜 사이의 일 수 차이: ${dayDifference +1}일`);
 				var areaName;
 				var areaimg;
-				console.log(m.tourisArealist.forEach(e =>{
+				
+				m.tourisArealist.forEach(e =>{
 					areaName = e.areaName;
 					areaimg = e.areaImg;
-				}));
+				});
 			const myplan = `<div class="myschedulcardarea">
 				<div class="myschedulcard">
 					<div class="myschedulcontent">
@@ -131,11 +137,15 @@ const tourisroute = (cPage,numPerpage) => {
 
 }
 
+
+
+
+/*여행경로삭제*/
 $(document).on('click', '.routedeltebtn', function(){
 	const tuId = $(this).find(".nonetuId").text();
 	alert('여행 경로를 삭제하겠습니까?');
 	$.ajax({
-		url: path+"touris/deleteroute",
+		url: getContextPath()+"/touris/deleteroute",
 		type:"get",
 		data:{tuId : tuId},
 		success:(data)=>{

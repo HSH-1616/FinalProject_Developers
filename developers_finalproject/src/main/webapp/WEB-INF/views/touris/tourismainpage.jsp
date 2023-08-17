@@ -9,9 +9,6 @@
 <meta charset="UTF-8">
 <title>메인페이지에서 여행경로페이지로 이동 지도</title>
 <link rel="stylesheet" href="${path }/css/touris/tourismainpage.css"/>
-<script>
-	const path='${path}';
-</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
