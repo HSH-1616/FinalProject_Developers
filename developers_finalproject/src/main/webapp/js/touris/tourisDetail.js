@@ -35,7 +35,7 @@ $(document).on("click", "#detailHeart", function(e) {
 				confirmButtonColor: "#b31312",
 			});
 			$.get("/tourisDetail/insertHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{
-					location.reload();
+					//location.reload();
 			});
 		} else {
 			$.get("/tourisDetail/deleteHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{

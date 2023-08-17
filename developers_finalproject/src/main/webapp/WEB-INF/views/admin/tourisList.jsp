@@ -229,19 +229,5 @@ $(()=>{
 			location.assign('${path}/admin/selectBytourisAreaId?tourisAreaId='+tourisAreaId);
 		}
 	};
-
-/* 	function black(memberId){
-		console.log(memberId);
-		open("${path}/admin/blackpage?memberId="+memberId
-				,"_blank","width=600, height=200, top=500,left=800");
-	}
-	function blackClear(memberId){
-		console.log(memberId);
-		$.get("${path}/admin/blackClear?memberId="+memberId,data=>{
-			alert("블랙회원을 삭제하셨습니다.");
-			location.assign("${path}/admin/selectTourisAll");
-			location.reload();
-		})
-	} */
 </script>
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
