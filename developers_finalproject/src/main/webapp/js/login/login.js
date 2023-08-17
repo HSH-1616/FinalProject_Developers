@@ -1,6 +1,6 @@
 const origin = window.location.origin;
 const CLIENT_ID = "TR_SQ2GAJzrrTPobWiSh";
-const redirectURI = origin + path + "member/naver/callback";
+const redirectURI = origin + path + "/member/naver/callback";
 const state = "1";
 
 $(document).ready(function() {
