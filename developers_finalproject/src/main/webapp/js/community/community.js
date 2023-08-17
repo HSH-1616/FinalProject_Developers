@@ -1,7 +1,7 @@
 
 function getContextPath() {
 	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
 };
 
 
@@ -9,7 +9,7 @@ function getContextPath() {
 const communityList = (cPage, numPerpage) => {
 	let result;
 	$.ajax({
-		url: getContextPath()+"/communityListEnd.do",
+		url: getContextPath()+"/community/communityListEnd.do",
 		type: "post",
 		async: false,
 		data: { cPage: cPage, numPerpage: numPerpage },
@@ -22,11 +22,11 @@ const communityList = (cPage, numPerpage) => {
 				str += "<a><img src='" + c.memberId.memberImage + "' style='height: 30px; border-radius:50%; margin:5px;'></a>&nbsp";
 				str += "<div style='margin-top:10px;'>" + c.memberId.memberNickname + "</div>";
 				str += "</div>";
-				str += "<img src='/upload/community/" + c.thumbnail + "' class='card-img-top' >";
+				str += "<img src='"+getContextPath()+"/upload/community/" + c.thumbnail + "' class='card-img-top' >";
 				str += "<div class='card-body'>";
 				str += "<h5 class='card-title'>" + c.communityTitle + "</h5>";
 				str += "<div class='text-end '>";
-				str += "<div><img src='<c:out value='/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
+				str += "<div><img src='<c:out value='"+getContextPath()+"/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
 				str += "</div>";
 				/*str += "<p class='card-text'>" + c.communityContent + "</p>";*/
 				str += "</div>";
@@ -44,7 +44,7 @@ const communityList = (cPage, numPerpage) => {
 
 
 const communityView = (no, id) => {
-	location.assign("/community/communityView.do?no=" + no + "&id=" + id);
+	location.assign(getContextPath()+"/community/communityView.do?no=" + no + "&id=" + id);
 };
 
 //무한스크롤 페이징
@@ -79,7 +79,7 @@ $(".like-review")
 					'animate-like');
 				$(".like-review").val("true");
 				fn_like();
-				$(".like-content>img").attr("src", "/images/community/fillheart.svg");
+				$(".like-content>img").attr("src", getContextPath()+"/images/community/fillheart.svg");
 				let count = $(".like-content>span").text();
 				$(".like-content>span").text(Number(count) + 1);
 			} else {
@@ -90,7 +90,7 @@ $(".like-review")
 					'animate-like');
 				$(".like-review").val("false");
 				fn_like();
-				$(".like-content>img").attr("src", "/images/community/heart.svg");
+				$(".like-content>img").attr("src", getContextPath()+"/images/community/heart.svg");
 				let count = $(".like-content>span").text();
 				$(".like-content>span").text(Number(count) - 1);
 			}
@@ -108,7 +108,7 @@ $(".like-content").ready(() => {
 					$(".like-review").children('.fa-heart').addClass(
 						'animate-like');
 					$(".like-review").val("true");
-					$(".like-content>img").attr("src", "/images/community/fillheart.svg");
+					$(".like-content>img").attr("src", getContextPath()+"/images/community/fillheart.svg");
 				}
 			}
 		});
@@ -288,7 +288,7 @@ deleteCommunity = (no) => {
 
 	if (confirm("게시글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-			url: getContextPath()+"/community/deleteCommunity.do",
+			url: getContextPath()+"/deleteCommunity.do",
 			type: "post",
 			data: { communityNo: no },
 			success: () => {
@@ -311,6 +311,7 @@ $(".file-del").click(function(e) {
 	let target = $(this);
 	const fileName = target.data("name");
 	const targetLi = e.target.closest("li");
+	console.log("파일삭제");
 	$.ajax({
 		url: getContextPath()+"/ncCommon/removeCommunityFile.do",
 		data: { fileName: fileName },

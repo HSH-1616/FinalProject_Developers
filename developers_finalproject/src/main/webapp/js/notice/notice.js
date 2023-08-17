@@ -1,11 +1,11 @@
 function getContextPath() {
 	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
 };
 
-const nList = (no, numPerpage) => {
+var nList = (no, numPerpage) => {
 	$.ajax({
-		url: getContextPath()+"/noticeListEnd.do",
+		url: getContextPath()+"/notice/noticeListEnd.do",
 		data: { cPage: no, numPerpage: numPerpage },
 		type: "get",
 		success: (data) => {
@@ -18,7 +18,7 @@ const nList = (no, numPerpage) => {
 				for (const n of data.noticeList) {
 					tb = "<tr>";
 					tb += "<td>" + n.noticeNo + "</td>";
-					tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
+					tb += "<td><a href='"+getContextPath()+"/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
 					tb += "<td>관리자</td>";
 					tb += "<td>" + n.noticeViews + "</td>";
 					tb += "<td>" + n.writeDate + "</td>";
@@ -74,11 +74,12 @@ const cancelUpdateNotice = () => {
 
 
 
-$("#contentArea").on("click", ".removeBtn", function(e) {
+$(document).on("click", ".removeBtn", function(e) {
+	console.log("사진삭제");
 	let target = $(this);
 	const fileName = target.data("name");
 	const targetDiv = e.target.closest("div");
-	console.log("사진삭제");
+	
 
 	$.ajax({
 		url: getContextPath()+"/ncCommon/removeFile.do",
@@ -108,20 +109,14 @@ const deleteNotice = (no) => {
 			url: getContextPath()+"/ncCommon/removeFile.do",
 			data: { fileName: fileName },
 			type: "post",
-			success: (data) => {
-
-				if (data == "true") {
-					console.log("파일삭제");
-				}
-				else {
-					alert("삭제실패");
-				}
+			success: () => {
+			
 
 			}
 		});
 
 	})
-	location.href = getContextPath()+"/deleteNotice.do?no=" + no;
+	location.href = getContextPath()+"/notice/deleteNotice.do?no=" + no;
 };
 
 const searchNotice = (no, numPerpage) => {
@@ -129,7 +124,7 @@ const searchNotice = (no, numPerpage) => {
 	let type = $("select[name=type]").val();
 	let keyword = $("input[name=keyword]").val();
 	$.ajax({
-		url: getContextPath()+"/searchNotice.do",
+		url: getContextPath()+"/notice/searchNotice.do",
 		data: { type: type, keyword: keyword, cPage: no, numPerpage: numPerpage },
 		type: "get",
 		success: (data) => {
@@ -142,7 +137,7 @@ const searchNotice = (no, numPerpage) => {
 				for (const n of data.noticeList) {
 					tb = "<tr>";
 					tb += "<td>" + n.noticeNo + "</td>";
-					tb += "<td><a href='/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
+					tb += "<td><a href='"+getContextPath()+"/notice/noticeView.do?no=" + n.noticeNo + "'>" + n.noticeTitle + "</a></td>";
 					tb += "<td>관리자</td>";
 					tb += "<td>" + n.noticeViews + "</td>";
 					tb += "<td>" + n.writeDate + "</td>";

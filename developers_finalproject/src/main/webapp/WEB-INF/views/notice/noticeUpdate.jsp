@@ -20,7 +20,7 @@
     <div class="container p-3 nw-container">
 
         <div><h3 class="text-center">공지사항 작성</h3></div>
-        <form action="/notice/updateNotice.do?no=${notice.noticeNo }" class="notice-form" method="post">
+        <form action="${path }/notice/updateNotice.do?no=${notice.noticeNo }" class="notice-form" method="post">
             <table class="table notice-table">
                 <colgroup>
                     <col style="width: 20%">
