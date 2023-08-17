@@ -41,7 +41,7 @@ public class CommunityController {
 	
 	@PostMapping("/communityListEnd.do")
 	@ResponseBody
-	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="8") int numPerpage) {
+	public List<Community> communityListEnd(@RequestParam(value="cPage",defaultValue ="1") int cPage, @RequestParam(value="numPerpage",defaultValue ="6") int numPerpage) {
 		Map<String, Object> pasing=new HashMap<String, Object>();
 		pasing.put("cPage", cPage);
 		pasing.put("numPerpage", numPerpage);
@@ -179,7 +179,7 @@ public class CommunityController {
 		Map<String, Object> result=new HashMap<>();
 		params.put("cPage",cPage);
 		params.put("numPerpage", numPerpage);
-		int totalData=service.communityCount();
+		int totalData=service.communityCount(memberId);
 		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "mypageCommunity");
 		List<Community> list=service.mypageCommunity(memberId, params);
 		result.put("mypageCommunity", list);

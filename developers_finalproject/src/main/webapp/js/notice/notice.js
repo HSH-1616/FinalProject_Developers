@@ -87,6 +87,8 @@ $("#contentArea").on("click", ".removeBtn", function(e) {
 				alert("삭제실패");
 			}
 
+		},error:()=>{
+			alert("서버오류");
 		}
 	})
 });
@@ -94,7 +96,7 @@ $("#contentArea").on("click", ".removeBtn", function(e) {
 
 const deleteNotice = (no) => {
 
-	$(".removeBtn").click(function(e) {
+	$(".removeBtn").click(function() {
 		let target = $(this);
 		const fileName = target.data("name");
 		$.ajax({

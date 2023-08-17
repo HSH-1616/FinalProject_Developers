@@ -25,7 +25,7 @@ $(document).on("click", "#detailHeart", function(e) {
 	if ($("#detailHeartOn").css("display") == "none") {
 
 		$.ajax({
-			url: "/ac/insertHeart",
+			url: getContextPath()+"/ac/insertHeart",
 			data: {
 				memberId: memberId,
 				acId: acId
@@ -47,7 +47,7 @@ $(document).on("click", "#detailHeart", function(e) {
 		})
 	} else {
 		$.ajax({
-			url: "/ac/deleteHeart",
+			url: getContextPath()+"/ac/deleteHeart",
 			data: {
 				memberId: memberId,
 				acId: acId

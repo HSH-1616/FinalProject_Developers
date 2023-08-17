@@ -8,12 +8,10 @@ function getContextPath() {
 
 $(document).ready(function() {
 	$.ajax({
-		url: "/ac/acMyPage",
+		url: getContextPath()+"/ac/acMyPage",
 		method: "get",
 		dataType: "json",
 		success: function(data) {
-			console.log(data)
-
 			$(data).each(function(i, l) {
 				var form = $('<form class="acPayForm" action="/ac/acRefundApply" method="post">')
 				var acPay = $('<div class="acPayForm">')
@@ -172,7 +170,7 @@ $(document).ready(function() {
 	})
 	setTimeout(function() {
 		$.ajax({
-			url: "/ac/acCheckReview",
+			url:getContextPath()+"/ac/acCheckReview",
 			method: "get",
 			dataType: "json",
 			success: function(data) {
@@ -343,7 +341,7 @@ function reviewOk() {
 	})
 
 	$.ajax({
-		url: "/ac/insertReview",
+		url: getContextPath()+"/ac/insertReview",
 		type: "post",
 		data: form,
 		processData: false,

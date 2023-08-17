@@ -1,3 +1,8 @@
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+};
+
 $(window).ready(function() {
 	//calender()
 	var checkInOutDay = []
@@ -108,7 +113,7 @@ $(".like").on("change", function() {
 
 	if ($(this).is(":checked")) {
 		$.ajax({
-			url: "/ac/insertHeart",
+			url: getContextPath()+"/ac/insertHeart",
 			data: {
 				memberId: memberId,
 				acId: acId
@@ -121,7 +126,7 @@ $(".like").on("change", function() {
 		})
 	} else {
 		$.ajax({
-			url: "/ac/deleteHeart",
+			url: getContextPath()+"/ac/deleteHeart",
 			data: {
 				memberId: memberId,
 				acId: acId

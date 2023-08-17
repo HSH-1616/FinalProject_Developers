@@ -102,7 +102,7 @@
                     
                       <div class="comu-buttons">
                         <button type="button" class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
-                        <button class="w-btn w-btn-gray-outline" onclick="community_cancel();">취소</button>
+                        <button type="button" class="w-btn w-btn-gray-outline" onclick="community_cancel();">취소</button>
                       </div>
                     
              </div>
@@ -115,6 +115,7 @@
         </div>
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<script src="${path }/js/community/community.js"></script>
   <script>
 		const memberId="<c:out value='${loginMember.memberId}' escapeXml="false"/>";
 		const communityNo="<c:out value='${comuView.communityNo}' escapeXml="false"/>";                               
@@ -162,7 +163,7 @@
                    	}
                 });
                 this.on("successmultiple", function(files, response){
-         			console.log(files);
+         			
                 	let fileNames=files[0].xhr.responseText;
                 	
                  	$.ajax({

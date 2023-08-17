@@ -23,7 +23,6 @@ public class Community {
 	private String communityContent;
 	private Date createDate;
 	private Date modifyDate;
-	private int communityViews;
 	private int likeCount;
 	private String thumbnail;
 	private Member memberId;

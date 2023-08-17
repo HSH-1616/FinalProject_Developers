@@ -1,3 +1,8 @@
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+};
+
 $(".value").on("click", function() {
 	$(".value").removeClass("active")
 	$(this).addClass("active")
@@ -30,7 +35,7 @@ function warningAlert(content) {
 function refundOk() {
 
 	$.ajax({
-		url: "/ac/insertRefund",
+		url: getContextPath()+"/ac/insertRefund",
 		type: "post",
 		data: {
 			apId: $("input[name=apId]").val(),
