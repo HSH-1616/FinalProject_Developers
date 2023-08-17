@@ -117,6 +117,7 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <script src="${path }/js/community/community.js"></script>
   <script>
+  
 		const memberId="<c:out value='${loginMember.memberId}' escapeXml="false"/>";
 		const communityNo="<c:out value='${comuView.communityNo}' escapeXml="false"/>";                               
 		
@@ -129,7 +130,7 @@
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
         
-        url: "/ncCommon/communityUploadFile.do?no="+communityNo, 
+        url: "<c:out value='${path}'/>/ncCommon/communityUploadFile.do?no="+communityNo, 
         method: "post", 
         uploadMultiple: true,
         maxFiles: 5,
@@ -148,13 +149,13 @@
                    		myDropzone.processQueue();
                    	}else{
                    		$.ajax({
-                    		url: "/community/communityUpdateEnd.do",
+                    		url: "<c:out value='${path}'/>/community/communityUpdateEnd.do",
                     		type:"post",
                     		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
                     			communityContent: $("#communityContent").val(), communityNo:communityNo },
                     		success:(data)=>{
                     			if(data>0){
-                    				location.replace("/community/communityView.do?no="+communityNo);
+                    				location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo);
                     			}else{
                     				alert("수정 실패");
                     			}
@@ -167,7 +168,7 @@
                 	let fileNames=files[0].xhr.responseText;
                 	
                  	$.ajax({
-                		url: "/community/communityUpdateEnd.do",
+                		url: "<c:out value='${path}'/>/community/communityUpdateEnd.do",
                 		type:"post",
                 		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
                 			communityContent: $("#communityContent").val(), files:fileNames, communityNo:communityNo },

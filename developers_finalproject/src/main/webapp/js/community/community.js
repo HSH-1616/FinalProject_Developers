@@ -1,8 +1,15 @@
 
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+};
+
+
+
 const communityList = (cPage, numPerpage) => {
 	let result;
 	$.ajax({
-		url: "/community/communityListEnd.do",
+		url: getContextPath()+"/communityListEnd.do",
 		type: "post",
 		async: false,
 		data: { cPage: cPage, numPerpage: numPerpage },
@@ -19,7 +26,7 @@ const communityList = (cPage, numPerpage) => {
 				str += "<div class='card-body'>";
 				str += "<h5 class='card-title'>" + c.communityTitle + "</h5>";
 				str += "<div class='text-end '>";
-				str += "<div><img src='/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
+				str += "<div><img src='<c:out value='/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
 				str += "</div>";
 				/*str += "<p class='card-text'>" + c.communityContent + "</p>";*/
 				str += "</div>";
@@ -92,7 +99,7 @@ $(".like-review")
 $(".like-content").ready(() => {
 	if ($('#like_memberId').length > 0 && $("#like_memberId").val() != "") {
 		$.ajax({
-			url: "/community/communityLikeCheck.do",
+			url: getContextPath()+"/community/communityLikeCheck.do",
 			data: { "memberId": $("#like_memberId").val(), "communityNo": $("#like_comuNo").val() },
 			type: "post",
 			success: (data) => {
@@ -112,7 +119,7 @@ const fn_like = () => {
 	const no = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
 	$.ajax({
-		url: "/community/communityLike.do",
+		url: getContextPath()+"/community/communityLike.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: no },
 		success: () => {
@@ -136,7 +143,7 @@ const insertReply = (ref, con) => {
 	const memberId = $("#like_memberId").val();
 
 	$.ajax({
-		url: "/community/insertReply.do",
+		url: getContextPath()+"/community/insertReply.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: communityNo, replyContent: content, replyRef: ref },
 		success: () => {
@@ -157,7 +164,7 @@ const replyList = () => {
 	const memberId = $("#like_memberId").val();
 	const loginAdmin = $("#adminCheck").val();
 	$.ajax({
-		url: "/community/replyList.do",
+		url: getContextPath()+"/community/replyList.do",
 		type: "get",
 		data: { communityNo: communityNo },
 		success: (data) => {
@@ -250,7 +257,7 @@ const updateReply = (no) => {
 	const reContent = $("#editReply" + no + "").val();
 
 	$.ajax({
-		url: "/community/updateReply.do",
+		url: getContextPath()+"/community/updateReply.do",
 		type: "post",
 		data: { replyNo: no, replyContent: reContent },
 		success: () => {
@@ -265,7 +272,7 @@ const updateReply = (no) => {
 const deleteReply = (level, no) => {
 	if (confirm("댓글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-			url: "/community/deleteReply.do",
+			url: getContextPath()+"/community/deleteReply.do",
 			type: "post",
 			data: { replyNo: no, replyLevel: level },
 			success: () => {
@@ -281,15 +288,15 @@ deleteCommunity = (no) => {
 
 	if (confirm("게시글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-			url: "/community/deleteCommunity.do",
+			url: getContextPath()+"/community/deleteCommunity.do",
 			type: "post",
 			data: { communityNo: no },
 			success: () => {
 				alert("삭제성공");
-				location.replace("/community/communityList.do");
+				location.replace(getContextPath()+"/community/communityList.do");
 			}, error: () => {
 				alert("삭제실패");
-				location.replace("/community/communityList.do");
+				location.replace(getContextPath()+"/community/communityList.do");
 			}
 		})
 	} else {
@@ -305,7 +312,7 @@ $(".file-del").click(function(e) {
 	const fileName = target.data("name");
 	const targetLi = e.target.closest("li");
 	$.ajax({
-		url: "/ncCommon/removeCommunityFile.do",
+		url: getContextPath()+"/ncCommon/removeCommunityFile.do",
 		data: { fileName: fileName },
 		type: "post",
 		success: (data) => {

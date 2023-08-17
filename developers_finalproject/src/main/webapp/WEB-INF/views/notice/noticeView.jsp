@@ -27,9 +27,9 @@
             
         </div>
 			<div class="text-center mb-3">
-				<button type="button" class="s-btn" onclick="location.href='/notice/noticeList.do'">목록</button> 
+				<button type="button" class="s-btn" onclick="location.href='${path}/notice/noticeList.do'">목록</button> 
 				<c:if test="${logimAdmin!=null }">
-				<button type="button" class="s-btn" onclick="location.href='/notice/updateNoticePage.do?no=${notice.noticeNo}'">수정하기</button>
+				<button type="button" class="s-btn" onclick="location.href='${path }/notice/updateNoticePage.do?no=${notice.noticeNo}'">수정하기</button>
 	            <button type="button" class="s-btn" onclick="deleteNotice(${notice.noticeNo}); $('.removeBtn').trigger('click');">삭제하기</button>
 	      		</c:if>
             </div>

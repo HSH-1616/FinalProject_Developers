@@ -1,6 +1,11 @@
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+};
+
 const nList = (no, numPerpage) => {
 	$.ajax({
-		url: "/notice/noticeListEnd.do",
+		url: getContextPath()+"/noticeListEnd.do",
 		data: { cPage: no, numPerpage: numPerpage },
 		type: "get",
 		success: (data) => {
@@ -73,10 +78,10 @@ $("#contentArea").on("click", ".removeBtn", function(e) {
 	let target = $(this);
 	const fileName = target.data("name");
 	const targetDiv = e.target.closest("div");
-
+	console.log("사진삭제");
 
 	$.ajax({
-		url: "/ncCommon/removeFile.do",
+		url: getContextPath()+"/ncCommon/removeFile.do",
 		data: { fileName: fileName },
 		type: "post",
 		success: (data) => {
@@ -100,7 +105,7 @@ const deleteNotice = (no) => {
 		let target = $(this);
 		const fileName = target.data("name");
 		$.ajax({
-			url: "/ncCommon/removeFile.do",
+			url: getContextPath()+"/ncCommon/removeFile.do",
 			data: { fileName: fileName },
 			type: "post",
 			success: (data) => {
@@ -116,7 +121,7 @@ const deleteNotice = (no) => {
 		});
 
 	})
-	location.href = "/notice/deleteNotice.do?no=" + no;
+	location.href = getContextPath()+"/deleteNotice.do?no=" + no;
 };
 
 const searchNotice = (no, numPerpage) => {
@@ -124,7 +129,7 @@ const searchNotice = (no, numPerpage) => {
 	let type = $("select[name=type]").val();
 	let keyword = $("input[name=keyword]").val();
 	$.ajax({
-		url: "/notice/searchNotice.do",
+		url: getContextPath()+"/searchNotice.do",
 		data: { type: type, keyword: keyword, cPage: no, numPerpage: numPerpage },
 		type: "get",
 		success: (data) => {
