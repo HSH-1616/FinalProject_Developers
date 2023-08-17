@@ -56,10 +56,10 @@ public class TourisDetailController {
 			param.put("tourisId",tourisId);
 //		여기서부터 상세내용에 대한 api주소 요청
 			StringBuilder commoncontent = new StringBuilder();
-
+			
 			String urlStr2 = "http://apis.data.go.kr/B551011/KorService1/detailCommon1?"
 					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-					+ URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8")+ "&"
+					+ URLEncoder.encode("DevsDkKGVAJ8NyGxgx/JQ+S12z+V4CQgH1rMizxBA1hk8Nuh6HATVSf8CWuJy2vVETydPpS53zwLx4UPEEKo9g==","UTF-8")+ "&"
 					+ URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
@@ -112,7 +112,7 @@ public class TourisDetailController {
 
 			String urlStr3 = "http://apis.data.go.kr/B551011/KorService1/detailIntro1?"
 					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-					+ URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8") + "&" 
+					+ URLEncoder.encode("DevsDkKGVAJ8NyGxgx/JQ+S12z+V4CQgH1rMizxBA1hk8Nuh6HATVSf8CWuJy2vVETydPpS53zwLx4UPEEKo9g==","UTF-8") + "&" 
 					+ URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
@@ -171,7 +171,7 @@ public class TourisDetailController {
 
 			String urlStr4 = "http://apis.data.go.kr/B551011/KorService1/detailImage1?"
 					+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-					+ URLEncoder.encode("0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==","UTF-8") + "&" 
+					+ URLEncoder.encode("DevsDkKGVAJ8NyGxgx/JQ+S12z+V4CQgH1rMizxBA1hk8Nuh6HATVSf8CWuJy2vVETydPpS53zwLx4UPEEKo9g==","UTF-8") + "&" 
 					+ URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 					+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8") + "&"
 					+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"
@@ -241,13 +241,8 @@ public class TourisDetailController {
 		Member m=service.selectByIdforMember(param);
 		model.addAttribute("loginMember",m);
 	} 
-//	@Scheduled(cron = " 0/5 * * * * *")
-//	public void test() {
-//		System.out.println("5초마다 실행되니?");
-//	}
-	
-	@Scheduled(cron = "0 0 0/1 * * *")
-//	@GetMapping("/test")
+	@Scheduled(cron = "0 0 0 10 * *")
+//	@GetMapping("/test2")
 	public void insertTourisTemp() throws IOException {
 		System.out.println("주기적실행되니?");
 		service.deleteTourisTemp();
@@ -265,9 +260,7 @@ public class TourisDetailController {
 
 				String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
 						+ URLEncoder.encode("serviceKey", "UTF-8") + "="
-						+ URLEncoder.encode(
-								"0906O7Vl32hAkLceKylOGOAzJuIESMtXTXESfLV++obF/XFUtduY0IZn4KnJnwSMB3L5HTj7oRuH8PqFhVAQ6w==",
-								"UTF-8")
+						+ URLEncoder.encode("DevsDkKGVAJ8NyGxgx/JQ+S12z+V4CQgH1rMizxBA1hk8Nuh6HATVSf8CWuJy2vVETydPpS53zwLx4UPEEKo9g==","UTF-8")
 						+ "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8") + "&"
 						+ URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("13000", "UTF-8") + "&"
 						+ URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8") + "&"

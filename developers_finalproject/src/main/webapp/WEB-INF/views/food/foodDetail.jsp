@@ -31,6 +31,18 @@
 </head>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
+<script>
+	var tourisId="${touris.tourisId}";
+	if('${loginMember}'==''){
+		var memberId=null;
+	}else{
+		var memberId="${loginMember.memberId}";
+	}
+	console.log('${loginMember.tourisHeartlist}');
+	/* console.log("이건뭐니?"+'${touris.tourisImages[0].tourisImages}'); */
+</script>
+
 <section>
    <!-- ==================================================맛집 상세페이지============================================================== -->
    <div class="foodDetailCon col justify-content-center">
@@ -44,12 +56,30 @@
             </div>
             <h5 class="text-secondary">${f.foodAddress}</h5>
          </span>
-         <button id="detailHeart" class="yoonBtn btnColorDefault col-sm-1 mx-3 h-50">
-            <ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
-            <ion-icon id="detailHeartOn" name="heart"></ion-icon>
-            찜하기
-         </button>
-      </div>
+			<button id="detailHeart">
+				<c:if test="${loginMember==null}">
+					<ion-icon id="detailHeartOff" name="heart-outline"></ion-icon>
+					<ion-icon id="detailHeartOn" name="heart"></ion-icon>
+				</c:if>
+				<c:if test="${loginMember!=null}">
+					<c:set var="loop_flag" value="false" />
+					<c:forEach var="list" items="${loginMember.tourisHeartlist}">
+						<c:if test='${fn:contains(list.tourisId,touris.tourisId)}'>
+							<ion-icon id="detailHeartOff" name="heart-outline"
+								style="display:none;"></ion-icon>
+							<ion-icon id="detailHeartOn" name="heart" style="display:inline;"></ion-icon>
+							<c:set var="loop_flag" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:if test="${not loop_flag}">
+						<ion-icon id="detailHeartOff" name="heart-outline"
+							style="display:inline;"></ion-icon>
+						<ion-icon id="detailHeartOn" name="heart" style="display:none;"></ion-icon>
+					</c:if>
+				</c:if>
+				찜하기
+			</button>
+		</div>
 
       <hr class="m-3">
 
@@ -278,6 +308,7 @@
          <div>등록된 리뷰가 없습니다.</div>
       </c:if>
    </div>
+   </section>
 
    <script>
       var foodName = '${f.foodName}';
@@ -459,6 +490,4 @@
          });
       });
    </script>
-
-</section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
