@@ -3,8 +3,8 @@ function getContextPath() {
 	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
 };
 
-const CLIENT_ID="TR_SQ2GAJzrrTPobWiSh";
-const redirectURI=window.location.origin+"member/naver/callback";
+let CLIENT_ID="TR_SQ2GAJzrrTPobWiSh";
+let redirectURI=getContextPath()+"/member/naver/callback";
 
 const state="1";
 
@@ -91,12 +91,14 @@ window.addEventListener("keyup", e => {
 })
 //네이버 로그인
 const naverlogin=()=>{
+	console.log(window.location.origin);
+	console.log(redirectURI);
 	location.assign("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="+CLIENT_ID+"&redirect_uri="+redirectURI+"&state="+state);
 	
 }
 //구글 로그인
 const googlelogin=()=>{
-	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri="+window.location.origin+"/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
+	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri="+getContextPath()+"/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
 }
 
 /*카카오 로그인 서비스  */
