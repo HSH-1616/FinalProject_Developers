@@ -74,7 +74,7 @@ const path='${path}';
         <label for="bike" class="radio-tile-label">내가 쓴 글</label>
       </div>
     </div>
-<div class="input-container" id="moveBtn3">
+	<div class="input-container" id="moveBtn3">
       <input id="walk" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon walk-icon">
@@ -84,7 +84,7 @@ const path='${path}';
         <label for="walk" class="radio-tile-label">숙박<br>결제여부</label>
       </div>
     </div>
-    <div class="input-container">
+    <div class="input-container" id="moveBtn4">
       <input id="drive" class="radio-button" type="radio" name="radio">
       <div class="radio-tile">
         <div class="icon car-icon">
@@ -652,7 +652,7 @@ const path='${path}';
        
       </div>
     </div>
-    <div class="routesearcharea">
+    <div class="routesearcharea" id="preId4">
         <a href="#"class="routesearchmodalbtn" title="장소를 검색하여 일정에 추가">
           <span>
             <svg viewBox="0 0 24 24" height="17" width="17" xmlns="http://www.w3.org/2000/svg"><path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"></path></svg>
@@ -763,6 +763,17 @@ const path='${path}';
             });
           }); 
         
+        $(document).ready(function(){
+            $("#moveBtn4").on("click",function(event){
+     
+              var offset = $("#preId4").offset();
+     
+              $("html body").animate({scrollTop:offset.top},10);
+     
+            });
+          }); 
+        
     </script> 
+    
     <script src="${path }/js/mypage/mypage.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
