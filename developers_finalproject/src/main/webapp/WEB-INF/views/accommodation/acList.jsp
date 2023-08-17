@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/accommodation/acSearchBar.jsp" />
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${path }/css/accommodation/acList.css" />
 
 <div id="hotelListContainer">

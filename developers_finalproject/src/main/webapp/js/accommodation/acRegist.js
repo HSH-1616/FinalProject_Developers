@@ -567,7 +567,7 @@ function registOk() {
 	})
 
 	$.ajax({
-		url: "/ac/insertRegist",
+		url: getContextPath()+"/ac/insertRegist",
 		type: "post",
 		data: form,
 		processData: false,
@@ -586,7 +586,7 @@ function registOk() {
 			})
 		},
 		error: function(data) {
-			location.replace("/ac/acError")
+			location.replace(getContextPath()+"/ac/acError")
 		}
 	});
 
@@ -655,7 +655,7 @@ function updateOk() {
 	})
 
 	$.ajax({
-		url: "/ac/updateAc",
+		url: getContextPath()+"/ac/updateAc",
 		type: "post",
 		data: form,
 		processData: false,
@@ -674,7 +674,7 @@ function updateOk() {
 			})
 		},
 		error: function(data) {
-			location.replace("/ac/acError")
+			location.replace(getContextPath()+"/ac/acError")
 		}
 	});
 }
