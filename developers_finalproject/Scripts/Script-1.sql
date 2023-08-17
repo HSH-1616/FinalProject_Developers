@@ -135,5 +135,5 @@ AND a.ac_id not in (
 SELECT ac_id FROM ac_reservation
 WHERE ('23/08/16'>=CHECKIN AND CHECKOUT >= '23/08/16'
 OR '23/08/20'>=CHECKIN AND CHECKOUT >= '23/08/20'))ORDER BY AC_DATE DESC;	
-        
+        SELECT * FROM MEMBER;
 	

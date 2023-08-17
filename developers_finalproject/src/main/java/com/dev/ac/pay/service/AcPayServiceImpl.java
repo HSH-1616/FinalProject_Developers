@@ -39,7 +39,7 @@ public class AcPayServiceImpl {
 	public KaKaoPayReady kakaoPayReady(Map<String, String> param) {
 		String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 		// 카카오페이 요청 양식
-
+		System.out.println(request.getContextPath());
 		// 주문번호 생성
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Calendar c = Calendar.getInstance();

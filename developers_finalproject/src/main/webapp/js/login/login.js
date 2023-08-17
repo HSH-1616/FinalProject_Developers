@@ -91,7 +91,6 @@ const naverlogin = () => {
 	location.assign("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" + CLIENT_ID + "&redirect_uri=" + redirectURI + "&state=" + state);
 }
 //구글 로그인
-
 const googlelogin = () => {
 	location.assign("https://accounts.google.com/o/oauth2/auth?client_id=839800773396-kvhvsj12jbcfs977u23dfa0ipci4s196.apps.googleusercontent.com&redirect_uri=" + origin + path + "/member/login/oauth2/code/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
 }
