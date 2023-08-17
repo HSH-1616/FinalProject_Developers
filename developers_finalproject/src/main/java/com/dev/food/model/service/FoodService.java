@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
 import com.dev.food.model.dto.FoodHeart;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -12,15 +14,19 @@ import com.dev.food.model.dto.FoodTemp;
 
 public interface FoodService {
 
-	int insertFood(FoodTemp food,FoodPhotoTemp fp);
+	int insertFood(FoodTemp food);
 	
+	int insertFoodPhoto(FoodPhotoTemp fp);
+
 	int updateFood(FoodTemp food);
+	
+	int updateFoodOnNull(FoodTemp food);
+	
+	int updateFoodPhotoOnNull(FoodPhotoTemp fp);
 	
 	int updateFoodOnAdmin(Food food);
 	
 	int deleteFoodOnAdmin(int foodNo);
-	
-	int insertFoodPhoto(FoodPhotoTemp fp);
 	
 	void mergeFood();
 	
@@ -38,9 +44,13 @@ public interface FoodService {
 	
 	List<Food> selectFoodByFoodNo (int foodNo);
 	
+	List<Food> selectFoodTempByFoodNo(int foodNo);
+	
 	int selectFoodCount();
 	
 	Food selectFoodByNo(int no);
+	
+	FoodPhoto selectFoodPhotoByNo(String fpName);
 	
 	String searchByFoodNo(int foodNo);
 
@@ -73,5 +83,9 @@ public interface FoodService {
 	//int updateReviewPhoto(FoodReviewPhoto rp);
 	
 	//List searchByRpNo(int frNo);
+	
+	int insertFoodBlackList(FoodBlackList fb);
+	
+	int selectFoodBlackListCount();
 	
 }

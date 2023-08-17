@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
 import com.dev.food.model.dto.FoodHeart;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -35,6 +37,16 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public int updateFood(SqlSession session, FoodTemp f) {
 		return session.update("food.updateFood",f);
+	}
+	
+	@Override
+	public int updateFoodOnNull(SqlSession session, FoodTemp food) {
+		return session.update("food.updateFoodOnNull",food);
+	}
+	
+	@Override
+	public int updateFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp) {
+		return session.update("food.updateFoodPhotoOnNull",fp);
 	}
 	
 	@Override
@@ -96,6 +108,11 @@ public class FoodDaoImpl implements FoodDao {
 	public List<Food> selectFoodByFoodNo(SqlSession session,int foodNo) {
 		return session.selectList("food.selectFoodByFoodNo",foodNo);
 	}
+	
+	@Override
+	public List<Food> selectFoodTempByFoodNo(SqlSession session, int foodNo) {
+		return session.selectList("food.selectFoodTempByFoodNo",foodNo);
+	}
 
 	@Override
 	public int selectFoodCount(SqlSession session) {
@@ -107,6 +124,11 @@ public class FoodDaoImpl implements FoodDao {
 	public Food selectFoodByNo(SqlSession session, int no) {
 		// TODO Auto-generated method stub
 		return session.selectOne("food.selectFoodByNo",no);
+	}
+	
+	@Override
+	public FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName) {
+		return session.selectOne("food.selectFoodPhotoByNo",fpName);
 	}
 
 	@Override
@@ -227,4 +249,13 @@ public class FoodDaoImpl implements FoodDao {
 		return null;
 	}
 	
+	@Override
+	public int insertFoodBlackList(SqlSession session, FoodBlackList fb) {
+		return session.insert("food.insertFoodBlackList",fb);
+	}
+	
+	@Override
+	public int selectFoodBlackListCount(SqlSession session) {
+		return session.selectOne("food.selectFoodBlackListCount");
+	}
 }

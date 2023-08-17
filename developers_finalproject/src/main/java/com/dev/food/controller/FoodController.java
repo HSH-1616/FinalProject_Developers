@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -122,7 +124,7 @@ public class FoodController {
 				+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 				+ "&" + "MobileOS"+"="+"ETC"
 				+ "&" + "MobileApp"+"="+"foodTest"
-				+ "&" + "numOfRows"+"="+ "10" //"17055"
+				+ "&" + "numOfRows"+"="+ "12" //"17055"
 				+ "&" + "pageNo"+"="+"1"
 				+ "&" + "contentTypeId"+"="+"39"
 				+ "&" + "_type"+"="+"json"
@@ -153,20 +155,24 @@ public class FoodController {
 
 		//파싱할 객체 생성
 		JsonObject obj0 = JsonParser.parseString(result0.toString()).getAsJsonObject();
+		//System.out.println(obj0);
 		JsonArray arr0 = obj0.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
 				.getAsJsonObject().get("item").getAsJsonArray();
+		
 		int apiCount = 0;
 		for (JsonElement jsonElement : arr0) {
 			JsonObject item0 = jsonElement.getAsJsonObject();
 			apiCount = Integer.parseInt(item0.get("totalCnt").toString().replaceAll("\"", ""));
-			System.out.println("apiCount : "+apiCount);
+			//System.out.println("apiCount : "+apiCount);
 		}
 		
 		int result = service.selectFoodCount();
+		int blackList = service.selectFoodBlackListCount();
 		System.out.println("음식점 수 : "+result);
 		
 		//api와 DB가 동일한 숫자이면 업데이트 x
-		if(result != apiCount) {
+		//if(result+blackList != apiCount) {
+		if(true) {
 			//api -> DB
 			System.out.println("api -> DB");
 
@@ -175,7 +181,7 @@ public class FoodController {
 					+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 					+ "&" + "MobileOS"+"="+"ETC"
 					+ "&" + "MobileApp"+"="+"foodTest"
-					//+ "&" + "numOfRows"+"="+ "10000" //"17055"
+					+ "&" + "numOfRows"+"="+ 12 //"17055" apiCount
 					+ "&" + "pageNo"+"="+"1"
 					+ "&" + "contentTypeId"+"="+"39"
 					+ "&" + "_type"+"="+"json"
@@ -214,21 +220,39 @@ public class FoodController {
 					
 					String StringType = item.get("contentid").toString().replaceAll("\"", "");
 					
-					FoodTemp food = FoodTemp.builder()
-							.foodNo(Integer.parseInt(StringType))
-							.foodName(item.get("title").toString().replaceAll("\"", ""))
-							.foodAddress(item.get("addr1").toString().replaceAll("\"", ""))
-							.build();
-					FoodPhotoTemp fp = FoodPhotoTemp.builder()
-							.foodNo(Integer.parseInt(StringType))
-							.fpName(item.get("firstimage").toString().replaceAll("\"", ""))
-							.fpMain(1)
-							.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
-							.build();
+					//null이 없는 값만 객체저장
+					if(item.get("title")!=null&&item.get("addr1")!=null&&item.get("firstimage")!=null) {
+						
+						FoodTemp food = FoodTemp.builder()
+								.foodNo(Integer.parseInt(StringType))
+								.foodName(item.get("title").toString().replaceAll("\"", ""))
+								.foodAddress(item.get("addr1").toString().replaceAll("\"", ""))
+								.build();
+						FoodPhotoTemp fp = FoodPhotoTemp.builder()
+								.foodNo(Integer.parseInt(StringType))
+								.fpName(item.get("firstimage").toString().replaceAll("\"", ""))
+								.fpMain(1)
+								.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
+								.build();
+						
+//						System.out.println("foodNo : "+food);
+//						System.out.println("foodPhoto : "+fp);
+//						System.out.println();
+						
+						service.insertFood(food);
+						service.mergeFood();
+						service.insertFoodPhoto(fp);
+						service.mergeFoodPhoto();
+					}else {
+						//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
+						System.out.println("불충분 조건 맛집리스트");
+						System.out.println("foodNo : "+Integer.parseInt(StringType)+", foodName : "+
+								item.get("title").toString().replaceAll("\"", "")+", foodAddress : "+
+								item.get("addr1").toString().replaceAll("\"", ""));
+						FoodBlackList fb = FoodBlackList.builder().foodNo(Integer.parseInt(StringType)).build();
+						service.insertFoodBlackList(fb);
+					}
 					
-					service.insertFood(food,fp);
-					service.mergeFood();
-					service.mergeFoodPhoto();
 				}
 			}
 		}
@@ -296,30 +320,57 @@ public class FoodController {
 			
 			JsonElement jsonElement2 = arr2.get(0);
 			JsonObject item2 = jsonElement2.getAsJsonObject();
+			String opentimefood = item2.get("opentimefood").toString().replaceAll("\"", "");
+			String restdatefood = item2.get("restdatefood").toString().replaceAll("\"", "");
+			String treatmenu = item2.get("treatmenu").toString().replaceAll("\"", "");
+			String infocenterfood = item2.get("infocenterfood").toString().replaceAll("\"", "");
+			
 			System.out.println("===========================가게정보===========================");
 			System.out.println("음식점Id : "+foodNo);
-			System.out.println("오픈시간 : "+item2.get("opentimefood").toString().replaceAll("\"", ""));	
-			System.out.println("휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""));
-			System.out.println("메뉴 : "+item2.get("treatmenu").toString().replaceAll("\"", ""));
-			System.out.println("연락처 : "+item2.get("infocenterfood").toString().replaceAll("\"", ""));
+			System.out.println("오픈시간 : "+opentimefood);	
+			System.out.println("휴무일 : "+restdatefood);
+			System.out.println("메뉴 : "+treatmenu);
+			System.out.println("연락처 : "+infocenterfood);
 			System.out.println("===============================================================");
 			
-			String StringType = item2.get("contentid").toString().replaceAll("\"", "");
-			FoodTemp food = FoodTemp.builder()
-					.foodNo(Integer.parseInt(StringType))
-					.foodOpenTime("오픈시간 : "+item2.get("opentimefood").toString().replaceAll("\"", "")+"\n\r"+"휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""))
-					.foodMenu(item2.get("treatmenu").toString().replaceAll("\"", ""))
-					.foodPhone(item2.get("infocenterfood").toString().replaceAll("\"", ""))
-					.build();
-			service.updateFood(food); //TEMP에 UPDATE
-			System.out.println("updateflag : "+service.selectFoodByFoodNo(foodNo));
-			service.mergeFood(); //FOOD에 없으면 MERGE
-			System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
-			foodImgApi(foodNo);
+			//String StringType = item2.get("contentid").toString().replaceAll("\"", "");
+			
+			//null이 없는 값만 객체저장================================================================================================
+			if(!opentimefood.isEmpty()&&!restdatefood.isEmpty()&&!treatmenu.isEmpty()&&!infocenterfood.isEmpty()) {
+				
+				FoodTemp food = FoodTemp.builder()
+						.foodNo(foodNo)
+						.foodOpenTime("오픈시간 : "+opentimefood+"\n\r"+"휴무일 : "+restdatefood)
+						.foodMenu(treatmenu)
+						.foodPhone(infocenterfood)
+						.build();
+				
+				service.updateFood(food); //TEMP에 UPDATE
+				//System.out.println("updateflag : "+service.selectFoodTempByFoodNo(foodNo));
+				
+				//opentime, menu, phone이 없으면 update
+				Food f = service.selectFoodByNo(foodNo);
+				//System.out.println("flag : "+f);
+				if(f == null) {
+					service.updateFoodOnNull(food);
+				}
+				service.mergeFood(); //FOOD에 없으면 INSERT
+				//System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
+				//foodImgApi(foodNo);
+				
+			}else {
+				//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
+				System.out.println("foodNo : "+foodNo+", "+opentimefood+", "+
+				restdatefood+", "+treatmenu+", "+infocenterfood);
+				FoodBlackList fb = FoodBlackList.builder().foodNo(foodNo).build();
+				service.insertFoodBlackList(fb);
+			}
+
 			//사용할 일 없으니 삭제
-			service.deleteFoodTemp(Integer.parseInt(StringType));
-			service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
+			//service.deleteFoodTemp(Integer.parseInt(StringType));
+			//service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
 		}
+		foodImgApi(foodNo);
 		//음식점의 리뷰 불러오기
 		//System.out.println(foodNo);
 		//List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
@@ -384,15 +435,38 @@ public class FoodController {
 			System.out.println("음식점Id : "+foodNo);	
 			System.out.println("원본이미지 : "+item3.get("originimgurl"));
 			System.out.println("===============================================================");
-			FoodPhotoTemp fp = FoodPhotoTemp.builder()
-				.foodNo(foodNo)
-				.fpName(item3.get("originimgurl").toString().replaceAll("\"", ""))
-				.fpMain(0)
-				.fpId(item3.get("originimgurl").toString().replaceAll("\"", ""))
-				.build();
-			service.insertFoodPhoto(fp);
-			service.mergeFoodPhoto();
-			System.out.println("이미지 list 결과 : "+fp);
+			
+			//null이 없는 값만 객체저장================================================================================================
+			if(!item3.get("originimgurl").toString().replaceAll("\"", "").isEmpty()) {
+				
+				FoodPhotoTemp fp = FoodPhotoTemp.builder()
+						.foodNo(foodNo)
+						.fpName(item3.get("originimgurl").toString().replaceAll("\"", ""))
+						.fpMain(0)
+						.fpId(item3.get("originimgurl").toString().replaceAll("\"", ""))
+						.build();
+				
+				service.insertFoodPhoto(fp); //temp 에 insert
+				//System.out.println("updateflag : "+service.selectFoodTempByFoodNo(foodNo));
+				
+//				//FOODPhoto에 INSERT
+				service.mergeFoodPhoto();
+				
+				//fpName, fpMain, fpId가 없으면 update
+				FoodPhoto f = service.selectFoodPhotoByNo(item3.get("originimgurl").toString().replaceAll("\"", "")); //photo에 조회
+				System.out.println("null-flag : "+f);
+				if(f == null) {
+					service.updateFoodPhotoOnNull(fp); //selectOne인데 2개이상 나온다 함
+				}
+				System.out.println("mergeflag : "+service.selectFoodPhotoByNo(item3.get("originimgurl").toString().replaceAll("\"", "")));
+				
+			}else {
+				//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
+				System.out.println("foodNo : "+foodNo+", "+item3.get("originimgurl").toString().replaceAll("\"", ""));
+				FoodBlackList fb = FoodBlackList.builder().foodNo(foodNo).build();
+				service.insertFoodBlackList(fb);
+			}
+
 		}
 	}
 	

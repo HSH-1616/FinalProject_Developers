@@ -56,6 +56,7 @@
       <div class="food_photo">
          <p class="fs-4">상세정보</p>
       </div>
+      ${f}
 
       <div class="row justify-content-center" style="height: 450px;">
          <!-- 음식 슬라이드 -->
