@@ -318,5 +318,10 @@ public class AcDaoImpl implements AcDao {
 	public int insertRefundAdmin(SqlSessionTemplate session, Map param) {
 		return session.insert("accommodation.insertRefundAdmin",param);
 	}
+
+	@Override
+	public List<Accommodation> mypageAcHeart(SqlSessionTemplate session, String memberId) {
+		return session.selectList("accommodation.mypageHeart",memberId);
+	}
 	
 }

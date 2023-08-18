@@ -355,5 +355,10 @@ public class AcServiceImpl implements AcService {
 		return result;
 	}
 
+	@Override
+	public List<Accommodation> mypageAcHeart(String memberId) {
+		return dao.mypageAcHeart(session,memberId);
+	}
+
 
 }
