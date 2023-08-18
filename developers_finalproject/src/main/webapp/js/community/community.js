@@ -1,15 +1,11 @@
 
-function getContextPath() {
-	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
-};
 
 
 
 const communityList = (cPage, numPerpage) => {
 	let result;
 	$.ajax({
-		url: getContextPath()+"/community/communityListEnd.do",
+		url: path+"/community/communityListEnd.do",
 		type: "post",
 		async: false,
 		data: { cPage: cPage, numPerpage: numPerpage },
@@ -22,11 +18,11 @@ const communityList = (cPage, numPerpage) => {
 				str += "<a><img src='" + c.memberId.memberImage + "' style='height: 30px; border-radius:50%; margin:5px;'></a>&nbsp";
 				str += "<div style='margin-top:10px;'>" + c.memberId.memberNickname + "</div>";
 				str += "</div>";
-				str += "<img src='"+getContextPath()+"/upload/community/" + c.thumbnail + "' class='card-img-top' >";
+				str += "<img src='"+path+"/upload/community/" + c.thumbnail + "' class='card-img-top' >";
 				str += "<div class='card-body'>";
 				str += "<h5 class='card-title'>" + c.communityTitle + "</h5>";
 				str += "<div class='text-end '>";
-				str += "<div><img src='"+getContextPath()+"/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
+				str += "<div><img src='"+path+"/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
 				str += "</div>";
 				/*str += "<p class='card-text'>" + c.communityContent + "</p>";*/
 				str += "</div>";
@@ -44,7 +40,7 @@ const communityList = (cPage, numPerpage) => {
 
 
 const communityView = (no, id) => {
-	location.assign(getContextPath()+"/community/communityView.do?no=" + no + "&id=" + id);
+	location.assign(path+"/community/communityView.do?no=" + no + "&id=" + id);
 };
 
 //무한스크롤 페이징
@@ -79,7 +75,7 @@ $(".like-review")
 					'animate-like');
 				$(".like-review").val("true");
 				fn_like();
-				$(".like-content>img").attr("src", getContextPath()+"/images/community/fillheart.svg");
+				$(".like-content>img").attr("src", path+"/images/community/fillheart.svg");
 				let count = $(".like-content>span").text();
 				$(".like-content>span").text(Number(count) + 1);
 			} else {
@@ -90,7 +86,7 @@ $(".like-review")
 					'animate-like');
 				$(".like-review").val("false");
 				fn_like();
-				$(".like-content>img").attr("src", getContextPath()+"/images/community/heart.svg");
+				$(".like-content>img").attr("src", path+"/images/community/heart.svg");
 				let count = $(".like-content>span").text();
 				$(".like-content>span").text(Number(count) - 1);
 			}
@@ -99,7 +95,7 @@ $(".like-review")
 $(".like-content").ready(() => {
 	if ($('#like_memberId').length > 0 && $("#like_memberId").val() != "") {
 		$.ajax({
-			url: getContextPath()+"/community/communityLikeCheck.do",
+			url: path+"/community/communityLikeCheck.do",
 			data: { "memberId": $("#like_memberId").val(), "communityNo": $("#like_comuNo").val() },
 			type: "post",
 			success: (data) => {
@@ -108,7 +104,7 @@ $(".like-content").ready(() => {
 					$(".like-review").children('.fa-heart').addClass(
 						'animate-like');
 					$(".like-review").val("true");
-					$(".like-content>img").attr("src", getContextPath()+"/images/community/fillheart.svg");
+					$(".like-content>img").attr("src", path+"/images/community/fillheart.svg");
 				}
 			}
 		});
@@ -119,7 +115,7 @@ const fn_like = () => {
 	const no = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
 	$.ajax({
-		url: getContextPath()+"/community/communityLike.do",
+		url: path+"/community/communityLike.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: no },
 		success: () => {
@@ -143,7 +139,7 @@ const insertReply = (ref, con) => {
 	const memberId = $("#like_memberId").val();
 
 	$.ajax({
-		url: getContextPath()+"/community/insertReply.do",
+		url: path+"/community/insertReply.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: communityNo, replyContent: content, replyRef: ref },
 		success: () => {
@@ -164,7 +160,7 @@ const replyList = () => {
 	const memberId = $("#like_memberId").val();
 	const loginAdmin = $("#adminCheck").val();
 	$.ajax({
-		url: getContextPath()+"/community/replyList.do",
+		url: path+"/community/replyList.do",
 		type: "get",
 		data: { communityNo: communityNo },
 		success: (data) => {
@@ -257,7 +253,7 @@ const updateReply = (no) => {
 	const reContent = $("#editReply" + no + "").val();
 
 	$.ajax({
-		url: getContextPath()+"/community/updateReply.do",
+		url: path+"/community/updateReply.do",
 		type: "post",
 		data: { replyNo: no, replyContent: reContent },
 		success: () => {
@@ -272,7 +268,7 @@ const updateReply = (no) => {
 const deleteReply = (level, no) => {
 	if (confirm("댓글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-			url: getContextPath()+"/community/deleteReply.do",
+			url: path+"/community/deleteReply.do",
 			type: "post",
 			data: { replyNo: no, replyLevel: level },
 			success: () => {
@@ -293,10 +289,10 @@ deleteCommunity = (no) => {
 			data: { communityNo: no },
 			success: () => {
 				alert("삭제성공");
-				location.replace(getContextPath()+"/community/communityList.do");
+				location.replace(path+"/community/communityList.do");
 			}, error: () => {
 				alert("삭제실패");
-				location.replace(getContextPath()+"/community/communityList.do");
+				location.replace(path+"/community/communityList.do");
 			}
 		})
 	} else {
@@ -313,7 +309,7 @@ $(".file-del").click(function(e) {
 	const targetLi = e.target.closest("li");
 	console.log("파일삭제");
 	$.ajax({
-		url: getContextPath()+"/ncCommon/removeCommunityFile.do",
+		url: path+"/ncCommon/removeCommunityFile.do",
 		data: { fileName: fileName },
 		type: "post",
 		success: (data) => {
@@ -323,6 +319,7 @@ $(".file-del").click(function(e) {
 			}
 			else {
 				alert("삭제실패");
+				targetLi.remove();
 			}
 
 		}

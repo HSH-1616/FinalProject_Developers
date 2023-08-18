@@ -53,6 +53,10 @@ public class AdminController {
 	public String adminMain() {
 		return "admin/adminMain";
 	}
+	@GetMapping("/main")
+	public String main() {
+		return "main";
+	}
 	@PostMapping("/adminlogin")
 	public String adminLogin(@RequestParam Map param,Model m) {
 		System.out.println(param);
