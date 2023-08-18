@@ -157,6 +157,12 @@
 						<!--  -->
 					
 					</div>
+					<div class="favorite2">
+					
+					</div>
+					<div class="favorite3">
+					
+					</div>
 				</div>
 			</div>
 		</div>

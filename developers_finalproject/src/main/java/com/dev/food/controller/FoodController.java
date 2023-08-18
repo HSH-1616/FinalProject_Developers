@@ -668,15 +668,15 @@ public class FoodController {
 	}
 //	여기까지
 	
-	@GetMapping("/mypage/foodheart")
+	@GetMapping("/mypagefoodheart")
 	@ResponseBody 
 	public List<Food> foodHeartList(@RequestParam int memberId){
+		
 		
 		List<Food> foods=service.foodHeartList(memberId);
 		
 	    return foods;
 	}
-	 
 	
 
 }
