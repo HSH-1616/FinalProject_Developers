@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
+import com.dev.touris.model.vo.TourisHeart;
 import com.dev.touris.model.vo.TourisTemp;
 
 public interface TourisDetailDao {
@@ -19,4 +20,5 @@ public interface TourisDetailDao {
 	Member selectByIdforMember(SqlSession session, Map param);
 	void insertTourisTemp(SqlSession session, TourisTemp touris);
 	void deleteTourisTemp(SqlSession session);
+	List<TourisHeart> tourisheart(SqlSession session, int memberId);
 }

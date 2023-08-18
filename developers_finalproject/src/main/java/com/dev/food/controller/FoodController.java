@@ -1,6 +1,7 @@
 package com.dev.food.controller;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.dto.FoodBlackList;
+import com.dev.food.model.dto.FoodHeart;
 import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
@@ -69,7 +71,7 @@ public class FoodController {
 		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
-		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
@@ -643,12 +645,38 @@ public class FoodController {
 	 * @GetMapping("/add") public String showAddForm(Model model) {
 	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
-	
+//	찬은
 	@PostMapping("/add")
     public String addFood(Food food) {
         service.addFood(food);
         
         return "redirect:/food/add";
     }
+	@GetMapping("/mypagefoodreview")
+	@ResponseBody
+	public Map<String, Object> foodheartlist(@RequestParam int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){
+		Map<String, Object> params = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
+		params.put("cPage",cPage);
+		params.put("numPerpage", numPerpage);
+		int totalData = service.selectFoodReviewByFoodNoCount(memberId);
+		String pageBar = com.dev.nc.common.PageFactory.getPage(cPage, numPerpage, totalData, "mypagereivewlist");
+		List<Food> reivewlist = service.selectFoodReviewByFoodNo(memberId, params);
+		result.put("mypagereivewlist", reivewlist);
+		result.put("pageBar", pageBar);
+		return result;
+	}
+//	여기까지
 	
+	@GetMapping("/mypage/foodheart")
+	@ResponseBody 
+	public List<Food> foodHeartList(@RequestParam int memberId){
+		
+		List<Food> foods=service.foodHeartList(memberId);
+		
+	    return foods;
+	}
+	 
+	
+
 }
