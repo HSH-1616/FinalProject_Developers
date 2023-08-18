@@ -69,7 +69,7 @@ public class FoodController {
 		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
-		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
@@ -651,13 +651,15 @@ public class FoodController {
         return "redirect:/food/add";
     }
 	
-	/*
-	 * @GetMapping("/mypage/foodheart")
-	 * 
-	 * @ResponseBody public List<Food> foodHeartList(@RequestParam int memberId){
-	 * 
-	 * 
-	 * }
-	 */
+	
+	@GetMapping("/mypage/foodheart")
+	@ResponseBody 
+	public List<Food> foodHeartList(@RequestParam int memberId){
+		
+		List<Food> foods=service.foodHeartList(memberId);
+		
+	    return foods;
+	}
+	 
 	
 }
