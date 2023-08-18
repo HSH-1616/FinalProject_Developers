@@ -13,10 +13,7 @@
 <div class="container-fluid full-width row">
 	<div class="col my-5">
 		<h3 class="fs-4 mb-3">결제 관리</h3>
-
-		<div class="tab-content" id="myTabContent">
-			<div class="tab-pane fade show active" id="home-tab-pane"
-				role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+			 <div class="col">
 				<table
 					class="table bg-white rounded shadow-sm table-hover text-center align-middle">
 					<thead>
@@ -72,7 +69,7 @@
 							</c:if>
 
 							<input type="hidden" name="apId" value="${ap.apId }">
-							<input type="hidden" name="refundPrice" value="${refundPrice}" />">
+							<input type="hidden" name="refundPrice" value="${refundPrice}" />
 							<tr>
 								<td class="acId">${ap.apOrderId }</td>
 								<td>${ap.acDetail.acId}</td>
@@ -123,7 +120,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 <script>
 
 /* var apId=$("input[name=apId]").val()

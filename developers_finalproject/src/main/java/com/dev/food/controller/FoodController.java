@@ -660,7 +660,7 @@ public class FoodController {
 		params.put("cPage",cPage);
 		params.put("numPerpage", numPerpage);
 		int totalData = service.selectFoodReviewByFoodNoCount(memberId);
-		String pageBar = com.dev.nc.common.PageFactory.getPage(cPage, numPerpage, totalData, "mypagereivewlist");
+		String pageBar = com.dev.nc.common.PageFactory.getPage(cPage, numPerpage, totalData, "foodreivew");
 		List<Food> reivewlist = service.selectFoodReviewByFoodNo(memberId, params);
 		result.put("mypagereivewlist", reivewlist);
 		result.put("pageBar", pageBar);
