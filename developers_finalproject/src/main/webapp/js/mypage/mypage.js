@@ -4,6 +4,8 @@ function getContextPath() {
 	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
 };
 
+
+
 $(document).ready(function() {
     initializeSlick();
 });
@@ -16,6 +18,11 @@ const initializeSlick = () => {
     });
 
     $('.favorite2').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 3,
+        slidesToScroll: 1
+    });
+    $('.favorite3').slick({
         lazyLoad: 'ondemand',
         slidesToShow: 3,
         slidesToScroll: 1
@@ -134,7 +141,7 @@ const tourisroute = (cPage,numPerpage) => {
 		data:{loginmemberid:loginmemberid,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			console.log(data)
-			$('.myschedularea').html("");
+			$('.myschedularea').empty();
 			for(let m of data.mypageTourisRoute){
 				const endDate = new Date(m.tuendDate);
 				const startDate = new Date(m.tustartDate);
@@ -293,7 +300,31 @@ const tourisheart = () =>{
 }
 
 const hotelheart = () =>{
-	
+	$.ajax({
+		url:path+"/ac/mypageAcHeart",
+		type:"get",
+		success:(data)=>{
+			data.forEach(e=>{
+				console.log(e);
+				const hotelheart = `<div class="cardarea">
+							<div class="cardimgarea">
+								<div class="cardimgstyle">
+									<span class="cardspanimg"> <img alt=""
+										src="#">
+									</span>
+								</div>
+							</div>
+							<div class="cardtextarea">
+								<div class="noneid">${e.acId}</div>
+								<h2 class="cardtexteng">${e.acTitle}</h2>
+								<h2 class="cardtextkr">${e.acAddress}</h2>
+							</div>
+						</div>`
+						$(".favorite3").append(hotelheart);
+			});
+			$('.favorite3').slick('refresh');
+		}
+	})
 }
 
 $(document).on("click", "#foodheart",function(){
@@ -310,6 +341,7 @@ $(document).on("click", "#tourisheart", function(){
 $(document).on("click", "#hotelheart", function(){
 		$(".favorite").empty();
 		$(".favorite2").empty();
+		hotelheart();
 });
 
 $("#communtitycontent").on("click", function(){

@@ -123,7 +123,7 @@ public class TourisController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		int totalData = service.myPageTourisRouteCount(loginmemberid);
-		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "mypageTourisRoute");
+		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "tourisroute");
 		List<TourisMember> tourisroutelist = service.myPageTourisRoute(loginmemberid, param);
 		data.put("mypageTourisRoute", tourisroutelist);
 		data.put("pageBar", pageBar);
