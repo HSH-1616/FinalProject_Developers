@@ -552,4 +552,13 @@ public class AcController {
 		param.put("comment", comment);
 		return service.rejectRefund(param);
 	}
+	
+	@PostMapping("/mypageAcHeart")
+	@ResponseBody
+	public List<Accommodation> mypageAcHeart() {
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+		
+		return service.mypageAcHeart(memberId);
+	}
 }
