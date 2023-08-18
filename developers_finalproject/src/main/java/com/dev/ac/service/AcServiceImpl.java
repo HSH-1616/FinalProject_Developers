@@ -315,7 +315,22 @@ public class AcServiceImpl implements AcService {
 	public int paymentListCount() {
 		return dao.paymentListCount(session);
 	}
+	
+	@Override
+	public List<AcPayList> refundList(Map param) {
+		return dao.refundList(session,param);
+	}
 
+	@Override
+	public int refundListCount() {
+		return dao.refundListCount(session);
+	}
+	
+	@Override
+	public int refundListCount2() {
+		return dao.refundListCount2(session);
+	}
+	
 	@Override
 	public int rejectRefund(Map param) {
 		int result=dao.rejectRefund(session,param);
@@ -323,6 +338,15 @@ public class AcServiceImpl implements AcService {
 			dao.rejectComment(session,param);
 		}
 		
+		return result;
+	}
+
+	@Override
+	public int updateRefundAdmin(Map param) {
+		int result=dao.updateRefundAdmin(session,param);
+		if(result>0) {
+			result+=dao.insertRefundAdmin(session,param);
+		}
 		return result;
 	}
 

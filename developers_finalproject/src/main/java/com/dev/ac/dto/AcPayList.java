@@ -18,6 +18,7 @@ public class AcPayList {
 	private int apPrice;
 	private Date apDate;
 	private Date apReDate;
+	private Date apCancelDate;
 	private int apPeople;
 	private char apCheckCancel;
 	private char apCancel;

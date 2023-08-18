@@ -201,6 +201,7 @@ public class AdminController {
 		m.addAttribute("foods",foodList);
 		return "admin/foodList";
 	}
+	
 	@GetMapping("/paymentList")
 	public String paymentList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
@@ -212,11 +213,30 @@ public class AdminController {
 		param.put("numPerpage", numPerpage);
 		int totalData = acService.paymentListCount();
 		
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectAcAll", type));
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectPayAll", type));
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("ap", acService.paymentList(param));
 		
 		return "admin/paymentList";
+	}
+	
+	@GetMapping("/refundList")
+	public String refundList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
+			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
+		
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> type = new HashMap<>();
+		
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		int totalData = acService.refundListCount();
+		int totalData2 = acService.refundListCount2();
+		
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectRefundAll", type));
+		m.addAttribute("pageBar2", PageFactory.getPage(cPage, numPerpage, totalData2, "selectRefundAll2", type));
+		m.addAttribute("totalData", totalData);
+		m.addAttribute("ap", acService.refundList(param));
+		return "admin/refundList";
 	}
 	
 	@GetMapping("/selectAcAll")
@@ -239,8 +259,14 @@ public class AdminController {
 	public String paymentDetail(String orderId,Model m) {
 		AcPayList ra = acService.acRefundApply(orderId);
 		m.addAttribute("ra", ra);
-		System.out.println(ra);
 		return "/admin/paymentDetail";
+	}
+	
+	@GetMapping("/refundDetail")
+	public String refundDetail(String orderId,Model m) {
+		AcPayList ra = acService.acRefundApply(orderId);
+		m.addAttribute("ra", ra);
+		return "/admin/refundDetail";
 	}
 	
 	@GetMapping("/selectFoodByFoodNo")
