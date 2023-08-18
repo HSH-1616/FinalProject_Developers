@@ -558,7 +558,7 @@ public class AcController {
 	public List<Accommodation> mypageAcHeart() {
 		Member member = (Member) session.getAttribute("loginMember");
 		String memberId = String.valueOf(member.getMemberId());
-		
+		System.out.println(service.mypageAcHeart(memberId));
 		return service.mypageAcHeart(memberId);
 	}
 }
