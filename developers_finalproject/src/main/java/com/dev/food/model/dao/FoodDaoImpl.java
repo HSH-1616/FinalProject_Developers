@@ -20,6 +20,11 @@ import com.dev.food.model.dto.FoodTemp;
 @Repository
 public class FoodDaoImpl implements FoodDao {
 	
+	@Override
+	public List<Food> foodHeartList(SqlSessionTemplate session, int memberId) {
+		return session.selectList("food.foodHeartList", memberId);
+	}
+
 	@Autowired
 	private SqlSession sqlSession;
 	
