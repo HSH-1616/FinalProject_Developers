@@ -6,11 +6,12 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.dev.food.model.dao.FoodDao;
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
 import com.dev.food.model.dto.FoodHeart;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -33,16 +34,31 @@ public class FoodServiceImpl implements FoodService{
 	private SqlSessionTemplate session;
 
 	@Override
-	@Transactional(rollbackFor = {Exception.class})
-	public void insertFood(FoodTemp f,FoodPhotoTemp fp) throws Exception {
-		dao.insertFood(session, f);
-		dao.insertFoodPhoto(session, fp);
+	//@Transactional(rollbackFor = {Exception.class})
+	public int insertFood(FoodTemp f){
+		return dao.insertFood(session, f);
 	}
 	
 	@Override
-	@Transactional(rollbackFor = {Exception.class})
-	public void updateFood(FoodTemp f) throws Exception {
-		dao.updateFood(session,f);
+	//@Transactional(rollbackFor = {Exception.class})
+	public int insertFoodPhoto(FoodPhotoTemp fp){
+		return dao.insertFoodPhoto(session, fp);
+	}
+	
+	@Override
+	//@Transactional(rollbackFor = {Exception.class})
+	public int updateFood(FoodTemp f){
+		return dao.updateFood(session,f);
+	}
+	
+	@Override
+	public int updateFoodOnNull(FoodTemp food) {
+		return dao.updateFoodOnNull(session,food);
+	}
+	
+	@Override
+	public int updateFoodPhotoOnNull(FoodPhotoTemp fp) {
+		return dao.updateFoodPhotoOnNull(session,fp);
 	}
 	
 	@Override
@@ -53,12 +69,6 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public int deleteFoodOnAdmin(int foodNo) {
 		return dao.deleteFoodOnAdmin(session,foodNo);
-	}
-	
-	@Override
-	@Transactional(rollbackFor = {Exception.class})
-	public void insertFoodPhoto(FoodPhotoTemp fp) throws Exception {
-		dao.insertFoodPhoto(session, fp);
 	}
 
 	@Override
@@ -98,6 +108,11 @@ public class FoodServiceImpl implements FoodService{
 	}
 
 	@Override
+	public List<Food> selectFoodTempByFoodNo(int foodNo) {
+		return dao.selectFoodTempByFoodNo(session,foodNo);
+	}
+	
+	@Override
 	public int selectFoodCount() {
 		// TODO Auto-generated method stub
 		return dao.selectFoodCount(session);
@@ -108,7 +123,12 @@ public class FoodServiceImpl implements FoodService{
 		// TODO Auto-generated method stub
 		return dao.selectFoodByNo(session, no);
 	}
-
+	
+	@Override
+	public FoodPhoto selectFoodPhotoByNo(String fpName) {
+		return dao.selectFoodPhotoByNo(session, fpName);
+	}
+	
 	/*
 	 * @Override public List<Food> getSortedFoods(String sortFilter,int cPage,int
 	 * numPerpage){
@@ -247,8 +267,24 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectFoodReviewPhotoByFoodNo(session,frNo);
 	}
 	
+	@Override
+	public int insertFoodBlackList(FoodBlackList fb) {
+		return dao.insertFoodBlackList(session,fb);
+	}
+	
+	@Override
+	public int selectFoodBlackListCount() {
+		return dao.selectFoodBlackListCount(session);
+	}
+	
 	 @Override
 	public int addFood(Food food) {
 	     return dao.insertFood(session, food);
-	    }
+	}
+	 
+	@Override
+	public List<Food> selectFoodReviewByFoodNo(int memberId) {
+		return dao.selectFoodReviewByFoodNo(session, memberId);
+	}
+
 }

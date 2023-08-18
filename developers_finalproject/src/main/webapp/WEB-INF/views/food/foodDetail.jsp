@@ -52,7 +52,6 @@
             <div class="d-flex flex-row">
                <h3 class="display-6">${f.foodName}</h3>
                &nbsp;
-               <p class="align-self-end food_type">이탈리안</p>
             </div>
             <h5 class="text-secondary">${f.foodAddress}</h5>
          </span>
@@ -87,6 +86,7 @@
       <div class="food_photo">
          <p class="fs-4">상세정보</p>
       </div>
+      ${f}
 
       <div class="row justify-content-center" style="height: 450px;">
          <!-- 음식 슬라이드 -->
