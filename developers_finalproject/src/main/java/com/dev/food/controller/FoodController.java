@@ -651,7 +651,6 @@ public class FoodController {
         return "redirect:/food/add";
     }
 	
-	
 	@GetMapping("/mypage/foodheart")
 	@ResponseBody 
 	public List<Food> foodHeartList(@RequestParam int memberId){
