@@ -124,7 +124,7 @@
 				<h2>나의 찜 목록</h2>
 			</div>
 			<div class="input">
-				<button class="value" id="foodheart">
+				<button class="value" id="tourisheart">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
 						viewBox="0 0 512 512">
 				         <path
@@ -132,15 +132,15 @@
 				         <path
 							d="M463.08 96h-74.59l8.92-35.66L442 45l-10-29-62 20-14.49 60H208v32h18.75l1.86 16H236c39 0 73.66 10.9 100.12 31.52A121.9 121.9 0 01371 218.07a124.16 124.16 0 0110.73 32.65 72 72 0 0127.89 90.9A96 96 0 01416 376c0 22.34-7.6 43.63-21.4 59.95a80 80 0 01-31.83 22.95 109.21 109.21 0 01-18.53 33c-1.18 1.42-2.39 2.81-3.63 4.15H416c16 0 23-8 25-23l36.4-345H496V96z" />
          			</svg>
-					관심 맛집
+					관심 관광지
 				</button>
-				<button class="value" id="tourisheart">
+				<button class="value" id="foodheart">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
 						viewBox="0 0 512 512">
 			          <path
 							d="M407.72 208c-2.72 0-14.44.08-18.67.31l-57.77 1.52L198.06 48h-62.81l74.59 164.61-97.31 1.44L68.25 160H16.14l20.61 94.18c.15.54.33 1.07.53 1.59a.26.26 0 010 .15 15.42 15.42 0 00-.53 1.58L15.86 352h51.78l45.45-55 96.77 2.17L135.24 464h63l133-161.75 57.77 1.54c4.29.23 16 .31 18.66.31 24.35 0 44.27-3.34 59.21-9.94C492.22 283 496 265.46 496 256c0-30.06-33-48-88.28-48zm-71.29 87.9z" />
 			         </svg>
-					관심 관광지
+					관심 맛집
 				</button>
 				<button class="value" id="hotelheart">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
@@ -154,77 +154,8 @@
 			<div class="favoritselect">
 				<div class="favoriteselectarea">
 					<div class="favorite">
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
 						<!--  -->
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
+					
 					</div>
 				</div>
 			</div>

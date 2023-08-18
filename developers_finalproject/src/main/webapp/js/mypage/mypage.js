@@ -1,8 +1,4 @@
-$('.favorite').slick({
-  lazyLoad: 'ondemand',
-  slidesToShow: 3,
-  slidesToScroll: 1
-});
+
 function getContextPath() {
 	var hostIndex = location.href.indexOf(location.host) + location.host.length;
 	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
@@ -57,6 +53,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 /*여행일정 가져오는 ajax*/
 $(document).ready(()=> {
 	tourisroute();
+	tourisheart();
 });
 
 const tourisroute = (cPage,numPerpage) => {
@@ -169,6 +166,42 @@ const foodheart = () => {
 }		
 
 
+const tourisheart = () =>{
+  const memberId = $('.nickname').text();
+  $.ajax({
+	  url: getContextPath()+"/tourisDetail/mypagetourisheart",
+		type:"get",
+		data:{memberId:memberId},
+		success:(data)=>{	
+			data.forEach(e =>{
+				/*console.log(e.heartlist);*/
+				e.heartlist.forEach(h=>{
+			const tourisheartlist = `<div class="cardarea">
+							<div class="cardimgarea">
+								<div class="cardimgstyle">
+									<span class="cardspanimg"> <img alt=""
+										src="${h.tourismainImge}">
+									</span>
+								</div>
+							</div>
+							<div class="cardtextarea">
+								<div class="noneid">${h.tourisId}</div>
+								<h2 class="cardtexteng">${h.tourisName}</h2>
+								<h2 class="cardtextkr">${h.tourisAddress}</h2>
+							</div>
+						</div>`
+						$(".favorite").append(tourisheartlist);
+					});	
+			});
+			
+			$('.favorite').slick({
+				lazyLoad: 'ondemand',
+				slidesToShow: 3,
+				slidesToScroll: 1
+			});
+		}
+  })
+}
 $("#foodheart").on("click", function(){
 	$(".cardarea").show();
 	$(".touriscard").hide();
