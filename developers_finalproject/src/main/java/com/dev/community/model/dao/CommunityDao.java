@@ -36,4 +36,5 @@ public interface CommunityDao {
 	List<String> selectCommunityFileList(SqlSession session, int communityNo);
 	int deleteCommunity(SqlSession session, int communityNo);
 	List<Community> mypageCommunity(SqlSession session, int memberId,Map<String, Object> params);
+	List<Community> communityMain(SqlSession session);
 }

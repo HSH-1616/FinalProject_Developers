@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${path }/css/main/main.css" />
- <script src="${path }js/main/main.js"></script>
+ <script src="${path }/js/main/main.js"></script>
 <section>
       <div id="blurSection"></div>
       <div id="banner">
@@ -78,7 +78,9 @@
           </div>
         </div>
         <div id="communityImage">
-          <div class="card">
+        
+        
+        <%--   <div class="card">
             <div class="card-image">
               <a><img src="${path }/images/main/travel.jpg" /></a>
             </div>
@@ -125,7 +127,9 @@
                 By <span class="name">Abi</span> 4 days ago
               </div>
             </div>
-          </div>
+          </div> --%>
+          
+          
         </div>
       </div>
 
@@ -152,7 +156,7 @@
       </div>
       <div id="hotelBanner">
         <div class="blurImage"></div>
-        <button
+        <button onclick="location.href='${path}/ac/acList'"
           class="travelBtn"
           data-aos="zoom-in"
           data-aos-easing="ease-out-cubic"

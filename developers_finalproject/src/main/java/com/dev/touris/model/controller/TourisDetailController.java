@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.service.TourisDetailService;
 import com.dev.touris.model.vo.Touris;
+import com.dev.touris.model.vo.TourisHeart;
 import com.dev.touris.model.vo.TourisTemp;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -98,10 +98,10 @@ public class TourisDetailController {
 				System.out.println("=============================");
 				System.out.println("상세내용 : " + temp2.get("overview"));
 				System.out.println("전화번호 : " + temp2.get("tel"));
-				System.out.println("홈페이지주소 : " + temp2.get("hmpg"));
+				System.out.println("홈페이지주소 : " + temp2.get("homepage"));
 				
 				String tourisContent=temp2.get("overview").getAsString();
-				String tourisPage=temp2.get("hmpg")==null?"-":temp2.get("hmpg").getAsString();
+				String tourisPage=temp2.get("homepage")==null?"-":temp2.get("homepage").getAsString();
 				
 				param.put("tourisContent",tourisContent);
 				param.put("tourisPage",tourisPage);
@@ -327,5 +327,14 @@ public class TourisDetailController {
 				
 				System.out.println("성공");
 	}
+	
+	
+	@GetMapping("/mypagetourisheart")
+	@ResponseBody
+	public List<TourisHeart> tourisheart(@RequestParam int memberId){
+		
+		return service.tourisheart(memberId);
+	}
+	
 	
 }

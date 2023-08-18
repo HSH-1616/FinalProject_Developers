@@ -37,9 +37,9 @@ public class AcPayServiceImpl {
 	private KaKaoRefund KaKaoRefund;
 
 	public KaKaoPayReady kakaoPayReady(Map<String, String> param) {
-		String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+		String path=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		// 카카오페이 요청 양식
-		System.out.println(request.getContextPath());
+		System.out.println(path);
 		// 주문번호 생성
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Calendar c = Calendar.getInstance();

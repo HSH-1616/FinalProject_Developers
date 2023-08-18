@@ -39,6 +39,12 @@
 .yoonBtn:hover{
    background-color: #cccccc;
 }
+a{
+	text-decoration: none;
+	color: #464646;
+}
+a:active,a:hover {
+    color: #1341ff;
 </style>
 <script>
 	var tourisId="${touris.tourisId}";
@@ -153,7 +159,9 @@
 			              <tr>
 			                <th class="fs-4">홈페이지</th>
 			                <td>
-		                 		<div class="ft-blue2"><a href="${touris.tourispage}" target="_blank">${touris.tourispage}</a></div>
+			                	<div class="ft-blue2">
+		                 		${touris.tourispage}
+		                 		</div>
 			                </td>
 			              </tr>
 			              <tr>

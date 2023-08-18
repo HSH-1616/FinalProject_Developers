@@ -107,6 +107,25 @@ public class AcPayController {
 		}
 		return kakaoRefund;
 	}
+	
+	@PostMapping("/kakaoRefundAdmin")
+	@ResponseBody
+	public KaKaoRefund kakaoRefundAdmin(String refundPrice, int apId) {
+
+		AcPay ap = service.checkPayRefund(apId);
+		String keyId = ap.getApKeyId();
+		KaKaoRefund kakaoRefund = serviceImpl.kakaoRefund(keyId, refundPrice);
+		if (kakaoRefund != null) {
+			Map<String,Object> param=new HashMap<String,Object>();
+			param.put("apId",apId);
+			param.put("refundPrice",refundPrice);
+			
+			int result = service.updateRefundAdmin(param);
+		}
+		return kakaoRefund;
+	}
+	
+	
 
 	public IamportResponse<Payment> checkIamport(String impUid) throws IamportResponseException, IOException {
 		return api.paymentByImpUid(impUid);
@@ -144,13 +163,41 @@ public class AcPayController {
 
 		AcPay ap = service.checkPayRefund(apId);
 		String keyId = ap.getApKeyId();
-
+		System.out.println(1);
 		CancelData data = new CancelData(keyId, true);
 		data.setChecksum(new BigDecimal(refundPrice));
 		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(data);// 취소
 		if (cancel != null) {
+			System.out.println(2);
 			int result = service.deletePay(apId);
 			if (result > 0) {
+				System.out.println(3);
+				return cancel;
+			}
+		}
+		return cancel;
+	}
+	
+	@ResponseBody
+	@PostMapping("refundIamportAdmin")
+	public IamportResponse<Payment> refundIamportAdmin(String refundPrice, int apId)
+			throws IamportResponseException, IOException {
+
+		AcPay ap = service.checkPayRefund(apId);
+		String keyId = ap.getApKeyId();
+		System.out.println(1);
+		CancelData data = new CancelData(keyId, true);
+		data.setChecksum(new BigDecimal(refundPrice));
+		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(data);// 취소
+		if (cancel != null) {
+			System.out.println(2);
+			Map<String,Object> param=new HashMap<String,Object>();
+			param.put("apId",apId);
+			param.put("refundPrice",refundPrice);
+			
+			int result = service.updateRefundAdmin(param);
+			if (result > 0) {
+				System.out.println(3);
 				return cancel;
 			}
 		}

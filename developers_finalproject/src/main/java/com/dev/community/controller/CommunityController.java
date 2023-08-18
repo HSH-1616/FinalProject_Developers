@@ -186,6 +186,12 @@ public class CommunityController {
 		result.put("pageBar", pageBar);
 		return result;
 	}
+	
+	@GetMapping("/communityMain.do")
+	@ResponseBody
+	public List<Community> communityMain(){
+		return service.communityMain();
+	}
 }
 
 
