@@ -27,6 +27,12 @@ public class FoodServiceImpl implements FoodService{
 	 * this.session = session; }
 	 */
 	
+	@Override
+	public List<Food> foodHeartList(int memberId) {
+		// TODO Auto-generated method stub
+		return dao.foodHeartList(session, memberId);
+	}
+
 	@Autowired
 	private FoodDao dao;
 

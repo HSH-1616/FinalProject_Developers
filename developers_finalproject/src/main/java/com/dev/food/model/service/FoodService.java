@@ -84,6 +84,8 @@ public interface FoodService {
 
 	int addFood(Food food);
 	
+	List<Food> foodHeartList(int memberId);
+	
 	//int updateReviewPhoto(FoodReviewPhoto rp);
 	
 	//List searchByRpNo(int frNo);
