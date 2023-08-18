@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
 import com.dev.food.model.dto.FoodHeart;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -20,6 +22,11 @@ import com.dev.food.model.dto.FoodTemp;
 @Repository
 public class FoodDaoImpl implements FoodDao {
 	
+	@Override
+	public List<Food> foodHeartList(SqlSessionTemplate session, int memberId) {
+		return session.selectList("food.foodHeartList", memberId);
+	}
+
 	@Autowired
 	private SqlSession sqlSession;
 	
@@ -45,6 +52,16 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
+	public int updateFoodOnNull(SqlSession session, FoodTemp food) {
+		return session.update("food.updateFoodOnNull",food);
+	}
+	
+	@Override
+	public int updateFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp) {
+		return session.update("food.updateFoodPhotoOnNull",fp);
+	}
+	
+	@Override
 	public int updateFoodOnAdmin(SqlSession session, Food food) {
 		return session.update("food.updateFoodOnAdmin",food);
 	}
@@ -56,14 +73,12 @@ public class FoodDaoImpl implements FoodDao {
 	
 	@Override
 	public int mergeFood(SqlSession session) {
-		return session.selectOne("food.mergeFood");
-		//merge한 이후엔 temp테이블 지우기
+		return session.update("food.mergeFood");
 	}
 	
 	@Override
 	public int mergeFoodPhoto(SqlSession session) {
-		return session.selectOne("food.mergeFoodPhoto");
-		//merge한 이후엔 temp테이블 지우기
+		return session.update("food.mergeFoodPhoto");
 	}
 	
 	@Override
@@ -105,6 +120,11 @@ public class FoodDaoImpl implements FoodDao {
 	public List<Food> selectFoodByFoodNo(SqlSession session,int foodNo) {
 		return session.selectList("food.selectFoodByFoodNo",foodNo);
 	}
+	
+	@Override
+	public List<Food> selectFoodTempByFoodNo(SqlSession session, int foodNo) {
+		return session.selectList("food.selectFoodTempByFoodNo",foodNo);
+	}
 
 	@Override
 	public int selectFoodCount(SqlSession session) {
@@ -116,6 +136,11 @@ public class FoodDaoImpl implements FoodDao {
 	public Food selectFoodByNo(SqlSession session, int no) {
 		// TODO Auto-generated method stub
 		return session.selectOne("food.selectFoodByNo",no);
+	}
+	
+	@Override
+	public FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName) {
+		return session.selectOne("food.selectFoodPhotoByNo",fpName);
 	}
 
 	@Override
@@ -245,6 +270,26 @@ public class FoodDaoImpl implements FoodDao {
 		return session.insert("food.addFood", food);
 	}
 	
+	@Override
+	public int insertFoodBlackList(SqlSession session, FoodBlackList fb) {
+		return session.insert("food.insertFoodBlackList",fb);
+	}
 	
-	 
+	@Override
+	public int selectFoodBlackListCount(SqlSession session) {
+		return session.selectOne("food.selectFoodBlackListCount");
+	}
+	
+	@Override
+	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId, Map<String, Object> params) {
+		int cPage=(int)params.get("cPage");
+		int numPerpage=(int)params.get("numPerpage");
+		return session.selectList("food.selectFoodReviewByFoodNo",memberId, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+
+	@Override
+	public int selectFoodReviewByFoodNoCount(SqlSession session, int memberId) {
+		return session.selectOne("food.selectFoodReviewByFoodNoCount", memberId);
+	}
+
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.dao.TourisDetailDao;
 import com.dev.touris.model.vo.Touris;
+import com.dev.touris.model.vo.TourisHeart;
 import com.dev.touris.model.vo.TourisTemp;
 
 @Service
@@ -55,6 +56,10 @@ public class TourisDetailServiceImpl implements TourisDetailService {
 	@Override
 	public void deleteTourisTemp() {
 		dao.deleteTourisTemp(session);
+	}
+	@Override
+	public List<TourisHeart> tourisheart(int memberId) {
+		return dao.tourisheart(session, memberId);
 	}
 
 }

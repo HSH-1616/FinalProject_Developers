@@ -13,14 +13,6 @@ public class MyPageController {
 	@RequestMapping("/mypage")
 	public String mypage() {
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		return "mypage/mypage";
 	}
 	

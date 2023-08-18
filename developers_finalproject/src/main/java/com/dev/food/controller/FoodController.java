@@ -1,6 +1,7 @@
 package com.dev.food.controller;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,6 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.common.PageFactory;
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
+import com.dev.food.model.dto.FoodHeart;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -53,13 +57,21 @@ public class FoodController {
 	}
 	
 	@GetMapping("/foodList.do")
+	public String startFoodApi()throws IOException{
+		//api 불러오기
+		callApi();
+		return "redirect:/food/foodList2.do";
+	}
+	
+	@GetMapping("/foodList2.do")
 	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
-			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m) {
+			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m)throws IOException {
 		
+		//DB값 불러오기
 		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
-		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
@@ -103,24 +115,79 @@ public class FoodController {
 		return "food/foodListTitle";
 	}
 	
-	@GetMapping("/foodApi")
-	public String callApi(Model m) throws Exception {
+	
+	//메소드
+	//@GetMapping("/foodApi")
+	public void callApi()throws IOException{
+		
+		//api개수 불러오기 로직
+		StringBuilder result0 = new StringBuilder();
+		String urlStr0 = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
+				+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
+				+ "&" + "MobileOS"+"="+"ETC"
+				+ "&" + "MobileApp"+"="+"foodTest"
+				+ "&" + "numOfRows"+"="+ "12" //"17055"
+				+ "&" + "pageNo"+"="+"1"
+				+ "&" + "contentTypeId"+"="+"39"
+				+ "&" + "_type"+"="+"json"
+				+ "&" + "listYN"+"="+"N"
+				+ "&" + "arrange"+"="+"O";
+		
+		//URL로 서버와 통신하기
+		
+		//1. URL객체만들기
+		URL url0 = new URL(urlStr0);
+		//2. URL에서 URLConnection객체얻기(http://로 접근하면 HttpURLConnection)
+		HttpURLConnection urlConnection0 = (HttpURLConnection) url0.openConnection();
+		//3. URLConnection구성(setRequestMethod:URL요청을 받을 방식)
+		urlConnection0.setRequestMethod("GET");
+		//4. 입력스트림 가져오기 및 데이터 읽기(BufferedReader:데이터를 문자열로 읽기 가능,
+		//		getInputStream():외부에서 데이터를 읽을 수 있게 된다, Charset.forName("UTF-8"):"UTF-8"설정)
+		BufferedReader br0 = new BufferedReader(
+				new InputStreamReader(urlConnection0.getInputStream(), Charset.forName("UTF-8")));
+
+		String returnLine0;
+		//readLine():받은 내용을 한줄씩 읽어들이기
+		while ((returnLine0 = br0.readLine()) != null) {
+			result0.append(returnLine0 + "\n\r");
+		}
+		urlConnection0.disconnect();
+		
+		//여기서 부터 파싱 코드
+
+		//파싱할 객체 생성
+		JsonObject obj0 = JsonParser.parseString(result0.toString()).getAsJsonObject();
+		//System.out.println(obj0);
+		JsonArray arr0 = obj0.get("response").getAsJsonObject().get("body").getAsJsonObject().get("items")
+				.getAsJsonObject().get("item").getAsJsonArray();
+		
+		int apiCount = 0;
+		for (JsonElement jsonElement : arr0) {
+			JsonObject item0 = jsonElement.getAsJsonObject();
+			apiCount = Integer.parseInt(item0.get("totalCnt").toString().replaceAll("\"", ""));
+			//System.out.println("apiCount : "+apiCount);
+		}
 		
 		int result = service.selectFoodCount();
-		System.out.println("음식점 수 : "+result);
-		if(result == 0) {
+		int blackList = service.selectFoodBlackListCount();
+		//System.out.println("음식점 수 : "+result);
+		
+		//api와 DB가 동일한 숫자이면 업데이트 x
+		//if(result+blackList != apiCount) {
+		if(true) {
 			//api -> DB
-			System.out.println("api -> DB");
+			//System.out.println("api -> DB");
 
 			StringBuilder result1 = new StringBuilder();
 			String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
 					+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 					+ "&" + "MobileOS"+"="+"ETC"
 					+ "&" + "MobileApp"+"="+"foodTest"
-					+ "&" + "numOfRows"+"="+ "10000" //"17055"
+					+ "&" + "numOfRows"+"="+ 12 //"17055" apiCount
 					+ "&" + "pageNo"+"="+"1"
 					+ "&" + "contentTypeId"+"="+"39"
-					+ "&" + "_type"+"="+"json";
+					+ "&" + "_type"+"="+"json"
+					+ "&" + "arrange"+"="+"O";
 			
 			//URL로 서버와 통신하기
 			
@@ -151,53 +218,64 @@ public class FoodController {
 			
 			for (JsonElement jsonElement : arr) {
 				JsonObject item = jsonElement.getAsJsonObject();
-				//System.out.println(!item.get("firstimage").toString().replaceAll("\"", "").isEmpty());
 				if(!item.get("firstimage").toString().replaceAll("\"", "").isEmpty()) {
-					//System.out.println("음식Id : "+item.get("contentid"));
-					//System.out.println("대표 이미지 : "+item.get("firstimage").toString().replaceAll("\"", ""));
-					//System.out.println("이름 : "+item.get("title"));
-					//System.out.println("주소 : "+item.get("addr1"));
-					//System.out.println("우편번호 : "+item.get("zipcode"));
-					//System.out.println(item.get("areaCode")); //잘 안나옴
-					//System.out.println(item.get("sigungucode"));
-					//System.out.println("x좌표 : "+item.get("mapx"));
-					//System.out.println("y좌표 : "+item.get("mapy"));
-					//System.out.println("===============================================================");
 					
 					String StringType = item.get("contentid").toString().replaceAll("\"", "");
-					FoodTemp food = FoodTemp.builder()
-							.foodNo(Integer.parseInt(StringType))
-							.foodName(item.get("title").toString().replaceAll("\"", ""))
-							.foodAddress(item.get("addr1").toString().replaceAll("\"", ""))
-							.build();
-					FoodPhotoTemp fp = FoodPhotoTemp.builder()
-							.foodNo(Integer.parseInt(StringType))
-							.fpName(item.get("firstimage").toString().replaceAll("\"", ""))
-							.fpMain(1)
-							.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
-							.build();
-					service.insertFood(food,fp);
-					service.mergeFood();
-					service.mergeFoodPhoto();
+					
+					//null이 없는 값만 객체저장
+					if(item.get("title")!=null&&item.get("addr1")!=null&&item.get("firstimage")!=null) {
+						
+						FoodTemp food = FoodTemp.builder()
+								.foodNo(Integer.parseInt(StringType))
+								.foodName(item.get("title").toString().replaceAll("\"", ""))
+								.foodAddress(item.get("addr1").toString().replaceAll("\"", ""))
+								.build();
+						FoodPhotoTemp fp = FoodPhotoTemp.builder()
+								.foodNo(Integer.parseInt(StringType))
+								.fpName(item.get("firstimage").toString().replaceAll("\"", ""))
+								.fpMain(1)
+								.fpId(item.get("firstimage").toString().replaceAll("\"", ""))
+								.build();
+						
+//						System.out.println("foodNo : "+food);
+//						System.out.println("foodPhoto : "+fp);
+//						System.out.println();
+						
+						service.insertFood(food);
+						service.mergeFood();
+						service.insertFoodPhoto(fp);
+						service.mergeFoodPhoto();
+					}else {
+						//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
+						System.out.println("불충분 조건 맛집리스트");
+						System.out.println("foodNo : "+Integer.parseInt(StringType)+", foodName : "+
+								item.get("title").toString().replaceAll("\"", "")+", foodAddress : "+
+								item.get("addr1").toString().replaceAll("\"", ""));
+						FoodBlackList fb = FoodBlackList.builder().foodNo(Integer.parseInt(StringType)).build();
+						service.insertFoodBlackList(fb);
+					}
+					
 				}
 			}
 		}
-		//DB 불러오는 과정
-		int count = 50;
-		List<Food> foods = service.selectFoodAllTest(count); //FOOD + FOODPHOTO
-		System.out.println("flag : "+foods);
-		m.addAttribute("foods", foods);
-		return "food/foodList2";
+//		//DB 불러오는 과정
+//		int count = 50;
+//		List<Food> foods = service.selectFoodAllTest(count); //FOOD + FOODPHOTO
+//		System.out.println("flag : "+foods);
+//		m.addAttribute("foods", foods);
+//		return "food/foodList2";
 	}
 	
 	@RequestMapping("/foodDetail.do")
-	public String selectFoodByNo(Model m, int no) {
+	public String selectFoodByNo(Model m, int no) throws IOException {
 //		m.addAttribute("food",service.selectFoodById(no));
+		foodInfoApi(no,m);
+		System.out.println("flag");
 		return "food/foodDetail";
 	}
 
-	@GetMapping("/foodInfoApi")
-	public String foodInfoApi(int foodNo, Model m) throws IOException,Exception {
+	//@GetMapping("/foodInfoApi")
+	public void foodInfoApi(int foodNo, Model m) throws IOException{
 		
 		String result = service.searchByFoodNo(foodNo);
 		System.out.println("상세정보 유무 : "+result);
@@ -244,48 +322,75 @@ public class FoodController {
 			
 			JsonElement jsonElement2 = arr2.get(0);
 			JsonObject item2 = jsonElement2.getAsJsonObject();
+			String opentimefood = item2.get("opentimefood").toString().replaceAll("\"", "");
+			String restdatefood = item2.get("restdatefood").toString().replaceAll("\"", "");
+			String treatmenu = item2.get("treatmenu").toString().replaceAll("\"", "");
+			String infocenterfood = item2.get("infocenterfood").toString().replaceAll("\"", "");
+			
 			System.out.println("===========================가게정보===========================");
 			System.out.println("음식점Id : "+foodNo);
-			System.out.println("오픈시간 : "+item2.get("opentimefood"));	
-			System.out.println("휴무일 : "+item2.get("restdatefood"));
-			System.out.println("메뉴 : "+item2.get("treatmenu"));
-			System.out.println("연락처 : "+item2.get("infocenterfood"));
+			System.out.println("오픈시간 : "+opentimefood);	
+			System.out.println("휴무일 : "+restdatefood);
+			System.out.println("메뉴 : "+treatmenu);
+			System.out.println("연락처 : "+infocenterfood);
 			System.out.println("===============================================================");
 			
-			String StringType = item2.get("contentid").toString().replaceAll("\"", "");
-			FoodTemp food = FoodTemp.builder()
-					.foodNo(Integer.parseInt(StringType))
-					.foodOpenTime("오픈시간 : "+item2.get("opentimefood").toString().replaceAll("\"", "")+"\n\r"+"휴무일 : "+item2.get("restdatefood").toString().replaceAll("\"", ""))
-					.foodMenu(item2.get("treatmenu").toString().replaceAll("\"", ""))
-					.foodPhone(item2.get("infocenterfood").toString().replaceAll("\"", ""))
-					.build();
-			service.updateFood(food); //TEMP에 UPDATE
-			System.out.println("updateflag : "+service.selectFoodByFoodNo(foodNo));
-			service.mergeFood(); //FOOD에 없으면 MERGE
-			System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
-			foodImgApi(foodNo);
+			//String StringType = item2.get("contentid").toString().replaceAll("\"", "");
+			
+			//null이 없는 값만 객체저장================================================================================================
+			if(!opentimefood.isEmpty()&&!restdatefood.isEmpty()&&!treatmenu.isEmpty()&&!infocenterfood.isEmpty()) {
+				
+				FoodTemp food = FoodTemp.builder()
+						.foodNo(foodNo)
+						.foodOpenTime("오픈시간 : "+opentimefood+"\n\r"+"휴무일 : "+restdatefood)
+						.foodMenu(treatmenu)
+						.foodPhone(infocenterfood)
+						.build();
+				
+				service.updateFood(food); //TEMP에 UPDATE
+				//System.out.println("updateflag : "+service.selectFoodTempByFoodNo(foodNo));
+				
+				//opentime, menu, phone이 없으면 update
+				Food f = service.selectFoodByNo(foodNo);
+				//System.out.println("flag : "+f);
+				if(f == null) {
+					service.updateFoodOnNull(food);
+				}
+				service.mergeFood(); //FOOD에 없으면 INSERT
+				//System.out.println("mergeflag : "+service.selectFoodByFoodNo(foodNo));
+				//foodImgApi(foodNo);
+				
+			}else {
+				//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
+				System.out.println("foodNo : "+foodNo+", "+opentimefood+", "+
+				restdatefood+", "+treatmenu+", "+infocenterfood);
+				FoodBlackList fb = FoodBlackList.builder().foodNo(foodNo).build();
+				service.insertFoodBlackList(fb);
+			}
+
 			//사용할 일 없으니 삭제
-			service.deleteFoodTemp(Integer.parseInt(StringType));
-			service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
+			//service.deleteFoodTemp(Integer.parseInt(StringType));
+			//service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
 		}
-//		//음식점의 리뷰 불러오기
-//		System.out.println(foodNo);
-//		List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
-//		System.out.println("reviews : "+reviews);
-//		m.addAttribute("reviews", reviews);
+		foodImgApi(foodNo);
+		//음식점의 리뷰 불러오기
+		//System.out.println(foodNo);
+		//List<FoodReview> reviews = service.selectFoodReviewByFoodNo(foodNo);
+		//System.out.println("reviews : "+reviews);
+		//m.addAttribute("reviews", reviews);
 		
 		//DB에서 불러오는 과정(리뷰)
 		List<Food> foods = service.selectFoodByFoodNo(foodNo); //FOOD + FOODPHOTO + FOODREVIEW
 		System.out.println("flagS : "+foods);
 		m.addAttribute("foods", foods);
-		return "/food/foodDetail";
+//		return "/food/foodDetail";
 	}
 	
 //	@GetMapping("/foodImgApi")
-	public void foodImgApi(int foodNo) throws IOException,Exception {
+	public void foodImgApi(int foodNo) throws IOException{
 
 		StringBuilder result3 = new StringBuilder();
-		System.out.println(foodNo);
+		//System.out.println(foodNo);
 		String urlStr3 = "https://apis.data.go.kr/B551011/KorService1/detailImage1?"
 				+ "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 				+ "&" + "MobileOS"+"="+"ETC"
@@ -312,7 +417,6 @@ public class FoodController {
 		urlConnection3.disconnect();
 		
 		//여기서 부터 파싱 코드
-		System.out.println("====================flag========================");
 //		JsonObject obj3 = JsonParser.parseString(result3.toString()).getAsJsonObject();
 		
 //		JsonObject obj3 = JsonParser.parseString(result3.toString()).getAsJsonObject();
@@ -321,7 +425,7 @@ public class FoodController {
 		
 		Gson gson = new Gson();
 		JsonObject objo = gson.fromJson(result3.toString(), JsonObject.class);
-		System.out.println(objo);
+		//System.out.println(objo);
 		JsonObject obj3 = objo.getAsJsonObject("response").getAsJsonObject("body")
 				.getAsJsonObject("items");
 		JsonArray arr3 = obj3.getAsJsonArray("item");
@@ -333,15 +437,38 @@ public class FoodController {
 			System.out.println("음식점Id : "+foodNo);	
 			System.out.println("원본이미지 : "+item3.get("originimgurl"));
 			System.out.println("===============================================================");
-			FoodPhotoTemp fp = FoodPhotoTemp.builder()
-				.foodNo(foodNo)
-				.fpName(item3.get("originimgurl").toString().replaceAll("\"", ""))
-				.fpMain(0)
-				.fpId(item3.get("originimgurl").toString().replaceAll("\"", ""))
-				.build();
-			service.insertFoodPhoto(fp);
-			service.mergeFoodPhoto();
-			System.out.println("이미지 list 결과 : "+fp);
+			
+			//null이 없는 값만 객체저장================================================================================================
+			if(!item3.get("originimgurl").toString().replaceAll("\"", "").isEmpty()) {
+				
+				FoodPhotoTemp fp = FoodPhotoTemp.builder()
+						.foodNo(foodNo)
+						.fpName(item3.get("originimgurl").toString().replaceAll("\"", ""))
+						.fpMain(0)
+						.fpId(item3.get("originimgurl").toString().replaceAll("\"", ""))
+						.build();
+				
+				service.insertFoodPhoto(fp); //temp 에 insert
+				//System.out.println("updateflag : "+service.selectFoodTempByFoodNo(foodNo));
+				
+//				//FOODPhoto에 INSERT
+				service.mergeFoodPhoto();
+				
+				//fpName, fpMain, fpId가 없으면 update
+				FoodPhoto f = service.selectFoodPhotoByNo(item3.get("originimgurl").toString().replaceAll("\"", "")); //photo에 조회
+				System.out.println("null-flag : "+f);
+				if(f == null) {
+					service.updateFoodPhotoOnNull(fp); //selectOne인데 2개이상 나온다 함
+				}
+				System.out.println("mergeflag : "+service.selectFoodPhotoByNo(item3.get("originimgurl").toString().replaceAll("\"", "")));
+				
+			}else {
+				//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
+				System.out.println("foodNo : "+foodNo+", "+item3.get("originimgurl").toString().replaceAll("\"", ""));
+				FoodBlackList fb = FoodBlackList.builder().foodNo(foodNo).build();
+				service.insertFoodBlackList(fb);
+			}
+
 		}
 	}
 	
@@ -518,12 +645,38 @@ public class FoodController {
 	 * @GetMapping("/add") public String showAddForm(Model model) {
 	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
-	
+//	찬은
 	@PostMapping("/add")
     public String addFood(Food food) {
         service.addFood(food);
         
         return "redirect:/food/add";
     }
+	@GetMapping("/mypagefoodreview")
+	@ResponseBody
+	public Map<String, Object> foodheartlist(@RequestParam int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){
+		Map<String, Object> params = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
+		params.put("cPage",cPage);
+		params.put("numPerpage", numPerpage);
+		int totalData = service.selectFoodReviewByFoodNoCount(memberId);
+		String pageBar = com.dev.nc.common.PageFactory.getPage(cPage, numPerpage, totalData, "mypagereivewlist");
+		List<Food> reivewlist = service.selectFoodReviewByFoodNo(memberId, params);
+		result.put("mypagereivewlist", reivewlist);
+		result.put("pageBar", pageBar);
+		return result;
+	}
+//	여기까지
 	
+	@GetMapping("/mypage/foodheart")
+	@ResponseBody 
+	public List<Food> foodHeartList(@RequestParam int memberId){
+		
+		List<Food> foods=service.foodHeartList(memberId);
+		
+	    return foods;
+	}
+	 
+	
+
 }
