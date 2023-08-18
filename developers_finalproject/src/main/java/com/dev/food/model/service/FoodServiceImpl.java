@@ -283,8 +283,13 @@ public class FoodServiceImpl implements FoodService{
 	}
 	 
 	@Override
-	public List<Food> selectFoodReviewByFoodNo(int memberId) {
-		return dao.selectFoodReviewByFoodNo(session, memberId);
+	public List<Food> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params) {
+		return dao.selectFoodReviewByFoodNo(session, memberId, params);
+	}
+
+	@Override
+	public int selectFoodReviewByFoodNoCount(int memberId) {
+		return dao.selectFoodReviewByFoodNoCount(session, memberId);
 	}
 
 }

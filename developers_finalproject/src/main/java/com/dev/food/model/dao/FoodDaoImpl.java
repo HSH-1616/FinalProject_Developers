@@ -276,8 +276,15 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId) {
-		return session.selectList("food.selectFoodReviewByFoodNo",memberId);
+	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId, Map<String, Object> params) {
+		int cPage=(int)params.get("cPage");
+		int numPerpage=(int)params.get("numPerpage");
+		return session.selectList("food.selectFoodReviewByFoodNo",memberId, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+
+	@Override
+	public int selectFoodReviewByFoodNoCount(SqlSession session, int memberId) {
+		return session.selectOne("food.selectFoodReviewByFoodNoCount", memberId);
 	}
 
 }
