@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.dev.food.model.dto.Food;
+import com.dev.food.model.dto.FoodBlackList;
 import com.dev.food.model.dto.FoodHeart;
+import com.dev.food.model.dto.FoodPhoto;
 import com.dev.food.model.dto.FoodPhotoTemp;
 import com.dev.food.model.dto.FoodReview;
 import com.dev.food.model.dto.FoodReviewPhoto;
@@ -25,6 +27,10 @@ public interface FoodDao {
 	
 	int updateFood(SqlSession session, FoodTemp f);
 	
+	int updateFoodOnNull(SqlSession session, FoodTemp food);
+	
+	int updateFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp);
+	
 	int updateFoodOnAdmin(SqlSession session, Food food);
 	
 	int deleteFoodOnAdmin(SqlSession session, int foodNo);
@@ -40,15 +46,18 @@ public interface FoodDao {
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
 	
 	List<Food> foodListTitle(SqlSession session, Map<String,Object> param);
-	
 
 	List<Food> selectFoodAllTest(SqlSession session,int count);
 	
 	List<Food> selectFoodByFoodNo(SqlSession session,int foodNo);
 	
+	List<Food> selectFoodTempByFoodNo(SqlSession session,int foodNo);
+	
 	int selectFoodCount(SqlSession session);
 	
 	Food selectFoodByNo(SqlSession session, int no);
+	
+	FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName);
 	
 	List<Food> searchFood(SqlSession session, Map<String, Object> params);
 
@@ -105,4 +114,10 @@ public interface FoodDao {
 	 * 
 	 * int getHeartCount(SqlSession session, Map params);
 	 */
+	
+	int insertFoodBlackList(SqlSession session, FoodBlackList fb);
+	
+	int selectFoodBlackListCount(SqlSession session);
+	
+	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId);
 }

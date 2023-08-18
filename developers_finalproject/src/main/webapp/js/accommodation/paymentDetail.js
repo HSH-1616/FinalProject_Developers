@@ -78,7 +78,7 @@ function rejectRefund() {
 		// 이후 처리되는 내용.
 		if (comment) {
 			$.ajax({
-				url: getContextPath()+`"/ac/rejectRefund",
+				url: getContextPath()+"/ac/rejectRefund",
 				type: "POST",
 				data: {
 					apId: apId,
@@ -102,7 +102,7 @@ function rejectRefund() {
 					location.replace(getContextPath() + "/paymentList");
 				}
 			});
-
 		}
+		
 	})()
 }

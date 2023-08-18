@@ -30,6 +30,12 @@ $(document).ready(function () {
   });
 });
 
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
+};
+
+
 //-------------------------------------------------------------------------- 첫번재 지도 api
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
@@ -1302,7 +1308,7 @@ function searchTouris() {
   /*console.log(inputval);
   console.log(tourisAreaid);*/
   $.ajax({
-    url: path+"/touris/searchtouris",
+    url: getContextPath()+"/touris/searchtouris",
     method: "get",
     data: {
       'text': inputval,
@@ -1328,7 +1334,7 @@ function searchTouris2() {
   /*console.log(inputval);
   console.log(tourisAreaid);*/
   $.ajax({
-    url: path+"/touris/searchtouris2",
+    url: getContextPath()+"/touris/searchtouris2",
     method: "get",
     data: {
       'text': inputval,
@@ -1357,7 +1363,7 @@ var day = ('0' + today.getDate()).slice(-2);
 var registrationDate = year+'년' +' '+month+'월'+' '+day+'일';
 // 경로 저장 ajax
 function saveRoute() {
-	const routeurl = path + "/touris/inserttourisroute";
+	const routeurl = getContextPath() + "/touris/inserttourisroute";
 	const dayselectbox = $(".dayselecttag").text();
 	const calandertext = $("#calander").val();
 	const dayselecttag = $(".dayselecttag").text();

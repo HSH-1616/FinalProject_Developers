@@ -26,7 +26,7 @@ const communityList = (cPage, numPerpage) => {
 				str += "<div class='card-body'>";
 				str += "<h5 class='card-title'>" + c.communityTitle + "</h5>";
 				str += "<div class='text-end '>";
-				str += "<div><img src='<c:out value='"+getContextPath()+"/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
+				str += "<div><img src='"+getContextPath()+"/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
 				str += "</div>";
 				/*str += "<p class='card-text'>" + c.communityContent + "</p>";*/
 				str += "</div>";

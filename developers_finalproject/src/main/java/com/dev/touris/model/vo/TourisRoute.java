@@ -1,5 +1,7 @@
 package com.dev.touris.model.vo;
 
+
+
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -12,8 +14,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TourisRoute {
 	private int routeId;
-	TourisMember tuesId;
-	Touris tourisesId;
+	private TourisMember tuesId;
+	private Touris tourisesId;
 	private int tourisrouteLevel;
 	private String tourisrouteDate;
+	
 }
