@@ -124,7 +124,7 @@
 				<h2>나의 찜 목록</h2>
 			</div>
 			<div class="input">
-				<button class="value">
+				<button class="value" id="foodheart">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
 						viewBox="0 0 512 512">
 				         <path
@@ -134,7 +134,7 @@
          			</svg>
 					관심 맛집
 				</button>
-				<button class="value">
+				<button class="value" id="tourisheart">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
 						viewBox="0 0 512 512">
 			          <path
@@ -142,7 +142,7 @@
 			         </svg>
 					관심 관광지
 				</button>
-				<button class="value">
+				<button class="value" id="hotelheart">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
 						viewBox="0 0 512 512">
 						<path
@@ -223,34 +223,6 @@
 								<div class="noneid"></div>
 								<h2 class="cardtexteng">SEOUL</h2>
 								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr">서울</h2>
-							</div>
-						</div>
-						<div class="cardarea">
-							<div class="cardimgarea">
-								<div class="cardimgstyle">
-									<span class="cardspanimg"> <img alt=""
-										src="https://cdn.myro.co.kr/prod/image/city/Seoul.jpg">
-									</span>
-								</div>
-							</div>
-							<div class="cardtextarea">
-								<div class="noneid"></div>
-								<h2 class="cardtexteng">SEOUL</h2>
-								<h2 class="cardtextkr" id="preId1">서울</h2>
 							</div>
 						</div>
 					</div>

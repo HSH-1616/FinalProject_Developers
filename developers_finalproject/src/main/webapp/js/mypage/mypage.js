@@ -153,8 +153,40 @@ $(document).on('click', '.routedeltebtn', function(){
 		}
 	})
 });
-
+/*찜하기 가져오기*/
+const foodheart = () => {
+    const memberId = $('.nickname').text();
+    console.log(loginmemberid);
+	$.ajax({
+		url: getContextPath()+"/food/mypagefoodheart",
+		type:"get",
+		data:{memberId:memberId},
+		success:(data)=>{	
+			console.log(data);
 			
+		}
+	})
+}		
+
+
+$("#foodheart").on("click", function(){
+	$(".cardarea").show();
+	$(".touriscard").hide();
+	$(".hotelcard").hid();
+});
+$("#tourisheart").on("click", function(){
+	$(".cardarea").hide();
+	$(".touriscard").show();
+	$(".hotelcard").hid();
+});
+$("#hotelheart").on("click", function(){
+	$(".cardarea").hide();
+	$(".touriscard").hide();
+	$(".hotelcard").show();
+});
+
+	
+
 
 
 
