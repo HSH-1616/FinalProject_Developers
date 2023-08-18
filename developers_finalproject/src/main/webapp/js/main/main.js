@@ -50,7 +50,7 @@ const communityCardView=(no)=>{
 			for(let c of data){
 			let str="<div class='card' onclick='communityCardView("+c.communityNo+")'>";
 			str+="<div class='card-image'>";
-            str+="<a><img src='"+path+c.thumbnail+"' /></a>";
+            str+="<a><img src='"+path+"/upload/community/"+c.thumbnail+"' /></a>";
             str+="</div>";
             str+="<div class='heading'>"+c.communityTitle;
             str+="<div class='author'>";
