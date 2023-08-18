@@ -118,5 +118,17 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne("admin.selectFoodCount");
 	}
 	
+	@Override
+	public List<Food> searchFoodNonApprove(SqlSession session, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("admin.searchFoodNonApprove", null, rb);
+	}
+	@Override
+	public int selectFoodCountNonApprove(SqlSession session) {
+		return session.selectOne("admin.selectFoodCountNonApprove");
+	}
+	
 	
 }

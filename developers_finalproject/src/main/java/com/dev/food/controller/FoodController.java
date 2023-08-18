@@ -48,7 +48,7 @@ import com.google.gson.JsonParser;
 public class FoodController {
 
 	@Autowired
-	private FoodService service;
+	private static FoodService service;
 	
 	public FoodController(FoodService service) {
 		this.service = service;
@@ -69,7 +69,7 @@ public class FoodController {
 		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
-		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
@@ -124,7 +124,7 @@ public class FoodController {
 				+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 				+ "&" + "MobileOS"+"="+"ETC"
 				+ "&" + "MobileApp"+"="+"foodTest"
-				+ "&" + "numOfRows"+"="+ "12" //"17055"
+				+ "&" + "numOfRows"+"="+ "1" //"현제 api의 개수 불러옴 , 개수 상관 x"
 				+ "&" + "pageNo"+"="+"1"
 				+ "&" + "contentTypeId"+"="+"39"
 				+ "&" + "_type"+"="+"json"
@@ -174,14 +174,14 @@ public class FoodController {
 		//if(result+blackList != apiCount) {
 		if(true) {
 			//api -> DB
-			//System.out.println("api -> DB");
+			System.out.println("api -> DB");
 
 			StringBuilder result1 = new StringBuilder();
 			String urlStr = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
 					+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 					+ "&" + "MobileOS"+"="+"ETC"
 					+ "&" + "MobileApp"+"="+"foodTest"
-					+ "&" + "numOfRows"+"="+ 12 //"17055" apiCount
+					+ "&" + "numOfRows"+"="+ 100 //"17055" apiCount
 					+ "&" + "pageNo"+"="+"1"
 					+ "&" + "contentTypeId"+"="+"39"
 					+ "&" + "_type"+"="+"json"
@@ -227,6 +227,7 @@ public class FoodController {
 								.foodNo(Integer.parseInt(StringType))
 								.foodName(item.get("title").toString().replaceAll("\"", ""))
 								.foodAddress(item.get("addr1").toString().replaceAll("\"", ""))
+								.allow(1)
 								.build();
 						FoodPhotoTemp fp = FoodPhotoTemp.builder()
 								.foodNo(Integer.parseInt(StringType))
@@ -273,7 +274,7 @@ public class FoodController {
 	}
 
 	//@GetMapping("/foodInfoApi")
-	public void foodInfoApi(int foodNo, Model m) throws IOException{
+	public static void foodInfoApi(int foodNo, Model m) throws IOException{
 		
 		String result = service.searchByFoodNo(foodNo);
 		System.out.println("상세정보 유무 : "+result);
@@ -366,9 +367,9 @@ public class FoodController {
 				service.insertFoodBlackList(fb);
 			}
 
-			//사용할 일 없으니 삭제
-			//service.deleteFoodTemp(Integer.parseInt(StringType));
-			//service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
+			//사용할 일 없으니 삭제(검증 필요)
+			service.deleteFoodTemp(foodNo);
+			service.deleteFoodPhotoTemp(foodNo);
 		}
 		foodImgApi(foodNo);
 		//음식점의 리뷰 불러오기
@@ -385,7 +386,7 @@ public class FoodController {
 	}
 	
 //	@GetMapping("/foodImgApi")
-	public void foodImgApi(int foodNo) throws IOException{
+	public static void foodImgApi(int foodNo) throws IOException{
 
 		StringBuilder result3 = new StringBuilder();
 		//System.out.println(foodNo);
@@ -607,16 +608,14 @@ public class FoodController {
 		List<FoodReviewPhoto> rp = service.selectFoodReviewPhotoByFoodNo(frNo);
 		System.out.println("rp : "+rp);
 		
-		if(!rp.isEmpty()) {
-			//upload삭제
-			for(FoodReviewPhoto p : rp) {
-				System.out.println("p : "+p.getRpName());
-				File delFile=new File(path+p.getRpRename());
-				delFile.delete();
-			}
-			//DB삭제
-			service.deleteFoodReview(frNo);			
+		//upload삭제
+		for(FoodReviewPhoto p : rp) {
+			System.out.println("p : "+p.getRpName());
+			File delFile=new File(path+p.getRpRename());
+			delFile.delete();
 		}
+		//DB삭제
+		service.deleteFoodReview(frNo);			
 	}
 
 	@GetMapping("/insertHeart")

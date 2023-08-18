@@ -1,5 +1,6 @@
 package com.dev.admin.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.dev.ac.service.AcService;
 import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
+import com.dev.food.controller.FoodController;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.service.FoodService;
 import com.dev.member.model.dto.Black;
@@ -181,9 +183,14 @@ public class AdminController {
 	}
 	
 //	===========================지환=========================
+	//미승인 리스트 페이지
 	@GetMapping("/selectFoodList")
 	public String selectFoodList(@RequestParam(value="cPage",defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, Model m){
+			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage,
+			@RequestParam(value="allow",defaultValue="0")String allow, Model m){
+		
+		System.out.println("allow : "+allow);
+		
 		//페이지처리용 Map
 		Map<String,Object> param=new HashMap<>();
 		param.put("cPage", cPage);
@@ -191,16 +198,34 @@ public class AdminController {
 		
 		//검색처리 Map
 		Map<String,Object> type=new HashMap<>();
-//		type.put("typeId", "tourisAreaId");
-//		type.put("value", data.get("tourisAreaId"));
+		type.put("typeId", "allow");
+		type.put("value", allow);
 		
+		//미승인 리스트 출력
+		List<Food> nonApprovefoodList=service.searchFoodNonApprove(param);
+		int totalDataNonApprove=service.selectFoodCountNonApprove();
+		m.addAttribute("npageBar",PageFactory.getPage(cPage, numPerpage, totalDataNonApprove,"selectFoodList",type));
+		System.out.println("미승인 페이지 펙토리");
+		m.addAttribute("nd",totalDataNonApprove);
+		m.addAttribute("nf",nonApprovefoodList);
+		
+		//승인 리스트 출력
 		List<Food> foodList=service.searchFood(param);
 		int totalData=service.selectFoodCount();
 		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectFoodList",type));
+		System.out.println("승인 페이지 펙토리");
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foodList);
-		return "admin/foodList";
+		
+		m.addAttribute("allow", allow);
+		if(allow == "0") {
+			return "admin/foodList0";			
+		}else {
+			return "admin/foodList1";
+		}
 	}
+	
+	
 	@GetMapping("/paymentList")
 	public String paymentList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
@@ -244,7 +269,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("/selectFoodByFoodNo")
-	public String selectFoodByFoodNo(int foodNo, Model m) {
+	public String selectFoodByFoodNo(int foodNo, Model m)throws IOException{
+		//상세정보 api 불러오기
+		FoodController.foodInfoApi(foodNo,m);
 		//foodNo로 food,foodPhoto dto불러오고 출력(출력페이지에서 승인,미승인 여부 네비게이션으로) //리뷰는 어쩌지?
 		List<Food> foods = foodService.selectFoodByFoodNo(foodNo);
 		m.addAttribute("foods", foods);

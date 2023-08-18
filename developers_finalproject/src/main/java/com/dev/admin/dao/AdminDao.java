@@ -35,4 +35,7 @@ public interface AdminDao {
 //	======지환======
 	List<Food> searchFood(SqlSession session, Map param);
 	int selectFoodCount(SqlSession session);
+	
+	List<Food> searchFoodNonApprove(SqlSession session, Map param);
+	int selectFoodCountNonApprove(SqlSession session);
 }

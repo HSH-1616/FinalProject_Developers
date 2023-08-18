@@ -82,18 +82,17 @@
 
       <hr class="m-3">
 
-      <!-- 맛집 상세정보 페이지 -->
+      <!-- 맛집 상세정보 페이지  -->
       <div class="food_photo">
          <p class="fs-4">상세정보</p>
       </div>
-      ${f}
 
       <div class="row justify-content-center" style="height: 450px;">
          <!-- 음식 슬라이드 -->
          <div class="foodInfosection d-flex flex-row justify-content-center align-items-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 550px;">
                <div class="carousel-indicators">
-                  <%-- <button type="button"
+                  <button type="button"
                      data-bs-target="#carouselExampleIndicators"
                      data-bs-slide-to="0" class="active" aria-current="true"
                      aria-label="Slide 1">
@@ -104,7 +103,7 @@
                      data-bs-slide-to="${i}" aria-current="true"
                      aria-label="Slide ${i+1}">
                      </button>
-                  </c:forEach> --%>
+                  </c:forEach>
                </div>
                <div class="carousel-inner">               
                   <c:forEach var="fp" items="${f.foodPhoto}">
@@ -195,7 +194,7 @@
                   <div class="row mr-1 p-0 align-items-center">
                      <span class="star w-auto p-0">★★★★★
                         <span class="review_rating">★★★★★</span>
-                           <input type="range" class="starcountnum" name="frGrade" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                           <input type="range" class="starcountnum" name="frGrade" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
                            <div class="star_rating text-center text-dark">
                               <h5>0/5</h5>
                            </div>
@@ -287,9 +286,13 @@
                </div>
                <!-- 리뷰 이미지 -->
                <div class="detailReviewImg">
-                  <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
-                  <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/> <!-- update data -->
-                  </c:forEach>
+                  <c:if test="${fr.foodReviewPhoto[0].rpName == null}">
+                  </c:if>
+                  <c:if test="${fr.foodReviewPhoto[0].rpName != null}">
+                     <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
+                     <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/> <!-- update data -->
+                     </c:forEach>
+                  </c:if>
                </div>
                <div class="detailReviewText detailFoodInfo">
                   <pre style="overflow-y: hidden" class="default_food_review_height"> <!-- update data -->
@@ -405,28 +408,32 @@
             //form.append("memberId","${loginMember.memberId}");
             form.append("frGrade",$(".starcountnum").val()/2);
             form.append("frContent",$("#FR_CONTENT").val());
-   
-            $.ajax({
-               url:"${path}/food/insertFoodReview.do",
-               data:form,
-               type:"post",
-               enctype: "multipart/form-data",
-               processData:false,
-               contentType:false,
-               cache: false,
-               success:data=>{
-                  alert("업로드가 완료되었습니다.");
-                  location.reload();
-                  $('window').scrollTop(0,300);
-               },
-               error:(r,s,e)=>{
-                  console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
-                  alert("업로드 실패");
-               },
-               complete:()=>{
-                  $(".upFile").val('');
-               }
-            });
+            console.log($(".starcountnum").val()/2);
+            if($(".starcountnum").val()/2 == 0){
+               alert("별점, 후기를 작성해주세요");
+            }else{
+               $.ajax({
+                  url:"${path}/food/insertFoodReview.do",
+                  data:form,
+                  type:"post",
+                  enctype: "multipart/form-data",
+                  processData:false,
+                  contentType:false,
+                  cache: false,
+                  success:data=>{
+                     alert("업로드가 완료되었습니다.");
+                     location.reload();
+                     $('window').scrollTop(0,300);
+                  },
+                  error:(r,s,e)=>{
+                     console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
+                     alert("업로드 실패");
+                  },
+                  complete:()=>{
+                     $(".upFile").val('');
+                  }
+               });
+            }
          }
          //ajax 통신(수정)
          if($(".submitModal").hasClass("updateFoodReview") === true){
