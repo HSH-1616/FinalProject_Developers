@@ -62,6 +62,7 @@ public static String getPage(int cPage, int numPerpage, int totalData, String ur
 		}else {
 			String typeId=(String)type.get("typeId");
 			String value=(String)type.get("value");
+			System.out.println("page-allow : "+value);
 			pageBar.append("location.assign('"+url+"?cPage='+no+'&numPerpage="+numPerpage+"&"+typeId+"="+value+"');");
 		}
 		pageBar.append("}");

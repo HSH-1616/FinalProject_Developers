@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${path }/css/accommodation/acError.css" />
 <section>
 	<div>

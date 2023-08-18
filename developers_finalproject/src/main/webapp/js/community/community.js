@@ -1,8 +1,15 @@
 
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
+};
+
+
+
 const communityList = (cPage, numPerpage) => {
 	let result;
 	$.ajax({
-		url: "/community/communityListEnd.do",
+		url: getContextPath()+"/community/communityListEnd.do",
 		type: "post",
 		async: false,
 		data: { cPage: cPage, numPerpage: numPerpage },
@@ -13,13 +20,13 @@ const communityList = (cPage, numPerpage) => {
 				str += "<div class='card community-cardList' onclick='communityView(" + c.communityNo + ")'>";
 				str += "<div class='d-flex'>";
 				str += "<a><img src='" + c.memberId.memberImage + "' style='height: 30px; border-radius:50%; margin:5px;'></a>&nbsp";
-				str += "<div style='margin-top:10px;'>"+c.memberId.memberNickname+"</div>";
+				str += "<div style='margin-top:10px;'>" + c.memberId.memberNickname + "</div>";
 				str += "</div>";
-				str += "<img src='/upload/community/" + c.thumbnail + "' class='card-img-top' >";
+				str += "<img src='"+getContextPath()+"/upload/community/" + c.thumbnail + "' class='card-img-top' >";
 				str += "<div class='card-body'>";
 				str += "<h5 class='card-title'>" + c.communityTitle + "</h5>";
 				str += "<div class='text-end '>";
-				str += "<div><img src='/images/community/heart.svg' style='height: 20px; width:auto'>" + c.likeCount + "</div>";
+				str += "<div><img src='"+getContextPath()+"/images/community/fillheart.svg' style='height: 20px; width:auto; margin-right:3px;'>" + c.likeCount + "</div>";
 				str += "</div>";
 				/*str += "<p class='card-text'>" + c.communityContent + "</p>";*/
 				str += "</div>";
@@ -37,7 +44,7 @@ const communityList = (cPage, numPerpage) => {
 
 
 const communityView = (no, id) => {
-	location.assign("/community/communityView.do?no=" + no + "&id=" + id);
+	location.assign(getContextPath()+"/community/communityView.do?no=" + no + "&id=" + id);
 };
 
 //무한스크롤 페이징
@@ -72,7 +79,7 @@ $(".like-review")
 					'animate-like');
 				$(".like-review").val("true");
 				fn_like();
-				$(".like-content>img").attr("src", "/images/community/fillheart.svg");
+				$(".like-content>img").attr("src", getContextPath()+"/images/community/fillheart.svg");
 				let count = $(".like-content>span").text();
 				$(".like-content>span").text(Number(count) + 1);
 			} else {
@@ -83,7 +90,7 @@ $(".like-review")
 					'animate-like');
 				$(".like-review").val("false");
 				fn_like();
-				$(".like-content>img").attr("src", "/images/community/heart.svg");
+				$(".like-content>img").attr("src", getContextPath()+"/images/community/heart.svg");
 				let count = $(".like-content>span").text();
 				$(".like-content>span").text(Number(count) - 1);
 			}
@@ -92,7 +99,7 @@ $(".like-review")
 $(".like-content").ready(() => {
 	if ($('#like_memberId').length > 0 && $("#like_memberId").val() != "") {
 		$.ajax({
-			url: "/community/communityLikeCheck.do",
+			url: getContextPath()+"/community/communityLikeCheck.do",
 			data: { "memberId": $("#like_memberId").val(), "communityNo": $("#like_comuNo").val() },
 			type: "post",
 			success: (data) => {
@@ -101,7 +108,7 @@ $(".like-content").ready(() => {
 					$(".like-review").children('.fa-heart').addClass(
 						'animate-like');
 					$(".like-review").val("true");
-					$(".like-content>img").attr("src", "/images/community/fillheart.svg");
+					$(".like-content>img").attr("src", getContextPath()+"/images/community/fillheart.svg");
 				}
 			}
 		});
@@ -112,11 +119,11 @@ const fn_like = () => {
 	const no = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
 	$.ajax({
-		url: "/community/communityLike.do",
+		url: getContextPath()+"/community/communityLike.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: no },
-		success: (data) => {
-			console.log(data);
+		success: () => {
+			
 		}
 	});
 
@@ -134,13 +141,13 @@ const insertReply = (ref, con) => {
 	}
 	const communityNo = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
-	
+
 	$.ajax({
-		url: "/community/insertReply.do",
+		url: getContextPath()+"/community/insertReply.do",
 		type: "post",
 		data: { memberId: memberId, communityNo: communityNo, replyContent: content, replyRef: ref },
 		success: () => {
-			$("#comment_input")==null;
+			$("#comment_input") == null;
 			replyList();
 		}
 	});
@@ -155,9 +162,9 @@ $(document).ready(() => {
 const replyList = () => {
 	const communityNo = $("#like_comuNo").val();
 	const memberId = $("#like_memberId").val();
-	const loginAdmin=$("#adminCheck").val();
+	const loginAdmin = $("#adminCheck").val();
 	$.ajax({
-		url: "/community/replyList.do",
+		url: getContextPath()+"/community/replyList.do",
 		type: "get",
 		data: { communityNo: communityNo },
 		success: (data) => {
@@ -180,8 +187,8 @@ const replyList = () => {
 					if (memberId == i.memberId.memberId) {
 						str += "<button class='reply-update s-btn m-2' data-name='" + i.replyNo + "' >수정</button>";
 					}
-					if (memberId == i.memberId.memberId || loginAdmin!="") {
-						str += "<button class='reply-delete s-btn mx-2' onclick='deleteReply(" + i.replyLevel + "," + i.replyNo + ")'>삭제</button>";
+					if (memberId == i.memberId.memberId || loginAdmin != "") {
+						str += "<button class='reply-delete s-btn mx-1' onclick='deleteReply(" + i.replyLevel + "," + i.replyNo + ")'>삭제</button>";
 					}
 					if (memberId != "") {
 						str += "<a class='w-btn-outline w-btn-blue-outline' data-title='대댓글달기' data-bs-toggle='collapse' href='#inputReplies" + i.replyNo + "' role='button'"
@@ -217,7 +224,7 @@ const replyList = () => {
 					if (memberId == i.memberId.memberId) {
 						str += "<button class='reply-update s-btn m-2' data-name='" + i.replyNo + "'>수정</button>";
 					}
-					if (memberId == i.memberId.memberId || loginAdmin!="") {
+					if (memberId == i.memberId.memberId || loginAdmin != "") {
 						str += "<button class='reply-delete s-btn' onclick='deleteReply(" + i.replyLevel + "," + i.replyNo + ")'>삭제</button>";
 					}
 					str += "</div>";
@@ -233,13 +240,13 @@ const replyList = () => {
 	});
 }
 
-$(".reply-list").on("click", ".reply-update", function(e) {
+$(".reply-list").on("click", ".reply-update", function() {
 	let target = $(this);
 	const no = target.data("name");
 
-	let updateForm = "<span><input type='text' id='editReply" + no + "' value='" + $("." + no).html() + "'>";
-	updateForm += "<button class='s-btn m-2' onclick='updateReply(" + no + ");'>수정</button>"
-	updateForm += "<button class='s-btn m-2' onclick='replyList()'>취소</button>"
+	let updateForm = "<span><input type='text' id='editReply" + no + "' value='" + $("." + no).html() + "'></span>";
+	updateForm += "<button class='s-btn m-1' onclick='updateReply(" + no + ");'>수정</button>"
+	updateForm += "<button class='s-btn m-1' onclick='replyList()'>취소</button>"
 
 	$("." + no).parent().replaceWith(updateForm);
 })
@@ -250,7 +257,7 @@ const updateReply = (no) => {
 	const reContent = $("#editReply" + no + "").val();
 
 	$.ajax({
-		url: "/community/updateReply.do",
+		url: getContextPath()+"/community/updateReply.do",
 		type: "post",
 		data: { replyNo: no, replyContent: reContent },
 		success: () => {
@@ -263,38 +270,40 @@ const updateReply = (no) => {
 }
 
 const deleteReply = (level, no) => {
-	$.ajax({
-		url: "/community/deleteReply.do",
-		type: "post",
-		data: { replyNo: no, replyLevel: level },
-		success: () => {
-			replyList();
-		}, error: () => {
-			alert("댓글 삭제 실패");
-		}
-	})
+	if (confirm("댓글을 삭제하시겠습니까?") == true) {
+		$.ajax({
+			url: getContextPath()+"/community/deleteReply.do",
+			type: "post",
+			data: { replyNo: no, replyLevel: level },
+			success: () => {
+				replyList();
+			}, error: () => {
+				alert("댓글 삭제 실패");
+			}
+		})
+	}
 }
 
 deleteCommunity = (no) => {
 
-	if(confirm("게시글을 삭제하시겠습니까?")==true){
+	if (confirm("게시글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-		url: "/community/deleteCommunity.do",
-		type: "post",
-		data: { communityNo: no },
-		success: () => {
-			alert("삭제성공");
-			location.replace("/community/communityList.do");
-		}, error: () => {
-			alert("삭제실패");
-			location.replace("/community/communityList.do");
-		}
-	})
-	}else{
+			url: getContextPath()+"/deleteCommunity.do",
+			type: "post",
+			data: { communityNo: no },
+			success: () => {
+				alert("삭제성공");
+				location.replace(getContextPath()+"/community/communityList.do");
+			}, error: () => {
+				alert("삭제실패");
+				location.replace(getContextPath()+"/community/communityList.do");
+			}
+		})
+	} else {
 		return false;
 	}
 
-	
+
 }
 
 $(".file-del").click(function(e) {
@@ -302,14 +311,15 @@ $(".file-del").click(function(e) {
 	let target = $(this);
 	const fileName = target.data("name");
 	const targetLi = e.target.closest("li");
+	console.log("파일삭제");
 	$.ajax({
-		url: "/ncCommon/removeCommunityFile.do",
+		url: getContextPath()+"/ncCommon/removeCommunityFile.do",
 		data: { fileName: fileName },
 		type: "post",
 		success: (data) => {
 			if (data > 0) {
 				targetLi.remove();
-				/* location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo); */
+
 			}
 			else {
 				alert("삭제실패");
@@ -320,7 +330,7 @@ $(".file-del").click(function(e) {
 })
 
 
-const community_cancel=()=>{
+const community_cancel = () => {
 	window.history.back();
 }
 

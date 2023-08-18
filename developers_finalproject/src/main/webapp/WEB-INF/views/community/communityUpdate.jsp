@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
 	<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
@@ -102,7 +102,7 @@
                     
                       <div class="comu-buttons">
                         <button type="button" class="w-btn w-btn-blue-outline" id="btn-upload-file">등록</button>&nbsp;&nbsp;&nbsp;
-                        <button class="w-btn w-btn-gray-outline" onclick="community_cancel();">취소</button>
+                        <button type="button" class="w-btn w-btn-gray-outline" onclick="community_cancel();">취소</button>
                       </div>
                     
              </div>
@@ -115,7 +115,9 @@
         </div>
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<script src="${path }/js/community/community.js"></script>
   <script>
+  
 		const memberId="<c:out value='${loginMember.memberId}' escapeXml="false"/>";
 		const communityNo="<c:out value='${comuView.communityNo}' escapeXml="false"/>";                               
 		
@@ -128,7 +130,7 @@
         const dropzone = new Dropzone(".dropzone", {
         autoProcessQueue: false,
         
-        url: "/ncCommon/communityUploadFile.do?no="+communityNo, 
+        url: "<c:out value='${path}'/>/ncCommon/communityUploadFile.do?no="+communityNo, 
         method: "post", 
         uploadMultiple: true,
         maxFiles: 5,
@@ -147,13 +149,13 @@
                    		myDropzone.processQueue();
                    	}else{
                    		$.ajax({
-                    		url: "/community/communityUpdateEnd.do",
+                    		url: "<c:out value='${path}'/>/community/communityUpdateEnd.do",
                     		type:"post",
                     		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
                     			communityContent: $("#communityContent").val(), communityNo:communityNo },
                     		success:(data)=>{
                     			if(data>0){
-                    				location.replace("/community/communityView.do?no="+communityNo);
+                    				location.replace("<c:out value='${path}'/>/community/communityView.do?no="+communityNo);
                     			}else{
                     				alert("수정 실패");
                     			}
@@ -162,11 +164,11 @@
                    	}
                 });
                 this.on("successmultiple", function(files, response){
-         			console.log(files);
+         			
                 	let fileNames=files[0].xhr.responseText;
                 	
                  	$.ajax({
-                		url: "/community/communityUpdateEnd.do",
+                		url: "<c:out value='${path}'/>/community/communityUpdateEnd.do",
                 		type:"post",
                 		data: {memberId:memberId,communityTitle: $("#communityTitle").val(),
                 			communityContent: $("#communityContent").val(), files:fileNames, communityNo:communityNo },

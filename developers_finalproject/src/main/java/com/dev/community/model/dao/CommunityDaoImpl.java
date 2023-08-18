@@ -41,9 +41,9 @@ public class CommunityDaoImpl implements CommunityDao {
 	}
 
 	@Override
-	public int communityCount(SqlSession session) {
+	public int communityCount(SqlSession session, int memberId) {
 		
-		return session.selectOne("community.communityCount");
+		return session.selectOne("community.communityCount", memberId);
 	}
 
 	@Override

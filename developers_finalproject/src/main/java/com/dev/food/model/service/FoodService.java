@@ -62,7 +62,9 @@ public interface FoodService {
 	
 	int deleteHeart(Map param);
 	
-	List<FoodHeart> fdHeart(int no);
+	int updateHeart(Map param);
+	
+	int cancleHeart(Map param);
 	
 	/* int toggleHeartAndGetCount(Map params); */
 
@@ -79,6 +81,8 @@ public interface FoodService {
 	List<FoodReviewPhoto> selectFoodReviewPhotoByFoodNo(int frNo);
 	
 	int updateFoodReview(FoodReview fr);
+
+	int addFood(Food food);
 	
 	//int updateReviewPhoto(FoodReviewPhoto rp);
 	
@@ -87,5 +91,7 @@ public interface FoodService {
 	int insertFoodBlackList(FoodBlackList fb);
 	
 	int selectFoodBlackListCount();
+	
+	List<Food> selectFoodReviewByFoodNo(int memberId);
 	
 }

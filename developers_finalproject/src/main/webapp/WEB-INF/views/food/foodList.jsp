@@ -1,4 +1,4 @@
-$$<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -44,23 +44,6 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
 		<div id="food_main_theme">
 			<p>맛집 목록</p>
 		</div>
-		<div class="container">
-		<nav id="food_menu">
-		<input type="hidden" id="sortFilter" value="sortFilter">
-			<ul>
-			<%-- href="${path}/food/foodListTitle.do" --%>
-				<li class="bar">|</li>
-				<!-- <li class="menu_style" id="all"><span class="color_ch">제목순</span></li> -->
-				<li class="menu_style" id="all"><span class="color_ch" onclick="sortFoodByTitle()">제목순</span></li>
-				<li class="bar">|</li>
-				<li class="menu_style" id="popular"><span class="color_ch">조회순</span></li>
-				<li class="bar">|</li>
-				<li class="menu_style" id="review"><span class="color_ch">리뷰순</span></li>
-				<li class="bar">|</li>
-			</ul>
-		</nav>
-		</div>
-		
 		<div class="search-notice text-end mt-3">
 			<form action="${path }/food/searchFood.do" class="searchForm" method="GET">
 				<select name="searchType">
@@ -83,8 +66,7 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
 					<%-- <c:forEach var="fh" items="${fhHeart }"> --%>
 					<c:if test="${loginMember!=null }">
 						<div class="con-like" style="position: relative; z-index: 2;">
-							<input title="like" type="checkbox" class="like"
-								value="${f.foodNo }">
+							<input title="like" type="checkbox" class="like" value="${f.foodNo }">
 							<div class="checkmark">
 								<svg viewBox="0 0 24 24" class="outline"
 									xmlns="http://www.w3.org/2000/svg">
@@ -122,10 +104,10 @@ $$<%@ page language="java" contentType="text/html; charset=UTF-8"
 					<div class="food_menu">${f.foodName }</div>
 					<div class="food_address" style="color: #828282;">${f.foodAddress}</div>
 					<div class="countDiv">
-						<img class="heart" src="${path }/images/food/fillheart.svg">
-						<span class="heart_count">0</span> <img class="comment"
-							src="${path }/images/food/comment.png"> <span
-							class="comment_count">${f.foodReadCount}</span>
+						<%-- <img class="heart" src="${path }/images/food/fillheart.svg">
+						<span class="heart_count">${f.foodHeartCount }</span> 
+						<img class="comment" src="${path }/images/food/comment.png"> 
+						<span class="comment_count">${f.foodReadCount}</span> --%>
 					</div>
 				</div>
 			</c:forEach>

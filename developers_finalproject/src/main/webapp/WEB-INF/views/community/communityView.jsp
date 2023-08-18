@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet"
 	href="${path }/css/noticeAndCommunity/coStyle.css" />
@@ -114,7 +115,7 @@
 				<button class="s-btn ms-2" onclick="deleteCommunity(${comuView.communityNo });">삭제</button>
 				</c:if>
 			
-			
+				<button class="s-btn ms-2" onclick="location.href='${path}/community/communityList.do'" >목록</button>
 			</div>
 		</div>
 		<div class="collapse" id="inputComment">

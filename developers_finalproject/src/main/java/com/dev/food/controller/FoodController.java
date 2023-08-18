@@ -48,7 +48,7 @@ import com.google.gson.JsonParser;
 public class FoodController {
 
 	@Autowired
-	private FoodService service;
+	private static FoodService service;
 	
 	public FoodController(FoodService service) {
 		this.service = service;
@@ -69,7 +69,7 @@ public class FoodController {
 		List<Food> foods=service.selectFoodAll(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData=service.selectFoodCount();
 		
-		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList.do"));
+		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "foodList2.do"));
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
@@ -124,7 +124,7 @@ public class FoodController {
 				+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 				+ "&" + "MobileOS"+"="+"ETC"
 				+ "&" + "MobileApp"+"="+"foodTest"
-				+ "&" + "numOfRows"+"="+ "12" //"17055"
+				+ "&" + "numOfRows"+"="+ "1" //"현제 api의 개수 불러옴 , 개수 상관 x"
 				+ "&" + "pageNo"+"="+"1"
 				+ "&" + "contentTypeId"+"="+"39"
 				+ "&" + "_type"+"="+"json"
@@ -168,7 +168,7 @@ public class FoodController {
 		
 		int result = service.selectFoodCount();
 		int blackList = service.selectFoodBlackListCount();
-		System.out.println("음식점 수 : "+result);
+		//System.out.println("음식점 수 : "+result);
 		
 		//api와 DB가 동일한 숫자이면 업데이트 x
 		//if(result+blackList != apiCount) {
@@ -181,7 +181,7 @@ public class FoodController {
 					+ "&" + "serviceKey"+"="+"Qpncm3m%2Fbx1Ph6PQUHC4FT6%2BcaFJ1mEGs4R7vrqWvCOMp2lZBfGp2zHQ5A%2BWvuLj8R6IRfwTw43LBM%2F1FWGojA%3D%3D"
 					+ "&" + "MobileOS"+"="+"ETC"
 					+ "&" + "MobileApp"+"="+"foodTest"
-					+ "&" + "numOfRows"+"="+ 12 //"17055" apiCount
+					+ "&" + "numOfRows"+"="+ 100 //"17055" apiCount
 					+ "&" + "pageNo"+"="+"1"
 					+ "&" + "contentTypeId"+"="+"39"
 					+ "&" + "_type"+"="+"json"
@@ -227,6 +227,7 @@ public class FoodController {
 								.foodNo(Integer.parseInt(StringType))
 								.foodName(item.get("title").toString().replaceAll("\"", ""))
 								.foodAddress(item.get("addr1").toString().replaceAll("\"", ""))
+								.allow(1)
 								.build();
 						FoodPhotoTemp fp = FoodPhotoTemp.builder()
 								.foodNo(Integer.parseInt(StringType))
@@ -273,7 +274,7 @@ public class FoodController {
 	}
 
 	//@GetMapping("/foodInfoApi")
-	public void foodInfoApi(int foodNo, Model m) throws IOException{
+	public static void foodInfoApi(int foodNo, Model m) throws IOException{
 		
 		String result = service.searchByFoodNo(foodNo);
 		System.out.println("상세정보 유무 : "+result);
@@ -366,9 +367,9 @@ public class FoodController {
 				service.insertFoodBlackList(fb);
 			}
 
-			//사용할 일 없으니 삭제
-			//service.deleteFoodTemp(Integer.parseInt(StringType));
-			//service.deleteFoodPhotoTemp(Integer.parseInt(StringType));
+			//사용할 일 없으니 삭제(검증 필요)
+			service.deleteFoodTemp(foodNo);
+			service.deleteFoodPhotoTemp(foodNo);
 		}
 		foodImgApi(foodNo);
 		//음식점의 리뷰 불러오기
@@ -385,7 +386,7 @@ public class FoodController {
 	}
 	
 //	@GetMapping("/foodImgApi")
-	public void foodImgApi(int foodNo) throws IOException{
+	public static void foodImgApi(int foodNo) throws IOException{
 
 		StringBuilder result3 = new StringBuilder();
 		//System.out.println(foodNo);
@@ -607,61 +608,46 @@ public class FoodController {
 		List<FoodReviewPhoto> rp = service.selectFoodReviewPhotoByFoodNo(frNo);
 		System.out.println("rp : "+rp);
 		
-		if(!rp.isEmpty()) {
-			//upload삭제
-			for(FoodReviewPhoto p : rp) {
-				System.out.println("p : "+p.getRpName());
-				File delFile=new File(path+p.getRpRename());
-				delFile.delete();
-			}
-			//DB삭제
-			service.deleteFoodReview(frNo);			
+		//upload삭제
+		for(FoodReviewPhoto p : rp) {
+			System.out.println("p : "+p.getRpName());
+			File delFile=new File(path+p.getRpRename());
+			delFile.delete();
 		}
+		//DB삭제
+		service.deleteFoodReview(frNo);			
 	}
 
-	//좋아요 기능
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/food/toggleHeart") public int toggleHeart(@RequestParam Map
-	 * params, int fhNo, String memberId, int foodNo) {
-	 * 
-	 * params.put("fhNo", fhNo); params.put("memberId", memberId);
-	 * params.put("foodNo", foodNo);
-	 * 
-	 * int updatedCount = service.toggleHeartAndGetCount(params); return
-	 * updatedCount; }
-	 */
-	
 	@GetMapping("/insertHeart")
 	@ResponseBody
-	public int insertHeart(@RequestParam Map param, HttpSession session) {
+	public int insertHeart(@RequestParam Map param, HttpSession session, int foodNo) {
 		Member loginMember=(Member)session.getAttribute("loginMember");
 		param.put("memberId", loginMember.getMemberId());
+		param.put("foodNo", foodNo);
 		int result = service.insertHeart(param);
 		return result;
 	}
 
 	@GetMapping("/deleteHeart")
 	@ResponseBody
-	public int deleteHeart(@RequestParam Map param,HttpSession session) {
+	public int deleteHeart(@RequestParam Map param,HttpSession session, int foodNo) {
 		Member loingMember=(Member)session.getAttribute("loginMember");
 		param.put("memberId", loingMember.getMemberId());
+		param.put("foodNo", foodNo);
 		int result = service.deleteHeart(param);
 		return result;
 	}
 	
-	
 	/*
-	 * //분류기능(제목)
-	 * 
-	 * @GetMapping("/foodListTitle.do") public String
-	 * foodListTitle(@RequestParam("sortFilter") String sortFilter, Model model) {
-	 * // 여기에서 sortFilter를 기준으로 필요한 데이터를 가져오는 로직을 구현 // 데이터를 모델에 담아서 JSP로 전달
-	 * model.addAttribute("foods", sortedFoods); // foods는 JSP에서 사용하는 변수명, 가져온 데이터를
-	 * 할당해야 합니다.
-	 * 
-	 * return "foodList	"; }
+	 * @GetMapping("/add") public String showAddForm(Model model) {
+	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
+	
+	@PostMapping("/add")
+    public String addFood(Food food) {
+        service.addFood(food);
+        
+        return "redirect:/food/add";
+    }
 	
 }

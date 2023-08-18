@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css" />
@@ -533,7 +534,7 @@
 					      IMG3 :  "${path}/images/upload/accommodation/"+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
 					      THU : "${path}/images/common/logo.png",
-					      PATH : "ac/acDetail?no="+${ad.acId}
+					      PATH : "${path}/ac/acDetail?no="+${ad.acId}
 					    },
 					});
 		}

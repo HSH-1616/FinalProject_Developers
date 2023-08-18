@@ -18,11 +18,13 @@
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
+    >
+	</script>
     <script
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
+    >
+    </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <link rel="stylesheet" href="css/header.css"/>
@@ -33,79 +35,55 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <section>
+	
 	<div class="food_update_theme">
     <p>맛집 추천하기</p>
   </div>
-    <div class="food_update">
-        <table class="table">
-            <tr>
-                <th>상호명</th>
-                <td><input type="text" class="" placeholder="상호명을 입력해주세요." name="" id="" required></td>
-            </tr>
-            <!-- <tr>
-                <th>음식 종류</th>
-                <td>
-                  <form class="low_theme">
-                    <p>
-                      <label>
-                        <input name="group1" type="radio" />
-                        <span>한식</span>
-                      </label>
-                    </p>
-                    <p>
-                      <label>
-                        <input class="with-gap" name="group1" type="radio"  />
-                        <span>중식</span>
-                      </label>
-                    </p>
-                    <p>
-                      <label>
-                        <input class="with-gap" name="group1" type="radio"  />
-                        <span>일식</span>
-                      </label>
-                    </p>
-                    <p>
-                        <label>
-                          <input class="with-gap" name="group1" type="radio"  />
-                          <span>양식</span>
-                        </label>
-                      </p>
-                  </form>        
-                </td>
-            </tr> -->
-            <tr>
-                <th>상세 위치</th>
-                <td><div style="display: flex;">
-                  <input type="text" id="sample6_postcode" placeholder="우편번호">
-                  <input type="button" onclick="sample6_execDaumPostcode()" value="주소찾기" style="margin-left: 10px;">
-                </div>
-                <input type="text" id="sample6_address" placeholder="주소"><br>
-                <input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
-                <input type="text" id="sample6_extraAddress" placeholder="참고항목">
-                </td>
-            </tr>
-            <tr>
-                <th>추천 메뉴</th>
-                <td><input type="text" class="" placeholder="메뉴 입력해주세요." name="" id="" required></td>
-            </tr>
-            <tr>
-                <th>첨부사진</th>
-                <td>
-                	<form action="/submit" method="post" enctype="multipart/form-data">
-						<input type="file" class="real-upload" accept="image/*" required multiple>
+	<div class="food_update">
+
+		<form action="${pageContext.request.contextPath}/food/add" method="post" enctype="multipart/form-data">
+			<table class="table">
+				<tr>
+					<th>상호명</th>
+					<td><input type="text" class="" placeholder="상호명을 입력해주세요."
+						name="foodName" id="" required></td>
+				</tr>
+				<tr>
+					<th>상세 위치</th>
+					<td><div style="display: flex;">
+							<input type="text" id="sample6_postcode" placeholder="우편번호"
+								name="foodAddress"> <input type="button"
+								onclick="sample6_execDaumPostcode()" value="주소찾기"
+								style="margin-left: 10px;">
+						</div> <input type="text" id="sample6_address" placeholder="주소"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+					</td>
+				</tr>
+				<tr>
+					<th>추천 메뉴</th>
+					<td><input type="text" class="" placeholder="메뉴 입력해주세요."
+						name="" id="" required></td>
+				</tr>
+				<tr>
+					<th>첨부사진</th>
+					<td>
+						<input name="file" type="file" class="real-upload" accept="image/*" required multiple>
 						<div class="upload"></div>
 						<ul class="image-preview"></ul>
-					</form>
-				</td>
-            </tr>
-        </table>
-    </div>
-    <!-- 맛집 등록하는 버튼 -->
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<!-- 맛집 등록하는 버튼 -->
     <div class="registBtnCon">
       <div class="registBtn">
         <button id="registOkBtn">등록하기</button>
       </div>
     </div>
+    
     <!-- /맛집 등록하는 버튼 -->
 
 </section>

@@ -262,11 +262,9 @@
 			</div>
 		</div>
 	</div>
-	<c:if test="${empty loginMember and not empty loginAdmin }">
 	<div class="d-flex justify-content-center">
 			<button class="yoonBtn btnColorRed" onclick="history.back(-1);" style="justify-content:center; width:500px;">목록으로</button>
 	</div>
-	</c:if>
 	<script>
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host) + location.host.length;

@@ -40,6 +40,7 @@ public interface FoodDao {
 	int mergeFoodPhoto(SqlSession session);
 	
 	void deleteFoodTemp(SqlSession session,int foodNo);
+	
 	void deleteFoodPhotoTemp(SqlSession session,int foodNo);
 	
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
@@ -96,8 +97,12 @@ public interface FoodDao {
 	
 	int deleteHeart(SqlSessionTemplate session, Map param);
 	
-	List<FoodHeart> fdHeart(SqlSessionTemplate session, int no);
+	int updateHeart(SqlSessionTemplate session, Map param);
+	
+	int cancleHeart(SqlSessionTemplate session, Map param);
 
+	int addFood(SqlSessionTemplate session, Food food);
+	
 	/*
 	 * boolean checkHeart(SqlSession session, Map params);
 	 * 
@@ -111,4 +116,6 @@ public interface FoodDao {
 	int insertFoodBlackList(SqlSession session, FoodBlackList fb);
 	
 	int selectFoodBlackListCount(SqlSession session);
+	
+	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId);
 }

@@ -30,7 +30,7 @@ public class FoodServiceImpl implements FoodService{
 	@Autowired
 	private FoodDao dao;
 
-	@Autowired
+	@Autowired 
 	private SqlSessionTemplate session;
 
 	@Override
@@ -155,7 +155,13 @@ public class FoodServiceImpl implements FoodService{
 	
 	@Override
 	public int insertHeart(Map param) {
-		return dao.insertHeart(session, param);
+		
+		
+		int result=dao.insertHeart(session, param);
+		int result2=dao.updateHeart(session, param);
+		System.out.println(result);
+		System.out.println(result2);
+		return result2;
 	}
 
 	@Override
@@ -163,11 +169,6 @@ public class FoodServiceImpl implements FoodService{
 		return dao.deleteHeart(session, param);
 	}
 
-	@Override
-	public List<FoodHeart> fdHeart(int no){
-		return dao.fdHeart(session, no);
-	}
-	
 	/*
 	 * @Override public int toggleHeartAndGetCount(Map params) { boolean isLiked =
 	 * dao.checkHeart(session, params);
@@ -176,6 +177,16 @@ public class FoodServiceImpl implements FoodService{
 	 * dao.insertHeart(session, params); } return dao.getHeartCount(session,
 	 * params); }
 	 */
+
+	@Override
+	public int updateHeart(Map param) {
+		return dao.updateHeart(session, param);
+	}
+
+	@Override
+	public int cancleHeart(Map param) {
+		return dao.cancleHeart(session, param);
+	}
 
 	@Override
 	public List<Food> foodListTitle(Map<String, Object> param) {
@@ -266,4 +277,14 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectFoodBlackListCount(session);
 	}
 	
+	 @Override
+	public int addFood(Food food) {
+	     return dao.insertFood(session, food);
+	}
+	 
+	@Override
+	public List<Food> selectFoodReviewByFoodNo(int memberId) {
+		return dao.selectFoodReviewByFoodNo(session, memberId);
+	}
+
 }

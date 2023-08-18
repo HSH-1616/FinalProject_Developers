@@ -4,7 +4,7 @@ img {
 
 td input.real-upload {
     position: relative;
-    bottom: 32px;
+    top: 5px;
 }
 
 th {
@@ -52,7 +52,7 @@ input[type="text"] {
 
 .food_update {
   padding-right: 25%;
-  padding-left: 31%;
+  padding-left: 23%;
 }
 
 .food_add {
@@ -201,7 +201,7 @@ ul.image-preview {
 	display: flex;
     position: relative;
     right: 37px;
-    bottom: 8px;
+    top: 12px;
 }
 input[type="button"] {
   background-color: #b31312;
