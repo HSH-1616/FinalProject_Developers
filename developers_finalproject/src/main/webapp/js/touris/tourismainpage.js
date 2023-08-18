@@ -21,7 +21,7 @@ $(document).ready(function () {
 	    function loadData(areaName) {
 	        // 데이터를 로드하는 함수
 	        $.ajax({
-	            url: getContextPath()+"/touris/selecttourisarea",
+	            url: path+"/touris/selecttourisarea",
 	            method: "get",
 	            data: {
 	                'areaName': areaName

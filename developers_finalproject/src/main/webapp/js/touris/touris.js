@@ -1308,7 +1308,7 @@ function searchTouris() {
   /*console.log(inputval);
   console.log(tourisAreaid);*/
   $.ajax({
-    url: getContextPath()+"/touris/searchtouris",
+    url: path+"/touris/searchtouris",
     method: "get",
     data: {
       'text': inputval,
@@ -1334,7 +1334,7 @@ function searchTouris2() {
   /*console.log(inputval);
   console.log(tourisAreaid);*/
   $.ajax({
-    url: getContextPath()+"/touris/searchtouris2",
+    url: path+"/touris/searchtouris2",
     method: "get",
     data: {
       'text': inputval,
@@ -1363,7 +1363,7 @@ var day = ('0' + today.getDate()).slice(-2);
 var registrationDate = year+'년' +' '+month+'월'+' '+day+'일';
 // 경로 저장 ajax
 function saveRoute() {
-	const routeurl = getContextPath() + "/touris/inserttourisroute";
+	const routeurl = path + "/touris/inserttourisroute";
 	const dayselectbox = $(".dayselecttag").text();
 	const calandertext = $("#calander").val();
 	const dayselecttag = $(".dayselecttag").text();

@@ -30,7 +30,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 	const memberId = $('.nickname').text();
 	
 	$.ajax({
-		url: getContextPath()+"/community/mypageCommunity.do",
+		url: path+"/community/mypageCommunity.do",
 		type:"get",
 		data:{memberId:memberId,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
@@ -75,7 +75,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 const foodreivew = (cPage,numPerpage) =>{
 	 const memberId = $('.nickname').text();
 	$.ajax({
-		url: getContextPath()+"/food/mypagefoodreview",
+		url: path+"/food/mypagefoodreview",
 		type:"get",
 		data:{memberId:memberId, cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
@@ -129,7 +129,7 @@ const tourisroute = (cPage,numPerpage) => {
     const loginmemberid = $('.nickname').text();
     console.log(loginmemberid);
 	$.ajax({
-		url: getContextPath()+"/touris/mypagetourisroute",
+		url: path+"/touris/mypagetourisroute",
 		type:"get",
 		data:{loginmemberid:loginmemberid,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
@@ -210,7 +210,7 @@ $(document).on('click', '.routedeltebtn', function(){
 	const tuId = $(this).find(".nonetuId").text();
 	alert('여행 경로를 삭제하겠습니까?');
 	$.ajax({
-		url: getContextPath()+"/touris/deleteroute",
+		url: path+"/touris/deleteroute",
 		type:"get",
 		data:{tuId : tuId},
 		success:(data)=>{
@@ -224,7 +224,7 @@ const foodheart = () => {
     console.log(memberId);
      let cardspanimg
 	$.ajax({
-		url: getContextPath()+"/food/mypagefoodheart",
+		url: path+"/food/mypagefoodheart",
 		type:"get",
 		data:{memberId:memberId},
 		success:(data)=>{
@@ -263,7 +263,7 @@ const foodheart = () => {
 const tourisheart = () =>{
   const memberId = $('.nickname').text();
   $.ajax({
-	  url: getContextPath()+"/tourisDetail/mypagetourisheart",
+	  url: path+"/tourisDetail/mypagetourisheart",
 		type:"get",
 		data:{memberId:memberId},
 		success:(data)=>{
@@ -291,6 +291,11 @@ const tourisheart = () =>{
 		}
   })
 }
+
+const hotelheart = () =>{
+	
+}
+
 $(document).on("click", "#foodheart",function(){
 		$(".favorite").empty();
 		$(".favorite3").empty();
