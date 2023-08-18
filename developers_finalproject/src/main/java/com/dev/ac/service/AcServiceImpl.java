@@ -208,7 +208,6 @@ public class AcServiceImpl implements AcService {
 	public int updateAc(Accommodation ac) {
 		int result = dao.updateAc(session, ac);
 		log.info("acUpdate 성공 result : " + result);
-
 		if (result > 0) {
 			result += dao.updateRegistDelAf(session, ac.getAcId());
 
@@ -246,6 +245,7 @@ public class AcServiceImpl implements AcService {
 			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 3) {
 				for (int i = 0; i < ac.getArv().size(); i++) {
 					ac.getArv().get(i).setAcId(ac.getAcId());
+					System.out.println(ac.getArv().get(i));
 					result += dao.updateInArv(session, ac.getArv().get(i));
 				}
 				log.info("예약내역 등록 성공 result : " + result);
@@ -319,6 +319,11 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public List<AcPayList> refundList(Map param) {
 		return dao.refundList(session,param);
+	}
+	
+	@Override
+	public List<AcPayList> refundOkList(Map param) {
+		return dao.refundOkList(session,param);
 	}
 
 	@Override

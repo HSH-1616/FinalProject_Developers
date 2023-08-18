@@ -230,13 +230,27 @@ public class AdminController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		int totalData = acService.refundListCount();
-		int totalData2 = acService.refundListCount2();
 		
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectRefundAll", type));
-		m.addAttribute("pageBar2", PageFactory.getPage(cPage, numPerpage, totalData2, "selectRefundAll2", type));
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "refundList", type));
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("ap", acService.refundList(param));
 		return "admin/refundList";
+	}
+	
+	@GetMapping("/refundOkList")
+	public String refundOkList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
+			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
+		
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> type = new HashMap<>();
+		
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+		int totalData2 = acService.refundListCount2();
+		
+		m.addAttribute("pageBar2", PageFactory.getPage(cPage, numPerpage, totalData2, "refundOkList", type));
+		m.addAttribute("ap", acService.refundOkList(param));
+		return "admin/refundOkList";
 	}
 	
 	@GetMapping("/selectAcAll")

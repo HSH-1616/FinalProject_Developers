@@ -280,6 +280,14 @@ public class AcDaoImpl implements AcDao {
 		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
 		return session.selectList("accommodation.refundList",null,rb);
 	}
+	
+	@Override
+	public List<AcPayList> refundOkList(SqlSessionTemplate session, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("accommodation.refundOkList",null,rb);
+	}
 
 	@Override
 	public int refundListCount(SqlSessionTemplate session) {

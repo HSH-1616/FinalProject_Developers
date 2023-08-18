@@ -86,6 +86,8 @@ public interface AcService {
 	int paymentListCount();
 
 	List<AcPayList> refundList(Map param);
+	
+	List<AcPayList> refundOkList(Map param);
 
 	int refundListCount();
 
