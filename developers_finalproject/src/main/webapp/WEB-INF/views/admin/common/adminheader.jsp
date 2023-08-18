@@ -39,7 +39,7 @@
 				    <li><a class="list-group-item-action second-text fw-bold" href="${path }/admin/paymentList" style="margin-left:60px; text-decoration-line: none;">결제관리</a></li>
 			    </ul>
 			    </div>
-                <a href="/" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <a href="${path }/admin/main" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fa-solid fa-house me-2"></i>HomePage</a>
                 <!-- <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout</a> -->
