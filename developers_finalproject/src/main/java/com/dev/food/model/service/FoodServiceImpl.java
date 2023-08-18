@@ -280,6 +280,11 @@ public class FoodServiceImpl implements FoodService{
 	 @Override
 	public int addFood(Food food) {
 	     return dao.insertFood(session, food);
-	    }
+	}
+	 
+	@Override
+	public List<Food> selectFoodReviewByFoodNo(int memberId) {
+		return dao.selectFoodReviewByFoodNo(session, memberId);
+	}
 
 }

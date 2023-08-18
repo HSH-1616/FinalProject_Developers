@@ -116,4 +116,6 @@ public interface FoodDao {
 	int insertFoodBlackList(SqlSession session, FoodBlackList fb);
 	
 	int selectFoodBlackListCount(SqlSession session);
+	
+	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId);
 }

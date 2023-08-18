@@ -274,5 +274,10 @@ public class FoodDaoImpl implements FoodDao {
 	public int selectFoodBlackListCount(SqlSession session) {
 		return session.selectOne("food.selectFoodBlackListCount");
 	}
+	
+	@Override
+	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId) {
+		return session.selectList("food.selectFoodReviewByFoodNo",memberId);
+	}
 
 }
