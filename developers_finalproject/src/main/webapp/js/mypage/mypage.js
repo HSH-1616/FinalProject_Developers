@@ -4,6 +4,8 @@ function getContextPath() {
 	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
 };
 
+
+
 $(document).ready(function() {
     initializeSlick();
 });
@@ -20,6 +22,11 @@ const initializeSlick = () => {
         slidesToShow: 3,
         slidesToScroll: 1
     });
+    $('.favorite3').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 3,
+        slidesToScroll: 1
+    });
     
 };
 /*리뷰목록, 게시글 가져오기*/
@@ -30,7 +37,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 	const memberId = $('.nickname').text();
 	
 	$.ajax({
-		url: getContextPath()+"/community/mypageCommunity.do",
+		url: path+"/community/mypageCommunity.do",
 		type:"get",
 		data:{memberId:memberId,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
@@ -75,7 +82,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 const foodreivew = (cPage,numPerpage) =>{
 	 const memberId = $('.nickname').text();
 	$.ajax({
-		url: getContextPath()+"/food/mypagefoodreview",
+		url: path+"/food/mypagefoodreview",
 		type:"get",
 		data:{memberId:memberId, cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
@@ -129,12 +136,12 @@ const tourisroute = (cPage,numPerpage) => {
     const loginmemberid = $('.nickname').text();
     console.log(loginmemberid);
 	$.ajax({
-		url: getContextPath()+"/touris/mypagetourisroute",
+		url: path+"/touris/mypagetourisroute",
 		type:"get",
 		data:{loginmemberid:loginmemberid,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			console.log(data)
-			$('.myschedularea').html("");
+			$('.myschedularea').empty();
 			for(let m of data.mypageTourisRoute){
 				const endDate = new Date(m.tuendDate);
 				const startDate = new Date(m.tustartDate);
@@ -210,7 +217,7 @@ $(document).on('click', '.routedeltebtn', function(){
 	const tuId = $(this).find(".nonetuId").text();
 	alert('여행 경로를 삭제하겠습니까?');
 	$.ajax({
-		url: getContextPath()+"/touris/deleteroute",
+		url: path+"/touris/deleteroute",
 		type:"get",
 		data:{tuId : tuId},
 		success:(data)=>{
@@ -224,7 +231,7 @@ const foodheart = () => {
     console.log(memberId);
      let cardspanimg
 	$.ajax({
-		url: getContextPath()+"/food/mypagefoodheart",
+		url: path+"/food/mypagefoodheart",
 		type:"get",
 		data:{memberId:memberId},
 		success:(data)=>{
@@ -263,7 +270,7 @@ const foodheart = () => {
 const tourisheart = () =>{
   const memberId = $('.nickname').text();
   $.ajax({
-	  url: getContextPath()+"/tourisDetail/mypagetourisheart",
+	  url: path+"/tourisDetail/mypagetourisheart",
 		type:"get",
 		data:{memberId:memberId},
 		success:(data)=>{
@@ -291,6 +298,35 @@ const tourisheart = () =>{
 		}
   })
 }
+
+const hotelheart = () =>{
+	$.ajax({
+		url:path+"/ac/mypageAcHeart",
+		type:"get",
+		success:(data)=>{
+			data.forEach(e=>{
+				console.log(e);
+				const hotelheart = `<div class="cardarea">
+							<div class="cardimgarea">
+								<div class="cardimgstyle">
+									<span class="cardspanimg"> <img alt=""
+										src="#">
+									</span>
+								</div>
+							</div>
+							<div class="cardtextarea">
+								<div class="noneid">${e.acId}</div>
+								<h2 class="cardtexteng">${e.acTitle}</h2>
+								<h2 class="cardtextkr">${e.acAddress}</h2>
+							</div>
+						</div>`
+						$(".favorite3").append(hotelheart);
+			});
+			$('.favorite3').slick('refresh');
+		}
+	})
+}
+
 $(document).on("click", "#foodheart",function(){
 		$(".favorite").empty();
 		$(".favorite3").empty();
@@ -305,6 +341,7 @@ $(document).on("click", "#tourisheart", function(){
 $(document).on("click", "#hotelheart", function(){
 		$(".favorite").empty();
 		$(".favorite2").empty();
+		hotelheart();
 });
 
 $("#communtitycontent").on("click", function(){

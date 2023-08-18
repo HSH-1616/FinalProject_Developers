@@ -14,7 +14,7 @@ $(".like").on("change",function(){
 	
 	if($(this).is(":checked")){
 		$.ajax({
-			url : getContextPath()+"/ac/insertHeart",
+			url : path+"/ac/insertHeart",
 			data :{
 				memberId : memberId,
 				acId : acId
