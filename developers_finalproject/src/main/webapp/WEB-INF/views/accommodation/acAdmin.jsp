@@ -48,7 +48,7 @@
 									class="btn btn-outline-dark btn-sm"
 									onclick="location.href='${path}/ac/updateRegist?acId=${ac.acId}'">수정</button></td>
 							<td><button type="button"
-									class="btn btn-outline-dark btn-sm"
+									class="btn btn-danger btn-sm"
 									onclick="warningDelete('${ac.acId}')">삭제</button></td>
 						</tr>
 					</c:forEach>
@@ -86,7 +86,7 @@ function warningDelete(acId) {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/ac/deleteRegist",
+				url: "${path}/ac/deleteRegist",
 				type: "get",
 				data: { acId: acId},
 				success: function(result) {
@@ -105,7 +105,7 @@ function warningDelete(acId) {
 					}
 				},
 				error: function() {
-					location.href = "/ac/acError"
+					location.href = "${path}/ac/acError"
 				}
 			});
 		}

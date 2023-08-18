@@ -116,8 +116,20 @@ public interface AcDao {
 
 	int paymentListCount(SqlSessionTemplate session);
 	
+	List<AcPayList> refundList(SqlSessionTemplate session, Map param);
+	
+	List<AcPayList> refundOkList(SqlSessionTemplate session, Map param);
+
+	int refundListCount(SqlSessionTemplate session);
+	
+	int refundListCount2(SqlSessionTemplate session);
+	
 	int rejectRefund(SqlSessionTemplate session,Map param);
 	
 	int rejectComment(SqlSessionTemplate session,Map param);
+	
+	int updateRefundAdmin(SqlSessionTemplate session, Map param);
+
+	int insertRefundAdmin(SqlSessionTemplate session, Map param);
 
 }

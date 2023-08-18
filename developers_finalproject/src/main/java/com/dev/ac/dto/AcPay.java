@@ -18,6 +18,7 @@ public class AcPay {
 	private int apPrice;
 	private Date apDate;
 	private Date apReDate;
+	private Date apCancelDate;
 	private int apPeople;
 	private char apCancel;
 	private String apOrderId;
