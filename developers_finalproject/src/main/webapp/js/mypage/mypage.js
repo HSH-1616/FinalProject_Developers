@@ -5,6 +5,30 @@ function getContextPath() {
 };
 
 
+
+$(document).ready(function() {
+    initializeSlick();
+});
+
+const initializeSlick = () => {
+    $('.favorite').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 3,
+        slidesToScroll: 1
+    });
+
+    $('.favorite2').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 3,
+        slidesToScroll: 1
+    });
+    $('.favorite3').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 3,
+        slidesToScroll: 1
+    });
+    
+};
 /*리뷰목록, 게시글 가져오기*/
 $(document).ready(()=> {
 	mypageCommunity();
@@ -13,7 +37,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 	const memberId = $('.nickname').text();
 	
 	$.ajax({
-		url: getContextPath()+"/community/mypageCommunity.do",
+		url: path+"/community/mypageCommunity.do",
 		type:"get",
 		data:{memberId:memberId,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
@@ -24,15 +48,16 @@ const mypageCommunity=(cPage,numPerpage)=>{
 					<div class="myschedulcontent">
 						<div class="myschedulcontentarea">
 							<div class="myreviewiconarea">
-								<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
-         							<path d="M384 352H184.36l-41 35-41-35H16v24c0 30.59 21.13 55.51 47.26 56 2.43 15.12 8.31 28.78 17.16 39.47C93.51 487.28 112.54 496 134 496h132c21.46 0 40.49-8.72 53.58-24.55 8.85-10.69 14.73-24.35 17.16-39.47 13.88-.25 26.35-7.4 35-18.63A61.26 61.26 0 00384 376zM105 320l38.33 28.19L182 320h202v-8a40.07 40.07 0 00-32-39.2c-.82-29.69-13-54.54-35.51-72C295.67 184.56 267.85 176 236 176h-72c-68.22 0-114.43 38.77-116 96.8A40.07 40.07 0 0016 312v8h89z"></path>
-         							<path d="M463.08 96h-74.59l8.92-35.66L442 45l-10-29-62 20-14.49 60H208v32h18.75l1.86 16H236c39 0 73.66 10.9 100.12 31.52A121.9 121.9 0 01371 218.07a124.16 124.16 0 0110.73 32.65 72 72 0 0127.89 90.9A96 96 0 01416 376c0 22.34-7.6 43.63-21.4 59.95a80 80 0 01-31.83 22.95 109.21 109.21 0 01-18.53 33c-1.18 1.42-2.39 2.81-3.63 4.15H416c16 0 23-8 25-23l36.4-345H496V96z"></path></svg>
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+</svg>
+
 							</div>
-							<div class="myreviewcontentarea">
+							<div class="myreviewcontentarea1">
 								<span class="myreviewcontent">${m.communityTitle}
 									</span>
 							</div>
-							<div class="myreviewupdatearea">
+							<div class="myreviewupdatearea1">
 								<div class="circleday">
 									<p class="cirledaytext">수정</p>
 								</div>
@@ -57,12 +82,13 @@ const mypageCommunity=(cPage,numPerpage)=>{
 const foodreivew = (cPage,numPerpage) =>{
 	 const memberId = $('.nickname').text();
 	$.ajax({
-		url: getContextPath()+"/food/mypagefoodreview",
+		url: path+"/food/mypagefoodreview",
 		type:"get",
 		data:{memberId:memberId, cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			console.log(data);	
 			$(".mycommuity").empty();
+			
 			data.mypagereivewlist.forEach(e => {
 				e.foodReview.forEach(r => {
 					const reivewcard = `<div class="foodreivewcontent">
@@ -81,7 +107,7 @@ const foodreivew = (cPage,numPerpage) =>{
 							<div class="myreviewupdatearea">
 								<span>${r.frWriterDate}</span>
 							</div>
-							<div class="myreviewdeletearea">
+							<div class="myreviewdeletearea2">
 								<div class="circleday">
 									<p class="cirledaytext">삭제</p>
 								</div>
@@ -101,7 +127,7 @@ const foodreivew = (cPage,numPerpage) =>{
 
 
 /*여행일정 가져오는 ajax*/
-$(document).ready(()=> {
+$(document).ready(function() {
 	tourisroute();
 	tourisheart();
 });
@@ -110,12 +136,12 @@ const tourisroute = (cPage,numPerpage) => {
     const loginmemberid = $('.nickname').text();
     console.log(loginmemberid);
 	$.ajax({
-		url: getContextPath()+"/touris/mypagetourisroute",
+		url: path+"/touris/mypagetourisroute",
 		type:"get",
 		data:{loginmemberid:loginmemberid,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			console.log(data)
-			$('.myschedularea').html("");
+			$('.myschedularea').empty();
 			for(let m of data.mypageTourisRoute){
 				const endDate = new Date(m.tuendDate);
 				const startDate = new Date(m.tustartDate);
@@ -186,13 +212,12 @@ const tourisroute = (cPage,numPerpage) => {
 
 
 
-
 /*여행경로삭제*/
 $(document).on('click', '.routedeltebtn', function(){
 	const tuId = $(this).find(".nonetuId").text();
 	alert('여행 경로를 삭제하겠습니까?');
 	$.ajax({
-		url: getContextPath()+"/touris/deleteroute",
+		url: path+"/touris/deleteroute",
 		type:"get",
 		data:{tuId : tuId},
 		success:(data)=>{
@@ -202,31 +227,53 @@ $(document).on('click', '.routedeltebtn', function(){
 });
 /*찜하기 가져오기*/
 const foodheart = () => {
-    const no = $('.nickname').text();
-    console.log(loginmemberid);
+    const memberId = $('.nickname').text();
+    console.log(memberId);
+     let cardspanimg
 	$.ajax({
-		url: getContextPath()+"/food/mypagefoodheart",
+		url: path+"/food/mypagefoodheart",
 		type:"get",
-		data:{no:no},
-		success:(data)=>{	
-			/*console.log(data);*/
-			
+		data:{memberId:memberId},
+		success:(data)=>{
+			data.forEach(e=>{
+				console.log(e);
+				let foodAddress = e.foodAddress;
+				let foodName = e.foodName;
+				let foodNo = e.foodNo;
+				e.foodPhoto.forEach(p =>{
+					 if (p.fpMain === 1) {
+                        cardspanimg = `<img alt="" src="${p.fpName}">`;
+                    }
+					
+				});
+				const foodheartlist = `<div class="foodcardarea">
+							<div class="cardimgarea">
+								<div class="cardimgstyle">
+									<span class="cardspanimg">${cardspanimg}
+									</span>
+								</div>
+							</div>
+							<div class="cardtextarea">
+								<div class="noneid">${foodNo}</div>
+								<h2 class="cardtexteng">${foodName}</h2>
+								<h2 class="cardtextkr">${foodAddress}</h2>
+							</div>
+						</div>`
+					$(".favorite2").append(foodheartlist);
+			});
+			$('.favorite2').slick('refresh');
 		}
 	})
 }		
 
 
-
-
-
-
 const tourisheart = () =>{
   const memberId = $('.nickname').text();
   $.ajax({
-	  url: getContextPath()+"/tourisDetail/mypagetourisheart",
+	  url: path+"/tourisDetail/mypagetourisheart",
 		type:"get",
 		data:{memberId:memberId},
-		success:(data)=>{	
+		success:(data)=>{
 			data.forEach(e =>{
 				/*console.log(e.heartlist);*/
 				e.heartlist.forEach(h=>{
@@ -247,36 +294,60 @@ const tourisheart = () =>{
 						$(".favorite").append(tourisheartlist);
 					});	
 			});
-			
-			$('.favorite').slick({
-				lazyLoad: 'ondemand',
-				slidesToShow: 3,
-				slidesToScroll: 1
-			});
+			$('.favorite').slick('refresh');
 		}
   })
 }
-$("#foodheart").on("click", function(){
-	$(".cardarea").show();
-	$(".touriscard").hide();
-	$(".hotelcard").hid();
+
+const hotelheart = () =>{
+	$.ajax({
+		url:path+"/ac/mypageAcHeart",
+		type:"get",
+		success:(data)=>{
+			data.forEach(e=>{
+				console.log(e);
+				const hotelheart = `<div class="cardarea">
+							<div class="cardimgarea">
+								<div class="cardimgstyle">
+									<span class="cardspanimg"> <img alt=""
+										src="#">
+									</span>
+								</div>
+							</div>
+							<div class="cardtextarea">
+								<div class="noneid">${e.acId}</div>
+								<h2 class="cardtexteng">${e.acTitle}</h2>
+								<h2 class="cardtextkr">${e.acAddress}</h2>
+							</div>
+						</div>`
+						$(".favorite3").append(hotelheart);
+			});
+			$('.favorite3').slick('refresh');
+		}
+	})
+}
+
+$(document).on("click", "#foodheart",function(){
+		$(".favorite").empty();
+		$(".favorite3").empty();
+		foodheart();
+		
 });
-$("#tourisheart").on("click", function(){
-	$(".cardarea").hide();
-	$(".touriscard").show();
-	$(".hotelcard").hid();
+$(document).on("click", "#tourisheart", function(){
+		$(".favorite2").empty();
+		$(".favorite3").empty();
+		tourisheart();
 });
-$("#hotelheart").on("click", function(){
-	$(".cardarea").hide();
-	$(".touriscard").hide();
-	$(".hotelcard").show();
+$(document).on("click", "#hotelheart", function(){
+		$(".favorite").empty();
+		$(".favorite2").empty();
+		hotelheart();
 });
+
 $("#communtitycontent").on("click", function(){
-	$(".foodreivewcontent").hide();
 	mypageCommunity();
 });
 $("#foodreivewcontent").on("click", function(){
-	$(".mycommuntiyarea").hide();
 	foodreivew();
 });
 	

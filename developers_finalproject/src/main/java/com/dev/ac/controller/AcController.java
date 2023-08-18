@@ -348,7 +348,7 @@ public class AcController {
 		List<AcFile> afDb = service.updateRegistCheckAf(ac.getAcId());
 		List<String> requestFileName = ac.getAcFiles().stream().map(e -> e.getAfName()).toList();
 		List<AcFile> resultFile = afDb.stream().filter(e -> !requestFileName.contains(e.getAfName())).toList();
-
+		log.info("db에서 가져온 list : " + afDb);
 		log.info("db와 비교 결과 : " + resultFile);
 		// 파일이 삭제되면 db에서 전체 삭제
 		for (AcFile afImg : resultFile) {
@@ -459,7 +459,7 @@ public class AcController {
 		ac.getAfa().setAfal(afal);
 		log.info("편의시설 이름 추가 : " + afal);
 		log.info("////////////////////////////");
-
+		log.info("휴무일 추가 : "+ac.getArv());
 		int result = service.updateAc(ac);
 		return ac.getAcId();
 	}
@@ -551,5 +551,14 @@ public class AcController {
 		param.put("apId", apId);
 		param.put("comment", comment);
 		return service.rejectRefund(param);
+	}
+	
+	@GetMapping("/mypageAcHeart")
+	@ResponseBody
+	public List<Accommodation> mypageAcHeart() {
+		Member member = (Member) session.getAttribute("loginMember");
+		String memberId = String.valueOf(member.getMemberId());
+		
+		return service.mypageAcHeart(memberId);
 	}
 }
