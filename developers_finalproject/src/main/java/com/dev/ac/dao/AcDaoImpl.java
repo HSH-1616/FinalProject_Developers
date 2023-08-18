@@ -321,7 +321,7 @@ public class AcDaoImpl implements AcDao {
 
 	@Override
 	public List<Accommodation> mypageAcHeart(SqlSessionTemplate session, String memberId) {
-		return session.selectList("accommodation.mypageHeart",memberId);
+		return session.selectList("accommodation.mypageAcHeart",memberId);
 	}
 	
 }

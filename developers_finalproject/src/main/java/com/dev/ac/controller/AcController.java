@@ -553,12 +553,12 @@ public class AcController {
 		return service.rejectRefund(param);
 	}
 	
-	@PostMapping("/mypageAcHeart")
+	@GetMapping("/mypageAcHeart")
 	@ResponseBody
 	public List<Accommodation> mypageAcHeart() {
 		Member member = (Member) session.getAttribute("loginMember");
 		String memberId = String.valueOf(member.getMemberId());
-		
+		System.out.println(service.mypageAcHeart(memberId));
 		return service.mypageAcHeart(memberId);
 	}
 }
