@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
 
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
@@ -11,7 +12,7 @@
       href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
       type="text/css"
     />
-    <script>document.execCommand('defaultParagraphSeparator', false, 'p');</script>
+    <!-- <script>document.execCommand('defaultParagraphSeparator', false, 'p');</script> -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 
@@ -20,7 +21,7 @@
     <div class="container p-3 nw-container">
 
         <div><h3 class="text-center">공지사항 작성</h3></div>
-        <form action="/notice/insertNotice.do" class="notice-form" method="post">
+        <form action="${path }/notice/insertNotice.do" class="notice-form" method="post">
             <table class="table notice-table">
                 <colgroup>
                     <col style="width: 20%">
@@ -112,17 +113,20 @@
                 </tr>
             </table>
             <div class="d-flex justify-content-center mt-4">
-           <button type="button" class="w-btn" onclick="noticeWrite();">등록하기</button>&nbsp;
+           <button type="button" class="w-btn" onclick="noticeWrite();">등록하기</button>&nbsp;&nbsp;
            <button type="reset" class="w-btn" onclick="cancelNotice();">취소</button>
                 </div>
         </form>
 
     </div>
 </section>
-    <script src="${path }/js/notice/notice.js"></script>
+<script src="${path }/js/notice/notice.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
 
 <script>
+
+
+
 Dropzone.autoDiscover = false;
 let fileName;
 var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
@@ -133,7 +137,7 @@ dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
 const dropzone = new Dropzone(".dropzone", {
 	autoProcessQueue: false,
 	paramName: "files",
-	url: "/ncCommon/noticeUploadFile.do", // 파일을 업로드할 서버 주소 url.
+	url: "<c:out value='${path}'/>/ncCommon/noticeUploadFile.do", // 파일을 업로드할 서버 주소 url.
 	method: "post", // 기본 post로 request 감. put으로도 할수있음
 	uploadMultiple: false,
 	maxFiles: 1,
@@ -146,7 +150,7 @@ const dropzone = new Dropzone(".dropzone", {
 		var submitButton = document.querySelector("#file-submit");
 		var myDropzone = this; //closure
 		submitButton.addEventListener("click", function() {
-			console.log("업로드"); //tell Dropzone to process all queued files
+			console.log("업로드");
 			
 			myDropzone.processQueue();
 			
@@ -159,8 +163,8 @@ const dropzone = new Dropzone(".dropzone", {
 			var str = "";
 	
 			str += "<div>";
-			str += "<img src='/upload/notice/" + fileName + "' style='width:400px'; height:400px' readonly>";
-			str += "<button type='button' class='removeBtn' data-name='" + fileName + "'>Remove</button>";
+			str += "<img src='<c:out value='${path}'/>/upload/notice/" + fileName + "' style='width:400px'; height:400px' readonly>";
+			str += "<button type='button' class='removeBtn s-btn' data-name='" + fileName + "'>Remove</button>";
 			str += "</div>";
 			str += "<br><br>";
 	

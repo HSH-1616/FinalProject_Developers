@@ -15,11 +15,11 @@ public interface TourisService {
 	List<Touris> selecttourislist(String areaEng);
 	List<Touris> searchtouris(Map<String, Object> param);
 	int inserttourismember(int loginmemberid, String tustartDate, String tuendDate, String registrationDate, List<Map> tourismemberdata);
-	int myPageTourisRouteCount();
+	int myPageTourisRouteCount(int loginmemberid);
 	List<TourisMember> myPageTourisRoute(int loginmemberid, Map params);
 	List<TourisMember> myPageTourisRouteList(int loginmemberid);
 	int tourisListCount();
 	List<Touris> tourislist(Map<String,Object> param);
-	
+	int deleteroute(int tuId);
 	
 }

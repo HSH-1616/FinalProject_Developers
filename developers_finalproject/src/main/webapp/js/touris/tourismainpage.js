@@ -1,4 +1,9 @@
 // /모달창 js/ 
+
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex));
+};
 $(document).ready(function () {
 		  let isDataLoaded = false;
 		  let clickedText = ""; // 클릭한 텍스트를 저장하는 변수
@@ -16,7 +21,7 @@ $(document).ready(function () {
 	    function loadData(areaName) {
 	        // 데이터를 로드하는 함수
 	        $.ajax({
-	            url: path+"/touris/selecttourisarea",
+	            url: getContextPath()+"/touris/selecttourisarea",
 	            method: "get",
 	            data: {
 	                'areaName': areaName
@@ -77,4 +82,7 @@ $(document).ready(function () {
 		    closeModal();
 		  });
 		});
+		
+		
+		
 // /모달창 js/

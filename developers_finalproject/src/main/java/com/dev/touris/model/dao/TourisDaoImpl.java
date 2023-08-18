@@ -51,8 +51,8 @@ public class TourisDaoImpl implements TourisDao {
 		return session.insert("touris.inserttourisroute", routedata);
 	}
 	@Override
-	public int myPageTourisRouteCount(SqlSessionTemplate session) {
-		return session.selectOne("touris.myPageTourisRouteCount");
+	public int myPageTourisRouteCount(SqlSessionTemplate session, int loginmemberid) {
+		return session.selectOne("touris.myPageTourisRouteCount", loginmemberid);
 	}
 	@Override
 	public List<TourisMember> myPageTourisRoute(SqlSessionTemplate session, int loginmemberid, Map param) {
@@ -74,6 +74,10 @@ public class TourisDaoImpl implements TourisDao {
 	@Override
 	public int tourisListCount(SqlSessionTemplate session) {
 		return session.selectOne("touris.tourisListCount");
+	}
+	@Override
+	public int deleteroute(SqlSessionTemplate session, int tuId) {
+		return session.delete("touris.deleteroute", tuId);
 	}
 	
 

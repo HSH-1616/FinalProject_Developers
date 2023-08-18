@@ -11,7 +11,7 @@ var refundPrice = $("input[name=refundPrice]").val()
 
 function refundKaKao() {
 	$.ajax({
-		url: "/pay/kakaoRefund",
+		url: getContextPath()+"/pay/kakaoRefund",
 		method: "POST",
 		data: {
 			apId: apId,
@@ -39,7 +39,7 @@ function refundKaKao() {
 
 function refundCard() {
 	$.ajax({
-		url: "/pay/refundIamport",
+		url: getContextPath()+"/pay/refundIamport",
 		type: "POST",
 		data: {
 			apId: apId,
@@ -78,7 +78,7 @@ function rejectRefund() {
 		// 이후 처리되는 내용.
 		if (comment) {
 			$.ajax({
-				url: "/ac/rejectRefund",
+				url: getContextPath()+"/ac/rejectRefund",
 				type: "POST",
 				data: {
 					apId: apId,
@@ -102,7 +102,7 @@ function rejectRefund() {
 					location.replace(getContextPath() + "/paymentList");
 				}
 			});
-
 		}
+		
 	})()
 }

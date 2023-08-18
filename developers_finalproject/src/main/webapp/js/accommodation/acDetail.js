@@ -25,7 +25,7 @@ $(document).on("click", "#detailHeart", function(e) {
 	if ($("#detailHeartOn").css("display") == "none") {
 
 		$.ajax({
-			url: "/ac/insertHeart",
+			url: getContextPath()+"/ac/insertHeart",
 			data: {
 				memberId: memberId,
 				acId: acId
@@ -36,7 +36,7 @@ $(document).on("click", "#detailHeart", function(e) {
 					$("#detailHeartOff").hide();
 					swal({
 						title: "찜하기에 등록되었습니다!",
-						imageUrl: "../../images/accommodation/heartIcon.png",
+						imageUrl: getContextPath()+"/images/accommodation/heartIcon.png",
 						imageWidth: 200,
 						imageHeight: 200,
 						confirmButtonText: "확인",
@@ -47,7 +47,7 @@ $(document).on("click", "#detailHeart", function(e) {
 		})
 	} else {
 		$.ajax({
-			url: "/ac/deleteHeart",
+			url: getContextPath()+"/ac/deleteHeart",
 			data: {
 				memberId: memberId,
 				acId: acId

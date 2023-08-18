@@ -21,7 +21,7 @@ public interface CommunityService {
 	Community communityView(int no);
 	int insertCommunity(Community m);
 	String communitySaveFile(MultipartFile file,HttpSession session);
-	int communityCount();
+	int communityCount(int memberId);
 	int communitySaveFileDB(CommunityFile file);
 	int removeCommunityFile(String fileName,HttpSession session);
 	int communityLike(int id, int no);

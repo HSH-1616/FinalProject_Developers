@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.dev.food.model.dto.Food;
@@ -24,6 +25,12 @@ public class FoodDaoImpl implements FoodDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	private final JdbcTemplate jdbcTemplate;
+
+    public FoodDaoImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    
 	@Override
 	public int insertFood(SqlSession session, FoodTemp f) {
 		return session.insert("food.insertFood", f);
@@ -234,19 +241,28 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public List<FoodHeart> fdHeart(SqlSessionTemplate session, int no){
-		return session.selectList("food.fdHeart",no);
+	public int updateHeart(SqlSessionTemplate session, Map param) {
+		return session.update("food.updateHeart",param);
 	}
-
+	
+	@Override
+	public int cancleHeart(SqlSessionTemplate session, Map param) {
+		return session.delete("food.cancleHeart",param);
+	}
+	
 	/*
 	 * @Override public int getHeartCount(SqlSession session, Map params) { return
 	 * session.selectOne("food.getHeartCount", params); }
 	 */
-	
+
 	@Override
 	public List<Food> getFoodsSortedByTitle(SqlSession session, Map<String, Object> params, String sortType) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int addFood(SqlSessionTemplate session, Food food) {
+		return session.insert("food.addFood", food);
 	}
 	
 	@Override
@@ -258,4 +274,5 @@ public class FoodDaoImpl implements FoodDao {
 	public int selectFoodBlackListCount(SqlSession session) {
 		return session.selectOne("food.selectFoodBlackListCount");
 	}
+
 }

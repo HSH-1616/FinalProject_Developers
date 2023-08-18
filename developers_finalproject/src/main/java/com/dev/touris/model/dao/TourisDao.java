@@ -23,9 +23,10 @@ public interface TourisDao {
 	List<Touris> searchtouris(SqlSessionTemplate session, Map<String, Object> param);
 	int inserttourisroute(SqlSessionTemplate session, Map routedata);
 	int inserttourismember(SqlSessionTemplate session, Map tourismemberdata);
-	int myPageTourisRouteCount(SqlSessionTemplate session);
+	int myPageTourisRouteCount(SqlSessionTemplate session, int loginmemberid);
 	List<TourisMember> myPageTourisRoute(SqlSessionTemplate session, int loginmemberid, Map param);
 	List<TourisMember> myPageTourisRouteList(SqlSessionTemplate session, int loginmemberid);
 	int tourisListCount(SqlSessionTemplate session);
 	List<Touris> tourislist(SqlSessionTemplate session, Map<String,Object> param);
+	int deleteroute(SqlSessionTemplate session, int tuId);
 }

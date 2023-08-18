@@ -619,49 +619,36 @@ public class FoodController {
 		}
 	}
 
-	//좋아요 기능
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/food/toggleHeart") public int toggleHeart(@RequestParam Map
-	 * params, int fhNo, String memberId, int foodNo) {
-	 * 
-	 * params.put("fhNo", fhNo); params.put("memberId", memberId);
-	 * params.put("foodNo", foodNo);
-	 * 
-	 * int updatedCount = service.toggleHeartAndGetCount(params); return
-	 * updatedCount; }
-	 */
-	
 	@GetMapping("/insertHeart")
 	@ResponseBody
-	public int insertHeart(@RequestParam Map param, HttpSession session) {
+	public int insertHeart(@RequestParam Map param, HttpSession session, int foodNo) {
 		Member loginMember=(Member)session.getAttribute("loginMember");
 		param.put("memberId", loginMember.getMemberId());
+		param.put("foodNo", foodNo);
 		int result = service.insertHeart(param);
 		return result;
 	}
 
 	@GetMapping("/deleteHeart")
 	@ResponseBody
-	public int deleteHeart(@RequestParam Map param,HttpSession session) {
+	public int deleteHeart(@RequestParam Map param,HttpSession session, int foodNo) {
 		Member loingMember=(Member)session.getAttribute("loginMember");
 		param.put("memberId", loingMember.getMemberId());
+		param.put("foodNo", foodNo);
 		int result = service.deleteHeart(param);
 		return result;
 	}
 	
-	
 	/*
-	 * //분류기능(제목)
-	 * 
-	 * @GetMapping("/foodListTitle.do") public String
-	 * foodListTitle(@RequestParam("sortFilter") String sortFilter, Model model) {
-	 * // 여기에서 sortFilter를 기준으로 필요한 데이터를 가져오는 로직을 구현 // 데이터를 모델에 담아서 JSP로 전달
-	 * model.addAttribute("foods", sortedFoods); // foods는 JSP에서 사용하는 변수명, 가져온 데이터를
-	 * 할당해야 합니다.
-	 * 
-	 * return "foodList	"; }
+	 * @GetMapping("/add") public String showAddForm(Model model) {
+	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
+	
+	@PostMapping("/add")
+    public String addFood(Food food) {
+        service.addFood(food);
+        
+        return "redirect:/food/add";
+    }
 	
 }

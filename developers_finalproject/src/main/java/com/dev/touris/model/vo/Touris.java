@@ -31,5 +31,6 @@ public class Touris {
 	private String tourisDayoff;
 	private String tourisAreaId;
 	private List<TourisImages> tourisImages;
+	List<TourisRoute> tourisroutes2;
 
 }

@@ -408,9 +408,6 @@ function handleImgsFiles(e) {
 		}
 		reader.readAsDataURL(f)
 	})
-
-
-
 }
 
 $(document).on("click", ".blurPreview", function() {
@@ -429,9 +426,7 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	fileArray.splice(seq, 1);
 	fileArray.forEach(file => { dataTransfer.items.add(file); });
 	$('input[name=afImage]')[0].files = dataTransfer.files;
-	
-	
-	
+		
 	if ($(this).parents(".previewImgWrap").children(".mainCheck").css("display") == "flex") {
 		$(this).parents(".previewImgWrap").remove()
 		$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
@@ -567,7 +562,7 @@ function registOk() {
 	})
 
 	$.ajax({
-		url: "/ac/insertRegist",
+		url: getContextPath()+"/ac/insertRegist",
 		type: "post",
 		data: form,
 		processData: false,
@@ -581,12 +576,12 @@ function registOk() {
 				confirmButtonColor: "#20c997",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.replace(getContextPath() + "/acDetail?no=" + data);
+					location.replace(getContextPath() + "/ac/acDetail?no=" + data);
 				}
 			})
 		},
 		error: function(data) {
-			location.replace("/ac/acError")
+			location.replace(getContextPath()+"/ac/acError")
 		}
 	});
 
@@ -655,7 +650,7 @@ function updateOk() {
 	})
 
 	$.ajax({
-		url: "/ac/updateAc",
+		url: getContextPath()+"/ac/updateAc",
 		type: "post",
 		data: form,
 		processData: false,
@@ -669,12 +664,12 @@ function updateOk() {
 				confirmButtonColor: "#20c997",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.replace(getContextPath() + "/acDetail?no=" + data);
+					location.replace(getContextPath() + "/ac/acDetail?no=" + data);
 				}
 			})
 		},
 		error: function(data) {
-			location.replace("/ac/acError")
+			location.replace(getContextPath()+"/ac/acError")
 		}
 	});
 }

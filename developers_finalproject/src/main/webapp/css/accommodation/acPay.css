@@ -80,7 +80,6 @@
 
 #payCategory{
 	display: flex;
-	justify-content: space-between;
 }
 
 .pcBtn{
@@ -94,6 +93,7 @@
 	align-items: center;
 	border : 2px solid #d8d8d8;
 	font-size: 1.2rem;
+	margin-right: 30px;
 }
 
 .pcBtn img{
@@ -110,10 +110,6 @@
 .pcBtn>span{
 	position: relative;
 	top: 1px;
-}
-
-.pcBtn:nth-of-type(2){
-	border: 3px solid #1EC800;
 }
 
 

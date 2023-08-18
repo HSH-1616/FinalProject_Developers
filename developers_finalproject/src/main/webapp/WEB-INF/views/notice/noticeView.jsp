@@ -4,6 +4,7 @@
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${path }/css/noticeAndCommunity/coStyle.css" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
@@ -27,9 +28,9 @@
             
         </div>
 			<div class="text-center mb-3">
-				<button type="button" class="s-btn" onclick="location.href='/notice/noticeList.do'">목록</button> 
-				<c:if test="${logimAdmin!=null }">
-				<button type="button" class="s-btn" onclick="location.href='/notice/updateNoticePage.do?no=${notice.noticeNo}'">수정하기</button>
+				<button type="button" class="s-btn" onclick="location.href='${path}/notice/noticeList.do'">목록</button> 
+				<c:if test="${loginAdmin!=null }">
+				<button type="button" class="s-btn" onclick="location.href='${path }/notice/updateNoticePage.do?no=${notice.noticeNo}'">수정하기</button>
 	            <button type="button" class="s-btn" onclick="deleteNotice(${notice.noticeNo}); $('.removeBtn').trigger('click');">삭제하기</button>
 	      		</c:if>
             </div>
