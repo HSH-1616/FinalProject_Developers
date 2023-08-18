@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="sweetalert2.min.css">
 <div class="container-fluid full-width row">
 	<div class="col my-5">
-		<h3 class="fs-4 mb-3">관광지 관리</h3>
+		<h3 class="fs-4 mb-3">숙박업소 관리</h3>
 		<div style="display:flex;justify-content:space-between;margin-bottom:30px">
 			<span>숙박업소 : ${totalData}개</span>
 			<button type="button" class="btn btn-success btn-sm"

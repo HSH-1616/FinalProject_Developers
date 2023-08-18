@@ -199,6 +199,12 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		return dao.mypageCommunity(session, memberId, params);
 	}
+
+	@Override
+	public List<Community> communityMain() {
+		
+		return dao.communityMain(session);
+	}
 	
 	
 
