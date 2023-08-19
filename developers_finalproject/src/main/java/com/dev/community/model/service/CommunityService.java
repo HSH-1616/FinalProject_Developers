@@ -33,5 +33,5 @@ public interface CommunityService {
 	int updateCommunity(Community c);
 	int deleteCommunity(int communityNo,HttpSession hsession);
 	List<Community> mypageCommunity(int memberId, Map<String, Object> params);
-	
+	List<Community> communityMain();
 }

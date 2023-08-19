@@ -217,7 +217,7 @@ public class AdminController {
 		param.put("numPerpage", numPerpage);
 		int totalData = acService.paymentListCount();
 		
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectPayAll", type));
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "paymentList", type));
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("ap", acService.paymentList(param));
 		
