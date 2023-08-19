@@ -111,7 +111,7 @@
 										<c:if test="${al.reviewGrade!='0.0'}">
 											<span class="star"> ★★★★★ <span
 												<c:set var="star" value="20" />
-												style="width: ${al.reviewGrade * star}">★★★★★</span>
+												style="width: ${al.reviewGrade * star}%">★★★★★</span>
 											</span>
 										</c:if>
 										<c:if test="${al.reviewGrade=='0.0'}">
