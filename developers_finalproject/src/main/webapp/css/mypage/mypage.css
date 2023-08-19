@@ -139,14 +139,22 @@
     overflow-x: auto;*/
     display: flex;
 }
-.favorite{
+.favorite,.favorite2,.favorite3{
 	width: 100%;
 	display: flex;
 	/*position: relative;*/
 	
 }
-
-.cardarea{
+/*.favorite2{
+	display: none;
+}
+.foodcardarea{
+	
+}
+.favorite3{
+	display: none;
+}*/
+.cardarea, .foodcardarea, .hotelcard{
 	margin: 1rem;
 	transition-duration: .2s;
 	border-radius: 0.5rem;
@@ -155,6 +163,7 @@
 	height: auto;
 	width: 200px;
 }
+
 .cardimgarea{
 	padding: 0.5rem;
 }
@@ -252,10 +261,11 @@
 	font-size: 1.5rem;
 	font-weight: 700
 }
-.myschedulcardarea{
+.myschedulcardarea, .mycommuntiyarea, .myfoodreivewarea, .myhotelarea{
 	margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
 .myschedulcard{
 	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
     border-radius: 8px;
@@ -520,39 +530,48 @@
 	height: 100%;
 	fill: rgb(255, 128, 64);
 }
-.myreviewcontentarea{
-	width: 800px;
+.myreviewcontentarea, .myreviewcontentarea1{
+	width: 600px;
 	position: relative;
     top: 4px;
     padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    left: -70px;
 }
 
 .cirledaytext {
 	left: 8.5px;
 	position: relative;
 }
-.myreviewupdatearea .circleday{
+.myreviewupdatearea1 .circleday{
 	background-color : #b31312;
 }
-.myreviewdeletearea .circleday{
-	background-color : #b31312;
+.myreviewdeletearea2 .circleday{
+	background-color : rgb(0, 0, 0);
 }
-.myreviewupdatearea{
+.myreviewupdatearea1{
+	left:1;
 	width: 50px;
 }
-.myreviewdeletearea{
+.myreviewdeletearea2{
 	width: 50px;
 	/*margin-left: 10px;*/
 }
 
-.myreviewupdatearea,  .myreviewdeletearea{
+.myreviewupdatearea1,  .myreviewdeletearea{
+	width: 130px;
+	right: 50px;
 	justify-content: center;
     align-items: center;
     display: flex;
     width: 60px;
     position: relative;
     top: 1;	
+    left: 1px;
 }
+
 /*호텔 내역 */
 .mypagehotelcontentarea{
 	position: relative;
@@ -3154,4 +3173,7 @@ position: relative;
 }
 .nonetuId{
 	display: none;
+	}
+	.noneid{
+		display: none;
 	}

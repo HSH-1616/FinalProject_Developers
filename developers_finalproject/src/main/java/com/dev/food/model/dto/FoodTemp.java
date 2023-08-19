@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FoodTemp {
 
+	private int foodId;
 	private int foodNo;
 	private String foodName;
 	private String foodAddress;
-	private String foodType;
 	private String foodOpenTime;
 	private String foodMenu;
 	private String foodPhone;

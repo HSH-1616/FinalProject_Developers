@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dev.member.model.dto.Member;
 import com.dev.touris.model.vo.Touris;
+import com.dev.touris.model.vo.TourisHeart;
 import com.dev.touris.model.vo.TourisTemp;
 
 @Repository
@@ -45,6 +46,10 @@ public class TourisDetailDaoImpl implements TourisDetailDao {
 	@Override
 	public void deleteTourisTemp(SqlSession session) {
 		session.delete("tourisDetail.deleteTourisTemp");
+	}
+	@Override
+	public List<TourisHeart> tourisheart(SqlSession session, int memberId) {
+		return session.selectList("tourisDetail.tourisHeart", memberId);
 	}
 
 }

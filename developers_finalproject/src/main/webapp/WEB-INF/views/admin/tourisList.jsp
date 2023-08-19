@@ -10,6 +10,12 @@
 	#search-tourisAreaId{
 	display:none;
 	}
+	a{
+	text-decoration: none;
+	color: #464646;
+	}
+	a:active,a:hover {
+    color: #1341ff;
 </style>
 <script>
 	/* console.log("${tourises[0]}"); */
@@ -140,7 +146,7 @@
 	                        </c:choose>
 	                        <c:choose>
 		                        <c:when test="${not empty t.tourispage }">
-		                       		<td>있음</td>
+		                       		<td>${t.tourispage}</td>
 		                        </c:when>
 		                        <c:otherwise>
 			                        <td>-</td>

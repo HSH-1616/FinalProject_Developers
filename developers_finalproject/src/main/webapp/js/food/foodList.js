@@ -1,3 +1,35 @@
+// 초기 상태 설정
+    let liked = false;
+
+    // 좋아요 버튼 클릭 이벤트 처리
+    const likeButton = document.querySelector('.like');
+    likeButton.addEventListener('change', function () {
+        liked = this.checked;
+        updateIcon();
+    });
+
+    // 아이콘 업데이트 함수
+    function updateIcon() {
+        const checkmark = document.querySelector('.checkmark');
+        const outlineIcon = checkmark.querySelector('.outline');
+        const filledIcon = checkmark.querySelector('.filled');
+        const celebrateIcon = checkmark.querySelector('.celebrate');
+
+        if (liked) {
+            outlineIcon.style.display = 'none';
+            filledIcon.style.display = 'block';
+            celebrateIcon.style.display = 'block';
+        } else {
+            outlineIcon.style.display = 'block';
+            filledIcon.style.display = 'none';
+            celebrateIcon.style.display = 'none';
+        }
+    }
+
+    // 초기 아이콘 상태 설정
+    updateIcon();
+
+
 const sortFoodByTitle = (no, numPerpage) => {
 
 	$.ajax({

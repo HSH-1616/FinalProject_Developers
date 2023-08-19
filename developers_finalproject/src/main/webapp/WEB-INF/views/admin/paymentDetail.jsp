@@ -24,8 +24,47 @@
 										alt="" />
 								</c:if>
 							</c:forEach>
+							
+							<c:set var="now" value="<%=new java.util.Date()%>" />
+							<c:set var="nowDate">
+								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />
+							</c:set>
+							<fmt:parseDate value="${nowDate}" var="nowCheck"
+								pattern="yyyy-MM-dd" />
+							<fmt:parseNumber value="${nowCheck.time / (1000*60*60*24)}"
+								integerOnly="true" var="nowRefund"></fmt:parseNumber>
+							<fmt:parseDate value="${ra.arv.checkIn }" var="checkInDate"
+								pattern="yyyy-MM-dd" />
+							<fmt:parseNumber value="${checkInDate.time / (1000*60*60*24)}"
+								integerOnly="true" var="checkIn"></fmt:parseNumber>
+							<fmt:parseDate value="${ra.arv.checkOut }" var="checkOutDate"
+								pattern="yyyy-MM-dd" />
+							<fmt:parseNumber value="${checkOutDate.time / (1000*60*60*24)}"
+								integerOnly="true" var="checkOut"></fmt:parseNumber>
+							
+							<c:if test="${checkIn-nowRefund>3}">
+								<c:set var="refundPrice" value="${ra.apPrice}"></c:set>
+							</c:if>
+
+							<c:if test="${checkIn-nowRefund<=3 && nowRefund-checkIn>1 }">
+								<c:set var="refundPrice">
+									<fmt:formatNumber value="${ra.apPrice*0.5}" pattern="0" />
+								</c:set>
+							</c:if>
+
+							<c:if test="${checkIn-nowRefund<=1&&nowRefund<checkIn }">
+								<c:set var="refundPrice">
+									<fmt:formatNumber value="${ra.apPrice*0.2}" pattern="0" />
+								</c:set>
+							</c:if>
+							<c:if test="${checkIn<nowRefund}">
+								<c:set var="refundPrice" value="0">
+								</c:set>
+							</c:if>
+
 							<input type="hidden" name="apId" value="${ra.apId }">
-							<input type="hidden" name="refundPrice" value="${ra.apr.aprPrice}">
+							<input type="hidden" name="refundPrice" value="${refundPrice}" />">
+							
 							<div>
 								<div class="payInfoTitle">
 									<div class="payInfoType">
@@ -70,15 +109,17 @@
 											<span>결제일자</span> <span>${ra.apDate}</span>
 										</div>
 									</div>
+								
 									<div class="payInfoTypeCon">
 										<div class="payInfoType">
-											<span>취소일자</span> <span>${ra.apReDate}</span>
+											<span>숙박일</span> 
+											<span>${ra.arv.checkIn} ~ ${ra.arv.checkOut}</span>
 										</div>
 									</div>
 									<div class="payInfoTypeCon">
 										<div class="payInfoType">
-											<span>결제 금액</span> <span><fmt:formatNumber
-													value="${ra.apPrice}" type="currency" currencySymbol="₩" /></span>
+											<span>인원</span> 
+											<span>${ra.apPeople}</span>
 										</div>
 									</div>
 								</div>
@@ -89,12 +130,11 @@
 						</div>
 						<div class="hotelPayDetailInfo">
 							<div class="payDetailPrice">
-								<h4>환불 예정 금액</h4>
-
+								<h4>결제 금액</h4>
 								<div>
 									<h4>
 										총합 :
-										<fmt:formatNumber value="${ra.apr.aprPrice}" type="currency"
+										<fmt:formatNumber value="${ra.apPrice}" type="currency"
 											currencySymbol="₩" />
 									</h4>
 								</div>
@@ -103,40 +143,103 @@
 					</div>
 				</div>
 			</div>
-			<div class="hotelPayInfoCon">
-				<div class="hotelPayInfo">
-					<hr />
-					<div id="payInfo">
-						<h3>예약 취소 사유</h3>
-					</div>
-					<div class="refundContent">
-						<div>
-							<h5>
-								환불 사유 : <span style="color: #20c997;">${ra.apr.aprReason }</span></span>
-							</h5>
-							<textarea rows="" cols="" readonly>${ra.apr.aprContent }</textarea>
-						</div>
-
-						<hr />
-
-					</div>
-				</div>
-
-			</div>
 			<div id="hotelPayBtnCon">
+			<c:if test="${checkIn>nowRefund}">
 				<c:if test="${fn:substring(ra.apOrderId,0,1)=='C' }">
-					<button class="hotelPayBtn" onclick="refundCard()">환불 승인</button>
+					<button class="hotelPayBtn" style="background-color : #b31312" onclick="refundCard(${ra.apId},${refundPrice},${checkIn},${nowRefund})">결제 취소</button>
 				</c:if>
 				<c:if test="${fn:substring(ra.apOrderId,0,1)=='K' }">
-					<button class="hotelPayBtn" onclick="refundKaKao()">환불 승인</button>
+					<button class="hotelPayBtn" style="background-color : #b31312" onclick="refundKaKao(${ra.apId},${refundPrice},${checkIn},${nowRefund})">결제 취소</button>
 				</c:if>
-				<button class="hotelPayBtn" onclick="rejectRefund()">환불 반려</button>
-				<button class="hotelPayBtn" onclick="javascript:history.back()">취소</button>
+			</c:if>	
+				<button class="hotelPayBtn" style="background-color : #afafaf" onclick="javascript:history.back()">뒤로 가기</button>
 			</div>
 		</div>
 	</div>
 	</div>
 
-	<script src="${path }/js/accommodation/paymentDetail.js"></script>
+	<script>
+	
+	function refundKaKao(apId,refundPrice,checkIn,nowRefund) {
+		var diff=checkIn-nowRefund
+		Swal.fire({
+			icon: 'success',
+			iconColor: '#20c997',
+			title: "체크인 기준 "+diff+"일전\n환불 가능 금액은 "+refundPrice+"원 입니다.",
+			confirmButtonText: "승인",
+			confirmButtonColor: "#20c997",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: "${path}/pay/kakaoRefundAdmin",
+					method: "POST",
+					data: {
+						apId: apId,
+						refundPrice: refundPrice,
+					},
+					success: function(data) {
+						Swal.fire({
+							icon: 'success',
+							iconColor: '#20c997',
+							title: "승인 완료",
+							confirmButtonText: "확인",
+							confirmButtonColor: "#20c997",
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.replace("${path}admin/paymentList");
+							}
+						})
+					},
+					error: function(result) {
+						alert("결제금액 환불실패.");
+						location.replace("${path}admin/paymentList");
+					}
+				})					
+			}
+		})
+		
+		
+	}
+
+	function refundCard(apId,refundPrice,checkIn,nowRefund) {
+		var diff=checkIn-nowRefund
+		Swal.fire({
+			icon: 'success',
+			iconColor: '#20c997',
+			title: "체크인 기준 "+diff+"일전\n환불 가능 금액은 "+refundPrice+"원 입니다.",
+			confirmButtonText: "승인",
+			confirmButtonColor: "#20c997",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: "${path}/pay/refundIamportAdmin",
+					method: "POST",
+					data: {
+						apId: apId,
+						refundPrice: refundPrice,
+					},
+					success: function(data) {
+						Swal.fire({
+							icon: 'success',
+							iconColor: '#20c997',
+							title: "승인 완료",
+							confirmButtonText: "확인",
+							confirmButtonColor: "#20c997",
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.replace("${path}admin/paymentList");
+							}
+						})
+					},
+					error: function(result) {
+						alert("결제금액 환불실패.");
+						location.replace("${path}admin/paymentList");
+					}
+				})					
+			}
+		})
+	}
+	
+	</script>
 </section>
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp" />

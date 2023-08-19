@@ -281,7 +281,7 @@ $(document).on("click", ".insertFcDelete", function(e) {
 	}
 
 	for (var i = 0; i < afalImgSrc.length; i++) {
-		if (afalImgSrc[i].afalImg === $(this).parent().prev("img").attr("src").replace("/images/upload/accommodation/afal/", "")) {
+		if (afalImgSrc[i].afalImg === $(this).parent().prev("img").attr("src").replace(path+"/images/upload/accommodation/afal/", "")) {
 			afalImgSrc.splice(i, 1);
 		}
 	}
@@ -391,7 +391,7 @@ function handleImgsFiles(e) {
 			var img_html = "<img class='previewImg' src=\"" + e.target.result + "\" />"
 
 			const div = $('<div class="previewImgWrap">')
-			const blur = $('<div class="blurPreview"><img alt="" src="/images/accommodation/checkImage.png"></div > ')
+			const blur = $('<div class="blurPreview"><img alt="" src="${path}/images/accommodation/checkImage.png"></div > ')
 			const main = $('<div class="mainCheck"><div>메인</div></div>')
 			const icon = $('<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>')
 			const input = $('<input type="hidden" name="afMain" value="N">')
@@ -426,7 +426,7 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	fileArray.splice(seq, 1);
 	fileArray.forEach(file => { dataTransfer.items.add(file); });
 	$('input[name=afImage]')[0].files = dataTransfer.files;
-		
+
 	if ($(this).parents(".previewImgWrap").children(".mainCheck").css("display") == "flex") {
 		$(this).parents(".previewImgWrap").remove()
 		$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
@@ -436,25 +436,21 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 		$(this).parents(".previewImgWrap").remove()
 	}
 	if (acFiles.length) {
+		var acFileSize = acFiles.length;
 		for (var i = 0; i < acFiles.length; i++) {
-			if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
+			if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace(path+"/images/upload/accommodation/", "")) {
 				acFiles.splice(i, 1);
+				acFileSize--
 			}
 		}
-		sel_files.splice(num-acFiles.length,1)
-	}else{
-		sel_files.splice(num,1)
-	}
-	for (var i = 0; i < sel_files.length; i++) {
-		if (sel_files[i].name === $(this).nextAll("img").attr("src").replace("/images/upload/accommodation/", "")) {
-			sel_files.splice(i, 1)
+		if (acFileSize != acFiles.length) {
+			sel_files.splice(num - acFiles.length, 1)
 		}
-	}
-	
-	console.log(num)
-	console.log(acFiles)
-	console.log(sel_files)
-
+	} else {
+		sel_files.splice(num, 1)
+	}	
+	console.log("기존파일 : "+acFiles)
+	console.log("새로 추가한 파일 : "+sel_files)
 });
 
 //등록 양식 체크
@@ -562,7 +558,7 @@ function registOk() {
 	})
 
 	$.ajax({
-		url: getContextPath()+"/ac/insertRegist",
+		url: path + "/ac/insertRegist",
 		type: "post",
 		data: form,
 		processData: false,
@@ -576,12 +572,12 @@ function registOk() {
 				confirmButtonColor: "#20c997",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.replace(getContextPath() + "/ac/acDetail?no=" + data);
+					location.replace(path + "/ac/acDetail?no=" + data);
 				}
 			})
 		},
 		error: function(data) {
-			location.replace(getContextPath()+"/ac/acError")
+			location.replace(path + "/ac/acError")
 		}
 	});
 
@@ -650,7 +646,7 @@ function updateOk() {
 	})
 
 	$.ajax({
-		url: getContextPath()+"/ac/updateAc",
+		url: path + "/ac/updateAc",
 		type: "post",
 		data: form,
 		processData: false,
@@ -664,12 +660,12 @@ function updateOk() {
 				confirmButtonColor: "#20c997",
 			}).then((result) => {
 				if (result.isConfirmed) {
-					location.replace(getContextPath() + "/ac/acDetail?no=" + data);
+					location.replace(path + "/ac/acDetail?no=" + data);
 				}
 			})
 		},
 		error: function(data) {
-			location.replace(getContextPath()+"/ac/acError")
+			location.replace(path + "/ac/acError")
 		}
 	});
 }

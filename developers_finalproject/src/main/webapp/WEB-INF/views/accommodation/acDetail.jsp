@@ -523,18 +523,19 @@
 		// init 체크
 		if (!Kakao.isInitialized()) {
 			Kakao.init('737cdc9322ba7fec26566e0863b53498');
-		}
-
+		} 
+	
 		function kakaoShare() {
-			Kakao.Link.sendCustom({	
-					    templateId: 96691, // 메시지템플릿 번호
+			Kakao.Share.sendCustom({	
+					    templateId: 97428, // 메시지템플릿 번호
 					    templateArgs: {	
 					      IMG1 : "${path}/images/upload/accommodation/"+img1,
 					      IMG2 :  "${path}/images/upload/accommodation/"+img2,
 					      IMG3 :  "${path}/images/upload/accommodation/"+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
 					      THU : "${path}/images/common/logo.png",
-					      PATH : "${path}/ac/acDetail?no="+${ad.acId}
+					      PATH : "${path}/ac/acDetail?no=${ad.acId}",
+					      DESC : ""		  
 					    },
 					});
 		}
