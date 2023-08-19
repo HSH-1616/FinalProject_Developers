@@ -78,7 +78,9 @@
           </div>
         </div>
         <div id="communityImage">
-          <div class="card">
+        
+        
+        <%--   <div class="card">
             <div class="card-image">
               <a><img src="${path }/images/main/travel.jpg" /></a>
             </div>
@@ -125,7 +127,9 @@
                 By <span class="name">Abi</span> 4 days ago
               </div>
             </div>
-          </div>
+          </div> --%>
+          
+          
         </div>
       </div>
 

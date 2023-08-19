@@ -301,7 +301,7 @@
 							<h2>숙박기간</h2>
 							<hr />
 						</div>
-						<c:forEach var="arv" items="${ad.arv }">
+						<c:forEach var="arv" items="${arv }">
 							<input type="hidden" class="checkIn" val="${arv.checkIn }">
 							<input type="hidden" class="checkOut" val="${arv.checkOut }">
 						</c:forEach>
@@ -588,7 +588,7 @@
 		
 		var checkInOutDay = []
 		var checkHolyDay=[]
-		<c:forEach var="arv" items="${ad.arv}">
+		<c:forEach var="arv" items="${arv}">
 		<c:if test="${arv.apId!=0}">
 		checkInOutDay.push({
 			checkIn : "${arv.checkIn}",

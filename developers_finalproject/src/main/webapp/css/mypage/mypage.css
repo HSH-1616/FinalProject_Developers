@@ -261,12 +261,12 @@
 	font-size: 1.5rem;
 	font-weight: 700
 }
-.myschedulcardarea, .mycommuntiyarea, .myfoodreivewarea, .myhotelarea{
+.myschedulcardarea, .mycommuntiyarea, .myfoodreivewarea, .myhotelarea, .myfoodreviewarea{
 	margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.myschedulcard{
+.myschedulcard, .myfoodreivewmargin{
 	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
     border-radius: 8px;
     border: initial none!important;
@@ -274,6 +274,83 @@
     -o-border-image: initial!important;
     border-image: initial!important;
     margin-top: 20px;
+}
+.myfoodreivewwrap{
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 10px;
+}
+.myfoodreivewcard{
+	width: 300px;
+	height: 400px;
+	box-shadow: 0 2px 30px 0 rgba(31,38,135,.08)!important;
+    border-radius: 8px;
+    border: initial none!important;
+    border-color: initial!important;
+    -o-border-image: initial!important;
+    border-image: initial!important;
+    margin: 20px;
+}
+.myreivewimgarea{
+	height: 170px;
+}
+.myreivewimgarea img {
+	width: 100%;
+	height: 100%;
+	border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.reivewptag{
+	text-align: center;
+}
+.reivewspantag{
+	max-height: 75px;
+	display: -webkit-box;
+        -webkit-line-clamp: 2; /* 원하는 줄 수로 변경 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+}
+.myreivewsdayarea{
+	margin-left: 20px;
+}
+/*.myfoodreviewarea{
+	display: none;
+}*/
+.hiddenidtag{
+	display: none;
+}
+.stararea{
+	display:grid;
+	margin-top: 10px;
+}
+.starspan{
+	text-align: center;
+	
+	}
+.star{
+	position: relative;
+    font-size: 1.5rem;
+    color: #ddd;
+    bottom: 1px;
+    left: 50px;
+}
+.star span{
+	position: absolute;
+    left: 0;
+    color: #b31312;
+    overflow: hidden;
+    pointer-events: none;
+}
+.myreivewcontentarea{
+	height: 190px;
+}
+.myreivewcontentpadding{
+	padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    height: 100%;
 }
 .mypagehotelcard{
 	height: 400px;
@@ -283,6 +360,18 @@
     border: initial none!important;
     border-color: initial!important;
     border-image: initial!important;
+}
+.myfoodreivewpadding{
+	padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.myreivewpagebararea{
+	height: 45px;
 }
 .hotelcardimboxarea{
 	width: 100%;
