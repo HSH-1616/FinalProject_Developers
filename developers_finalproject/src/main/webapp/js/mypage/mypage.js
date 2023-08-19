@@ -131,11 +131,22 @@ const foodreivew = (cPage,numPerpage) =>{
 				
 				});
 			})
-			$('.pagebararea').html(data.pageBar);
+			$('.myreivewpagebararea').html(data.pageBar);
 		}
 	})
 }
 
+const hotelreivew = (cPage, numPerpage) => {
+	const memberId = $('.nickname').text();
+	$.ajax({
+		url: path+"/ac/mypageAcReview",
+		type: "get",
+		data: { memberId: memberId, cPage: cPage, numPerpage: numPerpage },
+		success: (data) => {
+			consol.log("데이터 나옴?" + data);
+		}
+	});
+}
 
 
 /*여행일정 가져오는 ajax*/
@@ -368,6 +379,9 @@ $("#communtitycontent").on("click", function(){
 $("#foodreivewcontent").on("click", function(){
 	foodreivew();
 });
+$("#hotelreviewcontent").on("click", function(){
+	hotelreivew();
+})
 	
 
 

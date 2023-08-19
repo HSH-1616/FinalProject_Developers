@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.dev.community.model.dto.Community;
 import com.dev.nc.common.PageFactory;
 import com.dev.touris.model.service.TourisService;
 import com.dev.touris.model.vo.Touris;

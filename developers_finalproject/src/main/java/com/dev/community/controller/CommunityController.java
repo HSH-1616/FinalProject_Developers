@@ -179,8 +179,8 @@ public class CommunityController {
 		Map<String, Object> result=new HashMap<>();
 		params.put("cPage",cPage);
 		params.put("numPerpage", numPerpage);
-		int totalData=service.communityCount(memberId);
-		String pageBar=PageFactory.getPage(cPage, numPerpage, totalData, "mypageCommunity");
+		int totalData = service.communityCount(memberId);
+		String pageBar = com.dev.nc.common.PageFactory.getPage(cPage, numPerpage, totalData, "mypageCommunity");
 		List<Community> list=service.mypageCommunity(memberId, params);
 		result.put("mypageCommunity", list);
 		result.put("pageBar", pageBar);
