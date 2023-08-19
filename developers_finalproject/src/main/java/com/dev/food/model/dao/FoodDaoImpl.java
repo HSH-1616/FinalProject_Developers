@@ -150,7 +150,7 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName) {
+	public int selectFoodPhotoByNo(SqlSession session, String fpName) {
 		return session.selectOne("food.selectFoodPhotoByNo",fpName);
 	}
 

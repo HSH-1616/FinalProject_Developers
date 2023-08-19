@@ -54,7 +54,7 @@ public interface FoodService {
 	
 	Food selectFoodByNo(int no);
 	
-	FoodPhoto selectFoodPhotoByNo(String fpName);
+	int selectFoodPhotoByNo(String fpName);
 	
 	String searchByFoodNo(int foodNo);
 	

@@ -169,8 +169,10 @@ public class FoodController {
 		int blackList = service.selectFoodBlackListCount();
 		//System.out.println("음식점 수 : "+result);
 		
+		apiCount = 6000;
+		
 		//api와 DB의 개수가 같지 않으면 업데이트
-		if(result+blackList != apiCount) {
+		if(result+blackList < apiCount) {
 			int currentNum = result; //api와 DB가 같지 않을 때 DB개수
 			
 			System.out.println("api -> DB");
@@ -437,9 +439,9 @@ public class FoodController {
 						.build();
 				
 				//FOOD_PHOTO에 해당하는 이미지가 있는지 조회
-				FoodPhoto f = service.selectFoodPhotoByNo(fp.getFpName());
-				if(f == null) {
-					System.out.println("DB에 안들어간 이미지 : "+f);
+				int foodPhotoCount = service.selectFoodPhotoByNo(fp.getFpName());
+				if(foodPhotoCount <= 0) {
+					System.out.println("DB에 안들어간 이미지 개수 : "+foodPhotoCount);
 					//없으면 INSERT
 					service.insertFoodPhoto(fp);
 				}

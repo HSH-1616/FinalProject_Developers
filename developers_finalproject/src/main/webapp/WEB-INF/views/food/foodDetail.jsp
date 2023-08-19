@@ -6,22 +6,12 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/> 
 <head>
    <script> const jspath = '${path}'; </script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <%-- <script src="${path }/js/food/foodList.js"></script> --%>
     <script src="${path }/js/food/foodDetail.js"></script>
-    <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!-- <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4428a904f18357ee0a3f795c4918e96a&libraries=services,clusterer,drawing"></script>
-
-
-    
-   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"/>
     <link rel="stylesheet" href="${path }/css/food/foodDetail.css"/>
     <link rel="stylesheet" href="${path }/css/default.css" />
@@ -32,7 +22,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<script>
+<!-- <script>
 	var tourisId="${touris.tourisId}";
 	if('${loginMember}'==''){
 		var memberId=null;
@@ -40,13 +30,11 @@
 		var memberId="${loginMember.memberId}";
 	}
 	console.log('${loginMember.tourisHeartlist}');
-	/* console.log("이건뭐니?"+'${touris.tourisImages[0].tourisImages}'); */
-</script>
+</script> -->
 
 <section>
    <!-- ==================================================맛집 상세페이지============================================================== -->
    <div class="foodDetailCon col justify-content-center">
-      <!-- <div id="hotelDetail" class="row"> -->
       <div class="row align-items-end">
          <span class="col w-auto">
             <div class="d-flex flex-row">
@@ -386,10 +374,10 @@
             }
          } 
       });
-      //별점 확인
-      $(".starcountnum").click(e=>{
-         console.log($(".starcountnum").val()/2);
-      })
+      // //별점 확인
+      // $(".starcountnum").click(e=>{
+      //    console.log($(".starcountnum").val()/2);
+      // })
 
       $(".submitModal").click(e=>{
          //ajax 통신(등록)

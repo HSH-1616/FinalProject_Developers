@@ -141,7 +141,7 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
-	public FoodPhoto selectFoodPhotoByNo(String fpName) {
+	public int selectFoodPhotoByNo(String fpName) {
 		return dao.selectFoodPhotoByNo(session, fpName);
 	}
 	

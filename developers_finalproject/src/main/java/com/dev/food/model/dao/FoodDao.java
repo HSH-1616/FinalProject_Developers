@@ -61,7 +61,7 @@ public interface FoodDao {
 	
 	Food selectFoodByNo(SqlSession session, int no);
 	
-	FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName);
+	int selectFoodPhotoByNo(SqlSession session, String fpName);
 	
 	List<Food> searchFood(SqlSession session, Map<String, Object> params);
 
