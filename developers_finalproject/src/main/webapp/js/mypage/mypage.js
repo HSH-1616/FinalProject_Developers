@@ -42,6 +42,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 		data:{memberId:memberId,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			$(".mycommuity").html("");
+			$('.pagebararea').html("");
 			for(let m of data.mypageCommunity){
 			let test = `<div class="mycommuntiyarea">
 				<div class="myschedulcard">
@@ -90,7 +91,8 @@ const foodreivew = (cPage,numPerpage) =>{
 			let foodName;
 			let foodNo;
 			let fpName;
-			$(".mycommuity").empty();	
+			$(".mycommuity").empty();
+			$('.pagebararea').html("");	
 			let tagarea = `<div class="myfoodreviewarea">
 					<div class="myfoodreivewmargin">
 						<div class="myfoodreivewpadding">
@@ -131,11 +133,68 @@ const foodreivew = (cPage,numPerpage) =>{
 				
 				});
 			})
-			$('.pagebararea').html(data.pageBar);
+			$('.myreivewpagebararea').html(data.pageBar);
 		}
 	})
 }
 
+const hotelreview = (cPage, numPerpage) => {
+	const memberId = $('.nickname').text();
+	$.ajax({
+		url: path+"/ac/mypageAcReview",
+		type: "get",
+		data: { memberId: memberId, cPage: cPage, numPerpage: numPerpage },
+		success: (data) => {
+			let acTitle;
+			let acId;
+			let cardspanimg;
+			$(".mycommuity").empty();
+			$('.pagebararea').html("");	
+			let tagarea = `<div class="myfoodreviewarea">
+					<div class="myfoodreivewmargin">
+						<div class="myfoodreivewpadding">
+							<div class="myfoodreivewwrap">
+								
+							</div>
+							<div class="myreivewpagebararea"></div>
+						</div>			
+					</div>
+				</div>`;
+				$(".mycommuity").append(tagarea);
+			data.mypageAcReview.forEach(l =>{
+				console.log(l);
+				acTitle = l.acTitle;
+				acId = l.acId;
+				l.acFiles.forEach(p=>{
+					cardspanimg = '<img alt="" src='+path+'/images/upload/accommodation/'+p.afName+'/>';
+				l.acReviews.forEach(r =>{
+					const reivewcard = `
+								<div class="myfoodreivewcard">
+									<div class="myreivewimgarea">
+										${cardspanimg}
+									</div>
+									<div class="myreivewcontentarea">
+										<div class="myreivewcontentpadding">
+											<div class="reivewptag"><p>${acTitle}</p></div>
+											<div class="hiddenidtag">${acId}</div>
+											<div class="reivewspantag"><span>${r.arContent}</span></div>
+											<div class="stararea"> <span class="starspan">${r.arGrade}/5</span>
+											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20}">★★★★★</span>
+											</div>
+											</span>
+										</div>
+									</div>
+									<div class="myreivewsdayarea"><span class="">${r.arDate}</span></div>
+								</div>`;
+					
+					$(".myfoodreivewwrap").append(reivewcard);
+					});
+				})
+			});
+			$('.myreivewpagebararea').html(data.pageBar);
+		}
+	});
+}
 
 
 /*여행일정 가져오는 ajax*/
@@ -318,13 +377,8 @@ const hotelheart = () =>{
 		success:(data)=>{
 			let cardspanimg;
 			data.forEach(e=>{
-				console.log(e);
-				
-				e.acFiles.forEach(f=>{
-					if(f.afMain == "Y"){
-						 cardspanimg = `<img alt="" src=${path}/images/upload/accommodation/${f.afName}>`;
-					}
-				})
+				e.acFiles.forEach(p=>{
+					cardspanimg = '<img alt="" src='+path+'/images/upload/accommodation/'+p.afName+'/>';
 				const hotelheart = `<div class="cardarea">
 							<div class="cardimgarea">
 								<div class="cardimgstyle">
@@ -339,6 +393,7 @@ const hotelheart = () =>{
 							</div>
 						</div>`
 						$(".favorite3").append(hotelheart);
+						})	
 			});
 			$('.favorite3').slick('refresh');
 		}
@@ -368,6 +423,9 @@ $("#communtitycontent").on("click", function(){
 $("#foodreivewcontent").on("click", function(){
 	foodreivew();
 });
+$("#hotelreviewcontent").on("click", function(){
+	hotelreview();
+})
 	
 
 
