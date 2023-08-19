@@ -136,14 +136,18 @@ const foodreivew = (cPage,numPerpage) =>{
 	})
 }
 
-const hotelreivew = (cPage, numPerpage) => {
+const hotelreview = (cPage, numPerpage) => {
 	const memberId = $('.nickname').text();
 	$.ajax({
 		url: path+"/ac/mypageAcReview",
 		type: "get",
 		data: { memberId: memberId, cPage: cPage, numPerpage: numPerpage },
 		success: (data) => {
-			consol.log("데이터 나옴?" + data);
+			console.log("데이터 나옴?" + data);
+			$(data).each(function(i,l){
+				console.log(l)	
+			})
+			
 		}
 	});
 }
@@ -329,13 +333,9 @@ const hotelheart = () =>{
 		success:(data)=>{
 			let cardspanimg;
 			data.forEach(e=>{
-				console.log(e);
-				
-				e.acFiles.forEach(f=>{
-					if(f.afMain == "Y"){
-						 cardspanimg = `<img alt="" src=${path}/images/upload/accommodation/${f.afName}>`;
-					}
-				})
+				console.log(e);				
+				cardspanimg = '<img alt="" src='+path+'/images/upload/accommodation/'+e.acFiles.afName+'/>';
+
 				const hotelheart = `<div class="cardarea">
 							<div class="cardimgarea">
 								<div class="cardimgstyle">
@@ -380,7 +380,7 @@ $("#foodreivewcontent").on("click", function(){
 	foodreivew();
 });
 $("#hotelreviewcontent").on("click", function(){
-	hotelreivew();
+	hotelreview();
 })
 	
 

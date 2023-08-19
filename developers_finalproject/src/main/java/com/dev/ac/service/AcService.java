@@ -96,6 +96,11 @@ public interface AcService {
 	int rejectRefund(Map param);
 	
 	int updateRefundAdmin(Map param);
+		
 	
 	List<Accommodation> mypageAcHeart(String memberId);
+	
+	List<Accommodation> mypageAcReview(int memberId, Map params);
+	
+	int mypageAcReviewCount(int memberId);
 }

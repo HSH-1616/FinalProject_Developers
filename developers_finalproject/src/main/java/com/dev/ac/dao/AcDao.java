@@ -133,4 +133,8 @@ public interface AcDao {
 	int insertRefundAdmin(SqlSessionTemplate session, Map param);
 	
 	List<Accommodation> mypageAcHeart(SqlSessionTemplate session, String memberId);
+	
+	List<Accommodation> mypageAcReview(SqlSessionTemplate session, int memberId, Map params);
+	
+	int mypageAcReviewCount(SqlSessionTemplate session, int memberId);
 }

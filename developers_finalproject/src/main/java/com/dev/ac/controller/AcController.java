@@ -558,7 +558,24 @@ public class AcController {
 	public List<Accommodation> mypageAcHeart() {
 		Member member = (Member) session.getAttribute("loginMember");
 		String memberId = String.valueOf(member.getMemberId());
-		System.out.println(service.mypageAcHeart(memberId));
+
 		return service.mypageAcHeart(memberId);
 	}
+	
+	@GetMapping("/mypageAcReview")
+	   @ResponseBody
+	   public Map<String, Object> mypageAcReview(int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){
+	      Map<String, Object> params=new HashMap<>();
+	      Map<String, Object> result=new HashMap<>();
+	      params.put("cPage",cPage);
+	      params.put("numPerpage", numPerpage);
+	      int totalData=service.mypageAcReviewCount(memberId);
+	      String pageBar=com.dev.nc.common.PageFactory.getPage(cPage, numPerpage, totalData, "hotelreview");
+	      List<Accommodation> review=service.mypageAcReview(memberId, params);
+	      result.put("mypageAcReview", review);
+	      result.put("pageBar", pageBar);
+	      
+	      return result;
+	  }
+
 }

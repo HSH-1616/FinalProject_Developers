@@ -360,5 +360,15 @@ public class AcServiceImpl implements AcService {
 		return dao.mypageAcHeart(session,memberId);
 	}
 
+	@Override
+	public List<Accommodation> mypageAcReview(int memberId, Map params) {
+		return dao.mypageAcReview(session, memberId, params);
+	}
+
+	@Override
+	public int mypageAcReviewCount(int memberId) {
+		return dao.mypageAcReviewCount(session, memberId);
+	}
+
 
 }
