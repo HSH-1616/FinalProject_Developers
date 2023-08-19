@@ -113,7 +113,7 @@ $(".like").on("change", function() {
 
 	if ($(this).is(":checked")) {
 		$.ajax({
-			url: getContextPath()+"/ac/insertHeart",
+			url: path+"/ac/insertHeart",
 			data: {
 				memberId: memberId,
 				acId: acId
@@ -126,7 +126,7 @@ $(".like").on("change", function() {
 		})
 	} else {
 		$.ajax({
-			url: getContextPath()+"/ac/deleteHeart",
+			url: path+"/ac/deleteHeart",
 			data: {
 				memberId: memberId,
 				acId: acId

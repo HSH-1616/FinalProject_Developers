@@ -10,6 +10,20 @@
 <div class="container-fluid full-width row">
 	<div class="col my-5">
 		<h3 class="fs-4 mb-3">환불 관리</h3>
+		<div id="searchCon" style="display:flex">
+			<select id="searchAc" class="mb-3"
+				style="width: 120px; height: 30px;">
+				<option value="orderId">결제번호</option>
+				<option value="memberId">결제자ID</option>				
+			</select>
+			<div id="searchAcInput">
+				<form action="${path}/admin/refundOkSearchList" method="get">
+					<input type="number" name="orderId" placeholder="검색할 결제번호를 입력하세요"> 
+					<input type="text" name="memberId" placeholder="검색할 ID을 입력하세요" style="display:none">
+					<button class="btn btn-outline-secondary btn-sm" type="submit">검색</button>
+				</form>
+			</div>
+		</div>
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
 				<button class="nav-link" id="profile-tab" onclick="location='${path}/admin/refundList'">환불대기</button>
@@ -77,4 +91,11 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	$("#searchAc").change(function(){
+		$("#searchAcInput input").val("")
+		$("#searchAcInput input").hide()	
+		$('input[name='+$("#searchAc option:selected").val()+']').show()	
+	})
+	</script>
 	<jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp" />
