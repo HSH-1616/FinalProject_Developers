@@ -42,6 +42,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 		data:{memberId:memberId,cPage:cPage,numPerpage:numPerpage},
 		success:(data)=>{
 			$(".mycommuity").html("");
+			$('.pagebararea').html("");
 			for(let m of data.mypageCommunity){
 			let test = `<div class="mycommuntiyarea">
 				<div class="myschedulcard">
@@ -90,7 +91,8 @@ const foodreivew = (cPage,numPerpage) =>{
 			let foodName;
 			let foodNo;
 			let fpName;
-			$(".mycommuity").empty();	
+			$(".mycommuity").empty();
+			$('.pagebararea').html("");	
 			let tagarea = `<div class="myfoodreviewarea">
 					<div class="myfoodreivewmargin">
 						<div class="myfoodreivewpadding">
@@ -147,7 +149,8 @@ const hotelreview = (cPage, numPerpage) => {
 			let acId;
 			let cardspanimg;
 			let afName;
-			$(".mycommuity").empty();	
+			$(".mycommuity").empty();
+			$('.pagebararea').html("");	
 			let tagarea = `<div class="myfoodreviewarea">
 					<div class="myfoodreivewmargin">
 						<div class="myfoodreivewpadding">
