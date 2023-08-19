@@ -148,7 +148,6 @@ const hotelreview = (cPage, numPerpage) => {
 			let acTitle;
 			let acId;
 			let cardspanimg;
-			let afName;
 			$(".mycommuity").empty();
 			$('.pagebararea').html("");	
 			let tagarea = `<div class="myfoodreviewarea">
@@ -378,9 +377,8 @@ const hotelheart = () =>{
 		success:(data)=>{
 			let cardspanimg;
 			data.forEach(e=>{
-				console.log(e);				
-				cardspanimg = '<img alt="" src='+path+'/images/upload/accommodation/'+e.acFiles.afName+'/>';
-
+				e.acFiles.forEach(p=>{
+					cardspanimg = '<img alt="" src='+path+'/images/upload/accommodation/'+p.afName+'/>';
 				const hotelheart = `<div class="cardarea">
 							<div class="cardimgarea">
 								<div class="cardimgstyle">
@@ -395,6 +393,7 @@ const hotelheart = () =>{
 							</div>
 						</div>`
 						$(".favorite3").append(hotelheart);
+						})	
 			});
 			$('.favorite3').slick('refresh');
 		}
