@@ -520,20 +520,16 @@
 	var img2=$(".subImage img").first().attr("src")
 	var img3=$(".subImage img").last().attr("src")
 
-		// init 체크
-		if (!Kakao.isInitialized()) {
-			Kakao.init('737cdc9322ba7fec26566e0863b53498');
-		} 
-	
 		function kakaoShare() {
+		console.log(window.location.origin+img1)
 			Kakao.Share.sendCustom({	
 					    templateId: 97428, // 메시지템플릿 번호
 					    templateArgs: {	
-					      IMG1 : "${path}/images/upload/accommodation/"+img1,
-					      IMG2 :  "${path}/images/upload/accommodation/"+img2,
-					      IMG3 :  "${path}/images/upload/accommodation/"+img3,
+					      IMG1 : window.location.origin+img1,
+					      IMG2 : window.location.origin+img2,
+					      IMG3 : window.location.origin+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
-					      THU : "${path}/images/common/logo.png",
+					      THU : window.location.origin+path+ "/images/common/logo.png",
 					      PATH : "${path}/ac/acDetail?no=${ad.acId}",
 					      DESC : ""		  
 					    },

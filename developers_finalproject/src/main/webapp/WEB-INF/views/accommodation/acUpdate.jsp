@@ -23,7 +23,7 @@
 		<input type="hidden" name="acId" value="${ac.acId}">
 		<div class="hotelRegist">
 			<div class="registHeader">
-				<button>
+				<button onclick="javascript:history.back()">
 					<ion-icon name="chevron-back"></ion-icon>
 				</button>
 				<span>숙박업소 등록</span>
@@ -56,7 +56,7 @@
 
 									<div class="previewImgWrap">
 										<div class="blurPreview">
-											<img alt="" src="/images/accommodation/checkImage.png">
+											<img alt="" src="${path}/images/accommodation/checkImage.png">
 										</div>
 										<c:if test="${fn:contains(af.afMain,'Y')}">
 											<div class="mainCheck" style="display: flex">

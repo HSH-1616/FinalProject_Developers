@@ -23,7 +23,7 @@
 		enctype="multipart/form-data">
 		<div class="hotelRegist">
 			<div class="registHeader">
-				<button>
+				<button onclick="javascript:history.back()">
 					<ion-icon name="chevron-back"></ion-icon>
 				</button>
 				<span>숙박업소 등록</span>

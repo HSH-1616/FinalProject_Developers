@@ -41,7 +41,17 @@ function refundOk() {
 			refundContent :$("textarea[name=refundContent]").val()
 		},
 		success:function(data){
-			alert("성공")
+			Swal.fire({
+				icon: 'success',
+				iconColor: '#20c997',
+				title: "환불 신청 완료",
+				confirmButtonText: "확인",
+				confirmButtonColor: "#20c997",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					location.replace(path+"/mypage/mypage");
+				}
+			})
 		}
 	})
 

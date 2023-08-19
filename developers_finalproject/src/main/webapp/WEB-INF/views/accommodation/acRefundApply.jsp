@@ -14,7 +14,7 @@
 	<div class="hotelPayCon">
 		<div class="hotelPay">
 			<div id="payTitle">
-				<button type="button">
+				<button type="button" onclick="javascript:history.back()">
 					<ion-icon name="chevron-back"></ion-icon>
 				</button>
 				<span>예약 취소 신청</span>

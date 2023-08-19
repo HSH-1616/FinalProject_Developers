@@ -144,6 +144,7 @@ $(document).on("click", "#holyBtn", function() {
 			checkIn: $("#holyStart").val(),
 			checkOut: $("#holyLast").val()
 		})
+		console.log(checkHolyDay)
 		resetStart()
 		resetLast()
 	}
@@ -391,12 +392,11 @@ function handleImgsFiles(e) {
 			var img_html = "<img class='previewImg' src=\"" + e.target.result + "\" />"
 
 			const div = $('<div class="previewImgWrap">')
-			const blur = $('<div class="blurPreview"><img alt="" src="${path}/images/accommodation/checkImage.png"></div > ')
+			const blur = $('<div class="blurPreview"><img alt="" src="'+path+'/images/accommodation/checkImage.png"></div > ')
 			const main = $('<div class="mainCheck"><div>메인</div></div>')
 			const icon = $('<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>')
 			const input = $('<input type="hidden" name="afMain" value="N">')
 			const afImage = $("<img class='previewImg' src=\"" + e.target.result + "\" />")
-
 			div.append(blur).append(main).append(icon).append(input).append(afImage)
 
 			$(".preview").append(div)

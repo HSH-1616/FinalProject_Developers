@@ -245,7 +245,6 @@ public class AcServiceImpl implements AcService {
 			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 3) {
 				for (int i = 0; i < ac.getArv().size(); i++) {
 					ac.getArv().get(i).setAcId(ac.getAcId());
-					System.out.println(ac.getArv().get(i));
 					result += dao.updateInArv(session, ac.getArv().get(i));
 				}
 				log.info("예약내역 등록 성공 result : " + result);
