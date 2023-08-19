@@ -143,11 +143,53 @@ const hotelreview = (cPage, numPerpage) => {
 		type: "get",
 		data: { memberId: memberId, cPage: cPage, numPerpage: numPerpage },
 		success: (data) => {
-			console.log("데이터 나옴?" + data);
-			$(data).each(function(i,l){
-				console.log(l)	
-			})
-			
+			let acTitle;
+			let acId;
+			let cardspanimg;
+			let afName;
+			$(".mycommuity").empty();	
+			let tagarea = `<div class="myfoodreviewarea">
+					<div class="myfoodreivewmargin">
+						<div class="myfoodreivewpadding">
+							<div class="myfoodreivewwrap">
+								
+							</div>
+							<div class="myreivewpagebararea"></div>
+						</div>			
+					</div>
+				</div>`;
+				$(".mycommuity").append(tagarea);
+			data.mypageAcReview.forEach(l =>{
+				console.log(l);
+				acTitle = l.acTitle;
+				acId = l.acId;
+				l.acFiles.forEach(p=>{
+					cardspanimg = '<img alt="" src='+path+'/images/upload/accommodation/'+p.afName+'/>';
+				l.acReviews.forEach(r =>{
+					const reivewcard = `
+								<div class="myfoodreivewcard">
+									<div class="myreivewimgarea">
+										${cardspanimg}
+									</div>
+									<div class="myreivewcontentarea">
+										<div class="myreivewcontentpadding">
+											<div class="reivewptag"><p>${acTitle}</p></div>
+											<div class="hiddenidtag">${acId}</div>
+											<div class="reivewspantag"><span>${r.arContent}</span></div>
+											<div class="stararea"> <span class="starspan">${r.arGrade}/5</span>
+											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20}">★★★★★</span>
+											</div>
+											</span>
+										</div>
+									</div>
+									<div class="myreivewsdayarea"><span class="">${r.arDate}</span></div>
+								</div>`;
+					
+					$(".myfoodreivewwrap").append(reivewcard);
+					});
+				})
+			});
+			$('.myreivewpagebararea').html(data.pageBar);
 		}
 	});
 }
