@@ -63,8 +63,8 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
-	public int updateFoodPhotoOnNull(FoodPhotoTemp fp) {
-		return dao.updateFoodPhotoOnNull(session,fp);
+	public int insertFoodPhotoOnNull(FoodPhotoTemp fp) {
+		return dao.insertFoodPhotoOnNull(session,fp);
 	}
 	
 	@Override
@@ -95,6 +95,16 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public void deleteFoodPhotoTemp(int foodNo) {
 		dao.deleteFoodPhotoTemp(session,foodNo);
+	}
+	
+	@Override
+	public int deleteFoodTempAll() {
+		return dao.deleteFoodTempAll(session);
+	}
+	
+	@Override
+	public int deleteFoodPhotoTempAll() {
+		return dao.deleteFoodPhotoTempAll(session);
 	}
 	
 	@Override
@@ -141,6 +151,16 @@ public class FoodServiceImpl implements FoodService{
 	 * 
 	 * return dao.getSortedFoods(session, sortFilter, cPage, numPerpage); }
 	 */
+	
+	@Override
+	public int copyFoodtoFoodTemp(int foodNo) {
+		return dao.copyFoodtoFoodTemp(session,foodNo);
+	}
+	
+	@Override
+	public int copyFPtoFPTemp(int foodNo) {
+		return dao.copyFPtoFPTemp(session,foodNo);
+	}
 	
 	@Override
 	public String searchByFoodNo(int foodNo) {
@@ -296,6 +316,11 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public int selectFoodReviewByFoodNoCount(int memberId) {
 		return dao.selectFoodReviewByFoodNoCount(session, memberId);
+	}
+	
+	@Override
+	public String searchFoodNameByNo(int foodNo) {
+		return dao.searchFoodNameByNo(session,foodNo);
 	}
 
 }

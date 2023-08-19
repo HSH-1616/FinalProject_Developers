@@ -22,7 +22,7 @@ public interface FoodService {
 	
 	int updateFoodOnNull(FoodTemp food);
 	
-	int updateFoodPhotoOnNull(FoodPhotoTemp fp);
+	int insertFoodPhotoOnNull(FoodPhotoTemp fp);
 	
 	int updateFoodOnAdmin(Food food);
 	
@@ -35,6 +35,10 @@ public interface FoodService {
 	void deleteFoodTemp(int foodNo);
 	
 	void deleteFoodPhotoTemp(int foodNo);
+	
+	int deleteFoodTempAll();
+	
+	int deleteFoodPhotoTempAll();
 	
 	List<Food> selectFoodAll (Map<String,Object> param);
 	
@@ -53,6 +57,10 @@ public interface FoodService {
 	FoodPhoto selectFoodPhotoByNo(String fpName);
 	
 	String searchByFoodNo(int foodNo);
+	
+	int copyFoodtoFoodTemp(int foodNo);
+	
+	int copyFPtoFPTemp(int foodNo);
 
 	List<Food> searchFood(Map<String, Object> params);
 	
@@ -97,4 +105,5 @@ public interface FoodService {
 	List<Food> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params);
 	int selectFoodReviewByFoodNoCount(int memberId);
 	
+	String searchFoodNameByNo(int foodNo);
 }
