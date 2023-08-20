@@ -1363,7 +1363,7 @@ var day = ('0' + today.getDate()).slice(-2);
 var registrationDate = year+'년' +' '+month+'월'+' '+day+'일';
 // 경로 저장 ajax
 function saveRoute() {
-	const routeurl = path + "/touris/inserttourisroute";
+	const routeurl=path+"/touris/inserttourisroute";
 	const dayselectbox = $(".dayselecttag").text();
 	const calandertext = $("#calander").val();
 	const dayselecttag = $(".dayselecttag").text();
@@ -1437,7 +1437,7 @@ console.log("시작 날짜:", tustartDate);
 		$.ajax({
 			url: routeurl,
 			type: "POST",
-			contentType: "application/json",
+			contentType: "application/json;", 
 			data: JSON.stringify({routedata : routedata, 
 			loginmemberid: loginmemberid,
 			tustartDate: tustartDate, 

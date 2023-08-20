@@ -28,13 +28,11 @@ public class FoodServiceImpl implements FoodService{
 	 */
 	
 	
-	
 	@Override
 	public List<Food> foodHeartList(int memberId) {
 		// TODO Auto-generated method stub
 		return dao.foodHeartList(session, memberId);
 	}
-
 
 	@Autowired
 	private FoodDao dao;
@@ -287,7 +285,7 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 //	@Override
-//	public List<FoodReview> selectFoodReviewByFoodNo(int foodNo) {
+//	public List<Food> selectFoodReviewByFoodNo(int foodNo) {
 //		return dao.selectFoodReviewByFoodNo(session,foodNo);
 //	}
 	
@@ -319,6 +317,12 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public String searchFoodNameByNo(int foodNo) {
 		return dao.searchFoodNameByNo(session,foodNo);
+	}
+
+	@Override
+	public List<Food> selectFoodReviewByFoodNo(int memberId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

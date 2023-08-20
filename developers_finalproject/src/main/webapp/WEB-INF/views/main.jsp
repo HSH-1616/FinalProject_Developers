@@ -145,7 +145,7 @@
         >
           여행이 떠나고 싶을때<br />관광지,맛집 찾아보기 <br /><br />
         </h2>
-        <button onclick="location.href='${path}/touris/tourismainpage'"
+        <button onclick="location.href='${path }/touris/tourislist'"
           class="travelBtn"
           data-aos="zoom-in"
           data-aos-easing="ease-out-cubic"
@@ -187,6 +187,8 @@
           data-aos="zoom-in"
           data-aos-easing="ease-out-cubic"
           data-aos-duration="2000"
+          onclick="location.href='${path}/touris/tourismainpage'"
+          
         >
           바로가기
         </button>

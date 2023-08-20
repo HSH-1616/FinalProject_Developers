@@ -38,14 +38,6 @@ public class FoodDaoImpl implements FoodDao {
     	return session.selectList("food.foodHeartList", memberId);
     }
     
-    @Override
-    public List<Food> addFood(SqlSessionTemplate session, Map param){
-    	
-    	int cPage=(int)param.get("cPage");
-		int numPerpage=(int)param.get("numPerpage");
-		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
-    	return session.selectList("food.addFood", null, rb);
-    }
     
 	@Override
 	public int insertFood(SqlSession session, FoodTemp f) {
@@ -247,8 +239,8 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 //	@Override
-//	public List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo) {
-//		return session.selectList("food.selectFoodReviewByFoodNo",foodNo);
+//	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int foodNo, Map<String, Object> params) {
+//		return session.selectList("food.selectFoodReviewByFoodNo",foodNo,params);
 //	}
 	
 	@Override

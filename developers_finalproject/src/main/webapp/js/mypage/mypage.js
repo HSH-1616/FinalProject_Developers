@@ -181,7 +181,7 @@ const hotelreview = (cPage, numPerpage) => {
 											<div class="hiddenidtag">${acId}</div>
 											<div class="reivewspantag"><span>${r.arContent}</span></div>
 											<div class="stararea"> <span class="starspan">${r.arGrade}/5</span>
-											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20}">★★★★★</span>
+											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20+"%"}">★★★★★</span>
 											</div>
 											</span>
 										</div>
@@ -338,18 +338,10 @@ const foodheart = () => {
 					$(".favorite2").append(foodheartlist);
 			
 			});
-			if (!slideAdded) {
-                $('.favorite2').slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                });
-                slideAdded = true;
-            }
-			/*$('.favorite2').slick('refresh');*/
+			$('.favorite2').slick('refresh');
 		}
 	})
 }		
-
 
 const tourisheart = () =>{
   const memberId = $('.nickname').text();
