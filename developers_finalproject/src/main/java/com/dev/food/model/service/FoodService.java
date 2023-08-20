@@ -90,8 +90,6 @@ public interface FoodService {
 	
 	int updateFoodReview(FoodReview fr);
 
-	int addFood(Food food);
-	
 	List<Food> foodHeartList(int memberId);
 	
 	//int updateReviewPhoto(FoodReviewPhoto rp);
@@ -102,7 +100,10 @@ public interface FoodService {
 	
 	int selectFoodBlackListCount();
 	
+	List<Food> selectFoodReviewByFoodNo(int memberId);
+
 	List<Food> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params);
+	
 	int selectFoodReviewByFoodNoCount(int memberId);
 	
 	String searchFoodNameByNo(int foodNo);

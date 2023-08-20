@@ -23,10 +23,6 @@ import com.dev.food.model.dto.FoodTemp;
 @Repository
 public class FoodDaoImpl implements FoodDao {
 	
-	@Override
-	public List<Food> foodHeartList(SqlSessionTemplate session, int memberId) {
-		return session.selectList("food.foodHeartList", memberId);
-	}
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -36,6 +32,12 @@ public class FoodDaoImpl implements FoodDao {
     public FoodDaoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    
+    @Override
+    public List<Food> foodHeartList(SqlSessionTemplate session, int memberId) {
+    	return session.selectList("food.foodHeartList", memberId);
+    }
+    
     
 	@Override
 	public int insertFood(SqlSession session, FoodTemp f) {
@@ -237,8 +239,8 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 //	@Override
-//	public List<FoodReview> selectFoodReviewByFoodNo(SqlSession session, int foodNo) {
-//		return session.selectList("food.selectFoodReviewByFoodNo",foodNo);
+//	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int foodNo, Map<String, Object> params) {
+//		return session.selectList("food.selectFoodReviewByFoodNo",foodNo,params);
 //	}
 	
 	@Override
@@ -286,11 +288,6 @@ public class FoodDaoImpl implements FoodDao {
 		return null;
 	}
 
-	@Override
-	public int addFood(SqlSessionTemplate session, Food food) {
-		return session.insert("food.addFood", food);
-	}
-	
 	@Override
 	public int insertFoodBlackList(SqlSession session, FoodBlackList fb) {
 		return session.insert("food.insertFoodBlackList",fb);

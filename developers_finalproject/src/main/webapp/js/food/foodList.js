@@ -30,24 +30,6 @@
     updateIcon();
 
 
-const sortFoodByTitle = (no, numPerpage) => {
-
-	$.ajax({
-		url: path + "/food/sortByTitle.do",
-		data: {
-			sortType: sortType,
-			cPage: no, numPerpage: numPerpage
-		},
-		type: "GET",
-		success: function(data) {
-			// Update the food_main_list section with the sorted data
-			$(".food_main_list").html(data);
-		},
-		error: function(xhr, status, error) {
-			console.log("Error:", error);
-		}
-	});
-}
 
 //로그인 시 좋아요 이용가능
 $(document).ready(function() {
@@ -75,7 +57,7 @@ if($("#memberL").val()!=""){
 		
 		if ($(this).is(":checked")) {
 			$.ajax({
-				url: "/food/insertHeart",
+				url: path+"/food/insertHeart",
 				data: {
 					foodNo: foodNo
 				},
@@ -87,7 +69,7 @@ if($("#memberL").val()!=""){
 			})
 		} else {
 			$.ajax({
-				url: "/food/deleteHeart",
+				url: path+"/food/deleteHeart",
 				data: {
 					foodNo: foodNo
 				},
@@ -189,7 +171,7 @@ window.onload = function() {
 function updateFoodList(sortFilter) {
 	$.ajax({
 		type: "GET",
-		url: "/food/list", // 서버에서 맛집 리스트를 가져올 URL
+		url: path+"/food/list", // 서버에서 맛집 리스트를 가져올 URL
 		data: { sortFilter: sortFilter }, // 클릭한 <li> 태그의 id 값을 전달
 		success: function(data) {
 			// 서버로부터 받은 데이터를 이용하여 맛집 리스트를 업데이트
@@ -224,7 +206,7 @@ $(document).ready(function() {
 function updateFoodList(sortFilter) {
 	$.ajax({
 		type: "GET",
-		url: "/food/list",
+		url: path+"/food/list",
 		data: { sortFilter: sortFilter },
 		success: function(data) {
 			$(".food_main_list").html(data);

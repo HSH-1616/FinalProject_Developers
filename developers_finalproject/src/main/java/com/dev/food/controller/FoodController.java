@@ -51,9 +51,12 @@ public class FoodController {
 
 	@Autowired
 	private static FoodService service;
+	private HttpSession session;
+	/* private static FoodService service; */
 	
-	public FoodController(FoodService service) {
+	public FoodController(FoodService service, HttpSession session) {
 		this.service = service;
+		this.session = session;
 	}
 	
 	@GetMapping("/foodList.do")
@@ -332,44 +335,43 @@ public class FoodController {
 			String treatmenu = item2.get("treatmenu").toString().replaceAll("\"", "");
 			String infocenterfood = item2.get("infocenterfood").toString().replaceAll("\"", "");
 			
-//			System.out.println("===========================가게정보===========================");
-//			System.out.println("음식점Id : "+foodNo);
-//			System.out.println("오픈시간 : "+opentimefood);	
-//			System.out.println("휴무일 : "+restdatefood);
-//			System.out.println("메뉴 : "+treatmenu);
-//			System.out.println("연락처 : "+infocenterfood);
-//			System.out.println("===============================================================");
+			System.out.println("===========================가게정보===========================");
+			System.out.println("음식점Id : "+foodNo);
+			System.out.println("오픈시간 : "+opentimefood);	
+			System.out.println("휴무일 : "+restdatefood);
+			System.out.println("메뉴 : "+treatmenu);
+			System.out.println("연락처 : "+infocenterfood);
+			System.out.println("===============================================================");
 			
-			if(!opentimefood.isEmpty()&&!restdatefood.isEmpty()
-					&&!treatmenu.isEmpty()&&!infocenterfood.isEmpty()) {
+			if(opentimefood.isEmpty()&&restdatefood.isEmpty()
+					&&treatmenu.isEmpty()&&infocenterfood.isEmpty()) {
 				
-				FoodTemp food = FoodTemp.builder()
-						.foodNo(foodNo)
-						.foodOpenTime("오픈시간 : "+opentimefood+"\n\r"+"휴무일 : "+restdatefood)
-						.foodMenu(treatmenu)
-						.foodPhone(infocenterfood)
-						.build();
-				
-				//삭제한 temp에 food값을 넣기
-				service.copyFoodtoFoodTemp(foodNo);
-				service.copyFPtoFPTemp(foodNo);
-				service.updateFood(food); //TEMP에 UPDATE
-				
-				//opentime, menu, phone이 없으면 update
-				Food f = service.selectFoodByNo(foodNo);
-
-				if(f == null) {
-					service.updateFoodOnNull(food);
-				}
-				service.mergeFood(); //FOOD에 없으면 INSERT
-				
-			}else {
 				//조건을 충족하지 못하는 아이디만 모아서 분기처리에 사용
 				System.out.println("foodNo : "+foodNo+", "+opentimefood+", "+
-				restdatefood+", "+treatmenu+", "+infocenterfood);
+						restdatefood+", "+treatmenu+", "+infocenterfood);
 				FoodBlackList fb = FoodBlackList.builder().foodNo(foodNo).build();
 				service.insertFoodBlackList(fb);
 			}
+			
+			FoodTemp food = FoodTemp.builder()
+					.foodNo(foodNo)
+					.foodOpenTime("오픈시간 : "+opentimefood+"\n\r"+"휴무일 : "+restdatefood)
+					.foodMenu(treatmenu)
+					.foodPhone(infocenterfood)
+					.build();
+			
+			//삭제한 temp에 food값을 넣기
+			service.copyFoodtoFoodTemp(foodNo);
+			service.copyFPtoFPTemp(foodNo);
+			service.updateFood(food); //TEMP에 UPDATE
+			
+			//opentime, menu, phone이 없으면 update
+			Food f = service.selectFoodByNo(foodNo);
+
+			if(f == null) {
+				service.updateFoodOnNull(food);
+			}
+			service.mergeFood(); //FOOD에 없으면 INSERT
 
 			//사용할 일 없으니 삭제(검증 필요)
 			service.deleteFoodTemp(foodNo);
@@ -639,13 +641,14 @@ public class FoodController {
 	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
 	
+	/*
+	 * @PostMapping("/add") public List<Food> addFood(@RequestParam int memberId) {
+	 * 
+	 * List<Food> foods=service.addFood(memberId);
+	 * 
+	 * return foods; }
+	 */
 //	찬은
-	@PostMapping("/add")
-    public String addFood(Food food) {
-        service.addFood(food);
-        
-        return "redirect:/food/add";
-    }
 	@GetMapping("/mypagefoodreview")
 	@ResponseBody
 	public Map<String, Object> foodheartlist(@RequestParam int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){
@@ -671,6 +674,12 @@ public class FoodController {
 		
 	    return foods;
 	}
+	 
+	/*
+	 * @GetMapping("/foodRegist")
+	 * 
+	 * @ResponseBody public
+	 */
 	
 
 }

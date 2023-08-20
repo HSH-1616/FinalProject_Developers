@@ -109,9 +109,8 @@ public interface FoodDao {
 	
 	int cancleHeart(SqlSessionTemplate session, Map param);
 
-	int addFood(SqlSessionTemplate session, Food food);
-	
 	List<Food> foodHeartList(SqlSessionTemplate session, int memberId);
+	
 	
 	/*
 	 * boolean checkHeart(SqlSession session, Map params);
@@ -128,6 +127,7 @@ public interface FoodDao {
 	int selectFoodBlackListCount(SqlSession session);
 	
 	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId, Map<String, Object> params);
+	
 	int selectFoodReviewByFoodNoCount(SqlSession session, int memberId);
 	
 	String searchFoodNameByNo(SqlSession session,int foodNo);
