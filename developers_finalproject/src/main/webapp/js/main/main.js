@@ -39,7 +39,7 @@ const communityCardView=(no)=>{
 }
 
 
-(document).ready(
+$(document).ready(
 
 	
 	$.ajax({

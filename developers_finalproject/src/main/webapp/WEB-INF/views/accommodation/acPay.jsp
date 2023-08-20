@@ -26,14 +26,12 @@
 						<div class="payInfoTypeCon">
 							<div class="payInfoType">
 								<span>날짜</span> <span>${checkIn} ~ ${checkOut}</span>
-							</div>
-							<button class="modifyBtn">수정</button>
+							</div>		
 						</div>
 						<div class="payInfoTypeCon">
 							<div class="payInfoType">
 								<span>게스트</span> <span>게스트 ${people}명</span>
 							</div>
-							<button class="modifyBtn">수정</button>
 						</div>
 					</div>
 					<hr />

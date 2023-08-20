@@ -11,6 +11,7 @@
 	display:none;
 	}
 </style>
+
 <section>
 	<div class="container-fluid full-width row">
 	    <div class="col my-5">
@@ -25,7 +26,6 @@
 	                        <th scope="col">No</th>
 	                        <th scope="col">이름</th>
 	                        <th scope="col">장소</th>
-	                        <!-- <th scope="col">연락처</th> -->
 	                        <th scope="col">승인하기</th>
 	                        <th scope="col">반려하기</th>
 	                    </tr>
@@ -36,8 +36,6 @@
 							<td>${f.foodNo}</td>
 	                        <td>${f.foodName}</td>
 	                        <td>${f.foodAddress}</td>
-	                        <%-- <td>${f.foodPhone}</td> --%>
-							<%-- <td><button type="button" class="btn btn-outline-danger btn-sm" onclick="fn_foodInfo(${f.foodNo});">상세보기</button></td> --%>
 	                        <td><button type="button" class="btn btn-outline-dark btn-sm" onclick="fn_foodInfo(${f.foodNo});">승인</button></td>
 	                        <td><button type="button" class="btn btn-outline-dark btn-sm" onclick="fn_deleteFood(${f.foodNo});">반려</button></td>
 	                    </tr>

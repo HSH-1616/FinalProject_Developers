@@ -4,6 +4,7 @@ $(document).ready(function (e) {
     $("#timer span").html(count--);
     if (count == 0) {
       clearInterval(timer);
+      location.replace(path+"/mypage/mypage");
     }
   }, 1000);
 });

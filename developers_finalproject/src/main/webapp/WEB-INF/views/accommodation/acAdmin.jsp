@@ -10,10 +10,25 @@
 <div class="container-fluid full-width row">
 	<div class="col my-5">
 		<h3 class="fs-4 mb-3">숙박업소 관리</h3>
-		<div style="display:flex;justify-content:space-between;margin-bottom:30px">
+		<div
+			style="display: flex; justify-content: space-between; margin-bottom: 30px">
 			<span>숙박업소 : ${totalData}개</span>
 			<button type="button" class="btn btn-success btn-sm"
 				onclick="location.href='${path}/ac/acRegist'">숙박업소 등록</button>
+		</div>
+		<div id="searchCon">
+			<select id="searchAc" class="mb-3"
+				style="width: 120px; height: 30px;">
+				<option value="acId">숙박업소ID</option>
+				<option value="acTitle">숙박업소명</option>				
+			</select>
+			<div id="searchAcInput">
+				<form action="${path}/admin/searchAc" method="get">
+					<input type="number" name="acId" placeholder="검색할 숙박업소ID를 입력하세요"> 
+					<input type="text" name="acTitle" placeholder="검색할 숙박업소 이름을 입력하세요" style="display:none">
+					<button class="btn btn-outline-secondary btn-sm" type="submit">검색</button>
+				</form>
+			</div>
 		</div>
 		<div class="col">
 			<table
@@ -36,7 +51,8 @@
 							<td class="acId">${ac.acId }</td>
 							<td>${ac.acTitle }</td>
 							<td>${ac.acAddress}</td>
-							<td><fmt:formatNumber value="${ac.acPrice}" type="currency" currencySymbol="₩"  /></td>
+							<td><fmt:formatNumber value="${ac.acPrice}" type="currency"
+									currencySymbol="₩" /></td>
 							<td>${ac.acPeople}</td>
 							<td>${ac.acRoom}</td>
 							<td>${ac.acBed}</td>
@@ -47,8 +63,7 @@
 							<td><button type="button"
 									class="btn btn-outline-dark btn-sm"
 									onclick="location.href='${path}/ac/updateRegist?acId=${ac.acId}'">수정</button></td>
-							<td><button type="button"
-									class="btn btn-danger btn-sm"
+							<td><button type="button" class="btn btn-danger btn-sm"
 									onclick="warningDelete('${ac.acId}')">삭제</button></td>
 						</tr>
 					</c:forEach>
@@ -63,14 +78,17 @@
 	</div>
 </div>
 
-<script>
-function getContextPath() {
-	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(
-		hostIndex,
-		location.href.indexOf("/", hostIndex + 1)
-	);
+<style>
+#searchCon{
+display:flex
 }
+</style>
+<script>
+$("#searchAc").change(function(){
+	$("#searchAcInput input").val("")
+	$("#searchAcInput input").hide()	
+	$('input[name='+$("#searchAc option:selected").val()+']').show()	
+})
 
 function warningDelete(acId) {
 	console.log(acId)

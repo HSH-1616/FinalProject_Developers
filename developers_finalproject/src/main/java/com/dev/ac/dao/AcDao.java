@@ -115,26 +115,42 @@ public interface AcDao {
 	List<AcPayList> paymentList(SqlSessionTemplate session, Map param);
 
 	int paymentListCount(SqlSessionTemplate session);
-	
+
 	List<AcPayList> refundList(SqlSessionTemplate session, Map param);
-	
+
 	List<AcPayList> refundOkList(SqlSessionTemplate session, Map param);
 
 	int refundListCount(SqlSessionTemplate session);
-	
+
 	int refundListCount2(SqlSessionTemplate session);
-	
-	int rejectRefund(SqlSessionTemplate session,Map param);
-	
-	int rejectComment(SqlSessionTemplate session,Map param);
-	
+
+	int rejectRefund(SqlSessionTemplate session, Map param);
+
+	int rejectComment(SqlSessionTemplate session, Map param);
+
 	int updateRefundAdmin(SqlSessionTemplate session, Map param);
 
 	int insertRefundAdmin(SqlSessionTemplate session, Map param);
-	
+
 	List<Accommodation> mypageAcHeart(SqlSessionTemplate session, String memberId);
-	
+
 	List<Accommodation> mypageAcReview(SqlSessionTemplate session, int memberId, Map params);
-	
+
 	int mypageAcReviewCount(SqlSessionTemplate session, int memberId);
+
+	List<Accommodation> searchAc(SqlSessionTemplate session, Map param);
+
+	int searchAcCount(SqlSessionTemplate session, Map param);
+
+	List<AcPayList> paymentSearchList(SqlSessionTemplate session, Map param);
+
+	int paymentSearchListCount(SqlSessionTemplate session,Map param);
+
+	List<AcPayList> refundSearchList(SqlSessionTemplate session, Map param);
+
+	List<AcPayList> refundOkSearchList(SqlSessionTemplate session, Map param);
+
+	int refundSearchListCount(SqlSessionTemplate session,Map param);
+
+	int refundSearchListCount2(SqlSessionTemplate session,Map param);
 }

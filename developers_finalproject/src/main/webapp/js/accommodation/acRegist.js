@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 });
 
@@ -144,6 +145,7 @@ $(document).on("click", "#holyBtn", function() {
 			checkIn: $("#holyStart").val(),
 			checkOut: $("#holyLast").val()
 		})
+		console.log(checkHolyDay)
 		resetStart()
 		resetLast()
 	}
@@ -281,7 +283,7 @@ $(document).on("click", ".insertFcDelete", function(e) {
 	}
 
 	for (var i = 0; i < afalImgSrc.length; i++) {
-		if (afalImgSrc[i].afalImg === $(this).parent().prev("img").attr("src").replace(path+"/images/upload/accommodation/afal/", "")) {
+		if (afalImgSrc[i].afalImg === $(this).parent().prev("img").attr("src").replace(path + "/images/upload/accommodation/afal/", "")) {
 			afalImgSrc.splice(i, 1);
 		}
 	}
@@ -377,6 +379,7 @@ var sel_files = [];
 
 $(document).ready(function() {
 	$("#afImage").on("change", handleImgsFiles)
+
 })
 function handleImgsFiles(e) {
 	var files = e.target.files;
@@ -391,12 +394,11 @@ function handleImgsFiles(e) {
 			var img_html = "<img class='previewImg' src=\"" + e.target.result + "\" />"
 
 			const div = $('<div class="previewImgWrap">')
-			const blur = $('<div class="blurPreview"><img alt="" src="${path}/images/accommodation/checkImage.png"></div > ')
+			const blur = $('<div class="blurPreview"><img alt="" src="' + path + '/images/accommodation/checkImage.png"></div > ')
 			const main = $('<div class="mainCheck"><div>메인</div></div>')
 			const icon = $('<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>')
 			const input = $('<input type="hidden" name="afMain" value="N">')
 			const afImage = $("<img class='previewImg' src=\"" + e.target.result + "\" />")
-
 			div.append(blur).append(main).append(icon).append(input).append(afImage)
 
 			$(".preview").append(div)
@@ -409,6 +411,51 @@ function handleImgsFiles(e) {
 		reader.readAsDataURL(f)
 	})
 }
+
+$(".afLabel").on("dragenter", function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+}).on("dragover", function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+}).on("dragleave", function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+}).on("drop", function(e) {
+	e.preventDefault();
+	var files = e.originalEvent.dataTransfer.files;
+	var filesArr = Array.prototype.slice.call(files);
+
+	//파일 추가
+	filesArr.forEach(function(f) {
+		sel_files.push(f);
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			var img_html = "<img class='previewImg' src=\"" + e.target.result + "\" />"
+
+			const div = $('<div class="previewImgWrap">')
+			const blur = $('<div class="blurPreview"><img alt="" src="' + path + '/images/accommodation/checkImage.png"></div > ')
+			const main = $('<div class="mainCheck"><div>메인</div></div>')
+			const icon = $('<ion-icon class="deletePreview" name="close-circle-outline" role="img"></ion-icon>')
+			const input = $('<input type="hidden" name="afMain" value="N">')
+			const afImage = $("<img class='previewImg' src=\"" + e.target.result + "\" />")
+			div.append(blur).append(main).append(icon).append(input).append(afImage)
+
+			$(".preview").append(div)
+			if ($(".previewImgWrap").length == 1) {
+				$(".previewImgWrap").first().children(".mainCheck").css("display", "flex")
+				$(".previewImgWrap").first().children("input[name=afMain]").val("Y")
+			}
+			console.log(sel_files)
+		}
+		reader.readAsDataURL(f)
+	})
+});
+
+
+
 
 $(document).on("click", ".blurPreview", function() {
 	$(".mainCheck").hide()
@@ -435,22 +482,26 @@ var $item = $(document).on("click", '.deletePreview', function(e) {
 	} else {
 		$(this).parents(".previewImgWrap").remove()
 	}
+	
 	if (acFiles.length) {
-		var acFileSize = acFiles.length;
+		//기존에 있던 파일의 길이를 변수로 지정
+		var acFileSize = acFiles.length;		
 		for (var i = 0; i < acFiles.length; i++) {
-			if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace(path+"/images/upload/accommodation/", "")) {
-				acFiles.splice(i, 1);
-				acFileSize--
+			if (acFiles[i].afName === $(this).nextAll("img").attr("src").replace(path + "/images/upload/accommodation/", "")) {
+				acFiles.splice(i, 1);				
 			}
 		}
-		if (acFileSize != acFiles.length) {
+		//기존에 있던 파일이 삭제됬으면 지정한 변수와 값이 다름
+		//값이 같으면 새로 추가한 파일을 선택한것이므로 새로 추가한 파일 삭제
+		if (acFileSize == acFiles.length) {
+			console.log("fileDeleteOk")
 			sel_files.splice(num - acFiles.length, 1)
 		}
 	} else {
 		sel_files.splice(num, 1)
-	}	
-	console.log("기존파일 : "+acFiles)
-	console.log("새로 추가한 파일 : "+sel_files)
+	}
+	console.log("기존파일 : " + acFiles)
+	console.log("새로 추가한 파일 : " + sel_files)
 });
 
 //등록 양식 체크

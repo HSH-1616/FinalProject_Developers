@@ -109,9 +109,9 @@ public interface FoodDao {
 	
 	int cancleHeart(SqlSessionTemplate session, Map param);
 
-	int addFood(SqlSessionTemplate session, Food food);
-	
 	List<Food> foodHeartList(SqlSessionTemplate session, int memberId);
+	
+	List<Food> addFood(SqlSessionTemplate session, Map param);
 	
 	/*
 	 * boolean checkHeart(SqlSession session, Map params);

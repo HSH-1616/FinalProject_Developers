@@ -114,56 +114,56 @@
               </g>
               <g filter="url(#dropshadow)">
                 <text id="seoulText" class="TEXT" x="156" y="214">
-                  서울특별시
+                  서울
                 </text>
                 <text id="busanText" class="TEXT" x="503" y="695">
-                  부산광역시
+                  부산
                 </text>
                 <text id="daegooText" class="TEXT" x="418" y="567">
-                  대구광역시
+                  대구
                 </text>
                 <text id="incheonText" class="TEXT" x="67" y="177">
-                  인천광역시
+                  인천
                 </text>
                 <text id="gwangjooText" class="TEXT" x="127" y="707">
-                  광주광역시
+                  광주
                 </text>
                 <text id="daejunText" class="TEXT" x="221" y="463">
-                  대전광역시
+                  대전
                 </text>
                 <text id="ulsanText" class="TEXT" x="531" y="622">
-                  울산광역시
+                  울산
                 </text>
                 <text id="saejongText" class="TEXT" x="199" y="418">
                   세종특별자치시
                 </text>
                 <text id="gyeongiText" class="TEXT" x="216" y="245">
-                  경기도
+                  경기
                 </text>
                 <text id="kwangwonText" class="TEXT" x="370" y="179">
-                  강원도
+                  강원특별자치도
                 </text>
                 <text id="choongchungbookText" class="TEXT" x="294"
 						y="381">
-                  충청북도
+                  충북
                 </text>
                 <text id="choongchungnamText" class="TEXT" x="125"
 						y="449">
-                  충청남도
+                  충남
                 </text>
                 <text id="jeonlabookText" class="TEXT" x="179" y="592">
-                  전라북도
+                  전북
                 </text>
                 <text id="jeonlanamText" class="TEXT" x="138" y="764">
-                  전라남도
+                  전남
                 </text>
                 <text id="gyeongsangbookText" class="TEXT" x="447"
 						y="460">
-                  경상북도
+                  경북
                 </text>
                 <text id="gyeongsangnamText" class="TEXT" x="367"
 						y="672">
-                  경상남도
+                  경남
                 </text>
                 <text id="jejuText" class="TEXT" x="76" y="970">
                   제주특별자치도

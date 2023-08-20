@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.net.http.HttpRequest;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.json.JSONParser;
 import org.apache.tomcat.util.json.ParseException;
@@ -24,7 +24,9 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -238,6 +240,26 @@ public class MemberController {
   		if(!status.isComplete()) status.setComplete();
   		return "redirect:/";
   	}	
+  	
 	
-	
+	// 회원탈퇴
+
+	@GetMapping("/deleteMember")
+
+	@ResponseBody
+	public String deleteMember(@RequestParam int memberId, HttpSession session) {
+
+		service.deleteMember(memberId);
+
+		session.invalidate();
+
+		return "redirect:/";
+	}
+		 
+  	
+  	
+	 
+  	
 }
+  	
+

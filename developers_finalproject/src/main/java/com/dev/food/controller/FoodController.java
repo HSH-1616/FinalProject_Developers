@@ -51,9 +51,12 @@ public class FoodController {
 
 	@Autowired
 	private static FoodService service;
+	private HttpSession session;
+	/* private static FoodService service; */
 	
-	public FoodController(FoodService service) {
+	public FoodController(FoodService service, HttpSession session) {
 		this.service = service;
+		this.session = session;
 	}
 	
 	@GetMapping("/foodList.do")
@@ -638,6 +641,13 @@ public class FoodController {
 	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
 	
+	/*
+	 * @PostMapping("/add") public List<Food> addFood(@RequestParam int memberId) {
+	 * 
+	 * List<Food> foods=service.addFood(memberId);
+	 * 
+	 * return foods; }
+	 */
 //	찬은
 	@PostMapping("/add")
     public String addFood(Food food) {
@@ -670,6 +680,12 @@ public class FoodController {
 		
 	    return foods;
 	}
+	 
+	/*
+	 * @GetMapping("/foodRegist")
+	 * 
+	 * @ResponseBody public
+	 */
 	
 
 }

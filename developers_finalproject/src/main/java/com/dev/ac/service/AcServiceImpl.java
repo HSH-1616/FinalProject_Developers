@@ -245,7 +245,6 @@ public class AcServiceImpl implements AcService {
 			if (result > ac.getAcFiles().size() + ac.getAfa().getAfal().size() + 3) {
 				for (int i = 0; i < ac.getArv().size(); i++) {
 					ac.getArv().get(i).setAcId(ac.getAcId());
-					System.out.println(ac.getArv().get(i));
 					result += dao.updateInArv(session, ac.getArv().get(i));
 				}
 				log.info("예약내역 등록 성공 result : " + result);
@@ -368,6 +367,46 @@ public class AcServiceImpl implements AcService {
 	@Override
 	public int mypageAcReviewCount(int memberId) {
 		return dao.mypageAcReviewCount(session, memberId);
+	}
+
+	@Override
+	public List<Accommodation> searchAc(Map param) {
+		return dao.searchAc(session, param);
+	}
+
+	@Override
+	public int searchAcCount(Map param) {
+		return dao.searchAcCount(session,param);
+	}
+
+	@Override
+	public List<AcPayList> paymentSearchList(Map param) {
+		return dao.paymentSearchList(session, param);
+	}
+
+	@Override
+	public int paymentSearchListCount(Map param) {
+		return dao.paymentSearchListCount(session,param);
+	}
+
+	@Override
+	public List<AcPayList> refundSearchList(Map param) {
+		return dao.refundSearchList(session, param);
+	}
+
+	@Override
+	public List<AcPayList> refundOkSearchList(Map param) {
+		return dao.refundOkSearchList(session, param);
+	}
+
+	@Override
+	public int refundSearchListCount(Map param) {
+		return dao.refundSearchListCount(session,param);
+	}
+
+	@Override
+	public int refundSearchListCount2(Map param) {
+		return dao.refundSearchListCount2(session,param);
 	}
 
 

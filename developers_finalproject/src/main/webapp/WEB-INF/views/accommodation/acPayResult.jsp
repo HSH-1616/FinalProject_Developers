@@ -16,7 +16,7 @@
 				</h3>
 				<img src="${path}/images/accommodation/payCheck.png" alt="" />
 				<div>
-					<button>예약내역 바로가기</button>
+					<button onclick="location.href='${path}/mypage/mypage'" >예약내역 바로가기</button>
 				</div>
 			</div>
 		</div>

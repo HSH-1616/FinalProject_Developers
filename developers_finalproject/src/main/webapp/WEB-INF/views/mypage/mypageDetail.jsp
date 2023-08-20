@@ -2,16 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <link rel="stylesheet" href="${path }/css/mypage/mypageDetail.css" />
 <head>
 
-<script src="${path }/js/mypage/mypageDetail.js"/>
+
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <section>
 
 	<div class="mypageheader">
+			
 		<div class="mypageheaderarea">
 			<div class="mypageprofile">
 				<div class="profile">
@@ -26,18 +28,13 @@
 					<form>
 						<div class="mt-6">
 							<div class="mt-2">
-								<label class="block text-xs">닉네임</label> <input type="text"
+								<label class="block text-xs">아이디</label> <input type="text"
 									class="flex-1 w-full p-2 my-2 text-black placeholder-gray-700 bg-gray-800 rounded-sm focus:outline-none focus:border-transparent"
-									name="memberNewNickname">
-							</div>
-							<div class="mt-2">
-								<label class="block text-xs">이메일</label><input type="email"
-									class="flex-1 w-full p-2 my-2 text-black placeholder-gray-700 bg-gray-800 rounded-sm focus:outline-none focus:border-transparent"
-									readonly="" value="">
+									name="memberNewNickname" id="deleteMember">
 							</div>
 							<div class="mt-4">
 								<p class="text-xs font-light text-left text-gray-500">
-									<button id="withdrawButton" class="text-gray-500 hover:underline">회원탈퇴</button>
+									<div onclick="removeMember();" id="withdrawButton">회원탈퇴</div>
 								</p>
 							</div>
 							<div class="flex items-center mt-4">
@@ -58,4 +55,5 @@
 	</div>
 
 </section>
+<script src="${path }/js/mypage/mypageDetail.js"/>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

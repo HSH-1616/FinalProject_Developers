@@ -9,7 +9,7 @@ $(document).ready(function() {
 		dataType: "json",
 		success: function(data) {
 			$(data).each(function(i, l) {
-				var form = $('<form class="acPayForm" action="/ac/acRefundApply" method="post">')
+				var form = $('<form class="acPayForm" action="'+path+'/ac/acRefundApply" method="post">')
 				var acPay = $('<div class="acPayForm">')
 				var hidden = $('<input type="hidden" name="orderId" value="' + l.apOrderId + '"/>')
 				var id = $('<input type="hidden" name="acId" value="' + l.acDetail.acId + '"/>')
@@ -19,7 +19,7 @@ $(document).ready(function() {
 				var img = ""
 				$(l.acDetail.acFiles).each(function(i2, l2) {
 					if (l2.afMain == "Y") {
-						img = $('<img alt="" src="/images/upload/accommodation/' + l2.afName + '">')
+						img = $('<img alt="" src="'+path+'/images/upload/accommodation/' + l2.afName + '">')
 					}
 				})
 				var content = $('<div class="payListContent">')

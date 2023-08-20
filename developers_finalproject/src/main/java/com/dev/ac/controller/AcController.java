@@ -80,6 +80,7 @@ public class AcController {
 		Accommodation ad = service.acDetail(no);
 		m.addAttribute("ad", ad);
 		m.addAttribute("ah", service.acHeart(no));
+		m.addAttribute("arv",service.updateRegistArv(no));
 		m.addAttribute("afal", service.updateRegistAfal(ad.getAfa().getAfaId()));
 		m.addAttribute("ar", service.acReview(no));
 		System.out.println(service.acReview(no));
@@ -312,7 +313,6 @@ public class AcController {
 		m.addAttribute("afa", afa);
 		m.addAttribute("afal", afal);
 		m.addAttribute("af", af);
-
 		return "accommodation/acUpdate";
 	}
 

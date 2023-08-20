@@ -18,6 +18,11 @@ public class MemberDaoImpl implements MemberDao {
 			session.insert("member.insertMember", m);
 		
 	}
+
+	@Override
+	public int deleteMember(SqlSession session, int memberId) {
+		return session.delete("member.deleteMember", memberId);
+	}
 	
 	
 

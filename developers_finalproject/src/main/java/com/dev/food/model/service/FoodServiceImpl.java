@@ -27,10 +27,18 @@ public class FoodServiceImpl implements FoodService{
 	 * this.session = session; }
 	 */
 	
+	
+	
 	@Override
 	public List<Food> foodHeartList(int memberId) {
 		// TODO Auto-generated method stub
 		return dao.foodHeartList(session, memberId);
+	}
+
+	@Override
+	public List<Food> addFood(Map param) {
+		// TODO Auto-generated method stub
+		return dao.addFood(session, param);
 	}
 
 	@Autowired
@@ -303,11 +311,6 @@ public class FoodServiceImpl implements FoodService{
 		return dao.selectFoodBlackListCount(session);
 	}
 	
-	 @Override
-	public int addFood(Food food) {
-	     return dao.insertFood(session, food);
-	}
-	 
 	@Override
 	public List<Food> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params) {
 		return dao.selectFoodReviewByFoodNo(session, memberId, params);
