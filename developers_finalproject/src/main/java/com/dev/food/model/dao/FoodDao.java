@@ -127,6 +127,7 @@ public interface FoodDao {
 	int selectFoodBlackListCount(SqlSession session);
 	
 	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId, Map<String, Object> params);
+	
 	int selectFoodReviewByFoodNoCount(SqlSession session, int memberId);
 	
 	String searchFoodNameByNo(SqlSession session,int foodNo);
