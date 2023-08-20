@@ -144,7 +144,7 @@ public class TourisController {
 			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m){
 		List<Touris> tourislist = service.tourislist(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData = service.tourisListCount();
-		m.addAttribute("pageBar", com.dev.common.PageFactory.getPage(cPage, numPerpage, totalData, "tourisroute"));
+		m.addAttribute("pageBar", com.dev.common.PageFactory.getPage(cPage, numPerpage, totalData, "tourislist"));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("tourislist", tourislist);
 		
