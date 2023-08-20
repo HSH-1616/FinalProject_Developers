@@ -100,11 +100,6 @@ public interface FoodService {
 	
 	int selectFoodBlackListCount();
 	
-	//List<Food> selectFoodReviewByFoodNo(int memberId);
-
-	List<Food> addFood(Map param);
-	
-//	List<FoodReview> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params);
 	List<Food> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params);
 	
 	int selectFoodReviewByFoodNoCount(int memberId);

@@ -12,21 +12,22 @@ $(document).ready(function() {
 
 const initializeSlick = () => {
     $('.favorite').slick({
-        lazyLoad: 'ondemand',
+       lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 1
+        slidesToScroll: 3
     });
 
     $('.favorite2').slick({
-        lazyLoad: 'ondemand',
+      lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 1
+        slidesToScroll: 3
     });
     $('.favorite3').slick({
-        lazyLoad: 'ondemand',
+       lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 1
+        slidesToScroll: 3
     });
+
     
 };
 /*리뷰목록, 게시글 가져오기*/
@@ -306,6 +307,10 @@ const foodheart = () => {
 		type:"get",
 		data:{memberId:memberId},
 		success:(data)=>{
+			let slideAdded = false;
+
+            $('.favorite2').slick('unslick');
+            $('.favorite2').empty();
 			data.forEach(e=>{
 				console.log(e);
 				let foodAddress = e.foodAddress;
@@ -315,7 +320,6 @@ const foodheart = () => {
 					 if (p.fpMain === 1) {
                         cardspanimg = `<img alt="" src="${p.fpName}">`;
                     }
-					
 				});
 				const foodheartlist = `<div class="foodcardarea">
 							<div class="cardimgarea">
@@ -331,8 +335,16 @@ const foodheart = () => {
 							</div>
 						</div>`
 					$(".favorite2").append(foodheartlist);
+			
 			});
-			$('.favorite2').slick('refresh');
+			if (!slideAdded) {
+                $('.favorite2').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                });
+                slideAdded = true;
+            }
+			/*$('.favorite2').slick('refresh');*/
 		}
 	})
 }		
