@@ -284,7 +284,7 @@ deleteCommunity = (no) => {
 
 	if (confirm("게시글을 삭제하시겠습니까?") == true) {
 		$.ajax({
-			url: getContextPath()+"/deleteCommunity.do",
+			url: path+"/deleteCommunity.do",
 			type: "post",
 			data: { communityNo: no },
 			success: () => {
