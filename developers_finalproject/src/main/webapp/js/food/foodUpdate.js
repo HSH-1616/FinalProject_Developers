@@ -101,15 +101,25 @@ upload.addEventListener('click', () => realUpload.click());
 realUpload.addEventListener('change', getImageFiles);
 
 
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
   const registCancelBtn = document.getElementById("registOkBtn");
 
   registOkBtn.addEventListener("click", function() {
 	  
-    const confirmation = confirm("등록하시겠습니까??");
-    if (confirmation) {
+    
+    
+    if (confirm("등록하시겠습니까??")==true) {
+		console.log("실해")
+		document.getElementById('#foodRecommendForm').submit();
 		
     }
   });
 });
+*/
+
+
+function submitFoodRecommendForm() {
+	var form = document.getElementById('foodRecommendForm');
+	form.submit(); // 폼 데이터를 서버로 전송
+}
 

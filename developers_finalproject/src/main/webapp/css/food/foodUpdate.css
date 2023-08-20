@@ -11,8 +11,14 @@ th {
     position: relative;
     top: 10px;
 }
-
-
+input[type="submit"] {
+    position: relative;
+    top: 465px;
+    left: 300px;
+    border-radius: 10px;
+    background-color: white;
+    height: 30px;
+}
 
 a.on {
   font-size: 1.5rem;

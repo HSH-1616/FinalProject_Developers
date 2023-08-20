@@ -49,9 +49,11 @@ public class FoodController {
 
 	@Autowired
 	private FoodService service;
+	private HttpSession session;
 	
-	public FoodController(FoodService service) {
+	public FoodController(FoodService service, HttpSession session) {
 		this.service = service;
+		this.session = session;
 	}
 	
 	@GetMapping("/foodList.do")
@@ -644,12 +646,13 @@ public class FoodController {
 	 * model.addAttribute("food", new Food()); return "food/foodUpdate"; }
 	 */
 	
-	@PostMapping("/add")
-    public String addFood(Food food) {
-        service.addFood(food);
-        
-        return "redirect:/food/add";
-    }
+	/*
+	 * @PostMapping("/add") public List<Food> addFood(@RequestParam int memberId) {
+	 * 
+	 * List<Food> foods=service.addFood(memberId);
+	 * 
+	 * return foods; }
+	 */
 	
 	@GetMapping("/mypage/foodheart")
 	@ResponseBody 
@@ -660,5 +663,11 @@ public class FoodController {
 	    return foods;
 	}
 	 
+	/*
+	 * @GetMapping("/foodRegist")
+	 * 
+	 * @ResponseBody public
+	 */
+	
 	
 }

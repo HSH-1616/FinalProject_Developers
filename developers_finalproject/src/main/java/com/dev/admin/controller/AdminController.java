@@ -201,6 +201,7 @@ public class AdminController {
 		m.addAttribute("foods",foodList);
 		return "admin/foodList";
 	}
+	
 	@GetMapping("/paymentList")
 	public String paymentList(Model m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
@@ -279,22 +280,24 @@ public class AdminController {
 	}
 	
 //	===========================장흠=========================
+
+	/*
+	 * @PostMapping("/foodRecommend") public String foodRecommend(Model
+	 * m, @RequestParam(value = "cPage", defaultValue = "1") int cPage,
+	 * 
+	 * @RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage) {
+	 * System.out.println("여기오니?"); Map<String, Object> param = new HashMap<>();
+	 * Map<String, Object> type = new HashMap<>();
+	 * 
+	 * param.put("cPage", cPage); param.put("numPerpage", numPerpage); int totalData
+	 * = foodService.selectFoodCount();
+	 * 
+	 * m.addAttribute("pageBar", com.dev.common.PageFactory.getPage(cPage,
+	 * numPerpage, totalData, "/admin/foodRecommend")); m.addAttribute("totalData",
+	 * totalData); m.addAttribute("af", foodService.addFood(param));
+	 * 
+	 * return "admin/foodRecommend"; }
+	 */
 	
-	@GetMapping("/foodRecommend")
-	public String foodRecommend(@RequestParam(value="cPage",defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage",defaultValue="10") int numPerpage, Model m){
-		Map<String,Object> param=new HashMap<>();
-		param.put("cPage", cPage);
-		param.put("numPerpage", numPerpage);
-		
-		Map<String,Object> type=new HashMap<>();
-		
-		List<Food> foodList=service.searchFood(param);
-		int totalData=service.selectFoodCount();
-		m.addAttribute("pageBar",PageFactory.getPage(cPage, numPerpage, totalData,"selectFoodList",type));
-		m.addAttribute("totalData",totalData);
-		m.addAttribute("foods",foodList);
-		return "admin/foodRecommend";
-	}
 }
 

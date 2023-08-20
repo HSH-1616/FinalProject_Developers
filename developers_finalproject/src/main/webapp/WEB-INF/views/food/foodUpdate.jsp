@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script
@@ -41,7 +41,7 @@
   </div>
 	<div class="food_update">
 
-		<form action="${pageContext.request.contextPath}/food/add" method="post" enctype="multipart/form-data">
+		<form id="foodRecommendForm" action="${pageContext.request.contextPath}/food/foodRegist" method="post" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<th>상호명</th>
@@ -73,20 +73,24 @@
 						<ul class="image-preview"></ul>
 					</td>
 				</tr>
+				<div id="registBtn">
+					<input type="submit" value="등록하기">
+				</div>
 			</table>
 		</form>
 	</div>
 
 	<!-- 맛집 등록하는 버튼 -->
-    <div class="registBtnCon">
+    <<!-- div class="registBtnCon">
       <div class="registBtn">
-        <button id="registOkBtn">등록하기</button>
+        <button type=button id="registOkBtn" onclick="submitFoodRecommendForm();">등록하기</button>
       </div>
-    </div>
+    </div> -->
     
     <!-- /맛집 등록하는 버튼 -->
 
 </section>
 
 <script src="${path }/js/food/foodUpdate.js"/>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
