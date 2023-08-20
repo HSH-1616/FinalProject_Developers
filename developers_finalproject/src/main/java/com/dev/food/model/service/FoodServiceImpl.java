@@ -35,11 +35,6 @@ public class FoodServiceImpl implements FoodService{
 		return dao.foodHeartList(session, memberId);
 	}
 
-	@Override
-	public List<Food> addFood(Map param) {
-		// TODO Auto-generated method stub
-		return dao.addFood(session, param);
-	}
 
 	@Autowired
 	private FoodDao dao;
