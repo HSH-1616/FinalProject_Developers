@@ -1,5 +1,6 @@
 package com.dev.admin.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,10 +22,13 @@ import com.dev.ac.service.AcService;
 import com.dev.admin.common.PageFactory;
 import com.dev.admin.model.dto.Admin;
 import com.dev.admin.service.AdminService;
+import com.dev.food.controller.FoodController;
 import com.dev.food.model.dto.Food;
 import com.dev.food.model.service.FoodService;
 import com.dev.member.model.dto.Black;
 import com.dev.member.model.dto.Member;
+import com.dev.member.service.MemberService;
+import com.dev.touris.model.service.TourisService;
 import com.dev.touris.model.vo.Touris;
 
 @Controller
@@ -33,14 +36,19 @@ import com.dev.touris.model.vo.Touris;
 @RequestMapping("/admin")
 public class AdminController {
 
-	private AcService acService;
-	private AdminService service;
+	private TourisService tourisService;
 	private FoodService foodService;
+	private AcService acService;
+	private MemberService memberService;
+	private AdminService service;
 
-	public AdminController(AdminService service, AcService acService, FoodService foodService) {
-		this.service = service;
-		this.acService = acService;
+	public AdminController(AdminService service, AcService acService, FoodService foodService,
+			TourisService tourisService, MemberService memberService) {
+		this.tourisService = tourisService;
 		this.foodService = foodService;
+		this.acService = acService;
+		this.service = service;
+		this.memberService = memberService;
 	}
 
 	@GetMapping
@@ -49,12 +57,30 @@ public class AdminController {
 	}
 
 	@GetMapping("/adminMain")
-	public String adminMain() {
+	public String adminMain(Model m) {
+		int tour = tourisService.tourisListCount();
+		int foodCount = foodService.selectFoodCount();
+		int ac = acService.selectAcAllCount();
+		int member = service.selectMemberAllCount();
+
+		m.addAttribute("tour", tour);
+		m.addAttribute("foodCount", foodCount);
+		m.addAttribute("ac", ac);
+		m.addAttribute("member", member);
 		return "admin/adminMain";
 	}
 
 	@GetMapping("/main")
-	public String main() {
+	public String main(Model m) {
+//		int tour = tourisService.tourisListCount();
+//		int food = foodService.selectFoodCount();
+//		int ac = acService.selectAcAllCount();
+//		int member = service.selectMemberAllCount();
+//		
+//		m.addAttribute("tour", tour);
+//		m.addAttribute("food", food);
+//		m.addAttribute("ac", ac);
+//		m.addAttribute("member", member);
 		return "main";
 	}
 
@@ -194,9 +220,11 @@ public class AdminController {
 	}
 
 //	===========================지환=========================
-	@GetMapping("/selectFoodList")
-	public String selectFoodList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
+	// 미승인 리스트 페이지
+	@GetMapping("/selectFoodListNon")
+	public String selectFoodListNon(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, Model m) {
+
 		// 페이지처리용 Map
 		Map<String, Object> param = new HashMap<>();
 		param.put("cPage", cPage);
@@ -204,15 +232,41 @@ public class AdminController {
 
 		// 검색처리 Map
 		Map<String, Object> type = new HashMap<>();
-//		type.put("typeId", "tourisAreaId");
-//		type.put("value", data.get("tourisAreaId"));
 
+		// 미승인 리스트 출력
+		List<Food> nonApprovefoodList = service.searchFoodNonApprove(param);
+		int totalDataNonApprove = service.selectFoodCountNonApprove();
+		int totalData = service.selectFoodCount();
+		m.addAttribute("npageBar",
+				PageFactory.getPage(cPage, numPerpage, totalDataNonApprove, "selectFoodListNon", type));
+		m.addAttribute("nd", totalDataNonApprove);
+		m.addAttribute("totalData", totalData);
+		m.addAttribute("nf", nonApprovefoodList);
+
+		return "admin/foodListNon";
+	}
+
+	@GetMapping("/selectFoodListApprove")
+	public String selectFoodListApprove(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
+			@RequestParam(value = "numPerpage", defaultValue = "10") int numPerpage, Model m) {
+
+		// 페이지처리용 Map
+		Map<String, Object> param = new HashMap<>();
+		param.put("cPage", cPage);
+		param.put("numPerpage", numPerpage);
+
+		// 검색처리 Map
+		Map<String, Object> type = new HashMap<>();
+
+		// 승인 리스트 출력
 		List<Food> foodList = service.searchFood(param);
 		int totalData = service.selectFoodCount();
-		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectFoodList", type));
+		int totalDataNonApprove = service.selectFoodCountNonApprove();
+		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectFoodListApprove", type));
+		m.addAttribute("nd", totalDataNonApprove);
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("foods", foodList);
-		return "admin/foodList";
+		return "admin/foodListApprove";
 	}
 
 	@GetMapping("/paymentList")
@@ -225,7 +279,6 @@ public class AdminController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		int totalData = acService.paymentListCount();
-
 		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "paymentList", type));
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("ap", acService.paymentList(param));
@@ -397,23 +450,32 @@ public class AdminController {
 	}
 
 	@GetMapping("/selectFoodByFoodNo")
-	public String selectFoodByFoodNo(int foodNo, Model m) {
+	public String selectFoodByFoodNo(int foodNo, Model m) throws IOException {
+
 		// foodNo로 food,foodPhoto dto불러오고 출력(출력페이지에서 승인,미승인 여부 네비게이션으로) //리뷰는 어쩌지?
 		List<Food> foods = foodService.selectFoodByFoodNo(foodNo);
+
+		// 출력할 값이 없으면
+		if (foods.get(0).getFoodPhoto().get(1).getFpName() == null) {
+			// 상세정보 api 불러오기
+			FoodController.foodInfoApi(foodNo, m);
+		}
+
+		System.out.println("qweqwe" + foods);
 		m.addAttribute("foods", foods);
 		return "admin/foodDetail";
 	}
 
 	@GetMapping("/updateFoodByFoodNo")
 	public String updateFoodByFoodNo(Food f, Model m) {
-		System.out.println(f);
+		System.out.println("allow가 업데이트가 안되는 문제 :" + f);
 		int result = foodService.updateFoodOnAdmin(f);
 		if (result > 0) {
 			m.addAttribute("result", "true");
 		} else {
 			m.addAttribute("result", "false");
 		}
-		return "/admin/adminMain";
+		return "redirect:/admin/adminMain";
 	}
 
 	@GetMapping("/deleteFoodByFoodNo")
@@ -428,7 +490,7 @@ public class AdminController {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("result", result);
-		return "redirect:/admin/selectFoodList";
+		return "redirect:/admin/adminMain";
 	}
 
 //	===========================장흠=========================
@@ -442,11 +504,12 @@ public class AdminController {
 
 		Map<String, Object> type = new HashMap<>();
 
-		List<Food> foodList = service.searchFood(param);
-		int totalData = service.selectFoodCount();
+		List<Food> foodList = service.searchFoodNonApprove(param);
+		int totalData = service.selectFoodCountNonApprove();
 		m.addAttribute("pageBar", PageFactory.getPage(cPage, numPerpage, totalData, "selectFoodList", type));
 		m.addAttribute("totalData", totalData);
 		m.addAttribute("foods", foodList);
 		return "admin/foodRecommend";
+
 	}
 }

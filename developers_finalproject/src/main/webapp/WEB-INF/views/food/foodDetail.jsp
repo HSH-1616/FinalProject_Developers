@@ -6,22 +6,12 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/> 
 <head>
    <script> const jspath = '${path}'; </script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <%-- <script src="${path }/js/food/foodList.js"></script> --%>
     <script src="${path }/js/food/foodDetail.js"></script>
-    <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!-- <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4428a904f18357ee0a3f795c4918e96a&libraries=services,clusterer,drawing"></script>
-
-
-    
-   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"/>
     <link rel="stylesheet" href="${path }/css/food/foodDetail.css"/>
     <link rel="stylesheet" href="${path }/css/default.css" />
@@ -32,7 +22,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<script>
+<!-- <script>
 	var tourisId="${touris.tourisId}";
 	if('${loginMember}'==''){
 		var memberId=null;
@@ -40,13 +30,11 @@
 		var memberId="${loginMember.memberId}";
 	}
 	console.log('${loginMember.tourisHeartlist}');
-	/* console.log("이건뭐니?"+'${touris.tourisImages[0].tourisImages}'); */
-</script>
+</script> -->
 
 <section>
    <!-- ==================================================맛집 상세페이지============================================================== -->
    <div class="foodDetailCon col justify-content-center">
-      <!-- <div id="hotelDetail" class="row"> -->
       <div class="row align-items-end">
          <span class="col w-auto">
             <div class="d-flex flex-row">
@@ -82,18 +70,17 @@
 
       <hr class="m-3">
 
-      <!-- 맛집 상세정보 페이지 -->
+      <!-- 맛집 상세정보 페이지  -->
       <div class="food_photo">
          <p class="fs-4">상세정보</p>
       </div>
-      ${f}
 
       <div class="row justify-content-center" style="height: 450px;">
          <!-- 음식 슬라이드 -->
          <div class="foodInfosection d-flex flex-row justify-content-center align-items-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 550px;">
                <div class="carousel-indicators">
-                  <%-- <button type="button"
+                  <button type="button"
                      data-bs-target="#carouselExampleIndicators"
                      data-bs-slide-to="0" class="active" aria-current="true"
                      aria-label="Slide 1">
@@ -104,7 +91,7 @@
                      data-bs-slide-to="${i}" aria-current="true"
                      aria-label="Slide ${i+1}">
                      </button>
-                  </c:forEach> --%>
+                  </c:forEach>
                </div>
                <div class="carousel-inner">               
                   <c:forEach var="fp" items="${f.foodPhoto}">
@@ -195,7 +182,7 @@
                   <div class="row mr-1 p-0 align-items-center">
                      <span class="star w-auto p-0">★★★★★
                         <span class="review_rating">★★★★★</span>
-                           <input type="range" class="starcountnum" name="frGrade" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                           <input type="range" class="starcountnum" name="frGrade" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
                            <div class="star_rating text-center text-dark">
                               <h5>0/5</h5>
                            </div>
@@ -287,9 +274,13 @@
                </div>
                <!-- 리뷰 이미지 -->
                <div class="detailReviewImg">
-                  <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
-                  <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/> <!-- update data -->
-                  </c:forEach>
+                  <c:if test="${fr.foodReviewPhoto[0].rpName == null}">
+                  </c:if>
+                  <c:if test="${fr.foodReviewPhoto[0].rpName != null}">
+                     <c:forEach var="imgs" items="${fr.foodReviewPhoto}">
+                     <img src="${path}/images/upload/food/${imgs.rpRename}" alt="리뷰이미지"/> <!-- update data -->
+                     </c:forEach>
+                  </c:if>
                </div>
                <div class="detailReviewText detailFoodInfo">
                   <pre style="overflow-y: hidden" class="default_food_review_height"> <!-- update data -->
@@ -383,10 +374,10 @@
             }
          } 
       });
-      //별점 확인
-      $(".starcountnum").click(e=>{
-         console.log($(".starcountnum").val()/2);
-      })
+      // //별점 확인
+      // $(".starcountnum").click(e=>{
+      //    console.log($(".starcountnum").val()/2);
+      // })
 
       $(".submitModal").click(e=>{
          //ajax 통신(등록)
@@ -405,28 +396,32 @@
             //form.append("memberId","${loginMember.memberId}");
             form.append("frGrade",$(".starcountnum").val()/2);
             form.append("frContent",$("#FR_CONTENT").val());
-   
-            $.ajax({
-               url:"${path}/food/insertFoodReview.do",
-               data:form,
-               type:"post",
-               enctype: "multipart/form-data",
-               processData:false,
-               contentType:false,
-               cache: false,
-               success:data=>{
-                  alert("업로드가 완료되었습니다.");
-                  location.reload();
-                  $('window').scrollTop(0,300);
-               },
-               error:(r,s,e)=>{
-                  console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
-                  alert("업로드 실패");
-               },
-               complete:()=>{
-                  $(".upFile").val('');
-               }
-            });
+            console.log($(".starcountnum").val()/2);
+            if($(".starcountnum").val()/2 == 0){
+               alert("별점, 후기를 작성해주세요");
+            }else{
+               $.ajax({
+                  url:"${path}/food/insertFoodReview.do",
+                  data:form,
+                  type:"post",
+                  enctype: "multipart/form-data",
+                  processData:false,
+                  contentType:false,
+                  cache: false,
+                  success:data=>{
+                     alert("업로드가 완료되었습니다.");
+                     location.reload();
+                     $('window').scrollTop(0,300);
+                  },
+                  error:(r,s,e)=>{
+                     console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
+                     alert("업로드 실패");
+                  },
+                  complete:()=>{
+                     $(".upFile").val('');
+                  }
+               });
+            }
          }
          //ajax 통신(수정)
          if($(".submitModal").hasClass("updateFoodReview") === true){

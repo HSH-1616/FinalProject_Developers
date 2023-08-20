@@ -19,11 +19,23 @@ $(()=>{
 
 // ======================= 지환 ====================
 function fn_foodInfo(foodNo){
-	location.assign(getContextPath()+'/admin/selectFoodByFoodNo?foodNo='+foodNo);
+	location.assign(getContextPath()+'/selectFoodByFoodNo?foodNo='+foodNo);
 }
 function fn_deleteFood(foodNo){
 	const result = confirm("정말 삭제하시겠습니까?");
 	if(result == true){
-		location.assign(getContextPath()+'/admin/deleteFoodByFoodNo?foodNo='+foodNo);
+		location.assign(getContextPath()+'/deleteFoodByFoodNo?foodNo='+foodNo);
 	}
 }
+
+$("#approve-tab").click(function(){
+	console.log("#approve-tab");
+	location.assign(getContextPath()+'/selectFoodListApprove');
+});
+
+$("#non-approve-tab").click(function(){
+	console.log("#non-approve-tab");
+	location.assign(getContextPath()+'/selectFoodListNon');
+});
+
+
