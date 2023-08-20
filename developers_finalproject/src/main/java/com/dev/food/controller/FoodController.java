@@ -67,7 +67,7 @@ public class FoodController {
 	}
 	
 	@GetMapping("/foodList2.do")
-	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
+	public String selectFoodAll(@RequestParam(value="cPage",defaultValue ="1") int cPage, 
 			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m)throws IOException {
 		
 		//DB값 불러오기

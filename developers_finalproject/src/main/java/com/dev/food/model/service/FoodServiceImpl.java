@@ -183,7 +183,6 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public int insertHeart(Map param) {
 		
-		
 		int result=dao.insertHeart(session, param);
 		int result2=dao.updateHeart(session, param);
 		System.out.println(result);

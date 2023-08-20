@@ -120,8 +120,6 @@ function updateFoodList(sortFilter) {
 	xhr.send();
 }
 
-
-
 function searchFood(page) {
 
 	const form = document.getElementById('searchForm');

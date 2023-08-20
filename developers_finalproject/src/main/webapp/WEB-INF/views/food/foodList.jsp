@@ -63,13 +63,7 @@
 		<c:if test="${not empty foods }">
 			<c:forEach var="f" items="${foods }" varStatus="status">
 				<div class="food_list">
-					<%-- <c:forEach var="fh" items="${fhHeart }"> --%>
 					<c:if test="${loginMember!=null }">
-						<%-- <div class="con-like" style="position: relative; z-index: 2;">
-							<input title="like" type="checkbox" class="like" value="${f.foodNo }">
-							<div class="checkmark">
-								<svg viewBox="0 0 24 24" class="outline"
-									xmlns="http://www.w3.org/2000/svg"> --%>
 						<div class="con-like" style="position: relative; z-index: 2;">
 							<input title="like" type="checkbox" class="like"
 								value="${f.foodNo }">
@@ -95,6 +89,7 @@
                 </svg>
 							</div>
 						</div>
+						</c:forEach>
 					</c:if>
 
 					<c:forEach var="fp" items="${f.foodPhoto}">
@@ -116,7 +111,6 @@
 						<span class="comment_count">${f.foodReadCount}</span> --%>
 					</div>
 				</div>
-			</c:forEach>
 		</c:if>
 		<!-- /음식 목록 -->
 
@@ -137,5 +131,20 @@
 
 </section>
 <script src="${path }/js/food/foodList.js" />
+<script>
+<c:if test="${not empty loginMember }">
+<c:forEach var="f" items="${foods}">
+<c:forEach var="fh" items="${fh.foodHeart}">
+	<c:if test="${loginMember.memberId==fh.memberId}">
+		$(".like").each(function(i,l){
+			if($(this).val()==${fh.foodNo}){
+				$(this).prop("checked",true)
+			}
+		})
+	</c:if>
+</c:forEach>
+</c:forEach>
+</c:if>
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
