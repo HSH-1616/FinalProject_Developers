@@ -35,7 +35,7 @@ $(document).on("mouseout", ".travelBtn", function () {
 
 const communityCardView=(no)=>{
 	console.log(no);
-	location.href=path+"community/communityView.do?no="+no;
+	location.href=path+"/community/communityView.do?no="+no;
 }
 
 
