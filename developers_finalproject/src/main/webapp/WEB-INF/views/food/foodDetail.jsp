@@ -466,7 +466,7 @@
          const data = {frNo:$("#selected_food_no").val()};
 
          $.ajax({
-            url:"${path}/food/deleteFoodReview.do",
+            url: "${path}/food/deleteFoodReview.do",
             type:"post",
             data:data,
             success:data=>{
