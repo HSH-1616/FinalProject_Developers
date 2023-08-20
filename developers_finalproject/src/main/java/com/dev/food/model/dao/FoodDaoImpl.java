@@ -270,7 +270,7 @@ public class FoodDaoImpl implements FoodDao {
 	
 	@Override
 	public int updateHeart(SqlSessionTemplate session, Map param) {
-		return session.update("food.updateHeart",param);
+		return session.update("food.insertHeart",param);
 	}
 	
 	@Override

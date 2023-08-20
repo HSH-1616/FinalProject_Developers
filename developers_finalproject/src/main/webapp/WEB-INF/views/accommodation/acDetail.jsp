@@ -529,8 +529,8 @@
 					      IMG2 : window.location.origin+img2,
 					      IMG3 : window.location.origin+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
-					      THU : window.location.origin+path+ "/images/common/logo.png",
-					      PATH : "${path}/ac/acDetail?no=${ad.acId}",
+					      THU : window.location.origin+path+"/images/common/logo.png",
+					      PATH : "developers_finalproject/ac/acDetail?no=${ad.acId}",
 					      DESC : ""		  
 					    },
 					});

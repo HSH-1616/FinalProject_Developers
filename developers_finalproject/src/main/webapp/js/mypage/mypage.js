@@ -351,7 +351,8 @@ const tourisheart = () =>{
 		data:{memberId:memberId},
 		success:(data)=>{
 			data.forEach(e =>{
-				/*console.log(e.heartlist);*/
+				console.log(e)
+				console.log(e.heartlist);
 				e.heartlist.forEach(h=>{
 			const tourisheartlist = `<div class="cardarea">
 							<div class="cardimgarea">

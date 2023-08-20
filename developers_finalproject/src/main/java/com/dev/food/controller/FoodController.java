@@ -67,7 +67,7 @@ public class FoodController {
 	}
 	
 	@GetMapping("/foodList2.do")
-	public String selectFoodAll( @RequestParam(value="cPage",defaultValue ="1") int cPage, 
+	public String selectFoodAll(@RequestParam(value="cPage",defaultValue ="1") int cPage, 
 			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m)throws IOException {
 		
 		//DB값 불러오기
@@ -78,7 +78,7 @@ public class FoodController {
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
-		
+
 		return "food/foodList";
 	}
 	
@@ -172,10 +172,11 @@ public class FoodController {
 		int blackList = service.selectFoodBlackListCount();
 		//System.out.println("음식점 수 : "+result);
 		
-		apiCount = 6000;
+		apiCount = 6250;
+		System.out.println("DB : "+result+", db : "+blackList+", = "+(result+blackList));
 		
 		//api와 DB의 개수가 같지 않으면 업데이트
-		if(result+blackList < apiCount) {
+		if(result < apiCount) {
 			int currentNum = result; //api와 DB가 같지 않을 때 DB개수
 			
 			System.out.println("api -> DB");
@@ -254,7 +255,7 @@ public class FoodController {
 							service.insertFood(food);
 							service.mergeFood();
 							service.insertFoodPhoto(fp);
-							service.mergeFoodPhoto();
+							//service.mergeFoodPhoto();
 							
 							foodCount++;
 						}
@@ -442,6 +443,7 @@ public class FoodController {
 				
 				//FOOD_PHOTO에 해당하는 이미지가 있는지 조회
 				int foodPhotoCount = service.selectFoodPhotoByNo(fp.getFpName());
+				System.out.println("여기서 뭐가 나옴? : "+foodPhotoCount);
 				if(foodPhotoCount <= 0) {
 					System.out.println("DB에 안들어간 이미지 개수 : "+foodPhotoCount);
 					//없으면 INSERT

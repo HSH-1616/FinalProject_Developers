@@ -1433,7 +1433,6 @@ function saveRoute() {
 console.log("시작 날짜:", tustartDate);
 		console.log("끝 날짜:", tuendDate);
 		/*console.log(tourismemberdata);*/
-	
 		$.ajax({
 			url: routeurl,
 			type: "POST",

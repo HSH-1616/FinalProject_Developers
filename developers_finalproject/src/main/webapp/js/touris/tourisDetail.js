@@ -28,17 +28,17 @@ $(document).on("click", "#detailHeart", function(e) {
 			$("#detailHeartOff").hide();
 			swal({
 				title: "찜하기에 등록되었습니다!",
-				imageUrl: "../../images/accommodation/heartIcon.png",
+				imageUrl: path+"/images/accommodation/heartIcon.png",
 				imageWidth: 200,
 				imageHeight: 200,
 				confirmButtonText: "확인",
 				confirmButtonColor: "#b31312",
 			});
-			$.get("/tourisDetail/insertHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{
+			$.get(path+"/tourisDetail/insertHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{
 					//location.reload();
 			});
 		} else {
-			$.get("/tourisDetail/deleteHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{
+			$.get(path+"/tourisDetail/deleteHeart?tourisId="+tourisId+"&memberId="+memberId,data=>{
 					location.reload();
 			});
 			$("#detailHeartOn").hide();

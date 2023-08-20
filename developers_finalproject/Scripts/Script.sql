@@ -32,7 +32,11 @@ ALTER TABLE food DROP COLUMN food_readcount;
 SELECT * FROM FOOD LEFT JOIN MEMBER WHERE memberId=#{memberId};
 SELECT * FROM MEMBER;
 
-
+SELECT * FROM food
+LEFT JOIN FOOD_HEART USING (food_no);
+SELECT * FROM FOOD LEFT JOIN FOOD_PHOTO USING(FOOD_NO) 
+			left join food_heart using(Food_no)
+			ORDER BY FOOD_NO DESC;
 
 SELECT * FROM food;
 SELECT * FROM food WHERE food_name='가고파생삼겹구이';
