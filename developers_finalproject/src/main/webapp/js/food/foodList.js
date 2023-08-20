@@ -138,7 +138,7 @@ function searchFood(page) {
 	//location.href = location.pathname + "/food/searchFood.do?type=" + queryParams.searchType + "&keyword=" + queryParams.keyword;
 
 	const queryString = new URLSearchParams(queryParams).toString();
-	const redirectURL = "/food/searchFood.do?" + queryString;
+	const redirectURL = path+"/food/searchFood.do?" + queryString;
 	location.href = redirectURL;
 
 }
