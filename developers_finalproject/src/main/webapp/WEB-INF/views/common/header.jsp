@@ -29,6 +29,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/x-icon" href="${path}/images/common/favicon.png">
 <title>여행은 살아보는거야</title>
 </head>
 <body>

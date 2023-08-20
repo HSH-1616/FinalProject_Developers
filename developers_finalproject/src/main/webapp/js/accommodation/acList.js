@@ -27,7 +27,7 @@ $(".like").on("change",function(){
 		})
 	}else{
 		$.ajax({
-			url : getContextPath()+"/ac/deleteHeart",
+			url : path+"/ac/deleteHeart",
 			data :{
 				memberId : memberId,
 				acId : acId

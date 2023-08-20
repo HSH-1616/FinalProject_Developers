@@ -186,13 +186,13 @@
 							confirmButtonColor: "#20c997",
 						}).then((result) => {
 							if (result.isConfirmed) {
-								location.replace("${path}admin/paymentList");
+								location.replace("${path}/admin/paymentList");
 							}
 						})
 					},
 					error: function(result) {
 						alert("결제금액 환불실패.");
-						location.replace("${path}admin/paymentList");
+						location.replace("${path}/admin/paymentList");
 					}
 				})					
 			}
