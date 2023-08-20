@@ -172,6 +172,13 @@ public class CommunityController {
 		return service.deleteCommunity(communityNo, session);
 	}
 	
+	@GetMapping("/deleteCommunityMypage.do")
+	public String deleteCommunityMypage(int communityNo, HttpSession session) {
+		service.deleteCommunity(communityNo, session);
+		return "/mypage/mypage";
+	}
+	
+	
 	@GetMapping("/mypageCommunity.do")
 	@ResponseBody
 	public Map<String,Object> mypageCommunity(int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){
