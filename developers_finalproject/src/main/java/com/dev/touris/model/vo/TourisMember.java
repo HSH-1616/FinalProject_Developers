@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 public class TourisMember {
 	private int tuId;
 	private int loginmemberid;
-	private Date tustartDate;
-	private Date tuendDate;
+	private String tustartDate;
+	private String tuendDate;
 	private String registrationDate;
 	List<TourisRoute> tourisroutes;
 	List<Touris> tourisList;
