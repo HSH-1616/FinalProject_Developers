@@ -1,7 +1,6 @@
 package com.dev.touris.model.controller;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 
@@ -10,14 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import com.dev.community.model.dto.Community;
 import com.dev.nc.common.PageFactory;
 import com.dev.touris.model.service.TourisService;
 import com.dev.touris.model.vo.Touris;
@@ -104,8 +102,10 @@ public class TourisController {
 		model.addAttribute("tourlist", service.searchtouris(param));
 		return "touris/searchtouris2";
 	}
-	@RequestMapping(value = "/inserttourisroute", method = RequestMethod.POST, consumes = "application/json")
+	@PostMapping("/inserttourisroute")
+	@ResponseBody
 	public String inserttourisroute(@RequestBody Map data) {
+		
 		List<Map> routedata = (List<Map>) data.get("routedata");
 		Integer loginmemberid = Integer.parseInt(String.valueOf(data.get("loginmemberid")));
 		String tustartDate = (String) data.get("tustartDate");
