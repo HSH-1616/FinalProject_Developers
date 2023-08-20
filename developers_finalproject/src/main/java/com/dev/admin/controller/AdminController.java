@@ -235,6 +235,7 @@ public class AdminController {
 
 		// 미승인 리스트 출력
 		List<Food> nonApprovefoodList = service.searchFoodNonApprove(param);
+		System.out.println("미승인리스트 : "+nonApprovefoodList);
 		int totalDataNonApprove = service.selectFoodCountNonApprove();
 		int totalData = service.selectFoodCount();
 		m.addAttribute("npageBar",
