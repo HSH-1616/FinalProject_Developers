@@ -34,7 +34,7 @@ function fn_updateCheck(event){
         form.append("allow",$("#flexSwitchCheckChecked").val());
 
         $.ajax({
-            url:getContextPath()+"/updateFoodReview.do",
+            url:getContextPath()+"/admin/updateFoodReview.do",
             data:form,
             type:"post",
             enctype: "multipart/form-data",
