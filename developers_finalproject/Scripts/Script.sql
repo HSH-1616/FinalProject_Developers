@@ -23,12 +23,9 @@ select count(*) from food;
 
 select * from food;
 select * from food where food_allow=1;
-			
-
-SELECT * FROM food WHERE food_name ='가고파생삼겹구이';
 
 SELECT * FROM FOOD;
-DELETE FROM food WHERE food_name='가고파생삼겹구이';
+DELETE FROM food WHERE food_name='백년짬뽕';
 
 ALTER TABLE FOOD ADD FOOD_readcount NUMBER DEFAULT '0';
 ALTER TABLE food DROP COLUMN food_readcount;
