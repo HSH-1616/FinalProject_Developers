@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.SelectBuilder.SelectOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -67,8 +68,8 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public int updateFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp) {
-		return session.update("food.updateFoodPhotoOnNull",fp);
+	public int insertFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp) {
+		return session.insert("food.insertFoodPhotoOnNull",fp);
 	}
 	
 	@Override
@@ -99,6 +100,16 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public void deleteFoodPhotoTemp(SqlSession session,int foodNo) {
 		session.delete("food.deleteFoodPhotoTemp",foodNo);
+	}
+	
+	@Override
+	public int deleteFoodTempAll(SqlSession session) {
+		return session.delete("food.deleteFoodTempAll");
+	}
+	
+	@Override
+	public int deleteFoodPhotoTempAll(SqlSession session) {
+		return session.delete("food.deleteFoodPhotoTempAll");
 	}
 
 	@Override
@@ -149,7 +160,7 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName) {
+	public int selectFoodPhotoByNo(SqlSession session, String fpName) {
 		return session.selectOne("food.selectFoodPhotoByNo",fpName);
 	}
 
@@ -171,6 +182,16 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public String searchByFoodNo(SqlSession session,int foodNo) {
 		return session.selectOne("food.searchByFoodNo",foodNo);
+	}
+	
+	@Override
+	public int copyFoodtoFoodTemp(SqlSession session, int foodNo) {
+		return session.insert("food.copyFoodtoFoodTemp",foodNo);
+	}
+	
+	@Override
+	public int copyFPtoFPTemp(SqlSession session, int foodNo) {
+		return session.insert("food.copyFPtoFPTemp",foodNo);
 	}
 	
 	@Override
@@ -286,8 +307,20 @@ public class FoodDaoImpl implements FoodDao {
 	}
 	
 	@Override
-	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId) {
-		return session.selectList("food.selectFoodReviewByFoodNo",memberId);
+	public List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId, Map<String, Object> params) {
+		int cPage=(int)params.get("cPage");
+		int numPerpage=(int)params.get("numPerpage");
+		return session.selectList("food.selectFoodReviewByFoodNo",memberId, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+
+	@Override
+	public int selectFoodReviewByFoodNoCount(SqlSession session, int memberId) {
+		return session.selectOne("food.selectFoodReviewByFoodNoCount", memberId);
+	}
+	
+	@Override
+	public String searchFoodNameByNo(SqlSession session, int foodNo) {
+		return session.selectOne("food.searchFoodNameByNo",foodNo);
 	}
 
 }

@@ -6,22 +6,13 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/> 
 <head>
 	<script> const jspath = '${path}'; </script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <%-- <script src="${path }/js/food/foodList.js"></script> --%>
+    <script src="${path }/js/admin/foodDetail.js"></script>
     <script src="${path }/js/food/foodDetail.js"></script>
-    <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!-- <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4428a904f18357ee0a3f795c4918e96a&libraries=services,clusterer,drawing"></script>
-
-
-    
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"/>
     <link rel="stylesheet" href="${path }/css/food/foodDetail.css"/>
     <link rel="stylesheet" href="${path }/css/default.css" />
@@ -33,7 +24,6 @@
 <section>
    <!-- ==================================================맛집 상세페이지============================================================== -->
    <div class="foodDetailCon col justify-content-center">
-      <!-- <div id="hotelDetail" class="row"> -->
       <div class="row align-items-end">
          <span class="col w-auto">
             <div class="d-flex flex-row">
@@ -51,7 +41,7 @@
       </div>
 
       <div class="row justify-content-center" style="height: 400px;">
-      <form action="${path}/admin/updateFoodByFoodNo" method="get" class="row justify-content-center" style="height: 400px;">
+      <form action="${path}/admin/updateFoodByFoodNo" method="get" class="row justify-content-center updateFoodReview" style="height: 400px;">
          <div class="foodInfosection d-flex flex-row justify-content-center align-items-center" style="height: 350px;">
             <input type="hidden" name="foodNo" value="${f.foodNo}">
             <!-- 맛집 상세정보 텍스트 -->
@@ -61,8 +51,6 @@
                      style="color: #000000;"></i></th>
                   <th class="fs-4" valign="top" style="width: 95px;">장소</th>
                   <td>
-                     <%-- <% pageContext.setAttribute("enter", "\n"); %> --%>
-                     <%-- <div class="food_runtime">${fn:replace(f.foodOpenTime,enter,'<br>')}</div> --%>
                      <textarea rows="4" cols="30" name="foodAddress" class="adminFoodAddress"
                      style="border: none;resize: none;">${f.foodAddress}</textarea>
                   </td>
@@ -102,8 +90,8 @@
                   <td>
                      <div class="form-check form-switch">
                         <!-- 이대로 사용하면 자료형이 문자열과 숫자로 달라서 오류가 발생한다. -->
-                        <input class="form-check-input" type="checkbox" role="switch" 
-                           name="allow" id="flexSwitchCheckChecked" ${f.allow == 1?'checked':''} value="${f.allow}">
+                        <input class="form-check-input" type="checkbox" role="switch"
+                           name="allow" id="flexSwitchCheckChecked" ${f.allow == 1?'checked':''} value="${f.allow}" onchange="YNCheck(event);">
                         <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                       </div>
                   </td>
@@ -122,131 +110,6 @@
       </form>
       </div>
    </div>
-
-   <script>
-      //체크박스 로직
-      $("#flexSwitchCheckChecked").click(e=>{
-         if($("#flexSwitchCheckChecked").is(":checked")){
-            $(".adminAllow").val(1);
-            console.log(typeof $(".adminAllow").val());
-         }
-         else{
-            $(".adminAllow").val(0);
-            console.log(typeof $(".adminAllow").val());
-         }
-      })
-
-      function fn_updateCheck(event){
-         const result = confirm("맛집 수정을 완료 하시겠습니까?");
-         if(result == true){
-            $(event.target).attr("type","submit");
-         }else{
-
-         }
-      }
-
-      $(".submitModal").click(e=>{
-         //ajax 통신(등록)
-         if($(".submitModal").hasClass("insertFoodReview") === true){
-            //js가 제공하는 FormData클래스를 이용함
-            const form=new FormData();
-            //append로 서버에 전송할 데이터를 넣을 수 있음
-            //key-value형식으로 저장
-            const fileInput=$("#upFile");
-            //console.log(fileInput[0].files);
-            $.each(fileInput[0].files,(i,f)=>{
-               form.append("upFile",f);
-               console.log(form);
-            });
-            form.append("foodNo","${f.foodNo}");
-            //form.append("memberId","${loginMember.memberId}");
-            form.append("frGrade",$(".starcountnum").val()/2);
-            form.append("frContent",$("#FR_CONTENT").val());
-   
-            $.ajax({
-               url:"${path}/food/insertFoodReview.do",
-               data:form,
-               type:"post",
-               enctype: "multipart/form-data",
-               processData:false,
-               contentType:false,
-               cache: false,
-               success:data=>{
-                  alert("업로드가 완료되었습니다.");
-                  location.reload();
-                  $('window').scrollTop(0,300);
-               },
-               error:(r,s,e)=>{
-                  console.log("업로드실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
-                  alert("업로드 실패");
-               },
-               complete:()=>{
-                  $(".upFile").val('');
-               }
-            });
-         }
-         //ajax 통신(수정)
-         if($(".submitModal").hasClass("updateFoodReview") === true){
-            const form=new FormData();
-            const fileInput=$("#upFile");
-
-            $.each(fileInput[0].files,(i,f)=>{
-               form.append("upFile",f);
-               console.log(form);
-            });
-            form.append("foodNo","${f.foodNo}");
-            form.append("frGrade",$(".starcountnum").val()/2);
-            form.append("frContent",$("#FR_CONTENT").val());
-            form.append("frNo",$("#selected_food_no").val());
-   
-            $.ajax({
-               url:"${path}/food/updateFoodReview.do",
-               data:form,
-               type:"post",
-               enctype: "multipart/form-data",
-               processData:false,
-               contentType:false,
-               cache: false,
-               success:data=>{
-                  alert("수정이 완료되었습니다.");
-                  location.reload();
-                  $('window').scrollTop(0,300);
-               },
-               error:(r,s,e)=>{
-                  console.log("수정 실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
-                  alert("수정 실패");
-               },
-               complete:()=>{
-                  $(".upFile").val('');
-               }
-            });
-         }
-		});
-
-      //ajax 통신(삭제)
-      $("#remove_food_btn").click(e=>{
-         const data = {frNo:$("#selected_food_no").val()};
-
-			$.ajax({
-				url:"${path}/food/deleteFoodReview.do",
-				type:"post",
-            data:data,
-				success:data=>{
-               alert("삭제가 완료되었습니다.");
-               // location.reload();
-               $('window').scrollTop(0,300);
-				},
-				error:(r,s,e)=>{
-               console.log("삭제실패 "+r.s+"\n"+"msg "+r.responseText+"\n"+"error "+e);
-               alert("삭제 실패");
-				},
-				complete:()=>{
-               // $(".upFile").val('');
-               location.reload();
-				}
-			});
-		});
-   </script>
 
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

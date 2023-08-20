@@ -68,16 +68,16 @@ $("#hotelPayBtn").on("click", function() {
 						checkOut: checkOut,
 					};
 					$.ajax({
-						url: getContextPath()+"/pay/cardPay",
+						url: path+"/pay/cardPay",
 						method: "POST",
 						contentType: "application/json;charset=utf-8",
 						data: JSON.stringify(data),
 						dataType: "json",
 						success: function(result) {
-							location.replace(getContextPath()+"/ac/acPayResult")
+							location.replace(path+"/ac/acPayResult")
 						},
 						error: function(result) {
-							location.replace(getContextPath()+"/ac/acError")
+							location.replace(path+"/ac/acError")
 						}
 					})
 				}
@@ -99,7 +99,7 @@ $("#hotelPayBtn").on("click", function() {
 		};
 
 		$.ajax({
-			url: getContextPath()+"/pay/kakaoPay",
+			url: path+"/pay/kakaoPay",
 			method: "POST",
 			contentType: "application/json;charset=utf-8",
 			data: JSON.stringify(data),
@@ -108,7 +108,7 @@ $("#hotelPayBtn").on("click", function() {
 				location.href = data.next_redirect_pc_url
 			},
 			error: function(data) {
-					location.replace(getContextPath()+"/ac/acError")
+					location.replace(path+"/ac/acError")
 			}
 		})
 	}

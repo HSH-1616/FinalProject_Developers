@@ -113,6 +113,15 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectFoodCount(session);
 	}
 	
+	@Override
+	public List<Food> searchFoodNonApprove(Map param) {
+	return dao.searchFoodNonApprove(session,param);
+}
+	@Override
+	public int selectFoodCountNonApprove() {
+		return dao.selectFoodCountNonApprove(session);
+	}
+	
 	
 	
 	

@@ -38,4 +38,7 @@ public interface AdminService {
 //	===========지환=============
 	List<Food> searchFood(Map param);
 	int selectFoodCount();
+	
+	List<Food> searchFoodNonApprove(Map param);
+	int selectFoodCountNonApprove();
 }

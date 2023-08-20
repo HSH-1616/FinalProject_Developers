@@ -29,7 +29,7 @@ public interface FoodDao {
 	
 	int updateFoodOnNull(SqlSession session, FoodTemp food);
 	
-	int updateFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp);
+	int insertFoodPhotoOnNull(SqlSession session, FoodPhotoTemp fp);
 	
 	int updateFoodOnAdmin(SqlSession session, Food food);
 	
@@ -42,6 +42,10 @@ public interface FoodDao {
 	void deleteFoodTemp(SqlSession session,int foodNo);
 	
 	void deleteFoodPhotoTemp(SqlSession session,int foodNo);
+	
+	int deleteFoodTempAll(SqlSession session);
+	
+	int deleteFoodPhotoTempAll(SqlSession session);
 	
 	List<Food> selectFoodAll(SqlSession session, Map<String,Object> param);
 	
@@ -57,11 +61,15 @@ public interface FoodDao {
 	
 	Food selectFoodByNo(SqlSession session, int no);
 	
-	FoodPhoto selectFoodPhotoByNo(SqlSession session, String fpName);
+	int selectFoodPhotoByNo(SqlSession session, String fpName);
 	
 	List<Food> searchFood(SqlSession session, Map<String, Object> params);
 
 	String searchByFoodNo(SqlSession session,int foodNo);
+	
+	int copyFoodtoFoodTemp(SqlSession session,int foodNo);
+	
+	int copyFPtoFPTemp(SqlSession session,int foodNo);
 	
 	int insertFoodReview(SqlSession session,FoodReview fr);
 	
@@ -119,5 +127,8 @@ public interface FoodDao {
 	
 	int selectFoodBlackListCount(SqlSession session);
 	
-	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId);
+	List<Food> selectFoodReviewByFoodNo(SqlSession session, int memberId, Map<String, Object> params);
+	int selectFoodReviewByFoodNoCount(SqlSession session, int memberId);
+	
+	String searchFoodNameByNo(SqlSession session,int foodNo);
 }

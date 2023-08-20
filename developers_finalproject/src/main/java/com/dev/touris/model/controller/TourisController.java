@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.dev.community.model.dto.Community;
 import com.dev.nc.common.PageFactory;
 import com.dev.touris.model.service.TourisService;
 import com.dev.touris.model.vo.Touris;
@@ -123,7 +124,7 @@ public class TourisController {
 		param.put("cPage", cPage);
 		param.put("numPerpage", numPerpage);
 		int totalData = service.myPageTourisRouteCount(loginmemberid);
-		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "mypageTourisRoute");
+		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "tourisroute");
 		List<TourisMember> tourisroutelist = service.myPageTourisRoute(loginmemberid, param);
 		data.put("mypageTourisRoute", tourisroutelist);
 		data.put("pageBar", pageBar);
@@ -143,7 +144,7 @@ public class TourisController {
 			@RequestParam(value="numPerpage",defaultValue ="12") int numPerpage,Model m){
 		List<Touris> tourislist = service.tourislist(Map.of("cPage",cPage,"numPerpage",numPerpage));
 		int totalData = service.tourisListCount();
-		m.addAttribute("pageBar", com.dev.common.PageFactory.getPage(cPage, numPerpage, totalData, "tourislist"));
+		m.addAttribute("pageBar", com.dev.common.PageFactory.getPage(cPage, numPerpage, totalData, "tourisroute"));
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("tourislist", tourislist);
 		

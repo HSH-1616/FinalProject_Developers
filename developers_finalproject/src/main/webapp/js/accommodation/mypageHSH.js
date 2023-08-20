@@ -1,14 +1,10 @@
 /**
  * 
  *//*숙박업소*/
-function getContextPath() {
-	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
-};
 
 $(document).ready(function() {
 	$.ajax({
-		url: getContextPath()+"/ac/acMyPage",
+		url: path+ "/ac/acMyPage",
 		method: "get",
 		dataType: "json",
 		success: function(data) {
@@ -114,7 +110,10 @@ $(document).ready(function() {
 
 					var refundPrice = $('<h5>예약 취소 정보</h5><div class="refundPrice"><span>결제금액 : ₩' + String(l.apPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span><span>공제액 : ₩' + String(risk).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 						+ '</span></div><h6>환불 예정 금액 : ₩' + String(refundPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</h6>')
-					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : ' + l.apReDate + '</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
+					
+					
+					
+					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : ' + l.apReDate + '</h6><pre>내용 : ' +l.apr.aprContent + '</pre></div></div>')
 					content.append(orderId).append(status).append(contentDiv)
 					listHead.append(img).append(content)
 					refundInfo.append(refundPrice)
@@ -149,11 +148,31 @@ $(document).ready(function() {
 						risk = 0
 						refundPrice = l.apPrice
 					}
-					console.log(risk)
+					
+					var reason = ""
+					var reDate = ""
+					var aprContent=""
+		
+					if (l.apr.aprReason == null) {
+						reason = "-"
+					} else {
+						reason = l.apr.aprReason
+					}
 
+					if (l.apReDate == null) {
+						reDate="-"	
+					}else{
+						reDate=l.apReDate
+					}
+					if(l.apr.aprReason==null &&l.apReDate==null){
+						aprContent="관리자 승인"
+					}else{
+						aprContent=l.apr.aprContent
+					}
+					
 					var refundPrice = $('<h5>예약 취소 정보</h5><div class="refundPrice"><span>결제금액 : ₩' + String(l.apPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span><span>공제액 : ₩' + String(risk).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 						+ '</span></div><h6>환불 예정 금액 : ₩' + String(refundPrice).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</h6>')
-					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + l.apr.aprReason + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : ' + l.apReDate + '</h6><pre>내용 : ' + l.apr.aprContent + '</pre></div></div>')
+					var refundReason = $('<div class="refundReason"><h5>예약 취소 사유</h5><div><h6>취소 사유 : ' + reason + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소 일자 : ' + reDate + '</h6><pre>내용 : ' + aprContent + '</pre></div></div>')
 					content.append(orderId).append(status).append(contentDiv)
 					listHead.append(img).append(content)
 					refundInfo.append(refundPrice)
@@ -170,7 +189,7 @@ $(document).ready(function() {
 	})
 	setTimeout(function() {
 		$.ajax({
-			url:getContextPath()+"/ac/acCheckReview",
+			url: path + "/ac/acCheckReview",
 			method: "get",
 			dataType: "json",
 			success: function(data) {
@@ -341,7 +360,7 @@ function reviewOk() {
 	})
 
 	$.ajax({
-		url: getContextPath()+"/ac/insertReview",
+		url: path + "/ac/insertReview",
 		type: "post",
 		data: form,
 		processData: false,
@@ -360,7 +379,7 @@ function reviewOk() {
 			})
 		},
 		error: function(data) {
-			location.replace("/ac/acError")
+			location.replace(path+"/ac/acError")
 		}
 
 	})
@@ -379,3 +398,4 @@ $(document).on("click", ".refundBtn", function() {
 		$(".refundCheck").hide()
 	}
 })
+

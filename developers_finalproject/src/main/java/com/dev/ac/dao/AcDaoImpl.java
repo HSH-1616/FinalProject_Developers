@@ -227,7 +227,7 @@ public class AcDaoImpl implements AcDao {
 	
 	@Override
 	public int updateRefund(SqlSessionTemplate session, Map param) {
-		return session.insert("accommodation.updateRefund",param);
+		return session.update("accommodation.updateRefund",param);
 	}
 	
 	@Override
@@ -272,6 +272,32 @@ public class AcDaoImpl implements AcDao {
 	public int paymentListCount(SqlSessionTemplate session) {
 		return session.selectOne("accommodation.paymentListCount");
 	}
+	
+	@Override
+	public List<AcPayList> refundList(SqlSessionTemplate session, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("accommodation.refundList",null,rb);
+	}
+	
+	@Override
+	public List<AcPayList> refundOkList(SqlSessionTemplate session, Map param) {
+		int cPage=(int)param.get("cPage");
+		int numPerpage=(int)param.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("accommodation.refundOkList",null,rb);
+	}
+
+	@Override
+	public int refundListCount(SqlSessionTemplate session) {
+		return session.selectOne("accommodation.refundListCount");
+	}
+	
+	@Override
+	public int refundListCount2(SqlSessionTemplate session) {
+		return session.selectOne("accommodation.refundListCount2");
+	}
 
 	@Override
 	public int rejectRefund(SqlSessionTemplate session, Map param) {
@@ -281,6 +307,34 @@ public class AcDaoImpl implements AcDao {
 	@Override
 	public int rejectComment(SqlSessionTemplate session, Map param) {
 		return session.update("accommodation.rejectComment",param);
+	}
+
+	@Override
+	public int updateRefundAdmin(SqlSessionTemplate session, Map param) {
+		return session.update("accommodation.updateRefundAdmin",param);
+	}
+
+	@Override
+	public int insertRefundAdmin(SqlSessionTemplate session, Map param) {
+		return session.insert("accommodation.insertRefundAdmin",param);
+	}
+
+	@Override
+	public List<Accommodation> mypageAcHeart(SqlSessionTemplate session, String memberId) {
+		return session.selectList("accommodation.mypageAcHeart",memberId);
+	}
+
+	@Override
+	public List<Accommodation> mypageAcReview(SqlSessionTemplate session, int memberId, Map params) {
+		int cPage=(int)params.get("cPage");
+		int numPerpage=(int)params.get("numPerpage");
+		RowBounds rb=new RowBounds((cPage-1)*numPerpage,numPerpage);
+		return session.selectList("accommodation.mypageAcReview",memberId,rb);
+	}
+
+	@Override
+	public int mypageAcReviewCount(SqlSessionTemplate session, int memberId) {
+		return session.selectOne("accommodation.mypageAcReviewCount",memberId);
 	}
 	
 }

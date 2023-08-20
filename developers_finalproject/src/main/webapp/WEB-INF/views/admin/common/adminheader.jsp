@@ -25,7 +25,7 @@
                     <i class="fa-solid fa-cloud me-2"></i>main</a>
                 <a href="${path}/admin/selectMemberAll" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-user me-2"></i>회원관리</a>
-                <a href="${path}/admin/selectFoodList" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <a href="${path}/admin/selectFoodListNon" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-pizza-slice me-2"></i>맛집정보관리</a>
                 <a href="${path}/admin/selectAcAll" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-hotel me-2"></i>숙박업소관리</a>
@@ -37,9 +37,10 @@
 			    <ul class="list-group" id="m-drop" style="display:none;">
 				    <li><a class="list-group-item-action second-text fw-bold" href="${path }/admin/foodRecommend" style="margin-left:60px; text-decoration-line: none;">맛집관리</a></li>
 				    <li><a class="list-group-item-action second-text fw-bold" href="${path }/admin/paymentList" style="margin-left:60px; text-decoration-line: none;">결제관리</a></li>
+				    <li><a class="list-group-item-action second-text fw-bold" href="${path }/admin/refundList" style="margin-left:60px; text-decoration-line: none;">환불관리</a></li>
 			    </ul>
 			    </div>
-                <a href="/" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <a href="${path }/admin/main" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fa-solid fa-house me-2"></i>HomePage</a>
                 <!-- <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout</a> -->
@@ -83,4 +84,10 @@
 /* 	function mdrop(){
 		$("#m-drop").css("display","inline");
 	} */
+    var url = window.location.pathname;
+    $(".list-group-flush").find("a").each(function(){
+        //$(".list-group-flush>a").removeClass("active");
+        $(this).toggleClass("active",$(this).attr("href") == url);
+    });
+
 </script>            

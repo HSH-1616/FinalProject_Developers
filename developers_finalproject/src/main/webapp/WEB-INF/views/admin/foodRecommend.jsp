@@ -16,6 +16,9 @@
 	<div class="container-fluid full-width row">
 	    <div class="col my-5">
 	        <h3 class="fs-4 mb-3">맛집 추천</h3>
+	        <div>
+	        	<span>${totalData}개</span>
+	        </div>
 	        <div class="col">
 	            <table class="table bg-white rounded shadow-sm table-hover text-center align-middle">
 	                <thead>
