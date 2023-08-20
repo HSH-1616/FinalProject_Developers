@@ -12,22 +12,21 @@ $(document).ready(function() {
 
 const initializeSlick = () => {
     $('.favorite').slick({
-       lazyLoad: 'ondemand',
+        lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToScroll: 1
     });
 
     $('.favorite2').slick({
-      lazyLoad: 'ondemand',
+        lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToScroll: 1
     });
     $('.favorite3').slick({
-       lazyLoad: 'ondemand',
+        lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToScroll: 1
     });
-
     
 };
 /*리뷰목록, 게시글 가져오기*/
@@ -180,7 +179,7 @@ const hotelreview = (cPage, numPerpage) => {
 											<div class="hiddenidtag">${acId}</div>
 											<div class="reivewspantag"><span>${r.arContent}</span></div>
 											<div class="stararea"> <span class="starspan">${r.arGrade}/5</span>
-											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20+"%"}">★★★★★</span>
+											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20}">★★★★★</span>
 											</div>
 											</span>
 										</div>
@@ -307,10 +306,6 @@ const foodheart = () => {
 		type:"get",
 		data:{memberId:memberId},
 		success:(data)=>{
-			let slideAdded = false;
-
-            $('.favorite2').slick('unslick');
-            $('.favorite2').empty();
 			data.forEach(e=>{
 				console.log(e);
 				let foodAddress = e.foodAddress;
@@ -320,6 +315,7 @@ const foodheart = () => {
 					 if (p.fpMain === 1) {
                         cardspanimg = `<img alt="" src="${p.fpName}">`;
                     }
+					
 				});
 				const foodheartlist = `<div class="foodcardarea">
 							<div class="cardimgarea">
@@ -335,12 +331,12 @@ const foodheart = () => {
 							</div>
 						</div>`
 					$(".favorite2").append(foodheartlist);
-			
 			});
 			$('.favorite2').slick('refresh');
 		}
 	})
 }		
+
 
 const tourisheart = () =>{
   const memberId = $('.nickname').text();
@@ -398,6 +394,10 @@ const hotelheart = () =>{
 						</div>`
 						$(".favorite3").append(hotelheart);
 						})	
+						
+							if(e==1){
+					
+				}
 			});
 			$('.favorite3').slick('refresh');
 		}
