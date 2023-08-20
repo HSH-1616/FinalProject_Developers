@@ -290,40 +290,7 @@
 		</div>
 		<!-- 숙박예약내역  삭제X-->
 		<!-- 내 승인여부(맛집)-->
-		<div class="myreviwarea">
-			<h2 class="myschedultext">승인여부 (맛집)</h2>
-			<div class="myschedulcardarea">
-				<div class="myschedulcard">
-					<div class="myschedulcontent">
-						<div class="myschedulcontentarea">
-							<div class="myreviewiconarea">
-								<label class="container"> <input checked="checked"
-									type="checkbox">
-									<div class="checkmark"></div>
-								</label>
-							</div>
-							<div class="myreviewcontentarea">
-								<span class="myreviewcontent">게시글 제목
-									setsetsetsestsdagadsfadsfadsfadsf</span>
-							</div>
-							<div class="myreviewupdatearea">
-								<div class="circleday">
-									<p class="cirledaytext">수정</p>
-								</div>
-							</div>
-							<div class="myreviewdeletearea">
-								<div class="circleday">
-									<p class="cirledaytext">삭제</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--  -->
-
-			<div class="pagerevie" style="width: 100%; height: 60px;"></div>
-		</div>
+		
 	</div>
 	<button class="backbtn gotop">
 		<div class="text">
