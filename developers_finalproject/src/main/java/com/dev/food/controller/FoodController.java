@@ -650,12 +650,6 @@ public class FoodController {
 	 * return foods; }
 	 */
 //	찬은
-	@PostMapping("/add")
-    public String addFood(Food food) {
-        service.addFood(food);
-        
-        return "redirect:/food/add";
-    }
 	@GetMapping("/mypagefoodreview")
 	@ResponseBody
 	public Map<String, Object> foodheartlist(@RequestParam int memberId, @RequestParam(value = "cPage", defaultValue = "1") int cPage, @RequestParam(value = "numPerpage",defaultValue = "3") int numPerpage){

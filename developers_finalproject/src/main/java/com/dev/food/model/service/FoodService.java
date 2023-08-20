@@ -102,7 +102,6 @@ public interface FoodService {
 	
 	List<Food> selectFoodReviewByFoodNo(int memberId);
 
-	List<Food> addFood(Food food);
 	
 	List<Food> selectFoodReviewByFoodNo(int memberId, Map<String, Object> params);
 	
