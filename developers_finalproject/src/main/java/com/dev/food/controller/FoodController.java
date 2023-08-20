@@ -50,7 +50,7 @@ import com.google.gson.JsonParser;
 public class FoodController {
 
 	@Autowired
-	private FoodService service;
+	private static FoodService service;
 	private HttpSession session;
 	/* private static FoodService service; */
 	
