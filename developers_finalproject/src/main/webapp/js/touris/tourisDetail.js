@@ -28,7 +28,7 @@ $(document).on("click", "#detailHeart", function(e) {
 			$("#detailHeartOff").hide();
 			swal({
 				title: "찜하기에 등록되었습니다!",
-				imageUrl: path+"images/accommodation/heartIcon.png",
+				imageUrl: path+"/images/accommodation/heartIcon.png",
 				imageWidth: 200,
 				imageHeight: 200,
 				confirmButtonText: "확인",

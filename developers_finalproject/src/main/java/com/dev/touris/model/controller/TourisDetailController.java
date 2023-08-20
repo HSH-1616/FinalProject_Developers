@@ -332,7 +332,7 @@ public class TourisDetailController {
 	@GetMapping("/mypagetourisheart")
 	@ResponseBody
 	public List<TourisHeart> tourisheart(@RequestParam int memberId){
-		
+		System.out.println(service.tourisheart(memberId));
 		return service.tourisheart(memberId);
 	}
 	

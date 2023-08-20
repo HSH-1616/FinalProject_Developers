@@ -530,7 +530,7 @@
 					      IMG3 : window.location.origin+img3,
 					      TITLE: '${ad.acTitle}', // 제목 텍스트
 					      THU : window.location.origin+path+"/images/common/logo.png",
-					      PATH : window.location.origin+path+"/ac/acDetail?no=${ad.acId}",
+					      PATH : "developers_finalproject/ac/acDetail?no=${ad.acId}",
 					      DESC : ""		  
 					    },
 					});
