@@ -61,12 +61,12 @@ const mypageCommunity=(cPage,numPerpage)=>{
 							</div>
 							<div class="myreviewupdatearea1">
 								<div class="circleday">
-									<p class="cirledaytext">수정</p>
+									<p class="cirledaytext" onclick="location.href='${path}/community/updateCommunity.do?no=${m.communityNo}'">수정</p>
 								</div>
 							</div>
 							<div class="myreviewdeletearea">
 								<div class="circleday">
-									<p class="cirledaytext">삭제</p>
+									<p class="cirledaytext" onclick="location.href='${path}/community/deleteCommunityMypage.do?communityNo=${m.communityNo}'">삭제</p>
 								</div>
 							</div>
 						</div>
@@ -79,6 +79,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 		}
 	});
 }
+
 
 
 const foodreivew = (cPage,numPerpage) =>{
@@ -180,7 +181,7 @@ const hotelreview = (cPage, numPerpage) => {
 											<div class="hiddenidtag">${acId}</div>
 											<div class="reivewspantag"><span>${r.arContent}</span></div>
 											<div class="stararea"> <span class="starspan">${r.arGrade}/5</span>
-											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20}">★★★★★</span>
+											<span class="star"> ★★★★★ <span style="width: ${r.arGrade *20+"%"}">★★★★★</span>
 											</div>
 											</span>
 										</div>
@@ -337,18 +338,10 @@ const foodheart = () => {
 					$(".favorite2").append(foodheartlist);
 			
 			});
-			if (!slideAdded) {
-                $('.favorite2').slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                });
-                slideAdded = true;
-            }
-			/*$('.favorite2').slick('refresh');*/
+			$('.favorite2').slick('refresh');
 		}
 	})
 }		
-
 
 const tourisheart = () =>{
   const memberId = $('.nickname').text();

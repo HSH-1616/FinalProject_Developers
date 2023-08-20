@@ -26,9 +26,10 @@ function removeMember() {
                 success: function(response) {
                     if (response === "success") {
                         alert("회원 탈퇴가 완료되었습니다.");
-                        window.location.href = "http://localhost:8888/WEB-INF/views/main"; // 또는 다른 페이지로 이동
+                        window.location.href = path+"/"; // 또는 다른 페이지로 이동
                     } else {
-                        alert("회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
+                        alert("회원 탈퇴가 완료되었습니다.");
+                        window.location.href = path+"/";
                     }
                 },
                 error: function(xhr, status, error) {
