@@ -78,7 +78,7 @@ public class FoodController {
 
 		m.addAttribute("totalData",totalData);
 		m.addAttribute("foods",foods);
-		
+
 		return "food/foodList";
 	}
 	
