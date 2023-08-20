@@ -115,7 +115,7 @@
 											</span>
 										</c:if>
 										<c:if test="${al.reviewGrade=='0.0'}">
-											<span>리뷰 없음</span>
+											<span style="color: #b31312">리뷰 없음</span>
 										</c:if>
 									</div>
 								</div>
