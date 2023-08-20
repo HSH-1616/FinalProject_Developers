@@ -61,12 +61,12 @@ const mypageCommunity=(cPage,numPerpage)=>{
 							</div>
 							<div class="myreviewupdatearea1">
 								<div class="circleday">
-									<p class="cirledaytext">수정</p>
+									<p class="cirledaytext" onclick="location.href='${path}/community/updateCommunity.do?no=${m.communityNo}'">수정</p>
 								</div>
 							</div>
 							<div class="myreviewdeletearea">
 								<div class="circleday">
-									<p class="cirledaytext">삭제</p>
+									<p class="cirledaytext" onclick="location.href='${path}/community/deleteCommunityMypage.do?communityNo=${m.communityNo}'">삭제</p>
 								</div>
 							</div>
 						</div>
@@ -79,6 +79,7 @@ const mypageCommunity=(cPage,numPerpage)=>{
 		}
 	});
 }
+
 
 
 const foodreivew = (cPage,numPerpage) =>{
