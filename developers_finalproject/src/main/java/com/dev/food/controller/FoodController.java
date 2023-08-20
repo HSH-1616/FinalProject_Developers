@@ -650,8 +650,8 @@ public class FoodController {
 	 */
 //	찬은
 	@PostMapping("/add")
-    public String addFood(Food food) {
-        service.addFood(food);
+    public String addFood(Map param) {
+        service.addFood(param);
         
         return "redirect:/food/add";
     }
