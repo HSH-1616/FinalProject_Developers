@@ -172,7 +172,7 @@ public class FoodController {
 		int blackList = service.selectFoodBlackListCount();
 		//System.out.println("음식점 수 : "+result);
 		
-		apiCount = 6000;
+		apiCount = 6250;
 		System.out.println("DB : "+result+", db : "+blackList+", = "+(result+blackList));
 		
 		//api와 DB의 개수가 같지 않으면 업데이트
@@ -255,7 +255,7 @@ public class FoodController {
 							service.insertFood(food);
 							service.mergeFood();
 							service.insertFoodPhoto(fp);
-							service.mergeFoodPhoto();
+							//service.mergeFoodPhoto();
 							
 							foodCount++;
 						}
