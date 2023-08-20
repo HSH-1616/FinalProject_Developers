@@ -1446,7 +1446,7 @@ console.log("시작 날짜:", tustartDate);
 			}),
 			success: function(response) {
 				alert("경로가 저장되었습니다.");
-				 window.location.href = "WEB-INF/views/mypage/mypage.jsp";
+				 window.location.href = path+"/";
 			},
 			error: function() {
 				alert("오류가 발생했습니다. 관리자에게 문의하세요");
