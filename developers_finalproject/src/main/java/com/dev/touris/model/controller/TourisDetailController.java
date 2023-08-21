@@ -241,8 +241,8 @@ public class TourisDetailController {
 		Member m=service.selectByIdforMember(param);
 		model.addAttribute("loginMember",m);
 	} 
-	@Scheduled(cron = "0 0 0 10 * *")
-//	@GetMapping("/test2")
+//	@Scheduled(cron = "0 0 0 10 * *")
+	@GetMapping("/test2")
 	public void insertTourisTemp() throws IOException {
 		System.out.println("주기적실행되니?");
 		service.deleteTourisTemp();
