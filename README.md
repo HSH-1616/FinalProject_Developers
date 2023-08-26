@@ -1,6 +1,8 @@
 <img src="http://14.36.141.71:10005/developers_finalproject/images/common/logo.png" style="width:400px; height:160px;"/>
 
-## INDEX
+<details>
+ <summary style="font-size:22px; font-weight:500;">INDEX</summary>
+
 > #### INFORMATION
 > 
 > #### MAIN FUNCTION
@@ -11,6 +13,8 @@
 >
 > #### MEMBER
 
+</details>
+
 ## INFORMATION
 
 <img src="https://github.com/HSH-1616/FinalProject_Developers/blob/main/developers_finalproject/src/test/readme.JPG"/>
@@ -20,6 +24,8 @@
  - #### 참여 인원 : 6명
  - #### 프로젝트 주제 : 국내 여행을 간편하게 즐기기 위해 관광지, 숙박업소, 맛집에 대한 정보를 한번에 조회 할수 있는 웹사이트
 
+<br>
+
  ## MAIN FUNTION
  - #### 공공데이터 오픈API를 사용해 데이터 불러오기
  - #### 유명 관광지 정보 제공, 나만의 여행 일정 생성
@@ -27,14 +33,16 @@
  - #### 맛집 정보 제공 , 맛집 추천 서비스
  - #### 관리자 페이지 조회,승인,수정 기능
 
+<br>
+
 ## SITE
 ### 배포 사이트 : [Developers](http://14.36.141.71:10005/developers_finalproject/)
 ### 참고 사이트 : [에어비앤비: 여행은 살아보는거야](https://www.airbnb.co.kr/)
 
+<br>
+
 ## STACKS
-
 **Back-End**
-
 <div>
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=Oracle&logoColor=white"> 
@@ -45,7 +53,6 @@
 <br>
 
 **Front-End**
-
 <div>
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
@@ -56,7 +63,6 @@
 <br>
 
 **API**
-
 <div>
 <img src="https://img.shields.io/badge/kakao login-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
 <img src="https://img.shields.io/badge/kakao map-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
@@ -71,10 +77,10 @@ cloudways&logoColor=white">
 <img src="https://img.shields.io/badge/inisis pay-B31312?style=for-the-badge&logo=&logoColor=black">
 <img src="https://img.shields.io/badge/공공데이터 API-B31312?style=for-the-badge&logo=&logoColor=white">
 </div>
+
 </br>
 
 **Tools**
-
 <div>
 <img src="https://img.shields.io/badge/visual studio-5c2d91?style=for-the-badge&logo=visual studio&logoColor=white">
 <img src="https://img.shields.io/badge/spring tool suite-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white">
@@ -84,20 +90,21 @@ cloudways&logoColor=white">
 googlecloud&logoColor=white">
 </div>
 
-## MEMBER
+<br>
 
+## MEMBER
 ### 🙎‍♂️ 허성현 - 팀장
 #### ✅ 주요 기능 구현
 * 숙박업소 CRUD, 예약 기능
 * 마이페이지 결제 내역 
 * 관리자 페이지 결제관리
-
+  
 ### 🙎‍♂️강민기
 #### ✅ 주요 기능 구현
 * 로그인 기능
 * 관광지 리스트,상세 페이지
-* 관리자 페이지 관광지 관리 
-
+* 관리자 페이지 관광지 관리
+  
 ### 🙎‍♂️ 김찬은
 #### ✅ 주요 기능 구현
 * 여행 일정 생성
@@ -119,20 +126,3 @@ googlecloud&logoColor=white">
 * 커뮤니티 CRUD, 댓글 기능
 * 카카오 챗봇 API
 
-<details>
-  <summary>INDEX</summary>
-  <ol>
-    <li>
-      <a href="#INFORMATION">INFORMATION</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
