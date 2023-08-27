@@ -11,7 +11,7 @@
 
 </details>
 
-## INFORMATION
+## 📋INFORMATION
 
 <img src="https://github.com/HSH-1616/FinalProject_Developers/blob/main/developers_finalproject/src/test/readme.JPG"/>
 
@@ -22,7 +22,7 @@
 
 <br>
 
- ## MAIN FUNCTION
+ ## 💻MAIN FUNCTION
  - #### 공공데이터 오픈API를 사용해 데이터 불러오기
  - #### 유명 관광지 정보 제공, 나만의 여행 일정 생성
  - #### 숙박업소 정보 제공, 예약 결제 서비스
@@ -31,13 +31,13 @@
 
 <br>
 
-## SITE
+## 🌐SITE
 ### 배포 사이트 : [Developers](http://14.36.141.71:10005/developers_finalproject/)
 ### 참고 사이트 : [에어비앤비: 여행은 살아보는거야](https://www.airbnb.co.kr/)
 
 <br>
 
-## STACKS
+## 💡STACKS
 **Back-End**
 <div>
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
@@ -89,7 +89,7 @@ googlecloud&logoColor=white">
 
 <br>
 
-## MEMBER
+## 🎓MEMBER
 ### 🙎‍♂️ 허성현 - 팀장
 #### ✅ 주요 기능 구현
 * 숙박업소 CRUD, 예약 기능
