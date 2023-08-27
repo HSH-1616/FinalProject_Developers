@@ -2,43 +2,13 @@
 
 <details>
  <summary style="font-size:22px; font-weight:500;">INDEX</summary>
-<ul>
-<li>
-<a href="#INFORMATION">
+ 
+- [INFORMATION](#information)
+- [MAIN FUNCTION](#main-function)
+- [SITE](#site)
+- [STACKS](#stacks)
+- [MEMBER](#member)
 
-> #### INFORMATION
- </a>
-</li>
-
-<li>
-<a href="#MAIN FUNCTION">
-
-> #### MAIN FUNCTION
-</a>
-</li>
-
-<li>
-<a href="#SITE">
-
-> #### SITE
-</a>
-</li>
-
-<li>
-<a href="#STACKS">
-
-> #### STACKS
-</a>
-</li>
-
-<li>
-<a href="#MEMBER">
-
-> #### MEMBER
-</a>
-</li>
-
-</ul>
 </details>
 
 ## INFORMATION
