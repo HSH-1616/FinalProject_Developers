@@ -66,6 +66,7 @@
 <img src="https://img.shields.io/badge/kakao pay-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
 <img src="https://img.shields.io/badge/kakao chat-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
 <br>
+<img src="https://img.shields.io/badge/kakao address-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
 <img src="https://img.shields.io/badge/naver login-03C75A?style=for-the-badge&logo=naver&logoColor=white">
 <img src="https://img.shields.io/badge/google login-4285F4?style=for-the-badge&logo=google&logoColor=black">
 <img src="https://img.shields.io/badge/werather API-2C39BD?style=for-the-badge&logo=
